@@ -1,0 +1,129 @@
+C51 COMPILER V9.60.7.0   KEY                                                               02/27/2025 21:38:57 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE KEY
+OBJECT MODULE PLACED IN .\Objects\key.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE key.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\key.l
+                    -st) TABS(2) OBJECT(.\Objects\key.obj)
+
+line level    source
+
+   1          #include "key.h"
+   2          
+   3          uchar key_scan()
+   4          {
+   5   1          static uchar value, state, i;
+   6   1          uchar press = 0xFF, tmp = 99;
+   7   1      
+   8   1          P3 = 0x0F;
+   9   1          P42 = 0; P44 = 0;
+  10   1          P36 = P42; P37 = P44;
+  11   1      
+  12   1          press = P3 & 0x0F;
+  13   1      
+  14   1          switch (state)
+  15   1          {
+  16   2              case 0:
+  17   2              {
+  18   3                  if (press != 0x0F)
+  19   3                  {
+  20   4                      state = 1;
+  21   4                  }
+  22   3              }
+  23   2              break;
+  24   2      
+  25   2              case 1:
+  26   2              {
+  27   3                  if (press == 0x0F)
+  28   3                  {
+  29   4                      state = 0;
+  30   4                  }
+  31   3                  else
+  32   3                  {
+  33   4                      P3 = press | 0xF0;
+  34   4                      P42 = 1; P44 = 1;
+  35   4                      P36 = P42; P37 = P44;
+  36   4                  
+  37   4                      press = P3;     
+  38   4                      state = 2;
+  39   4                      
+  40   4                      switch (press)
+  41   4                      {
+  42   5                          case 0x77: {value = 4; break; }
+  43   5                          case 0x7b: {value = 5; break; }
+  44   5                          case 0x7d: {value = 6; break; }
+  45   5                          case 0x7e: {value = 7; break; }
+  46   5      
+  47   5                          case 0xb7: {value = 8; break; }
+  48   5                          case 0xbb: {value = 9; break; }
+  49   5                          case 0xbd: {value = 10; break; }
+  50   5                          case 0xbe: {value = 11; break; }
+  51   5                          
+  52   5                          case 0xd7: {value = 12; break; }
+  53   5                          case 0xdb: {value = 13; break; }
+  54   5                          case 0xdd: {value = 14; break; }
+C51 COMPILER V9.60.7.0   KEY                                                               02/27/2025 21:38:57 PAGE 2   
+
+  55   5                          case 0xde: {value = 15; break; }
+  56   5                          
+  57   5                          
+  58   5                          case 0xe7: {value = 16; break; }
+  59   5                          case 0xeb: {value = 17; break; }
+  60   5                          case 0xed: {value = 18; break; }
+  61   5                          case 0xee: {value = 19; break; }
+  62   5      
+  63   5                          default: state = 0;
+  64   5                      }
+  65   4                  }
+  66   3              }
+  67   2              break;
+  68   2      
+  69   2              case 2:
+  70   2              {
+  71   3                  if (press != 0x0F)
+  72   3                  {
+  73   4                      i = (i + 1) % 255;
+  74   4                      if (i >= 100)
+  75   4                      {
+  76   5                          state = 3;
+  77   5                          i = 0;
+  78   5                      }
+  79   4                  }
+  80   3                  else
+  81   3                  {
+  82   4                      state = 0;
+  83   4                      tmp = value;
+  84   4                      value = 0;
+  85   4                      i = 0;
+  86   4                  }
+  87   3              }
+  88   2              break;
+  89   2      
+  90   2              case 3:
+  91   2              {
+  92   3                  if (press == 0x0F)
+  93   3                  {
+  94   4                      state = 0;
+  95   4                      tmp = value + 20;
+  96   4                      value = 0;
+  97   4                  }
+  98   3              }
+  99   2              break;
+ 100   2          }
+ 101   1      
+ 102   1          return tmp;
+ 103   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    315    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      3       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

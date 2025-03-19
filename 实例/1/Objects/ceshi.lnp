@@ -1,0 +1,10 @@
+".\Objects\STARTUP.obj",
+".\Objects\main.obj",
+".\Objects\sys.obj",
+".\Objects\led.obj",
+".\Objects\smg.obj",
+".\Objects\iic.obj",
+".\Objects\csb.obj",
+".\Objects\onewire.obj" 
+TO ".\Objects\ceshi" 
+PRINT(".\Listings\ceshi.m51") RAMSIZE(256) 

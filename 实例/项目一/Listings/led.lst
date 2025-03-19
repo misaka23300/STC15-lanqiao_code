@@ -1,0 +1,76 @@
+C51 COMPILER V9.60.7.0   LED                                                               03/09/2025 16:34:55 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE LED
+OBJECT MODULE PLACED IN .\Objects\led.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE led.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\led.l
+                    -st) TABS(2) OBJECT(.\Objects\led.obj)
+
+line level    source
+
+   1          #include "led.h"
+   2          
+   3          uchar led_value[8] = {0, 0, 0, 0 ,0, 0, 0, 0};
+   4          
+   5          void led(uchar i, bit state)
+   6          {
+   7   1          static uchar last = 0xFF, tmp;
+   8   1          if (state)
+   9   1          {
+  10   2              tmp = tmp | (0x01 << i);
+  11   2          }
+  12   1          else
+  13   1          {
+  14   2              tmp = tmp & ~(0x01 << i);
+  15   2          }
+  16   1      
+  17   1          if (last != tmp)
+  18   1          {
+  19   2              P0 = ~tmp;
+  20   2              batch(4);
+  21   2              batch(0);
+  22   2      
+  23   2              last = tmp;
+  24   2          }
+  25   1      }
+  26          
+  27          
+  28          void led_display()
+  29          {
+  30   1          static uchar i;
+  31   1          led(i, led_value[i]);  
+  32   1          i = (i + 1) % 8;
+  33   1      }
+  34          
+  35          void s4_state(uchar j)
+  36          {
+  37   1          uchar i;
+  38   1          for (i = 0; i < 3;i++)
+  39   1          {
+  40   2              if (i != j)
+  41   2              {
+  42   3                  led_value[i] = 0;
+  43   3              }
+  44   2              else
+  45   2              {
+  46   3                  led_value[i] = 1;
+  47   3              }
+  48   2          }
+  49   1      }
+  50          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    105    ----
+C51 COMPILER V9.60.7.0   LED                                                               03/09/2025 16:34:55 PAGE 2   
+
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     11    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       1
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

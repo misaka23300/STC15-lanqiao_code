@@ -1,0 +1,56 @@
+C51 COMPILER V9.59.0.0   SMG                                                               04/03/2024 20:39:34 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE SMG
+OBJECT MODULE PLACED IN .\Objects\smg.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE smg.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\smg.l
+                    -st) TABS(2) OBJECT(.\Objects\smg.obj)
+
+line level    source
+
+   1          #include "smg.h"
+   2          
+   3          uchar code duan[]={                       //????
+   4          //   0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F
+   5              0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x7F,0x6F,0x77,0x7C,0x39,0x5E,0x79,0x71,
+   6          //black  -     H    J    K    L    N    o   P    U     t    G    Q    r   M    y
+   7              0x00,0x40,0x76,0x1E,0x70,0x38,0x37,0x5C,0x73,0x3E,0x78,0x3d,0x67,0x50,0x37,0x6e,
+   8              0xBF,0x86,0xDB,0xCF,0xE6,0xED,0xFD,0x87,0xFF,0xEF,0x46};    //0. 1. 2. 3. 4. 5. 6. 7. 8. 9. -1
+   9          
+  10          
+  11          uchar dspbuf[]={1,1,1,1,1,1,1,1};
+  12          
+  13          void setcontent(uchar c1,c2,c3,c4,c5,c6,c7,c8)  //给各个数码管赋值
+  14          {
+  15   1       dspbuf[0]=c1; 
+  16   1       dspbuf[1]=c2;
+  17   1       dspbuf[2]=c3;
+  18   1       dspbuf[3]=c4; 
+  19   1       dspbuf[4]=c5; 
+  20   1       dspbuf[5]=c6; 
+  21   1       dspbuf[6]=c7; 
+  22   1       dspbuf[7]=c8; 
+  23   1      }
+  24          
+  25          void display()      // 数码管显示
+  26          {
+  27   1       static uchar pos;
+  28   1        P0=0xff;Y7;Y0;
+  29   1        P0=~duan[dspbuf[pos]];Y7;Y0;//段选
+  30   1        P0=1<<(pos++);Y6;Y0;  //片选
+  31   1        pos%=8;
+  32   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     92    ----
+   CONSTANT SIZE    =     43    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      9      15
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

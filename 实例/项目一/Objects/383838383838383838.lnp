@@ -1,0 +1,9 @@
+".\Objects\STARTUP.obj",
+".\Objects\boot.obj",
+".\Objects\key.obj",
+".\Objects\led.obj",
+".\Objects\main.obj",
+".\Objects\onewire.obj",
+".\Objects\seg.obj" 
+TO ".\Objects\383838383838383838" 
+PRINT(".\Listings\383838383838383838.m51") RAMSIZE(256) 

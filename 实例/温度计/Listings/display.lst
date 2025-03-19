@@ -1,0 +1,104 @@
+C51 COMPILER V9.60.7.0   DISPLAY                                                           02/27/2025 21:38:57 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE DISPLAY
+OBJECT MODULE PLACED IN .\Objects\display.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE display.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\d
+                    -isplay.lst) TABS(2) OBJECT(.\Objects\display.obj)
+
+line level    source
+
+   1          #include "display.h"
+   2          
+   3          uchar led[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+   4          uchar seg[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+   5          
+   6          const uchar code letter[] = {                       //标准字库
+   7              //   0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F
+   8                  0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x7F,0x6F,0x77,0x7C,0x39,0x5E,0x79,0x71,
+   9              //black  -     H    J    K    L    N    o   P    U     t    G    Q    r   M    y
+  10                  0x00,0x40,0x76,0x1E,0x70,0x38,0x37,0x5C,0x73,0x3E,0x78,0x3d,0x67,0x50,0x37,0x6e,
+  11                  0xBF,0x86,0xDB,0xCF,0xE6,0xED,0xFD,0x87,0xFF,0xEF,0x46, 0x63};    //0. 1. 2. 3. 4. 5. 6. 7. 8. 9. 
+             --1
+  12              // 0 0x1100 0110
+  13              // 0110 0011
+  14              // 2 4-> 6  3
+  15              // A6
+  16              
+  17          void led_display()
+  18          {
+  19   1          static uchar i;
+  20   1          static uchar last = 0xFF, tmp;
+  21   1          bit state;
+  22   1      
+  23   1          state = led[i];
+  24   1      
+  25   1          if (state){
+  26   2              tmp = tmp | (0x01 << i);
+  27   2          }else{
+  28   2              tmp = tmp & ~(0x01 << i);
+  29   2          }
+  30   1      
+  31   1          if (last != tmp){
+  32   2              P0 = ~tmp;
+  33   2              batch(4);
+  34   2              batch(0);
+  35   2      
+  36   2              last = tmp;
+  37   2          }
+  38   1      
+  39   1          i = (i + 1) % 8;
+  40   1      }
+  41          
+  42          void sandy(uchar i,bit state)
+  43          {
+  44   1          static uchar last = 0xFF, tmp;
+  45   1      
+  46   1          if (state){
+  47   2              tmp = tmp | (0x01 << i);
+  48   2          }else{
+  49   2              tmp = tmp & ~(0x01 << i);
+  50   2          }
+  51   1      
+  52   1          if (last != tmp){
+  53   2              P0 = tmp;
+C51 COMPILER V9.60.7.0   DISPLAY                                                           02/27/2025 21:38:57 PAGE 2   
+
+  54   2              batch(5);
+  55   2              batch(0);
+  56   2      
+  57   2              last = tmp;
+  58   2          }
+  59   1      }
+  60          
+  61          void seg_display()
+  62          {
+  63   1          static uchar i;
+  64   1          P0 = 0xFF;
+  65   1          batch(7);
+  66   1          batch(0);
+  67   1      
+  68   1          P0 = 0x01 << i;
+  69   1          batch(6);
+  70   1          batch(0);
+  71   1      
+  72   1          P0 = ~letter[seg[i]];
+  73   1          batch(7);
+  74   1          batch(0);
+  75   1      
+  76   1          i = (i + 1) % 8;
+  77   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    202    ----
+   CONSTANT SIZE    =     44    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     22    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       2
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,10 @@
+"STARTUP.obj",
+"boot.obj",
+"main.obj",
+"sonic.obj",
+"key.obj",
+"seg.obj",
+"led.obj",
+"iic.obj" 
+TO "315" 
+RAMSIZE(256) 

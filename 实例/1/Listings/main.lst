@@ -1,0 +1,208 @@
+C51 COMPILER V9.59.0.0   MAIN                                                              04/03/2024 20:39:33 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "main.h"
+   2          
+   3          uchar led_flash[]={0,0,0,0,0,0,0,0};
+   4          bit seg_flag,led_flag,temp_flag;
+   5          /*bit pcf_flag;*/
+   6          uchar buz_type=6;
+   7          bit buz_2,buz_3,buz_4,buz_5;
+   8          //uint ad1,ad2;
+   9          uint temp;
+  10          void led_proc()
+  11          {
+  12   1       if(led_flag)
+  13   1       {
+  14   2         led_flag=0;
+  15   2         switch(buz_type)
+  16   2         {
+  17   3           case 1:led_flash[0]=1;break;
+  18   3           case 2:led_flash[0]^=1;break;
+  19   3           case 3:led_flash[0]^=1;break;
+  20   3           case 4:led_flash[0]^=1;break;
+  21   3           case 5:led_flash[0]^=1;break;
+  22   3           case 6:led_flash[0]=1;break;
+  23   3         }
+  24   2       }
+  25   1      }
+  26          
+  27          /*
+  28          void seg_proc()  //ÊýÂë¹ÜÏÔÊ¾£¨³¬Éù²¨²â¾à£©
+  29          {
+  30            uint dis;
+  31            uchar times;
+  32            if(seg_flag)
+  33            {
+  34              seg_flag=0;
+  35              dis=csb_CJ();
+  36              
+  37              if(dis>40)buz_type=6;
+  38              else if(dis>30) buz_type=5;
+  39              else if(dis>20) buz_type=4;
+  40              else if(dis>10) buz_type=3;
+  41              else if(dis>5) buz_type=2;
+  42              else buz_type=1;
+  43              
+  44              if(buz_type<3)    //Õâ¿éÃ»¿´¶®
+  45              {
+  46                times++;
+  47                times%=2;
+  48                if(times)
+  49                {
+  50                 setcontent(16,16,dis/10%10,dis%10,16,16,16,buz_type);
+  51                }
+  52                else
+  53                {
+  54                 setcontent(16,16,16,16,16,16,16,16);
+C51 COMPILER V9.59.0.0   MAIN                                                              04/03/2024 20:39:33 PAGE 2   
+
+  55                }
+  56              }
+  57              else
+  58                {
+  59                 setcontent(16,16,dis/10%10,dis%10,16,16,16,buz_type);
+  60                }
+  61            }
+  62          }
+  63          */
+  64          
+  65          /*
+  66          void seg_proc()     // ÊýÂë¹ÜÏÔÊ¾º¯Êý£¨PCF8591£©
+  67          {
+  68          if(seg_flag)
+  69            {
+  70              seg_flag=0;
+  71              setcontent(ad1/100,ad1/10%10,ad1%10,16,16,ad2/100+32,ad2/10%10,ad2%10);
+  72              if(ad1>50)buz_type=6;
+  73              else if(ad1>40) buz_type=5;
+  74              else if(ad1>30) buz_type=4;
+  75              else if(ad1>20) buz_type=3;
+  76              else if(ad1>10) buz_type=2;
+  77              else buz_type=1;
+  78            }
+  79          }
+  80          */
+  81          void seg_proc()     // ÊýÂë¹ÜÏÔÊ¾º¯Êý£¨DS18B20£©
+  82          {
+  83   1      if(seg_flag)
+  84   1        {
+  85   2          seg_flag=0;
+  86   2          setcontent(16,16,16,16,temp/1000,temp%1000/100+32,temp%100/10,temp%10);
+  87   2        }
+  88   1      }
+  89          /*
+  90          void ad_proc()      //PCF8591²É¼¯¼°´¦Àíº¯Êý
+  91          {
+  92          if(pcf_flag)
+  93            {
+  94            pcf_flag=0;
+  95            ad2=PCF8591_AD(0X01);//²É¼¯µÄÊÇ¹âÃôµç×èÍ¨µÀ£¬µ«ÊÇµÃµ½µÄ½á¹ûÊÇµçÑ¹²É¼¯Í¨µÀ£¬½á¹ûÊÇ0-255µÄÊý×Ö£¬²»ÊÇÊµ¼ÊµçÑ
+             -¹Öµ
+  96            delay_ms(10);
+  97            ad1=PCF8591_AD(0X03);//²É¼¯µÄÊÇµçÑ¹²É¼¯Í¨µÀ£¬µ«ÊÇµÃµ½µÄ½á¹ûÊÇ¹âÃôµç×èÍ¨µÀ£¬½á¹ûÊÇ0-255µÄÊý×Ö£¬²»ÊÇÊµ¼ÊµçÑ
+             -¹Öµ
+  98            
+  99            PCF8591_DA(ad2);
+ 100            
+ 101            ad2=(int)((ad2/255.0)*500);//²É¼¯µ½µÄÊýÖµ£¬×ª»»ÏàÓ¦µÄµçÑ¹Öµ
+ 102            delay_ms(10);
+ 103            }
+ 104          }
+ 105          */
+ 106          void buz_proc()
+ 107          {
+ 108   1       switch(buz_type)
+ 109   1       {
+ 110   2         case 1:wmq(6,0);break;
+ 111   2         case 2:wmq(6,buz_2);break;
+ 112   2         case 3:wmq(6,buz_3);break;
+ 113   2         case 4:wmq(6,buz_4);break;
+ 114   2         case 5:wmq(6,buz_5);break;
+C51 COMPILER V9.59.0.0   MAIN                                                              04/03/2024 20:39:33 PAGE 3   
+
+ 115   2         case 6:wmq(6,1);break;
+ 116   2       }
+ 117   1      }
+ 118          
+ 119          void ds18b20_proc()
+ 120          {
+ 121   1       float tmp;
+ 122   1        if(temp_flag)
+ 123   1        {
+ 124   2          temp_flag=0;
+ 125   2          ET0=0;
+ 126   2          tmp=read_temp();
+ 127   2          ET0=1;
+ 128   2          temp=(int)(tmp*100);
+ 129   2        }
+ 130   1      }
+ 131          void main()
+ 132          {
+ 133   1      
+ 134   1        sys_init();
+ 135   1        Timer0Init();
+ 136   1        csb_Init();
+ 137   1      
+ 138   1        while(1)
+ 139   1        {
+ 140   2        
+ 141   2      //   key_proc();
+ 142   2            seg_proc();
+ 143   2            led_proc(); 
+ 144   2            buz_proc(); 
+ 145   2          ds18b20_proc();
+ 146   2      //   ad_proc();
+ 147   2        }
+ 148   1        
+ 149   1           
+ 150   1      
+ 151   1      }
+ 152          
+ 153          void  Timer0interrupt() interrupt 1    //1ºÁÃë
+ 154          {
+ 155   1        static uint k,cnt;
+ 156   1        k++;
+ 157   1        if(k%3==0) display();                //3ºÁÃë
+ 158   1        if(k%5==0)                           //5ºÁÃë
+ 159   1        {
+ 160   2          led(cnt,led_flash[cnt++]);cnt%=8;
+ 161   2        } 
+ 162   1      //  if(k%10==0) key_flag=1;
+ 163   1        if(k%100==0) { led_flag=1; /*pcf_flag=1;*/ } //100ºÁÃë
+ 164   1        if(k%200==0)  seg_flag=1;             //200ºÁÃë
+ 165   1      //  
+ 166   1        if(k%750==0) temp_flag=1; 
+ 167   1        
+ 168   1        if(k%40==0) buz_2^=1;
+ 169   1        if(k%80==0) buz_3^=1;
+ 170   1        if(k%100==0) buz_4^=1;
+ 171   1        if(k%150==0) buz_5^=1;
+ 172   1        
+ 173   1        k%=10000;
+ 174   1      
+ 175   1      }
+ 176          
+C51 COMPILER V9.59.0.0   MAIN                                                              04/03/2024 20:39:33 PAGE 4   
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    559    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     15       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      7    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
