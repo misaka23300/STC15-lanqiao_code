@@ -1,0 +1,114 @@
+C51 COMPILER V9.00   KEY                                                                   03/02/2025 13:58:24 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE KEY
+OBJECT MODULE PLACED IN key.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE key.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include "key.h"
+   2          
+   3          
+   4          uchar key_scan()
+   5          {
+   6   1          static uchar value, state, i;
+   7   1          uchar press = 0xFF, tmp = 99;
+   8   1      
+   9   1          P3 = 0x0F;
+  10   1          P42 = 0; P44 = 0;
+  11   1          P36 = P42; P37 = P44;
+  12   1      
+  13   1          press = P3 & 0x0F;
+  14   1      
+  15   1          switch(state)
+  16   1          {
+  17   2              case 0:
+  18   2              {
+  19   3                  if (press != 0x0F)
+  20   3                  {
+  21   4                      state = 1;
+  22   4                  }
+  23   3              }   
+  24   2              break;
+  25   2      
+  26   2              case 1:
+  27   2              {
+  28   3                  if (press == 0x0F)
+  29   3                  {
+  30   4                      state = 0;
+  31   4                  }
+  32   3                  else
+  33   3                  {
+  34   4                      P3 |= 0xF0;
+  35   4                      P42 = 1; P44 = 1;
+  36   4                      P36 = P42; P37 = P44;
+  37   4      
+  38   4                      press = P3;
+  39   4                      state = 2;
+  40   4      
+  41   4                      switch (press)
+  42   4                      {
+  43   5                          case 0xf7: {value = 4; break; }
+  44   5                          case 0xfb: {value = 5; break; }
+  45   5                          case 0xfd: {value = 6; break; }
+  46   5                          case 0xfe: {value = 7; break; }
+  47   5      
+  48   5                        default: {state = 0;}
+  49   5                      }
+  50   4                  }   
+  51   3              }
+  52   2              break;
+  53   2          
+  54   2              case 2:
+  55   2              {
+C51 COMPILER V9.00   KEY                                                                   03/02/2025 13:58:24 PAGE 2   
+
+  56   3                  if (press != 0x0F)
+  57   3                  {
+  58   4                      i = (i + 1) % 255;
+  59   4                      if (i >= 150)
+  60   4                      {
+  61   5                          i = 0;
+  62   5                          state = 3;
+  63   5                      }
+  64   4                  }
+  65   3                  else
+  66   3                  {
+  67   4                      i = 0;
+  68   4                      tmp = value;
+  69   4                      value = 0;
+  70   4                      state = 0;
+  71   4                  }
+  72   3                  
+  73   3                  
+  74   3              }   
+  75   2              break;
+  76   2      
+  77   2              case 3:
+  78   2              {
+  79   3                  if (press == 0x0F)
+  80   3                  {
+  81   4                      tmp = value + 20;
+  82   4                      value = 0;
+  83   4                      state = 0;
+  84   4                  }
+  85   3              }   
+  86   2              break;
+  87   2          }
+  88   1          return tmp;
+  89   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    198    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      3       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

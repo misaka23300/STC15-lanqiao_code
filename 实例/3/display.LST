@@ -1,0 +1,118 @@
+C51 COMPILER V9.00   DISPLAY                                                               03/02/2025 13:58:24 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE DISPLAY
+OBJECT MODULE PLACED IN display.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE display.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include "display.h"
+   2          
+   3          uchar seg[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+   4          uchar led[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+   5          
+   6          uchar code letter[] = {                       //标准字库
+   7          //   0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F
+   8              0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x7F,0x6F,0x77,0x7C,0x39,0x5E,0x79,0x71,
+   9          //black  -     H    J    K    L    N    o   P    U     t    G    Q    r   M    y
+  10              0x00,0x40,0x76,0x1E,0x70,0x38,0x37,0x5C,0x73,0x3E,0x78,0x3d,0x67,0x50,0x37,0x6e,
+  11              0xBF,0x86,0xDB,0xCF,0xE6,0xED,0xFD,0x87,0xFF,0xEF,0x46, 0x41};    //0. 1. 2. 3. 4. 5. 6. 7. 8. 9. -1
+  12          
+  13          // 8e 1000 1110 F
+  14          // =  1000 0100
+  15          // 0010 0001
+  16          //1000 0010
+  17          // 0100 0001
+  18          void seg_display()
+  19          {
+  20   1          static uchar i;
+  21   1      
+  22   1          P0 = 0xFF;
+  23   1          batch(7);
+  24   1          batch(0);
+  25   1      
+  26   1          P0 = 0x01 << i;
+  27   1          batch(6);
+  28   1          batch(0);
+  29   1      
+  30   1          P0 = ~letter[seg[i]];
+  31   1          batch(7);
+  32   1          batch(0);
+  33   1      
+  34   1          i = (i + 1) % 8;
+  35   1      }
+  36          
+  37          void led_display()
+  38          {
+  39   1          static uchar i;
+  40   1          uchar state;
+  41   1      
+  42   1          static uchar temp;
+  43   1          static uchar last = 0xFF;
+  44   1      
+  45   1          
+  46   1          state = led[i];
+  47   1      
+  48   1          
+  49   1      
+  50   1          if (state)
+  51   1          {
+  52   2              temp = temp | (0x01 << i);
+  53   2          }
+  54   1          else
+  55   1          {
+C51 COMPILER V9.00   DISPLAY                                                               03/02/2025 13:58:24 PAGE 2   
+
+  56   2              temp = temp & ~(0x01 << i);
+  57   2          }
+  58   1      
+  59   1          if (last != temp)
+  60   1          {
+  61   2              P0 = ~temp;
+  62   2              batch(4);
+  63   2              batch(0);
+  64   2              last = temp;
+  65   2          }
+  66   1      
+  67   1          i = (i + 1) % 8;
+  68   1      }
+  69          
+  70          void sandy(uchar i,bit state)
+  71          {
+  72   1          static uchar temp;
+  73   1          static uchar last = 0xFF;
+  74   1      
+  75   1          if (state)
+  76   1          {
+  77   2              temp = temp | (0x01 << i);
+  78   2          }
+  79   1          else
+  80   1          {
+  81   2              temp = temp & ~(0x01 << i);
+  82   2          }
+  83   1      
+  84   1          if (last != temp)
+  85   1          {
+  86   2              P0 = temp;
+  87   2              batch(5);
+  88   2              batch(0);
+  89   2              last = temp;
+  90   2          }
+  91   1      
+  92   1          i = (i + 1) % 8;
+  93   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    208    ----
+   CONSTANT SIZE    =     44    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     22       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       1
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

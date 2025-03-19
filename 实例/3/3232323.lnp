@@ -1,0 +1,10 @@
+"STARTUP.obj",
+"boot.obj",
+"display.obj",
+"key.obj",
+"main.obj",
+"iic.obj",
+"ds1302.obj",
+"onewire.obj" 
+TO "3232323" 
+RAMSIZE(256) 

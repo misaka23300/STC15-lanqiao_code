@@ -1,0 +1,473 @@
+C51 COMPILER V9.00   MAIN                                                                  03/02/2025 13:58:24 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include "main.h"
+   2          
+   3          #define LED_TIME 3
+   4          #define KEY_TIME 5
+   5          #define CLOCK_TIME 150
+   6          #define TEMP_TIME 1000
+   7          #define ADC_TIME 1000
+   8          bit key_flag, ds1302_flag, temp_flag, adc_flag, boling_flag;
+   9          bit naozhong_work;
+  10          
+  11          uchar set;
+  12          uchar state, press;
+  13          uchar one_tag = 233;
+  14          uchar adc;
+  15          char boling_time = 2;
+  16          uchar times;
+  17          
+  18          float temp;
+  19          uint temperature;
+  20          extern uchar led[8];
+  21          extern uchar seg[8];
+  22          
+  23          extern uchar now_time[7];
+  24          
+  25          char clock_time[3] = {0, 0, 0};
+  26          char naozhong_time[3] = {0, 0, 0};
+  27          
+  28          void main()
+  29          {
+  30   1          uchar i;
+  31   1          boot_init();
+  32   1          init_time();
+  33   1          // hex
+  34   1          naozhong_time[0] = read_2k(0x00);
+  35   1          naozhong_time[1] = read_2k(0x01);
+  36   1          naozhong_time[2] = read_2k(0x02);
+  37   1      
+  38   1          while (1)
+  39   1          {   
+  40   2              for (i = 0;i < 3;i++)
+  41   2              {
+  42   3                  if (naozhong_time[i] == now_time[i])
+  43   3                  {
+  44   4                      naozhong_work = 1;
+  45   4                  }
+  46   3                  else
+  47   3                  {
+  48   4                      naozhong_work = 0;
+  49   4                      break;
+  50   4                  }
+  51   3              }
+  52   2      
+  53   2              if (naozhong_work)
+  54   2              {   
+  55   3                  sandy(0x04,1);
+C51 COMPILER V9.00   MAIN                                                                  03/02/2025 13:58:24 PAGE 2   
+
+  56   3                  if (boling_flag)
+  57   3                  {
+  58   4                      times++;
+  59   4                      led[0] = 1;
+  60   4                      led[1] = 1;
+  61   4                  }
+  62   3                  else
+  63   3                  {
+  64   4                      led[0] = 0;
+  65   4                      led[1] = 0;
+  66   4                      for (i = 0;i < 8;i++)
+  67   4                      {
+  68   5                          seg[i] = 0;
+  69   5                          one_tag = 255;
+  70   5                      }
+  71   4                  }
+  72   3      
+  73   3                  if (times == 10)
+  74   3                  {
+  75   4                      naozhong_work = 0;
+  76   4                      led[0] = 0;
+  77   4                      led[1] = 0;
+  78   4                      for (i = 0;i < 8;i++)
+  79   4                      {
+  80   5                          seg[i] = 0;
+  81   5                          one_tag = 255;
+  82   5                      }
+  83   4                  }
+  84   3              }
+  85   2      
+  86   2      
+  87   2              if (ds1302_flag)
+  88   2              {
+  89   3                  read_time();
+  90   3              }
+  91   2      
+  92   2              if (key_flag)
+  93   2              {
+  94   3                  press = key_scan();
+  95   3                  key_flag = 0;
+  96   3                  
+  97   3                  if (press == 4)
+  98   3                  {
+  99   4                      if (set == 0)
+ 100   4                          state = (state + 1) % 3;
+ 101   4                      else
+ 102   4                          if (state == 20)
+ 103   4                          {
+ 104   5                              state = 21;
+ 105   5                          }
+ 106   4                          else if (state == 21)
+ 107   4                          {
+ 108   5                              state = 20;
+ 109   5                          }
+ 110   4                  }
+ 111   3      
+ 112   3                  if (press == 24)
+ 113   3                  {
+ 114   4                      if (set != 1)
+ 115   4                      {
+ 116   5                          set = 1;
+ 117   5                          state = 20;
+C51 COMPILER V9.00   MAIN                                                                  03/02/2025 13:58:24 PAGE 3   
+
+ 118   5                      }
+ 119   4                      else
+ 120   4                      {
+ 121   5                          if (state == 20)
+ 122   5                          {
+ 123   6                              write_time(clock_time);
+ 124   6                          }
+ 125   5                          else if (state == 21)
+ 126   5                          {
+ 127   6                              write_2k(0x00, naozhong_time[0]);
+ 128   6                              write_2k(0x01, naozhong_time[1]);
+ 129   6                              write_2k(0x02, naozhong_time[2]);
+ 130   6                          }
+ 131   5                      }
+ 132   4                      
+ 133   4                  }
+ 134   3      
+ 135   3                  if (press == 27)
+ 136   3                  {
+ 137   4                      if (set == 1)
+ 138   4                      {
+ 139   5                          set = 0;
+ 140   5                          state = 0;
+ 141   5                      }
+ 142   4                  }
+ 143   3      
+ 144   3                  if (press == 7 && set == 1)
+ 145   3                  {
+ 146   4                      boling_time--;
+ 147   4                      if (boling_time == -1)
+ 148   4                      {
+ 149   5                          boling_time = 2;
+ 150   5                      }
+ 151   4                  }
+ 152   3      
+ 153   3                  if (press == 5 && set == 1)
+ 154   3                  {
+ 155   4                      if (state == 20)
+ 156   4                      {
+ 157   5                          if (boling_time != 2)
+ 158   5                          clock_time[boling_time] = (clock_time[boling_time] + 1) % 60;
+ 159   5                          else
+ 160   5                              clock_time[boling_time] = (clock_time[boling_time] + 1) % 24;
+ 161   5                      }
+ 162   4      
+ 163   4                      else if (state == 21)
+ 164   4                      {
+ 165   5                          if (boling_time != 2)
+ 166   5                          naozhong_time[boling_time] = (naozhong_time[boling_time] + 1) % 60;
+ 167   5                          else
+ 168   5                              naozhong_time[boling_time] = (naozhong_time[boling_time] + 1) % 24;
+ 169   5                      }
+ 170   4                      
+ 171   4                  }
+ 172   3      
+ 173   3                  if (press == 6 && set == 1)
+ 174   3                  {
+ 175   4                     if (state == 20)
+ 176   4                     {
+ 177   5                      clock_time[boling_time]--;
+ 178   5                      if (clock_time[boling_time] == -1)
+ 179   5                      {
+C51 COMPILER V9.00   MAIN                                                                  03/02/2025 13:58:24 PAGE 4   
+
+ 180   6                          if (boling_time != 2)
+ 181   6                              clock_time[boling_time] = 59;
+ 182   6                          else
+ 183   6                              clock_time[boling_time] = 23;
+ 184   6                      }
+ 185   5                     }
+ 186   4                      else
+ 187   4                      {
+ 188   5                          naozhong_time[boling_time]--;
+ 189   5                          if (naozhong_time[boling_time] == -1)
+ 190   5                          {
+ 191   6                              if (boling_time != 2)
+ 192   6                                  naozhong_time[boling_time] = 59;
+ 193   6                              else
+ 194   6                                  naozhong_time[boling_time] = 23;
+ 195   6                          }
+ 196   5                      }
+ 197   4                    
+ 198   4                  }
+ 199   3                 
+ 200   3      
+ 201   3                 if (press == 5 || press == 6 || press == 7 || press == 8)
+ 202   3                 {
+ 203   4                      if (set == 0)
+ 204   4                      {
+ 205   5                          state = 0;
+ 206   5                      }
+ 207   4                 }
+ 208   3              
+ 209   3              }
+ 210   2      
+ 211   2              switch (state)
+ 212   2              {
+ 213   3                  case 0:
+ 214   3                  {
+ 215   4                      if (one_tag != 0)
+ 216   4                      {
+ 217   5                          one_tag = 0;
+ 218   5                          seg[2] = 17;
+ 219   5                          seg[5] = 17;
+ 220   5                      }
+ 221   4      
+ 222   4                      seg[7] = now_time[0] % 10;
+ 223   4                      seg[6] = now_time[0] / 10;
+ 224   4      
+ 225   4                      seg[4] = now_time[1] % 10;
+ 226   4                      seg[3] = now_time[1] / 10;
+ 227   4      
+ 228   4                      seg[1] = now_time[2] % 10;
+ 229   4                      seg[0] = now_time[2] / 10;
+ 230   4                  }
+ 231   3                  break;
+ 232   3      
+ 233   3                  case 1:
+ 234   3                  {
+ 235   4                      if (temp_flag)
+ 236   4                      {
+ 237   5                          temp_flag = 0;
+ 238   5                          temp = read_temperatrue();
+ 239   5                          temperature = (int) (temp * 100);
+ 240   5                          if (one_tag != 1)
+ 241   5                          {
+C51 COMPILER V9.00   MAIN                                                                  03/02/2025 13:58:24 PAGE 5   
+
+ 242   6                              one_tag = 1;
+ 243   6                              seg[0] = 43;
+ 244   6                              seg[1] = 43;
+ 245   6                              seg[2] = 16;
+ 246   6                              seg[3] = 16;
+ 247   6                          }    
+ 248   5                          seg[4] = temperature / 1000 % 10;
+ 249   5                          seg[5] = (temperature / 100 % 10) + 32;
+ 250   5                          seg[6] = temperature / 10 % 10;
+ 251   5                          seg[7] = temperature % 10;
+ 252   5                      }
+ 253   4                  }
+ 254   3      
+ 255   3                  break;
+ 256   3      
+ 257   3                  case 2:
+ 258   3                  {
+ 259   4                      if (adc_flag)
+ 260   4                      {
+ 261   5                          adc_flag = 0;
+ 262   5                          adc = ADC(0x01);
+ 263   5      
+ 264   5                          if (one_tag != 2)
+ 265   5                          {
+ 266   6                              one_tag = 2;
+ 267   6                              seg[0] = 21;
+ 268   6                              seg[1] = 16;
+ 269   6                              seg[2] = 16;
+ 270   6                              seg[3] = 16;
+ 271   6                              seg[4] = 16;
+ 272   6                            
+ 273   6                          }
+ 274   5      
+ 275   5                          seg[5] = adc / 100 % 10;
+ 276   5                          seg[6] = adc / 10 % 10;
+ 277   5                          seg[7] = adc % 10;
+ 278   5                      }
+ 279   4                  }
+ 280   3                  break;
+ 281   3      
+ 282   3                  case 20:
+ 283   3                  {
+ 284   4                      if (one_tag != 20)
+ 285   4                      {
+ 286   5                          one_tag = 20;
+ 287   5                          seg[0] = 15;
+ 288   5                          seg[1] = 16;
+ 289   5      
+ 290   5                          for (i = 0;i < 3;i++)
+ 291   5                          {
+ 292   6                              clock_time[i] = now_time[i];
+ 293   6                          }
+ 294   5                          
+ 295   5                      }
+ 296   4      
+ 297   4                      if (boling_flag == 0)
+ 298   4                      {
+ 299   5                          seg[2] = clock_time[2] / 10;
+ 300   5                          seg[3] = clock_time[2] % 10;
+ 301   5      
+ 302   5                          seg[4] = clock_time[1] / 10;
+ 303   5                          seg[5] = clock_time[1] % 10;
+C51 COMPILER V9.00   MAIN                                                                  03/02/2025 13:58:24 PAGE 6   
+
+ 304   5      
+ 305   5                          seg[6] = clock_time[0] / 10;
+ 306   5                          seg[7] = clock_time[0] % 10;
+ 307   5                      }
+ 308   4      
+ 309   4                      if (boling_flag)
+ 310   4                      {
+ 311   5                          switch (boling_time)
+ 312   5                          {
+ 313   6                              case 2:
+ 314   6                              {
+ 315   7                                  seg[2] = 16;
+ 316   7                                  seg[3] = 16;
+ 317   7                              }
+ 318   6                              break;
+ 319   6      
+ 320   6                              case 1:
+ 321   6                              {
+ 322   7                                  seg[4] = 16;
+ 323   7                                  seg[5] = 16;
+ 324   7                              }
+ 325   6                              break;
+ 326   6      
+ 327   6                              case 0:
+ 328   6                              {
+ 329   7                                  seg[6] = 16;
+ 330   7                                  seg[7] = 16;
+ 331   7                              }
+ 332   6                              break;
+ 333   6                          }
+ 334   5                      }
+ 335   4                  }
+ 336   3                  break;
+ 337   3      
+ 338   3                  case 21:
+ 339   3                  {
+ 340   4                      if (one_tag != 21)
+ 341   4                      {
+ 342   5                          one_tag = 21;
+ 343   5                          seg[0] = 24;
+ 344   5                          seg[1] = 16;
+ 345   5                          
+ 346   5                      }
+ 347   4      
+ 348   4                      if (boling_flag == 0)
+ 349   4                      {
+ 350   5                          seg[2] = naozhong_time[2] / 10;
+ 351   5                          seg[3] = naozhong_time[2] % 10;
+ 352   5      
+ 353   5                          seg[4] = naozhong_time[1] / 10;
+ 354   5                          seg[5] = naozhong_time[1] % 10;
+ 355   5      
+ 356   5                          seg[6] = naozhong_time[0] / 10;
+ 357   5                          seg[7] = naozhong_time[0] % 10;
+ 358   5                      }
+ 359   4      
+ 360   4                      if (boling_flag)
+ 361   4                      {
+ 362   5                          switch (boling_time)
+ 363   5                          {
+ 364   6                              case 2:
+ 365   6                              {
+C51 COMPILER V9.00   MAIN                                                                  03/02/2025 13:58:24 PAGE 7   
+
+ 366   7                                  seg[2] = 16;
+ 367   7                                  seg[3] = 16;
+ 368   7                              }
+ 369   6                              break;
+ 370   6      
+ 371   6                              case 1:
+ 372   6                              {
+ 373   7                                  seg[4] = 16;
+ 374   7                                  seg[5] = 16;
+ 375   7                              }
+ 376   6                              break;
+ 377   6      
+ 378   6                              case 0:
+ 379   6                              {
+ 380   7                                  seg[6] = 16;
+ 381   7                                  seg[7] = 16;
+ 382   7                              }
+ 383   6                              break;
+ 384   6                          }
+ 385   5                      }
+ 386   4                  }
+ 387   3                  break;
+ 388   3              }
+ 389   2          }
+ 390   1      }
+ 391          
+ 392          
+ 393          timer_11() interrupt 1
+ 394          {
+ 395   1          static uchar i;
+ 396   1          i = (i + 1) % 30000;
+ 397   1      
+ 398   1          seg_display();
+ 399   1      
+ 400   1          if (i % LED_TIME == 0)
+ 401   1          {
+ 402   2              led_display();
+ 403   2          }
+ 404   1      
+ 405   1          if (i % KEY_TIME == 0)
+ 406   1          {
+ 407   2              key_flag = 1;
+ 408   2          }
+ 409   1      
+ 410   1          if (i % CLOCK_TIME == 0)
+ 411   1          {
+ 412   2              ds1302_flag = 1;
+ 413   2          }
+ 414   1      
+ 415   1          if (i % TEMP_TIME == 0 && state == 1)
+ 416   1          {
+ 417   2              temp_flag = 1;
+ 418   2          }
+ 419   1      
+ 420   1          if (i % ADC_TIME == 0 && state == 2)
+ 421   1          {
+ 422   2              adc_flag = 1;
+ 423   2          }
+ 424   1      
+ 425   1          if (i % 500 == 0)
+ 426   1          {
+ 427   2              if (boling_flag == 1)
+C51 COMPILER V9.00   MAIN                                                                  03/02/2025 13:58:24 PAGE 8   
+
+ 428   2              {
+ 429   3                  boling_flag = 0;
+ 430   3              }
+ 431   2              else
+ 432   2              {
+ 433   3                  boling_flag = 1;
+ 434   3              }
+ 435   2          }
+ 436   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1319    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     20       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      6    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
