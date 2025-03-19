@@ -1,0 +1,179 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              03/19/2025 19:21:02 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "main.h"
+   2          
+   3          const uchar code SONIC_TIME = 500; 
+   4          const uchar code KEY_TIME = 150;
+   5          const uchar code SEG_TIME = 1;
+   6          const uchar code LED_TIME = 5;
+   7          const uchar code TEMPERATURE_TIME = 500;
+   8          bit seg_flag, led_flag, sonic_flag, key_flag, temp_flag;
+   9          bit sonic_units;
+  10          uchar state;
+  11           
+  12          uint distance;
+  13          uchar temperature;
+  14          
+  15          void main()
+  16          {
+  17   1          boot_init();
+  18   1          while (1)
+  19   1          {
+  20   2              if (sonic_flag)
+  21   2              {
+  22   3                  sonic_flag = 0;
+  23   3                  distance = sonic_measure();
+  24   3              }
+  25   2      
+  26   2              if (key_flag)
+  27   2              {
+  28   3                  uchar press;
+  29   3      
+  30   3                  key_flag = 0;
+  31   3                  press = key_scan();
+  32   3                  key_proc(press);
+  33   3              }
+  34   2      
+  35   2              if (led_flag)
+  36   2              {
+  37   3                  led_flag = 0;
+  38   3                  led_display();
+  39   3              }
+  40   2      
+  41   2              if (seg_flag)
+  42   2              {
+  43   3                  seg_flag = 0;
+  44   3                  seg_display();
+  45   3                  state_proc();
+  46   3              }
+  47   2      
+  48   2              if (temp_flag)
+  49   2              {
+  50   3                  temp_flag = 0;
+  51   3                  temp_proc();
+  52   3              }
+  53   2          }
+  54   1      }
+C51 COMPILER V9.60.7.0   MAIN                                                              03/19/2025 19:21:02 PAGE 2   
+
+  55          
+  56          void timer_1_1ms() interrupt 3
+  57          {
+  58   1          static uint i;
+  59   1          i = (i + 1) % 30000;
+  60   1      
+  61   1         
+  62   1          if (i % SEG_TIME == 0)
+  63   1          {
+  64   2              seg_flag = 1;
+  65   2          }
+  66   1          
+  67   1          if (i % LED_TIME == 0)
+  68   1          {
+  69   2              led_flag = 1;
+  70   2          }
+  71   1      
+  72   1          if (i % SONIC_TIME == 0)
+  73   1          {
+  74   2              sonic_flag = 1;
+  75   2          }
+  76   1      
+  77   1          if (i % KEY_TIME == 0)
+  78   1          {
+  79   2              key_flag = 1;
+  80   2          }
+  81   1      
+  82   1          if (i % TEMPERATURE_TIME == 0)
+  83   1          {
+  84   2              temp_flag = 1;
+  85   2          }
+  86   1      }
+  87          
+  88          void key_proc(uchar press)
+  89          {
+  90   1          switch (press)
+  91   1          {
+  92   2              case 0:
+  93   2              {
+  94   3                  state = (state + 1) % 3;
+  95   3              }
+  96   2          }
+  97   1      }
+  98          
+  99          void state_proc()
+ 100          {
+ 101   1          switch (state)
+ 102   1          {
+ 103   2              case 0:
+ 104   2              {
+ 105   3                  if (sonic_units)
+ 106   3                  {
+ 107   4                      
+ 108   4                      // cm
+ 109   4                      set_seg(temperature / 1000 % 10,
+ 110   4                              temperature / 100 % 10,
+ 111   4                              temperature / 10 % 10,
+ 112   4                              17,
+ 113   4                              16,
+ 114   4                              16,
+ 115   4                              distance / 10 % 10,
+ 116   4                              distance % 10
+C51 COMPILER V9.60.7.0   MAIN                                                              03/19/2025 19:21:02 PAGE 3   
+
+ 117   4                              );  
+ 118   4                  }
+ 119   3                  else
+ 120   3                  {
+ 121   4                      set_seg(temperature / 1000 % 10,
+ 122   4                              temperature / 100 % 10,
+ 123   4                              temperature / 10 % 10,
+ 124   4                              17,
+ 125   4                              16,
+ 126   4                              34, // 0.
+ 127   4                              distance / 10 % 10,
+ 128   4                              distance % 10
+ 129   4                              );
+ 130   4                  }
+ 131   3      
+ 132   3                 
+ 133   3              }
+ 134   2              break;
+ 135   2      
+ 136   2              case 1:
+ 137   2              {
+ 138   3                  //set_seg();
+ 139   3              }
+ 140   2              break;
+ 141   2              
+ 142   2          }
+ 143   1      }
+ 144          
+ 145          void temp_proc()
+ 146          {
+ 147   1          float temp;
+ 148   1          temp = read_temperature();
+ 149   1      
+ 150   1          temperature = temp * 100;
+ 151   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    501    ----
+   CONSTANT SIZE    =      5    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      6       5
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      6    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
