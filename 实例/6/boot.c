@@ -20,9 +20,11 @@ void boot_init()
 
     P0 = 0xAF;
     batch(5);
+    batch(0);
 
     P0 = 0x00;
     batch(6);
+    batch(0);
 
     timer_0();
     timer_1();
