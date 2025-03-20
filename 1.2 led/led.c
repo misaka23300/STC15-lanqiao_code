@@ -31,6 +31,6 @@ void led_display()
 {
     static uchar i;
 
-    led(i,led_value[i]);
+    led(i, led_value[i]);
     i = (i + 1) % 8;
 }

@@ -7,4 +7,7 @@
 #define uchar unsigned char
 #define uint unsigned int
 
+void batch(char i);
+void Delay14us(void);
+
 #endif
