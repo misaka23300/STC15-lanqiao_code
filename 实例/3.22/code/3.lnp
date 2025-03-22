@@ -1,0 +1,10 @@
+"STARTUP.obj",
+"boot.obj",
+"key.obj",
+"led.obj",
+"main.obj",
+"seg.obj",
+"ds1302.obj",
+"iic.obj" 
+TO "3.22" 
+RAMSIZE(256) 

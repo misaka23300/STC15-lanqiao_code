@@ -1,0 +1,480 @@
+C51 COMPILER V9.00   MAIN                                                                  03/22/2025 14:51:02 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE code\main.c BROWSE DEBUG OBJECTEXTEND PRINT(.\main.lst) OBJECT(main.obj)
+
+line level    source
+
+   1          #include "main.h"
+   2          
+   3          const uchar code SEG_TIME = 1;
+   4          const uchar code KEY_TIME = 40;
+   5          const uchar code DATE_TIME = 100;
+   6          const uchar code LED_TIME = 50;
+   7          
+   8          bit seg_flag, freq_flag, key_flag, ds1302_flag, freq_fushu, led_flag, shan_flag;
+   9          
+  10          
+  11          uint freq_high, freq_low;
+  12          long uint freq;
+  13          
+  14          // 1 - 9 *1000
+  15          char freq_out = 2;
+  16          
+  17          // -9 - 9 *100
+  18          char freq_xiaozhun = 0;
+  19          
+  20          
+  21          uchar state;
+  22          char state_1 = 1;
+  23          char state_3 = 0;
+  24          
+  25          uchar time[3] = {0, 0, 0};
+  26          
+  27          long uint freq_max;
+  28          uchar max_time[3] = {0, 0, 0};
+  29          
+  30          extern uchar led_value[8];
+  31          
+  32          void main()
+  33          {
+  34   1              // 秒 分 时
+  35   1              uchar times[3] = {0, 0, 23};
+  36   1              write_datetime(times);
+  37   1      
+  38   1              boot_init();
+  39   1      
+  40   1              while (1)
+  41   1              {
+  42   2                      if (seg_flag)
+  43   2                      {
+  44   3                              seg_flag = 0;
+  45   3                              state_proc();
+  46   3                      }
+  47   2                      
+  48   2                      if (freq_flag)
+  49   2                      {
+  50   3                              freq_flag = 0;
+  51   3                              freq_proc();
+  52   3                      }
+  53   2                      
+  54   2                      if (key_flag)
+  55   2                      {
+C51 COMPILER V9.00   MAIN                                                                  03/22/2025 14:51:02 PAGE 2   
+
+  56   3                              key_flag = 0;
+  57   3                              key_proc();
+  58   3                      }
+  59   2                      
+  60   2                      if (ds1302_flag)
+  61   2                      {
+  62   3                              ds1302_flag = 0;
+  63   3                              ds1302_proc();
+  64   3                      }
+  65   2      
+  66   2                      if (led_flag)
+  67   2                      {
+  68   3                              led_flag = 0;
+  69   3                              led_proc();
+  70   3                      }
+  71   2                      
+  72   2                              
+  73   2              }
+  74   1      }
+  75          
+  76          
+  77          void timer_1_1ms(void) interrupt 3
+  78          {
+  79   1              static uint i;
+  80   1              i = (i + 1);
+  81   1      
+  82   1              if (i >= 30000)
+  83   1              {
+  84   2                      i = 0;
+  85   2              }
+  86   1      
+  87   1              if (i % LED_TIME == 0)
+  88   1              {
+  89   2                      led_flag = 1;
+  90   2              }
+  91   1      
+  92   1              if (i % SEG_TIME == 0)
+  93   1              {
+  94   2                      seg_display();
+  95   2                      //led_display();
+  96   2                      seg_flag = 1;
+  97   2              }
+  98   1      
+  99   1              if (i % 1000 == 0)
+ 100   1              {
+ 101   2                      freq_flag = 1;
+ 102   2              }
+ 103   1      
+ 104   1              if (i % KEY_TIME == 0)
+ 105   1              {
+ 106   2                      key_flag = 1;
+ 107   2              }
+ 108   1      
+ 109   1              if (i % DATE_TIME == 0)
+ 110   1              {
+ 111   2                      ds1302_flag = 1;
+ 112   2              }
+ 113   1      
+ 114   1              if (i % 200 == 0)
+ 115   1              {
+ 116   2                      if (shan_flag == 1)
+ 117   2                              shan_flag = 0;
+C51 COMPILER V9.00   MAIN                                                                  03/22/2025 14:51:02 PAGE 3   
+
+ 118   2                      else
+ 119   2                              shan_flag = 1;
+ 120   2              }
+ 121   1      }
+ 122          
+ 123          void timer_0_ne555(void) interrupt 1
+ 124          {
+ 125   1              freq_low++;
+ 126   1              if (freq_low == 30000)
+ 127   1              {
+ 128   2                      freq_low = 0;
+ 129   2                      freq_high++;
+ 130   2              }
+ 131   1      
+ 132   1      }
+ 133          
+ 134          void freq_proc(void)
+ 135          {
+ 136   1              freq = 0;
+ 137   1              freq = (freq_high * 30000 + freq_low);
+ 138   1      
+ 139   1              // 如果校准值为负数
+ 140   1              if (freq_xiaozhun < 0)
+ 141   1              {
+ 142   2                      // 如果校准值比频率高
+ 143   2                      if (freq < (-freq_xiaozhun* 100))
+ 144   2                      {
+ 145   3                              freq_fushu = 1;
+ 146   3                      }
+ 147   2                      else 
+ 148   2                      {
+ 149   3                              freq_fushu = 0;
+ 150   3                      }
+ 151   2              }
+ 152   1              // 正数
+ 153   1              else
+ 154   1              {
+ 155   2                      freq_fushu = 0;
+ 156   2              }
+ 157   1      
+ 158   1              if (freq_fushu == 0)
+ 159   1              {
+ 160   2                      freq = freq + (freq_xiaozhun* 100);
+ 161   2              }
+ 162   1      
+ 163   1              freq_high = 0;
+ 164   1              freq_low = 0;
+ 165   1      
+ 166   1              if (freq > freq_max)
+ 167   1              {
+ 168   2                      freq_max = freq;
+ 169   2                      max_time[0] = time[0];
+ 170   2                      max_time[1] = time[1];
+ 171   2                      max_time[2] = time[2];
+ 172   2              }
+ 173   1      
+ 174   1              DAC_proc();
+ 175   1      }
+ 176          
+ 177          void ds1302_proc(void)
+ 178          {
+ 179   1              read_datetime(time);    
+C51 COMPILER V9.00   MAIN                                                                  03/22/2025 14:51:02 PAGE 4   
+
+ 180   1      }
+ 181          
+ 182          void key_proc(void)
+ 183          {
+ 184   1              uchar press;
+ 185   1              press = key_scan();
+ 186   1      
+ 187   1              switch (press)
+ 188   1              {
+ 189   2                      case 4:
+ 190   2                      {
+ 191   3                              state = (state + 1) % 4;
+ 192   3                      }
+ 193   2                      break;
+ 194   2      
+ 195   2                      case 5:
+ 196   2                      {
+ 197   3                              if (state == 1)
+ 198   3                              {
+ 199   4                                      state_1++;
+ 200   4                                      if (state_1 == 3)
+ 201   4                                      {
+ 202   5                                              state_1 = 1;
+ 203   5                                      }       
+ 204   4                              }
+ 205   3                              else if (state == 3)
+ 206   3                              {
+ 207   4                                      state_3++;
+ 208   4                                      if (state_3 == 2)
+ 209   4                                      {
+ 210   5                                              state_3 = 0;
+ 211   5                                      }
+ 212   4                              }
+ 213   3                      }
+ 214   2                      break;
+ 215   2      
+ 216   2                      case 8:
+ 217   2                      {
+ 218   3                              if (state == 1)
+ 219   3                              {
+ 220   4                                      if (state_1 == 1)
+ 221   4                                      {
+ 222   5                                              freq_out++;
+ 223   5                                              if (freq_out == 10)
+ 224   5                                              {
+ 225   6                                                      freq_out = 9;
+ 226   6                                              }
+ 227   5                                      }
+ 228   4                                      else if (state_1 == 2)
+ 229   4                                      {
+ 230   5                                              freq_xiaozhun++;
+ 231   5                                              if (freq_xiaozhun == 10)
+ 232   5                                              {
+ 233   6                                                      freq_xiaozhun = 9;
+ 234   6                                              }
+ 235   5                                      }
+ 236   4                              }
+ 237   3                      }
+ 238   2                      break;
+ 239   2      
+ 240   2                      case 9:
+ 241   2                      {
+C51 COMPILER V9.00   MAIN                                                                  03/22/2025 14:51:02 PAGE 5   
+
+ 242   3                              if (state == 1)
+ 243   3                              {
+ 244   4                                      if (state_1 == 1)
+ 245   4                                      {
+ 246   5                                              freq_out--;
+ 247   5                                              if (freq_out == 0)
+ 248   5                                              {
+ 249   6                                                      freq_out = 1;
+ 250   6                                              }
+ 251   5                                      }
+ 252   4                                      else if (state_1 == 2)
+ 253   4                                      {
+ 254   5                                              freq_xiaozhun--;
+ 255   5                                              if (freq_xiaozhun == -10)
+ 256   5                                              {
+ 257   6                                                      freq_xiaozhun = -9;
+ 258   6                                              }
+ 259   5                                      }
+ 260   4                              }
+ 261   3                      }
+ 262   2                      break;
+ 263   2              }
+ 264   1      }
+ 265          
+ 266          
+ 267          void state_proc(void)
+ 268          {
+ 269   1              uchar freq_array[5] = {0, 0, 0, 0, 0};
+ 270   1              uchar xiaozhun_array[3] = {0, 0, 0};
+ 271   1              uchar max_array[5] = {0, 0, 0, 0, 0};
+ 272   1              switch (state)
+ 273   1              {
+ 274   2                      case 0:
+ 275   2                      {
+ 276   3                              
+ 277   3                              if (freq_fushu == 1)
+ 278   3                              {
+ 279   4                                      freq_array[0] = 16;
+ 280   4                                      freq_array[1] = 16;
+ 281   4                                      freq_array[2] = 16;
+ 282   4                                      freq_array[3] = 21;
+ 283   4                                      freq_array[4] = 21;
+ 284   4                              }
+ 285   3                              else if (freq_fushu == 0)
+ 286   3                              {
+ 287   4                                  freq_array[0] = freq / 10000 % 10;
+ 288   4                                      freq_array[1] = freq / 1000 % 10;
+ 289   4                                      freq_array[2] = freq / 100 % 10;
+ 290   4                                      freq_array[3] = freq / 10 % 10;
+ 291   4                                      freq_array[4] = freq % 10;
+ 292   4              
+ 293   4                                      delete_0(freq_array, 4);
+ 294   4                              }
+ 295   3                              
+ 296   3      
+ 297   3                              set_seg(15, 16, 16, freq_array[0], freq_array[1], freq_array[2], freq_array[3], freq_array[4]); 
+ 298   3                      }
+ 299   2                      break;
+ 300   2      
+ 301   2                      case 1:
+ 302   2                      {
+ 303   3                              // 参数界面 超限参数 
+C51 COMPILER V9.00   MAIN                                                                  03/22/2025 14:51:02 PAGE 6   
+
+ 304   3                              if (state_1 == 1)
+ 305   3                              {
+ 306   4                                      xiaozhun_array[0] = freq_out;
+ 307   4                                      xiaozhun_array[1] = 0;
+ 308   4                                      xiaozhun_array[2] = 0;
+ 309   4                              }
+ 310   3      
+ 311   3                              else if (state_1 == 2)
+ 312   3                              {
+ 313   4                                      if (freq_xiaozhun < 0)
+ 314   4                                      {
+ 315   5                                              
+ 316   5                                              xiaozhun_array[0] = 17;
+ 317   5                                              xiaozhun_array[1] = -freq_xiaozhun;
+ 318   5                                              xiaozhun_array[2] = 0;
+ 319   5                                      }
+ 320   4                                      else if (freq_xiaozhun > 0)
+ 321   4                                      {
+ 322   5                                              xiaozhun_array[0] = 16;
+ 323   5                                              xiaozhun_array[1] = freq_xiaozhun;
+ 324   5                                              xiaozhun_array[2] = 0;  
+ 325   5                                      }
+ 326   4                                      else
+ 327   4                                      {
+ 328   5                                              xiaozhun_array[0] = 16;
+ 329   5                                              xiaozhun_array[1] = 16;
+ 330   5                                              xiaozhun_array[2] = 16;
+ 331   5                                      }
+ 332   4                              }
+ 333   3      
+ 334   3                              set_seg(24, state_1, 16, 16, xiaozhun_array[0], xiaozhun_array[1], xiaozhun_array[2], 0);
+ 335   3                              
+ 336   3                      }
+ 337   2                      break;
+ 338   2      
+ 339   2                      case 2:
+ 340   2                      {
+ 341   3                              set_seg(time[2] / 10, time[2] % 10, 17, 
+ 342   3                                              time[1] / 10, time[1] % 10, 17,
+ 343   3                                              time[0] / 10, time[0] % 10
+ 344   3                                              );
+ 345   3                      }
+ 346   2                      break;
+ 347   2      
+ 348   2                      case 3:
+ 349   2                      {
+ 350   3                              if (state_3 == 0)
+ 351   3                              {
+ 352   4                                      max_array[0] = freq_max / 10000 % 10;
+ 353   4                                      max_array[1] = freq_max / 1000 % 10;
+ 354   4                                      max_array[2] = freq_max / 100 % 10;
+ 355   4                                      max_array[3] = freq_max / 10 % 10;
+ 356   4                                      max_array[4] = freq_max % 10;
+ 357   4      
+ 358   4                                      delete_0(max_array, 4);
+ 359   4                                      set_seg(18, 15, 16, max_array[0], max_array[1],  max_array[2], max_array[3], max_array[4]);
+ 360   4                              }
+ 361   3                              else if(state_3 == 1)
+ 362   3                              {
+ 363   4                                      set_seg(18, 43, 
+ 364   4                                      max_time[2] / 10, max_time[2] % 10, 
+ 365   4                                      max_time[1] / 10, max_time[1] % 10, 
+C51 COMPILER V9.00   MAIN                                                                  03/22/2025 14:51:02 PAGE 7   
+
+ 366   4                                      max_time[0] / 10, max_time[0] % 10
+ 367   4                                      );                      
+ 368   4                              }
+ 369   3                      }
+ 370   2                      break;
+ 371   2              }
+ 372   1      }
+ 373          
+ 374          
+ 375          void delete_0(uchar *arr, uchar j)
+ 376          {
+ 377   1              // j 为数组个数 
+ 378   1              uchar i;
+ 379   1              for (i = 0;i < j;i++)
+ 380   1              {
+ 381   2                      if (arr[i] == 0)
+ 382   2                      {
+ 383   3                              arr[i] = 16;
+ 384   3                      }
+ 385   2                      else
+ 386   2                      {
+ 387   3                              break;
+ 388   3                      }
+ 389   2              }
+ 390   1      }
+ 391          
+ 392          void DAC_proc(void)
+ 393          {
+ 394   1              uchar value;
+ 395   1              if (freq_fushu)
+ 396   1              {
+ 397   2                      value = 1;
+ 398   2              }
+ 399   1              else if (freq < 500)
+ 400   1              {
+ 401   2                      value = 1;
+ 402   2              }
+ 403   1              else if (500 <= freq && freq < (freq_out*1000))
+ 404   1              {
+ 405   2                      value = ( (freq_out - 500) / 4) * freq;
+ 406   2              }
+ 407   1              else if (freq > (freq_out* 1000))
+ 408   1              {
+ 409   2                      value = 5;      
+ 410   2              }
+ 411   1      
+ 412   1              DAC(value);
+ 413   1      }
+ 414          
+ 415          void led_proc(void)
+ 416          {
+ 417   1              if (state == 0)
+ 418   1              {
+ 419   2                      led_value[0] = shan_flag;
+ 420   2                      //led_value[7] = 1;
+ 421   2              }
+ 422   1              else
+ 423   1              {
+ 424   2                      led_value[0] = 0;
+ 425   2              }
+ 426   1      
+ 427   1              if (freq_fushu)
+C51 COMPILER V9.00   MAIN                                                                  03/22/2025 14:51:02 PAGE 8   
+
+ 428   1              {
+ 429   2                      led_value[1] = 1;
+ 430   2              }
+ 431   1              else if (freq > freq_out*1000)
+ 432   1              {
+ 433   2                      led_value[1] = shan_flag;
+ 434   2              }
+ 435   1              else
+ 436   1              {
+ 437   2                      led_value[1] = 0;
+ 438   2              }
+ 439   1      
+ 440   1              
+ 441   1      
+ 442   1              led_display();
+ 443   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1725    ----
+   CONSTANT SIZE    =     20    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     25      20
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      7    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
