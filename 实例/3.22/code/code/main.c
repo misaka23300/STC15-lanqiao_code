@@ -31,7 +31,7 @@ extern uchar led_value[8];
 
 void main()
 {
-	// Ãë ·Ö Ê±
+	// ç§’ åˆ† æ—¶
 	uchar times[3] = {0, 0, 23};
 	write_datetime(times);
 
@@ -67,6 +67,7 @@ void main()
 		{
 			led_flag = 0;
 			led_proc();
+			led_display();
 		}
 		
 			
@@ -84,6 +85,8 @@ void timer_1_1ms(void) interrupt 3
 		i = 0;
 	}
 
+	//led_display();
+
 	if (i % LED_TIME == 0)
 	{
 		led_flag = 1;
@@ -92,7 +95,6 @@ void timer_1_1ms(void) interrupt 3
 	if (i % SEG_TIME == 0)
 	{
 		seg_display();
-		//led_display();
 		seg_flag = 1;
 	}
 
@@ -136,10 +138,10 @@ void freq_proc(void)
 	freq = 0;
 	freq = (freq_high * 30000 + freq_low);
 
-	// Èç¹ûÐ£×¼ÖµÎª¸ºÊý
+	// å¦‚æžœæ ¡å‡†å€¼ä¸ºè´Ÿæ•°
 	if (freq_xiaozhun < 0)
 	{
-		// Èç¹ûÐ£×¼Öµ±ÈÆµÂÊ¸ß
+		// å¦‚æžœæ ¡å‡†å€¼æ¯”é¢‘çŽ‡é«˜
 		if (freq < (-freq_xiaozhun* 100))
 		{
 			freq_fushu = 1;
@@ -149,7 +151,7 @@ void freq_proc(void)
 			freq_fushu = 0;
 		}
 	}
-	// ÕýÊý
+	// æ­£æ•°
 	else
 	{
 		freq_fushu = 0;
@@ -300,7 +302,7 @@ void state_proc(void)
 
 		case 1:
 		{
-			// ²ÎÊý½çÃæ ³¬ÏÞ²ÎÊý 
+			// å‚æ•°ç•Œé¢ è¶…é™å‚æ•° 
 			if (state_1 == 1)
 			{
 				xiaozhun_array[0] = freq_out;
@@ -374,7 +376,7 @@ void state_proc(void)
 
 void delete_0(uchar *arr, uchar j)
 {
-	// j ÎªÊý×é¸öÊý 
+	// j ä¸ºæ•°ç»„ä¸ªæ•° 
 	uchar i;
 	for (i = 0;i < j;i++)
 	{
@@ -413,11 +415,11 @@ void DAC_proc(void)
 }
 
 void led_proc(void)
-{
+{	
+	//led_display();
 	if (state == 0)
 	{
 		led_value[0] = shan_flag;
-		//led_value[7] = 1;
 	}
 	else
 	{
@@ -436,8 +438,6 @@ void led_proc(void)
 	{
 		led_value[1] = 0;
 	}
-
-	
-
-	led_display();
+	// æ­¤å¤„ä¼šå½±å“æ˜¾ç¤º
+	//led_display();
 }
