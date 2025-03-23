@@ -4,6 +4,7 @@ sbid SDA = P2^3;
 sbit SCL = P1^7;
 sbit RST = P2^7;
 
+// 秒 分 时 天 月 星期 年
 const uchar code write_address[7] = {0x80, 0x82, 0x84, 0x86, 0x88, 0x8A, 0x8C,};
 const uchar code read_address[7] = {0x81, 0x83, 0x85, 0x87, 0x89, 0x8B, 0x8D};
 								
@@ -76,7 +77,7 @@ void datetime_write(uchar *time)
 	uchar i;
 	Write_Ds1302_Byte(0x8E, 0x00);
 	
-	for (i = 0;i < 7;i++)
+	for (i = 0;i < 3;i++)
 	{
 		Write_Ds1302_Byte(write_address[i], time[i]);
 	}
