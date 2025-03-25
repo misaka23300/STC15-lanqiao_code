@@ -1,0 +1,51 @@
+C51 COMPILER V9.60.7.0   SYS                                                               03/23/2025 18:37:40 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE SYS
+OBJECT MODULE PLACED IN sys.OBJ
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE sys.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include "sys.h"
+   2          
+   3          void sys_init() {
+   4   1          P0M0 = 0x00; P0M1 = 0x00;
+   5   1          P1M0 = 0x00; P1M1 = 0x00;
+   6   1          P2M0 = 0x00; P2M1 = 0x00;
+   7   1          P3M0 = 0x00; P3M1 = 0x00;
+   8   1          P4M0 = 0x00; P4M1 = 0x00;
+   9   1          P5M0 = 0x00; P5M1 = 0x00;
+  10   1          P6M0 = 0x00; P6M1 = 0x00;
+  11   1          P7M0 = 0x00; P7M1 = 0x00;
+  12   1      
+  13   1          P0 = 0xFF; Y4; Y0;
+  14   1          P0 = 0xAF; Y5; Y0;
+  15   1          P0 = 0; Y6; Y0;
+  16   1          P0 = 0xFF; Y7; Y0;
+  17   1      }
+  18          
+  19          void Timer0_Init() {
+  20   1          AUXR &= 0x7F; // 定时器时钟12T模式
+  21   1          TMOD &= 0xF0; // 设置定时器模式
+  22   1          TL0 = 0x18;   // 设置定时初值
+  23   1          TH0 = 0xFC;   // 设置定时初值
+  24   1          TF0 = 0;      // 清除TF0标志
+  25   1          TR0 = 1;      // 定时器0开始计时
+  26   1          ET0 = 1;
+  27   1          EA = 1;
+  28   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    111    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

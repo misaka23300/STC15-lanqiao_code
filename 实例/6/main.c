@@ -187,7 +187,7 @@ void state_proc()
                     }
                     
                     argument[6] = f1_value / 10;
-                    argument[7] = fi_value % 10;
+                    argument[7] = f1_value % 10;
                 }
                 break;
             }
