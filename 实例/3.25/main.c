@@ -8,7 +8,7 @@ enum
     SONIC_TIME = 500
 };
 
-void main(void)
+void main()
 {
     boot_init();
     while (1)
@@ -36,7 +36,8 @@ void timer_2_1ms(void) interrupt 12
     }
 
     seg_display();
-
+    state_proc();
+    
     if (i % SONIC_TIME == 0)
     {
         sonic_flag = 1;
@@ -50,7 +51,7 @@ void state_proc()
     {
         case 0:
         {
-            set_seg();
+            set_seg(distance / 10, distance % 10, 0, 0, 0, 0 ,0, 0);
         }
         break;
     }
