@@ -42,7 +42,7 @@ void timer_0(void)
 
     TF0 = 0;
     TR0 = 1;
-    ET0 = 1;
+    ET0 = 0;
 }
 
 // sonic

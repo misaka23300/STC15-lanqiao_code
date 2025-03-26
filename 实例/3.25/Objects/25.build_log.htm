@@ -5,7 +5,7 @@
 <h2>Tool Versions:</h2>
 IDE-Version: μVision V5.38.0.0
 Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: 。。 laffe, 。, LIC=58E4T-RG7YF-TRKXY-IBURZ-YWSZ8-SI2F7
+License Information: 0 laffey, 0, LIC=14RJ7-E37Y1-ITV3R-KPMEW-JYCSM-CUV9T
  
 Tool Versions:
 Toolchain:       PK51 Prof. Developers Kit  Version: 9.60.7.0
@@ -18,8 +18,8 @@ Hex Converter:   OH51.exe V2.7.0.0
 CPU DLL:         S8051.DLL V3.125.1.0
 Dialog DLL:      DP51.DLL V2.69.0.0 
 <h2>Project:</h2>
-C:\code V4.1\单片机\STC15F2K60S2\STC15F2K60S2\实例\3.25\25.uvproj
-Project File Date:  03/25/2025
+D:\code_V4.0\STC15F2K60S2_git\实例\3.25\25.uvproj
+Project File Date:  03/26/2025
 
 <h2>Output:</h2>
 Rebuild target 'Target 1'
@@ -28,14 +28,11 @@ compiling boot.c...
 compiling key.c...
 compiling led.c...
 compiling main.c...
+main.c(19): warning C206: 'sonic_proc': missing function-prototype
+main.c(53): warning C209: '_set_seg': too few actual parameters
+main.c(60): error C231: 'sonic_proc': redefinition
 compiling seg.c...
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?STATE_PROC?MAIN
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_SET_SEG?SEG
-Program Size: data=36.0 xdata=0 code=426
-".\Objects\25" - 0 Error(s), 2 Warning(s).
+Target not created.
 Build Time Elapsed:  00:00:01
 </pre>
 </body>

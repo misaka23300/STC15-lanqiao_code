@@ -6,7 +6,7 @@ uchar distance;
 enum 
 {
     SONIC_TIME = 500
-}
+};
 
 void main(void)
 {
