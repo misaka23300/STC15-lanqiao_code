@@ -1,0 +1,60 @@
+C51 COMPILER V9.60.7.0   LED                                                               03/23/2025 18:37:40 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE LED
+OBJECT MODULE PLACED IN led.OBJ
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE led.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include "led.h"
+   2          void led(uchar p,bit state)
+   3          {
+   4   1        static uchar led_tmp=0x00;
+   5   1        static uchar led_last=0xff;
+   6   1        if(state)
+   7   1        {
+   8   2          led_tmp|=(0x01<<p); 
+   9   2        }
+  10   1        else
+  11   1        {
+  12   2          led_tmp&=~(0x01<<p);
+  13   2        }
+  14   1        if(led_tmp!=led_last)
+  15   1        {
+  16   2          P0=led_tmp;Y4;Y0;
+  17   2          led_last=led_tmp;
+  18   2        }
+  19   1      }
+  20          //void ctrl(uchar d,bit state)
+  21          //{
+  22          //  static uchar ctrl_tmp=0x00;
+  23          //  static uchar ctrl_last=0xff;
+  24          //  if(state)
+  25          //  {
+  26          //    ctrl_tmp|=(0x01<<d);  
+  27          //  }
+  28          //  else
+  29          //  {
+  30          //    ctrl_tmp&=~(0x01<<d);
+  31          //  }
+  32          //  if(ctrl_tmp!=ctrl_last)
+  33          //  {
+  34          //    P0=ctrl_tmp;Y5;Y0;
+  35          //    ctrl_last=ctrl_tmp;
+  36          //  }
+  37          //}
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     56    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       1
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

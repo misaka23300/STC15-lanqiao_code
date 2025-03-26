@@ -1,0 +1,121 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              03/23/2025 18:37:40 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include "main.h"
+   2          
+   3          uchar a_flag, b_flag;
+   4          uchar led_flag, seg_flag, key_flag;
+   5          uchar led_T[] = {16, 16, 16, 16, 16, 16, 16, 16};
+   6          
+   7          uchar num;
+   8          
+   9          void key_proc() {
+  10   1          if (key_flag) {
+  11   2              key_flag = 0;
+  12   2              num = scankey();
+  13   2              switch (num) {
+  14   3                  case 4:
+  15   3                      a_flag++;
+  16   3                      a_flag %= 3;
+  17   3                      break;
+  18   3                  case 5:
+  19   3                      b_flag++;
+  20   3                      b_flag %= 3;
+  21   3                      break;
+  22   3              }
+  23   2          }
+  24   1      }
+  25          
+  26          void seg_proc() {
+  27   1          if (seg_flag) {
+  28   2              seg_flag = 0;
+  29   2              switch (a_flag) {
+  30   3                  case 0:
+  31   3                      if (num != 99)
+  32   3                          setdsp(num / 10, num % 10, 17, 5, 9, 17, 5, 0);
+  33   3                      break;
+  34   3                  case 1:
+  35   3                      setdsp(24, 33, 4, 5, 25, 32, 0, 6);
+  36   3                      break;
+  37   3                  case 2:
+  38   3                      switch (b_flag) {
+  39   4                          case 0:
+  40   4                              setdsp(10, 1, 2, 3, 5, 5, 0, 6);
+  41   4                              break;
+  42   4                          case 1:
+  43   4                              setdsp(10, 2, 17, 17, 17, 17, 17, 17);
+  44   4                              break;
+  45   4                          case 2:
+  46   4                              setdsp(10, 3, 17, 17, 17, 17, 17, 17);
+  47   4                              break;
+  48   4                      }
+  49   3                      break;
+  50   3              }
+  51   2          }
+  52   1      }
+  53          
+  54          void led_proc() {
+  55   1          if (led_flag) {
+C51 COMPILER V9.60.7.0   MAIN                                                              03/23/2025 18:37:40 PAGE 2   
+
+  56   2              led_flag = 0;
+  57   2          }
+  58   1          switch (a_flag) {
+  59   2              case 0:
+  60   2                  led_T[0] = 0;
+  61   2                  break;
+  62   2              case 1:
+  63   2                  led_T[1] = 0;
+  64   2                  break;
+  65   2              case 2:
+  66   2                  led_T[2] = 0;
+  67   2                  break;
+  68   2          }
+  69   1      }
+  70          
+  71          void main() {
+  72   1          sys_init();
+  73   1          Timer0_Init();
+  74   1          while (1) {
+  75   2              led_proc();
+  76   2              seg_proc();
+  77   2              key_proc();
+  78   2          }
+  79   1      }
+  80          
+  81          void Timer1_Isr(void) interrupt 1 {
+  82   1          static uint k, cnt;
+  83   1          display();
+  84   1          // if(k%10==0)display();
+  85   1          if (k % 5 == 0) {
+  86   2              led(cnt, led_T[cnt++]);
+  87   2              cnt %= 8;
+  88   2          }
+  89   1          if (k % 10 == 0) led_flag = 1;
+  90   1          if (k % 15 == 0) key_flag = 1;
+  91   1          if (k % 10 == 0) seg_flag = 1;
+  92   1          k++;
+  93   1          if (k >= 30000) {
+  94   2              k = 1;
+  95   2          }
+  96   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    439    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     18    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
