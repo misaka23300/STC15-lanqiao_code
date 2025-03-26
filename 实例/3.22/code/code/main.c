@@ -1,9 +1,16 @@
 #include "main.h"
-
+/*
 const uchar code SEG_TIME = 1;
-const uchar code KEY_TIME = 40;
+const uchar code KEY_TIME = 10;
 const uchar code DATE_TIME = 100;
 const uchar code LED_TIME = 50;
+*/
+enum {
+    SEG_TIME = 1,     // 显式赋值
+    KEY_TIME = 10,    // 显式赋值
+    DATE_TIME = 100,  // 显式赋值
+    LED_TIME = 50     // 显式赋值
+};
 
 bit seg_flag, freq_flag, key_flag, ds1302_flag, freq_fushu, led_flag, shan_flag;
 
@@ -221,19 +228,14 @@ void key_proc(void)
 			{
 				if (state_1 == 1)
 				{
-					freq_out++;
-					if (freq_out == 10)
-					{
-						freq_out = 9;
-					}
+					if (freq_out != 10)
+						freq_out++;
+					
 				}
 				else if (state_1 == 2)
 				{
+					if (freq_xiaozhun != 10)
 					freq_xiaozhun++;
-					if (freq_xiaozhun == 10)
-					{
-						freq_xiaozhun = 9;
-					}
 				}
 			}
 		}
@@ -246,7 +248,7 @@ void key_proc(void)
 				if (state_1 == 1)
 				{
 					freq_out--;
-					if (freq_out == 0)
+					if (freq_out < 0)
 					{
 						freq_out = 1;
 					}
@@ -254,7 +256,7 @@ void key_proc(void)
 				else if (state_1 == 2)
 				{
 					freq_xiaozhun--;
-					if (freq_xiaozhun == -10)
+					if (freq_xiaozhun < -10)
 					{
 						freq_xiaozhun = -9;
 					}
