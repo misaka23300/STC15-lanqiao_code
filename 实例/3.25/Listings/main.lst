@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-C51 COMPILER V9.60.7.0   MAIN                                                              03/26/2025 13:54:32 PAGE 1   
-=======
-C51 COMPILER V9.60.7.0   MAIN                                                              03/25/2025 19:44:39 PAGE 1   
->>>>>>> 6b1092dd8ea0abf0b9890f507e4df09ff687f4ab
+C51 COMPILER V9.60.7.0   MAIN                                                              03/26/2025 14:27:53 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -22,11 +18,7 @@ line level    source
    8              SONIC_TIME = 500
    9          };
   10          
-<<<<<<< HEAD
-  11          void main(void)
-=======
   11          void main()
->>>>>>> 6b1092dd8ea0abf0b9890f507e4df09ff687f4ab
   12          {
   13   1          boot_init();
   14   1          while (1)
@@ -35,10 +27,6 @@ line level    source
   17   2              {
   18   3                  sonic_flag = 0;
   19   3                  sonic_proc();
-<<<<<<< HEAD
-*** WARNING C206 IN LINE 19 OF main.c: 'sonic_proc': missing function-prototype
-=======
->>>>>>> 6b1092dd8ea0abf0b9890f507e4df09ff687f4ab
   20   3              }
   21   2          }
   22   1      }
@@ -58,24 +46,6 @@ line level    source
   36   2          }
   37   1      
   38   1          seg_display();
-<<<<<<< HEAD
-  39   1      
-  40   1          if (i % SONIC_TIME == 0)
-  41   1          {
-  42   2              sonic_flag = 1;
-  43   2          }
-  44   1      }
-  45          
-  46          
-  47          void state_proc()
-  48          {
-  49   1          switch (state)
-  50   1          {
-  51   2              case 0:
-  52   2              {
-  53   3                  set_seg();
-C51 COMPILER V9.60.7.0   MAIN                                                              03/26/2025 13:54:32 PAGE 2   
-=======
   39   1          state_proc();
   40   1          
   41   1          if (i % SONIC_TIME == 0)
@@ -92,7 +62,7 @@ line level    source
   52   2              case 0:
   53   2              {
   54   3                  set_seg(distance / 10, distance % 10, 0, 0, 0, 0 ,0, 0);
-C51 COMPILER V9.60.7.0   MAIN                                                              03/25/2025 19:44:39 PAGE 2   
+C51 COMPILER V9.60.7.0   MAIN                                                              03/26/2025 14:27:53 PAGE 2   
 
   55   3              }
   56   2              break;
@@ -103,23 +73,8 @@ line level    source
   61          {
   62   1          distance = sonic_measure();
   63   1      }
->>>>>>> 6b1092dd8ea0abf0b9890f507e4df09ff687f4ab
 
-*** WARNING C209 IN LINE 53 OF main.c: '_set_seg': too few actual parameters
-  54   3              }
-  55   2              break;
-  56   2          }
-  57   1      }
-  58          
-  59          void sonic_proc()
-  60          {
-*** ERROR C231 IN LINE 60 OF main.c: 'sonic_proc': redefinition
-  61   1          distance = sonic_measure();
-  62   1      }
 
-<<<<<<< HEAD
-C51 COMPILATION COMPLETE.  2 WARNING(S),  1 ERROR(S)
-=======
 MODULE INFORMATION:   STATIC OVERLAYABLE
    CODE SIZE        =    171    ----
    CONSTANT SIZE    =   ----    ----
@@ -132,4 +87,3 @@ END OF MODULE INFORMATION.
 
 
 C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
->>>>>>> 6b1092dd8ea0abf0b9890f507e4df09ff687f4ab
