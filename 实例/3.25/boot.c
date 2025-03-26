@@ -35,8 +35,8 @@ void timer_0(void)
 
 
     // 定时器0 -> 计数器 
-    AUXR |= 0x80;
-    TMOD = (TMOD & 0xF0) | 0x06;
+    //AUXR |= 0x80;
+    //TMOD = (TMOD & 0xF0) | 0x06;
     TL0 = 0x00; 
     TH0 = 0x00;
 
@@ -53,7 +53,7 @@ void timer_1(void)
 	TL1 = 0x50;				//设置定时初始值
 	TH1 = 0xFB;				//设置定时初始值
 	TF1 = 0;				//清除TF1标志
-	TR1 = 1;				//定时器1开始计时
+	TR1 = 0;				//定时器1开始计时
 	ET1 = 1;				//使能定时器1中断
 
 }
@@ -78,5 +78,15 @@ void batch(uchar i)
         case 7: {P2 = (P2 & 0x1F) | 0xE0; break;}
         case 0: {P2 = (P2 & 0x1F); break;}
     }
+}
+
+void Delay14us(void)	//@12.000MHz
+{
+	unsigned char data i;
+
+	_nop_();
+	_nop_();
+	i = 39;
+	while (--i);
 }
 

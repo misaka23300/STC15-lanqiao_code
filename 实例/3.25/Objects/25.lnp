@@ -3,6 +3,7 @@
 ".\Objects\key.obj",
 ".\Objects\led.obj",
 ".\Objects\main.obj",
-".\Objects\seg.obj" 
+".\Objects\seg.obj",
+".\Objects\sonic.obj" 
 TO ".\Objects\25" 
 PRINT(".\Listings\25.m51") RAMSIZE(256) 

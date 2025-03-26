@@ -4,4 +4,10 @@
 #include "boot.h"
 
 #include "seg.h"
+#include "sonic.h"
+
+
+void state_proc();
+void sonic_proc();
+
 #endif

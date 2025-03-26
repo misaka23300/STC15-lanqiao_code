@@ -18,25 +18,26 @@ void sonic_send()
 
 uchar sonic_measure()
 {
-   TR1 = 0;
-   TH0 = 0; TL0 = 0;
-   TF0 = 0;
+    uchar distance;
+    TR1 = 0;
+    TH0 = 0; TL0 = 0;
+    TF0 = 0;
    
-   sonic_send();
-   while (rx == 0);
-   TR1 = 1;
+    sonic_send();
+    while (rx == 0);
+    TR1 = 1;
 
-   while (rx == 1 && TF1 == 0);
-   TR1 = 0;
+    while (rx == 1 && TF1 == 0);
+    TR1 = 0;
 
-   if (TF1 == 1)
-   {
+    if (TF1 == 1)
+    {
         distance = 99;
         TF1 = 0;
-   }
-   else
-   {
+    }
+    else
+    {
         distance = (uchar) ((TH1 << 8) | TL1) * 0.017;
-   }
-   return distance;
+    }
+    return distance;
 }
