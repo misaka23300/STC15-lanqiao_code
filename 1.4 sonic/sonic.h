@@ -4,6 +4,7 @@
 #include "boot.h"
 
 void sonic_send();
-uint sonic_measure();
+uchar sonic_measure();
+
 
 #endif
