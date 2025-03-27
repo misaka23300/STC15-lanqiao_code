@@ -1,0 +1,7 @@
+".\Objects\STARTUP.obj",
+".\Objects\boot.obj",
+".\Objects\main.obj",
+".\Objects\seg.obj",
+".\Objects\sonic.obj" 
+TO ".\Objects\27" 
+PRINT(".\Listings\27.m51") RAMSIZE(256) 
