@@ -3,6 +3,6 @@
 
 #include "boot.h"
 
-uchar DAC(uchar value);
+void DAC(uchar value);
 
 #endif

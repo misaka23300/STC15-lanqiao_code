@@ -2,13 +2,29 @@
 
 enum {
     SONIC_TIME = 1000,
-    STATE_TIME = 90
+    STATE_TIME = 90,
+    KEY_TIME = 20,
+    DS18B20_TIME = 1000,
+    DAC_TIME = 1000
+
 };
 
-bit sonic_flag, state_flag;
+//bit sonic_flag, state_flag, key_flag, temp_flag, dac_flag;
 
 extern uchar seg[8];
+
 uchar distance;
+
+struct fonction_list
+{
+    bit flag;
+    uchar value;
+    const uchar code TIME;
+}
+
+struct fonction_list led, key, sonic, DAC;
+
+
 
 void main()
 {
@@ -27,6 +43,8 @@ void main()
             state_flag = 0;
             state_proc();
         }
+
+        if (key_)
     }
     
 }

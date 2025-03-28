@@ -1,0 +1,89 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              03/28/2025 20:58:22 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE code\main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "main.h"
+   2          
+   3          struct fonction_list
+   4          {
+   5              uchar value;
+   6              uchar flag;
+   7              uint time;
+   8          };
+   9          
+  10          struct fonction_list sonic = {0, 0, 1000};
+  11          struct fonction_list state = {0, 0, 50};
+  12          
+  13          extern uchar seg[8];
+  14          
+  15          void main()
+  16          {
+  17   1          boot_init();
+  18   1      
+  19   1          while (1)
+  20   1          {
+  21   2              if (sonic.flag)
+  22   2              {
+  23   3                  sonic.flag = 0;
+  24   3                  sonic.value = sonic_measure();
+  25   3              }
+  26   2      
+  27   2              if (state.flag)
+  28   2              {
+  29   3                  state.flag = 0; // Corrected from sonic.flag = 0
+  30   3                  state_proc();
+  31   3              }
+  32   2          }
+  33   1      }
+  34          
+  35          void timer_2_1ms() interrupt 12
+  36          {
+  37   1          static uint i = 0;
+  38   1          i++;
+  39   1          if (i > 30000)
+  40   1          {
+  41   2              i = 0;
+  42   2          }
+  43   1      
+  44   1          seg_display();
+  45   1      
+  46   1          if (i % sonic.time == 0)
+  47   1          {
+  48   2              sonic.flag = 1;
+  49   2          }
+  50   1      
+  51   1          if (i % state.time == 0) // Corrected from state.flag to state.time
+  52   1          {
+  53   2              state.flag = 1;
+  54   2          }
+C51 COMPILER V9.60.7.0   MAIN                                                              03/28/2025 20:58:22 PAGE 2   
+
+  55   1      }
+  56          
+  57          void state_proc()
+  58          {
+  59   1          seg[0] = sonic.value / 100 % 10;
+  60   1          seg[1] = (sonic.value / 10) % 10; // Added %10 for clarity
+  61   1          seg[2] = sonic.value % 10;
+  62   1          seg[7] = 3;
+  63   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    184    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     10    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

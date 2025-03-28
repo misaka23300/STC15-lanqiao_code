@@ -1,5 +1,6 @@
-#include "onewire.c"
+#include "onewire.h"
 
+sbit DQ = P1^4;
 //
 void Delay_OneWire(unsigned int t)  
 {

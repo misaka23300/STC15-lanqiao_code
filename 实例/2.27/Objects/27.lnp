@@ -2,6 +2,9 @@
 ".\Objects\boot.obj",
 ".\Objects\main.obj",
 ".\Objects\seg.obj",
-".\Objects\sonic.obj" 
+".\Objects\sonic.obj",
+".\Objects\iic.obj",
+".\Objects\key.obj",
+".\Objects\onewire.obj" 
 TO ".\Objects\27" 
 PRINT(".\Listings\27.m51") RAMSIZE(256) 

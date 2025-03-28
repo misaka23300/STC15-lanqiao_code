@@ -134,10 +134,10 @@ uchar read_2k(uchar address)
 
     I2CStart();
 
-    Data = I2CSendByte(0xA1);
+    I2CSendByte(0xA1);
     I2CWaitAck();
 
-    I2CReceiveByte();
+    Data = I2CReceiveByte();
     I2CSendAck(1);
 
     I2CStop();
@@ -165,6 +165,8 @@ uchar ADC(uchar channel)
     I2CWaitAck();
 
     I2CStop();
+	
+		return value;
 }
 
 void DAC(uchar value)

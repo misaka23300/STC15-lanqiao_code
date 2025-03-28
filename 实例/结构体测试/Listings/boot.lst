@@ -1,10 +1,10 @@
-C51 COMPILER V9.60.7.0   BOOT                                                              03/28/2025 19:05:52 PAGE 1   
+C51 COMPILER V9.60.7.0   BOOT                                                              03/28/2025 20:58:22 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE BOOT
 OBJECT MODULE PLACED IN .\Objects\boot.obj
-COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE boot.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\boot
-                    -.lst) TABS(2) OBJECT(.\Objects\boot.obj)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE code\boot.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\boot.lst) TABS(2) OBJECT(.\Objects\boot.obj)
 
 line level    source
 
@@ -62,7 +62,7 @@ line level    source
   52   1        _nop_();
   53   1        _nop_();
   54   1        i = 39;
-C51 COMPILER V9.60.7.0   BOOT                                                              03/28/2025 19:05:52 PAGE 2   
+C51 COMPILER V9.60.7.0   BOOT                                                              03/28/2025 20:58:22 PAGE 2   
 
   55   1        while (--i);
   56   1      }
