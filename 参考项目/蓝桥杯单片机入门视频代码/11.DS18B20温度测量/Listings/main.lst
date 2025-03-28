@@ -1,0 +1,73 @@
+C51 COMPILER V9.54   MAIN                                                                  01/26/2023 10:14:46 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\Keil5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main.l
+                    -st) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "main.h"
+   2          float T;//温度值
+   3          int real_T;//方便显示
+   4          u16 cnt;//定时器0计数
+   5          u8 num;//接按键值
+   6          bit key_flag,led_flag,tmp_mea;
+   7          void main(){
+   8   1              Sys_Init();
+   9   1              Timer0Init();
+  10   1              //解决上电显示85℃的问题
+  11   1              T = rd_temperature();//先读一次
+  12   1              Delay(1000);//延时1s就可解决
+  13   1              
+  14   1              
+  15   1              while(1){
+  16   2                      if(key_flag){
+  17   3                              key_flag=0;
+  18   3                              num=Key_Scan();
+  19   3                      }
+  20   2                      if(tmp_mea){
+  21   3                              tmp_mea=0;
+  22   3                              
+  23   3                              ET0=0;//关闭中断，防止影响时序
+  24   3                              T = rd_temperature();//获取温度值
+  25   3                              ET0=1;//读取结束，开启中断
+  26   3                              
+  27   3                              real_T=(int)(T*100);//获取小数点后两位
+  28   3                              if(real_T<0){
+  29   4                                      real_T=-real_T;
+  30   4                                      Seg_Set(16,16,16,17,real_T/1000,real_T/100%10+32,real_T/10%10,real_T%10);
+  31   4                              }
+  32   3                              else 
+  33   3                                      Seg_Set(16,16,16,16,real_T/1000,real_T/100%10+32,real_T/10%10,real_T%10);
+  34   3                                      
+  35   3                      }
+  36   2                      
+  37   2              }
+  38   1      }
+  39          
+  40          void Timer0_Int() interrupt 1{
+  41   1              Seg_Show();
+  42   1              cnt++;
+  43   1              if(cnt%20==0)key_flag=1;
+  44   1              if(cnt%50==0)led_flag=1;
+  45   1              if(cnt%500==0)tmp_mea=1;//每隔500ms测一次温度
+  46   1              cnt%=1000;
+  47   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    452    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+C51 COMPILER V9.54   MAIN                                                                  01/26/2023 10:14:46 PAGE 2   
+
+   DATA SIZE        =      9    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      3    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
