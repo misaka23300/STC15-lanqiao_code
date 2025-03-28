@@ -1,0 +1,99 @@
+C51 COMPILER V9.54   PCF8591______                                                         02/12/2025 20:46:58 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE PCF8591______
+OBJECT MODULE PLACED IN .\Objects\PCF8591的运用.obj
+COMPILER INVOKED BY: E:\SoftWareProgrom\keli\C51\BIN\C51.EXE PCF8591的运用.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND
+                    - PRINT(.\Listings\PCF8591的运用.lst) TABS(2) OBJECT(.\Objects\PCF8591的运用.obj)
+
+line level    source
+
+   1          #include <STC15F2K60S2.H>
+   2          #include "iic.h"
+   3          
+   4          #define uchar unsigned char
+   5          #define uint unsigned int
+   6          
+   7          code unsigned char DuanMa[]={0xc0,0xf9,0xa4,0xb0,0x99,
+   8          0x92,0x82,0xf8,0x80,0x90,0xbf,0xff};   //对应着0-9和-共11个字符加上全灭
+   9          
+  10          uchar SMGa[8]={11,11,11,11,11,11,11,11};  //SMGa[0]
+  11          
+  12          void control(char x,y)
+  13          {
+  14   1        switch(x)
+  15   1        {
+  16   2          case 4:P2=(P2 & 0x1f)|0x80;break;   //Y4C为高电平
+  17   2          case 5:P2=(P2 & 0x1f)|0xa0;break;   //5
+  18   2          case 6:P2=(P2 & 0x1f)|0xc0;break;
+  19   2          case 7:P2=(P2 & 0x1f)|0xe0;break;
+  20   2        }
+  21   1        P0=y;
+  22   1        P2 &= 0x1f;   //P2 = P2 & 0x1f;
+  23   1      }
+  24          
+  25          void aloneSMG(char pos,value)   //单个数码管显示   
+  26          {
+  27   1        control(7,0xff);         //消影
+  28   1        control(6,0x01<<pos);    //位选 x=0 x=7
+  29   1        control(7,DuanMa[value]);//段码
+  30   1      }
+  31          
+  32          void T0_Reset()
+  33          {
+  34   1        AUXR &= 0x7f;     //0111 1111
+  35   1        TMOD &= 0xf0;     //TMOD = TMOD & 0xf0;
+  36   1        TH0 = 0xfc;       //初值64536，1000次后就溢出
+  37   1        TL0 = 0x18;
+  38   1        TF0 = 0;
+  39   1        ET0 = 1;
+  40   1        EA = 1;
+  41   1        TR0 = 1;
+  42   1      }
+  43          
+  44          uchar SMGi=0;  uchar t=0;       //100ms读取一次
+  45          void T0_Server() interrupt 1    //每次执行函数就是1ms
+  46          {
+  47   1        aloneSMG(SMGi,SMGa[SMGi]);    //SMGa[0] SMGa[1]   ----   SMGa[7]
+  48   1        if(++SMGi==8)SMGi=0; 
+  49   1        if(++t==101)t=0;
+  50   1      }
+  51          
+  52          uchar AIN1=0;
+  53          void main()
+  54          {
+C51 COMPILER V9.54   PCF8591______                                                         02/12/2025 20:46:58 PAGE 2   
+
+  55   1        control(4,0xff);
+  56   1        control(5,0x00);
+  57   1        T0_Reset();
+  58   1        while(1)
+  59   1        {
+  60   2          if(t==100) AIN1=AD_Read(0x03); //读取的是电位器的参数 0xff 255
+  61   2          
+  62   2          SMGa[0] = 11;
+  63   2          SMGa[1] = 11;
+  64   2          SMGa[2] = 11;
+  65   2          SMGa[3] = 11;
+  66   2          
+  67   2          SMGa[4] = 11;
+  68   2          SMGa[5] = AIN1/100%10;
+  69   2          SMGa[6] = AIN1/10%10;
+  70   2          SMGa[7] = AIN1%10;
+  71   2        }
+  72   1      }
+  73          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    304    ----
+   CONSTANT SIZE    =     12    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     11    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
