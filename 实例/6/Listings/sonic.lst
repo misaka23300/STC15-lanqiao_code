@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   SONIC                                                             03/19/2025 19:21:02 PAGE 1   
+C51 COMPILER V9.60.7.0   SONIC                                                             03/26/2025 14:40:27 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE SONIC
@@ -30,7 +30,7 @@ line level    source
   20   1          uint distance;
   21   1      
   22   1          TR0 = 0; TF0 = 0;
-  23   1          TF0 = 0; TH0 = 0;
+  23   1          TL0 = 0; TH0 = 0;
   24   1          
   25   1          sonic_send();
   26   1      
@@ -62,7 +62,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    DATA SIZE        =   ----       3
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
-C51 COMPILER V9.60.7.0   SONIC                                                             03/19/2025 19:21:02 PAGE 2   
+C51 COMPILER V9.60.7.0   SONIC                                                             03/26/2025 14:40:27 PAGE 2   
 
 END OF MODULE INFORMATION.
 
