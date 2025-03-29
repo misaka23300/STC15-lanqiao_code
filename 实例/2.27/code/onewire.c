@@ -68,6 +68,7 @@ float read_temperature()
 	uchar low, high;
 	float temp;
 
+
 	init_ds18b20();
 	Write_DS18B20(0xcc);
 	Write_DS18B20(0x44);
@@ -82,10 +83,8 @@ float read_temperature()
 	high = Read_DS18B20();
 	
 	temp = (high<<8) | low;
-	if((temp & 0x8000) == 0x0000)
-	{
-		return temp * 0.0625;
-	}
-	else return 0;
+	
+	return temp * 0.0625;
+	
 }
 

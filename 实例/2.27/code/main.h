@@ -15,4 +15,5 @@ void delete_0(uchar *a, j, bit negative);
 
 
 void key_proc();
+void led_proc();
 #endif

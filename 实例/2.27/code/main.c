@@ -8,14 +8,16 @@ enum {
     STATE_TIME = 90,
 
     // 键盘
-    KEY_TIME = 20,
+    KEY_TIME = 15,
 
     // DS18B20
     DS18B20_TIME = 1000,
 
     // DAC
-    DAC_TIME = 1000
+    DAC_TIME = 1000,
 
+    // LED
+    LED_TIME = 20
 };
 
 //bit sonic_flag, state_flag, key_flag, temp_flag, dac_flag;
@@ -28,7 +30,7 @@ bit sonic_flag;
 bit sonic_unit;
 
 // 键盘
-uchar press;
+//uchar press;
 bit key_flag;
 uchar state;
 
@@ -62,7 +64,10 @@ char calibra_value;
 
 void main()
 {
+    read_temperature();
     boot_init();
+    led_proc();
+    
 
     while (1)
     {
@@ -88,6 +93,12 @@ void main()
         {
             key_flag = 0;
             key_proc();
+        }
+
+        if (led_flag)
+        {
+            led_flag = 0;
+            led_proc();
         }
     }
     
@@ -123,6 +134,11 @@ void Timer2_Isr(void) interrupt 12
     {
         key_flag = 1;
     }
+
+    if (i % LED_TIME == 0)
+    {
+        led_flag = 1;
+    }
 }
 
 
@@ -133,9 +149,9 @@ void state_proc()
         case 0:
         {
             set_seg(
-                temperature / 100 % 10,
-                (temperature / 10 % 10) + 32,
-                temperature % 10,
+                temperature / 1000 % 10,
+                (temperature / 100 % 10) + 32,
+                temperature / 10 % 10,
                 17,
                 16,
                 distance / 100 % 10,
@@ -152,7 +168,7 @@ void state_proc()
                 case 0:
                 {
                     set_seg(
-                        23,
+                        24,
                         1,
                         16, 16, 16, 16,
                         distance_argument / 10 % 10,
@@ -164,7 +180,7 @@ void state_proc()
                 case 1:
                 {
                     set_seg(
-                        23,
+                        24,
                         2,
                         16, 16, 16, 16,
                         temp_argument / 10 % 10,
@@ -244,6 +260,7 @@ void delete_0(uchar *a, j, bit negative)
 
 void key_proc()
 {
+    uchar press;
     press = key_scan();
     switch (press)
     {
@@ -276,3 +293,18 @@ void key_proc()
         break;
     }
 }
+
+void led_proc()
+{
+    uchar i;
+    for (i = 0;i < 8;i++)
+    {
+        if (i != state)
+            led_value[i] = 0;
+        else
+            led_value[i] = 1;
+    }
+    led_display();
+}
+
+

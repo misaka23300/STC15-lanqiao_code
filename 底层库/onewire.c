@@ -66,7 +66,7 @@ bit init_ds18b20(void)
 
 
 
-float read_temperature()
+/* float read_temperature()
 {
 	float temperature;
 	uchar high, low;
@@ -87,5 +87,33 @@ float read_temperature()
 
 	temperature = (high << 8) | low;
 	return temperature / 16.0;
+} */
+
+
+float read_temperature()
+{
+	uchar low, high;
+	float temp;
+
+	init_ds18b20();
+	Write_DS18B20(0xcc);
+	Write_DS18B20(0x44);
+	
+	Delay_OneWire(200);
+	
+	init_ds18b20();
+	Write_DS18B20(0xcc);
+	Write_DS18B20(0xbe);
+	
+	low = Read_DS18B20();
+	high = Read_DS18B20();
+	
+	temp = (high<<8) | low;
+	if((temp & 0x8000) == 0x0000)
+	{
+		return temp * 0.0625;
+	}
+	else return 0;
 }
+
 
