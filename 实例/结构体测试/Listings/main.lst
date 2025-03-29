@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              03/28/2025 20:58:22 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              03/29/2025 15:12:21 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -62,7 +62,7 @@ line level    source
   52   1          {
   53   2              state.flag = 1;
   54   2          }
-C51 COMPILER V9.60.7.0   MAIN                                                              03/28/2025 20:58:22 PAGE 2   
+C51 COMPILER V9.60.7.0   MAIN                                                              03/29/2025 15:12:21 PAGE 2   
 
   55   1      }
   56          
@@ -73,17 +73,76 @@ line level    source
   61   1          seg[2] = sonic.value % 10;
   62   1          seg[7] = 3;
   63   1      }
+  64          
+  65          struct fonction_list
+  66          {
+  67              uchar value;
+  68              uchar flag;
+  69              uint time;
+  70          };
+*** ERROR C226 IN LINE 70 OF code\main.c: 'fonction_list': duplicate struct/union/enum tag
+  71          
+  72          struct fonction_list sonic = {0, 0, 1000};
+*** ERROR C279 IN LINE 72 OF code\main.c: 'sonic': multiple initialization
+  73          struct fonction_list state = {0, 0, 50};
+*** ERROR C279 IN LINE 73 OF code\main.c: 'state': multiple initialization
+  74          
+  75          extern uchar seg[8];
+  76          
+  77          void main()
+  78          {
+  79   1          boot_init();
+  80   1      
+  81   1          while (1)
+  82   1          {
+  83   2              if (sonic.flag)
+  84   2              {
+  85   3                  sonic.flag = 0;
+  86   3                  sonic.value = sonic_measure();
+  87   3              }
+  88   2      
+  89   2              if (state.flag)
+  90   2              {
+  91   3                  state.flag = 0; // Corrected from sonic.flag = 0
+  92   3                  state_proc();
+  93   3              }
+  94   2          }
+  95   1      }
+*** ERROR C237 IN LINE 95 OF code\main.c: 'main': function already has a body
+  96          
+  97          void timer_2_1ms() interrupt 12
+  98          {
+  99   1          static uint i = 0;
+ 100   1          i++;
+ 101   1          if (i > 30000)
+ 102   1          {
+ 103   2              i = 0;
+ 104   2          }
+ 105   1      
+ 106   1          seg_display();
+ 107   1      
+ 108   1          if (i % sonic.time == 0)
+ 109   1          {
+ 110   2              sonic.flag = 1;
+ 111   2          }
+ 112   1      
+C51 COMPILER V9.60.7.0   MAIN                                                              03/29/2025 15:12:21 PAGE 3   
 
+ 113   1          if (i % state.time == 0) // Corrected from state.flag to state.time
+ 114   1          {
+ 115   2              state.flag = 1;
+ 116   2          }
+ 117   1      }
+*** ERROR C237 IN LINE 117 OF code\main.c: 'timer_2_1ms': function already has a body
+ 118          
+ 119          void state_proc()
+ 120          {
+ 121   1          seg[0] = sonic.value / 100 % 10;
+ 122   1          seg[1] = (sonic.value / 10) % 10; // Added %10 for clarity
+ 123   1          seg[2] = sonic.value % 10;
+ 124   1          seg[7] = 3;
+ 125   1      }
+*** ERROR C237 IN LINE 125 OF code\main.c: 'state_proc': function already has a body
+ 126          
 
-MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    184    ----
-   CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =   ----    ----
-   PDATA SIZE       =   ----    ----
-   DATA SIZE        =     10    ----
-   IDATA SIZE       =   ----    ----
-   BIT SIZE         =   ----    ----
-END OF MODULE INFORMATION.
-
-
-C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  0 WARNING(S),  6 ERROR(S)

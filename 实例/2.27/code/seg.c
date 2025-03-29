@@ -26,3 +26,15 @@ void seg_display()
 
     i = (i + 1) % 8;
 }    
+
+void set_seg(uchar s0, s1, s2, s3, s4, s5, s6, s7)
+{
+    seg[0] = s0;
+    seg[1] = s1;
+    seg[2] = s2;
+    seg[3] = s3;
+    seg[4] = s4;
+    seg[5] = s5;
+    seg[6] = s6;
+    seg[7] = s7;
+}

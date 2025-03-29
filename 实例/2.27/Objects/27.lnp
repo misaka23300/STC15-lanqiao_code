@@ -1,10 +1,11 @@
 ".\Objects\STARTUP.obj",
 ".\Objects\boot.obj",
-".\Objects\main.obj",
-".\Objects\seg.obj",
-".\Objects\sonic.obj",
+".\Objects\display.obj",
 ".\Objects\iic.obj",
 ".\Objects\key.obj",
-".\Objects\onewire.obj" 
+".\Objects\main.obj",
+".\Objects\onewire.obj",
+".\Objects\seg.obj",
+".\Objects\sonic.obj" 
 TO ".\Objects\27" 
 PRINT(".\Listings\27.m51") RAMSIZE(256) 

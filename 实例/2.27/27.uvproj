@@ -384,37 +384,42 @@
             <File>
               <FileName>boot.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\boot.c</FilePath>
+              <FilePath>.\code\boot.c</FilePath>
             </File>
             <File>
-              <FileName>main.c</FileName>
+              <FileName>display.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\main.c</FilePath>
-            </File>
-            <File>
-              <FileName>seg.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\seg.c</FilePath>
-            </File>
-            <File>
-              <FileName>sonic.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\sonic.c</FilePath>
+              <FilePath>.\code\display.c</FilePath>
             </File>
             <File>
               <FileName>iic.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\iic.c</FilePath>
+              <FilePath>.\code\iic.c</FilePath>
             </File>
             <File>
               <FileName>key.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\key.c</FilePath>
+              <FilePath>.\code\key.c</FilePath>
+            </File>
+            <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\code\main.c</FilePath>
             </File>
             <File>
               <FileName>onewire.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\onewire.c</FilePath>
+              <FilePath>.\code\onewire.c</FilePath>
+            </File>
+            <File>
+              <FileName>seg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\code\seg.c</FilePath>
+            </File>
+            <File>
+              <FileName>sonic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\code\sonic.c</FilePath>
             </File>
           </Files>
         </Group>

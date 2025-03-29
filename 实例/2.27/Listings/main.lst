@@ -1,89 +1,309 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              03/28/2025 19:05:52 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              03/29/2025 17:35:14 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
 OBJECT MODULE PLACED IN .\Objects\main.obj
-COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
-                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE code\main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
 
 line level    source
 
    1          #include "main.h"
    2          
    3          enum {
-   4              SONIC_TIME = 1000,
-   5              STATE_TIME = 90
-   6          };
-   7          
-   8          bit sonic_flag, state_flag;
+   4              // 超声波
+   5              SONIC_TIME = 1000,
+   6          
+   7              // 数码管
+   8              STATE_TIME = 90,
    9          
-  10          extern uchar seg[8];
-  11          uchar distance;
+  10              // 键盘
+  11              KEY_TIME = 20,
   12          
-  13          void main()
-  14          {
-  15   1          boot_init();
-  16   1      
-  17   1          while (1)
-  18   1          {
-  19   2              if (sonic_flag)
-  20   2              {
-  21   3                  sonic_flag = 0;
-  22   3                  distance = sonic_measure();
-  23   3              }
-  24   2      
-  25   2              if (state_flag)
-  26   2              {
-  27   3                  state_flag = 0;
-  28   3                  state_proc();
-  29   3              }
-  30   2          }
-  31   1          
-  32   1      }
-  33          
-  34          void Timer2_Isr(void) interrupt 12
-  35          {
-  36   1          static uint i;
-  37   1          i++;
-  38   1          if (i > 30000)
-  39   1          {
-  40   2              i = 0;
-  41   2          }
-  42   1      
-  43   1          seg_display();
-  44   1      
-  45   1          if (i % SONIC_TIME == 0)
-  46   1          {
-  47   2              sonic_flag = 1;
-  48   2          }
-  49   1      
-  50   1          if (i % STATE_TIME == 0)
-  51   1          {
-  52   2              state_flag = 1;
-  53   2          }
-  54   1      }
-C51 COMPILER V9.60.7.0   MAIN                                                              03/28/2025 19:05:52 PAGE 2   
+  13              // DS18B20
+  14              DS18B20_TIME = 1000,
+  15          
+  16              // DAC
+  17              DAC_TIME = 1000
+  18          
+  19          };
+  20          
+  21          //bit sonic_flag, state_flag, key_flag, temp_flag, dac_flag;
+  22          
+  23          
+  24          
+  25          // 超声波
+  26          uchar distance;
+  27          bit sonic_flag;
+  28          bit sonic_unit;
+  29          
+  30          // 键盘
+  31          uchar press;
+  32          bit key_flag;
+  33          uchar state;
+  34          
+  35          // DS18B20
+  36          int temperature;
+  37          bit ds18b20_flag;
+  38          
+  39          // LED
+  40          extern uchar led_value[8];
+  41          bit led_flag;
+  42          
+  43          // 继电器
+  44          
+  45          // 数码管
+  46          extern uchar seg[8];
+  47          bit state_flag;
+  48          uchar state_1_flag;
+  49          uchar state_2;
+  50          
+  51          // DAC
+  52          uchar DAC_value;
+  53          bit DAC_flag;
+  54          
+C51 COMPILER V9.60.7.0   MAIN                                                              03/29/2025 17:35:14 PAGE 2   
 
-  55          
+  55          uchar low_dac;
   56          
-  57          void state_proc()
-  58          {
-  59   1          seg[0] = distance / 100 % 10;
-  60   1          seg[1] = distance / 10 % 10;
-  61   1          seg[2] = distance % 10;
-  62   1      }
-  63          
-  64          
+  57          // other
+  58          uchar distance_argument;
+  59          uchar temp_argument;
+  60          
+  61          char calibra_value;
+  62          
+  63          void main()
+  64          {
+  65   1          boot_init();
+  66   1      
+  67   1          while (1)
+  68   1          {
+  69   2              if (sonic_flag)
+  70   2              {
+  71   3                  sonic_flag = 0;
+  72   3                  distance = sonic_measure();
+  73   3              }
+  74   2      
+  75   2              if (state_flag)
+  76   2              {
+  77   3                  state_flag = 0;
+  78   3                  state_proc();
+  79   3              }
+  80   2      
+  81   2              if (ds18b20_flag)
+  82   2              {
+  83   3                  ds18b20_flag = 0;
+  84   3                  ds18b20_proc();
+  85   3              }
+  86   2      
+  87   2              if (key_flag)
+  88   2              {
+  89   3                  key_flag = 0;
+  90   3                  key_proc();
+  91   3              }
+  92   2          }
+  93   1          
+  94   1      }
+  95          
+  96          void Timer2_Isr(void) interrupt 12
+  97          {
+  98   1          static uint i;
+  99   1          i++;
+ 100   1          if (i > 30000)
+ 101   1          {
+ 102   2              i = 0;
+ 103   2          }
+ 104   1      
+ 105   1          seg_display();
+ 106   1      
+ 107   1          if (i % SONIC_TIME == 0)
+ 108   1          {
+ 109   2              sonic_flag = 1;
+ 110   2          }
+ 111   1      
+ 112   1          if (i % STATE_TIME == 0)
+ 113   1          {
+ 114   2              state_flag = 1;
+ 115   2          }
+ 116   1      
+C51 COMPILER V9.60.7.0   MAIN                                                              03/29/2025 17:35:14 PAGE 3   
+
+ 117   1          if (i % DS18B20_TIME == 0)
+ 118   1          {
+ 119   2              ds18b20_flag = 1;
+ 120   2          }
+ 121   1      
+ 122   1          if (i % KEY_TIME == 0)
+ 123   1          {
+ 124   2              key_flag = 1;
+ 125   2          }
+ 126   1      }
+ 127          
+ 128          
+ 129          void state_proc()
+ 130          {
+ 131   1          switch (state)
+ 132   1          {
+ 133   2              case 0:
+ 134   2              {
+ 135   3                  set_seg(
+ 136   3                      temperature / 100 % 10,
+ 137   3                      (temperature / 10 % 10) + 32,
+ 138   3                      temperature % 10,
+ 139   3                      17,
+ 140   3                      16,
+ 141   3                      distance / 100 % 10,
+ 142   3                      distance / 10 % 10,
+ 143   3                      distance % 10
+ 144   3                  );
+ 145   3              }
+ 146   2              break;
+ 147   2      
+ 148   2              case 1:
+ 149   2              {
+ 150   3                  switch (state_1_flag)
+ 151   3                  {
+ 152   4                      case 0:
+ 153   4                      {
+ 154   5                          set_seg(
+ 155   5                              23,
+ 156   5                              1,
+ 157   5                              16, 16, 16, 16,
+ 158   5                              distance_argument / 10 % 10,
+ 159   5                              distance_argument / 10
+ 160   5                          );
+ 161   5                      }
+ 162   4                      break;
+ 163   4      
+ 164   4                      case 1:
+ 165   4                      {
+ 166   5                          set_seg(
+ 167   5                              23,
+ 168   5                              2,
+ 169   5                              16, 16, 16, 16,
+ 170   5                              temp_argument / 10 % 10,
+ 171   5                              temp_argument / 10
+ 172   5                          );
+ 173   5                      }
+ 174   4                      break;
+ 175   4                  }
+ 176   3              }
+ 177   2              break;
+ 178   2      
+C51 COMPILER V9.60.7.0   MAIN                                                              03/29/2025 17:35:14 PAGE 4   
+
+ 179   2              case 2:
+ 180   2              {
+ 181   3                  switch (state_2)
+ 182   3                  {
+ 183   4                      case 0:
+ 184   4                      {
+ 185   5                          uchar calibra_list[3] = {0, 0, 0};
+ 186   5      
+ 187   5                          calibra_list[1] = calibra_value / 10;
+ 188   5                          calibra_list[2] = calibra_value % 10;
+ 189   5                          
+ 190   5                          delete_0(calibra_list, 3, calibra_value < 0 ? 1 : 0);
+ 191   5      
+ 192   5                          set_seg( 15, 1, 16, 16, 16, calibra_list[0], calibra_list[1], calibra_list[2] );
+ 193   5                      }
+ 194   4                      break;
+ 195   4      
+ 196   4                      case 1:
+ 197   4                      {
+ 198   5                          set_seg(15, 2, 16, 16, 16, 3, 4, 0);
+ 199   5                      }
+ 200   4                      break;
+ 201   4      
+ 202   4                      case 2:
+ 203   4                      {
+ 204   5                          set_seg(15, 3, 16, 16, 16, 16,low_dac / 10 % 10, low_dac % 10);
+ 205   5                      }
+ 206   4                      break;
+ 207   4                  }
+ 208   3              }
+ 209   2              break;
+ 210   2          }
+ 211   1       
+ 212   1      }
+ 213          
+ 214          void ds18b20_proc()
+ 215          {
+ 216   1          temperature = read_temperature()* 100;
+ 217   1      }
+ 218          
+ 219          void delete_0(uchar *a, j, bit negative)
+ 220          {
+ 221   1          uchar i;
+ 222   1          if (j == 0)
+ 223   1          {
+ 224   2              return;
+ 225   2          }
+ 226   1          j--;
+ 227   1          for (i = 0; i < j;i++)
+ 228   1          {
+ 229   2              if (a[i] == 0)
+ 230   2              {
+ 231   3                  a[i] = 16;
+ 232   3                  
+ 233   3              }
+ 234   2              else
+ 235   2              {
+ 236   3                  if (i != 0 && negative)
+ 237   3                  {
+ 238   4                      a[i - 1] = 17; 
+ 239   4                  }
+ 240   3                  break;
+C51 COMPILER V9.60.7.0   MAIN                                                              03/29/2025 17:35:14 PAGE 5   
+
+ 241   3              }
+ 242   2          }
+ 243   1      }
+ 244          
+ 245          void key_proc()
+ 246          {
+ 247   1          press = key_scan();
+ 248   1          switch (press)
+ 249   1          {
+ 250   2              case 4:
+ 251   2              {
+ 252   3                  state = (state + 1) % 3;
+ 253   3              }
+ 254   2              break; 
+ 255   2      
+ 256   2              case 5:
+ 257   2              {
+ 258   3                  if (sonic_unit == 1)
+ 259   3                      sonic_unit = 0;
+ 260   3                  else
+ 261   3                      sonic_unit = 1;
+ 262   3                
+ 263   3              }
+ 264   2              break;
+ 265   2      
+ 266   2              case 8:
+ 267   2              {
+ 268   3      
+ 269   3              }
+ 270   2              break;
+ 271   2      
+ 272   2              case 9:
+ 273   2              {
+ 274   3      
+ 275   3              }
+ 276   2              break;
+ 277   2          }
+ 278   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    175    ----
-   CONSTANT SIZE    =   ----    ----
+   CODE SIZE        =    845    ----
+   CONSTANT SIZE    =      3    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      3    ----
+   DATA SIZE        =     14       8
    IDATA SIZE       =   ----    ----
-   BIT SIZE         =      2    ----
+   BIT SIZE         =      7       1
 END OF MODULE INFORMATION.
 
 

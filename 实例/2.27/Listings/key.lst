@@ -1,10 +1,10 @@
-C51 COMPILER V9.60.7.0   KEY                                                               03/28/2025 19:05:53 PAGE 1   
+C51 COMPILER V9.60.7.0   KEY                                                               03/29/2025 17:35:14 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE KEY
 OBJECT MODULE PLACED IN .\Objects\key.obj
-COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE key.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\key.l
-                    -st) TABS(2) OBJECT(.\Objects\key.obj)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE code\key.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\
+                    -key.lst) TABS(2) OBJECT(.\Objects\key.obj)
 
 line level    source
 
@@ -62,7 +62,7 @@ line level    source
   52   2      
   53   2              case 2:
   54   2              {
-C51 COMPILER V9.60.7.0   KEY                                                               03/28/2025 19:05:53 PAGE 2   
+C51 COMPILER V9.60.7.0   KEY                                                               03/29/2025 17:35:14 PAGE 2   
 
   55   3                  if (press != 0x0F)
   56   3                  {
