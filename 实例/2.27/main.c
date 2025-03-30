@@ -10,6 +10,10 @@ bit sonic_flag, state_flag;
 extern uchar seg[8];
 uchar distance;
 
+// 0.5 ~ 5.0,c
+uchar valtage_high, voltage_low;
+uchar state;
+
 void main()
 {
     boot_init();
@@ -56,9 +60,106 @@ void Timer2_Isr(void) interrupt 12
 
 void state_proc()
 {
-    seg[0] = distance / 100 % 10;
-    seg[1] = distance / 10 % 10;
-    seg[2] = distance % 10;
+    switch (state)
+    {
+        case 0:
+        {
+            if (one_flag != 0)
+            {
+                one_flag = 0;
+                seg[0] = 25;
+                seg[1] = 16;
+                seg[2] = 16;
+                seg[3] = 16;
+                seg[4] = 16;
+            }
+            seg[5] = (v / 100 % 10) + 32;
+            seg[6] = v / 10;
+            seg[7] = v % 10;
+        }
+        break;
+
+        case 1:
+        {
+            if (one_flag != 1)
+            {
+                one_flag = 1;
+
+                seg[0] = 24;
+                seg[1] = 16;
+                seg[2] = 16;
+
+                seg[5] = 16;
+            }
+
+            seg[3] = voltage_high / 10;
+            seg[4] = voltage_high % 10;
+
+            seg[6] = voltage_low / 10;
+            seg[7] = voltage_low % 10;
+        }
+        break;
+
+        case 2:
+        {
+            if (one_flag != 2)
+            {
+                one_flag = 2;
+                seg[0] = 42;
+                seg[1] = 16;
+                seg[2] = 16;
+                seg[3] = 16;
+                seg[4] = 16;
+            }
+            if (distance == 255)
+            {
+                seg[5] = 16;
+                seg[6] = distance / 10 % 10;
+                seg[7] = distance % 10;
+            }
+            else
+            {
+                seg[5] = 16;
+                seg[6] = distance / 10 % 10;
+                seg[7] = distance % 10;
+            } 
+        }
+        break;
+    }
+}
+    
+
+void key_proc()
+{
+    uchar press;
+    press = key_sca();
+
+    switch (press)
+    {
+        case 4:
+        {
+            state = (state + 1) % 3;
+        }
+        break;
+
+        case 5:
+        {
+            low_high_state = ~low_high_state;
+        }
+        break;
+
+        case 7:
+        {
+
+        }
+        break;
+    }
 }
 
 
+uchar voltage(uchar value)
+{
+    if (value != 5)
+        vlaue++;
+    
+}
