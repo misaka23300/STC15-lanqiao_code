@@ -1,89 +1,405 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              03/27/2025 19:17:53 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              03/30/2025 19:17:25 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
 OBJECT MODULE PLACED IN .\Objects\main.obj
-COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
-                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE code\main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
 
 line level    source
 
    1          #include "main.h"
    2          
    3          enum {
-   4              SONIC_TIME = 1000,
-   5              STATE_TIME = 90
-   6          };
-   7          
-   8          bit sonic_flag, state_flag;
+   4              // 超声波
+   5              SONIC_TIME = 1000,
+   6          
+   7              // 数码管
+   8              STATE_TIME = 90,
    9          
-  10          extern uchar seg[8];
-  11          uchar distance;
+  10              // 键盘
+  11              KEY_TIME = 15,
   12          
-  13          void main()
-  14          {
-  15   1          boot_init();
-  16   1      
-  17   1          while (1)
-  18   1          {
-  19   2              if (sonic_flag)
-  20   2              {
-  21   3                  sonic_flag = 0;
-  22   3                  distance = sonic_measure();
-  23   3              }
-  24   2      
-  25   2              if (state_flag)
-  26   2              {
-  27   3                  state_flag = 0;
-  28   3                  state_proc();
-  29   3              }
-  30   2          }
-  31   1          
-  32   1      }
-  33          
-  34          void Timer2_Isr(void) interrupt 12
-  35          {
-  36   1          static uint i;
-  37   1          i++;
-  38   1          if (i > 30000)
-  39   1          {
-  40   2              i = 0;
-  41   2          }
-  42   1      
-  43   1          seg_display();
-  44   1      
-  45   1          if (i % SONIC_TIME == 0)
-  46   1          {
-  47   2              sonic_flag = 1;
-  48   2          }
-  49   1      
-  50   1          if (i % STATE_TIME == 0)
-  51   1          {
-  52   2              state_flag = 1;
-  53   2          }
-  54   1      }
-C51 COMPILER V9.60.7.0   MAIN                                                              03/27/2025 19:17:53 PAGE 2   
+  13              // DS18B20
+  14              DS18B20_TIME = 1000,
+  15          
+  16              // DAC
+  17              DAC_TIME = 1000,
+  18          
+  19              // LED
+  20              LED_TIME = 20
+  21          };
+  22          
+  23          //bit sonic_flag, state_flag, key_flag, temp_flag, dac_flag;
+  24          
+  25          
+  26          
+  27          // 超声波
+  28          uchar distance;
+  29          bit sonic_flag;
+  30          bit sonic_unit;
+  31          
+  32          // 键盘
+  33          //uchar press;
+  34          bit key_flag;
+  35          uchar state;
+  36          
+  37          // DS18B20
+  38          int temperature;
+  39          bit ds18b20_flag;
+  40          
+  41          // LED
+  42          extern uchar led_value[8];
+  43          bit led_flag;
+  44          
+  45          // 继电器
+  46          
+  47          // 数码管
+  48          extern uchar seg[8];
+  49          bit state_flag;
+  50          uchar state_1;
+  51          uchar state_2;
+  52          
+  53          // DAC
+  54          uchar DAC_value;
+C51 COMPILER V9.60.7.0   MAIN                                                              03/30/2025 19:17:25 PAGE 2   
 
-  55          
+  55          bit DAC_flag;
   56          
-  57          void state_proc()
-  58          {
-  59   1          seg[0] = distance / 100 % 10;
-  60   1          seg[1] = distance / 10 % 10;
-  61   1          seg[2] = distance % 10;
-  62   1      }
-  63          
+  57          //0.1 - 2.0 * 10
+  58          // 1 - 20
+  59          uchar  low_dac;
+  60          
+  61          // other
+  62          uchar distance_argument;
+  63          uchar temp_argument;
   64          
+  65          char calibra_value;
+  66          
+  67          uchar speed;
+  68          
+  69          void main()
+  70          {
+  71   1          read_temperature();
+  72   1          boot_init();
+  73   1          led_proc();
+  74   1          
+  75   1      
+  76   1          while (1)
+  77   1          {
+  78   2              if (sonic_flag)
+  79   2              {
+  80   3                  sonic_flag = 0;
+  81   3                  distance = sonic_measure();
+  82   3              }
+  83   2      
+  84   2              if (state_flag)
+  85   2              {
+  86   3                  state_flag = 0;
+  87   3                  state_proc();
+  88   3              }
+  89   2      
+  90   2              if (ds18b20_flag)
+  91   2              {
+  92   3                  ds18b20_flag = 0;
+  93   3                  ds18b20_proc();
+  94   3              }
+  95   2      
+  96   2              if (key_flag)
+  97   2              {
+  98   3                  key_flag = 0;
+  99   3                  key_proc();
+ 100   3              }
+ 101   2      
+ 102   2              if (led_flag)
+ 103   2              {
+ 104   3                  led_flag = 0;
+ 105   3                  led_proc();
+ 106   3              }
+ 107   2          }
+ 108   1          
+ 109   1      }
+ 110          
+ 111          void Timer2_Isr(void) interrupt 12
+ 112          {
+ 113   1          static uint i;
+ 114   1          i++;
+ 115   1          if (i > 30000)
+ 116   1          {
+C51 COMPILER V9.60.7.0   MAIN                                                              03/30/2025 19:17:25 PAGE 3   
+
+ 117   2              i = 0;
+ 118   2          }
+ 119   1      
+ 120   1          seg_display();
+ 121   1      
+ 122   1          if (i % SONIC_TIME == 0)
+ 123   1          {
+ 124   2              sonic_flag = 1;
+ 125   2          }
+ 126   1      
+ 127   1          if (i % STATE_TIME == 0)
+ 128   1          {
+ 129   2              state_flag = 1;
+ 130   2          }
+ 131   1      
+ 132   1          if (i % DS18B20_TIME == 0)
+ 133   1          {
+ 134   2              ds18b20_flag = 1;
+ 135   2          }
+ 136   1      
+ 137   1          if (i % KEY_TIME == 0)
+ 138   1          {
+ 139   2              key_flag = 1;
+ 140   2          }
+ 141   1      
+ 142   1          if (i % LED_TIME == 0)
+ 143   1          {
+ 144   2              led_flag = 1;
+ 145   2          }
+ 146   1      }
+ 147          
+ 148          
+ 149          void state_proc()
+ 150          {
+ 151   1          switch (state)
+ 152   1          {
+ 153   2              case 0:
+ 154   2              {
+ 155   3      
+ 156   3                  // 2 3. 5 - x x 2 5
+ 157   3                  set_seg(
+ 158   3                      temperature / 1000 % 10,
+ 159   3                      (temperature / 100 % 10) + 32,
+ 160   3                      temperature / 10 % 10,
+ 161   3                      17,
+ 162   3                      16,
+ 163   3                      distance / 100 % 10,
+ 164   3                      distance / 10 % 10,
+ 165   3                      distance % 10
+ 166   3                  );
+ 167   3              }
+ 168   2              break;
+ 169   2      
+ 170   2              case 1:
+ 171   2              {
+ 172   3                  switch (state_1)
+ 173   3                  {
+ 174   4                      case 0:
+ 175   4                      {
+ 176   5                          // P 1 x x x x 4 0
+ 177   5                          set_seg(
+ 178   5                              24,
+C51 COMPILER V9.60.7.0   MAIN                                                              03/30/2025 19:17:25 PAGE 4   
+
+ 179   5                              1,
+ 180   5                              16, 16, 16, 16,
+ 181   5                              distance_argument / 10 % 10,
+ 182   5                              distance_argument / 10
+ 183   5                          );
+ 184   5                      }
+ 185   4                      break;
+ 186   4      
+ 187   4                      case 1:
+ 188   4                      {
+ 189   5                          // P 2 x x x x 3 0
+ 190   5                          set_seg(
+ 191   5                              24,
+ 192   5                              2,
+ 193   5                              16, 16, 16, 16,
+ 194   5                              temp_argument / 10 % 10,
+ 195   5                              temp_argument / 10
+ 196   5                          );
+ 197   5                      }
+ 198   4                      break;
+ 199   4                  }
+ 200   3              }
+ 201   2              break;
+ 202   2      
+ 203   2              case 2:
+ 204   2              {
+ 205   3                  switch (state_2)
+ 206   3                  {
+ 207   4                      case 0:
+ 208   4                      {
+ 209   5                          uchar calibra_list[3] = {0, 0, 0};
+ 210   5      
+ 211   5                          calibra_list[1] = calibra_value / 10;
+ 212   5                          calibra_list[2] = calibra_value % 10;
+ 213   5                          
+ 214   5                          delete_0(calibra_list, 3, calibra_value < 0 ? 1 : 0);
+ 215   5                          
+ 216   5                          // F 1 x x x 0 x x 5
+ 217   5                          set_seg( 15, 1, 16, 16, 16, calibra_list[0], calibra_list[1], calibra_list[2] );
+ 218   5                      }
+ 219   4                      break;
+ 220   4      
+ 221   4                      case 1:
+ 222   4                      {
+ 223   5                          // F 2 x x x 3 4 0
+ 224   5                          set_seg(15, 2, 16, 16, 16, speed / 100 % 10, speed / 10 % 10, speed % 10);
+ 225   5                      }
+ 226   4                      break;
+ 227   4      
+ 228   4                      case 2:
+ 229   4                      {
+ 230   5                          // F 3 x x x x 0. 2
+ 231   5                          set_seg(15, 3, 16, 16, 16, 16,low_dac / 10 % 10, low_dac % 10);
+ 232   5                      }
+ 233   4                      break;
+ 234   4                  }
+ 235   3              }
+ 236   2              break;
+ 237   2          }
+ 238   1       
+ 239   1      }
+ 240          
+C51 COMPILER V9.60.7.0   MAIN                                                              03/30/2025 19:17:25 PAGE 5   
+
+ 241          void ds18b20_proc()
+ 242          {
+ 243   1          temperature = read_temperature()* 100;
+ 244   1      }
+ 245          
+ 246          void delete_0(uchar *a, j, bit negative)
+ 247          {
+ 248   1          uchar i;
+ 249   1          if (j == 0)
+ 250   1          {
+ 251   2              return;
+ 252   2          }
+ 253   1          j--;
+ 254   1          for (i = 0; i < j;i++)
+ 255   1          {
+ 256   2              if (a[i] == 0)
+ 257   2              {
+ 258   3                  a[i] = 16;
+ 259   3                  
+ 260   3              }
+ 261   2              else
+ 262   2              {
+ 263   3                  if (i != 0 && negative)
+ 264   3                  {
+ 265   4                      a[i - 1] = 17; 
+ 266   4                  }
+ 267   3                  break;
+ 268   3              }
+ 269   2          }
+ 270   1      }
+ 271          
+ 272          void key_proc()
+ 273          {
+ 274   1          uchar press;
+ 275   1          press = key_scan();
+ 276   1          switch (press)
+ 277   1          {
+ 278   2              case 4:
+ 279   2              {
+ 280   3                  state = (state + 1) % 3;
+ 281   3              }
+ 282   2              break; 
+ 283   2      
+ 284   2              case 5:
+ 285   2              {
+ 286   3                  switch (state)
+ 287   3                  {
+ 288   4                      case 0:
+ 289   4                      {
+ 290   5                          if (sonic_unit == 1)
+ 291   5                          sonic_unit = 0;
+ 292   5                          else
+ 293   5                              sonic_unit = 1;
+ 294   5                      }
+ 295   4                      break;
+ 296   4      
+ 297   4                      case 1:
+ 298   4                      {
+ 299   5                          state_2 = (state_2 + 1) % 2;
+ 300   5                      }
+ 301   4                      break; 
+ 302   4                  }
+C51 COMPILER V9.60.7.0   MAIN                                                              03/30/2025 19:17:25 PAGE 6   
+
+ 303   3                             
+ 304   3                
+ 305   3              }
+ 306   2              break;
+ 307   2      
+ 308   2              case 8:
+ 309   2              {
+ 310   3                  if (state == 2)
+ 311   3                  {
+ 312   4                      if (state_2 == 0 && distance_argument != 90)
+ 313   4                      {
+ 314   5                          distance_argument = distance_argument + 10;
+ 315   5                      }
+ 316   4                      else if (state_2 == 1 && speed != 90)
+ 317   4                      {
+ 318   5                          speed = speed + 10;
+ 319   5                      }
+ 320   4                      else if (state_2 == 2 && low_dac != 20)
+ 321   4                      {
+ 322   5                          low_dac = low_dac + 1;
+ 323   5                      }
+ 324   4                  }
+ 325   3                  else if (state == 1)
+ 326   3                  {
+ 327   4                      //dac_proc();
+ 328   4                  }
+ 329   3              }
+ 330   2              break;
+ 331   2      
+ 332   2              case 9:
+ 333   2              {
+ 334   3                  if (state == 2)
+ 335   3                  {
+ 336   4                      switch (state_2)
+ 337   4                      {
+ 338   5                          case 0:
+ 339   5                          {
+ 340   6                              if (distance_argument != 10)
+ 341   6                                  distance_argument = distance_argument - 10;
+ 342   6                          }
+ 343   5                          break;
+ 344   5      
+ 345   5                          case 1:
+ 346   5                          {
+ 347   6                              //if ()
+ 348   6                          }
+ 349   5                          break;
+ 350   5                      }
+ 351   4                  }
+ 352   3              }
+ 353   2              break;
+ 354   2          }
+ 355   1      }
+ 356          
+ 357          void led_proc()
+ 358          {
+ 359   1          uchar i;
+ 360   1          for (i = 0;i < 8;i++)
+ 361   1          {
+ 362   2              if (i != state)
+ 363   2                  led_value[i] = 0;
+ 364   2              else
+C51 COMPILER V9.60.7.0   MAIN                                                              03/30/2025 19:17:25 PAGE 7   
+
+ 365   2                  led_value[i] = 1;
+ 366   2          }
+ 367   1          led_display();
+ 368   1      }
+ 369          
+ 370          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    175    ----
-   CONSTANT SIZE    =   ----    ----
+   CODE SIZE        =   1046    ----
+   CONSTANT SIZE    =      3    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      3    ----
+   DATA SIZE        =     14       8
    IDATA SIZE       =   ----    ----
-   BIT SIZE         =      2    ----
+   BIT SIZE         =      7       1
 END OF MODULE INFORMATION.
 
 
