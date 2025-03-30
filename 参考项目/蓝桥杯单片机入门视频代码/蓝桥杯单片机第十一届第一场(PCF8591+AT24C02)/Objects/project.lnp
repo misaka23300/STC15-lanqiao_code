@@ -1,0 +1,9 @@
+".\Objects\STARTUP.obj",
+".\Objects\iic.obj",
+".\Objects\kbd.obj",
+".\Objects\main.obj",
+".\Objects\sys.obj",
+".\Objects\tube.obj" 
+TO ".\Objects\project" 
+PRINT(".\Listings\project.m51") RAMSIZE(256) 
+DISABLEWARNING (16) 

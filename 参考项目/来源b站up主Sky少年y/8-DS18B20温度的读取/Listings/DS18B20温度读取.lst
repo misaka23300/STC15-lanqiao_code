@@ -1,0 +1,124 @@
+C51 COMPILER V9.54   DS18B20________                                                       02/10/2025 19:52:12 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE DS18B20________
+OBJECT MODULE PLACED IN .\Objects\DS18B20温度读取.obj
+COMPILER INVOKED BY: E:\SoftWareProgrom\keli\C51\BIN\C51.EXE DS18B20温度读取.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTE
+                    -ND PRINT(.\Listings\DS18B20温度读取.lst) TABS(2) OBJECT(.\Objects\DS18B20温度读取.obj)
+
+line level    source
+
+   1          #include <STC15F2K60S2.H>
+   2          #include "onewire.h"
+   3          #include "intrins.h"
+   4          
+   5          #define uchar unsigned char
+   6          #define uint unsigned int
+   7          
+   8          code unsigned char DuanMa[]={
+   9          0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90,  //0-9
+  10          0xbf,0xff,
+  11          0x40,0x79,0x24,0x30,0x19,0x12,0x02,0x78,0x00,0x10
+  12          };
+  13          //对应着0-9和-共11个字符加上全灭
+  14          
+  15          uchar SMGa[8]={11,11,11,11,11,11,11,11};  //SMGa[0]
+  16          
+  17          void control(char x,y)
+  18          {
+  19   1        switch(x)
+  20   1        {
+  21   2          case 4:P2=(P2 & 0x1f)|0x80;break;   //Y4C为高电平
+  22   2          case 5:P2=(P2 & 0x1f)|0xa0;break;   //5
+  23   2          case 6:P2=(P2 & 0x1f)|0xc0;break;
+  24   2          case 7:P2=(P2 & 0x1f)|0xe0;break;
+  25   2        }
+  26   1        P0=y;
+  27   1        P2 &= 0x1f;   //P2 = P2 & 0x1f;
+  28   1      }
+  29          
+  30          void aloneSMG(char pos,value)   //单个数码管显示   
+  31          {
+  32   1        control(7,0xff);         //消影
+  33   1        control(6,0x01<<pos);    //位选 x=0 x=7
+  34   1        control(7,DuanMa[value]);//段码
+  35   1      }
+  36          
+  37          void T0_Reset()
+  38          {
+  39   1        AUXR &= 0x7f;     //0111 1111
+  40   1        TMOD &= 0xf0;     //TMOD = TMOD & 0xf0;
+  41   1        TH0 = 0xfc;       //初值64536，1000次后就溢出
+  42   1        TL0 = 0x18;
+  43   1        TF0 = 0;
+  44   1        ET0 = 1;
+  45   1        EA = 1;
+  46   1        TR0 = 1;
+  47   1      }
+  48          
+  49          uchar SMGi=0;   //0-7
+  50          uchar Read_Delay=0;
+  51          void T0_Server() interrupt 1    //每次执行函数就是1ms
+  52          {
+  53   1        aloneSMG(SMGi,SMGa[SMGi]);    //SMGa[0] SMGa[1]   ----   SMGa[7]
+  54   1        if(++SMGi==8)SMGi=0;
+C51 COMPILER V9.54   DS18B20________                                                       02/10/2025 19:52:12 PAGE 2   
+
+  55   1        if(++Read_Delay==101)Read_Delay=0;
+  56   1      }
+  57          
+  58          void Delay750ms(void) //@12.000MHz
+  59          {
+  60   1        unsigned char data i, j, k;
+  61   1      
+  62   1        _nop_();
+  63   1        _nop_();
+  64   1        i = 35;
+  65   1        j = 51;
+  66   1        k = 182;
+  67   1        do
+  68   1        {
+  69   2          do
+  70   2          {
+  71   3            while (--k);
+  72   3          } while (--j);
+  73   2        } while (--i);
+  74   1      }
+  75          
+  76          
+  77          uint SMG_temp=0;   //2 16   5     1 3. 0 5   1.05C   0105
+  78          void main()
+  79          {
+  80   1        Read_temp();
+  81   1        Delay750ms();
+  82   1        T0_Reset();
+  83   1        while(1)
+  84   1        {
+  85   2          if(Read_Delay==100)SMG_temp=Read_temp()*100;
+  86   2          SMGa[0] = 11;
+  87   2          SMGa[1] = 11;
+  88   2          SMGa[2] = 11;
+  89   2          SMGa[3] = 11;
+  90   2          if(SMG_temp>=1000)SMGa[4] = SMG_temp/1000%10;
+  91   2          else SMGa[4] = 11;
+  92   2          SMGa[5] = SMG_temp/100%10+12;
+  93   2          SMGa[6] = SMG_temp/10%10;
+  94   2          SMGa[7] = SMG_temp%10;
+  95   2        }
+  96   1      }
+  97          
+  98          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    378    ----
+   CONSTANT SIZE    =     22    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     12    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

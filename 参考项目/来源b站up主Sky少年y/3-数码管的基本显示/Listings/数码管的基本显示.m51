@@ -1,0 +1,162 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        01/24/2025  02:17:04  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+E:\SOFTWAREPROGROM\KELI\C51\BIN\BL51.EXE .\Objects\数码管.obj TO .\Objects\数码管的基本显示 PRINT (.\Listings\数码管的基
+>> 本显示.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\数码管.obj (______)
+  E:\SOFTWAREPROGROM\KELI\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\Objects\数码管的基本显示 (______)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     004AH     UNIT         ?PR?MAIN?______
+            CODE    004DH     0043H     UNIT         ?PR?_ALONESMG?______
+            CODE    0090H     003BH     UNIT         ?PR?_CONTROL?______
+            CODE    00CBH     0014H     UNIT         ?PR?_DELAY?______
+            CODE    00DFH     000CH     UNIT         ?PR?DELAY1MS?______
+            CODE    00EBH     000CH     UNIT         ?CO?______
+            CODE    00F7H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\数码管的基本显示 (______)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?______
+
+?PR?MAIN?______
+  +--> ?PR?_ALONESMG?______
+
+?PR?_ALONESMG?______
+  +--> ?PR?_CONTROL?______
+  +--> ?CO?______
+  +--> ?PR?_DELAY?______
+
+?PR?_DELAY?______
+  +--> ?PR?DELAY1MS?______
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\数码管的基本显示 (______)
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/24/2025  02:17:04  PAGE 2
+
+
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ______
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00C0H         PUBLIC        P4
+  C:00DFH         PUBLIC        Delay1ms
+  D:00C8H         PUBLIC        P5
+  C:0090H         PUBLIC        _control
+  D:00E8H         PUBLIC        P6
+  D:00F8H         PUBLIC        P7
+  D:00A8H         PUBLIC        IE
+  C:00CBH         PUBLIC        _delay
+  D:00B8H         PUBLIC        IP
+  D:00D8H         PUBLIC        CCON
+  C:0003H         PUBLIC        main
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:00EBH         PUBLIC        DuanMa
+  C:004DH         PUBLIC        _aloneSMG
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          DELAY1MS
+  -------         DO            
+  D:0007H         SYMBOL        i
+  D:0006H         SYMBOL        j
+  -------         ENDDO         
+  C:00DFH         LINE#         7
+  C:00DFH         LINE#         8
+  C:00DFH         LINE#         11
+  C:00E0H         LINE#         12
+  C:00E1H         LINE#         13
+  C:00E2H         LINE#         14
+  C:00E4H         LINE#         15
+  C:00E6H         LINE#         17
+  C:00E6H         LINE#         18
+  C:00E8H         LINE#         19
+  C:00EAH         LINE#         20
+  -------         ENDPROC       DELAY1MS
+  -------         PROC          _DELAY
+  D:0004H         SYMBOL        t
+  C:00CBH         LINE#         24
+  C:00CFH         LINE#         25
+  C:00CFH         LINE#         26
+  C:00DEH         LINE#         27
+  -------         ENDPROC       _DELAY
+  -------         PROC          _CONTROL
+  D:0007H         SYMBOL        x
+  D:0004H         SYMBOL        y
+  C:0090H         LINE#         29
+  C:0090H         LINE#         30
+  C:0090H         LINE#         31
+  C:009FH         LINE#         32
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/24/2025  02:17:04  PAGE 3
+
+
+  C:009FH         LINE#         33
+  C:00A9H         LINE#         34
+  C:00B3H         LINE#         35
+  C:00BDH         LINE#         36
+  C:00C5H         LINE#         37
+  C:00C5H         LINE#         38
+  C:00C7H         LINE#         39
+  C:00CAH         LINE#         40
+  -------         ENDPROC       _CONTROL
+  -------         PROC          _ALONESMG
+  D:0006H         SYMBOL        pos
+  D:0002H         SYMBOL        value
+  C:004DH         LINE#         42
+  C:0053H         LINE#         43
+  C:0053H         LINE#         44
+  C:005CH         LINE#         45
+  C:0076H         LINE#         46
+  C:0089H         LINE#         47
+  -------         ENDPROC       _ALONESMG
+  -------         PROC          MAIN
+  C:0003H         LINE#         50
+  C:0003H         LINE#         51
+  C:0003H         LINE#         52
+  C:0003H         LINE#         53
+  C:0003H         LINE#         54
+  C:000CH         LINE#         55
+  C:0015H         LINE#         56
+  C:001EH         LINE#         57
+  C:0027H         LINE#         59
+  C:0030H         LINE#         60
+  C:0039H         LINE#         61
+  C:0042H         LINE#         62
+  C:004BH         LINE#         63
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        ______
+
+Program Size: data=9.0 xdata=0 code=259
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,7 @@
+".\Objects\key.obj",
+".\Objects\main.obj",
+".\Objects\sys.obj",
+".\Objects\tube.obj",
+".\Objects\ds1302.obj" 
+TO ".\Objects\prj" 
+PRINT(".\Listings\prj.m51") RAMSIZE(256) 

@@ -1,0 +1,3 @@
+".\Objects\超声波传感器.obj" 
+TO ".\Objects\超声波传感器" 
+PRINT(".\Listings\超声波传感器.m51") RAMSIZE(256) 

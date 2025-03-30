@@ -1,0 +1,1 @@
+"sys.c" OPTIMIZE (8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\sys.lst) OBJECT(.\Objects\sys.obj)

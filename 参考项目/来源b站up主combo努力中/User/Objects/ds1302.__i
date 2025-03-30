@@ -1,0 +1,1 @@
+"..\Driver\ds1302.c" OPTIMIZE (8,SPEED) BROWSE INCDIR(..\Driver) DEBUG OBJECTEXTEND PRINT(.\Listings\ds1302.lst) TABS (2) OBJECT(.\Objects\ds1302.obj)

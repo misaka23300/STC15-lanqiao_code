@@ -1,0 +1,69 @@
+C51 COMPILER V9.54   MAIN                                                                  01/27/2023 20:22:41 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\Keil5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main.l
+                    -st) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "main.h"
+   2          u8 channel=0x03;//默认测量通道是AIN3
+   3          u16 cnt;//定时器0计数
+   4          u8 num;//接按键值
+   5          u8 ad;
+   6          u16 analog;
+   7          bit key_flag,led_flag,ad_mea;
+   8          void main(){
+   9   1              Sys_Init();
+  10   1              Timer0Init();
+  11   1              
+  12   1              while(1){
+  13   2                      if(key_flag){
+  14   3                              key_flag=0;
+  15   3                              num=Key_Scan();
+  16   3                      }
+  17   2                      if(num==4){
+  18   3                              channel = 0x03;//测量电位器电压值
+  19   3                              num=0;
+  20   3                      }
+  21   2                      if(num==5){
+  22   3                              channel = 0x01;//测量光敏电阻电压值
+  23   3                              num=0;
+  24   3                      }
+  25   2                      if(ad_mea){
+  26   3                              ad_mea=0;
+  27   3                              ad = PCF8591_ADin(channel);
+  28   3                              analog = (int)(ad/255.0*5*100);//方便在数码管上显示模拟电压值
+  29   3                              Seg_Set(channel,16,16,16,16,analog/100+32,analog/10%10,analog%10);
+  30   3                              PCF8591_DAout(ad);//将读取的电压值输出到OUT口
+  31   3                      }
+  32   2                      
+  33   2              }
+  34   1      }
+  35          
+  36          void Timer0_Int() interrupt 1{
+  37   1              Seg_Show();
+  38   1              cnt++;
+  39   1              if(cnt%20==0)key_flag=1;
+  40   1              if(cnt%50==0)led_flag=1;
+  41   1              if(cnt%100==0)ad_mea=1;//每隔100ms测一次电压值
+  42   1              cnt%=1000;
+  43   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    303    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      7    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      3    ----
+END OF MODULE INFORMATION.
+
+C51 COMPILER V9.54   MAIN                                                                  01/27/2023 20:22:41 PAGE 2   
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

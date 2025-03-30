@@ -1,0 +1,278 @@
+C51 COMPILER V9.54   MAIN                                                                  03/24/2022 23:25:49 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\Keil5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main.l
+                    -st) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "main.h"
+   2          
+   3          #define c_hour clk[0]
+   4          #define c_min clk[1]
+   5          #define c_sec clk[2]
+   6          
+   7          
+   8          u8 hour,sec,min;
+   9          u8 n,num,mode=1;
+  10          char temp[3];
+  11          u8 T,flag,cnt;
+  12          u16 cnt1;
+  13          u8 cc,uLed=0xff;
+  14          char clk[3]={0,0,0};
+  15          u8 index;
+  16          bit key_flag,led_flag,time_flag,tmp_flag;
+  17          
+  18          
+  19          void Time_Show();
+  20          void Time_Set();
+  21          void Clock_Set();
+  22          void led_show();
+  23          void Tmp_Show();
+  24          
+  25          void main(){
+  26   1              Sys_Init();
+  27   1              T = rd_temperature();
+  28   1              Delay(800);
+  29   1              T = rd_temperature();
+  30   1              DS1302_Settime(23,59,50);
+  31   1              Timer0Init();
+  32   1              while(1){
+  33   2                      
+  34   2      
+  35   2                      if(key_flag){
+  36   3                              key_flag=0;
+  37   3                              num = Key_Scan();
+  38   3                      }
+  39   2      
+  40   2                      switch(mode){
+  41   3                              case 1:Time_Show();break;
+  42   3                              case 2:Time_Set();break;
+  43   3                              case 3:Clock_Set();break;
+  44   3                              case 4:Tmp_Show();break;
+  45   3                      }
+  46   2                      
+  47   2                      //读DS1302也需要减速
+  48   2                      if(time_flag){
+  49   3                              time_flag=0;
+  50   3                              hour = Read_Ds1302_Byte(0x85);
+  51   3                              min = Read_Ds1302_Byte(0x83);
+  52   3                              sec = Read_Ds1302_Byte(0x81);//秒读做定时器
+  53   3                              if((hour/16*10+hour%16)==clk[0]){
+  54   4                                      if((min/16*10+min%16)==clk[1]){
+C51 COMPILER V9.54   MAIN                                                                  03/24/2022 23:25:49 PAGE 2   
+
+  55   5                                              if((sec/16*10+sec%16)==clk[2]){
+  56   6                                                      flag=1;
+  57   6                                              }
+  58   5                                      }
+  59   4                              }       
+  60   3                      }
+  61   2                      
+  62   2                      
+  63   2                      if(flag==1){
+  64   3                              if(num){
+  65   4                                      flag=0;
+  66   4                                      num=0;
+  67   4                                      ET0=0;
+  68   4                                      uLed=0xff;
+  69   4                                      P0 =0xff;
+  70   4                                      P0 = uLed;Y4;Y0;
+  71   4                                      ET0=1;
+  72   4                                      cc=0;
+  73   4                              }
+  74   3                              if(led_flag){
+  75   4                                      led_show();
+  76   4                                      led_flag=0;     
+  77   4                              }
+  78   3                      }
+  79   2      
+  80   2              }
+  81   1      }
+  82          
+  83          void Time_Show(){
+  84   1              if(num==7&&flag==0){
+  85   2                      mode=2;
+  86   2                      temp[0]=hour/16*10+hour%16;
+  87   2                      temp[1]=min/16*10+min%16;
+  88   2                      temp[2]=sec/16*10+sec%16;
+  89   2                      num=0;
+  90   2              }
+  91   1              if(num==6&&flag==0){
+  92   2                      mode=3;
+  93   2                      num=0;
+  94   2                      index=0;
+  95   2              }
+  96   1      
+  97   1              Seg_Set(hour/16,hour%16,17,min/16,min%16,17,sec/16,sec%16);
+  98   1      }
+  99          
+ 100          void Time_Set(){
+ 101   1              if(num==7&&flag==0){
+ 102   2                      index++;
+ 103   2                      if(index==3){
+ 104   3                              ET0=0;
+ 105   3                              DS1302_Settime(temp[0],temp[1],temp[2]);
+ 106   3                              ET0=1;
+ 107   3                              index=0;
+ 108   3                              mode=1;
+ 109   3                      }
+ 110   2                      num=0;
+ 111   2              }
+ 112   1              if(num==5&&flag==0){
+ 113   2                      temp[index]++;
+ 114   2                      switch(index){
+ 115   3                              case 0:if(temp[index]>23)temp[index]=0;break;
+ 116   3                              case 1:if(temp[index]>59)temp[index]=0;break;
+C51 COMPILER V9.54   MAIN                                                                  03/24/2022 23:25:49 PAGE 3   
+
+ 117   3                              case 2:if(temp[index]>59)temp[index]=0;break;
+ 118   3                      }
+ 119   2                      num=0;
+ 120   2              }
+ 121   1              if(num==4&&flag==0){
+ 122   2                      temp[index]--;
+ 123   2                      switch(index){
+ 124   3                              case 0:if(temp[index]<0)temp[index]=23;break;
+ 125   3                              case 1:if(temp[index]<0)temp[index]=59;break;
+ 126   3                              case 2:if(temp[index]<0)temp[index]=59;break;
+ 127   3                      }
+ 128   2                      num=0;
+ 129   2              }       
+ 130   1              
+ 131   1              
+ 132   1              
+ 133   1              if(sec%16%2){
+ 134   2                      Seg_Set(temp[0]/10,temp[0]%10,17,temp[1]/10,temp[1]%10,17,temp[2]/10,temp[2]%10);
+ 135   2      
+ 136   2              }else if(sec%16%2==0){
+ 137   2                      switch(index){
+ 138   3                              case 0:Seg_Set(16,16,17,temp[1]/10,temp[1]%10,17,temp[2]/10,temp[2]%10);break;
+ 139   3                              case 1:Seg_Set(temp[0]/10,temp[0]%10,17,16,16,17,temp[2]/10,temp[2]%10);break;
+ 140   3                              case 2:Seg_Set(temp[0]/10,temp[0]%10,17,temp[1]/10,temp[1]%10,17,16,16);break;
+ 141   3                      }
+ 142   2              }
+ 143   1      }
+ 144          
+ 145          
+ 146          void Clock_Set(){
+ 147   1              if(num==6&&flag==0){
+ 148   2                      index++;
+ 149   2                      if(index==3){
+ 150   3                              index=0;
+ 151   3                              mode=1;
+ 152   3                      }
+ 153   2                      num=0;
+ 154   2              }
+ 155   1              if(num==5&&flag==0){
+ 156   2                      clk[index]++;
+ 157   2                      switch(index){
+ 158   3                              case 0:if(clk[index]>23)clk[index]=0;break;
+ 159   3                              case 1:if(clk[index]>59)clk[index]=0;break;
+ 160   3                              case 2:if(clk[index]>59)clk[index]=0;break;
+ 161   3                      }
+ 162   2                      num=0;
+ 163   2              }
+ 164   1              if(num==4&&flag==0){
+ 165   2                      clk[index]--;
+ 166   2                      switch(index){
+ 167   3                              case 0:if(clk[index]<0)clk[index]=23;break;
+ 168   3                              case 1:if(clk[index]<0)clk[index]=59;break;
+ 169   3                              case 2:if(clk[index]<0)clk[index]=59;break;
+ 170   3                      }
+ 171   2                      num=0;
+ 172   2              }       
+ 173   1              
+ 174   1              
+ 175   1              
+ 176   1              if(sec%16%2){
+ 177   2                      Seg_Set(clk[0]/10,clk[0]%10,17,clk[1]/10,clk[1]%10,17,clk[2]/10,clk[2]%10);
+ 178   2      
+C51 COMPILER V9.54   MAIN                                                                  03/24/2022 23:25:49 PAGE 4   
+
+ 179   2              }else if(sec%16%2==0){
+ 180   2                      switch(index){
+ 181   3                              case 0:Seg_Set(16,16,17,clk[1]/10,clk[1]%10,17,clk[2]/10,clk[2]%10);break;
+ 182   3                              case 1:Seg_Set(clk[0]/10,clk[0]%10,17,16,16,17,clk[2]/10,clk[2]%10);break;
+ 183   3                              case 2:Seg_Set(clk[0]/10,clk[0]%10,17,clk[1]/10,clk[1]%10,17,16,16);break;
+ 184   3                      }
+ 185   2              }
+ 186   1      }
+ 187          
+ 188          void led_show(){
+ 189   1              
+ 190   1              ET0=0;
+ 191   1              if(cc%2)
+ 192   1              uLed = 0xff;
+ 193   1              else 
+ 194   1              uLed = 0xfe;
+ 195   1              P0 = 0xff;
+ 196   1              P0 = uLed;
+ 197   1              Y4;Y0;
+ 198   1              
+ 199   1              ET0=1;
+ 200   1              cc++;
+ 201   1              if(cc>=25){
+ 202   2                      flag=0;
+ 203   2                      ET0=0;
+ 204   2                      uLed=0xff;
+ 205   2                      P0 =0xff;
+ 206   2                      P0 = uLed;Y4;Y0;
+ 207   2                      ET0=1;
+ 208   2                      cc=0;
+ 209   2              }
+ 210   1              
+ 211   1      }
+ 212          
+ 213          void Tmp_Show(){
+ 214   1              if(tmp_flag){
+ 215   2                      tmp_flag=0;
+ 216   2                      T = rd_temperature();
+ 217   2              }
+ 218   1              Seg_Set(16,16,16,16,16,T/10,T%10,12);
+ 219   1      }
+ 220          
+ 221          void TIMER0_INT() interrupt 1{
+ 222   1              
+ 223   1              Seg_Show();
+ 224   1              n++;
+ 225   1              if(mode==4){
+ 226   2                      cnt1++;
+ 227   2                      if(cnt1>=500){
+ 228   3                              cnt1=0;
+ 229   3                              tmp_flag=1;
+ 230   3                      }
+ 231   2              }
+ 232   1              if(flag){
+ 233   2                      cnt++;
+ 234   2                      if(cnt>=200){
+ 235   3                              led_flag=1;
+ 236   3                              cnt=0;
+ 237   3                              
+ 238   3                      }
+ 239   2                      
+ 240   2              }
+C51 COMPILER V9.54   MAIN                                                                  03/24/2022 23:25:49 PAGE 5   
+
+ 241   1              if(n>=10){
+ 242   2                      key_flag=1;
+ 243   2                      time_flag=1;
+ 244   2                      n=0;
+ 245   2              }
+ 246   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1805    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     20    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      4    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

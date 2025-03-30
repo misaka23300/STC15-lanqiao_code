@@ -1,0 +1,55 @@
+C51 COMPILER V9.54   MAIN                                                                  01/28/2023 16:47:10 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\Keil5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main.l
+                    -st) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "main.h"
+   2          u8 distance;
+   3          u16 cnt;//定时器0计数
+   4          u8 num;//接按键值
+   5          bit key_flag,led_flag,csb_mea;
+   6          void main(){
+   7   1              Sys_Init();
+   8   1              Timer0Init();
+   9   1              csb_timer_init();
+  10   1              while(1){
+  11   2                      if(key_flag){
+  12   3                              key_flag=0;
+  13   3                              num=Key_Scan();
+  14   3                      }
+  15   2                      if(csb_mea){
+  16   3                              csb_mea=0;
+  17   3                              distance = csb_measure();
+  18   3                              Seg_Set(16,16,16,16,16,distance/100,distance/10%10,distance%10);
+  19   3                      }
+  20   2                      
+  21   2              }
+  22   1      }
+  23          
+  24          void Timer0_Int() interrupt 1{
+  25   1              Seg_Show();
+  26   1              cnt++;
+  27   1              if(cnt%20==0)key_flag=1;
+  28   1              if(cnt%50==0)led_flag=1;
+  29   1              if(cnt%500==0)csb_mea=1;
+  30   1              cnt%=1000;
+  31   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    229    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      3    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

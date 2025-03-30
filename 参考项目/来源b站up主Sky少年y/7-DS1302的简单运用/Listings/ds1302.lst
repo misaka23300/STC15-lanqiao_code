@@ -1,0 +1,125 @@
+C51 COMPILER V9.54   DS1302                                                                02/09/2025 23:06:05 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE DS1302
+OBJECT MODULE PLACED IN .\Objects\ds1302.obj
+COMPILER INVOKED BY: E:\SoftWareProgrom\keli\C51\BIN\C51.EXE ds1302.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(
+                    -.\Listings\ds1302.lst) TABS(2) OBJECT(.\Objects\ds1302.obj)
+
+line level    source
+
+   1          /*  #   DS1302代码片段说明
+   2            1.  本文件夹中提供的驱动代码供参赛选手完成程序设计参考。
+   3            2.  参赛选手可以自行编写相关代码或以该代码为基础，根据所选单片机类型、�
+             -�行速度和试题
+   4              中对单片机时钟频率的要求，进行代码调试和修改。
+   5          */  
+   6                      
+   7          //
+   8          
+   9          #include <STC15F2K60S2.H>
+  10          #include "intrins.h"
+  11          
+  12          #define uchar unsigned char
+  13          #define uint unsigned int
+  14          //秒、分、时、日、月、星期、年
+  15          code uchar DS1302_Write_adr[7]={0x80,0x82,0x84,0x86,0x88,0x8a,0x8c}; //DS1302_Write_adr[6]
+  16          code uchar DS1302_Read_adr[7]={0x81,0x83,0x85,0x87,0x89,0x8b,0x8d};
+  17          uchar DS1302_Time_Reset[7]={0x55,0x05,0x23,0x09,0x02,0x07,0x25}; //初始时间
+  18          unsigned char Time10[7]={0,0,0,0,0,0,0};
+  19          
+  20          sbit SCK = P1^7;            //位定义
+  21          sbit SDA = P2^3;
+  22          sbit RST = P1^3;
+  23          
+  24          void Write_Ds1302(unsigned  char temp) 
+  25          {
+  26   1        unsigned char i;
+  27   1        for (i=0;i<8;i++)       
+  28   1        { 
+  29   2          SCK = 0;
+  30   2          SDA = temp&0x01;
+  31   2          temp>>=1; 
+  32   2          SCK=1;
+  33   2        }
+  34   1      }   
+  35          
+  36          //
+  37          void Write_Ds1302_Byte( unsigned char address,unsigned char dat )     
+  38          {
+  39   1        RST=0;  _nop_();
+  40   1        SCK=0;  _nop_();
+  41   1        RST=1;  _nop_();  
+  42   1        Write_Ds1302(address);  
+  43   1        Write_Ds1302(dat);    
+  44   1        RST=0; 
+  45   1      }
+  46          
+  47          //
+  48          unsigned char Read_Ds1302_Byte ( unsigned char address )
+  49          {
+  50   1        unsigned char i,temp=0x00;
+  51   1        RST=0;  _nop_();
+  52   1        SCK=0;  _nop_();
+  53   1        RST=1;  _nop_();
+C51 COMPILER V9.54   DS1302                                                                02/09/2025 23:06:05 PAGE 2   
+
+  54   1        Write_Ds1302(address);
+  55   1        for (i=0;i<8;i++)   
+  56   1        {   
+  57   2          SCK=0;
+  58   2          temp>>=1; 
+  59   2          if(SDA)
+  60   2          temp|=0x80; 
+  61   2          SCK=1;
+  62   2        } 
+  63   1        RST=0;  _nop_();
+  64   1        SCK=0;  _nop_();
+  65   1        SCK=1;  _nop_();
+  66   1        SDA=0;  _nop_();
+  67   1        SDA=1;  _nop_();
+  68   1        return (temp);      
+  69   1      }
+  70          
+  71          uchar i=0;
+  72          void DS1302_Write_Time()    //初始值配置好了
+  73          {
+  74   1        Write_Ds1302_Byte(0x8e,0x00);
+  75   1        for(i=0;i<=6;i++)
+  76   1        {
+  77   2          Write_Ds1302_Byte(DS1302_Write_adr[i],DS1302_Time_Reset[i]);
+  78   2        }
+  79   1        Write_Ds1302_Byte(0x8e,0x80);
+  80   1      }
+  81          
+  82          void DS1302_Read_Time()
+  83          {
+  84   1        for(i=0;i<=6;i++)
+  85   1        {
+  86   2          DS1302_Time_Reset[i] = Read_Ds1302_Byte(DS1302_Read_adr[i]);
+  87   2        }
+  88   1        //0x35  ==  35
+  89   1        //3*16+5*1  / 16  =  3
+  90   1        //3*16+5*1  % 16  =  5
+  91   1        //3*10 + 5   
+  92   1        for(i=0;i<=6;i++)
+  93   1        {
+  94   2          Time10[i] = DS1302_Time_Reset[i]/16*10 + DS1302_Time_Reset[i]%16;
+  95   2        }
+  96   1      }
+  97          
+  98          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    201    ----
+   CONSTANT SIZE    =     14    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     15    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

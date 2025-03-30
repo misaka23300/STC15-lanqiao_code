@@ -1,0 +1,7 @@
+".\Objects\STARTUP.obj",
+".\Objects\boot.obj",
+".\Objects\main.obj",
+".\Objects\seg.obj",
+".\Objects\sonic.obj" 
+TO ".\Objects\struct" 
+PRINT(".\Listings\struct.m51") RAMSIZE(256) 

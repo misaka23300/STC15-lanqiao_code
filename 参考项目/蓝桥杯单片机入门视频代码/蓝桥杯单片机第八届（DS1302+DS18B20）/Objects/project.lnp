@@ -1,0 +1,10 @@
+".\Objects\STARTUP.obj",
+".\Objects\ds1302.obj",
+".\Objects\key.obj",
+".\Objects\main.obj",
+".\Objects\onewire.obj",
+".\Objects\sys.obj",
+".\Objects\tube.obj" 
+TO ".\Objects\project" 
+PRINT(".\Listings\project.m51") RAMSIZE(256) 
+DISABLEWARNING (16) 
