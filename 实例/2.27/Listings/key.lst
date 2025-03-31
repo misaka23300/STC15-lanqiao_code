@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 C51 COMPILER V9.60.7.0   KEY                                                               03/30/2025 19:17:25 PAGE 1   
+=======
+C51 COMPILER V9.60.7.0   KEY                                                               03/30/2025 20:12:11 PAGE 1   
+>>>>>>> 7cbaa3d9479fa449605936c8212c7dd4af9f3537
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE KEY
@@ -62,7 +66,11 @@ line level    source
   52   2      
   53   2              case 2:
   54   2              {
+<<<<<<< HEAD
 C51 COMPILER V9.60.7.0   KEY                                                               03/30/2025 19:17:25 PAGE 2   
+=======
+C51 COMPILER V9.60.7.0   KEY                                                               03/30/2025 20:12:11 PAGE 2   
+>>>>>>> 7cbaa3d9479fa449605936c8212c7dd4af9f3537
 
   55   3                  if (press != 0x0F)
   56   3                  {
