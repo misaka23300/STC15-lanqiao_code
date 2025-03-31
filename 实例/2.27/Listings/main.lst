@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              03/29/2025 18:09:27 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              03/30/2025 20:12:11 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -62,7 +62,7 @@ line level    source
   52          
   53          // DAC
   54          uchar DAC_value;
-C51 COMPILER V9.60.7.0   MAIN                                                              03/29/2025 18:09:27 PAGE 2   
+C51 COMPILER V9.60.7.0   MAIN                                                              03/30/2025 20:12:11 PAGE 2   
 
   55          bit DAC_flag;
   56          
@@ -126,7 +126,7 @@ line level    source
  114   2          }
  115   1      
  116   1          seg_display();
-C51 COMPILER V9.60.7.0   MAIN                                                              03/29/2025 18:09:27 PAGE 3   
+C51 COMPILER V9.60.7.0   MAIN                                                              03/30/2025 20:12:11 PAGE 3   
 
  117   1      
  118   1          if (i % SONIC_TIME == 0)
@@ -190,7 +190,7 @@ line level    source
  176   5                          );
  177   5                      }
  178   4                      break;
-C51 COMPILER V9.60.7.0   MAIN                                                              03/29/2025 18:09:27 PAGE 4   
+C51 COMPILER V9.60.7.0   MAIN                                                              03/30/2025 20:12:11 PAGE 4   
 
  179   4      
  180   4                      case 1:
@@ -254,7 +254,7 @@ line level    source
  238   1          if (j == 0)
  239   1          {
  240   2              return;
-C51 COMPILER V9.60.7.0   MAIN                                                              03/29/2025 18:09:27 PAGE 5   
+C51 COMPILER V9.60.7.0   MAIN                                                              03/30/2025 20:12:11 PAGE 5   
 
  241   2          }
  242   1          j--;
@@ -318,7 +318,7 @@ line level    source
  300   1          for (i = 0;i < 8;i++)
  301   1          {
  302   2              if (i != state)
-C51 COMPILER V9.60.7.0   MAIN                                                              03/29/2025 18:09:27 PAGE 6   
+C51 COMPILER V9.60.7.0   MAIN                                                              03/30/2025 20:12:11 PAGE 6   
 
  303   2                  led_value[i] = 0;
  304   2              else
@@ -326,6 +326,8 @@ line level    source
  306   2          }
  307   1          led_display();
  308   1      }
+ 309          
+ 310          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
