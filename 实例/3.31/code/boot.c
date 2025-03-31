@@ -52,4 +52,5 @@ void Timer2_Init(void)		//1毫秒@12.000MHz
 	IE2 |= 0x04;			//使能定时器2中断
 }
 
+// 
 
