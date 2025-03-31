@@ -3,11 +3,10 @@
 uchar state;
 bit sonic_flag;
 uchar distance;
-/* enum 
+enum 
 {
     SONIC_TIME = 500
-}; */
-#define SONIC_TIME 1000
+};
 
 void main()
 {
@@ -51,8 +50,8 @@ void state_proc()
     switch (state)
     {
         case 0:
-        { 
-            set_seg(distance / 100 % 10, distance / 10 % 10, distance % 10, 0, 0, 0 ,0, 0);
+        {
+            set_seg(distance / 10, distance % 10, 0, 0, 0, 0 ,0, 0);
         }
         break;
     }

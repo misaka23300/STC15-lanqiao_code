@@ -1,10 +1,14 @@
+<<<<<<< HEAD
 C51 COMPILER V9.60.7.0   SEG                                                               03/30/2025 20:12:11 PAGE 1   
+=======
+C51 COMPILER V9.60.7.0   SEG                                                               03/27/2025 19:17:54 PAGE 1   
+>>>>>>> f2f39c989d4b622f0e150523400b6d290abe90ab
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE SEG
 OBJECT MODULE PLACED IN .\Objects\seg.obj
-COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE code\seg.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\
-                    -seg.lst) TABS(2) OBJECT(.\Objects\seg.obj)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE seg.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\seg.l
+                    -st) TABS(2) OBJECT(.\Objects\seg.obj)
 
 line level    source
 
@@ -36,26 +40,14 @@ line level    source
   26   1      
   27   1          i = (i + 1) % 8;
   28   1      }    
-  29          
-  30          void set_seg(uchar s0, s1, s2, s3, s4, s5, s6, s7)
-  31          {
-  32   1          seg[0] = s0;
-  33   1          seg[1] = s1;
-  34   1          seg[2] = s2;
-  35   1          seg[3] = s3;
-  36   1          seg[4] = s4;
-  37   1          seg[5] = s5;
-  38   1          seg[6] = s6;
-  39   1          seg[7] = s7;
-  40   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     91    ----
+   CODE SIZE        =     69    ----
    CONSTANT SIZE    =     43    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      9      15
+   DATA SIZE        =      9    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

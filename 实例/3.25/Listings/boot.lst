@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   BOOT                                                              03/26/2025 15:00:11 PAGE 1   
+C51 COMPILER V9.60.7.0   BOOT                                                              03/26/2025 14:27:53 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE BOOT
@@ -58,60 +58,54 @@ line level    source
   48          // sonic
   49          void timer_1(void)
   50          {
-  51   1          /* AUXR &= 0xBF;      //定时器时钟12T模式
+  51   1          AUXR |= 0x40;     //定时器时钟1T模式
   52   1        TMOD &= 0x0F;     //设置定时器模式
-  53   1        TL1 = 0x00;       //设置定时初始值
-  54   1        TH1 = 0x00;       //设置定时初始值
-C51 COMPILER V9.60.7.0   BOOT                                                              03/26/2025 15:00:11 PAGE 2   
+  53   1        TL1 = 0x50;       //设置定时初始值
+  54   1        TH1 = 0xFB;       //设置定时初始值
+C51 COMPILER V9.60.7.0   BOOT                                                              03/26/2025 14:27:53 PAGE 2   
 
   55   1        TF1 = 0;        //清除TF1标志
   56   1        TR1 = 0;        //定时器1开始计时
-  57   1        ET1 = 0;        //使能定时器1中断 */
+  57   1        ET1 = 0;        //使能定时器1中断
   58   1      
-  59   1          AUXR &= 0xBF;   //定时器时钟12T模式
-  60   1        TMOD &= 0x0F;   //设置定时器模式
-  61   1        TL1 = 0;    //设置定时初值
-  62   1        TH1 = 0;    //设置定时初值
-  63   1        TF1 = 0;    //清除TF1标志
-  64   1        TR1 = 0;    //定时器1关闭计时
-  65   1      
-  66   1      }
-  67          
-  68          void timer_2(void)
-  69          {
-  70   1          AUXR &= 0xFB;     //定时器时钟12T模式
-  71   1        T2L = 0x18;       //设置定时初始值
-  72   1        T2H = 0xFC;       //设置定时初始值
-  73   1        AUXR |= 0x10;     //定时器2开始计时
-  74   1        IE2 |= 0x04;      //使能定时器2中断
-  75   1      
-  76   1      }
-  77          
-  78          void batch(uchar i)
-  79          {
-  80   1          switch (i)
-  81   1          {
-  82   2              case 4: {P2 = (P2 & 0x1F) | 0x80; break;}
-  83   2              case 5: {P2 = (P2 & 0x1F) | 0xA0; break;}
-  84   2              case 6: {P2 = (P2 & 0x1F) | 0xC0; break;}
-  85   2              case 7: {P2 = (P2 & 0x1F) | 0xE0; break;}
-  86   2              case 0: {P2 = (P2 & 0x1F); break;}
-  87   2          }
-  88   1      }
-  89          
-  90          void Delay14us(void)  //@12.000MHz
-  91          {
-  92   1        unsigned char data i;
-  93   1      
-  94   1        _nop_();
-  95   1        _nop_();
-  96   1        i = 39;
-  97   1        while (--i);
-  98   1      }
+  59   1      }
+  60          
+  61          void timer_2(void)
+  62          {
+  63   1          AUXR &= 0xFB;     //定时器时钟12T模式
+  64   1        T2L = 0x18;       //设置定时初始值
+  65   1        T2H = 0xFC;       //设置定时初始值
+  66   1        AUXR |= 0x10;     //定时器2开始计时
+  67   1        IE2 |= 0x04;      //使能定时器2中断
+  68   1      
+  69   1      }
+  70          
+  71          void batch(uchar i)
+  72          {
+  73   1          switch (i)
+  74   1          {
+  75   2              case 4: {P2 = (P2 & 0x1F) | 0x80; break;}
+  76   2              case 5: {P2 = (P2 & 0x1F) | 0xA0; break;}
+  77   2              case 6: {P2 = (P2 & 0x1F) | 0xC0; break;}
+  78   2              case 7: {P2 = (P2 & 0x1F) | 0xE0; break;}
+  79   2              case 0: {P2 = (P2 & 0x1F); break;}
+  80   2          }
+  81   1      }
+  82          
+  83          void Delay14us(void)  //@12.000MHz
+  84          {
+  85   1        unsigned char data i;
+  86   1      
+  87   1        _nop_();
+  88   1        _nop_();
+  89   1        i = 39;
+  90   1        while (--i);
+  91   1      }
+  92          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    175    ----
+   CODE SIZE        =    178    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

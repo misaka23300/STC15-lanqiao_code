@@ -20,7 +20,7 @@ uint sonic_measure()
     uint distance;
 
     TR0 = 0; TF0 = 0;
-    TL0 = 0; TH0 = 0;
+    TF0 = 0; TH0 = 0;
     
     sonic_send();
 
