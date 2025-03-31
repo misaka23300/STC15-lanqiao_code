@@ -33,34 +33,43 @@ struct
 // 键盘
 struct 
 {
-    bit key_flag;
-    uchar state;
-};
+    bit flag;
+} key;
 
+// 数码管显示状态
+struct 
+{
+    uchar mode1;
+    uchar mode2;
+} state;
 
+// 温度
 struct
 {
     int value;
     bit ds18b20_flag;
 } temp;
 
-
-
 // LED
+struct
+{
+    bit flag;
+} led;
 extern uchar led_value[8];
-bit led_flag;
+
 
 // 继电器
 
 // 数码管
 extern uchar seg[8];
-bit state_flag;
-uchar state_1;
-uchar state_2;
 
 // DAC
-uchar DAC_value;
-bit DAC_flag;
+struct
+{
+    uchar value;
+    bit flag;
+} dac;
+
 
 //0.1 - 2.0 * 10
 // 1 - 20
