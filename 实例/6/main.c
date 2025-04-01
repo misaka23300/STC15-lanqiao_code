@@ -14,6 +14,10 @@ uchar temperature;
 
 extern uchar seg[8];
 
+uchar argument_state;
+uchar argument_temp;
+uchar factory_state;
+
 void main()
 {
     boot_init();

@@ -26,7 +26,6 @@ struct {
 
 // key
 struct {
-    bit flag;
     uchar time;
 } key;
 

@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              03/19/2025 19:21:02 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/01/2025 09:28:41 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -22,158 +22,214 @@ line level    source
   12          uint distance;
   13          uchar temperature;
   14          
-  15          void main()
-  16          {
-  17   1          boot_init();
-  18   1          while (1)
-  19   1          {
-  20   2              if (sonic_flag)
-  21   2              {
-  22   3                  sonic_flag = 0;
-  23   3                  distance = sonic_measure();
-  24   3              }
-  25   2      
-  26   2              if (key_flag)
+  15          extern uchar seg[8];
+  16          
+  17          uchar argument_state;
+  18          uchar argument_temp;
+  19          uchar factory_state;
+  20          
+  21          void main()
+  22          {
+  23   1          boot_init();
+  24   1          while (1)
+  25   1          {
+  26   2              if (sonic_flag)
   27   2              {
-  28   3                  uchar press;
-  29   3      
-  30   3                  key_flag = 0;
-  31   3                  press = key_scan();
-  32   3                  key_proc(press);
-  33   3              }
-  34   2      
-  35   2              if (led_flag)
-  36   2              {
-  37   3                  led_flag = 0;
-  38   3                  led_display();
+  28   3                  sonic_flag = 0;
+  29   3                  distance = sonic_measure();
+  30   3              }
+  31   2      
+  32   2              if (key_flag)
+  33   2              {
+  34   3                  uchar press;
+  35   3      
+  36   3                  key_flag = 0;
+  37   3                  press = key_scan();
+  38   3                  key_proc(press);
   39   3              }
   40   2      
-  41   2              if (seg_flag)
+  41   2              if (led_flag)
   42   2              {
-  43   3                  seg_flag = 0;
-  44   3                  seg_display();
-  45   3                  state_proc();
-  46   3              }
-  47   2      
-  48   2              if (temp_flag)
-  49   2              {
-  50   3                  temp_flag = 0;
-  51   3                  temp_proc();
+  43   3                  led_flag = 0;
+  44   3                  led_display();
+  45   3              }
+  46   2      
+  47   2              if (seg_flag)
+  48   2              {
+  49   3                  seg_flag = 0;
+  50   3                  seg_display();
+  51   3                  state_proc();
   52   3              }
-  53   2          }
-  54   1      }
-C51 COMPILER V9.60.7.0   MAIN                                                              03/19/2025 19:21:02 PAGE 2   
+  53   2      
+  54   2              if (temp_flag)
+C51 COMPILER V9.60.7.0   MAIN                                                              04/01/2025 09:28:41 PAGE 2   
 
-  55          
-  56          void timer_1_1ms() interrupt 3
-  57          {
-  58   1          static uint i;
-  59   1          i = (i + 1) % 30000;
-  60   1      
-  61   1         
-  62   1          if (i % SEG_TIME == 0)
-  63   1          {
-  64   2              seg_flag = 1;
-  65   2          }
-  66   1          
-  67   1          if (i % LED_TIME == 0)
-  68   1          {
-  69   2              led_flag = 1;
-  70   2          }
-  71   1      
-  72   1          if (i % SONIC_TIME == 0)
-  73   1          {
-  74   2              sonic_flag = 1;
-  75   2          }
-  76   1      
-  77   1          if (i % KEY_TIME == 0)
-  78   1          {
-  79   2              key_flag = 1;
-  80   2          }
-  81   1      
-  82   1          if (i % TEMPERATURE_TIME == 0)
-  83   1          {
-  84   2              temp_flag = 1;
-  85   2          }
-  86   1      }
-  87          
-  88          void key_proc(uchar press)
-  89          {
-  90   1          switch (press)
-  91   1          {
-  92   2              case 0:
-  93   2              {
-  94   3                  state = (state + 1) % 3;
-  95   3              }
-  96   2          }
-  97   1      }
-  98          
-  99          void state_proc()
- 100          {
- 101   1          switch (state)
- 102   1          {
- 103   2              case 0:
- 104   2              {
- 105   3                  if (sonic_units)
- 106   3                  {
- 107   4                      
- 108   4                      // cm
- 109   4                      set_seg(temperature / 1000 % 10,
- 110   4                              temperature / 100 % 10,
- 111   4                              temperature / 10 % 10,
- 112   4                              17,
- 113   4                              16,
- 114   4                              16,
- 115   4                              distance / 10 % 10,
- 116   4                              distance % 10
-C51 COMPILER V9.60.7.0   MAIN                                                              03/19/2025 19:21:02 PAGE 3   
+  55   2              {
+  56   3                  temp_flag = 0;
+  57   3                  temp_proc();
+  58   3              }
+  59   2          }
+  60   1      }
+  61          
+  62          void timer_1_1ms() interrupt 3
+  63          {
+  64   1          static uint i;
+  65   1          i = (i + 1) % 30000;
+  66   1      
+  67   1         
+  68   1          if (i % SEG_TIME == 0)
+  69   1          {
+  70   2              seg_flag = 1;
+  71   2          }
+  72   1          
+  73   1          if (i % LED_TIME == 0)
+  74   1          {
+  75   2              led_flag = 1;
+  76   2          }
+  77   1      
+  78   1          if (i % SONIC_TIME == 0)
+  79   1          {
+  80   2              sonic_flag = 1;
+  81   2          }
+  82   1      
+  83   1          if (i % KEY_TIME == 0)
+  84   1          {
+  85   2              key_flag = 1;
+  86   2          }
+  87   1      
+  88   1          if (i % TEMPERATURE_TIME == 0)
+  89   1          {
+  90   2              temp_flag = 1;
+  91   2          }
+  92   1      }
+  93          
+  94          void key_proc(uchar press)
+  95          {
+  96   1          switch (press)
+  97   1          {
+  98   2              case 0:
+  99   2              {
+ 100   3                  state = (state + 1) % 3;
+ 101   3              }
+ 102   2          }
+ 103   1      }
+ 104          
+ 105          void state_proc()
+ 106          {
+ 107   1          uchar argument[8] = {0, 0, 0, 0 ,0 ,0 ,0, 0};
+ 108   1          uchar i;
+ 109   1          switch (state)
+ 110   1          {
+ 111   2              // 测距
+ 112   2              case 0:
+ 113   2              {
+ 114   3                  if (sonic_units == 0)
+ 115   3                  {
+ 116   4                      // cm
+C51 COMPILER V9.60.7.0   MAIN                                                              04/01/2025 09:28:41 PAGE 3   
 
- 117   4                              );  
- 118   4                  }
- 119   3                  else
- 120   3                  {
- 121   4                      set_seg(temperature / 1000 % 10,
- 122   4                              temperature / 100 % 10,
- 123   4                              temperature / 10 % 10,
- 124   4                              17,
- 125   4                              16,
- 126   4                              34, // 0.
- 127   4                              distance / 10 % 10,
- 128   4                              distance % 10
- 129   4                              );
- 130   4                  }
- 131   3      
- 132   3                 
- 133   3              }
- 134   2              break;
- 135   2      
- 136   2              case 1:
- 137   2              {
- 138   3                  //set_seg();
- 139   3              }
- 140   2              break;
- 141   2              
- 142   2          }
- 143   1      }
- 144          
- 145          void temp_proc()
- 146          {
- 147   1          float temp;
- 148   1          temp = read_temperature();
- 149   1      
- 150   1          temperature = temp * 100;
- 151   1      }
+ 117   4                      argument[5] = 0;
+ 118   4                      argument[6] = distance / 10 % 10;
+ 119   4                      argument[7] = distance % 10;
+ 120   4      
+ 121   4                      // 清零
+ 122   4                      if (argument[6] == 0)
+ 123   4                      {
+ 124   5                          argument[6] = 16;
+ 125   5                      }
+ 126   4                  }
+ 127   3                  else
+ 128   3                  {
+ 129   4                      // m
+ 130   4                      argument[5] = 32;
+ 131   4                      argument[6] = distance / 10 % 10;
+ 132   4                      argument[7] = distance % 10;
+ 133   4                  }
+ 134   3                  
+ 135   3                  set_seg(temperature / 1000 % 10,
+ 136   3                          temperature / 100 % 10,
+ 137   3                          temperature / 10 % 10,
+ 138   3                          17,
+ 139   3                          16,
+ 140   3                          argument[5],
+ 141   3                          argument[6],
+ 142   3                          argument[7]
+ 143   3                          );  
+ 144   3              }
+ 145   2              break;
+ 146   2              
+ 147   2              // 参数界面
+ 148   2              case 1:
+ 149   2              {
+ 150   3                  
+ 151   3                  if (argument_state == 1)
+ 152   3                  {
+ 153   4                      argument[6] = argument_distance / 10 % 10;
+*** ERROR C202 IN LINE 153 OF main.c: 'argument_distance': undefined identifier
+ 154   4                      argument[7] = argument_distance % 10;
+*** ERROR C202 IN LINE 154 OF main.c: 'argument_distance': undefined identifier
+ 155   4                  }
+ 156   3                  else if (argument_state = 2)
+ 157   3                  {
+ 158   4                      argument[6] = argument_temp / 10 % 10;
+ 159   4                      argument[7] = argument_temp % 10;
+ 160   4                  }
+ 161   3      
+ 162   3                  set_seg(24, argument_state, 
+ 163   3                          16, 16, 16, 16, 
+ 164   3                          argument[6], argument[7]
+ 165   3                          );
+ 166   3              }
+ 167   2          break;
+ 168   2      
+ 169   2              // uchar factory_state;
+ 170   2              // char f1_value;
+ 171   2              case 2:
+ 172   2              {
+ 173   3                  // factory
+ 174   3                  argument[0] = 15;
+ 175   3                  argument[1] = factory_state;
+ 176   3                  argument[2] = 16;
+C51 COMPILER V9.60.7.0   MAIN                                                              04/01/2025 09:28:41 PAGE 4   
 
+ 177   3                  argument[3] = 16;
+ 178   3                  argument[4] = 16;
+ 179   3      
+ 180   3                  switch (factory_state)
+ 181   3                  {
+ 182   4                      case 1: 
+ 183   4                      {
+ 184   5                          if (f1_value < 0)
+*** ERROR C202 IN LINE 184 OF main.c: 'f1_value': undefined identifier
+ 185   5                          {
+ 186   6                              argument[5] = 17;
+ 187   6                          }
+ 188   5                          else
+ 189   5                          {
+ 190   6                              argument[5] = 16;
+ 191   6                          }
+ 192   5                          
+ 193   5                          argument[6] = f1_value / 10;
+*** ERROR C202 IN LINE 193 OF main.c: 'f1_value': undefined identifier
+ 194   5                          argument[7] = f1_value % 10;
+*** ERROR C202 IN LINE 194 OF main.c: 'f1_value': undefined identifier
+ 195   5                      }
+ 196   4                      break;
+ 197   4                  }
+ 198   3              }
+ 199   2              break;
+ 200   2      
+ 201   2      
+ 202   2              
+ 203   2          }
+ 204   1      }
+ 205          
+ 206          void temp_proc()
+ 207          {
+ 208   1          float temp;
+ 209   1          temp = read_temperature();
+ 210   1      
+ 211   1          temperature = temp * 100;
+ 212   1      }
 
-MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    501    ----
-   CONSTANT SIZE    =      5    ----
-   XDATA SIZE       =   ----    ----
-   PDATA SIZE       =   ----    ----
-   DATA SIZE        =      6       5
-   IDATA SIZE       =   ----    ----
-   BIT SIZE         =      6    ----
-END OF MODULE INFORMATION.
-
-
-C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  0 WARNING(S),  5 ERROR(S)
