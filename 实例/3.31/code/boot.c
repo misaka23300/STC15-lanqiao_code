@@ -23,7 +23,7 @@ void boot_init()
     batch(6);
     batch(0);
 
-    P0 = 0xFF:
+    P0 = 0xFF;
     batch(7);
     batch(0);
 
@@ -53,4 +53,32 @@ void Timer2_Init(void)		//1毫秒@12.000MHz
 }
 
 // 
+void Delay14us(void)	//@12.000MHz
+{
+	unsigned char data i;
 
+	_nop_();
+	_nop_();
+	i = 39;
+	while (--i);
+}
+
+void delete_0(uchar *a, uchar j, uchar negative)
+{
+	uchar i;
+    if (j == 0)
+    {
+        return;
+    }
+    j--;
+    for (i = 0;i < j;i++)
+    {
+        if (a[i] == 0) 
+            { a[i] = 16; }
+        else
+        {
+            if (negative  == 1 && i != 0) { a[i-1] = 17; }
+            break;
+        }
+    }
+}

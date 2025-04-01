@@ -1,0 +1,9 @@
+".\Objects\STARTUP.obj",
+".\Objects\boot.obj",
+".\Objects\display.obj",
+".\Objects\key.obj",
+".\Objects\main.obj",
+".\Objects\sonic.obj",
+".\Objects\iic.obj" 
+TO ".\Objects\4444" 
+PRINT(".\Listings\4444.m51") RAMSIZE(256) 

@@ -7,7 +7,9 @@
 #define uchar unsigned char
 #define uint unsigned int
 
+void boot_init();
 void batch(uchar i);
 void Timer2_Init(void);
-
+void Delay14us(void);
+void delete_0(uchar *a, uchar j, uchar negative);
 #endif

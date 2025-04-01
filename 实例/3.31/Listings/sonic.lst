@@ -1,0 +1,70 @@
+C51 COMPILER V9.60.7.0   SONIC                                                             04/01/2025 17:23:37 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE SONIC
+OBJECT MODULE PLACED IN .\Objects\sonic.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE code\sonic.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listing
+                    -s\sonic.lst) TABS(2) OBJECT(.\Objects\sonic.obj)
+
+line level    source
+
+   1          #include "sonic.h"
+   2          
+   3          sbit rx = P1 ^ 1;
+   4          sbit tx = P1 ^ 0;
+   5          
+   6          
+   7          
+   8          void sonic_send()
+   9          {
+  10   1          tx = 1;
+  11   1          Delay14us();
+  12   1          tx = 0;
+  13   1      }
+  14          
+  15          
+  16          uchar sonic_measure()
+  17          {
+  18   1          uchar distance;
+  19   1      
+  20   1          TR0 = 0; TF0 = 0;
+  21   1          TH0 = 0; TL0 = 0;
+  22   1      
+  23   1          sonic_send();
+  24   1          while (rx == 0);
+  25   1      
+  26   1          TR0 = 1;
+  27   1      
+  28   1          while (rx == 1 && TF0 == 0);
+  29   1      
+  30   1          TR0 = 0;
+  31   1      
+  32   1          if (TF0)
+  33   1          {
+  34   2              distance = 256;
+  35   2              TF0 = 0;
+  36   2          }
+  37   1          else
+  38   1          {
+  39   2              distance = (uchar) (TH0 << 8 | TL0) * 0.017;
+  40   2          }
+  41   1          TH0 = 0; TL0 = 0;
+  42   1      
+  43   1          return distance;
+  44   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     77    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+C51 COMPILER V9.60.7.0   SONIC                                                             04/01/2025 17:23:37 PAGE 2   
+
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
