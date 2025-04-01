@@ -27,6 +27,7 @@ struct {
 // key
 struct {
     bit flag;
+    uchar time;
 } key;
 
 
@@ -42,7 +43,11 @@ void main()
 
     while (1)
     {
-
+        if (key.time == KEY_TIME)
+        {
+            key_proc();
+            key.time = 0;
+        }
     }
 }
 
@@ -56,5 +61,8 @@ void Timer2_Isr(void) interrupt 12
         i = 0;
     }
 
-
+    if (key.time < KEY_TIME)
+    {
+        key.time++;
+    }
 }
