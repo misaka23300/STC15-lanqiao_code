@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              04/01/2025 17:23:36 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/01/2025 17:41:46 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -62,7 +62,7 @@ line level    source
   52          } key;
   53          
   54          
-C51 COMPILER V9.60.7.0   MAIN                                                              04/01/2025 17:23:36 PAGE 2   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/01/2025 17:41:46 PAGE 2   
 
   55          // 继电器
   56          
@@ -126,7 +126,7 @@ line level    source
  114   3                  shan_time = 0;
  115   3              }
  116   2          }
-C51 COMPILER V9.60.7.0   MAIN                                                              04/01/2025 17:23:36 PAGE 3   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/01/2025 17:41:46 PAGE 3   
 
  117   1      }
  118          
@@ -172,218 +172,225 @@ line level    source
  158   3                  if (state.mode_1 == 1)
  159   3                      { state.mode_2 = (state.mode_2 + 1) % 2; }
  160   3                      
- 161   3              }
- 162   2              break;
- 163   2      
- 164   2              case 8:
- 165   2              {
- 166   3                  if (state.mode_1 == 1 && state.mode_2 == 0)
- 167   3                  {
- 168   4                      argument.high_value = argument.high_value + 10;
- 169   4                      if (argument.high_value > 90)
- 170   4                      {
- 171   5                          argument.high_value = 50;
- 172   5                      }
- 173   4                  }
- 174   3                  else if (state.mode_1 == 1 && state.mode_2 == 1)
- 175   3                  {
- 176   4                      led_value[7] = 0;
- 177   4                      state.check_mode2 = 0;
- 178   4                      ADC_proc();
-C51 COMPILER V9.60.7.0   MAIN                                                              04/01/2025 17:23:36 PAGE 4   
+ 161   3                  else if (state.mode_1 == 2)
+ 162   3                  {
+ 163   4                      argument.out_times = 0;
+ 164   4                  }
+ 165   3              }
+ 166   2              break;
+ 167   2      
+ 168   2              case 9:
+ 169   2              {
+ 170   3                  if (state.mode_1 == 1 && state.mode_2 == 0)
+ 171   3                  {
+ 172   4                      argument.high_value = argument.high_value + 10;
+ 173   4                      if (argument.high_value > 90)
+ 174   4                      {
+ 175   5                          argument.high_value = 50;
+ 176   5                      }
+ 177   4                  }
+ 178   3                  else if (state.mode_1 == 1 && state.mode_2 == 1)
+C51 COMPILER V9.60.7.0   MAIN                                                              04/01/2025 17:41:46 PAGE 4   
 
- 179   4                  }
- 180   3              }
- 181   2              break;
- 182   2      
- 183   2              case 9:
- 184   2              {
- 185   3                  if (state.mode_1 == 1 && state.mode_2 == 0)
- 186   3                  {
- 187   4                      argument.low_value = argument.low_value - 10;
- 188   4                      if (argument.low_value < 0)
- 189   4                      {
- 190   5                          argument.low_value = 40;
- 191   5                      }
- 192   4                  }
- 193   3                  else if (state.mode_1 == 1 && state.mode_2 == 1)
- 194   3                  {
- 195   4                      led_value[7] = 1;
- 196   4                      state.check_mode2 = 1;
- 197   4                      ADC_proc();
- 198   4                  }
- 199   3              }
- 200   2              break;
- 201   2          }
- 202   1      }
- 203          
- 204          void state_proc()
- 205          {
- 206   1          switch (state.mode_1)
- 207   1          {
- 208   2              // 测距
- 209   2              case 0:
- 210   2              {
- 211   3                  if (state.one_flag != 0)
- 212   3                  {
- 213   4                      state.one_flag = 0; 
- 214   4                      seg[0] = 43; seg[1] = 16; seg[2] = 16; seg[3] = 16; seg[4] = 16;
- 215   4                  }
- 216   3                  
- 217   3                  seg[5] = sonic.list[0];
- 218   3                  seg[6] = sonic.list[1];
- 219   3                  seg[7] = sonic.list[2];
- 220   3              }
- 221   2              break;
- 222   2      
- 223   2              // 参数
- 224   2              case 1:
- 225   2              {
- 226   3                  if (state.one_flag != 1)
- 227   3                  {
- 228   4                      state.one_flag = 1;
- 229   4                      seg[0] = 24; seg[2] = 16; seg[5] = 17;
- 230   4                  }
- 231   3      
- 232   3                  seg[1] = state.mode_2 + 1;
- 233   3      
- 234   3                  seg[3] = argument.low_value / 10 % 10;
- 235   3                  seg[4] = argument.low_value % 10;
- 236   3      
- 237   3                  seg[6] = argument.high_value / 10 % 10;
- 238   3                  seg[7] = argument.high_value % 10;
- 239   3              }
- 240   2              break;
-C51 COMPILER V9.60.7.0   MAIN                                                              04/01/2025 17:23:36 PAGE 5   
+ 179   3                  {
+ 180   4                      led_value[7] = 0;
+ 181   4                      state.check_mode2 = 0;
+ 182   4                      ADC_proc();
+ 183   4                  }
+ 184   3              }
+ 185   2              break;
+ 186   2      
+ 187   2              case 8:
+ 188   2              {
+ 189   3                  if (state.mode_1 == 1 && state.mode_2 == 0)
+ 190   3                  {
+ 191   4                      argument.low_value = argument.low_value + 10;
+ 192   4                      if (argument.low_value > 40)
+ 193   4                      {
+ 194   5                          argument.low_value = 0;
+ 195   5                      }
+ 196   4                  }
+ 197   3                  else if (state.mode_1 == 1 && state.mode_2 == 1)
+ 198   3                  {
+ 199   4                      led_value[7] = 1;
+ 200   4                      state.check_mode2 = 1;
+ 201   4                      ADC_proc();
+ 202   4                  }
+ 203   3              }
+ 204   2              break;
+ 205   2          }
+ 206   1      }
+ 207          
+ 208          void state_proc()
+ 209          {
+ 210   1          switch (state.mode_1)
+ 211   1          {
+ 212   2              // 测距
+ 213   2              case 0:
+ 214   2              {
+ 215   3                  if (state.one_flag != 0)
+ 216   3                  {
+ 217   4                      state.one_flag = 0; 
+ 218   4                      seg[0] = 43; seg[1] = 16; seg[2] = 16; seg[3] = 16; seg[4] = 16;
+ 219   4                  }
+ 220   3                  
+ 221   3                  seg[5] = sonic.list[0];
+ 222   3                  seg[6] = sonic.list[1];
+ 223   3                  seg[7] = sonic.list[2];
+ 224   3              }
+ 225   2              break;
+ 226   2      
+ 227   2              // 参数
+ 228   2              case 1:
+ 229   2              {
+ 230   3                  if (state.one_flag != 1)
+ 231   3                  {
+ 232   4                      state.one_flag = 1;
+ 233   4                      seg[0] = 24; seg[2] = 16; seg[5] = 17;
+ 234   4                  }
+ 235   3      
+ 236   3                  seg[1] = state.mode_2 + 1;
+ 237   3      
+ 238   3                  seg[3] = argument.low_value / 10 % 10;
+ 239   3                  seg[4] = argument.low_value % 10;
+ 240   3      
+C51 COMPILER V9.60.7.0   MAIN                                                              04/01/2025 17:41:46 PAGE 5   
 
- 241   2      
- 242   2              // 记录界面
- 243   2              case 2:
- 244   2              {
- 245   3                  if (state.one_flag != 2)
- 246   3                  {
- 247   4                      state.one_flag = 2; 
- 248   4                      seg[0] = 14; 
- 249   4                      seg[1] = 16; seg[2] = 16; seg[3] = 16; 
- 250   4                      seg[4] = 16; seg[5] = 16; seg[6] = 16;
- 251   4                  }
- 252   3                  seg[7] = argument.out_times;
- 253   3              }
- 254   2              break;
- 255   2          }
- 256   1      }
- 257          
- 258          
- 259          void sonic_proc()
- 260          {
- 261   1          sonic.distance = sonic_measure();
- 262   1      
- 263   1          sonic.list[0] = sonic.distance / 100 % 10;
- 264   1          sonic.list[1] = sonic.distance / 10 % 10;
- 265   1          sonic.list[2] = sonic.distance % 10;
- 266   1      
- 267   1          delete_0(sonic.list, 3, 0);
- 268   1      
- 269   1          //adjust_out();
- 270   1      }
- 271          
- 272          void ADC_proc()
- 273          {
- 274   1        uchar value;
- 275   1        
- 276   1          ADC_value = ADC(0x03);
- 277   1          //led_value[0] = 1;
- 278   1      
- 279   1          if (ADC_value <= 51)
- 280   1          {
- 281   2              value = 50; 
- 282   2          }
- 283   1          else if (51 < ADC_value && ADC_value <= 102)
- 284   1          {
- 285   2              value = 60;
- 286   2          }
- 287   1          else if (102 < ADC_value && ADC_value <= 153)
- 288   1          {
- 289   2              value = 70;
- 290   2          }
- 291   1          else if (154 < ADC_value && ADC_value <= 205)
- 292   1          {
- 293   2              value = 80;
- 294   2          }
- 295   1          else if (205 < ADC_value && ADC_value <= 255)
- 296   1          {
- 297   2              value = 90;
- 298   2          }
- 299   1      
- 300   1          if (state.check_mode2 == 0)
- 301   1          {
- 302   2              argument.low_value = value - 50;
-C51 COMPILER V9.60.7.0   MAIN                                                              04/01/2025 17:23:36 PAGE 6   
+ 241   3                  seg[6] = argument.high_value / 10 % 10;
+ 242   3                  seg[7] = argument.high_value % 10;
+ 243   3              }
+ 244   2              break;
+ 245   2      
+ 246   2              // 记录界面
+ 247   2              case 2:
+ 248   2              {
+ 249   3                  if (state.one_flag != 2)
+ 250   3                  {
+ 251   4                      state.one_flag = 2; 
+ 252   4                      seg[0] = 14; 
+ 253   4                      seg[1] = 16; seg[2] = 16; seg[3] = 16; 
+ 254   4                      seg[4] = 16; seg[5] = 16; seg[6] = 16;
+ 255   4                  }
+ 256   3                  if (argument.out_times > 9)
+ 257   3                      seg[7] = 17;
+ 258   3                  else
+ 259   3                      seg[7] = argument.out_times;
+ 260   3              }
+ 261   2              break;
+ 262   2          }
+ 263   1      }
+ 264          
+ 265          
+ 266          void sonic_proc()
+ 267          {
+ 268   1          sonic.distance = sonic_measure();
+ 269   1      
+ 270   1          sonic.list[0] = sonic.distance / 100 % 10;
+ 271   1          sonic.list[1] = sonic.distance / 10 % 10;
+ 272   1          sonic.list[2] = sonic.distance % 10;
+ 273   1      
+ 274   1          delete_0(sonic.list, 3, 0);
+ 275   1      
+ 276   1          //adjust_out();
+ 277   1      }
+ 278          
+ 279          void ADC_proc()
+ 280          {
+ 281   1        uchar value;
+ 282   1        
+ 283   1          ADC_value = ADC(0x03);
+ 284   1          //led_value[0] = 1;
+ 285   1      
+ 286   1          if (ADC_value <= 51)
+ 287   1          {
+ 288   2              value = 0; 
+ 289   2          }
+ 290   1          else if (51 < ADC_value && ADC_value <= 102)
+ 291   1          {
+ 292   2              value = 10;
+ 293   2          }
+ 294   1          else if (102 < ADC_value && ADC_value <= 153)
+ 295   1          {
+ 296   2              value = 20;
+ 297   2          }
+ 298   1          else if (154 < ADC_value && ADC_value <= 205)
+ 299   1          {
+ 300   2              value = 30;
+ 301   2          }
+ 302   1          else if (205 < ADC_value && ADC_value <= 255)
+C51 COMPILER V9.60.7.0   MAIN                                                              04/01/2025 17:41:46 PAGE 6   
 
- 303   2          }
- 304   1          else if (state.check_mode2 == 1)
- 305   1          {
- 306   2              argument.high_value = value;
- 307   2          } 
- 308   1      
- 309   1          value = 0;
- 310   1      }
- 311          
- 312          
- 313          void led_state()
- 314          {
- 315   1          led_value[0] = 0;
- 316   1          led_value[1] = 0;
- 317   1          led_value[2] = 0;
- 318   1      
- 319   1          led_value[state.mode_1] = 1;
- 320   1      
- 321   1      
- 322   1          // uchar i;
- 323   1          // for (i = 0;i < 3;i++)
- 324   1          // {
- 325   1          //     if (i != state.mode_1)
- 326   1          //     {
- 327   1          //         led_value[i] = 0;
- 328   1          //     }
- 329   1          //     else
- 330   1          //     {
- 331   1          //         led_value[i] = 1;
- 332   1          //     }
- 333   1          // }
- 334   1      }
- 335          
- 336          
- 337          void adjust_out()
- 338          {
- 339   1          static uchar adjust;
- 340   1          if (argument.low_value <= sonic.distance && sonic.distance <= argument.high_value)
- 341   1          {
- 342   2              adjust = 1;
- 343   2              led_value[7] = 1;
- 344   2          }
- 345   1          else 
- 346   1          {
- 347   2              led_value[7] = shan_flag;
- 348   2              if (adjust == 1)
- 349   2              {
- 350   3                  if (argument.out_times < 10)
- 351   3                      argument.out_times++;
- 352   3                  else
- 353   3                      argument.out_times = 17;
- 354   3                  
- 355   3                  adjust = 0;
- 356   3              }
- 357   2          }
- 358   1      }
+ 303   1          {
+ 304   2              value = 40;
+ 305   2          }
+ 306   1      
+ 307   1          if (state.check_mode2 == 1)
+ 308   1          {
+ 309   2              argument.low_value = value + 50;
+ 310   2          }
+ 311   1          else if (state.check_mode2 == 0)
+ 312   1          {
+ 313   2              argument.high_value = value;
+ 314   2          } 
+ 315   1      
+ 316   1          value = 0;
+ 317   1      }
+ 318          
+ 319          
+ 320          void led_state()
+ 321          {
+ 322   1          led_value[0] = 0;
+ 323   1          led_value[1] = 0;
+ 324   1          led_value[2] = 0;
+ 325   1      
+ 326   1          led_value[state.mode_1] = 1;
+ 327   1      
+ 328   1      
+ 329   1          // uchar i;
+ 330   1          // for (i = 0;i < 3;i++)
+ 331   1          // {
+ 332   1          //     if (i != state.mode_1)
+ 333   1          //     {
+ 334   1          //         led_value[i] = 0;
+ 335   1          //     }
+ 336   1          //     else
+ 337   1          //     {
+ 338   1          //         led_value[i] = 1;
+ 339   1          //     }
+ 340   1          // }
+ 341   1      }
+ 342          
+ 343          
+ 344          void adjust_out()
+ 345          {
+ 346   1          static uchar adjust;
+ 347   1          if (argument.low_value <= sonic.distance && sonic.distance <= argument.high_value)
+ 348   1          {
+ 349   2              adjust = 1;
+ 350   2              led_value[7] = 1;
+ 351   2          }
+ 352   1          else 
+ 353   1          {
+ 354   2              led_value[7] = shan_flag;
+ 355   2              if (adjust == 1)
+ 356   2              {
+ 357   3                  if (argument.out_times < 11)
+ 358   3                      argument.out_times++;
+ 359   3              
+ 360   3                      
+ 361   3                  
+ 362   3                  adjust = 0;
+ 363   3              }
+ 364   2          }
+C51 COMPILER V9.60.7.0   MAIN                                                              04/01/2025 17:41:46 PAGE 7   
+
+ 365   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    843    ----
+   CODE SIZE        =    860    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
-C51 COMPILER V9.60.7.0   MAIN                                                              04/01/2025 17:23:36 PAGE 7   
-
    PDATA SIZE       =   ----    ----
    DATA SIZE        =     24       1
    IDATA SIZE       =   ----    ----

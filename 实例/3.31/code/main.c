@@ -158,10 +158,14 @@ void key_proc()
             if (state.mode_1 == 1)
                 { state.mode_2 = (state.mode_2 + 1) % 2; }
                 
+            else if (state.mode_1 == 2)
+            {
+                argument.out_times = 0;
+            }
         }
         break;
 
-        case 8:
+        case 9:
         {
             if (state.mode_1 == 1 && state.mode_2 == 0)
             {
@@ -180,14 +184,14 @@ void key_proc()
         }
         break;
 
-        case 9:
+        case 8:
         {
             if (state.mode_1 == 1 && state.mode_2 == 0)
             {
-                argument.low_value = argument.low_value - 10;
-                if (argument.low_value < 0)
+                argument.low_value = argument.low_value + 10;
+                if (argument.low_value > 40)
                 {
-                    argument.low_value = 40;
+                    argument.low_value = 0;
                 }
             }
             else if (state.mode_1 == 1 && state.mode_2 == 1)
@@ -249,7 +253,10 @@ void state_proc()
                 seg[1] = 16; seg[2] = 16; seg[3] = 16; 
                 seg[4] = 16; seg[5] = 16; seg[6] = 16;
             }
-            seg[7] = argument.out_times;
+            if (argument.out_times > 9)
+                seg[7] = 17;
+            else
+                seg[7] = argument.out_times;
         }
         break;
     }
@@ -278,30 +285,30 @@ void ADC_proc()
 
     if (ADC_value <= 51)
     {
-        value = 50; 
+        value = 0; 
     }
     else if (51 < ADC_value && ADC_value <= 102)
     {
-        value = 60;
+        value = 10;
     }
     else if (102 < ADC_value && ADC_value <= 153)
     {
-        value = 70;
+        value = 20;
     }
     else if (154 < ADC_value && ADC_value <= 205)
     {
-        value = 80;
+        value = 30;
     }
     else if (205 < ADC_value && ADC_value <= 255)
     {
-        value = 90;
+        value = 40;
     }
 
-    if (state.check_mode2 == 0)
+    if (state.check_mode2 == 1)
     {
-        argument.low_value = value - 50;
+        argument.low_value = value + 50;
     }
-    else if (state.check_mode2 == 1)
+    else if (state.check_mode2 == 0)
     {
         argument.high_value = value;
     } 
@@ -347,10 +354,10 @@ void adjust_out()
         led_value[7] = shan_flag;
         if (adjust == 1)
         {
-            if (argument.out_times < 10)
+            if (argument.out_times < 11)
                 argument.out_times++;
-            else
-                argument.out_times = 17;
+        
+                
             
             adjust = 0;
         }
