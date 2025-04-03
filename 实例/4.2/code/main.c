@@ -77,21 +77,12 @@ void main()
             temp.time = 0;
             ds18b20_proc();
         }
-
     }
-
-    
 }
-
-
 
 
 void Timer0_Isr(void) interrupt 1
 {
-    /* static uint i;
-    i++;
-    if (i > 30000) { i = 0; } */
-
     seg_display();
     led_display();
 
