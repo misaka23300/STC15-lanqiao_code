@@ -15,7 +15,7 @@ void boot_init()
     batch(4);
     batch(0);
 
-    P0 = 0xAF:
+    P0 = 0xAF;
     batch(5);
     batch(0);
 

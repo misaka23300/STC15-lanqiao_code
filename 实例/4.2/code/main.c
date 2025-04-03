@@ -4,11 +4,11 @@ extern uchar led[8];
 extern uchar seg[8];
 
 enum {
-    KEY_TASK 15,
-    FLICKER_TASK 100,
-    STATE_TASK 20,
-    TEMP_TASK 900
-}
+    KEY_TASK = 15,
+    FLICKER_TASK = 100,
+    STATE_TASK = 20,
+    TEMP_TASK = 900
+};
 
 // key
 struct {
@@ -31,17 +31,24 @@ struct {
 // 数码管显示状态
 struct {
     uchar mode1;
+    uchar mode2;    // 触发  | 0 -> 上触发 | 1 -> 下触发
     uchar time;
     uchar only;
 } state;
 
 // 校准界面
-sturct {
+struct {
     char value;
     char list[3];
 } adjust;
 
-int main()
+// 参数界面
+struct {
+    char value;
+    char list[3];
+} argument;
+
+void main()
 {
     boot_init();
     state.only = 255;
@@ -73,7 +80,7 @@ int main()
 
     }
 
-    return 0;
+    
 }
 
 
@@ -107,21 +114,47 @@ void key_proc()
     {
         case 4:
         {
-            state.mode1 = (staet.mode1 + 1) % 3;
+            state.mode1 = (state.mode1 + 1) % 3;
+            led_proc(0);
+        }
+        break;
+
+        case 5:
+        {
+            state.mode2 = (state.mode2 + 1) % 2;
+            led_proc(1);
+        }
+        break;
+
+        // 减按键
+        case 8:
+        {
+            if (state.mode1 == 1 && adjust.value != -99)
+            {
+                adjust.value--;
+            }
+            else if (state.mode1 == 2 && argument.value != -99)
+            {
+                argument.value--;
+            }
+        }
+        break;
+
+        // 加按键
+        case 9:
+        {
+            if (state.mode1 == 1 && adjust.value != 99)
+            {
+                adjust.value++;
+            }
+            else if (state.mode1 == 2 && argument.value != 99)
+            {
+                argument.value++;
+            }
         }
         break;
     }
 }
-
-
-{                       //标准字库
-    //   0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F
-    0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x7F,0x6F,0x77,0x7C,0x39,0x5E,0x79,0x71,
-    //black  -     H    J    K    L    N    o   P    U     t    G    Q    r   M    y
-        0x00,0x40,0x76,0x1E,0x70,0x38,0x37,0x5C,0x73,0x3E,0x78,0x3d,0x67,0x50,0x37,0x6e,
-        0xBF,0x86,0xDB,0xCF,0xE6,0xED,0xFD,0x87,0xFF,0xEF,0x46};    //0. 1. 2. 3. 4. 5. 6. 7. 8. 9. -1
-
-
 
 void state_proc()
 {
@@ -151,9 +184,38 @@ void state_proc()
                 state.only = 1;
                 seg[0] = 14; seg[1] = 16; seg[2] = 16; seg[3] = 16; seg[4] = 16;
             }
-            seg[5] = 
-            seg[6] = 
-            seg[7] = 
+
+            adjust.list[0] = adjust.value / 100 % 10;
+            adjust.list[1] = adjust.value / 10 % 10;
+            adjust.list[2] = adjust.value % 10;
+
+            delete_0(adjust.list, 3, 1);
+
+            seg[5] = adjust.list[0];
+            seg[6] = adjust.list[1];
+            seg[7] = adjust.list[2];
+        }
+        break;
+
+        // 参数界面
+        case 2:
+        {
+            // H 16 16 16 16 A A A   A -> 参数 -99 ~ 99
+            if (state.only != 2)
+            {
+                state.only = 2;
+                seg[0] = 18; seg[1] = 16; seg[2] = 16; seg[3] = 16; seg[4] = 16;
+            }
+
+            argument.list[0] = argument.value / 100 % 10;
+            argument.list[1] = argument.value / 10 % 10;
+            argument.list[2] = argument.value % 10;
+
+            delete_0(argument.list, 3, 1);
+
+            seg[5] = argument.list[0];
+            seg[6] = argument.list[1];
+            seg[7] = argument.list[2];
         }
         break;
     }
@@ -166,16 +228,20 @@ void ds18b20_proc()
     temperature = read_temp();
 
     // 保留一位小数
-    temp.value = (uint) temperature * 10;
+    temp.value = (unsigned int) (temperature * 10);
+
+    temp.value = temp.value + adjust.value;
+
+    led_proc(2);
 }
 
 
 void delete_0(uchar *list, uchar n, bit negative)
 {
     uchar i;
-    if (j == 0) { return; }
+    if (n == 0) { return; }
 
-    for (i = 0;i < (j - 1);i++)
+    for (i = 0;i < (n - 1);i++)
     {
         if (list[i] == 0)
         {
@@ -183,7 +249,70 @@ void delete_0(uchar *list, uchar n, bit negative)
         }
         else
         {
-            
+            if (negative && i > 1)
+            {
+                list[i - 1] = 17;
+            }
+            break;
         }
+    }
+}
+
+void led_proc(uchar i)
+{
+    switch (i)
+    {
+        case 0:
+        {
+            // 状态灯
+            led[0] = 0; led[1] = 0; led[2] = 0;
+            led[state.mode1] = 1;  
+        }
+        break;
+
+        case 1:
+        {
+            // 上下限灯
+            if (state.mode2 == 0)
+            {
+                led[3] = 1;
+                led[4] = 0;
+            }
+            else
+            {
+                led[3] = 0;
+                led[4] = 1;
+            }
+        }
+        break;
+
+        case 2:
+        {
+            // check
+
+            if (state.mode2 == 0)
+            {
+                if (temp.value > argument.value)
+                {
+                    led[7] = 1;
+                }
+                else
+                {
+                    led[7] = 0;
+                }
+            }
+            else if (state.mode2 == 1)
+            {
+                if (temp.value < argument.value)
+                {
+                    led[7] = 1;
+                }
+                else
+                {
+                    led[7] = 0;
+                }
+            }
+        }
+        break;
     }
 }

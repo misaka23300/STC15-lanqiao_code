@@ -66,8 +66,11 @@ bit init_ds18b20(void)
 float read_temp()
 {
 	float temp;
+	uchar low, high;
+	
 	init_ds18b20();
-
+	
+	
 	Write_DS18B20(0xcc);
 	Write_DS18B20(0x44);
 

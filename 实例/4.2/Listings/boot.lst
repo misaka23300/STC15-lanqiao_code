@@ -1,0 +1,82 @@
+C51 COMPILER V9.60.7.0   BOOT                                                              04/04/2025 00:22:38 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE BOOT
+OBJECT MODULE PLACED IN .\Objects\boot.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE code\boot.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\boot.lst) TABS(2) OBJECT(.\Objects\boot.obj)
+
+line level    source
+
+   1          #include "boot.h"
+   2          
+   3          void boot_init()
+   4          {
+   5   1          P0M1 = 0;   P0M0 = 0;   //设置为准双向口
+   6   1          P1M1 = 0;   P1M0 = 0;   //设置为准双向口
+   7   1          P2M1 = 0;   P2M0 = 0;   //设置为准双向口
+   8   1          P3M1 = 0;   P3M0 = 0;   //设置为准双向口
+   9   1          P4M1 = 0;   P4M0 = 0;   //设置为准双向口
+  10   1          P5M1 = 0;   P5M0 = 0;   //设置为准双向口
+  11   1          P6M1 = 0;   P6M0 = 0;   //设置为准双向口
+  12   1          P7M1 = 0;   P7M0 = 0;   //设置为准双向口
+  13   1      
+  14   1          P0 = 0xFF;
+  15   1          batch(4);
+  16   1          batch(0);
+  17   1      
+  18   1          P0 = 0xAF;
+  19   1          batch(5);
+  20   1          batch(0);
+  21   1      
+  22   1          P0 = 0x00;
+  23   1          batch(6);
+  24   1          batch(0);
+  25   1      
+  26   1          P0 = 0xFF;
+  27   1          batch(7);
+  28   1          batch(0);
+  29   1      
+  30   1          Timer0_Init();
+  31   1          EA = 1;
+  32   1      }
+  33          
+  34          void batch(uchar i)
+  35          {
+  36   1          switch (i)
+  37   1          {
+  38   2              case 0: { P2 = P2 & 0x1F; break; }
+  39   2              case 4: { P2 = (P2 & 0x1F) | 0x80; break; }
+  40   2              case 5: { P2 = (P2 & 0x1F) | 0xA0; break; }
+  41   2              case 6: { P2 = (P2 & 0x1F) | 0xC0; break; }
+  42   2              case 7: { P2 = (P2 & 0x1F) | 0xE0; break; }
+  43   2          }
+  44   1      }
+  45          
+  46          
+  47          void Timer0_Init(void)    //1毫秒@12.000MHz
+  48          {
+  49   1        AUXR &= 0x7F;     //定时器时钟12T模式
+  50   1        TMOD &= 0xF0;     //设置定时器模式
+  51   1        TL0 = 0x18;       //设置定时初始值
+  52   1        TH0 = 0xFC;       //设置定时初始值
+  53   1        TF0 = 0;        //清除TF0标志
+  54   1        TR0 = 1;        //定时器0开始计时
+C51 COMPILER V9.60.7.0   BOOT                                                              04/04/2025 00:22:38 PAGE 2   
+
+  55   1        ET0 = 1;        //使能定时器0中断
+  56   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    168    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

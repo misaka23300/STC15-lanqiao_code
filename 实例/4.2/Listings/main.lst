@@ -1,0 +1,352 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              04/04/2025 00:22:39 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE code\main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "main.h"
+   2          
+   3          extern uchar led[8];
+   4          extern uchar seg[8];
+   5          
+   6          enum {
+   7              KEY_TASK = 15,
+   8              FLICKER_TASK = 100,
+   9              STATE_TASK = 20,
+  10              TEMP_TASK = 900
+  11          };
+  12          
+  13          // key
+  14          struct {
+  15              uchar time;
+  16              uchar press;
+  17          } key;
+  18          
+  19          // 闪烁
+  20          struct {
+  21              uchar time;
+  22              uchar state;
+  23          } flicker;
+  24          
+  25          // 测温
+  26          struct {
+  27              uchar value;
+  28              uchar time;
+  29          } temp;
+  30          
+  31          // 数码管显示状态
+  32          struct {
+  33              uchar mode1;
+  34              uchar mode2;    // 触发  | 0 -> 上触发 | 1 -> 下触发
+  35              uchar time;
+  36              uchar only;
+  37          } state;
+  38          
+  39          // 校准界面
+  40          struct {
+  41              char value;
+  42              char list[3];
+  43          } adjust;
+  44          
+  45          // 参数界面
+  46          struct {
+  47              char value;
+  48              char list[3];
+  49          } argument;
+  50          
+  51          void main()
+  52          {
+  53   1          boot_init();
+  54   1          state.only = 255;
+C51 COMPILER V9.60.7.0   MAIN                                                              04/04/2025 00:22:39 PAGE 2   
+
+  55   1          while (1)
+  56   1          {
+  57   2              if (key.time == KEY_TASK) 
+  58   2              {
+  59   3                  key.time = 0;
+  60   3                  key_proc();
+  61   3              }
+  62   2      
+  63   2              if (flicker.time == FLICKER_TASK)
+  64   2              {
+  65   3                  flicker.time = 0;
+  66   3                  flicker.state = !flicker.state;
+  67   3              }
+  68   2      
+  69   2              if (state.time == STATE_TASK)
+  70   2              {
+  71   3                  state.time = 0;
+  72   3                  state_proc();
+  73   3              }
+  74   2      
+  75   2              if (temp.time == TEMP_TASK)
+  76   2              {
+  77   3                  temp.time = 0;
+  78   3                  ds18b20_proc();
+  79   3              }
+  80   2      
+  81   2          }
+  82   1      
+  83   1          
+  84   1      }
+  85          
+  86          
+  87          
+  88          
+  89          void Timer0_Isr(void) interrupt 1
+  90          {
+  91   1          /* static uint i;
+  92   1          i++;
+  93   1          if (i > 30000) { i = 0; } */
+  94   1      
+  95   1          seg_display();
+  96   1          led_display();
+  97   1      
+  98   1          if ( key.time < KEY_TASK ) { key.time++; }
+  99   1      
+ 100   1          if ( flicker.time < FLICKER_TASK ) { flicker.time++; }
+ 101   1      
+ 102   1          if ( state.time < STATE_TASK ) { state.time++; }
+ 103   1      
+ 104   1          if ( temp.time < TEMP_TASK ) { temp.time++; }
+ 105   1          
+ 106   1      }
+ 107          
+ 108          
+ 109          void key_proc()
+ 110          {
+ 111   1          key.press = key_scan();
+ 112   1      
+ 113   1          switch (key.press)
+ 114   1          {
+ 115   2              case 4:
+ 116   2              {
+C51 COMPILER V9.60.7.0   MAIN                                                              04/04/2025 00:22:39 PAGE 3   
+
+ 117   3                  state.mode1 = (state.mode1 + 1) % 3;
+ 118   3                  led_proc(0);
+ 119   3              }
+ 120   2              break;
+ 121   2      
+ 122   2              case 5:
+ 123   2              {
+ 124   3                  state.mode2 = (state.mode2 + 1) % 2;
+ 125   3                  led_proc(1);
+ 126   3              }
+ 127   2              break;
+ 128   2      
+ 129   2              // 减按键
+ 130   2              case 8:
+ 131   2              {
+ 132   3                  if (state.mode1 == 1 && adjust.value != -99)
+ 133   3                  {
+ 134   4                      adjust.value--;
+ 135   4                  }
+ 136   3                  else if (state.mode1 == 2 && argument.value != -99)
+ 137   3                  {
+ 138   4                      argument.value--;
+ 139   4                  }
+ 140   3              }
+ 141   2              break;
+ 142   2      
+ 143   2              // 加按键
+ 144   2              case 9:
+ 145   2              {
+ 146   3                  if (state.mode1 == 1 && adjust.value != 99)
+ 147   3                  {
+ 148   4                      adjust.value++;
+ 149   4                  }
+ 150   3                  else if (state.mode1 == 2 && argument.value != 99)
+ 151   3                  {
+ 152   4                      argument.value++;
+ 153   4                  }
+ 154   3              }
+ 155   2              break;
+ 156   2          }
+ 157   1      }
+ 158          
+ 159          void state_proc()
+ 160          {
+ 161   1          switch (state.mode1)
+ 162   1          {
+ 163   2              // 温度界面
+ 164   2              case 0:
+ 165   2              {
+ 166   3                  // C 16 16 16 16 T T. T     T -> 温度值
+ 167   3                  if (state.only != 0)
+ 168   3                  {
+ 169   4                      state.only = 0;
+ 170   4                      seg[0] = 12; seg[1] = 16; seg[2] = 16; seg[3] = 16; seg[4] = 16;
+ 171   4                  }
+ 172   3                  seg[5] = temp.value / 100 % 10;
+ 173   3                  seg[6] = temp.value / 10 % 10;
+ 174   3                  seg[7] = temp.value % 10;
+ 175   3              }
+ 176   2              break;
+ 177   2              
+ 178   2              // 校准值
+C51 COMPILER V9.60.7.0   MAIN                                                              04/04/2025 00:22:39 PAGE 4   
+
+ 179   2              case 1:
+ 180   2              {
+ 181   3                  // E 16 16 16 16 A A A      A -> 校准值 进行负数处理 范围 -99 ~ 99
+ 182   3                  if (state.only != 1)
+ 183   3                  {
+ 184   4                      state.only = 1;
+ 185   4                      seg[0] = 14; seg[1] = 16; seg[2] = 16; seg[3] = 16; seg[4] = 16;
+ 186   4                  }
+ 187   3      
+ 188   3                  adjust.list[0] = adjust.value / 100 % 10;
+ 189   3                  adjust.list[1] = adjust.value / 10 % 10;
+ 190   3                  adjust.list[2] = adjust.value % 10;
+ 191   3      
+ 192   3                  delete_0(adjust.list, 3, 1);
+ 193   3      
+ 194   3                  seg[5] = adjust.list[0];
+ 195   3                  seg[6] = adjust.list[1];
+ 196   3                  seg[7] = adjust.list[2];
+ 197   3              }
+ 198   2              break;
+ 199   2      
+ 200   2              // 参数界面
+ 201   2              case 2:
+ 202   2              {
+ 203   3                  // H 16 16 16 16 A A A   A -> 参数 -99 ~ 99
+ 204   3                  if (state.only != 2)
+ 205   3                  {
+ 206   4                      state.only = 2;
+ 207   4                      seg[0] = 18; seg[1] = 16; seg[2] = 16; seg[3] = 16; seg[4] = 16;
+ 208   4                  }
+ 209   3      
+ 210   3                  argument.list[0] = argument.value / 100 % 10;
+ 211   3                  argument.list[1] = argument.value / 10 % 10;
+ 212   3                  argument.list[2] = argument.value % 10;
+ 213   3      
+ 214   3                  delete_0(argument.list, 3, 1);
+ 215   3      
+ 216   3                  seg[5] = argument.list[0];
+ 217   3                  seg[6] = argument.list[1];
+ 218   3                  seg[7] = argument.list[2];
+ 219   3              }
+ 220   2              break;
+ 221   2          }
+ 222   1      }
+ 223          
+ 224          void ds18b20_proc()
+ 225          {
+ 226   1          float temperature;
+ 227   1      
+ 228   1          temperature = read_temp();
+ 229   1      
+ 230   1          // 保留一位小数
+ 231   1          temp.value = (unsigned int) (temperature * 10);
+ 232   1      
+ 233   1          temp.value = temp.value + adjust.value;
+ 234   1      
+ 235   1          led_proc(2);
+ 236   1      }
+ 237          
+ 238          
+ 239          void delete_0(uchar *list, uchar n, bit negative)
+ 240          {
+C51 COMPILER V9.60.7.0   MAIN                                                              04/04/2025 00:22:39 PAGE 5   
+
+ 241   1          uchar i;
+ 242   1          if (n == 0) { return; }
+ 243   1      
+ 244   1          for (i = 0;i < (n - 1);i++)
+ 245   1          {
+ 246   2              if (list[i] == 0)
+ 247   2              {
+ 248   3                  list[i] = 16;
+ 249   3              }
+ 250   2              else
+ 251   2              {
+ 252   3                  if (negative && i > 1)
+ 253   3                  {
+ 254   4                      list[i - 1] = 17;
+ 255   4                  }
+ 256   3                  break;
+ 257   3              }
+ 258   2          }
+ 259   1      }
+ 260          
+ 261          void led_proc(uchar i)
+ 262          {
+ 263   1          switch (i)
+ 264   1          {
+ 265   2              case 0:
+ 266   2              {
+ 267   3                  // 状态灯
+ 268   3                  led[0] = 0; led[1] = 0; led[2] = 0;
+ 269   3                  led[state.mode1] = 1;  
+ 270   3              }
+ 271   2              break;
+ 272   2      
+ 273   2              case 1:
+ 274   2              {
+ 275   3                  // 上下限灯
+ 276   3                  if (state.mode2 == 0)
+ 277   3                  {
+ 278   4                      led[3] = 1;
+ 279   4                      led[4] = 0;
+ 280   4                  }
+ 281   3                  else
+ 282   3                  {
+ 283   4                      led[3] = 0;
+ 284   4                      led[4] = 1;
+ 285   4                  }
+ 286   3              }
+ 287   2              break;
+ 288   2      
+ 289   2              case 2:
+ 290   2              {
+ 291   3                  // check
+ 292   3      
+ 293   3                  if (state.mode2 == 0)
+ 294   3                  {
+ 295   4                      if (temp.value > argument.value)
+ 296   4                      {
+ 297   5                          led[7] = 1;
+ 298   5                      }
+ 299   4                      else
+ 300   4                      {
+ 301   5                          led[7] = 0;
+ 302   5                      }
+C51 COMPILER V9.60.7.0   MAIN                                                              04/04/2025 00:22:39 PAGE 6   
+
+ 303   4                  }
+ 304   3                  else if (state.mode2 == 1)
+ 305   3                  {
+ 306   4                      if (temp.value < argument.value)
+ 307   4                      {
+ 308   5                          led[7] = 1;
+ 309   5                      }
+ 310   4                      else
+ 311   4                      {
+ 312   5                          led[7] = 0;
+ 313   5                      }
+ 314   4                  }
+ 315   3              }
+ 316   2              break;
+ 317   2          }
+ 318   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    767    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     18       7
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       1
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
