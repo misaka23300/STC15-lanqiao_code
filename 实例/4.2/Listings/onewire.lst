@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   ONEWIRE                                                           04/04/2025 00:22:39 PAGE 1   
+C51 COMPILER V9.60.7.0   ONEWIRE                                                           04/04/2025 12:38:32 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE ONEWIRE
@@ -10,7 +10,7 @@ line level    source
 
    1          #include "onewire.h"
    2          
-   3          sbit DQ = P1 ^ 4;
+   3          sbit DQ = P1^4;
    4          
    5          void Delay_OneWire(unsigned int t)  
    6          {
@@ -62,7 +62,7 @@ line level    source
   52   1          
   53   1          DQ = 1;
   54   1          Delay_OneWire(12);
-C51 COMPILER V9.60.7.0   ONEWIRE                                                           04/04/2025 00:22:39 PAGE 2   
+C51 COMPILER V9.60.7.0   ONEWIRE                                                           04/04/2025 12:38:32 PAGE 2   
 
   55   1          DQ = 0;
   56   1          Delay_OneWire(80);
@@ -81,29 +81,27 @@ line level    source
   69   1        uchar low, high;
   70   1        
   71   1        init_ds18b20();
-  72   1        
-  73   1        
-  74   1        Write_DS18B20(0xcc);
-  75   1        Write_DS18B20(0x44);
-  76   1      
-  77   1        init_ds18b20();
-  78   1        Write_DS18B20(0xcc);
-  79   1        Write_DS18B20(0xbe);
+  72   1        Write_DS18B20(0xcc);
+  73   1        Write_DS18B20(0x44);
+  74   1      
+  75   1        init_ds18b20();
+  76   1        Write_DS18B20(0xcc);
+  77   1        Write_DS18B20(0xbe);
+  78   1      
+  79   1        Delay_OneWire(200);
   80   1      
-  81   1        Delay_OneWire(20);
-  82   1      
-  83   1        init_ds18b20();
-  84   1        low = Read_DS18B20();
-  85   1        high = Read_DS18B20();
+  81   1        //init_ds18b20();
+  82   1        low = Read_DS18B20();
+  83   1        high = Read_DS18B20();
+  84   1      
+  85   1        temp = ( (high << 8) | low) / 16.0;
   86   1      
-  87   1        temp = ( (high << 8) | low) / 16.0;
-  88   1      
-  89   1        return temp;
-  90   1      }
+  87   1        return temp;
+  88   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    183    ----
+   CODE SIZE        =    180    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

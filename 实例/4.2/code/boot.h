@@ -5,7 +5,7 @@
 #include "intrins.h"
 
 #define uchar unsigned char
-#define uchar unsigned char
+#define uint unsigned int
 
 void boot_init();
 void batch(uchar i);

@@ -1,6 +1,6 @@
 #include "onewire.h"
 
-sbit DQ = P1 ^ 4;
+sbit DQ = P1^4;
 
 void Delay_OneWire(unsigned int t)  
 {
@@ -69,8 +69,6 @@ float read_temp()
 	uchar low, high;
 	
 	init_ds18b20();
-	
-	
 	Write_DS18B20(0xcc);
 	Write_DS18B20(0x44);
 
@@ -78,9 +76,9 @@ float read_temp()
 	Write_DS18B20(0xcc);
 	Write_DS18B20(0xbe);
 
-	Delay_OneWire(20);
+	Delay_OneWire(200);
 
-	init_ds18b20();
+	//init_ds18b20();
 	low = Read_DS18B20();
 	high = Read_DS18B20();
 

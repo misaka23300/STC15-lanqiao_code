@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   DISPLAY                                                           04/04/2025 00:22:38 PAGE 1   
+C51 COMPILER V9.60.7.0   DISPLAY                                                           04/04/2025 12:38:32 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE DISPLAY
@@ -37,7 +37,7 @@ line level    source
   27   1      
   28   1          if (last != temp)
   29   1          {
-  30   2              P0 = temp;
+  30   2              P0 = ~temp;
   31   2              batch(4);
   32   2              batch(0);
   33   2      
@@ -62,7 +62,7 @@ line level    source
   52   1          P0 = ~letter[seg[i]];
   53   1          batch(7);
   54   1          batch(0);
-C51 COMPILER V9.60.7.0   DISPLAY                                                           04/04/2025 00:22:38 PAGE 2   
+C51 COMPILER V9.60.7.0   DISPLAY                                                           04/04/2025 12:38:32 PAGE 2   
 
   55   1      
   56   1          i = (i + 1) % 8;
@@ -92,7 +92,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    195    ----
+   CODE SIZE        =    197    ----
    CONSTANT SIZE    =     43    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

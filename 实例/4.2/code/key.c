@@ -3,14 +3,13 @@
 uchar key_scan()
 {
     static uchar state, i, value;
-    uchar press, temp;
+    uchar press = 0xFF, temp = 99;
 
     P3 = 0x0F;
     P42 = 0; P44 = 0;
     P36 = P42; P37 = P44;
 
-    press = P0 & 0x0F;
-
+    press = P3 & 0x0F;
 
     switch (state)
     {
@@ -41,7 +40,11 @@ uchar key_scan()
 
                 switch (press)
                 {
-
+                    case 0x77: { value = 4; break; }
+                    case 0x7b: { value = 5; break; }
+                    case 0xb7: { value = 8; break; }
+                    case 0xbb: { value = 9; break; }
+                    default: {state = 0;}
                 }
             }
         }

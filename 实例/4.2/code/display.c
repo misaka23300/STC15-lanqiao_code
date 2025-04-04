@@ -27,7 +27,7 @@ void led_display()
 
     if (last != temp)
     {
-        P0 = temp;
+        P0 = ~temp;
         batch(4);
         batch(0);
 

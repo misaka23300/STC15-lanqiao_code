@@ -4,10 +4,10 @@ extern uchar led[8];
 extern uchar seg[8];
 
 enum {
-    KEY_TASK = 15,
+    KEY_TASK = 10,
     FLICKER_TASK = 100,
     STATE_TASK = 20,
-    TEMP_TASK = 900
+    TEMP_TASK = 1000
 };
 
 // key
@@ -24,8 +24,8 @@ struct {
 
 // 测温
 struct {
-    uchar value;
-    uchar time;
+    int value;
+    uint time;
 } temp;
 
 // 数码管显示状态
@@ -40,18 +40,30 @@ struct {
 struct {
     char value;
     char list[3];
+    char negative;
 } adjust;
 
 // 参数界面
 struct {
     char value;
     char list[3];
+    char negative;
 } argument;
 
 void main()
 {
     boot_init();
     state.only = 255;
+    temp.value = 0;
+
+    argument.value = 26;
+
+    read_temp();
+
+    led_proc(0);
+    led_proc(1);
+    led_proc(2);
+
     while (1)
     {
         if (key.time == KEY_TASK) 
@@ -114,6 +126,7 @@ void key_proc()
         {
             state.mode2 = (state.mode2 + 1) % 2;
             led_proc(1);
+            led_proc(2);
         }
         break;
 
@@ -149,8 +162,10 @@ void key_proc()
 
 void state_proc()
 {
+    uchar i;
     switch (state.mode1)
     {
+        
         // 温度界面
         case 0:
         {
@@ -160,9 +175,9 @@ void state_proc()
                 state.only = 0;
                 seg[0] = 12; seg[1] = 16; seg[2] = 16; seg[3] = 16; seg[4] = 16;
             }
-            seg[5] = temp.value / 100 % 10;
-            seg[6] = temp.value / 10 % 10;
-            seg[7] = temp.value % 10;
+            seg[5] = (uchar) (temp.value / 100 % 10);
+            seg[6] = (uchar) ( (temp.value / 10 % 10) + 32);
+            seg[7] = (uchar) (temp.value % 10);
         }
         break;
         
@@ -176,11 +191,22 @@ void state_proc()
                 seg[0] = 14; seg[1] = 16; seg[2] = 16; seg[3] = 16; seg[4] = 16;
             }
 
-            adjust.list[0] = adjust.value / 100 % 10;
-            adjust.list[1] = adjust.value / 10 % 10;
-            adjust.list[2] = adjust.value % 10;
+            if (adjust.value < 0)
+            {
+                i = -adjust.value;
+                adjust.negative = 1;
+            }
+            else
+            {
+                i = adjust.value;
+                adjust.negative = 0;
+            }
 
-            delete_0(adjust.list, 3, 1);
+            adjust.list[0] = i / 100 % 10;
+            adjust.list[1] = i / 10 % 10;
+            adjust.list[2] = i % 10;
+
+            delete_0(adjust.list, 3, adjust.value < 0 ? 1 : 0);
 
             seg[5] = adjust.list[0];
             seg[6] = adjust.list[1];
@@ -198,11 +224,22 @@ void state_proc()
                 seg[0] = 18; seg[1] = 16; seg[2] = 16; seg[3] = 16; seg[4] = 16;
             }
 
-            argument.list[0] = argument.value / 100 % 10;
-            argument.list[1] = argument.value / 10 % 10;
-            argument.list[2] = argument.value % 10;
+            if (argument.value < 0)
+            {
+                i = -argument.value;
+                argument.negative = 1;
+            }
+            else
+            {
+                i = argument.value;
+                argument.negative = 0;
+            }
 
-            delete_0(argument.list, 3, 1);
+            argument.list[0] = i / 100 % 10;
+            argument.list[1] = i / 10 % 10;
+            argument.list[2] = i % 10;
+
+            delete_0(argument.list, 3, argument.value < 0 ? 1 : 0);
 
             seg[5] = argument.list[0];
             seg[6] = argument.list[1];
@@ -215,14 +252,15 @@ void state_proc()
 void ds18b20_proc()
 {
     float temperature;
-
+    
     temperature = read_temp();
 
+    temperature = temperature + adjust.value;
+
     // 保留一位小数
-    temp.value = (unsigned int) (temperature * 10);
+    temp.value = (int) (temperature * 10);
 
-    temp.value = temp.value + adjust.value;
-
+    
     led_proc(2);
 }
 
@@ -236,14 +274,18 @@ void delete_0(uchar *list, uchar n, bit negative)
     {
         if (list[i] == 0)
         {
-            list[i] = 16;
+            
+            if (list[i + 1] != 0 && negative == 1)
+            {
+                list[i] = 17;
+            }
+            else
+            {
+                list[i] = 16;
+            }
         }
         else
         {
-            if (negative && i > 1)
-            {
-                list[i - 1] = 17;
-            }
             break;
         }
     }
@@ -283,7 +325,7 @@ void led_proc(uchar i)
 
             if (state.mode2 == 0)
             {
-                if (temp.value > argument.value)
+                if (temp.value > argument.value* 10)
                 {
                     led[7] = 1;
                 }
@@ -294,7 +336,7 @@ void led_proc(uchar i)
             }
             else if (state.mode2 == 1)
             {
-                if (temp.value < argument.value)
+                if (temp.value< argument.value* 10)
                 {
                     led[7] = 1;
                 }
@@ -307,3 +349,4 @@ void led_proc(uchar i)
         break;
     }
 }
+
