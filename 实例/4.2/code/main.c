@@ -336,7 +336,7 @@ void led_proc(uchar i)
             }
             else if (state.mode2 == 1)
             {
-                if (temp.value< argument.value* 10)
+                if (temp.value < argument.value* 10)
                 {
                     led[7] = 1;
                 }
