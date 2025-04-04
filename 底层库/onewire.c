@@ -81,7 +81,6 @@ float read_temperature()
 
 	Delay_OneWire(200);
 
-	init_ds18b20();
 	low = Read_DS18B20();
 	high = Read_DS18B20();
 
