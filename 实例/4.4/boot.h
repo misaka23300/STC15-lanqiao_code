@@ -14,6 +14,11 @@
 #define uchar unsigned char
 #define uint nnsigned int
 
-#define ichar idata unsigned char 
+#define iuchar idata unsigned char 
+
+void boot_init();
+void batch(uchar i);
+void timer_1();
+
 
 #endif
