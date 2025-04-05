@@ -60,7 +60,7 @@ unsigned char Read_Ds1302_Byte ( unsigned char address )
 uchar hex_to_bcd(uchar HEX)
 {
 	uchar BCD;
-	BCD = (HEX / 10) << 4 | (HEX % 4);
+	BCD = (HEX / 10) << 4 | (HEX % 10);
 	return BCD;
 }
 
