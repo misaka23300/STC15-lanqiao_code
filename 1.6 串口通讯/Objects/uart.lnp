@@ -1,0 +1,5 @@
+".\Objects\STARTUP.obj",
+".\Objects\boot.obj",
+".\Objects\main.obj" 
+TO ".\Objects\uart" 
+PRINT(".\Listings\uart.m51") RAMSIZE(256) 

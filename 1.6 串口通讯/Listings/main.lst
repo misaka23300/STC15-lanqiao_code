@@ -1,0 +1,77 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              04/05/2025 16:05:14 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE code\main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "main.h"
+   2          
+   3          enum {
+   4              UART_TASK = 2000
+   5          };
+   6          
+   7          struct {
+   8              uint time; 
+   9              
+  10          } uart;
+  11          
+  12          void main()
+  13          {
+  14   1          uchar send_data[] = "ciallo~ \r \n";
+  15   1          boot_init();
+  16   1          
+  17   1          while (1)
+  18   1          {
+  19   2              if (uart.time == UART_TASK)
+  20   2              {
+  21   3                  uart.time = 0;
+  22   3                  uart_send(send_data);
+  23   3              }
+  24   2          }
+  25   1      }
+  26          
+  27          void Timer1_Isr(void) interrupt 3
+  28          {
+  29   1          if (uart.time < UART_TASK) { uart.time++; }
+  30   1      }
+  31          
+  32          void uart_send(uchar *str)
+  33          {
+  34   1          while (*str != '\0')
+  35   1          {
+  36   2              SBUF = *str;
+  37   2              while (TI == 0);
+  38   2              TI = 0;
+  39   2              str++;
+  40   2          }
+  41   1      }
+  42          
+  43          void uart_receive() interrupt 4
+  44          {
+  45   1        if(RI)
+  46   1        {
+  47   2          RI=0;
+  48   2          //LED_BUFF = SBUF;//获取串口数据点灯
+  49   2        }
+  50   1      }
+  51          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+C51 COMPILER V9.60.7.0   MAIN                                                              04/05/2025 16:05:14 PAGE 2   
+
+   CODE SIZE        =    103    ----
+   CONSTANT SIZE    =     12    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2      12
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
