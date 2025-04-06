@@ -80,7 +80,7 @@ void write_datetime(uchar *time)
 	Write_Ds1302_Byte(0x80, 0x80);
 }
 
-void Read_datatime(uchar *time)
+void read_datatime(uchar *time)
 {
 	uchar i;
 	for (i = 0;i < 3;i++)
@@ -88,5 +88,5 @@ void Read_datatime(uchar *time)
 		time[i] = Read_Ds1302_Byte(read_address[i]);
 		time[i] = bcd_to_hex(time[i]);
 	}
-
 }
+

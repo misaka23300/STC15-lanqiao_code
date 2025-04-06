@@ -15,7 +15,6 @@ void Delay10us()	//@12.000MHz
 }
 
 void csb_Init()		//100??@12.000MHz
-{
 	AUXR &= 0xBF;			//?????12T??
 	TMOD &= 0x0F;			//???????
 	TMOD |=0x10;
@@ -58,3 +57,4 @@ uint csb_CJ()
 	TF1=0; t=0;
 	return dis;
 }
+
