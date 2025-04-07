@@ -1,0 +1,8 @@
+".\Objects\STARTUP.obj",
+".\Objects\boot.obj",
+".\Objects\display.obj",
+".\Objects\key.obj",
+".\Objects\main.obj",
+".\Objects\onewire.obj" 
+TO ".\Objects\47" 
+PRINT(".\Listings\47.m51") RAMSIZE(256) 

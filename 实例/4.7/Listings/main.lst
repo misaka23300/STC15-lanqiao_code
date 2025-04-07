@@ -1,0 +1,246 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              04/07/2025 17:00:10 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\Program Files\keil5\C51\BIN\C51.EXE code\main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRIN
+                    -T(.\Listings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "main.h"
+   2          
+   3          extern uchar led[8];
+   4          extern uchar seg[8];
+   5          
+   6          enum {
+   7              KEY_TASK = 10,
+   8              FLICKER_TASK = 100,
+   9              STATE_TASK = 20,
+  10              TEMP_TASK = 1000
+  11          };
+  12          
+  13          // key
+  14          struct {
+  15              uchar time;
+  16              uchar press;
+  17          } key;
+  18          
+  19          // 闪烁
+  20          struct {
+  21              uchar time;
+  22              uchar state;
+  23          } flicker;
+  24          
+  25          
+  26          
+  27          // 数码管显示状态
+  28          struct {
+  29              uchar mode1;
+  30              uchar mode2;    // 触发  | 0 -> 上触发 | 1 -> 下触发
+  31              uchar time;
+  32              uchar only;
+  33          } state;
+  34          
+  35          
+  36          // ds1302   -> date
+  37          struct {
+  38              uchar now_time[3];
+  39              uint time;
+  40              uchar init_time[3];
+  41          } date;
+  42          
+  43          
+  44          // 查询界面 -> 数组
+  45          struct {
+  46              uchar value[3];
+  47              uchar index;
+  48          } search;
+  49          
+  50          
+  51          // 数据界面 -> ADC数据
+  52          struct {
+  53              uint light_value;
+  54              uint RB2_value;
+C51 COMPILER V9.60.7.0   MAIN                                                              04/07/2025 17:00:10 PAGE 2   
+
+  55          } adc;
+  56          
+  57          
+  58          
+  59          
+  60          void main()
+  61          {
+  62   1          boot_init();
+  63   1          state.only = 255;
+  64   1          
+  65   1      
+  66   1          
+  67   1      
+  68   1          read_temp();
+  69   1      
+  70   1          led_proc(0);
+  71   1          led_proc(1);
+  72   1          led_proc(2);
+  73   1      
+  74   1          while (1)
+  75   1          {
+  76   2              
+  77   2              if (key.time == KEY_TASK) 
+  78   2              {
+  79   3                  key.time = 0;
+  80   3                  key_proc();
+  81   3              }
+  82   2      
+  83   2              if (flicker.time == FLICKER_TASK)
+  84   2              {
+  85   3                  flicker.time = 0;
+  86   3                  flicker.state = !flicker.state;
+  87   3              }
+  88   2      
+  89   2              if (state.time == STATE_TASK)
+  90   2              {
+  91   3                  state.time = 0;
+  92   3                  state_proc();
+  93   3              }
+  94   2      
+  95   2              
+  96   2          }
+  97   1      }
+  98          
+  99          
+ 100          void Timer0_Isr(void) interrupt 1
+ 101          {
+ 102   1          seg_display();
+ 103   1          led_display();
+ 104   1          
+ 105   1          state_proc();
+ 106   1          if ( key.time < KEY_TASK ) { key.time++; }
+ 107   1      
+ 108   1          if ( flicker.time < FLICKER_TASK ) { flicker.time++; }
+ 109   1      
+ 110   1          if ( state.time < STATE_TASK ) { state.time++; }
+ 111   1      
+ 112   1          
+ 113   1      }
+ 114          
+ 115          
+ 116          void key_proc()
+C51 COMPILER V9.60.7.0   MAIN                                                              04/07/2025 17:00:10 PAGE 3   
+
+ 117          {
+ 118   1          key.press = key_scan();
+ 119   1      
+ 120   1          switch (key.press)
+ 121   1          {
+ 122   2              case 4:
+ 123   2              {
+ 124   3                  state.mode1 = (state.mode1 + 1) % 3;
+ 125   3              }
+ 126   2              break;
+ 127   2          }
+ 128   1      }
+ 129          
+ 130          void state_proc()
+ 131          {
+ 132   1         
+ 133   1          switch (state.mode1)
+ 134   1          {
+ 135   2              case 0: 
+ 136   2              {
+ 137   3                  // 时间界面
+ 138   3                 
+ 139   3                  {
+ 140   4                     
+ 141   4                      seg[2] = 17; seg[5] = 17; 
+ 142   4                  }
+ 143   3                  // 小时
+ 144   3                  seg[0] = date.now_time[2] / 10 % 10;
+ 145   3                  seg[1] = date.now_time[2] % 10;
+ 146   3                  // 分钟
+ 147   3                  seg[3] = date.now_time[1] / 10 % 10;
+ 148   3                  seg[4] = date.now_time[1] % 10;
+ 149   3                  // 秒
+ 150   3                  seg[6] = date.now_time[0] / 10 % 10;
+ 151   3                  seg[7] = date.now_time[0] % 10;
+ 152   3              }
+ 153   2              break;
+ 154   2      
+ 155   2              // 数据界面 P g. g g  U v. v v     g -> 光敏电阻   v -> 旋钮电压 
+ 156   2              case 1:
+ 157   2              {
+ 158   3                  if (state.only != 2)
+ 159   3                  {
+ 160   4                      state.only = 2;
+ 161   4                      seg[0] = 24; seg[4] = 25;
+ 162   4                  }
+ 163   3      
+ 164   3                  seg[1] = adc.light_value / 100 % 10;
+ 165   3                  seg[2] = (adc.light_value / 10 % 10) + 32;
+ 166   3                  seg[3] = adc.light_value % 10;
+ 167   3                  
+ 168   3                  seg[5] = adc.RB2_value / 100 % 10;
+ 169   3                  seg[6] = (adc.RB2_value / 10 % 10) + 32;
+ 170   3                  seg[7] = adc.RB2_value % 10;
+ 171   3              }
+ 172   2              break;
+ 173   2      
+ 174   2              case 2:
+ 175   2              {
+ 176   3                  if (state.only != 2)
+ 177   3                  {
+ 178   4                      state.only = 2;
+C51 COMPILER V9.60.7.0   MAIN                                                              04/07/2025 17:00:10 PAGE 4   
+
+ 179   4                      seg[0] = 42;
+ 180   4                  }
+ 181   3                  seg[1] = search.index;
+ 182   3                  //seg[2] = 
+ 183   3              }
+ 184   2              break;
+ 185   2          }
+ 186   1      }
+ 187          
+ 188          
+ 189          
+ 190          void delete_0(uchar *list, uchar n, bit negative)
+ 191          {
+ 192   1          uchar i;
+ 193   1          if (n == 0) { return; }
+ 194   1      
+ 195   1          for (i = 0;i < (n - 1);i++)
+ 196   1          {
+ 197   2              if (list[i] == 0)
+ 198   2              {
+ 199   3                  
+ 200   3                  if (list[i + 1] != 0 && negative == 1)
+ 201   3                  {
+ 202   4                      list[i] = 17;
+ 203   4                  }
+ 204   3                  else
+ 205   3                  {
+ 206   4                      list[i] = 16;
+ 207   4                  }
+ 208   3              }
+ 209   2              else
+ 210   2              {
+ 211   3                  break;
+ 212   3              }
+ 213   2          }
+ 214   1      }
+ 215          
+ 216          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    497    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     24       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       1
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

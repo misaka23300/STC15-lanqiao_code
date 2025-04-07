@@ -1,0 +1,7 @@
+".\Objects\STARTUP.obj",
+".\Objects\boot.obj",
+".\Objects\display.obj",
+".\Objects\key.obj",
+".\Objects\main.obj" 
+TO ".\Objects\471" 
+PRINT(".\Listings\471.m51") RAMSIZE(256) 

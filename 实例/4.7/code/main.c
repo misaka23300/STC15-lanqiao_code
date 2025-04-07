@@ -3,25 +3,49 @@
 extern uchar led[8];
 extern uchar seg[8];
 
+enum {
+    KEY_TASK = 10,
+    FLICKER_TASK = 100,
+    STATE_TASK = 20,
+    TEMP_TASK = 1000
+};
+
+// key
+struct {
+    uchar time;
+    uchar press;
+} key;
+
+// 闪烁
+struct {
+    uchar time;
+    uchar state;
+} flicker;
+
+
+
+// 数码管显示状态
+struct {
+    uchar mode1;
+    uchar mode2;    // 触发  | 0 -> 上触发 | 1 -> 下触发
+    uchar time;
+    uchar only;
+} state;
+
 
 // ds1302   -> date
 struct {
     uchar now_time[3];
     uint time;
     uchar init_time[3];
-} date = {
-    { 0, 0, 0 },
-    0,
-    { 23, 59, 50 }
-};
+} date;
 
 
-// 数码管显示数据 -> state
+// 查询界面 -> 数组
 struct {
-    uint time;
-    uchar mode1;
-    uchar only;
-} state;
+    uchar value[3];
+    uchar index;
+} search;
 
 
 // 数据界面 -> ADC数据
@@ -31,91 +55,89 @@ struct {
 } adc;
 
 
-// 查询界面 -> 数组
-struct {
-    uchar value[3][3];
-    uchar index;
-} search;
-
-
-// 键盘 -> press time
-struct {
-    uchar press;
-    uint time;
-} key;
-
-
-uint date_time;
-uint state_time;
-uint key_time;
 
 
 void main()
 {
-    boot_init(); 
+    boot_init();
+    state.only = 255;
+    
 
-    state.only = 2;
-    state.mode1 = 0;
+    
 
-    write_datetime(date.init_time);
+    read_temp();
 
-    //state_proc();
+    led_proc(0);
+    led_proc(1);
+    led_proc(2);
 
     while (1)
     {
-       
-        if (date_time == 100)
+        
+        if (key.time == KEY_TASK) 
         {
-            led[2]= 0;
-            ds1302_proc();
-            date_time = 0;
-        }
-
-        if (state_time == 90)
-        {
-            state_proc();
-            state_time = 0;
-        }
-
-        if (key_time == 20)
-        {
+            key.time = 0;
             key_proc();
-            key_time = 0;
         }
+
+        if (flicker.time == FLICKER_TASK)
+        {
+            flicker.time = 0;
+            flicker.state = !flicker.state;
+        }
+
+        if (state.time == STATE_TASK)
+        {
+            state.time = 0;
+            state_proc();
+        }
+
+        
     }
 }
 
-void Timer1_Isr() interrupt 12
+
+void Timer0_Isr(void) interrupt 1
 {
     seg_display();
     led_display();
+    
+    state_proc();
+    if ( key.time < KEY_TASK ) { key.time++; }
 
-    if (date_time < 100) { date_time++; }
+    if ( flicker.time < FLICKER_TASK ) { flicker.time++; }
 
-    if (state_time < 90) { state_time++; }
+    if ( state.time < STATE_TASK ) { state.time++; }
 
-    if (key_time < 20) { key_time++; }
-
-
+    
 }
 
 
-
-void ds1302_proc()
+void key_proc()
 {
-    read_datatime(date.now_time);
+    key.press = key_scan();
+
+    switch (key.press)
+    {
+        case 4:
+        {
+            state.mode1 = (state.mode1 + 1) % 3;
+        }
+        break;
+    }
 }
 
 void state_proc()
 {
+   
     switch (state.mode1)
     {
         case 0: 
         {
             // 时间界面
-            if (state.only != 0)
+           
             {
-                state.only = 0;
+               
                 seg[2] = 17; seg[5] = 17; 
             }
             // 小时
@@ -160,32 +182,35 @@ void state_proc()
             //seg[2] = 
         }
         break;
-        
     }
 }
 
-void ADC_proc()
+
+
+void delete_0(uchar *list, uchar n, bit negative)
 {
-    adc.light_value = ( ADC(0x01) / 255)* 500;
-    adc.RB2_value = ( ADC(0x03) / 255)* 500;
-}
+    uchar i;
+    if (n == 0) { return; }
 
-
-void search_proc()
-{
-
-}
-
-void key_proc()
-{
-    key.press = key_scan();
-
-    switch (key.press)
+    for (i = 0;i < (n - 1);i++)
     {
-        case 4:
+        if (list[i] == 0)
         {
-            state.mode1 = (state.mode1 + 1) % 3;
+            
+            if (list[i + 1] != 0 && negative == 1)
+            {
+                list[i] = 17;
+            }
+            else
+            {
+                list[i] = 16;
+            }
         }
-        break;
+        else
+        {
+            break;
+        }
     }
 }
+
+
