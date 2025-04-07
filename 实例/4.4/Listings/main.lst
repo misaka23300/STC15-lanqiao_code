@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              04/07/2025 18:02:47 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/07/2025 18:48:57 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -62,7 +62,7 @@ line level    source
   52   1          boot_init(); 
   53   1      
   54   1          state.only = 2;
-C51 COMPILER V9.60.7.0   MAIN                                                              04/07/2025 18:02:47 PAGE 2   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/07/2025 18:48:57 PAGE 2   
 
   55   1          state.mode1 = 0;
   56   1      
@@ -88,7 +88,7 @@ line level    source
   76   2      
   77   2              if (key.time == KEY_TIME)
   78   2              {
-  79   3                  key_proc();
+  79   3                  //key_proc();
   80   3                  key.time = 0;
   81   3              }
   82   2          }
@@ -126,7 +126,7 @@ line level    source
  114   3                  seg[2] = 7;
  115   3                  seg[3] = 6;
  116   3                  seg[4] = 5;
-C51 COMPILER V9.60.7.0   MAIN                                                              04/07/2025 18:02:47 PAGE 3   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/07/2025 18:48:57 PAGE 3   
 
  117   3                  seg[5] = 6;
  118   3                  seg[6] = 7;
@@ -190,7 +190,7 @@ line level    source
  176   1      }
  177          
  178          
-C51 COMPILER V9.60.7.0   MAIN                                                              04/07/2025 18:02:47 PAGE 4   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/07/2025 18:48:57 PAGE 4   
 
  179          void search_proc()
  180          {
@@ -204,7 +204,7 @@ line level    source
  188   1          switch (key.press)
  189   1          {
  190   2              case 4:
- 191   2              {
+ 191   2              {                                      
  192   3                  state.mode1 = (state.mode1 + 1) % 3;
  193   3              }
  194   2              break;
@@ -213,7 +213,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    305    ----
+   CODE SIZE        =    301    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

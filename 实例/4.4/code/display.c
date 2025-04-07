@@ -1,7 +1,7 @@
 #include "display.h"
 
 uchar led[8] = {0, 0, 0, 0, 0, 0, 0, 0};
-uchar seg[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+uchar seg[8] = {0, 0, 0, 0, 0, 0, 0, 9};
 
 const uchar code letter[] = {                       //标准字库
     //   0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F

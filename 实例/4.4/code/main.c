@@ -76,7 +76,7 @@ void main()
 
         if (key.time == KEY_TIME)
         {
-            key_proc();
+            //key_proc();
             key.time = 0;
         }
     }
@@ -188,7 +188,7 @@ void key_proc()
     switch (key.press)
     {
         case 4:
-        {
+        {                                      
             state.mode1 = (state.mode1 + 1) % 3;
         }
         break;
