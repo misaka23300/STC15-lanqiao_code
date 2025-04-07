@@ -4,9 +4,9 @@ extern uchar led[8];
 extern uchar seg[8];
 
 enum {
-    KEY_TASK = 10,
-    FLICKER_TASK = 100,
-    STATE_TASK = 20,
+    KEY_TIME = 10,
+    FLICKER_TIME = 100,
+    STATE_TIME = 20,
     TEMP_TASK = 1000
 };
 
@@ -101,7 +101,7 @@ void Timer0_Isr(void) interrupt 1
 {
     seg_display();
     led_display();
-    
+
     state_proc();
     if ( key.time < KEY_TASK ) { key.time++; }
 

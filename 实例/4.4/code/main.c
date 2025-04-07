@@ -9,11 +9,7 @@ struct {
     uchar now_time[3];
     uint time;
     uchar init_time[3];
-} date = {
-    { 0, 0, 0 },
-    0,
-    { 23, 59, 50 }
-};
+} date;
 
 
 // 数码管显示数据 -> state
@@ -33,7 +29,7 @@ struct {
 
 // 查询界面 -> 数组
 struct {
-    uchar value[3][3];
+    uchar value[3];
     uchar index;
 } search;
 
@@ -45,10 +41,11 @@ struct {
 } key;
 
 
-uint date_time;
-uint state_time;
-uint key_time;
-
+enum {
+    DATE_TIME = 100,
+    STATE_TIME = 90,
+    KEY_TIME = 15
+};
 
 void main()
 {
@@ -64,23 +61,23 @@ void main()
     while (1)
     {
        
-        if (date_time == 100)
+        if (date.time == DATE_TIME)
         {
             led[2]= 0;
             ds1302_proc();
-            date_time = 0;
+            date.time = 0;
         }
 
-        if (state_time == 90)
+        if (state.time == STATE_TIME)
         {
             state_proc();
-            state_time = 0;
+            state.time = 0;
         }
 
-        if (key_time == 20)
+        if (key.time == KEY_TIME)
         {
             key_proc();
-            key_time = 0;
+            key.time = 0;
         }
     }
 }
@@ -90,11 +87,11 @@ void Timer1_Isr() interrupt 12
     seg_display();
     led_display();
 
-    if (date_time < 100) { date_time++; }
+    if (date.time < DATE_TIME) { date.time++; }
 
-    if (state_time < 90) { state_time++; }
+    if (state.time < STATE_TIME) { state.time++; }
 
-    if (key_time < 20) { key_time++; }
+    if (key.time < KEY_TIME) { key.time++; }
 
 
 }
@@ -112,7 +109,15 @@ void state_proc()
     {
         case 0: 
         {
-            // 时间界面
+            seg[0] = 9;
+            seg[1] = 8; 
+            seg[2] = 7;
+            seg[3] = 6;
+            seg[4] = 5;
+            seg[5] = 6;
+            seg[6] = 7;
+            seg[7] = 8; 
+            /* // 时间界面
             if (state.only != 0)
             {
                 state.only = 0;
@@ -126,12 +131,12 @@ void state_proc()
             seg[4] = date.now_time[1] % 10;
             // 秒
             seg[6] = date.now_time[0] / 10 % 10;
-            seg[7] = date.now_time[0] % 10;
+            seg[7] = date.now_time[0] % 10; */
         }
         break;
 
         // 数据界面 P g. g g  U v. v v     g -> 光敏电阻   v -> 旋钮电压 
-        case 1:
+        /* case 1:
         {
             if (state.only != 2)
             {
@@ -159,7 +164,7 @@ void state_proc()
             seg[1] = search.index;
             //seg[2] = 
         }
-        break;
+        break; */
         
     }
 }

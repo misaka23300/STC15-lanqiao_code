@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              04/07/2025 16:32:38 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/07/2025 18:02:47 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -10,212 +10,214 @@ line level    source
 
    1          #include "main.h"
    2          
-   3          
-   4          
+   3          extern uchar led[8];
+   4          extern uchar seg[8];
    5          
-   6          extern uchar led[8];
-   7          extern uchar seg[8];
-   8          
-   9          
-  10          // ds1302   -> date
-  11          struct {
-  12              uchar now_time[3];
-  13              uint time;
-  14              uchar init_time[3];
-  15          } date = {
-  16              { 0, 0, 0 },
-  17              0,
-  18              { 23,59,50 }
-  19          };
-  20          
+   6          
+   7          // ds1302   -> date
+   8          struct {
+   9              uchar now_time[3];
+  10              uint time;
+  11              uchar init_time[3];
+  12          } date;
+  13          
+  14          
+  15          // 数码管显示数据 -> state
+  16          struct {
+  17              uint time;
+  18              uchar mode1;
+  19              uchar only;
+  20          } state;
   21          
-  22          // 数码管显示数据 -> state
-  23          struct {
-  24              uint time;
-  25              uchar mode1;
-  26              uchar only;
-  27          } state;
+  22          
+  23          // 数据界面 -> ADC数据
+  24          struct {
+  25              uint light_value;
+  26              uint RB2_value;
+  27          } adc;
   28          
   29          
-  30          // 数据界面 -> ADC数据
+  30          // 查询界面 -> 数组
   31          struct {
-  32              uint light_value;
-  33              uint RB2_value;
-  34          } adc;
+  32              uchar value[3];
+  33              uchar index;
+  34          } search;
   35          
   36          
-  37          // 查询界面 -> 数组
+  37          // 键盘 -> press time
   38          struct {
-  39              uchar value[3][3];
-  40              uchar index;
-  41          } search;
+  39              uchar press;
+  40              uint time;
+  41          } key;
   42          
   43          
-  44          // 键盘 -> press time
-  45          struct {
-  46              uchar press;
-  47              uint time;
-  48          } key;
+  44          enum {
+  45              DATE_TIME = 100,
+  46              STATE_TIME = 90,
+  47              KEY_TIME = 15
+  48          };
   49          
-  50          
-  51          uint date_time;
-  52          uint state_time;
-  53          uint key_time;
-  54          
-C51 COMPILER V9.60.7.0   MAIN                                                              04/07/2025 16:32:38 PAGE 2   
+  50          void main()
+  51          {
+  52   1          boot_init(); 
+  53   1      
+  54   1          state.only = 2;
+C51 COMPILER V9.60.7.0   MAIN                                                              04/07/2025 18:02:47 PAGE 2   
 
-  55          
-  56          void main()
-  57          {
-  58   1          boot_init(); 
-  59   1      
-  60   1          state.only = 2;
-  61   1          state.mode1 = 0;
-  62   1      
-  63   1          write_datetime(date.init_time);
-  64   1      
-  65   1          //state_proc();
-  66   1      
-  67   1          while (1)
-  68   1          {
-  69   2             
-  70   2              if (date_time == 100)
-  71   2              {
-  72   3                  led[2]= 0;
-  73   3                  ds1302_proc();
-  74   3                  date_time = 0;
+  55   1          state.mode1 = 0;
+  56   1      
+  57   1          write_datetime(date.init_time);
+  58   1      
+  59   1          //state_proc();
+  60   1      
+  61   1          while (1)
+  62   1          {
+  63   2             
+  64   2              if (date.time == DATE_TIME)
+  65   2              {
+  66   3                  led[2]= 0;
+  67   3                  ds1302_proc();
+  68   3                  date.time = 0;
+  69   3              }
+  70   2      
+  71   2              if (state.time == STATE_TIME)
+  72   2              {
+  73   3                  state_proc();
+  74   3                  state.time = 0;
   75   3              }
   76   2      
-  77   2              if (state_time == 90)
+  77   2              if (key.time == KEY_TIME)
   78   2              {
-  79   3                  state_proc();
-  80   3                  state_time = 0;
+  79   3                  key_proc();
+  80   3                  key.time = 0;
   81   3              }
-  82   2      
-  83   2              if (key_time == 20)
-  84   2              {
-  85   3                  key_proc();
-  86   3                  key_time = 0;
-  87   3              }
-  88   2          }
-  89   1      }
-  90          
-  91          void Timer1_Isr() interrupt 12
-  92          {
-  93   1          seg_display();
-  94   1          led_display();
+  82   2          }
+  83   1      }
+  84          
+  85          void Timer1_Isr() interrupt 12
+  86          {
+  87   1          seg_display();
+  88   1          led_display();
+  89   1      
+  90   1          if (date.time < DATE_TIME) { date.time++; }
+  91   1      
+  92   1          if (state.time < STATE_TIME) { state.time++; }
+  93   1      
+  94   1          if (key.time < KEY_TIME) { key.time++; }
   95   1      
-  96   1          if (date_time < 100) { date_time++; }
-  97   1      
-  98   1          if (state_time < 90) { state_time++; }
-  99   1      
- 100   1          if (key_time < 20) { key_time++; }
- 101   1      
- 102   1      
- 103   1      }
- 104          
+  96   1      
+  97   1      }
+  98          
+  99          
+ 100          
+ 101          void ds1302_proc()
+ 102          {
+ 103   1          read_datatime(date.now_time);
+ 104   1      }
  105          
- 106          
- 107          void ds1302_proc()
- 108          {
- 109   1          read_datatime(date.now_time);
- 110   1      }
- 111          
- 112          void state_proc()
- 113          {
- 114   1          switch (state.mode1)
- 115   1          {
- 116   2              case 0: 
-C51 COMPILER V9.60.7.0   MAIN                                                              04/07/2025 16:32:38 PAGE 3   
+ 106          void state_proc()
+ 107          {
+ 108   1          switch (state.mode1)
+ 109   1          {
+ 110   2              case 0: 
+ 111   2              {
+ 112   3                  seg[0] = 9;
+ 113   3                  seg[1] = 8; 
+ 114   3                  seg[2] = 7;
+ 115   3                  seg[3] = 6;
+ 116   3                  seg[4] = 5;
+C51 COMPILER V9.60.7.0   MAIN                                                              04/07/2025 18:02:47 PAGE 3   
 
- 117   2              {
- 118   3                  // 时间界面
- 119   3                  if (state.only != 0)
- 120   3                  {
- 121   4                      state.only = 0;
- 122   4                      seg[2] = 17; seg[5] = 17; 
- 123   4                  }
- 124   3                  // 小时
- 125   3                  seg[0] = date.now_time[2] / 10 % 10;
- 126   3                  seg[1] = date.now_time[2] % 10;
- 127   3                  // 分钟
- 128   3                  seg[3] = date.now_time[1] / 10 % 10;
- 129   3                  seg[4] = date.now_time[1] % 10;
- 130   3                  // 秒
- 131   3                  seg[6] = date.now_time[0] / 10 % 10;
- 132   3                  seg[7] = date.now_time[0] % 10;
- 133   3              }
- 134   2              break;
- 135   2      
- 136   2              // 数据界面 P g. g g  U v. v v     g -> 光敏电阻   v -> 旋钮电压 
- 137   2              case 1:
- 138   2              {
- 139   3                  if (state.only != 2)
- 140   3                  {
- 141   4                      state.only = 2;
- 142   4                      seg[0] = 24; seg[4] = 25;
- 143   4                  }
- 144   3      
- 145   3                  seg[1] = adc.light_value / 100 % 10;
- 146   3                  seg[2] = (adc.light_value / 10 % 10) + 32;
- 147   3                  seg[3] = adc.light_value % 10;
- 148   3                  
- 149   3                  seg[5] = adc.RB2_value / 100 % 10;
- 150   3                  seg[6] = (adc.RB2_value / 10 % 10) + 32;
- 151   3                  seg[7] = adc.RB2_value % 10;
- 152   3              }
- 153   2              break;
- 154   2      
- 155   2              case 2:
- 156   2              {
- 157   3                  if (state.only != 2)
- 158   3                  {
- 159   4                      state.only = 2;
- 160   4                      seg[0] = 42;
- 161   4                  }
- 162   3                  seg[1] = search.index;
- 163   3                  //seg[2] = 
- 164   3              }
- 165   2              break;
- 166   2              
- 167   2          }
- 168   1      }
- 169          
- 170          void ADC_proc()
- 171          {
- 172   1          adc.light_value = ( ADC(0x01) / 255)* 500;
- 173   1          adc.RB2_value = ( ADC(0x03) / 255)* 500;
- 174   1      }
- 175          
- 176          
- 177          void search_proc()
- 178          {
-C51 COMPILER V9.60.7.0   MAIN                                                              04/07/2025 16:32:38 PAGE 4   
+ 117   3                  seg[5] = 6;
+ 118   3                  seg[6] = 7;
+ 119   3                  seg[7] = 8; 
+ 120   3                  /* // 时间界面
+ 121   3                  if (state.only != 0)
+ 122   3                  {
+ 123   3                      state.only = 0;
+ 124   3                      seg[2] = 17; seg[5] = 17; 
+ 125   3                  }
+ 126   3                  // 小时
+ 127   3                  seg[0] = date.now_time[2] / 10 % 10;
+ 128   3                  seg[1] = date.now_time[2] % 10;
+ 129   3                  // 分钟
+ 130   3                  seg[3] = date.now_time[1] / 10 % 10;
+ 131   3                  seg[4] = date.now_time[1] % 10;
+ 132   3                  // 秒
+ 133   3                  seg[6] = date.now_time[0] / 10 % 10;
+ 134   3                  seg[7] = date.now_time[0] % 10; */
+ 135   3              }
+ 136   2              break;
+ 137   2      
+ 138   2              // 数据界面 P g. g g  U v. v v     g -> 光敏电阻   v -> 旋钮电压 
+ 139   2              /* case 1:
+ 140   2              {
+ 141   2                  if (state.only != 2)
+ 142   2                  {
+ 143   2                      state.only = 2;
+ 144   2                      seg[0] = 24; seg[4] = 25;
+ 145   2                  }
+ 146   2      
+ 147   2                  seg[1] = adc.light_value / 100 % 10;
+ 148   2                  seg[2] = (adc.light_value / 10 % 10) + 32;
+ 149   2                  seg[3] = adc.light_value % 10;
+ 150   2                  
+ 151   2                  seg[5] = adc.RB2_value / 100 % 10;
+ 152   2                  seg[6] = (adc.RB2_value / 10 % 10) + 32;
+ 153   2                  seg[7] = adc.RB2_value % 10;
+ 154   2              }
+ 155   2              break;
+ 156   2      
+ 157   2              case 2:
+ 158   2              {
+ 159   2                  if (state.only != 2)
+ 160   2                  {
+ 161   2                      state.only = 2;
+ 162   2                      seg[0] = 42;
+ 163   2                  }
+ 164   2                  seg[1] = search.index;
+ 165   2                  //seg[2] = 
+ 166   2              }
+ 167   2              break; */
+ 168   2              
+ 169   2          }
+ 170   1      }
+ 171          
+ 172          void ADC_proc()
+ 173          {
+ 174   1          adc.light_value = ( ADC(0x01) / 255)* 500;
+ 175   1          adc.RB2_value = ( ADC(0x03) / 255)* 500;
+ 176   1      }
+ 177          
+ 178          
+C51 COMPILER V9.60.7.0   MAIN                                                              04/07/2025 18:02:47 PAGE 4   
 
- 179   1      
- 180   1      }
- 181          
- 182          void key_proc()
- 183          {
- 184   1          key.press = key_scan();
- 185   1      
- 186   1          switch (key.press)
- 187   1          {
- 188   2              case 4:
- 189   2              {
- 190   3                  state.mode1 = (state.mode1 + 1) % 3;
- 191   3              }
- 192   2              break;
- 193   2          }
- 194   1      }
+ 179          void search_proc()
+ 180          {
+ 181   1      
+ 182   1      }
+ 183          
+ 184          void key_proc()
+ 185          {
+ 186   1          key.press = key_scan();
+ 187   1      
+ 188   1          switch (key.press)
+ 189   1          {
+ 190   2              case 4:
+ 191   2              {
+ 192   3                  state.mode1 = (state.mode1 + 1) % 3;
+ 193   3              }
+ 194   2              break;
+ 195   2          }
+ 196   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    518    ----
+   CODE SIZE        =    305    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =     35    ----
+   DATA SIZE        =     23    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
