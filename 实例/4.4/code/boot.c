@@ -1,4 +1,4 @@
-#inlcude "boot.h"
+#include "boot.h"
 
 void boot_init()
 {
