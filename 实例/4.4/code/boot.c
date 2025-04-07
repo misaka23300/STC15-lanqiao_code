@@ -19,7 +19,8 @@ void boot_init()
 
     P0 = 0xFF; batch(7); batch(0);
 
-    timer_1();
+    Timer2_Init();
+    EA = 1;
 }
 
 void batch(uchar i)
@@ -35,7 +36,7 @@ void batch(uchar i)
 }
 
 
-void timer_1()
+/* void timer_1()
 {
     AUXR &= 0xBF;			//定时器时钟12T模式
 	TMOD &= 0x0F;			//设置定时器模式
@@ -45,6 +46,17 @@ void timer_1()
 	TR1 = 1;				//定时器1开始计时
 	ET1 = 1;				//使能定时器1中断
 }
+ */
 
-
-
+/* void Timer2_Isr(void) interrupt 12
+{
+}
+ */
+void Timer2_Init(void)		//1毫秒@12.000MHz
+{
+	AUXR |= 0x04;			//定时器时钟1T模式
+	T2L = 0x20;				//设置定时初始值
+	T2H = 0xD1;				//设置定时初始值
+	AUXR |= 0x10;			//定时器2开始计时
+	IE2 |= 0x04;			//使能定时器2中断
+}

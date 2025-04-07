@@ -4,4 +4,5 @@
 #include "boot.h"
 
 uchar ADC(uchar channel);
+
 #endif

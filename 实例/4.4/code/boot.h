@@ -12,7 +12,7 @@
 
 void boot_init();
 void batch(uchar i);
-void timer_1();
+void Timer2_Init(void);
 
 
 #endif

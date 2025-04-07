@@ -25,19 +25,36 @@ Project File Date:  04/07/2025
 Rebuild target 'Target 1'
 assembling STARTUP.A51...
 compiling main.c...
-code\main.c(51): warning C206: 'write_datetime': missing function-prototype
-code\main.c(70): warning C206: 'seg_display': missing function-prototype
-code\main.c(71): warning C206: 'led_display': missing function-prototype
-code\main.c(84): warning C206: 'read_datatime': missing function-prototype
-code\main.c(84): error C267: 'read_datatime': requires ANSI-style prototype
-code\main.c(89): error C141: syntax error near ')', expected 'sizeof'
-code\main.c(137): error C204: 'index': undefined member
-code\main.c(139): error C141: syntax error near '}', expected '<id>'
 compiling boot.c...
 compiling display.c...
 compiling ds1302.c...
-Target not created.
-Build Time Elapsed:  00:00:00
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?ADC_PROC?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?SEARCH_PROC?MAIN
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _ADC
+    MODULE:  .\Objects\main.obj (MAIN)
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  KEY_SCAN
+    MODULE:  .\Objects\main.obj (MAIN)
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _ADC
+    MODULE:  .\Objects\main.obj (MAIN)
+    ADDRESS: 04FBH
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _ADC
+    MODULE:  .\Objects\main.obj (MAIN)
+    ADDRESS: 0513H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  KEY_SCAN
+    MODULE:  .\Objects\main.obj (MAIN)
+    ADDRESS: 0556H
+Program Size: data=81.0 xdata=0 code=1469
+creating hex file from ".\Objects\4.7"...
+".\Objects\4.7" - 0 Error(s), 7 Warning(s).
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

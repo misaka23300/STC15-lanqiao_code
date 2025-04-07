@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   BOOT                                                              04/07/2025 15:38:42 PAGE 1   
+C51 COMPILER V9.60.7.0   BOOT                                                              04/07/2025 16:32:38 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE BOOT
@@ -29,41 +29,53 @@ line level    source
   19   1      
   20   1          P0 = 0xFF; batch(7); batch(0);
   21   1      
-  22   1          timer_1();
-  23   1      }
-  24          
-  25          void batch(uchar i)
-  26          {
-  27   1          switch (i)
-  28   1          {
-  29   2              case 0: { P2 = P2 & 0x1F; break; }
-  30   2              case 4: { P2 = (P2 & 0x1F) | 0x80; break; }
-  31   2              case 5: { P2 = (P2 & 0x1F) | 0xA0; break; }
-  32   2              case 6: { P2 = (P2 & 0x1F) | 0xC0; break; }
-  33   2              case 7: { P2 = (P2 & 0x1F) | 0xE0; break; }
-  34   2          }
-  35   1      }
-  36          
+  22   1          Timer2_Init();
+  23   1          EA = 1;
+  24   1      }
+  25          
+  26          void batch(uchar i)
+  27          {
+  28   1          switch (i)
+  29   1          {
+  30   2              case 0: { P2 = P2 & 0x1F; break; }
+  31   2              case 4: { P2 = (P2 & 0x1F) | 0x80; break; }
+  32   2              case 5: { P2 = (P2 & 0x1F) | 0xA0; break; }
+  33   2              case 6: { P2 = (P2 & 0x1F) | 0xC0; break; }
+  34   2              case 7: { P2 = (P2 & 0x1F) | 0xE0; break; }
+  35   2          }
+  36   1      }
   37          
-  38          void timer_1()
-  39          {
-  40   1          AUXR &= 0xBF;     //定时器时钟12T模式
-  41   1        TMOD &= 0x0F;     //设置定时器模式
-  42   1        TL1 = 0x18;       //设置定时初始值
-  43   1        TH1 = 0xFC;       //设置定时初始值
-  44   1        TF1 = 0;        //清除TF1标志
-  45   1        TR1 = 1;        //定时器1开始计时
-  46   1        ET1 = 1;        //使能定时器1中断
-  47   1      }
-  48          
-  49          
+  38          
+  39          /* void timer_1()
+  40          {
+  41              AUXR &= 0xBF;     //定时器时钟12T模式
+  42            TMOD &= 0x0F;     //设置定时器模式
+  43            TL1 = 0x18;       //设置定时初始值
+  44            TH1 = 0xFC;       //设置定时初始值
+  45            TF1 = 0;        //清除TF1标志
+  46            TR1 = 1;        //定时器1开始计时
+  47            ET1 = 1;        //使能定时器1中断
+  48          }
+  49           */
   50          
+  51          /* void Timer2_Isr(void) interrupt 12
+  52          {
+  53          }
+  54           */
+C51 COMPILER V9.60.7.0   BOOT                                                              04/07/2025 16:32:38 PAGE 2   
+
+  55          void Timer2_Init(void)    //1毫秒@12.000MHz
+  56          {
+  57   1        AUXR |= 0x04;     //定时器时钟1T模式
+  58   1        T2L = 0x20;       //设置定时初始值
+  59   1        T2H = 0xD1;       //设置定时初始值
+  60   1        AUXR |= 0x10;     //定时器2开始计时
+  61   1        IE2 |= 0x04;      //使能定时器2中断
+  62   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
    CODE SIZE        =    165    ----
-C51 COMPILER V9.60.7.0   BOOT                                                              04/07/2025 15:38:42 PAGE 2   
-
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

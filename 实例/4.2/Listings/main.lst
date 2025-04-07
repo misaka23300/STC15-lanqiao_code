@@ -1,10 +1,10 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              04/04/2025 12:38:32 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/07/2025 16:34:10 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
 OBJECT MODULE PLACED IN .\Objects\main.obj
-COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE code\main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
-                    -\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+COMPILER INVOKED BY: D:\Program Files\keil5\C51\BIN\C51.EXE code\main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRIN
+                    -T(.\Listings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
 
 line level    source
 
@@ -62,7 +62,7 @@ line level    source
   52          
   53          void main()
   54          {
-C51 COMPILER V9.60.7.0   MAIN                                                              04/04/2025 12:38:32 PAGE 2   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/07/2025 16:34:10 PAGE 2   
 
   55   1          boot_init();
   56   1          state.only = 255;
@@ -126,7 +126,7 @@ line level    source
  114   1          key.press = key_scan();
  115   1      
  116   1          switch (key.press)
-C51 COMPILER V9.60.7.0   MAIN                                                              04/04/2025 12:38:32 PAGE 3   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/07/2025 16:34:10 PAGE 3   
 
  117   1          {
  118   2              case 4:
@@ -190,7 +190,7 @@ line level    source
  176   4                      seg[0] = 12; seg[1] = 16; seg[2] = 16; seg[3] = 16; seg[4] = 16;
  177   4                  }
  178   3                  seg[5] = (uchar) (temp.value / 100 % 10);
-C51 COMPILER V9.60.7.0   MAIN                                                              04/04/2025 12:38:32 PAGE 4   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/07/2025 16:34:10 PAGE 4   
 
  179   3                  seg[6] = (uchar) ( (temp.value / 10 % 10) + 32);
  180   3                  seg[7] = (uchar) (temp.value % 10);
@@ -254,7 +254,7 @@ line level    source
  238   3                  argument.list[0] = i / 100 % 10;
  239   3                  argument.list[1] = i / 10 % 10;
  240   3                  argument.list[2] = i % 10;
-C51 COMPILER V9.60.7.0   MAIN                                                              04/04/2025 12:38:32 PAGE 5   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/07/2025 16:34:10 PAGE 5   
 
  241   3      
  242   3                  delete_0(argument.list, 3, argument.value < 0 ? 1 : 0);
@@ -318,7 +318,7 @@ line level    source
  300   3                  // 状态灯
  301   3                  led[0] = 0; led[1] = 0; led[2] = 0;
  302   3                  led[state.mode1] = 1;  
-C51 COMPILER V9.60.7.0   MAIN                                                              04/04/2025 12:38:32 PAGE 6   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/07/2025 16:34:10 PAGE 6   
 
  303   3              }
  304   2              break;
@@ -356,7 +356,7 @@ line level    source
  336   4                  }
  337   3                  else if (state.mode2 == 1)
  338   3                  {
- 339   4                      if (temp.value< argument.value* 10)
+ 339   4                      if (temp.value < argument.value* 10)
  340   4                      {
  341   5                          led[7] = 1;
  342   5                      }
