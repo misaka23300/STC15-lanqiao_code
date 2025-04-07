@@ -10,6 +10,8 @@ enum {
 struct {
     uint time;
 } state;
+adsdfdsdafdfasdffasdfdfdfdsasaasdfdfaafdfdsdfasfdadsfdfffdfdffds
+
 
 
 void main()
