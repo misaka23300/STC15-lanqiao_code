@@ -63,7 +63,6 @@ void main()
        
         if (date.time == DATE_TIME)
         {
-            led[2]= 0;
             ds1302_proc();
             date.time = 0;
         }
