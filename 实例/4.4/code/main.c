@@ -67,7 +67,10 @@ void main()
        led[7] = 1;
         if (date.time == DATE_TIME)
         {
+<<<<<<< HEAD
             //led[2]= 0;
+=======
+>>>>>>> 6deb13c8de1b9f809f55229c5078c15dd282bda3
             ds1302_proc();
             date.time = 0;
         }
