@@ -1,0 +1,95 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              04/08/2025 18:04:35 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\Program Files\keil5\C51\BIN\C51.EXE code\main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRIN
+                    -T(.\Listings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "main.h"
+   2          
+   3          extern uchar led[8];
+   4          extern uchar seg[8];
+   5          
+   6          enum {
+   7              STATE_TIME = 90,
+   8              KEY_TIME = 20
+   9          };
+  10          
+  11          static uchar state_time; 
+  12          static uchar state_mode1;
+  13          
+  14          static uchar key_press;
+  15          static uchar key_time;
+  16          
+  17          void main()
+  18          {
+  19   1          boot_init();
+  20   1      
+  21   1          while (1)
+  22   1          {
+  23   2              if (state_time == STATE_TIME)
+  24   2              {
+  25   3                  state_proc();
+  26   3                  state_time = 0;
+  27   3              }
+  28   2      
+  29   2              if (key_time == KEY_TIME)
+  30   2              {
+  31   3                  key_proc();
+  32   3                  key_time = 0;
+  33   3              }
+  34   2          }
+  35   1      }
+  36          
+  37          void Timer1_Isr(void) interrupt 3
+  38          {
+  39   1          seg_display();
+  40   1          led_display();
+  41   1      
+  42   1          if (state_time < STATE_TIME) { state_time++; }
+  43   1      
+  44   1          if (key_time < KEY_TIME) { key_time++; }
+  45   1      }
+  46          
+  47          void state_proc()
+  48          {
+  49   1          switch (state_mode1)
+  50   1          {
+  51   2              case 0:
+  52   2              {
+  53   3                  seg[0] = key_press / 10 % 10;
+  54   3                  seg[1] = key_press % 10;
+C51 COMPILER V9.60.7.0   MAIN                                                              04/08/2025 18:04:35 PAGE 2   
+
+  55   3                  seg[2] = 3;
+  56   3                  seg[3] = 4;
+  57   3                  seg[4] = 5;
+  58   3                  seg[5] = 6;
+  59   3                  seg[6] = 7;
+  60   3                  seg[7] = 8;
+  61   3              }
+  62   2          }
+  63   1      }
+  64          
+  65          void key_proc()
+  66          {
+  67   1          key_press = key_scan();
+  68   1      
+  69   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    158    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

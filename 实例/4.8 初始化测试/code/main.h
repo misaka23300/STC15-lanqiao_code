@@ -3,9 +3,10 @@
 
 #include "boot.h"
 
+#include "display.h"
 #include "key.h"
 
-#include "display.h"
 void state_proc();
-                    
+void key_proc();
+
 #endif
