@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   KEY                                                               04/08/2025 18:04:34 PAGE 1   
+C51 COMPILER V9.60.7.0   KEY                                                               04/08/2025 18:08:05 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE KEY
@@ -16,8 +16,8 @@ line level    source
    6   1          static uchar value;
    7   1          static uchar state;
    8   1      
-   9   1          uchar press;
-  10   1          uchar out;
+   9   1          uchar press = 0xFF;
+  10   1          uchar out = 99;
   11   1      
   12   1          P3 = 0x0F;
   13   1          P42 = 0; P44 = 0;
@@ -62,7 +62,7 @@ line level    source
   52   5                          case 0xbb: { value = 9; break; }
   53   5                          case 0xbd: { value = 10; break; }
   54   5                          case 0xbe: { value = 11; break; }
-C51 COMPILER V9.60.7.0   KEY                                                               04/08/2025 18:04:34 PAGE 2   
+C51 COMPILER V9.60.7.0   KEY                                                               04/08/2025 18:08:05 PAGE 2   
 
   55   5      
   56   5                          case 0xd7: { value = 12; break; }
@@ -121,12 +121,12 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    291    ----
+   CODE SIZE        =    297    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =      3       2
-C51 COMPILER V9.60.7.0   KEY                                                               04/08/2025 18:04:34 PAGE 3   
+C51 COMPILER V9.60.7.0   KEY                                                               04/08/2025 18:08:05 PAGE 3   
 
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----

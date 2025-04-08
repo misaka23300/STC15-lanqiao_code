@@ -6,8 +6,8 @@ uchar key_scan()
     static uchar value;
     static uchar state;
 
-    uchar press;
-    uchar out;
+    uchar press = 0xFF;
+    uchar out = 99;
 
     P3 = 0x0F;
     P42 = 0; P44 = 0;

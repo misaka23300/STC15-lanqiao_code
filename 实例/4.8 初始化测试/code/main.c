@@ -50,8 +50,12 @@ void state_proc()
     {
         case 0:
         {
-            seg[0] = key_press / 10 % 10;
-            seg[1] = key_press % 10;
+            if (key_press != 99)
+            {
+                seg[0] = key_press / 10 % 10;
+                seg[1] = key_press % 10;
+            }
+            
             seg[2] = 3;
             seg[3] = 4;
             seg[4] = 5;
