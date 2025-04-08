@@ -44,15 +44,19 @@ struct {
 enum {
     DATE_TIME = 100,
     STATE_TIME = 90,
-    KEY_TIME = 15
+    KEY_TIME = 1000
 };
 
 void main()
 {
     boot_init(); 
-
+    led[0] = 1;
     state.only = 2;
     state.mode1 = 0;
+
+    date.init_time[0] = 50;
+    date.init_time[1] = 59;
+    date.init_time[2] = 23;
 
     write_datetime(date.init_time);
 
@@ -60,10 +64,10 @@ void main()
 
     while (1)
     {
-       
+       led[7] = 1;
         if (date.time == DATE_TIME)
         {
-            led[2]= 0;
+            //led[2]= 0;
             ds1302_proc();
             date.time = 0;
         }
@@ -76,9 +80,10 @@ void main()
 
         if (key.time == KEY_TIME)
         {
-            //key_proc();
+            key_proc();
             key.time = 0;
         }
+        led[7] = 0;
     }
 }
 
@@ -100,7 +105,9 @@ void Timer1_Isr() interrupt 12
 
 void ds1302_proc()
 {
+    led[1] = 1;
     read_datatime(date.now_time);
+    led[1] = 0;
 }
 
 void state_proc()
@@ -109,15 +116,7 @@ void state_proc()
     {
         case 0: 
         {
-            seg[0] = 9;
-            seg[1] = 8; 
-            seg[2] = 7;
-            seg[3] = 6;
-            seg[4] = 5;
-            seg[5] = 6;
-            seg[6] = 7;
-            seg[7] = 8; 
-            /* // 时间界面
+            // 时间界面
             if (state.only != 0)
             {
                 state.only = 0;
@@ -131,7 +130,7 @@ void state_proc()
             seg[4] = date.now_time[1] % 10;
             // 秒
             seg[6] = date.now_time[0] / 10 % 10;
-            seg[7] = date.now_time[0] % 10; */
+            seg[7] = date.now_time[0] % 10;
         }
         break;
 
@@ -189,7 +188,7 @@ void key_proc()
     {
         case 4:
         {                                      
-            state.mode1 = (state.mode1 + 1) % 3;
+            //state.mode1 = (state.mode1 + 1) % 3;
         }
         break;
     }
