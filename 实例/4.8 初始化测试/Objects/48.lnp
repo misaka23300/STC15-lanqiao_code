@@ -2,6 +2,7 @@
 ".\Objects\boot.obj",
 ".\Objects\display.obj",
 ".\Objects\key.obj",
-".\Objects\main.obj" 
+".\Objects\main.obj",
+".\Objects\ds1302.obj" 
 TO ".\Objects\48" 
 PRINT(".\Listings\48.m51") RAMSIZE(256) 

@@ -1,10 +1,10 @@
-C51 COMPILER V9.60.7.0   KEY                                                               04/08/2025 18:08:05 PAGE 1   
+C51 COMPILER V9.60.7.0   KEY                                                               04/08/2025 19:39:34 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE KEY
 OBJECT MODULE PLACED IN .\Objects\key.obj
-COMPILER INVOKED BY: D:\Program Files\keil5\C51\BIN\C51.EXE code\key.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT
-                    -(.\Listings\key.lst) TABS(2) OBJECT(.\Objects\key.obj)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE code\key.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\
+                    -key.lst) TABS(2) OBJECT(.\Objects\key.obj)
 
 line level    source
 
@@ -58,17 +58,17 @@ line level    source
   48   5                          case 0x7d: { value = 6; break; }
   49   5                          case 0x7e: { value = 7; break; }
   50   5      
-  51   5                          case 0xb7: { value = 8; break; }
+  51   5                      /*     case 0xb7: { value = 8; break; }
   52   5                          case 0xbb: { value = 9; break; }
   53   5                          case 0xbd: { value = 10; break; }
   54   5                          case 0xbe: { value = 11; break; }
-C51 COMPILER V9.60.7.0   KEY                                                               04/08/2025 18:08:05 PAGE 2   
+C51 COMPILER V9.60.7.0   KEY                                                               04/08/2025 19:39:34 PAGE 2   
 
   55   5      
   56   5                          case 0xd7: { value = 12; break; }
   57   5                          case 0xdb: { value = 13; break; }
   58   5                          case 0xdd: { value = 14; break; }
-  59   5                          case 0xde: { value = 15; break; }
+  59   5                          case 0xde: { value = 15; break; } */
   60   5                          
   61   5                          case 0xe7: { value = 16; break; }
   62   5                          case 0xeb: { value = 17; break; }
@@ -121,12 +121,12 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    297    ----
+   CODE SIZE        =    229    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =      3       2
-C51 COMPILER V9.60.7.0   KEY                                                               04/08/2025 18:08:05 PAGE 3   
+C51 COMPILER V9.60.7.0   KEY                                                               04/08/2025 19:39:34 PAGE 3   
 
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----

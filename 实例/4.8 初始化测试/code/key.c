@@ -48,7 +48,7 @@ uchar key_scan()
                     case 0x7d: { value = 6; break; }
                     case 0x7e: { value = 7; break; }
 
-                    case 0xb7: { value = 8; break; }
+                /*     case 0xb7: { value = 8; break; }
                     case 0xbb: { value = 9; break; }
                     case 0xbd: { value = 10; break; }
                     case 0xbe: { value = 11; break; }
@@ -56,7 +56,7 @@ uchar key_scan()
                     case 0xd7: { value = 12; break; }
                     case 0xdb: { value = 13; break; }
                     case 0xdd: { value = 14; break; }
-                    case 0xde: { value = 15; break; }
+                    case 0xde: { value = 15; break; } */
                     
                     case 0xe7: { value = 16; break; }
                     case 0xeb: { value = 17; break; }

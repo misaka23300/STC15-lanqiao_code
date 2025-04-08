@@ -1,97 +1,178 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              04/08/2025 18:08:05 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/08/2025 19:39:34 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
 OBJECT MODULE PLACED IN .\Objects\main.obj
-COMPILER INVOKED BY: D:\Program Files\keil5\C51\BIN\C51.EXE code\main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRIN
-                    -T(.\Listings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE code\main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
 
 line level    source
 
    1          #include "main.h"
    2          
-   3          extern uchar led[8];
-   4          extern uchar seg[8];
+   3          extern uchar idata led[8];
+   4          extern uchar idata seg[8];
    5          
    6          enum {
-   7              STATE_TIME = 90,
-   8              KEY_TIME = 20
-   9          };
-  10          
-  11          static uchar state_time; 
-  12          static uchar state_mode1;
-  13          
-  14          static uchar key_press;
-  15          static uchar key_time;
-  16          
-  17          void main()
-  18          {
-  19   1          boot_init();
-  20   1      
-  21   1          while (1)
-  22   1          {
-  23   2              if (state_time == STATE_TIME)
-  24   2              {
-  25   3                  state_proc();
-  26   3                  state_time = 0;
-  27   3              }
-  28   2      
-  29   2              if (key_time == KEY_TIME)
-  30   2              {
-  31   3                  key_proc();
-  32   3                  key_time = 0;
-  33   3              }
-  34   2          }
-  35   1      }
-  36          
-  37          void Timer1_Isr(void) interrupt 3
-  38          {
-  39   1          seg_display();
-  40   1          led_display();
-  41   1      
-  42   1          if (state_time < STATE_TIME) { state_time++; }
-  43   1      
-  44   1          if (key_time < KEY_TIME) { key_time++; }
-  45   1      }
-  46          
-  47          void state_proc()
-  48          {
-  49   1          switch (state_mode1)
-  50   1          {
-  51   2              case 0:
-  52   2              {
-  53   3                  if (key_press != 99)
-  54   3                  {
-C51 COMPILER V9.60.7.0   MAIN                                                              04/08/2025 18:08:05 PAGE 2   
+   7              STATE_TIME = 20,
+   8              KEY_TIME = 30,
+   9              DATE_TIME = 100
+  10          };
+  11          
+  12          idata uint state_time; 
+  13          uchar state_mode1;
+  14          
+  15          uchar idata key_press;
+  16          uint key_time;
+  17          
+  18          uchar key_list[2];
+  19          
+  20          uchar idata date_now_time[3];
+  21          idata uchar date_init_time[3] = {0x22, 0x22, 0x22};
+  22          uint date_time;
+  23          
+  24          
+  25          void main()
+  26          {
+  27   1          boot_init();
+  28   1          datetime_write(date_init_time);
+  29   1          date_now_time[0] = 0;
+  30   1          date_now_time[1] = 0;
+  31   1          date_now_time[2] = 0;
+  32   1          while (1)
+  33   1          {
+  34   2              if (state_time == 1)
+  35   2              {
+  36   3                  state_time = 0;
+  37   3                  state_proc();
+  38   3                  
+  39   3              }
+  40   2      
+  41   2              if (key_time == 1)
+  42   2              {
+  43   3                  key_time = 0;
+  44   3                  key_proc();
+  45   3                  
+  46   3              }
+  47   2      
+  48   2              if (date_time == 1)
+  49   2              {
+  50   3                  date_time = 0;
+  51   3                  ds1302_proc();
+  52   3                  
+  53   3              }
+  54   2          }
+C51 COMPILER V9.60.7.0   MAIN                                                              04/08/2025 19:39:34 PAGE 2   
 
-  55   4                      seg[0] = key_press / 10 % 10;
-  56   4                      seg[1] = key_press % 10;
-  57   4                  }
-  58   3                  
-  59   3                  seg[2] = 3;
-  60   3                  seg[3] = 4;
-  61   3                  seg[4] = 5;
-  62   3                  seg[5] = 6;
-  63   3                  seg[6] = 7;
-  64   3                  seg[7] = 8;
-  65   3              }
-  66   2          }
-  67   1      }
-  68          
-  69          void key_proc()
-  70          {
-  71   1          key_press = key_scan();
-  72   1      
-  73   1      }
+  55   1      }
+  56          
+  57          void Timer1_Isr(void) interrupt 3
+  58          {
+  59   1          static uint i;
+  60   1          i++;
+  61   1          
+  62   1          if (i >= 3000)
+  63   1          {
+  64   2              i = 0;
+  65   2          }
+  66   1      
+  67   1          seg_display();
+  68   1          led_display();
+  69   1      
+  70   1          if (i % STATE_TIME == 0)
+  71   1          {
+  72   2              state_time = 1;
+  73   2          }
+  74   1      
+  75   1          if (i % KEY_TIME == 0)
+  76   1          {
+  77   2              key_time = 1;
+  78   2          }
+  79   1      
+  80   1          if (i % DATE_TIME == 0)
+  81   1          {
+  82   2              date_time = 1;
+  83   2          }
+  84   1           
+  85   1          /* if (state_time < STATE_TIME) { state_time++; }
+  86   1      
+  87   1          if (key_time < KEY_TIME) { key_time++; }
+  88   1      
+  89   1          if (date_time < DATE_TIME) { date_time++; } */
+  90   1         
+  91   1      } 
+  92          
+  93          void state_proc()
+  94          {
+  95   1          switch (state_mode1)
+  96   1          {
+  97   2              case 0:
+  98   2              {
+  99   3                  if (key_press != 99)
+ 100   3                  {
+ 101   4                      seg[0] = key_list[0];
+ 102   4                      seg[1] = key_list[1];
+ 103   4                  }
+ 104   3                  
+ 105   3                  seg[2] = 3;
+ 106   3                  seg[3] = 4;
+ 107   3                  seg[4] = 5;
+ 108   3                  seg[5] = 6;
+ 109   3                  seg[6] = 7;
+ 110   3                  seg[7] = 8;
+ 111   3              }
+ 112   2              break;
+ 113   2      
+ 114   2      
+ 115   2             case 1:
+ 116   2              {
+C51 COMPILER V9.60.7.0   MAIN                                                              04/08/2025 19:39:34 PAGE 3   
+
+ 117   3                  seg[0] = date_now_time[2] / 10 % 10;
+ 118   3                  seg[1] = date_now_time[2] % 10;
+ 119   3      
+ 120   3                  seg[2] = 17;
+ 121   3      
+ 122   3                  seg[3] = date_now_time[1] / 10 % 10;
+ 123   3                  seg[4] = date_now_time[1] % 10;
+ 124   3      
+ 125   3                  seg[5] = 17;
+ 126   3      
+ 127   3                  seg[6] = date_now_time[0] / 10 % 10;
+ 128   3                  seg[7] = date_now_time[0] % 10;
+ 129   3              }
+ 130   2              break; 
+ 131   2          }
+ 132   1      }
+ 133          
+ 134          void key_proc()
+ 135          {
+ 136   1          key_press = key_scan();
+ 137   1          
+ 138   1      
+ 139   1          switch (key_press)
+ 140   1          {
+ 141   2              case 4:
+ 142   2              {
+ 143   3                  state_mode1 = (state_mode1 + 1) % 2;
+ 144   3              }
+ 145   2              break;
+ 146   2          }
+ 147   1      }
+ 148          
+ 149          void ds1302_proc()
+ 150          {
+ 151   1          datetime_read(date_now_time);
+ 152   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    164    ----
+   CODE SIZE        =    362    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      4    ----
-   IDATA SIZE       =   ----    ----
+   DATA SIZE        =      9    ----
+   IDATA SIZE       =      9    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
 

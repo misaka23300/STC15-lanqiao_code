@@ -401,6 +401,11 @@
               <FileType>1</FileType>
               <FilePath>.\code\main.c</FilePath>
             </File>
+            <File>
+              <FileName>ds1302.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\code\ds1302.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

@@ -1,10 +1,10 @@
-C51 COMPILER V9.60.7.0   BOOT                                                              04/08/2025 18:08:05 PAGE 1   
+C51 COMPILER V9.60.7.0   BOOT                                                              04/08/2025 19:39:34 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE BOOT
 OBJECT MODULE PLACED IN .\Objects\boot.obj
-COMPILER INVOKED BY: D:\Program Files\keil5\C51\BIN\C51.EXE code\boot.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRIN
-                    -T(.\Listings\boot.lst) TABS(2) OBJECT(.\Objects\boot.obj)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE code\boot.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\boot.lst) TABS(2) OBJECT(.\Objects\boot.obj)
 
 line level    source
 
