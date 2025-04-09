@@ -59,16 +59,14 @@ unsigned char Read_Ds1302_Byte ( unsigned char address )
 
 uchar hex_to_bcd(uchar HEX)
 {
-	uchar BCD;
-	BCD = (HEX / 10) << 4 | (HEX % 10);
-	return BCD;
+	//uchar BCD;
+	//BCD = (HEX / 10) << 4 | (HEX % 10);
+	return HEX / 16 * 10 + HEX % 16;
 }
 
 uchar bcd_to_hex(uchar BCD)
 {
-	uchar HEX;
-	HEX = (BCD << 4)* 10 | (BCD & 0x0F);
-	return HEX;
+	return BCD / 16 * 10 + BCD % 16;
 }
 
 void datetime_write(uchar *time)

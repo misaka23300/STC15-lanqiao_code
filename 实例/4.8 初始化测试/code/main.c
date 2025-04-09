@@ -1,7 +1,6 @@
 #include "main.h"
 
-extern uchar idata led[8];
-extern uchar idata seg[8];
+
 
 enum {
     STATE_TIME = 20,
@@ -18,7 +17,8 @@ uint key_time;
 uchar key_list[2];
 
 uchar idata date_now_time[3];
-idata uchar date_init_time[3] = {0x22, 0x22, 0x22};
+idata uchar date_init_time[3] = {0x55, 0x59, 0x23};
+
 uint date_time;
 
 
@@ -31,21 +31,21 @@ void main()
     date_now_time[2] = 0;
     while (1)
     {
-        if (state_time == 1)
+        if (state_time == STATE_TIME)
         {
             state_time = 0;
             state_proc();
             
         }
 
-        if (key_time == 1)
+        if (key_time == KEY_TIME)
         {
             key_time = 0;
             key_proc();
             
         }
 
-        if (date_time == 1)
+        if (date_time == DATE_TIME)
         {
             date_time = 0;
             ds1302_proc();
@@ -66,7 +66,7 @@ void Timer1_Isr(void) interrupt 3
 
     seg_display();
     led_display();
-
+/* 
     if (i % STATE_TIME == 0)
     {
         state_time = 1;
@@ -80,13 +80,13 @@ void Timer1_Isr(void) interrupt 3
     if (i % DATE_TIME == 0)
     {
         date_time = 1;
-    }
+    } */
      
-    /* if (state_time < STATE_TIME) { state_time++; }
+    if (state_time < STATE_TIME) { state_time++; }
 
     if (key_time < KEY_TIME) { key_time++; }
 
-    if (date_time < DATE_TIME) { date_time++; } */
+    if (date_time < DATE_TIME) { date_time++; }
    
 } 
 

@@ -4,7 +4,7 @@
 #include "stc15f2k60s2.h"
 #include "intrins.h"
 
-#define uchar unsigned char
+typedef unsigned char uchar;
 #define uint unsigned int
 
 void boot_init();
