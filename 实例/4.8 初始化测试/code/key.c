@@ -43,10 +43,10 @@ uchar key_scan()
 
                 switch (press)
                 {
-                    case 0x77: { value = 4; break; }
+                  /*   case 0x77: { value = 4; break; }
                     case 0x7b: { value = 5; break; }
                     case 0x7d: { value = 6; break; }
-                    case 0x7e: { value = 7; break; }
+                    case 0x7e: { value = 7; break; } */
 
                 /*     case 0xb7: { value = 8; break; }
                     case 0xbb: { value = 9; break; }

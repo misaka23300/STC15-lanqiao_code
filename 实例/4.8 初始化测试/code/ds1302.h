@@ -5,7 +5,7 @@
 
 extern idata uchar time_now[3];
 
-void datetime_write(uchar *time);
-void datetime_read(uchar *time);
+void datetime_write();
+void datetime_read();
 
 #endif

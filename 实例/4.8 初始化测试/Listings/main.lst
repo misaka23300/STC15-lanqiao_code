@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              04/09/2025 17:30:56 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/09/2025 19:27:08 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -35,7 +35,7 @@ line level    source
   25          void main()
   26          {
   27   1          boot_init();
-  28   1          datetime_write(date_init_time);
+  28   1          datetime_write();
   29   1          date_now_time[0] = 0;
   30   1          date_now_time[1] = 0;
   31   1          date_now_time[2] = 0;
@@ -62,7 +62,7 @@ line level    source
   52   3                  
   53   3              }
   54   2          }
-C51 COMPILER V9.60.7.0   MAIN                                                              04/09/2025 17:30:56 PAGE 2   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/09/2025 19:27:08 PAGE 2   
 
   55   1      }
   56          
@@ -126,7 +126,7 @@ line level    source
  114   2      
  115   2             case 1:
  116   2              {
-C51 COMPILER V9.60.7.0   MAIN                                                              04/09/2025 17:30:56 PAGE 3   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/09/2025 19:27:08 PAGE 3   
 
  117   3                  seg[0] = date_now_time[2] / 10 % 10;
  118   3                  seg[1] = date_now_time[2] % 10;
@@ -162,12 +162,12 @@ line level    source
  148          
  149          void ds1302_proc()
  150          {
- 151   1          datetime_read(date_now_time);
+ 151   1          datetime_read();
  152   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    358    ----
+   CODE SIZE        =    346    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

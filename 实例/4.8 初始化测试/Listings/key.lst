@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   KEY                                                               04/09/2025 17:30:56 PAGE 1   
+C51 COMPILER V9.60.7.0   KEY                                                               04/09/2025 19:27:08 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE KEY
@@ -53,16 +53,16 @@ line level    source
   43   4      
   44   4                      switch (press)
   45   4                      {
-  46   5                          case 0x77: { value = 4; break; }
+  46   5                        /*   case 0x77: { value = 4; break; }
   47   5                          case 0x7b: { value = 5; break; }
   48   5                          case 0x7d: { value = 6; break; }
-  49   5                          case 0x7e: { value = 7; break; }
+  49   5                          case 0x7e: { value = 7; break; } */
   50   5      
   51   5                      /*     case 0xb7: { value = 8; break; }
   52   5                          case 0xbb: { value = 9; break; }
   53   5                          case 0xbd: { value = 10; break; }
   54   5                          case 0xbe: { value = 11; break; }
-C51 COMPILER V9.60.7.0   KEY                                                               04/09/2025 17:30:56 PAGE 2   
+C51 COMPILER V9.60.7.0   KEY                                                               04/09/2025 19:27:08 PAGE 2   
 
   55   5      
   56   5                          case 0xd7: { value = 12; break; }
@@ -121,12 +121,12 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    229    ----
+   CODE SIZE        =    171    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      3       2
-C51 COMPILER V9.60.7.0   KEY                                                               04/09/2025 17:30:56 PAGE 3   
+   DATA SIZE        =      3       1
+C51 COMPILER V9.60.7.0   KEY                                                               04/09/2025 19:27:08 PAGE 3   
 
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----

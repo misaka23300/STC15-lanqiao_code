@@ -25,7 +25,7 @@ uint date_time;
 void main()
 {
     boot_init();
-    datetime_write(date_init_time);
+    datetime_write();
     date_now_time[0] = 0;
     date_now_time[1] = 0;
     date_now_time[2] = 0;
@@ -148,5 +148,5 @@ void key_proc()
 
 void ds1302_proc()
 {
-    datetime_read(date_now_time);
+    datetime_read();
 }

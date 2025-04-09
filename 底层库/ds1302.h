@@ -6,4 +6,6 @@
 void datetime_write(uchar *time);
 void datetime_read(uchar *time);
 
+extern idata uchar time_now[3];
+
 #endif

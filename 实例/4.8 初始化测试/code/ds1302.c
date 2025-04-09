@@ -70,7 +70,7 @@ uchar bcd_to_hex(uchar bcd)
 	return (bcd / 16 * 10) + (bcd % 16);
 }
 
-void datetime_write()
+void datetime_write()	// -> bcd
 {
 	// time -> bcd
 	uchar i;
