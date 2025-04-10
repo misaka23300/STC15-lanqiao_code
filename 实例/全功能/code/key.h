@@ -3,5 +3,5 @@
 
 #include "boot.h"
 
-
+uchar key_scan();
 #endif

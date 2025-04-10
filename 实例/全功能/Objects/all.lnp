@@ -1,0 +1,8 @@
+".\Objects\STARTUP.obj",
+".\Objects\boot.obj",
+".\Objects\dis.obj",
+".\Objects\ds1302.obj",
+".\Objects\key.obj",
+".\Objects\main.obj" 
+TO ".\Objects\all" 
+PRINT(".\Listings\all.m51") RAMSIZE(256) 

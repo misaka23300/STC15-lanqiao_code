@@ -3,5 +3,8 @@
 
 #include "boot.h"
 
+#include "key.h"
+#include "dis.h"
+#include "ds1302.h"
 
 #endif

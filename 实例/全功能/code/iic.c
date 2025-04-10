@@ -106,3 +106,43 @@ void I2CSendAck(unsigned char ackbit)
 	I2C_Delay(DELAY_TIME);
 }
 
+// 0x01 光敏 0x03 旋钮
+uchar ADC(uchar channel)
+{
+    uchar adc;
+
+    I2CStart();
+
+    I2CSendByte(0x90);
+    I2CWaitAck();
+
+    I2CSendByte(channel);
+    I2CWaitAck();
+
+    I2CStart();
+
+    I2CSendByte(0x91);
+    I2CWaitAck();
+
+    adc = I2CReceiveByte();
+    I2CSendAck(1);
+
+    I2CStop();
+}
+
+uchar DAC(uchar value)
+{
+    I2CStart();
+
+    I2CSendByte(0x90);
+    I2CWaitAck();
+
+    I2CSendByte(0x40);
+    I2CWaitAck();
+
+    I2CSendByte(value);
+    I2CWaitAck();
+
+    I2CStop();
+}
+

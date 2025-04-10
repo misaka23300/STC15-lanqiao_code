@@ -5,5 +5,8 @@
 
 extern uchar time_now[3];
 
+void date_write();
+void date_read();
+
 
 #endif
