@@ -11,15 +11,13 @@ enum {
 idata uint state_time; 
 uchar state_mode1;
 
-uchar idata key_press;
-uint key_time;
+uchar key_press;
+idata uint key_time;
 
 uchar key_list[2];
 
-uchar idata date_now_time[3];
-idata uchar date_init_time[3] = {0x55, 0x59, 0x23};
 
-uint date_time;
+idata uint date_time;
 
 
 void main()
