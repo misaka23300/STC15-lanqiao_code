@@ -135,7 +135,7 @@ void DAC(uchar value)
     I2CSendByte(0x90);
     I2CWaitAck();
 
-    I2CSendByte(0x40);
+    I2CSendByte(0x43);
     I2CWaitAck();
 
     I2CSendByte(value);
