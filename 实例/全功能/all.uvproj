@@ -406,6 +406,11 @@
               <FileType>1</FileType>
               <FilePath>.\code\main.c</FilePath>
             </File>
+            <File>
+              <FileName>iic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\code\iic.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

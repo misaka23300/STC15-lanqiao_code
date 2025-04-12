@@ -1,8 +1,8 @@
-/*	#   I2C代码片段说明
-	1. 	本文件夹中提供的驱动代码供参赛选手完成程序设计参考。
-	2. 	参赛选手可以自行编写相关代码或以该代码为基础，根据所选单片机类型、运行速度和试题
-		中对单片机时钟频率的要求，进行代码调试和修改。
-*/
+#include "iic.h"
+
+sbit scl = P2 ^ 0;
+sbit sda = P2 ^ 1;
+
 
 #define DELAY_TIME	10
 
@@ -128,9 +128,11 @@ uchar ADC(uchar channel)
     I2CSendAck(1);
 
     I2CStop();
+	
+			return adc;
 }
 
-uchar DAC(uchar value)
+void DAC(uchar value)
 {
     I2CStart();
 

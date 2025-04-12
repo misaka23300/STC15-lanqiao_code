@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   BOOT                                                              04/10/2025 20:39:44 PAGE 1   
+C51 COMPILER V9.60.7.0   BOOT                                                              04/12/2025 10:01:35 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE BOOT
@@ -62,7 +62,7 @@ line level    source
   52   1        TH1 = 0xFC;       //设置定时初始值
   53   1        TF1 = 0;        //清除TF1标志
   54   1        TR1 = 1;        //定时器1开始计时
-C51 COMPILER V9.60.7.0   BOOT                                                              04/10/2025 20:39:44 PAGE 2   
+C51 COMPILER V9.60.7.0   BOOT                                                              04/12/2025 10:01:35 PAGE 2   
 
   55   1        ET1 = 1;        //使能定时器1中断
   56   1      }

@@ -4,7 +4,8 @@ enum {
     LED_TIME = 7,
     KEY_TIME = 20,
     DATE_TIME = 100,
-    STATE_TIME = 200
+    STATE_TIME = 200,
+    ADC_TIME = 150
 };
 
 // key
@@ -24,6 +25,42 @@ idata uint date_time;
 
 // led
 idata uint led_time;
+
+// ADC
+idata uint adc_time;
+uchar adc_1;
+uchar adc_3;
+
+uint adc_3_value;
+bit is_3_flag;
+
+
+void adc_proc()
+{
+   
+    if (is_3_flag)
+    {
+        adc_1 = ADC(0x03);
+        is_3_flag = 0;
+    }
+    else
+    {
+       adc_3 = ADC(0x01); 
+       is_3_flag = 1;
+        
+       adc_3_value = (uint) (adc_3 * 19.6);
+       // adc_3_value = adc_3_value * 100; // 取2位小数
+
+       if ((adc_3_value % 10) > 5)
+       {
+            adc_3_value = (adc_3_value / 10) + 1;
+       }
+    }
+    
+
+
+}
+
 
 void ds1302_proc()
 {
@@ -62,6 +99,13 @@ void state_proc()
         {
             seg[0] = key_press / 10 % 10;
             seg[1] = key_press % 10;
+
+            seg[2] = 16;
+            seg[3] = 16;
+            seg[4] = 16;
+            seg[5] = 16;
+            seg[6] = 16;
+            seg[7] = 16;
         }
         break;
 
@@ -86,15 +130,21 @@ void state_proc()
 
         case 2:
         {
-            // x x x x     x x x x
+            // x x x 0     0 x x x
             // 
             if (state_only != 2)
             {
                 seg[3] = 16; seg[4] = 16;
             }
-            break;
-
             
+
+            seg[0] = adc_1 / 100 % 10;
+            seg[1] = adc_1 / 10 % 10;
+            seg[2] = adc_1 % 10;
+
+            seg[5] = (adc_3_value / 100 % 10) + 32;
+            seg[6] = adc_3_value / 10 % 10;
+            seg[7] = adc_3_value % 10;
         }
         break;
     }
@@ -129,6 +179,12 @@ void main()
             ds1302_proc();
             date_time = 0;
         }
+
+        if (adc_time == ADC_TIME)
+        {
+            adc_proc();
+            adc_time = 0;
+        }
     }
 }
 
@@ -144,6 +200,6 @@ void Timer1_Isr(void) interrupt 3
 
     if (date_time < DATE_TIME) { date_time++; }
 
-
+    if (adc_time < ADC_TIME) { adc_time++; }
     
 }

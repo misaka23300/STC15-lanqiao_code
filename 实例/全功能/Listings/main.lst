@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              04/10/2025 20:39:44 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/12/2025 10:01:35 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -14,149 +14,221 @@ line level    source
    4              LED_TIME = 7,
    5              KEY_TIME = 20,
    6              DATE_TIME = 100,
-   7              STATE_TIME = 200
-   8          };
-   9          
-  10          // key
-  11          idata uint key_time;
-  12          uchar key_press;
-  13          
+   7              STATE_TIME = 200,
+   8              ADC_TIME = 150
+   9          };
+  10          
+  11          // key
+  12          idata uint key_time;
+  13          uchar key_press;
   14          
-  15          // state
-  16          idata uint state_time;
-  17          uchar state_mode1;
-  18          uchar state_only;
-  19          
-  20          // 时间
-  21          idata uint date_time;
-  22          // uchar now_time[3];
-  23          
+  15          
+  16          // state
+  17          idata uint state_time;
+  18          uchar state_mode1;
+  19          uchar state_only;
+  20          
+  21          // 时间
+  22          idata uint date_time;
+  23          // uchar now_time[3];
   24          
-  25          // led
-  26          idata uint led_time;
-  27          
-  28          void ds1302_proc()
-  29          {
-  30   1          date_read();
-  31   1      }
-  32          
-  33          void key_proc()
-  34          {
-  35   1          key_press = key_scan();
-  36   1          switch (key_press)
-  37   1          {
-  38   2              case 4: 
-  39   2              {
-  40   3                  switch (state_mode1)
-  41   3                  {
-  42   4                      case 0: { state_mode1 = 1; break; }
-  43   4                      case 1: { state_mode1 = 2; break; }
-  44   4                      case 2: { state_mode1 = 0; break; }
-  45   4                  }
-  46   3              }
-  47   2              break;
-  48   2      
-  49   2              case 5:
-  50   2              {
-  51   3                 
-  52   3              }
-  53   2              break;
-  54   2          }
-C51 COMPILER V9.60.7.0   MAIN                                                              04/10/2025 20:39:44 PAGE 2   
+  25          
+  26          // led
+  27          idata uint led_time;
+  28          
+  29          // ADC
+  30          idata uint adc_time;
+  31          uchar adc_1;
+  32          uchar adc_3;
+  33          
+  34          uint adc_3_value;
+  35          bit is_3_flag;
+  36          
+  37          
+  38          void adc_proc()
+  39          {
+  40   1         
+  41   1          if (is_3_flag)
+  42   1          {
+  43   2              adc_1 = ADC(0x03);
+  44   2              is_3_flag = 0;
+  45   2          }
+  46   1          else
+  47   1          {
+  48   2             adc_3 = ADC(0x01); 
+  49   2             is_3_flag = 1;
+  50   2              
+  51   2             adc_3_value = (uint) (adc_3 * 19.6);
+  52   2             // adc_3_value = adc_3_value * 100; // 取2位小数
+  53   2      
+  54   2             if ((adc_3_value % 10) > 5)
+C51 COMPILER V9.60.7.0   MAIN                                                              04/12/2025 10:01:35 PAGE 2   
 
-  55   1      }
-  56          
-  57          void state_proc()
-  58          {
-  59   1          switch (state_mode1)
-  60   1          {
-  61   2              case 0: 
-  62   2              {
-  63   3                  seg[0] = key_press / 10 % 10;
-  64   3                  seg[1] = key_press % 10;
-  65   3              }
-  66   2              break;
-  67   2      
-  68   2              case 1:
-  69   2              {
-  70   3                  if (state_only != 1)
-  71   3                  {
-  72   4                      state_only = 1;
-  73   4                      seg[2] = 17; seg[5] = 17;
-  74   4                  }
-  75   3      
-  76   3                  seg[0] = time_now[2] / 10 % 10;
-  77   3                  seg[1] = time_now[2] % 10;
-  78   3      
-  79   3                  seg[3] = time_now[1] / 10 % 10;
-  80   3                  seg[4] = time_now[1] % 10;
-  81   3      
-  82   3                  seg[6] = time_now[0] / 10 % 10;
-  83   3                  seg[7] = time_now[0] % 10;
-  84   3              }
-  85   2              break;
-  86   2          }
-  87   1      }
-  88          
-  89          void main()
-  90          {
-  91   1          boot_init();
-  92   1          date_write();
-  93   1          while (1)
-  94   1          {
-  95   2              if (led_time == LED_TIME)
-  96   2              {
-  97   3                  led_display();
-  98   3                  led_time = 0;
-  99   3              }
- 100   2      
- 101   2              if (key_time == KEY_TIME)
- 102   2              {
- 103   3                  key_proc();
- 104   3                  key_time = 0;
- 105   3              }
- 106   2              
- 107   2              if (state_time == STATE_TIME)
- 108   2              {
- 109   3                  state_proc();
- 110   3                  state_time = 0;
- 111   3              }
- 112   2      
- 113   2              if (date_time == DATE_TIME)
- 114   2              {
- 115   3                  ds1302_proc();
- 116   3                  date_time = 0;
-C51 COMPILER V9.60.7.0   MAIN                                                              04/10/2025 20:39:44 PAGE 3   
+  55   2             {
+  56   3                  adc_3_value = (adc_3_value / 10) + 1;
+  57   3             }
+  58   2          }
+  59   1          
+  60   1      
+  61   1      
+  62   1      }
+  63          
+  64          
+  65          void ds1302_proc()
+  66          {
+  67   1          date_read();
+  68   1      }
+  69          
+  70          void key_proc()
+  71          {
+  72   1          key_press = key_scan();
+  73   1          switch (key_press)
+  74   1          {
+  75   2              case 4: 
+  76   2              {
+  77   3                  switch (state_mode1)
+  78   3                  {
+  79   4                      case 0: { state_mode1 = 1; break; }
+  80   4                      case 1: { state_mode1 = 2; break; }
+  81   4                      case 2: { state_mode1 = 0; break; }
+  82   4                  }
+  83   3              }
+  84   2              break;
+  85   2      
+  86   2              case 5:
+  87   2              {
+  88   3                 
+  89   3              }
+  90   2              break;
+  91   2          }
+  92   1      }
+  93          
+  94          void state_proc()
+  95          {
+  96   1          switch (state_mode1)
+  97   1          {
+  98   2              case 0: 
+  99   2              {
+ 100   3                  seg[0] = key_press / 10 % 10;
+ 101   3                  seg[1] = key_press % 10;
+ 102   3      
+ 103   3                  seg[2] = 16;
+ 104   3                  seg[3] = 16;
+ 105   3                  seg[4] = 16;
+ 106   3                  seg[5] = 16;
+ 107   3                  seg[6] = 16;
+ 108   3                  seg[7] = 16;
+ 109   3              }
+ 110   2              break;
+ 111   2      
+ 112   2              case 1:
+ 113   2              {
+ 114   3                  if (state_only != 1)
+ 115   3                  {
+ 116   4                      state_only = 1;
+C51 COMPILER V9.60.7.0   MAIN                                                              04/12/2025 10:01:35 PAGE 3   
 
- 117   3              }
- 118   2          }
- 119   1      }
- 120          
- 121          void Timer1_Isr(void) interrupt 3
- 122          {
- 123   1          seg_display();
- 124   1      
- 125   1          if (led_time < LED_TIME) { led_time++; }
- 126   1      
- 127   1          if (key_time < KEY_TIME) { key_time++; }
- 128   1      
- 129   1          if (state_time < STATE_TIME) { state_time++; }
- 130   1      
- 131   1          if (date_time < DATE_TIME) { date_time++; }
- 132   1      
- 133   1      
- 134   1          
- 135   1      }
+ 117   4                      seg[2] = 17; seg[5] = 17;
+ 118   4                  }
+ 119   3      
+ 120   3                  seg[0] = time_now[2] / 10 % 10;
+ 121   3                  seg[1] = time_now[2] % 10;
+ 122   3      
+ 123   3                  seg[3] = time_now[1] / 10 % 10;
+ 124   3                  seg[4] = time_now[1] % 10;
+ 125   3      
+ 126   3                  seg[6] = time_now[0] / 10 % 10;
+ 127   3                  seg[7] = time_now[0] % 10;
+ 128   3              }
+ 129   2              break;
+ 130   2      
+ 131   2              case 2:
+ 132   2              {
+ 133   3                  // x x x 0     0 x x x
+ 134   3                  // 
+ 135   3                  if (state_only != 2)
+ 136   3                  {
+ 137   4                      seg[3] = 16; seg[4] = 16;
+ 138   4                  }
+ 139   3                  
+ 140   3      
+ 141   3                  seg[0] = adc_1 / 100 % 10;
+ 142   3                  seg[1] = adc_1 / 10 % 10;
+ 143   3                  seg[2] = adc_1 % 10;
+ 144   3      
+ 145   3                  seg[5] = (adc_3_value / 100 % 10);
+ 146   3                  seg[6] = adc_3_value / 10 % 10;
+ 147   3                  seg[7] = adc_3_value % 10;
+ 148   3              }
+ 149   2              break;
+ 150   2          }
+ 151   1      }
+ 152          
+ 153          void main()
+ 154          {
+ 155   1          boot_init();
+ 156   1          date_write();
+ 157   1          while (1)
+ 158   1          {
+ 159   2              if (led_time == LED_TIME)
+ 160   2              {
+ 161   3                  led_display();
+ 162   3                  led_time = 0;
+ 163   3              }
+ 164   2      
+ 165   2              if (key_time == KEY_TIME)
+ 166   2              {
+ 167   3                  key_proc();
+ 168   3                  key_time = 0;
+ 169   3              }
+ 170   2              
+ 171   2              if (state_time == STATE_TIME)
+ 172   2              {
+ 173   3                  state_proc();
+ 174   3                  state_time = 0;
+ 175   3              }
+ 176   2      
+ 177   2              if (date_time == DATE_TIME)
+ 178   2              {
+C51 COMPILER V9.60.7.0   MAIN                                                              04/12/2025 10:01:35 PAGE 4   
+
+ 179   3                  ds1302_proc();
+ 180   3                  date_time = 0;
+ 181   3              }
+ 182   2      
+ 183   2              if (adc_time == ADC_TIME)
+ 184   2              {
+ 185   3                  adc_proc();
+ 186   3                  adc_time = 0;
+ 187   3              }
+ 188   2          }
+ 189   1      }
+ 190          
+ 191          void Timer1_Isr(void) interrupt 3
+ 192          {
+ 193   1          seg_display();
+ 194   1      
+ 195   1          if (led_time < LED_TIME) { led_time++; }
+ 196   1      
+ 197   1          if (key_time < KEY_TIME) { key_time++; }
+ 198   1      
+ 199   1          if (state_time < STATE_TIME) { state_time++; }
+ 200   1      
+ 201   1          if (date_time < DATE_TIME) { date_time++; }
+ 202   1      
+ 203   1          if (adc_time < ADC_TIME) { adc_time++; }
+ 204   1          
+ 205   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    364    ----
+   CODE SIZE        =    615    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      3    ----
-   IDATA SIZE       =      8    ----
-   BIT SIZE         =   ----    ----
+   DATA SIZE        =      7    ----
+   IDATA SIZE       =     10    ----
+   BIT SIZE         =      1    ----
 END OF MODULE INFORMATION.
 
 

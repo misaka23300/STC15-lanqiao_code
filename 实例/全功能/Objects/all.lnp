@@ -3,6 +3,7 @@
 ".\Objects\dis.obj",
 ".\Objects\ds1302.obj",
 ".\Objects\key.obj",
-".\Objects\main.obj" 
+".\Objects\main.obj",
+".\Objects\iic.obj" 
 TO ".\Objects\all" 
 PRINT(".\Listings\all.m51") RAMSIZE(256) 

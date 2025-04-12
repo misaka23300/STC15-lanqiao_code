@@ -4,6 +4,6 @@
 #include "boot.h"
 
 uchar ADC(uchar channel);
-uchar DAC(uchar value);
+void DAC(uchar value);
 
 #endif
