@@ -1,10 +1,14 @@
+<<<<<<< HEAD
 A51 MACRO ASSEMBLER  STARTUP                                                              04/12/2025 10:05:03 PAGE     1
+=======
+A51 MACRO ASSEMBLER  STARTUP                                                              04/12/2025 12:17:41 PAGE     1
+>>>>>>> 699e296f4e707adbeb00689010ffe74631757aaa
 
 
 MACRO ASSEMBLER A51 V8.2.7.0
 OBJECT MODULE PLACED IN .\Objects\STARTUP.obj
-ASSEMBLER INVOKED BY: D:\Program Files\keil5\C51\BIN\A51.EXE STARTUP.A51 SET(SMALL) DEBUG PRINT(.\Listings\STARTUP.lst) 
-                      OBJECT(.\Objects\STARTUP.obj) EP
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE STARTUP.A51 SET(SMALL) DEBUG PRINT(.\Listings\STARTUP.lst) OBJECT(.\Obj
+                      ects\STARTUP.obj) EP
 
 LOC  OBJ            LINE     SOURCE
 
@@ -65,7 +69,11 @@ LOC  OBJ            LINE     SOURCE
                       55     ;
                       56     ; <h> Stack Space for reentrant functions in the SMALL model.
                       57     ;  <q> IBPSTACK: Enable SMALL model reentrant stack
+<<<<<<< HEAD
 A51 MACRO ASSEMBLER  STARTUP                                                              04/12/2025 10:05:03 PAGE     2
+=======
+A51 MACRO ASSEMBLER  STARTUP                                                              04/12/2025 12:17:41 PAGE     2
+>>>>>>> 699e296f4e707adbeb00689010ffe74631757aaa
 
                       58     ;     <i> Stack space for reentrant functions in the SMALL model.
   0000                59     IBPSTACK        EQU     0       ; set to 1 if small reentrant is used.
@@ -133,7 +141,11 @@ LOC  OBJ            LINE     SOURCE
                      121     
                      122                     EXTRN CODE (?C_START)
                      123                     PUBLIC  ?C_STARTUP
+<<<<<<< HEAD
 A51 MACRO ASSEMBLER  STARTUP                                                              04/12/2025 10:05:03 PAGE     3
+=======
+A51 MACRO ASSEMBLER  STARTUP                                                              04/12/2025 12:17:41 PAGE     3
+>>>>>>> 699e296f4e707adbeb00689010ffe74631757aaa
 
                      124     
 ----                 125                     CSEG    AT      0
@@ -201,7 +213,11 @@ LOC  OBJ            LINE     SOURCE
                      187     ; This code is required if you use L51_BANK.A51 with Banking Mode 4
                      188     ;<h> Code Banking
                      189     ; <q> Select Bank 0 for L51_BANK.A51 Mode 4
+<<<<<<< HEAD
 A51 MACRO ASSEMBLER  STARTUP                                                              04/12/2025 10:05:03 PAGE     4
+=======
+A51 MACRO ASSEMBLER  STARTUP                                                              04/12/2025 12:17:41 PAGE     4
+>>>>>>> 699e296f4e707adbeb00689010ffe74631757aaa
 
                      190     
                              
@@ -212,7 +228,11 @@ LOC  OBJ            LINE     SOURCE
 0009 020000   F      196                     LJMP    ?C_START
                      197     
                      198                     END
+<<<<<<< HEAD
 A51 MACRO ASSEMBLER  STARTUP                                                              04/12/2025 10:05:03 PAGE     5
+=======
+A51 MACRO ASSEMBLER  STARTUP                                                              04/12/2025 12:17:41 PAGE     5
+>>>>>>> 699e296f4e707adbeb00689010ffe74631757aaa
 
 SYMBOL TABLE LISTING
 ------ ----- -------

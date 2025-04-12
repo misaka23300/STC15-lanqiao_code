@@ -9,6 +9,7 @@ code uchar read_address[7] = {0x81, 0x83, 0X85, 0X87, 0X89, 0X8B, 0x8D};
 code uchar write_address[7] = {0x80, 0x82, 0X84, 0X86, 0X88, 0X8A, 0x8C};
 
 uchar time_now[3] = {0, 0, 0};
+
 code uchar time_init[7] = {0x50, 0x59, 0x23, 0x09, 0x04, 0x03, 0x25};
 
 

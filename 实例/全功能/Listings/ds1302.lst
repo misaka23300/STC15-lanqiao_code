@@ -1,10 +1,14 @@
+<<<<<<< HEAD
 C51 COMPILER V9.60.7.0   DS1302                                                            04/12/2025 10:05:03 PAGE 1   
+=======
+C51 COMPILER V9.60.7.0   DS1302                                                            04/12/2025 12:17:41 PAGE 1   
+>>>>>>> 699e296f4e707adbeb00689010ffe74631757aaa
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE DS1302
 OBJECT MODULE PLACED IN .\Objects\ds1302.obj
-COMPILER INVOKED BY: D:\Program Files\keil5\C51\BIN\C51.EXE code\ds1302.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PR
-                    -INT(.\Listings\ds1302.lst) TABS(2) OBJECT(.\Objects\ds1302.obj)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE code\ds1302.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listin
+                    -gs\ds1302.lst) TABS(2) OBJECT(.\Objects\ds1302.obj)
 
 line level    source
 
@@ -19,9 +23,10 @@ line level    source
    9          code uchar write_address[7] = {0x80, 0x82, 0X84, 0X86, 0X88, 0X8A, 0x8C};
   10          
   11          uchar time_now[3] = {0, 0, 0};
-  12          code uchar time_init[7] = {0x50, 0x59, 0x23, 0x09, 0x04, 0x03, 0x25};
-  13          
+  12          
+  13          code uchar time_init[7] = {0x50, 0x59, 0x23, 0x09, 0x04, 0x03, 0x25};
   14          
+<<<<<<< HEAD
   15          void Write_Ds1302(unsigned  char temp) 
   16          {
   17   1        unsigned char i;
@@ -63,50 +68,94 @@ line level    source
   53   2        } 
   54   1        RST=0;  _nop_();
 C51 COMPILER V9.60.7.0   DS1302                                                            04/12/2025 10:05:03 PAGE 2   
+=======
+  15          
+  16          void Write_Ds1302(unsigned  char temp) 
+  17          {
+  18   1        unsigned char i;
+  19   1        for (i=0;i<8;i++)       
+  20   1        { 
+  21   2          SCK = 0;
+  22   2          SDA = temp & 0x01;
+  23   2          temp>>=1; 
+  24   2          SCK=1;
+  25   2        }
+  26   1      }   
+  27          
+  28          //
+  29          void Write_Ds1302_Byte( unsigned char address,unsigned char dat )     
+  30          {
+  31   1        RST=0;  _nop_();
+  32   1        SCK=0;  _nop_();
+  33   1        RST=1;  _nop_();  
+  34   1        Write_Ds1302(address);  
+  35   1        Write_Ds1302(dat);    
+  36   1        RST=0; 
+  37   1      }
+  38          
+  39          //
+  40          unsigned char Read_Ds1302_Byte ( unsigned char address )
+  41          {
+  42   1        unsigned char i,temp=0x00;
+  43   1        RST=0;  _nop_();
+  44   1        SCK=0;  _nop_();
+  45   1        RST=1;  _nop_();
+  46   1        Write_Ds1302(address);
+  47   1        for (i=0;i<8;i++)   
+  48   1        {   
+  49   2          SCK=0;
+  50   2          temp>>=1; 
+  51   2          if(SDA)
+  52   2          temp|=0x80; 
+  53   2          SCK=1;
+  54   2        } 
+C51 COMPILER V9.60.7.0   DS1302                                                            04/12/2025 12:17:41 PAGE 2   
+>>>>>>> 699e296f4e707adbeb00689010ffe74631757aaa
 
-  55   1        SCK=0;  _nop_();
-  56   1        SCK=1;  _nop_();
-  57   1        SDA=0;  _nop_();
-  58   1        SDA=1;  _nop_();
-  59   1        return (temp);      
-  60   1      }
-  61          
+  55   1        RST=0;  _nop_();
+  56   1        SCK=0;  _nop_();
+  57   1        SCK=1;  _nop_();
+  58   1        SDA=0;  _nop_();
+  59   1        SDA=1;  _nop_();
+  60   1        return (temp);      
+  61   1      }
   62          
-  63          uchar bcd_to_hex(uchar bcd)
-  64          {
-  65   1        return (bcd / 16 * 10) + (bcd % 16);
-  66   1      }
-  67          
+  63          
+  64          uchar bcd_to_hex(uchar bcd)
+  65          {
+  66   1        return (bcd / 16 * 10) + (bcd % 16);
+  67   1      }
   68          
-  69          void date_write()
-  70          {
-  71   1        uchar i;
-  72   1        Write_Ds1302_Byte(0X8E, 0X00);
-  73   1      
-  74   1        for (i = 0; i < 7;i++)
-  75   1        {
-  76   2          Write_Ds1302_Byte(write_address[i], time_init[i]);
-  77   2        }
-  78   1      
-  79   1        Write_Ds1302_Byte(0X8E, 0X80);
-  80   1      }
-  81          
+  69          
+  70          void date_write()
+  71          {
+  72   1        uchar i;
+  73   1        Write_Ds1302_Byte(0X8E, 0X00);
+  74   1      
+  75   1        for (i = 0; i < 7;i++)
+  76   1        {
+  77   2          Write_Ds1302_Byte(write_address[i], time_init[i]);
+  78   2        }
+  79   1      
+  80   1        Write_Ds1302_Byte(0X8E, 0X80);
+  81   1      }
   82          
-  83          void date_read()
-  84          {
-  85   1        uchar i;
-  86   1        for (i = 0; i < 3;i++)
-  87   1        {
-  88   2          time_now[i] = Read_Ds1302_Byte(read_address[i]);
-  89   2        }
-  90   1      
-  91   1        for (i = 0;i < 3;i++)
-  92   1        {
-  93   2          time_now[i] = bcd_to_hex(time_now[i]);
-  94   2        }
-  95   1      }
-  96          
+  83          
+  84          void date_read()
+  85          {
+  86   1        uchar i;
+  87   1        for (i = 0; i < 3;i++)
+  88   1        {
+  89   2          time_now[i] = Read_Ds1302_Byte(read_address[i]);
+  90   2        }
+  91   1      
+  92   1        for (i = 0;i < 3;i++)
+  93   1        {
+  94   2          time_now[i] = bcd_to_hex(time_now[i]);
+  95   2        }
+  96   1      }
   97          
+  98          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE

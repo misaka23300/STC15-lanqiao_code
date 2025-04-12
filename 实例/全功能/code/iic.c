@@ -129,7 +129,7 @@ uchar ADC(uchar channel)
 
     I2CStop();
 	
-			return adc;
+    return adc;
 }
 
 void DAC(uchar value)

@@ -411,6 +411,16 @@
               <FileType>1</FileType>
               <FilePath>.\code\iic.c</FilePath>
             </File>
+            <File>
+              <FileName>onewire.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\code\onewire.c</FilePath>
+            </File>
+            <File>
+              <FileName>sonic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\code\sonic.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

@@ -1,10 +1,14 @@
+<<<<<<< HEAD
 C51 COMPILER V9.60.7.0   BOOT                                                              04/12/2025 10:05:03 PAGE 1   
+=======
+C51 COMPILER V9.60.7.0   BOOT                                                              04/12/2025 12:17:41 PAGE 1   
+>>>>>>> 699e296f4e707adbeb00689010ffe74631757aaa
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE BOOT
 OBJECT MODULE PLACED IN .\Objects\boot.obj
-COMPILER INVOKED BY: D:\Program Files\keil5\C51\BIN\C51.EXE code\boot.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRIN
-                    -T(.\Listings\boot.lst) TABS(2) OBJECT(.\Objects\boot.obj)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE code\boot.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\boot.lst) TABS(2) OBJECT(.\Objects\boot.obj)
 
 line level    source
 
@@ -62,14 +66,49 @@ line level    source
   52   1        TH1 = 0xFC;       //设置定时初始值
   53   1        TF1 = 0;        //清除TF1标志
   54   1        TR1 = 1;        //定时器1开始计时
+<<<<<<< HEAD
 C51 COMPILER V9.60.7.0   BOOT                                                              04/12/2025 10:05:03 PAGE 2   
+=======
+C51 COMPILER V9.60.7.0   BOOT                                                              04/12/2025 12:17:41 PAGE 2   
+>>>>>>> 699e296f4e707adbeb00689010ffe74631757aaa
 
   55   1        ET1 = 1;        //使能定时器1中断
   56   1      }
+  57          
+  58          void Delay14us(void)  //@12.000MHz
+  59          {
+  60   1        unsigned char data i;
+  61   1      
+  62   1        _nop_();
+  63   1        _nop_();
+  64   1        i = 39;
+  65   1        while (--i);
+  66   1      }
+  67          
+  68          void timer_0_sonic()
+  69          {
+  70   1          AUXR &= 0x7F;     //定时器时钟12T模式
+  71   1        TMOD &= 0xF0;     //设置定时器模式
+  72   1        TL0 = 0x00;       //设置定时初始值
+  73   1        TH0 = 0x00;       //设置定时初始值
+  74   1        TF0 = 0;        //清除TF0标志
+  75   1        TR0 = 0;        //定时器0开始计时
+  76   1        ET0 = 0;        //使能定时器0中断
+  77   1      }
+  78          
+  79          void timer_0_ne555()
+  80          {
+  81   1          //TMOD -> 0000 0110
+  82   1          // AUXR -> 0xxx xxxx
+  83   1          TMOD = (TMOD & 0xF0) | 0x06;
+  84   1          TL0 = 0xFF;
+  85   1          TH0 = 0xFF;
+  86   1          ET0 = 1;
+  87   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    147    ----
+   CODE SIZE        =    189    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

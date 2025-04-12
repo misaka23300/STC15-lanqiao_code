@@ -3,5 +3,6 @@
 
 #include "boot.h"
 
+float read_temperature();
 
 #endif
