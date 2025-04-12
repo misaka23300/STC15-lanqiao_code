@@ -154,6 +154,7 @@ void main()
 {
     boot_init();
     date_write();
+    ADC(0x01);
     while (1)
     {
         if (led_time == LED_TIME)

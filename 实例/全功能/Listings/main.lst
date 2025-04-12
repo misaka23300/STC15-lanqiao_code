@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              04/12/2025 10:01:35 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/12/2025 10:04:02 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -62,7 +62,7 @@ line level    source
   52   2             // adc_3_value = adc_3_value * 100; // 取2位小数
   53   2      
   54   2             if ((adc_3_value % 10) > 5)
-C51 COMPILER V9.60.7.0   MAIN                                                              04/12/2025 10:01:35 PAGE 2   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/12/2025 10:04:02 PAGE 2   
 
   55   2             {
   56   3                  adc_3_value = (adc_3_value / 10) + 1;
@@ -126,7 +126,7 @@ line level    source
  114   3                  if (state_only != 1)
  115   3                  {
  116   4                      state_only = 1;
-C51 COMPILER V9.60.7.0   MAIN                                                              04/12/2025 10:01:35 PAGE 3   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/12/2025 10:04:02 PAGE 3   
 
  117   4                      seg[2] = 17; seg[5] = 17;
  118   4                  }
@@ -156,7 +156,7 @@ line level    source
  142   3                  seg[1] = adc_1 / 10 % 10;
  143   3                  seg[2] = adc_1 % 10;
  144   3      
- 145   3                  seg[5] = (adc_3_value / 100 % 10);
+ 145   3                  seg[5] = (adc_3_value / 100 % 10) + 32;
  146   3                  seg[6] = adc_3_value / 10 % 10;
  147   3                  seg[7] = adc_3_value % 10;
  148   3              }
@@ -168,61 +168,62 @@ line level    source
  154          {
  155   1          boot_init();
  156   1          date_write();
- 157   1          while (1)
- 158   1          {
- 159   2              if (led_time == LED_TIME)
- 160   2              {
- 161   3                  led_display();
- 162   3                  led_time = 0;
- 163   3              }
- 164   2      
- 165   2              if (key_time == KEY_TIME)
- 166   2              {
- 167   3                  key_proc();
- 168   3                  key_time = 0;
- 169   3              }
- 170   2              
- 171   2              if (state_time == STATE_TIME)
- 172   2              {
- 173   3                  state_proc();
- 174   3                  state_time = 0;
- 175   3              }
- 176   2      
- 177   2              if (date_time == DATE_TIME)
- 178   2              {
-C51 COMPILER V9.60.7.0   MAIN                                                              04/12/2025 10:01:35 PAGE 4   
+ 157   1          ADC(0x01);
+ 158   1          while (1)
+ 159   1          {
+ 160   2              if (led_time == LED_TIME)
+ 161   2              {
+ 162   3                  led_display();
+ 163   3                  led_time = 0;
+ 164   3              }
+ 165   2      
+ 166   2              if (key_time == KEY_TIME)
+ 167   2              {
+ 168   3                  key_proc();
+ 169   3                  key_time = 0;
+ 170   3              }
+ 171   2              
+ 172   2              if (state_time == STATE_TIME)
+ 173   2              {
+ 174   3                  state_proc();
+ 175   3                  state_time = 0;
+ 176   3              }
+ 177   2      
+ 178   2              if (date_time == DATE_TIME)
+C51 COMPILER V9.60.7.0   MAIN                                                              04/12/2025 10:04:02 PAGE 4   
 
- 179   3                  ds1302_proc();
- 180   3                  date_time = 0;
- 181   3              }
- 182   2      
- 183   2              if (adc_time == ADC_TIME)
- 184   2              {
- 185   3                  adc_proc();
- 186   3                  adc_time = 0;
- 187   3              }
- 188   2          }
- 189   1      }
- 190          
- 191          void Timer1_Isr(void) interrupt 3
- 192          {
- 193   1          seg_display();
- 194   1      
- 195   1          if (led_time < LED_TIME) { led_time++; }
- 196   1      
- 197   1          if (key_time < KEY_TIME) { key_time++; }
- 198   1      
- 199   1          if (state_time < STATE_TIME) { state_time++; }
- 200   1      
- 201   1          if (date_time < DATE_TIME) { date_time++; }
- 202   1      
- 203   1          if (adc_time < ADC_TIME) { adc_time++; }
- 204   1          
- 205   1      }
+ 179   2              {
+ 180   3                  ds1302_proc();
+ 181   3                  date_time = 0;
+ 182   3              }
+ 183   2      
+ 184   2              if (adc_time == ADC_TIME)
+ 185   2              {
+ 186   3                  adc_proc();
+ 187   3                  adc_time = 0;
+ 188   3              }
+ 189   2          }
+ 190   1      }
+ 191          
+ 192          void Timer1_Isr(void) interrupt 3
+ 193          {
+ 194   1          seg_display();
+ 195   1      
+ 196   1          if (led_time < LED_TIME) { led_time++; }
+ 197   1      
+ 198   1          if (key_time < KEY_TIME) { key_time++; }
+ 199   1      
+ 200   1          if (state_time < STATE_TIME) { state_time++; }
+ 201   1      
+ 202   1          if (date_time < DATE_TIME) { date_time++; }
+ 203   1      
+ 204   1          if (adc_time < ADC_TIME) { adc_time++; }
+ 205   1          
+ 206   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    615    ----
+   CODE SIZE        =    623    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
