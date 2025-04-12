@@ -1,10 +1,10 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              04/12/2025 10:04:02 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/12/2025 12:17:41 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
 OBJECT MODULE PLACED IN .\Objects\main.obj
-COMPILER INVOKED BY: D:\Program Files\keil5\C51\BIN\C51.EXE code\main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRIN
-                    -T(.\Listings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE code\main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
 
 line level    source
 
@@ -15,220 +15,411 @@ line level    source
    5              KEY_TIME = 20,
    6              DATE_TIME = 100,
    7              STATE_TIME = 200,
-   8              ADC_TIME = 150
-   9          };
-  10          
-  11          // key
-  12          idata uint key_time;
-  13          uchar key_press;
-  14          
-  15          
-  16          // state
-  17          idata uint state_time;
-  18          uchar state_mode1;
-  19          uchar state_only;
-  20          
-  21          // 时间
-  22          idata uint date_time;
-  23          // uchar now_time[3];
-  24          
-  25          
-  26          // led
-  27          idata uint led_time;
+   8              ADC_TIME = 150,
+   9              TEMP_TIME = 800,
+  10              SONIC_TIME = 899,
+  11              FREQ_TIME = 1000
+  12          };
+  13          
+  14          // key
+  15          idata uint key_time;
+  16          uchar key_press;
+  17          
+  18          
+  19          // state
+  20          idata uint state_time;
+  21          uchar state_mode1;
+  22          uchar state_only;
+  23          
+  24          // 时间
+  25          idata uint date_time;
+  26          // uchar now_time[3];
+  27          
   28          
-  29          // ADC
-  30          idata uint adc_time;
-  31          uchar adc_1;
-  32          uchar adc_3;
-  33          
-  34          uint adc_3_value;
-  35          bit is_3_flag;
+  29          // led
+  30          idata uint led_time;
+  31          
+  32          // ADC
+  33          idata uint adc_time;
+  34          uchar adc_1;
+  35          uchar adc_3;
   36          
-  37          
-  38          void adc_proc()
-  39          {
-  40   1         
-  41   1          if (is_3_flag)
-  42   1          {
-  43   2              adc_1 = ADC(0x03);
-  44   2              is_3_flag = 0;
-  45   2          }
-  46   1          else
-  47   1          {
-  48   2             adc_3 = ADC(0x01); 
-  49   2             is_3_flag = 1;
-  50   2              
-  51   2             adc_3_value = (uint) (adc_3 * 19.6);
-  52   2             // adc_3_value = adc_3_value * 100; // 取2位小数
-  53   2      
-  54   2             if ((adc_3_value % 10) > 5)
-C51 COMPILER V9.60.7.0   MAIN                                                              04/12/2025 10:04:02 PAGE 2   
+  37          uint adc_3_value;
+  38          bit is_3_flag;
+  39          
+  40          // 温度
+  41          idata uint temp_time;
+  42          uint temp;
+  43          
+  44          // mode2 
+  45          uchar is_sonic;
+  46          
+  47          // 超声波
+  48          idata uint sonic_time;
+  49          uchar distance;
+  50          
+  51          // 测量频率
+  52          idata uint freq_time;
+  53          idata uint freq;
+  54          uint freq_number;
+C51 COMPILER V9.60.7.0   MAIN                                                              04/12/2025 12:17:41 PAGE 2   
 
-  55   2             {
-  56   3                  adc_3_value = (adc_3_value / 10) + 1;
-  57   3             }
-  58   2          }
-  59   1          
-  60   1      
-  61   1      
-  62   1      }
+  55          uchar freq_list[5] = {0, 0, 0, 0, 0};
+  56          
+  57          
+  58          freq_timer_0() interrupt 1
+  59          {
+  60   1          freq_number++;
+  61   1      }
+  62          
   63          
-  64          
-  65          void ds1302_proc()
-  66          {
-  67   1          date_read();
-  68   1      }
-  69          
-  70          void key_proc()
-  71          {
-  72   1          key_press = key_scan();
-  73   1          switch (key_press)
-  74   1          {
-  75   2              case 4: 
-  76   2              {
-  77   3                  switch (state_mode1)
-  78   3                  {
-  79   4                      case 0: { state_mode1 = 1; break; }
-  80   4                      case 1: { state_mode1 = 2; break; }
-  81   4                      case 2: { state_mode1 = 0; break; }
-  82   4                  }
-  83   3              }
-  84   2              break;
-  85   2      
-  86   2              case 5:
-  87   2              {
-  88   3                 
-  89   3              }
-  90   2              break;
-  91   2          }
-  92   1      }
-  93          
-  94          void state_proc()
-  95          {
-  96   1          switch (state_mode1)
-  97   1          {
-  98   2              case 0: 
-  99   2              {
- 100   3                  seg[0] = key_press / 10 % 10;
- 101   3                  seg[1] = key_press % 10;
- 102   3      
- 103   3                  seg[2] = 16;
- 104   3                  seg[3] = 16;
- 105   3                  seg[4] = 16;
- 106   3                  seg[5] = 16;
- 107   3                  seg[6] = 16;
- 108   3                  seg[7] = 16;
- 109   3              }
- 110   2              break;
- 111   2      
- 112   2              case 1:
- 113   2              {
- 114   3                  if (state_only != 1)
- 115   3                  {
- 116   4                      state_only = 1;
-C51 COMPILER V9.60.7.0   MAIN                                                              04/12/2025 10:04:02 PAGE 3   
+  64          void freq_proc()
+  65          {
+  66   1          freq = freq_number;
+  67   1          freq_number = 0;
+  68   1      
+  69   1          freq_list[0] = freq / 10000 % 10;
+  70   1          freq_list[1] = freq / 1000 % 10;
+  71   1          freq_list[2] = freq / 100 % 10;
+  72   1          freq_list[3] = freq / 10 % 10;
+  73   1          freq_list[4] = freq % 10;
+  74   1      
+  75   1          delete_0(freq_list, 5, 0);
+  76   1      }
+  77          
+  78          void sonic_proc()
+  79          {
+  80   1          
+  81   1          distance = sonic_measure();
+  82   1      }
+  83          
+  84          void ds18b20_proc()
+  85          {
+  86   1          temp = read_temperature() * 100;
+  87   1      }
+  88          
+  89          void adc_proc()
+  90          {
+  91   1         
+  92   1          if (is_3_flag)
+  93   1          {
+  94   2              adc_1 = ADC(0x03);
+  95   2              is_3_flag = 0;
+  96   2          }
+  97   1          else
+  98   1          {
+  99   2             adc_3 = ADC(0x01); 
+ 100   2             is_3_flag = 1;
+ 101   2              
+ 102   2             adc_3_value = (uint) (adc_3 * 0.0196 * 1000);
+ 103   2             // adc_3_value = adc_3_value * 100; // 取2位小数
+ 104   2      
+ 105   2             if ((adc_3_value % 10) >= 5)
+ 106   2             {
+ 107   3                  adc_3_value = (adc_3_value / 10) + 1;
+ 108   3             }
+ 109   2             else
+ 110   2             {
+ 111   3              adc_3_value = adc_3_value / 10;
+ 112   3             }
+ 113   2          }
+ 114   1      }
+ 115          
+ 116          
+C51 COMPILER V9.60.7.0   MAIN                                                              04/12/2025 12:17:41 PAGE 3   
 
- 117   4                      seg[2] = 17; seg[5] = 17;
- 118   4                  }
- 119   3      
- 120   3                  seg[0] = time_now[2] / 10 % 10;
- 121   3                  seg[1] = time_now[2] % 10;
- 122   3      
- 123   3                  seg[3] = time_now[1] / 10 % 10;
- 124   3                  seg[4] = time_now[1] % 10;
- 125   3      
- 126   3                  seg[6] = time_now[0] / 10 % 10;
- 127   3                  seg[7] = time_now[0] % 10;
- 128   3              }
- 129   2              break;
- 130   2      
- 131   2              case 2:
- 132   2              {
- 133   3                  // x x x 0     0 x x x
- 134   3                  // 
- 135   3                  if (state_only != 2)
- 136   3                  {
- 137   4                      seg[3] = 16; seg[4] = 16;
- 138   4                  }
- 139   3                  
- 140   3      
- 141   3                  seg[0] = adc_1 / 100 % 10;
- 142   3                  seg[1] = adc_1 / 10 % 10;
- 143   3                  seg[2] = adc_1 % 10;
- 144   3      
- 145   3                  seg[5] = (adc_3_value / 100 % 10) + 32;
- 146   3                  seg[6] = adc_3_value / 10 % 10;
- 147   3                  seg[7] = adc_3_value % 10;
- 148   3              }
- 149   2              break;
- 150   2          }
- 151   1      }
- 152          
- 153          void main()
- 154          {
- 155   1          boot_init();
- 156   1          date_write();
- 157   1          ADC(0x01);
- 158   1          while (1)
- 159   1          {
- 160   2              if (led_time == LED_TIME)
- 161   2              {
- 162   3                  led_display();
- 163   3                  led_time = 0;
- 164   3              }
- 165   2      
- 166   2              if (key_time == KEY_TIME)
- 167   2              {
- 168   3                  key_proc();
- 169   3                  key_time = 0;
- 170   3              }
- 171   2              
- 172   2              if (state_time == STATE_TIME)
- 173   2              {
- 174   3                  state_proc();
- 175   3                  state_time = 0;
- 176   3              }
- 177   2      
- 178   2              if (date_time == DATE_TIME)
-C51 COMPILER V9.60.7.0   MAIN                                                              04/12/2025 10:04:02 PAGE 4   
+ 117          void ds1302_proc()
+ 118          {
+ 119   1          date_read();
+ 120   1      }
+ 121          
+ 122          void key_proc()
+ 123          {
+ 124   1          key_press = key_scan();
+ 125   1          switch (key_press)
+ 126   1          {
+ 127   2              case 4: 
+ 128   2              {
+ 129   3                  switch (state_mode1)
+ 130   3                  {
+ 131   4                      case 0: { state_mode1 = 1; break; }
+ 132   4      
+ 133   4                      case 1: { state_mode1 = 2; break; }
+ 134   4      
+ 135   4                      case 2: { state_mode1 = 3; break; }
+ 136   4      
+ 137   4                      case 3: { state_mode1 = is_sonic + 10; break; }
+ 138   4      
+ 139   4                      case 10: { state_mode1 = 0; break; }
+ 140   4      
+ 141   4                      case 11: { state_mode1 = 0; break; }
+ 142   4                  }
+ 143   3              }
+ 144   2              break;
+ 145   2      
+ 146   2              case 5:
+ 147   2              {
+ 148   3                  switch (is_sonic)
+ 149   3                  {
+ 150   4                      case 0: 
+ 151   4                      { 
+ 152   5                          timer_0_sonic();
+ 153   5                          is_sonic = 1; 
+ 154   5                          led[0] = 1;
+ 155   5                          led[1] = 0;
+ 156   5                          state_mode1 = 10; 
+ 157   5                          
+ 158   5                      }
+ 159   4                      break;
+ 160   4      
+ 161   4                      case 1: 
+ 162   4                      { 
+ 163   5                          timer_0_ne555();
+ 164   5                          is_sonic = 0; 
+ 165   5                          led[0] = 0;
+ 166   5                          led[1] = 1;
+ 167   5                          state_mode1 = 11;
+ 168   5                           
+ 169   5                      }
+ 170   4                      break; 
+ 171   4                  }
+ 172   3              }
+ 173   2              break;
+ 174   2          }
+ 175   1      }
+ 176          
+ 177          void state_proc()
+ 178          {
+C51 COMPILER V9.60.7.0   MAIN                                                              04/12/2025 12:17:41 PAGE 4   
 
- 179   2              {
- 180   3                  ds1302_proc();
- 181   3                  date_time = 0;
- 182   3              }
- 183   2      
- 184   2              if (adc_time == ADC_TIME)
- 185   2              {
- 186   3                  adc_proc();
- 187   3                  adc_time = 0;
- 188   3              }
- 189   2          }
- 190   1      }
- 191          
- 192          void Timer1_Isr(void) interrupt 3
- 193          {
- 194   1          seg_display();
- 195   1      
- 196   1          if (led_time < LED_TIME) { led_time++; }
- 197   1      
- 198   1          if (key_time < KEY_TIME) { key_time++; }
- 199   1      
- 200   1          if (state_time < STATE_TIME) { state_time++; }
- 201   1      
- 202   1          if (date_time < DATE_TIME) { date_time++; }
- 203   1      
- 204   1          if (adc_time < ADC_TIME) { adc_time++; }
- 205   1          
- 206   1      }
+ 179   1          switch (state_mode1)
+ 180   1          {
+ 181   2              // key界面
+ 182   2              case 0: 
+ 183   2              {
+ 184   3                  seg[0] = key_press / 10 % 10;
+ 185   3                  seg[1] = key_press % 10;
+ 186   3      
+ 187   3                  seg[2] = 16;
+ 188   3                  seg[3] = 16;
+ 189   3                  seg[4] = 16;
+ 190   3                  seg[5] = 16;
+ 191   3                  seg[6] = 16;
+ 192   3                  seg[7] = 16;
+ 193   3              }
+ 194   2              break;
+ 195   2      
+ 196   2              // 时间界面
+ 197   2              case 1:
+ 198   2              {
+ 199   3                  if (state_only != 1)
+ 200   3                  {
+ 201   4                      state_only = 1;
+ 202   4                      seg[2] = 17; seg[5] = 17;
+ 203   4                  }
+ 204   3      
+ 205   3                  seg[0] = time_now[2] / 10 % 10;
+ 206   3                  seg[1] = time_now[2] % 10;
+ 207   3      
+ 208   3                  seg[3] = time_now[1] / 10 % 10;
+ 209   3                  seg[4] = time_now[1] % 10;
+ 210   3      
+ 211   3                  seg[6] = time_now[0] / 10 % 10;
+ 212   3                  seg[7] = time_now[0] % 10;
+ 213   3              }
+ 214   2              break;
+ 215   2      
+ 216   2              // ADC界面
+ 217   2              case 2:
+ 218   2              {
+ 219   3                  // x x x 0     0 x x x
+ 220   3                  // 
+ 221   3                  if (state_only != 2)
+ 222   3                  {
+ 223   4                      state_only = 2;
+ 224   4                      seg[3] = 16; seg[4] = 16;
+ 225   4                  }
+ 226   3                  
+ 227   3      
+ 228   3                  seg[0] = adc_1 / 100 % 10;
+ 229   3                  seg[1] = adc_1 / 10 % 10;
+ 230   3                  seg[2] = adc_1 % 10;
+ 231   3      
+ 232   3                  seg[5] = (adc_3_value / 100 % 10) + 32;
+ 233   3                  seg[6] = adc_3_value / 10 % 10;
+ 234   3                  seg[7] = adc_3_value % 10;
+ 235   3              }
+ 236   2              break;
+ 237   2              // 温度界面  x x T T. T T o C
+ 238   2              case 3:
+ 239   2              {
+ 240   3                  if (state_only != 3)
+C51 COMPILER V9.60.7.0   MAIN                                                              04/12/2025 12:17:41 PAGE 5   
+
+ 241   3                  {
+ 242   4                      state_only = 3;
+ 243   4                      seg[0] = 16; seg[5] = 16; seg[6] = 43;seg[7] = 12;
+ 244   4                  }
+ 245   3                  seg[1] = temp / 1000 % 10;
+ 246   3                  seg[2] = (temp / 100 % 10) + 32;
+ 247   3                  seg[3] = temp / 10 % 10;
+ 248   3                  seg[4] = temp % 10;
+ 249   3              }
+ 250   2              break;
+ 251   2      
+ 252   2              // 超声波
+ 253   2              case 10:
+ 254   2              {
+ 255   3                  if (state_only != 4)
+ 256   3                  {
+ 257   4                      state_only = 4;
+ 258   4                      seg[2] = 16; seg[3] = 16; seg[4] = 16; seg[5] = 16; seg[6] = 16; seg[7] = 16;
+ 259   4                  }
+ 260   3                  seg[0] = distance / 100 % 10;
+ 261   3                  seg[1] = distance / 10 % 10;
+ 262   3                  seg[2] = distance % 10;
+ 263   3              }
+ 264   2              break;
+ 265   2      
+ 266   2              //freq
+ 267   2              case 11:
+ 268   2              {
+ 269   3                  if (state_only != 5)
+ 270   3                  {
+ 271   4                      state_only = 5;
+ 272   4                      seg[5] = 16; seg[6] = 16; seg[7] = 16;
+ 273   4                  }
+ 274   3                  seg[0] = freq_list[0];
+ 275   3                  seg[1] = freq_list[1];
+ 276   3                  seg[2] = freq_list[2];
+ 277   3                  seg[3] = freq_list[3];
+ 278   3                  seg[4] = freq_list[4];
+ 279   3              }
+ 280   2              break;
+ 281   2          }
+ 282   1          
+ 283   1      }
+ 284          
+ 285          void main()
+ 286          {
+ 287   1          boot_init();
+ 288   1          read_temperature();
+ 289   1          date_write();
+ 290   1          ADC(0x01);
+ 291   1          while (1)
+ 292   1          {
+ 293   2              if (led_time == LED_TIME)
+ 294   2              {
+ 295   3                  led_display();
+ 296   3                  led_time = 0;
+ 297   3              }
+ 298   2      
+ 299   2              if (key_time == KEY_TIME)
+ 300   2              {
+ 301   3                  key_proc();
+ 302   3                  key_time = 0;
+C51 COMPILER V9.60.7.0   MAIN                                                              04/12/2025 12:17:41 PAGE 6   
+
+ 303   3              }
+ 304   2              
+ 305   2              if (state_time == STATE_TIME)
+ 306   2              {
+ 307   3                  state_proc();
+ 308   3                  state_time = 0;
+ 309   3              }
+ 310   2      
+ 311   2              if (date_time == DATE_TIME)
+ 312   2              {
+ 313   3                  ds1302_proc();
+ 314   3                  date_time = 0;
+ 315   3              }
+ 316   2      
+ 317   2              if (adc_time == ADC_TIME)
+ 318   2              {
+ 319   3                  adc_proc();
+ 320   3                  adc_time = 0;
+ 321   3              }
+ 322   2      
+ 323   2              if (temp_time == TEMP_TIME)
+ 324   2              {
+ 325   3                  ds18b20_proc();
+ 326   3                  temp_time = 0;
+ 327   3              }
+ 328   2      
+ 329   2              if (sonic_time == SONIC_TIME && is_sonic == 1)
+ 330   2              {
+ 331   3                  sonic_proc();
+ 332   3                  sonic_time = 0;
+ 333   3              }
+ 334   2      
+ 335   2              if (freq_time == FREQ_TIME && is_sonic == 0)
+ 336   2              {
+ 337   3                  freq_proc();
+ 338   3                  freq_time = 0;
+ 339   3              }
+ 340   2          }
+ 341   1      }
+ 342          
+ 343          void Timer1_Isr(void) interrupt 3
+ 344          {
+ 345   1          seg_display();
+ 346   1      
+ 347   1          if (led_time < LED_TIME) { led_time++; }
+ 348   1      
+ 349   1          if (key_time < KEY_TIME) { key_time++; }
+ 350   1      
+ 351   1          if (state_time < STATE_TIME) { state_time++; }
+ 352   1      
+ 353   1          if (date_time < DATE_TIME) { date_time++; }
+ 354   1      
+ 355   1          if (adc_time < ADC_TIME) { adc_time++; }
+ 356   1      
+ 357   1          if (temp_time < TEMP_TIME) { temp_time++; }
+ 358   1      
+ 359   1          if (sonic_time < SONIC_TIME) { sonic_time++; }
+ 360   1      
+ 361   1          if (freq_time < FREQ_TIME) { freq_time++; }
+ 362   1          
+ 363   1      }
+ 364          
+C51 COMPILER V9.60.7.0   MAIN                                                              04/12/2025 12:17:41 PAGE 7   
+
+ 365          // 0 0 0 1 3 
+ 366          
+ 367          void delete_0(uchar *list, uchar len, uchar is_negative)
+ 368          {
+ 369   1          uchar i;
+ 370   1          if ( len == 0 ) { return; }
+ 371   1      
+ 372   1          len--;
+ 373   1          for (i = 0;i < len;i++)
+ 374   1          {
+ 375   2              if ( list[i] == 0 )
+ 376   2              {
+ 377   3                  if ( list[i-1] != 0 && is_negative == 1) 
+ 378   3                  {
+ 379   4                      list[i] = 17;
+ 380   4                  }
+ 381   3                  else
+ 382   3                  {
+ 383   4                      list[i] = 16;
+ 384   4                  }
+ 385   3              }
+ 386   2              else
+ 387   2              {
+ 388   3                  break;
+ 389   3              }
+ 390   2          }
+ 391   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    623    ----
+   CODE SIZE        =   1300    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      7    ----
-   IDATA SIZE       =     10    ----
+   DATA SIZE        =     18       5
+   IDATA SIZE       =     18    ----
    BIT SIZE         =      1    ----
 END OF MODULE INFORMATION.
 

@@ -1,0 +1,66 @@
+C51 COMPILER V9.60.7.0   SONIC                                                             04/12/2025 12:17:41 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE SONIC
+OBJECT MODULE PLACED IN .\Objects\sonic.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE code\sonic.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listing
+                    -s\sonic.lst) TABS(2) OBJECT(.\Objects\sonic.obj)
+
+line level    source
+
+   1          #include "sonic.h"
+   2          
+   3          sbit tx = P1 ^ 0;
+   4          sbit rx = P1 ^ 1;
+   5          
+   6          
+   7          void sonic_send()
+   8          {
+   9   1          tx = 1;
+  10   1          Delay14us();
+  11   1          tx = 0;
+  12   1      }
+  13          
+  14          
+  15          uchar sonic_measure()
+  16          {
+  17   1          uchar distance;
+  18   1      
+  19   1          TR0 = 0;    // 不允许中断
+  20   1          TF0 = 0;    // 溢出标志位
+  21   1          TF0 = 0; TH0 = 0;
+  22   1      
+  23   1          sonic_send();
+  24   1      
+  25   1          while (rx == 0);
+  26   1      
+  27   1          TR0 = 1;
+  28   1      
+  29   1          while (rx == 1 && TF0 == 0);
+  30   1          
+  31   1          if (TF0 == 1)
+  32   1          {
+  33   2              distance = 99;
+  34   2              TF0 = 0;
+  35   2          }
+  36   1          else
+  37   1          {
+  38   2              distance = (uchar) ((TH0 << 8 | TL0) * 0.017);
+  39   2          }
+  40   1      
+  41   1          return distance;
+  42   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     70    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

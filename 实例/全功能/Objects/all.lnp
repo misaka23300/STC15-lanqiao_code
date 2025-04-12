@@ -4,6 +4,8 @@
 ".\Objects\ds1302.obj",
 ".\Objects\key.obj",
 ".\Objects\main.obj",
-".\Objects\iic.obj" 
+".\Objects\iic.obj",
+".\Objects\onewire.obj",
+".\Objects\sonic.obj" 
 TO ".\Objects\all" 
 PRINT(".\Listings\all.m51") RAMSIZE(256) 
