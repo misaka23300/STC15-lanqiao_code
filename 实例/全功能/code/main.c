@@ -48,13 +48,13 @@ void adc_proc()
        adc_3 = ADC(0x01); 
        is_3_flag = 1;
         
-       adc_3_value = (uint) (adc_3 * 19.6);
+       adc_3_value = (uint) (adc_3 * 0.0196 * 100);
        // adc_3_value = adc_3_value * 100; // 取2位小数
 
-       if ((adc_3_value % 10) > 5)
+       /* if ((adc_3_value % 10) > 5)
        {
             adc_3_value = (adc_3_value / 10) + 1;
-       }
+       } */
     }
     
 
