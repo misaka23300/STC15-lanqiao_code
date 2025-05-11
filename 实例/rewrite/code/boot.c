@@ -21,7 +21,7 @@ void boot_init()
 
     P0 = 0x00;
     batch(6);
-
+ 
     Timer1_Init();
     EA = 1;
 }

@@ -6,7 +6,7 @@ typedef unsigned int uint;
 
 #include "STC15F2K60S2.H"
 #include "intrins.h"
-
+ 
 
 void boot_init();
 void batch(uchar i);
