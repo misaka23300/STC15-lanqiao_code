@@ -13,7 +13,7 @@ uchar led[8] = {0, 0 ,0, 0, 0, 0, 0 ,0};
 
 static uchar randz_now;
 static uchar randz_last = 0xFF;
-
+ 
 
 void seg_display()
 {
@@ -58,9 +58,6 @@ void led_display()
     i = i + 1;
     if (i == 8) { i = 0; }
 }
-
-
-
 
 
 // 继电器 4
