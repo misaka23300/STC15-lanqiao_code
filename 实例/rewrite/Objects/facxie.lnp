@@ -1,0 +1,6 @@
+".\Objects\STARTUP.obj",
+".\Objects\boot.obj",
+".\Objects\display.obj",
+".\Objects\main.obj" 
+TO ".\Objects\facxie" 
+PRINT(".\Listings\facxie.m51") RAMSIZE(256) 

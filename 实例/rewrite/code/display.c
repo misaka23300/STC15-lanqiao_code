@@ -10,6 +10,11 @@ uchar code letter[] = {                       //标准字库
 uchar seg[8] = {0, 0 ,0, 0, 0, 0, 0 ,0};
 uchar led[8] = {0, 0 ,0, 0, 0, 0, 0 ,0};
 
+
+static uchar randz_now;
+static uchar randz_last = 0xFF;
+
+
 void seg_display()
 {
     static uchar i;
@@ -54,30 +59,49 @@ void led_display()
     if (i == 8) { i = 0; }
 }
 
-// 继电器
+
+
+
+
+// 继电器 4
 
 void relay(bit state)
 {
+    
     if (state)
     {
-        temp = 0x01;
+        randz_now = randz_now | (0x10);
     }
     else
     {
-        temp = 0x00;
+        randz_now = randz_now & ~(0x10);
+    }
+
+    if (randz_now != randz_last)
+    {
+        P0 = randz_now;
+        batch(5);
+        randz_last = randz_now;
     }
 }
 
-// 蜂鸣器
+// 蜂鸣器 6
 void buzz(bit state)
 {
     if (state)
     {
-        temp = 0x03;
+        randz_now = randz_now | (0x40);
     }
     else
     {
-        temp = 0x00;
+        randz_now = randz_now & ~(0x40);
+    }
+    
+    if (randz_now != randz_last)
+    {
+        P0 = randz_now;
+        batch(5);
+        randz_last = randz_now;
     }
 }
 
