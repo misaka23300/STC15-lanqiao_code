@@ -1,6 +1,10 @@
 #include "boot.h"
 
-void boot_init()
+
+
+
+
+void clean_display()
 {
     P0M1 = 0;   P0M0 = 0;   //设置为准双向口
     P1M1 = 0;   P1M0 = 0;   //设置为准双向口
@@ -21,10 +25,9 @@ void boot_init()
 
     P0 = 0x00;
     batch(6);
- 
-    Timer1_Init();
-    EA = 1;
 }
+
+
 
 
 void batch(uchar i)
