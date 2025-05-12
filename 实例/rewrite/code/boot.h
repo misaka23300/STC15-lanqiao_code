@@ -12,5 +12,5 @@ void boot_init();
 void batch(uchar i);
 void Timer1_Init(void);
 void Delay500ms(void);
-
+void clean_display();
 #endif

@@ -3,5 +3,8 @@
 
 #include "boot.h"
 #include "display.h"
+#include "key.h"
+#include "iic.h"
+
 
 #endif
