@@ -3,7 +3,8 @@
 enum {
     LED_TIME = 20,
     KEY_TIME = 15,
-    TRC_TIME = 100
+    TRC_TIME = 100,
+    STATE_TIME = 50,
 };
 
 struct {
@@ -28,6 +29,10 @@ RTC rtc = {
     {0, 0, 0}
 };
 
+struct {
+    uchar time;
+    uchar mode_0;
+} state;
 
 
 void main()
@@ -68,6 +73,12 @@ void check_time()
         read_datetime(rtc.now_time);
         rtc.time = 0;
     }
+
+    if (state.time == STATE_TIME)
+    {
+        staet_proc();
+        state.time = 0;
+    }
 }
 
 void timer_1_interrupt() interrupt 3
@@ -77,6 +88,8 @@ void timer_1_interrupt() interrupt 3
     if (key.time < KET_TIME) { key.time++; }
 
     if (rtc.time < RTC_TIME) { rtc.time++; }
+
+    if (state.time < STATE_TIME) {state.time++; }
 
 }
 
@@ -101,3 +114,33 @@ void key_proc()
     }
 
 }
+
+void state_proc()
+{
+    switch (state.mode_0)
+    {
+        case 0:
+        {
+            set_seg_value(times / 10 % 10, times % 10, 0, 0 ,0 ,0, 0, 0);
+        }
+        break;
+
+       /*  case 1:
+        {
+            set_seg()
+        } */
+    }
+}
+
+
+
+void write_start_times()
+{
+    uchar times;
+    times = read_2k(0x00);
+    times = times + 1;
+    write_2k(0x00, times);
+}
+
+
+

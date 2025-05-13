@@ -3,8 +3,6 @@
 
 #include "boot.h"
 
-
-
 uchar ADC(uchar address);
 void DAC(uchar value);
 void write_2k(uchar address, Data);

@@ -14,6 +14,30 @@ uchar led[8] = {0, 0 ,0, 0, 0, 0, 0 ,0};
 static uchar randz_now;
 static uchar randz_last = 0xFF;
  
+void set_seg_value(uchar d0, d1, d2, d3, d4, d5, d6, d7)
+{
+    seg[0] = d0;
+    seg[1] = d1;
+    seg[2] = d2;
+    seg[3] = d3; 
+    seg[4] = d4; 
+    seg[5] = d5;
+    seg[6] = d6;
+    seg[7] = d7;
+}
+
+void set_seg_list(uchar *list)
+{
+    seg[0] = list[0];
+    seg[1] = list[1];
+    seg[2] = list[2];
+    seg[3] = list[3];
+    seg[4] = list[4];
+    seg[5] = list[5];
+    seg[6] = list[6];
+    seg[7] = list[7];
+
+}
 
 void seg_display()
 {
