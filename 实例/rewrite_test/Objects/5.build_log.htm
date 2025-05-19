@@ -27,16 +27,36 @@ assembling STARTUP.A51...
 compiling display.c...
 compiling ds1302.c...
 compiling iic.c...
-code\iic.c(170): error C267: 'I2CStart': requires ANSI-style prototype
 compiling key.c...
 compiling machine.c...
 compiling main.c...
-code\main.c(49): warning C206: 'boot_init': missing function-prototype
-code\main.c(53): warning C206: 'task_loop': missing function-prototype
-code\main.c(58): error C231: 'boot_init': redefinition
 compiling uart.c...
-code\uart.c(35): error C204: 'buffIdnex': undefined member
-Target not created.
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SET_SEG_LIST?DISPLAY
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SET_LED_VALUE?DISPLAY
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?SEG_DISPLAY?DISPLAY
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RELAY?DISPLAY
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?BUZZ?DISPLAY
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HEX_TO_BCD?DS1302
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_PCF8591_ADC?IIC
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_PCF8591_DAC?IIC
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY500MS?MACHINE
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?WRITE_START_TIMES?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?UART1_INIT?UART
+Program Size: data=99.2 xdata=0 code=1718
+creating hex file from ".\Objects\5.19"...
+".\Objects\5.19" - 0 Error(s), 11 Warning(s).
 Build Time Elapsed:  00:00:01
 </pre>
 </body>

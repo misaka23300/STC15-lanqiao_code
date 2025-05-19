@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              05/19/2025 16:34:22 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              05/19/2025 16:48:48 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -15,161 +15,174 @@ line level    source
    5              LED_TIME = 20,
    6              KEY_TIME = 15,
    7              TRC_TIME = 100,
-   8              STATE_TIME = 50
-   9          };
-  10          
+   8              STATE_TIME = 50,
+   9              RTC_TIME = 1000
+  10          };
   11          
-  12          typedef struct {
-  13              uchar time;
-  14          } LED;
-  15          
+  12          
+  13          typedef struct {
+  14              uchar time;
+  15          } LED;
   16          
-  17          typedef struct {
-  18              uchar time;
-  19              uchar press;
-  20          } KEY;
-  21          
+  17          
+  18          typedef struct {
+  19              uchar time;
+  20              uchar press;
+  21          } KEY;
   22          
-  23          typedef struct {
-  24              uchar rtc_time;
-  25              uchar init_time[7]; // 秒 分 时 天 月 星期 年 
-  26              uchar now_time[3];
-  27          } RTC;
-  28          
-  29          
-  30          typedef struct {
-  31              uchar time;
-  32              uchar mode_0;
-  33          } STATE;
-  34          
-  35          
-  36          LED led;
-  37          KEY key;
-  38          RTC rtc = {
-  39              0,
-  40              {0x50, 0x59, 0x23, 0x01, 0x01, 0x01, 0x25},
-  41              {0, 0, 0}
-  42          };
-  43          STATE state;
-  44          
-  45          
-  46          void main()
-  47          {
-  48   1          
-  49   1          boot_init();
-*** WARNING C206 IN LINE 49 OF code\main.c: 'boot_init': missing function-prototype
-  50   1      
-  51   1          while (1)
-  52   1          {
-  53   2              task_loop();
-C51 COMPILER V9.60.7.0   MAIN                                                              05/19/2025 16:34:22 PAGE 2   
+  23          
+  24          typedef struct {
+  25              uchar rtc_time;
+  26              uchar init_time[7]; // 秒 分 时 天 月 星期 年 
+  27              uchar now_time[3];
+  28              uint time;
+  29          } RTC;
+  30          
+  31          
+  32          typedef struct {
+  33              uchar time;
+  34              uchar mode_0;
+  35          } STATE;
+  36          
+  37          
+  38          LED led;
+  39          KEY key;
+  40          RTC rtc = {
+  41              0,
+  42              {0x50, 0x59, 0x23, 0x01, 0x01, 0x01, 0x25},
+  43              {0, 0, 0}
+  44          };
+  45          STATE state;
+  46          
+  47          
+  48          
+  49          
+  50          void main()
+  51          {
+  52   1          
+  53   1          boot_init();
+  54   1      
+C51 COMPILER V9.60.7.0   MAIN                                                              05/19/2025 16:48:48 PAGE 2   
 
-*** WARNING C206 IN LINE 53 OF code\main.c: 'task_loop': missing function-prototype
-  54   2          }
-  55   1      }
-  56          
-  57          void boot_init()
-  58          {
-*** ERROR C231 IN LINE 58 OF code\main.c: 'boot_init': redefinition
-  59   1          clean_display();
-  60   1      
-  61   1          Timer1_Init();
-  62   1          EA = 1;
-  63   1      
-  64   1          write_datetime(rtc.init_time);
-  65   1      }
-  66          
-  67          void task_loop()
-  68          {
-  69   1          if (led.time == LED_TIME)
-  70   1          {
-  71   2              led_proc();
-  72   2              led.time = 0;
-  73   2          }
-  74   1      
-  75   1          if (key.time == KEY_TIME)
-  76   1          {
-  77   2              key_proc();
-  78   2              key.time = 0;
-  79   2          }
-  80   1      
-  81   1          if (rtc.time == TRC_TIME)
-  82   1          {
-  83   2              read_datetime(rtc.now_time);
-  84   2              rtc.time = 0;
-  85   2          }
-  86   1      
-  87   1          if (state.time == STATE_TIME)
-  88   1          {
-  89   2              staet_proc();
-  90   2              state.time = 0;
-  91   2          }
-  92   1      }
-  93          
-  94          void timer_1_interrupt() interrupt 3
-  95          {
-  96   1          if (led.time < LED_TIME) { led.time++; }
-  97   1      
-  98   1          if (key.time < KET_TIME) { key.time++; }
-  99   1      
- 100   1          if (rtc.time < RTC_TIME) { rtc.time++; }
+  55   1          while (1)
+  56   1          {
+  57   2              task_loop();
+  58   2          }
+  59   1      }
+  60          
+  61          void boot_init()
+  62          {
+  63   1          clean_display();
+  64   1      
+  65   1          Timer1_Init();
+  66   1          EA = 1;
+  67   1      
+  68   1          write_datetime(rtc.init_time);
+  69   1      }
+  70          
+  71          void task_loop()
+  72          {
+  73   1          if (led.time == LED_TIME)
+  74   1          {
+  75   2              led_task();
+  76   2              led.time = 0;
+  77   2          }
+  78   1      
+  79   1          if (key.time == KEY_TIME)
+  80   1          {
+  81   2              key_task();
+  82   2              key.time = 0;
+  83   2          }
+  84   1      
+  85   1          if (rtc.time == TRC_TIME)
+  86   1          {
+  87   2              read_datetime(rtc.now_time);
+  88   2              rtc.time = 0;
+  89   2          }
+  90   1      
+  91   1          if (state.time == STATE_TIME)
+  92   1          {
+  93   2              display_task();
+  94   2              state.time = 0;
+  95   2          }
+  96   1      }
+  97          
+  98          void timer_1_interrupt() interrupt 3
+  99          {
+ 100   1          if (led.time < LED_TIME) { led.time++; }
  101   1      
- 102   1          if (state.time < STATE_TIME) {state.time++; }
+ 102   1          if (key.time < KEY_TIME) { key.time++; }
  103   1      
- 104   1      }
- 105          
- 106          
- 107          void led_task()
- 108          {
- 109   1          led_display();
- 110   1      }
- 111          
- 112          
- 113          void key_task()
-C51 COMPILER V9.60.7.0   MAIN                                                              05/19/2025 16:34:22 PAGE 3   
+ 104   1          if (rtc.time < RTC_TIME) { rtc.time++; }
+ 105   1      
+ 106   1          if (state.time < STATE_TIME) {state.time++; }
+ 107   1      
+ 108   1      }
+ 109          
+ 110          
+ 111          void led_task()
+ 112          {
+ 113   1          led_display();
+ 114   1      }
+ 115          
+ 116          
+C51 COMPILER V9.60.7.0   MAIN                                                              05/19/2025 16:48:48 PAGE 3   
 
- 114          {
- 115   1          key.press = key_scan();
- 116   1      
- 117   1          switch (key.press)
- 118   1          {
- 119   2              case 4:
- 120   2              {
- 121   3                  
- 122   3              }
- 123   2              break;
- 124   2          }
- 125   1      
- 126   1      }
- 127          
- 128          void display_task()
- 129          {
- 130   1          switch (state.mode_0)
- 131   1          {
- 132   2              case 0:
- 133   2              {
- 134   3                  set_seg_value(times / 10 % 10, times % 10, 0, 0 ,0 ,0, 0, 0);
- 135   3              }
- 136   2              break;
- 137   2      
- 138   2             /*  case 1:
- 139   2              {
- 140   2                  set_seg()
- 141   2              } */
- 142   2          }
- 143   1      }
- 144          
- 145          
- 146          
- 147          void write_start_times()
- 148          {
- 149   1          uchar times;
- 150   1          times = read_2k(0x00);
- 151   1          times = times + 1;
- 152   1          write_2k(0x00, times);
- 153   1      }
- 154          
- 155          
- 156          
+ 117          void key_task()
+ 118          {
+ 119   1          key.press = key_scan();
+ 120   1      
+ 121   1          switch (key.press)
+ 122   1          {
+ 123   2              case 4:
+ 124   2              {
+ 125   3                  
+ 126   3              }
+ 127   2              break;
+ 128   2          }
+ 129   1      
+ 130   1      }
+ 131          
+ 132          void display_task()
+ 133          {
+ 134   1          switch (state.mode_0)
+ 135   1          {
+ 136   2              case 0:
+ 137   2              {
+ 138   3                  set_seg_value(2, 3, 0, 0 ,0 ,0, 0, 0);
+ 139   3              }
+ 140   2              break;
+ 141   2      
+ 142   2             /*  case 1:
+ 143   2              {
+ 144   2                  set_seg()
+ 145   2              } */
+ 146   2          }
+ 147   1      }
+ 148          
+ 149          
+ 150          
+ 151          void write_start_times()
+ 152          {
+ 153   1          uchar times;
+ 154   1          times = AT24C02_read(0x00);
+ 155   1          times = times + 1;
+ 156   1          AT24C02_write(0x00, times);
+ 157   1      }
+ 158          
+ 159          
+ 160          
 
-C51 COMPILATION COMPLETE.  2 WARNING(S),  1 ERROR(S)
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    195    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     18    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

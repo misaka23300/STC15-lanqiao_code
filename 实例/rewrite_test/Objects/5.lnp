@@ -1,0 +1,10 @@
+".\Objects\STARTUP.obj",
+".\Objects\display.obj",
+".\Objects\ds1302.obj",
+".\Objects\iic.obj",
+".\Objects\key.obj",
+".\Objects\machine.obj",
+".\Objects\main.obj",
+".\Objects\uart.obj" 
+TO ".\Objects\5.19" 
+PRINT(".\Listings\5.m51") RAMSIZE(256) 

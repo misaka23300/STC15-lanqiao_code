@@ -16,5 +16,8 @@
             "command": "extension.execute",
             "priority": 4
         }
-    ]
+    ],
+    "files.associations": {
+        "iic.h": "c"
+    }
 }

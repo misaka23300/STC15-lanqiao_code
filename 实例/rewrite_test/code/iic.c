@@ -167,7 +167,8 @@ uchar AT24C02_read(uchar address)
 {
     uchar Data;
 
-    I2CStart(0xA0);
+    I2CStart();
+    I2CSendByte(0xA0);
     I2CWaitAck();
 
     I2CSendByte(address);

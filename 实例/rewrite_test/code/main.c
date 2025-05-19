@@ -5,7 +5,8 @@ enum {
     LED_TIME = 20,
     KEY_TIME = 15,
     TRC_TIME = 100,
-    STATE_TIME = 50
+    STATE_TIME = 50,
+    RTC_TIME = 1000
 };
 
 
@@ -24,6 +25,7 @@ typedef struct {
     uchar rtc_time;
     uchar init_time[7]; // 秒 分 时 天 月 星期 年 
     uchar now_time[3];
+    uint time;
 } RTC;
 
 
@@ -41,6 +43,8 @@ RTC rtc = {
     {0, 0, 0}
 };
 STATE state;
+
+
 
 
 void main()
@@ -68,13 +72,13 @@ void task_loop()
 {
     if (led.time == LED_TIME)
     {
-        led_proc();
+        led_task();
         led.time = 0;
     }
 
     if (key.time == KEY_TIME)
     {
-        key_proc();
+        key_task();
         key.time = 0;
     }
 
@@ -86,7 +90,7 @@ void task_loop()
 
     if (state.time == STATE_TIME)
     {
-        staet_proc();
+        display_task();
         state.time = 0;
     }
 }
@@ -95,7 +99,7 @@ void timer_1_interrupt() interrupt 3
 {
     if (led.time < LED_TIME) { led.time++; }
 
-    if (key.time < KET_TIME) { key.time++; }
+    if (key.time < KEY_TIME) { key.time++; }
 
     if (rtc.time < RTC_TIME) { rtc.time++; }
 
@@ -131,7 +135,7 @@ void display_task()
     {
         case 0:
         {
-            set_seg_value(times / 10 % 10, times % 10, 0, 0 ,0 ,0, 0, 0);
+            set_seg_value(2, 3, 0, 0 ,0 ,0, 0, 0);
         }
         break;
 
@@ -147,9 +151,9 @@ void display_task()
 void write_start_times()
 {
     uchar times;
-    times = read_2k(0x00);
+    times = AT24C02_read(0x00);
     times = times + 1;
-    write_2k(0x00, times);
+    AT24C02_write(0x00, times);
 }
 
 

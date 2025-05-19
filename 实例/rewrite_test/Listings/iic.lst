@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   IIC                                                               05/19/2025 16:34:22 PAGE 1   
+C51 COMPILER V9.60.7.0   IIC                                                               05/19/2025 16:48:48 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE IIC
@@ -62,7 +62,7 @@ line level    source
   52   2              else{
   53   3                  sda = 0;
   54   3              }
-C51 COMPILER V9.60.7.0   IIC                                                               05/19/2025 16:34:22 PAGE 2   
+C51 COMPILER V9.60.7.0   IIC                                                               05/19/2025 16:48:48 PAGE 2   
 
   55   2          I2C_Delay(DELAY_TIME);
   56   2              scl = 1;
@@ -126,7 +126,7 @@ line level    source
  114   1          I2CSendByte(0x90);
  115   1          I2CWaitAck();
  116   1      
-C51 COMPILER V9.60.7.0   IIC                                                               05/19/2025 16:34:22 PAGE 3   
+C51 COMPILER V9.60.7.0   IIC                                                               05/19/2025 16:48:48 PAGE 3   
 
  117   1          I2CSendByte(address);
  118   1          I2CWaitAck();
@@ -181,27 +181,39 @@ line level    source
  167          {
  168   1          uchar Data;
  169   1      
- 170   1          I2CStart(0xA0);
-*** ERROR C267 IN LINE 170 OF code\iic.c: 'I2CStart': requires ANSI-style prototype
- 171   1          I2CWaitAck();
- 172   1      
- 173   1          I2CSendByte(address);
- 174   1          I2CWaitAck();
- 175   1      
- 176   1          I2CStart();
- 177   1      
-C51 COMPILER V9.60.7.0   IIC                                                               05/19/2025 16:34:22 PAGE 4   
+ 170   1          I2CStart();
+ 171   1          I2CSendByte(0xA0);
+ 172   1          I2CWaitAck();
+ 173   1      
+ 174   1          I2CSendByte(address);
+ 175   1          I2CWaitAck();
+ 176   1      
+ 177   1          I2CStart();
+ 178   1      
+C51 COMPILER V9.60.7.0   IIC                                                               05/19/2025 16:48:48 PAGE 4   
 
- 178   1          I2CSendByte(0xA1);
- 179   1          I2CWaitAck();
- 180   1      
- 181   1          Data = I2CReceiveByte();
- 182   1          I2CSendAck(1);
- 183   1      
- 184   1          I2CStop();
- 185   1      
- 186   1          return Data;
- 187   1      }
- 188          
+ 179   1          I2CSendByte(0xA1);
+ 180   1          I2CWaitAck();
+ 181   1      
+ 182   1          Data = I2CReceiveByte();
+ 183   1          I2CSendAck(1);
+ 184   1      
+ 185   1          I2CStop();
+ 186   1      
+ 187   1          return Data;
+ 188   1      }
+ 189          
 
-C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    283    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -7,8 +7,8 @@ uchar code letter[] = {                       //标准字库
         0x00,0x40,0x76,0x1E,0x70,0x38,0x37,0x5C,0x73,0x3E,0x78,0x3d,0x67,0x50,0x37,0x6e,
         0xBF,0x86,0xDB,0xCF,0xE6,0xED,0xFD,0x87,0xFF,0xEF,0x46};    //0. 1. 2. 3. 4. 5. 6. 7. 8. 9. -1
 
-uchar seg[8] = {0, 0 ,0, 0, 0, 0, 0 ,0};
-uchar led[8] = {0, 0 ,0, 0, 0, 0, 0 ,0};
+uchar seg_data[8] = {0, 0, 0, 0, 0, 0, 0 ,0};
+uchar led_data[8] = {0, 0, 0, 0, 0, 0, 0 ,0};
 
 
 static uchar randz_now;
@@ -16,40 +16,40 @@ static uchar randz_last = 0xFF;
  
 void set_seg_value(uchar d0, d1, d2, d3, d4, d5, d6, d7)
 {
-    seg[0] = d0;
-    seg[1] = d1;
-    seg[2] = d2;
-    seg[3] = d3; 
-    seg[4] = d4; 
-    seg[5] = d5;
-    seg[6] = d6;
-    seg[7] = d7;
+    seg_data[0] = d0;
+    seg_data[1] = d1;
+    seg_data[2] = d2;
+    seg_data[3] = d3; 
+    seg_data[4] = d4; 
+    seg_data[5] = d5;
+    seg_data[6] = d6;
+    seg_data[7] = d7;
 }
 
 void set_seg_list(uchar *list)
 {
-    seg[0] = list[0];
-    seg[1] = list[1];
-    seg[2] = list[2];
-    seg[3] = list[3];
-    seg[4] = list[4];
-    seg[5] = list[5];
-    seg[6] = list[6];
-    seg[7] = list[7];
+    seg_data[0] = list[0];
+    seg_data[1] = list[1];
+    seg_data[2] = list[2];
+    seg_data[3] = list[3];
+    seg_data[4] = list[4];
+    seg_data[5] = list[5];
+    seg_data[6] = list[6];
+    seg_data[7] = list[7];
 
 }
 
 
 void set_led_value(uchar d0, d1, d2, d3, d4, d5, d6, d7)
 {
-    led[0] = d0;
-    led[1] = d1;
-    led[2] = d2;
-    led[3] = d3; 
-    led[4] = d4; 
-    led[5] = d5;
-    led[6] = d6;
-    led[7] = d7;
+    led_data[0] = d0;
+    led_data[1] = d1;
+    led_data[2] = d2;
+    led_data[3] = d3; 
+    led_data[4] = d4; 
+    led_data[5] = d5;
+    led_data[6] = d6;
+    led_data[7] = d7;
 }
 
 
@@ -63,7 +63,7 @@ void seg_display()
     P0 = 0x01 << i;
     batch(6);
 
-    P0 = ~letter[seg[i]]; 
+    P0 = ~letter[seg_data[i]]; 
     batch(7);
 
     i = i + 1;
@@ -76,7 +76,7 @@ void led_display()
     static uchar now;
     static uchar last;
 
-    if (led[i])
+    if (led_data[i])
     {
         now = now | (0x01 << i);
     }

@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   DISPLAY                                                           05/19/2025 16:34:22 PAGE 1   
+C51 COMPILER V9.60.7.0   DISPLAY                                                           05/19/2025 16:48:48 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE DISPLAY
@@ -17,8 +17,8 @@ line level    source
    7                  0x00,0x40,0x76,0x1E,0x70,0x38,0x37,0x5C,0x73,0x3E,0x78,0x3d,0x67,0x50,0x37,0x6e,
    8                  0xBF,0x86,0xDB,0xCF,0xE6,0xED,0xFD,0x87,0xFF,0xEF,0x46};    //0. 1. 2. 3. 4. 5. 6. 7. 8. 9. -1
    9          
-  10          uchar seg[8] = {0, 0 ,0, 0, 0, 0, 0 ,0};
-  11          uchar led[8] = {0, 0 ,0, 0, 0, 0, 0 ,0};
+  10          uchar seg_data[8] = {0, 0 ,0, 0, 0, 0, 0 ,0};
+  11          uchar led_data[8] = {0, 0 ,0, 0, 0, 0, 0 ,0};
   12          
   13          
   14          static uchar randz_now;
@@ -26,43 +26,43 @@ line level    source
   16           
   17          void set_seg_value(uchar d0, d1, d2, d3, d4, d5, d6, d7)
   18          {
-  19   1          seg[0] = d0;
-  20   1          seg[1] = d1;
-  21   1          seg[2] = d2;
-  22   1          seg[3] = d3; 
-  23   1          seg[4] = d4; 
-  24   1          seg[5] = d5;
-  25   1          seg[6] = d6;
-  26   1          seg[7] = d7;
+  19   1          seg_data[0] = d0;
+  20   1          seg_data[1] = d1;
+  21   1          seg_data[2] = d2;
+  22   1          seg_data[3] = d3; 
+  23   1          seg_data[4] = d4; 
+  24   1          seg_data[5] = d5;
+  25   1          seg_data[6] = d6;
+  26   1          seg_data[7] = d7;
   27   1      }
   28          
   29          void set_seg_list(uchar *list)
   30          {
-  31   1          seg[0] = list[0];
-  32   1          seg[1] = list[1];
-  33   1          seg[2] = list[2];
-  34   1          seg[3] = list[3];
-  35   1          seg[4] = list[4];
-  36   1          seg[5] = list[5];
-  37   1          seg[6] = list[6];
-  38   1          seg[7] = list[7];
+  31   1          seg_data[0] = list[0];
+  32   1          seg_data[1] = list[1];
+  33   1          seg_data[2] = list[2];
+  34   1          seg_data[3] = list[3];
+  35   1          seg_data[4] = list[4];
+  36   1          seg_data[5] = list[5];
+  37   1          seg_data[6] = list[6];
+  38   1          seg_data[7] = list[7];
   39   1      
   40   1      }
   41          
   42          
   43          void set_led_value(uchar d0, d1, d2, d3, d4, d5, d6, d7)
   44          {
-  45   1          led[0] = d0;
-  46   1          led[1] = d1;
-  47   1          led[2] = d2;
-  48   1          led[3] = d3; 
-  49   1          led[4] = d4; 
-  50   1          led[5] = d5;
-  51   1          led[6] = d6;
-  52   1          led[7] = d7;
+  45   1          led_data[0] = d0;
+  46   1          led_data[1] = d1;
+  47   1          led_data[2] = d2;
+  48   1          led_data[3] = d3; 
+  49   1          led_data[4] = d4; 
+  50   1          led_data[5] = d5;
+  51   1          led_data[6] = d6;
+  52   1          led_data[7] = d7;
   53   1      }
   54          
-C51 COMPILER V9.60.7.0   DISPLAY                                                           05/19/2025 16:34:22 PAGE 2   
+C51 COMPILER V9.60.7.0   DISPLAY                                                           05/19/2025 16:48:48 PAGE 2   
 
   55          
   56          void seg_display()
@@ -75,7 +75,7 @@ line level    source
   63   1          P0 = 0x01 << i;
   64   1          batch(6);
   65   1      
-  66   1          P0 = ~letter[seg[i]]; 
+  66   1          P0 = ~letter[seg_data[i]]; 
   67   1          batch(7);
   68   1      
   69   1          i = i + 1;
@@ -88,7 +88,7 @@ line level    source
   76   1          static uchar now;
   77   1          static uchar last;
   78   1      
-  79   1          if (led[i])
+  79   1          if (led_data[i])
   80   1          {
   81   2              now = now | (0x01 << i);
   82   2          }
@@ -126,7 +126,7 @@ line level    source
  114   1      
  115   1          if (randz_now != randz_last)
  116   1          {
-C51 COMPILER V9.60.7.0   DISPLAY                                                           05/19/2025 16:34:22 PAGE 3   
+C51 COMPILER V9.60.7.0   DISPLAY                                                           05/19/2025 16:48:48 PAGE 3   
 
  117   2              P0 = randz_now;
  118   2              batch(5);
