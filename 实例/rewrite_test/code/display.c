@@ -32,12 +32,26 @@ void set_seg_list(uchar *list)
     seg[1] = list[1];
     seg[2] = list[2];
     seg[3] = list[3];
-    seg[4] = list[4];=
+    seg[4] = list[4];
     seg[5] = list[5];
     seg[6] = list[6];
     seg[7] = list[7];
 
 }
+
+
+void set_led_value(uchar d0, d1, d2, d3, d4, d5, d6, d7)
+{
+    led[0] = d0;
+    led[1] = d1;
+    led[2] = d2;
+    led[3] = d3; 
+    led[4] = d4; 
+    led[5] = d5;
+    led[6] = d6;
+    led[7] = d7;
+}
+
 
 void seg_display()
 {

@@ -1,0 +1,61 @@
+C51 COMPILER V9.60.7.0   UART                                                              05/19/2025 16:34:23 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE UART
+OBJECT MODULE PLACED IN .\Objects\uart.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE code\uart.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\uart.lst) TABS(2) OBJECT(.\Objects\uart.obj)
+
+line level    source
+
+   1          #include "uart.h"
+   2          
+   3          typedef struct {
+   4            uchar buffData[16];
+   5            uchar buffIndex;
+   6          } UART;
+   7          
+   8          UART uart;
+   9          
+  10          
+  11          void Uart1_Init(void) //4800bps@11.0592MHz
+  12          {
+  13   1        SCON = 0x50;    //8位数据,可变波特率
+  14   1        AUXR |= 0x40;   //定时器时钟1T模式
+  15   1        AUXR &= 0xFE;   //串口1选择定时器1为波特率发生器
+  16   1        TMOD &= 0x0F;   //设置定时器模式
+  17   1        TL1 = 0xC0;     //设置定时初始值
+  18   1        TH1 = 0xFD;     //设置定时初始值
+  19   1        ET1 = 0;      //禁止定时器中断
+  20   1        TR1 = 1;      //定时器1开始计时
+  21   1        ES = 1;       //使能串口1中断
+  22   1      }
+  23          
+  24          
+  25          void uart_receive() interrupt 4
+  26          {
+  27   1        uchar temp;
+  28   1      
+  29   1        if(RI)
+  30   1        {
+  31   2          RI = 0;
+  32   2          temp = SBUF;
+  33   2          if (temp != '\0')
+  34   2          {
+  35   3            if (uart.buffIdnex < 16)
+*** ERROR C204 IN LINE 35 OF code\uart.c: 'buffIdnex': undefined member
+  36   3            {
+  37   4              uart.buffData[uart.buffIndex] = temp;
+  38   4              uart.buffIndex++;
+  39   4            }
+  40   3          }
+  41   2          else
+  42   2          {
+  43   3            uart.buffIndex = 0;
+  44   3          }
+  45   2        }
+  46   1      }
+  47          
+  48          
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)

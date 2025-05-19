@@ -1,0 +1,94 @@
+C51 COMPILER V9.60.7.0   MACHINE                                                           05/19/2025 16:34:22 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MACHINE
+OBJECT MODULE PLACED IN .\Objects\machine.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE code\machine.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listi
+                    -ngs\machine.lst) TABS(2) OBJECT(.\Objects\machine.obj)
+
+line level    source
+
+   1          #include "machine.h"
+   2          
+   3          void clean_display()
+   4          {
+   5   1          P0M1 = 0;   P0M0 = 0;   //设置为准双向口
+   6   1          P1M1 = 0;   P1M0 = 0;   //设置为准双向口
+   7   1          P2M1 = 0;   P2M0 = 0;   //设置为准双向口
+   8   1          P3M1 = 0;   P3M0 = 0;   //设置为准双向口
+   9   1          P4M1 = 0;   P4M0 = 0;   //设置为准双向口
+  10   1          P5M1 = 0;   P5M0 = 0;   //设置为准双向口
+  11   1          P6M1 = 0;   P6M0 = 0;   //设置为准双向口
+  12   1          P7M1 = 0;   P7M0 = 0;   //设置为准双向口
+  13   1      
+  14   1          P0 = 0xFF;
+  15   1          batch(4);
+  16   1          batch(7);
+  17   1          batch(0);
+  18   1      
+  19   1          P0 = 0xAF;
+  20   1          batch(5);
+  21   1      
+  22   1          P0 = 0x00;
+  23   1          batch(6);
+  24   1      }
+  25          
+  26          void batch(uchar i)
+  27          {
+  28   1          switch (i)
+  29   1          {
+  30   2              case 4: { P2 = 0x1F | 0x80; break; }
+  31   2              case 5: { P2 = 0x1F | 0xA0; break; }
+  32   2              case 6: { P2 = 0x1F | 0xC0; break; }
+  33   2              case 7: { P2 = 0x1F | 0xE0; break; }
+  34   2      
+  35   2          }
+  36   1          P2 = 0x1F;
+  37   1      }
+  38          
+  39          void Timer1_Init(void)    //1毫秒@12.000MHz
+  40          {
+  41   1        AUXR |= 0x40;     //定时器时钟1T模式
+  42   1        TMOD &= 0x0F;     //设置定时器模式
+  43   1        TL1 = 0x20;       //设置定时初始值
+  44   1        TH1 = 0xD1;       //设置定时初始值
+  45   1        TF1 = 0;        //清除TF1标志
+  46   1        TR1 = 1;        //定时器1开始计时
+  47   1        ET1 = 1;        //使能定时器1中断
+  48   1      }
+  49          
+  50          
+  51          void Delay500ms(void) //@12.000MHz
+  52          {
+  53   1        unsigned char data i, j, k;
+  54   1      
+C51 COMPILER V9.60.7.0   MACHINE                                                           05/19/2025 16:34:22 PAGE 2   
+
+  55   1        _nop_();
+  56   1        _nop_();
+  57   1        i = 23;
+  58   1        j = 205;
+  59   1        k = 120;
+  60   1        do
+  61   1        {
+  62   2          do
+  63   2          {
+  64   3            while (--k);
+  65   3          } while (--j);
+  66   2        } while (--i);
+  67   1      }
+  68          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    138    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

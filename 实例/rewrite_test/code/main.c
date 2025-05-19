@@ -1,18 +1,46 @@
 #include "main.h"
 
+
+enum {
+    LED_TIME = 20,
+    KEY_TIME = 15,
+    TRC_TIME = 100,
+    STATE_TIME = 50
+};
+
+
+typedef struct {
+    uchar time;
+} LED;
+
+
+typedef struct {
+    uchar time;
+    uchar press;
+} KEY;
+
+
+typedef struct {
+    uchar rtc_time;
+    uchar init_time[7]; // 秒 分 时 天 月 星期 年 
+    uchar now_time[3];
+} RTC;
+
+
+typedef struct {
+    uchar time;
+    uchar mode_0;
+} STATE;
+
+
 LED led;
 KEY key;
-
 RTC rtc = {
     0,
     {0x50, 0x59, 0x23, 0x01, 0x01, 0x01, 0x25},
     {0, 0, 0}
 };
-
-struct {
-    uchar time;
-    uchar mode_0;
-} state;
+STATE state;
 
 
 void main()
@@ -22,7 +50,7 @@ void main()
 
     while (1)
     {
-        check_time();
+        task_loop();
     }
 }
 
@@ -36,9 +64,9 @@ void boot_init()
     write_datetime(rtc.init_time);
 }
 
-void check_time()
+void task_loop()
 {
-    if (led.time == LED_TASK_TIME)
+    if (led.time == LED_TIME)
     {
         led_proc();
         led.time = 0;
@@ -76,13 +104,13 @@ void timer_1_interrupt() interrupt 3
 }
 
 
-void led_proc()
+void led_task()
 {
     led_display();
 }
 
 
-void key_proc()
+void key_task()
 {
     key.press = key_scan();
 
@@ -90,14 +118,14 @@ void key_proc()
     {
         case 4:
         {
-
+            
         }
         break;
     }
 
 }
 
-void state_proc()
+void display_task()
 {
     switch (state.mode_0)
     {

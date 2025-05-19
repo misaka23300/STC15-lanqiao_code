@@ -1,0 +1,43 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.38.0.0
+Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: , laffey, ,, LIC=X9F5U-SRSAU-0BQEL-01CMR-GW9ZG-CX27I
+ 
+Tool Versions:
+Toolchain:       PK51 Prof. Developers Kit  Version: 9.60.7.0
+Toolchain Path:  C:\Keil_v5\C51\BIN
+C Compiler:      C51.exe V9.60.7.0
+Assembler:       A51.exe V8.2.7.0
+Linker/Locator:  BL51.exe V6.22.4.0
+Library Manager: LIB51.exe V4.30.1.0
+Hex Converter:   OH51.exe V2.7.0.0
+CPU DLL:         S8051.DLL V3.125.1.0
+Dialog DLL:      DP51.DLL V2.69.0.0 
+<h2>Project:</h2>
+C:\code_V5.0\STC15-lanqiao_code\ÊµÀý\rewrite_test\5.19.uvproj
+Project File Date:  05/19/2025
+
+<h2>Output:</h2>
+Rebuild target 'Target 1'
+assembling STARTUP.A51...
+compiling display.c...
+compiling ds1302.c...
+compiling iic.c...
+code\iic.c(170): error C267: 'I2CStart': requires ANSI-style prototype
+compiling key.c...
+compiling machine.c...
+compiling main.c...
+code\main.c(49): warning C206: 'boot_init': missing function-prototype
+code\main.c(53): warning C206: 'task_loop': missing function-prototype
+code\main.c(58): error C231: 'boot_init': redefinition
+compiling uart.c...
+code\uart.c(35): error C204: 'buffIdnex': undefined member
+Target not created.
+Build Time Elapsed:  00:00:01
+</pre>
+</body>
+</html>

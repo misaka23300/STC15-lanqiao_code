@@ -1,8 +1,4 @@
-#include "boot.h"
-
-
-
-
+#include "machine.h"
 
 void clean_display()
 {
@@ -27,9 +23,6 @@ void clean_display()
     batch(6);
 }
 
-
-
-
 void batch(uchar i)
 {
     switch (i)
@@ -42,9 +35,6 @@ void batch(uchar i)
     }
     P2 = 0x1F;
 }
-
-
-
 
 void Timer1_Init(void)		//1毫秒@12.000MHz
 {
@@ -75,3 +65,4 @@ void Delay500ms(void)	//@12.000MHz
 		} while (--j);
 	} while (--i);
 }
+
