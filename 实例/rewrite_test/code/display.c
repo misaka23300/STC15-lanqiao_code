@@ -26,7 +26,7 @@ void set_seg_value(uchar d0, d1, d2, d3, d4, d5, d6, d7)
     seg_data[7] = d7;
 }
 
-void set_seg_list(uchar *list)
+/* void set_seg_list(uchar *list)
 {
     seg_data[0] = list[0];
     seg_data[1] = list[1];
@@ -37,10 +37,10 @@ void set_seg_list(uchar *list)
     seg_data[6] = list[6];
     seg_data[7] = list[7];
 
-}
+} */
 
 
-void set_led_value(uchar d0, d1, d2, d3, d4, d5, d6, d7)
+/* void set_led_value(uchar d0, d1, d2, d3, d4, d5, d6, d7)
 {
     led_data[0] = d0;
     led_data[1] = d1;
@@ -50,7 +50,7 @@ void set_led_value(uchar d0, d1, d2, d3, d4, d5, d6, d7)
     led_data[5] = d5;
     led_data[6] = d6;
     led_data[7] = d7;
-}
+} */
 
 
 void seg_display()
@@ -70,7 +70,7 @@ void seg_display()
     if (i == 8) { i = 0; }
 }
 
-void led_display()
+/* void led_display()
 {
     static uchar i;
     static uchar now;
@@ -141,3 +141,4 @@ void buzz(bit state)
 }
 
 
+ */

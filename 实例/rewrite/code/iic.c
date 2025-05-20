@@ -106,7 +106,7 @@ void I2CSendAck(unsigned char ackbit)
 }
 
 
-uchar ADC(uchar address)
+uchar PCF8591_ADC(uchar address)
 {
     uchar adc;
     I2CStart();
@@ -126,9 +126,11 @@ uchar ADC(uchar address)
     I2CSendAck(1);
 
     I2CStop();
+
+    return adc;
 }
 
-void DAC(uchar value)
+void PCF8591_DAC(uchar value)
 {
     I2CStart();
 
@@ -144,7 +146,7 @@ void DAC(uchar value)
     I2CStop();
 }
 
-void write_2k(uchar address, Data)
+void AT24C02_write(uchar address, Data)
 {
     I2CStart();
 
@@ -161,11 +163,12 @@ void write_2k(uchar address, Data)
 
 }
 
-uchar Read_2k(uchar address)
+uchar AT24C02_read(uchar address)
 {
     uchar Data;
 
-    I2CStart(0xA0);
+    I2CStart();
+    I2CSendByte(0xA0);
     I2CWaitAck();
 
     I2CSendByte(address);
@@ -180,6 +183,7 @@ uchar Read_2k(uchar address)
     I2CSendAck(1);
 
     I2CStop();
+
     return Data;
 }
 

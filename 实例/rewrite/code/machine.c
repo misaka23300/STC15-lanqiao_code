@@ -1,8 +1,4 @@
-#include "boot.h"
-
-
-
-
+#include "machine.h"
 
 void clean_display()
 {
@@ -18,7 +14,7 @@ void clean_display()
     P0 = 0xFF;
     batch(4);
     batch(7);
-    batch(0);
+    
 
     P0 = 0xAF;
     batch(5);
@@ -27,24 +23,18 @@ void clean_display()
     batch(6);
 }
 
-
-
-
 void batch(uchar i)
 {
     switch (i)
     {
-        case 4: { P2 = 0x1F | 0x80; break; }
-        case 5: { P2 = 0x1F | 0xA0; break; }
-        case 6: { P2 = 0x1F | 0xC0; break; }
-        case 7: { P2 = 0x1F | 0xE0; break; }
+        case 4: { P2 = (P2 & 0x1F) | 0x80; break; }
+        case 5: { P2 = (P2 & 0x1F) | 0xA0; break; }
+        case 6: { P2 = (P2 & 0x1F) | 0xC0; break; }
+        case 7: { P2 = (P2 & 0x1F) | 0xE0; break; }
 
     }
-    P2 = 0x1F;
+    P2 = (P2 & 0x1F);
 }
-
-
-
 
 void Timer1_Init(void)		//1毫秒@12.000MHz
 {
@@ -75,3 +65,4 @@ void Delay500ms(void)	//@12.000MHz
 		} while (--j);
 	} while (--i);
 }
+
