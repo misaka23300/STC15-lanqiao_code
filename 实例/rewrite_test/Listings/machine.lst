@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MACHINE                                                           05/19/2025 16:48:48 PAGE 1   
+C51 COMPILER V9.60.7.0   MACHINE                                                           05/20/2025 20:08:40 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MACHINE
@@ -24,7 +24,7 @@ line level    source
   14   1          P0 = 0xFF;
   15   1          batch(4);
   16   1          batch(7);
-  17   1          batch(0);
+  17   1          
   18   1      
   19   1          P0 = 0xAF;
   20   1          batch(5);
@@ -37,13 +37,13 @@ line level    source
   27          {
   28   1          switch (i)
   29   1          {
-  30   2              case 4: { P2 = 0x1F | 0x80; break; }
-  31   2              case 5: { P2 = 0x1F | 0xA0; break; }
-  32   2              case 6: { P2 = 0x1F | 0xC0; break; }
-  33   2              case 7: { P2 = 0x1F | 0xE0; break; }
+  30   2              case 4: { P2 = (P2 & 0x1F) | 0x80; break; }
+  31   2              case 5: { P2 = (P2 & 0x1F) | 0xA0; break; }
+  32   2              case 6: { P2 = (P2 & 0x1F) | 0xC0; break; }
+  33   2              case 7: { P2 = (P2 & 0x1F) | 0xE0; break; }
   34   2      
   35   2          }
-  36   1          P2 = 0x1F;
+  36   1          P2 = (P2 & 0x1F);
   37   1      }
   38          
   39          void Timer1_Init(void)    //1毫秒@12.000MHz
@@ -62,7 +62,7 @@ line level    source
   52          {
   53   1        unsigned char data i, j, k;
   54   1      
-C51 COMPILER V9.60.7.0   MACHINE                                                           05/19/2025 16:48:48 PAGE 2   
+C51 COMPILER V9.60.7.0   MACHINE                                                           05/20/2025 20:08:40 PAGE 2   
 
   55   1        _nop_();
   56   1        _nop_();
@@ -81,7 +81,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    138    ----
+   CODE SIZE        =    153    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

@@ -51,7 +51,7 @@ void main()
 {
     
     boot_init();
-
+    
     while (1)
     {
         task_loop();
