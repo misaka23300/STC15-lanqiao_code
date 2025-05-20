@@ -1,7 +1,7 @@
 #include "ds1302.h"
 
-sbid SDA = P2^3;
-sbit SCL = P1^7;
+sbit SDA = P2^3;
+sbit SCK = P1^7;
 sbit RST = P2^7;
 
 // 秒 分 时 天 月 星期 年
@@ -9,10 +9,6 @@ uchar code write_address[7] = {0x80, 0x82, 0x84, 0x86, 0x88, 0x8A, 0x8C};
 uchar code read_address[7] = {0x81, 0x83, 0x85, 0x87, 0x89, 0x8B, 0x8D};
 
 
-//uchar idata time_now[3] = {0, 0, 0};
-
-
-							
 
 //
 void Write_Ds1302(unsigned  char temp) 

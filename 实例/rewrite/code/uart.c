@@ -1,7 +1,7 @@
 #include "uart.h"
 
 typedef struct {
-	uchar idata buffData[16];
+	uchar buffData[16];
 	uchar buffIndex;
 } UART;
 
@@ -32,7 +32,7 @@ void uart_receive() interrupt 4
 		temp = SBUF;
 		if (temp != '\0')
 		{
-			if (uart.buffIdnex < 16)
+			if (uart.buffIndex < 16)
 			{
 				uart.buffData[uart.buffIndex] = temp;
 				uart.buffIndex++;

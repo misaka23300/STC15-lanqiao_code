@@ -1,28 +1,60 @@
 #include "main.h"
 
+
+enum {
+    LED_TIME = 20,
+    KEY_TIME = 15,
+    TRC_TIME = 100,
+    STATE_TIME = 50,
+    RTC_TIME = 1000
+};
+
+
+typedef struct {
+    uchar time;
+} LED;
+
+
+typedef struct {
+    uchar time;
+    uchar press;
+} KEY;
+
+
+typedef struct {
+    uchar rtc_time;
+    uchar init_time[7]; // 秒 分 时 天 月 星期 年 
+    uchar now_time[3];
+    uint time;
+} RTC;
+
+
+typedef struct {
+    uchar time;
+    uchar mode_0;
+} STATE;
+
+
 LED led;
 KEY key;
-
 RTC rtc = {
     0,
     {0x50, 0x59, 0x23, 0x01, 0x01, 0x01, 0x25},
     {0, 0, 0}
 };
+STATE state;
 
-struct {
-    uchar time;
-    uchar mode_0;
-} state;
+
 
 
 void main()
 {
     
     boot_init();
-
+    
     while (1)
     {
-        check_time();
+        task_loop();
     }
 }
 
@@ -36,17 +68,17 @@ void boot_init()
     write_datetime(rtc.init_time);
 }
 
-void check_time()
+void task_loop()
 {
-    if (led.time == LED_TASK_TIME)
+    if (led.time == LED_TIME)
     {
-        led_proc();
+        led_task();
         led.time = 0;
     }
 
     if (key.time == KEY_TIME)
     {
-        key_proc();
+        key_task();
         key.time = 0;
     }
 
@@ -58,7 +90,7 @@ void check_time()
 
     if (state.time == STATE_TIME)
     {
-        staet_proc();
+        display_task();
         state.time = 0;
     }
 }
@@ -67,7 +99,7 @@ void timer_1_interrupt() interrupt 3
 {
     if (led.time < LED_TIME) { led.time++; }
 
-    if (key.time < KET_TIME) { key.time++; }
+    if (key.time < KEY_TIME) { key.time++; }
 
     if (rtc.time < RTC_TIME) { rtc.time++; }
 
@@ -76,13 +108,13 @@ void timer_1_interrupt() interrupt 3
 }
 
 
-void led_proc()
+void led_task()
 {
     led_display();
 }
 
 
-void key_proc()
+void key_task()
 {
     key.press = key_scan();
 
@@ -90,20 +122,20 @@ void key_proc()
     {
         case 4:
         {
-
+            
         }
         break;
     }
 
 }
 
-void state_proc()
+void display_task()
 {
     switch (state.mode_0)
     {
         case 0:
         {
-            set_seg_value(times / 10 % 10, times % 10, 0, 0 ,0 ,0, 0, 0);
+            set_seg_value(2, 3, 0, 0 ,0 ,0, 0, 0);
         }
         break;
 
@@ -119,9 +151,9 @@ void state_proc()
 void write_start_times()
 {
     uchar times;
-    times = read_2k(0x00);
+    times = AT24C02_read(0x00);
     times = times + 1;
-    write_2k(0x00, times);
+    AT24C02_write(0x00, times);
 }
 
 
