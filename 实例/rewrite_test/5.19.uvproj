@@ -387,21 +387,6 @@
               <FilePath>.\code\display.c</FilePath>
             </File>
             <File>
-              <FileName>ds1302.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\code\ds1302.c</FilePath>
-            </File>
-            <File>
-              <FileName>iic.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\code\iic.c</FilePath>
-            </File>
-            <File>
-              <FileName>key.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\code\key.c</FilePath>
-            </File>
-            <File>
               <FileName>machine.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\code\machine.c</FilePath>
@@ -412,29 +397,9 @@
               <FilePath>.\code\main.c</FilePath>
             </File>
             <File>
-              <FileName>uart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\code\uart.c</FilePath>
-            </File>
-            <File>
               <FileName>display.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\code\display.h</FilePath>
-            </File>
-            <File>
-              <FileName>ds1302.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\code\ds1302.h</FilePath>
-            </File>
-            <File>
-              <FileName>iic.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\code\iic.h</FilePath>
-            </File>
-            <File>
-              <FileName>key.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\code\key.h</FilePath>
             </File>
             <File>
               <FileName>machine.h</FileName>
@@ -445,11 +410,6 @@
               <FileName>main.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\code\main.h</FilePath>
-            </File>
-            <File>
-              <FileName>uart.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\code\uart.h</FilePath>
             </File>
           </Files>
         </Group>

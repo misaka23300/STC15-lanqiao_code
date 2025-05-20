@@ -2,31 +2,10 @@
 
 
 enum {
-    LED_TIME = 20,
-    KEY_TIME = 15,
-    TRC_TIME = 100,
-    STATE_TIME = 50,
-    RTC_TIME = 1000
+    STATE_TIME = 50
 };
 
 
-typedef struct {
-    uchar time;
-} LED;
-
-
-typedef struct {
-    uchar time;
-    uchar press;
-} KEY;
-
-
-typedef struct {
-    uchar rtc_time;
-    uchar init_time[7]; // 秒 分 时 天 月 星期 年 
-    uchar now_time[3];
-    uint time;
-} RTC;
 
 
 typedef struct {
@@ -35,13 +14,8 @@ typedef struct {
 } STATE;
 
 
-LED led;
-KEY key;
-RTC rtc = {
-    0,
-    {0x50, 0x59, 0x23, 0x01, 0x01, 0x01, 0x25},
-    {0, 0, 0}
-};
+
+
 STATE state;
 
 
@@ -65,29 +39,12 @@ void boot_init()
     Timer1_Init();
     EA = 1;
 
-    write_datetime(rtc.init_time);
+    //write_datetime(rtc.init_time);
 }
 
 void task_loop()
 {
-    if (led.time == LED_TIME)
-    {
-        led_task();
-        led.time = 0;
-    }
-
-    if (key.time == KEY_TIME)
-    {
-        key_task();
-        key.time = 0;
-    }
-
-    if (rtc.time == TRC_TIME)
-    {
-        read_datetime(rtc.now_time);
-        rtc.time = 0;
-    }
-
+    
     if (state.time == STATE_TIME)
     {
         display_task();
@@ -97,37 +54,12 @@ void task_loop()
 
 void timer_1_interrupt() interrupt 3
 {
-    if (led.time < LED_TIME) { led.time++; }
-
-    if (key.time < KEY_TIME) { key.time++; }
-
-    if (rtc.time < RTC_TIME) { rtc.time++; }
-
     if (state.time < STATE_TIME) {state.time++; }
-
+    seg_display();
 }
 
 
-void led_task()
-{
-    led_display();
-}
 
-
-void key_task()
-{
-    key.press = key_scan();
-
-    switch (key.press)
-    {
-        case 4:
-        {
-            
-        }
-        break;
-    }
-
-}
 
 void display_task()
 {
@@ -144,16 +76,6 @@ void display_task()
             set_seg()
         } */
     }
-}
-
-
-
-void write_start_times()
-{
-    uchar times;
-    times = AT24C02_read(0x00);
-    times = times + 1;
-    AT24C02_write(0x00, times);
 }
 
 

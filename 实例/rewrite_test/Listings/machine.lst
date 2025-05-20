@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MACHINE                                                           05/20/2025 20:08:40 PAGE 1   
+C51 COMPILER V9.60.7.0   MACHINE                                                           05/20/2025 20:27:23 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MACHINE
@@ -48,10 +48,10 @@ line level    source
   38          
   39          void Timer1_Init(void)    //1毫秒@12.000MHz
   40          {
-  41   1        AUXR |= 0x40;     //定时器时钟1T模式
+  41   1        AUXR &= 0xBF;     //定时器时钟12T模式
   42   1        TMOD &= 0x0F;     //设置定时器模式
-  43   1        TL1 = 0x20;       //设置定时初始值
-  44   1        TH1 = 0xD1;       //设置定时初始值
+  43   1        TL1 = 0x18;       //设置定时初始值
+  44   1        TH1 = 0xFC;       //设置定时初始值
   45   1        TF1 = 0;        //清除TF1标志
   46   1        TR1 = 1;        //定时器1开始计时
   47   1        ET1 = 1;        //使能定时器1中断
@@ -62,7 +62,7 @@ line level    source
   52          {
   53   1        unsigned char data i, j, k;
   54   1      
-C51 COMPILER V9.60.7.0   MACHINE                                                           05/20/2025 20:08:40 PAGE 2   
+C51 COMPILER V9.60.7.0   MACHINE                                                           05/20/2025 20:27:23 PAGE 2   
 
   55   1        _nop_();
   56   1        _nop_();
