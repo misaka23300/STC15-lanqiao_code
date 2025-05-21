@@ -3,14 +3,17 @@
 
 #include "machine.h"
 #include "display.h"
-
+#include "uart.h"
 
 void boot_init();
 void task_loop();
+
 void led_task();
 void key_task();
 void display_task();
-void write_start_times();
+void uart_task();
+
+
 
 
 #endif

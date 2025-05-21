@@ -11,7 +11,7 @@ struct {
 
 void main()
 {
-    uchar send_data[] = "ciallo~ \r \n";
+    uchar send_data[] = "ciallo \r \n";
     boot_init();
     
     while (1)
