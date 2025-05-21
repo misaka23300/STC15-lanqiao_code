@@ -1,46 +1,39 @@
 #include "main.h"
 
 
-enum {
-    STATE_TIME = 50
-};
-
-
-
 
 typedef struct {
     uchar time;
     uchar mode_0;
 } STATE;
 
-
-
-
 STATE state;
 
-
-
-
-void main()
-{
+typedef struct {
+    uint time;
     
-    boot_init();
-    
-    while (1)
-    {
-        task_loop();
-    }
-}
+} UART;
 
-void boot_init()
-{
-    clean_display();
+code uchar str[] = "ciallo~";
+code float number = 0.0721;
+UART uart;
 
-    Timer1_Init();
-    EA = 1;
 
-    //write_datetime(rtc.init_time);
-}
+typedef struct {
+    uchar time;
+    uchar press;
+} KEY;
+
+KEY key;
+
+
+enum {
+    STATE_TIME = 50,
+    UART_TIME = 1000,
+    KEY_TIME = 20
+};
+
+
 
 void task_loop()
 {
@@ -50,11 +43,30 @@ void task_loop()
         display_task();
         state.time = 0;
     }
+
+    if (uart.time == UART_TIME)
+    {
+        uart_task();
+        uart.time = 0;
+    }
+
+    if (key.time == KEY_TIME)
+    {
+        key_task();
+        key.time = 0;
+    }
 }
 
 void timer_1_interrupt() interrupt 3
 {
-    if (state.time < STATE_TIME) {state.time++; }
+    
+
+    if ( state.time < STATE_TIME ) { state.time++; }
+
+    if ( uart.time < UART_TIME ) { uart.time++; }
+
+    if ( key.time < KEY_TIME ) { key.time++; }
+    
     seg_display();
 }
 
@@ -67,16 +79,68 @@ void display_task()
     {
         case 0:
         {
-            set_seg_value(2, 3, 0, 0 ,0 ,0, 0, 0);
+            //set_seg_value(2, 3, 0, 0, 0, 0, 0, 0);
         }
         break;
 
-       /*  case 1:
+     
+    }
+}
+
+void uart_task()
+{
+    //uart_send(str);
+}
+
+
+void key_task()
+{
+    key.press = key_scan();
+
+    switch (key.press)
+    {
+        case 4:
         {
-            set_seg()
-        } */
+            set_seg_value(4, 0, 0, 0, 0, 0, 0, 0);
+        }
+        break;
+
+        case 5:
+        {
+            set_seg_value(5, 0, 0, 0, 0, 0, 0, 0);
+        }
+        break;
     }
 }
 
 
 
+
+void main()
+{
+    
+    char buf[20];  
+
+    boot_init();
+    uart_send("设备完成了初始化");
+
+    sprintf(buf, "%.2f\r\n", number);
+    uart_send(buf);
+
+    while (1)
+    {
+        task_loop();
+    }
+}
+
+void boot_init()
+{
+    clean_display();
+
+    
+    Timer1_Init();
+    Uart1_Init();
+    EA = 1;
+
+    
+}

@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   KEY                                                               05/20/2025 20:08:39 PAGE 1   
+C51 COMPILER V9.60.7.0   KEY                                                               05/21/2025 19:14:58 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE KEY
@@ -10,105 +10,112 @@ line level    source
 
    1          #include "key.h"
    2          
-   3          typedef enum {
-   4              wait_press,
-   5              eliminate,
-   6              short_press,
-   7              long_press
-   8          } press_task;
-   9          
-  10          
-  11          uchar key_scan()
-  12          {
+   3          uchar key_scan()
+   4          {
+   5   1          static uchar state, i, value;
+   6   1          uchar press = 0xFF, temp = 99;
+   7   1      
+   8   1          P3 = 0x0F;
+   9   1          P42 = 0; P44 = 0;
+  10   1          P36 = P42; P37 = P44;
+  11   1      
+  12   1          press = P3 & 0x0F;
   13   1      
-  14   1          static press_task state = wait_press;
-  15   1      
-  16   1          static uchar value, i;
-  17   1          uchar press = 0xFF, temp = 99;
-  18   1      
-  19   1          P3 = 0x0F;
-  20   1          P42 = 0; P44 = 0;
-  21   1          P36 = P42; P37 = P44;
-  22   1      
-  23   1          switch (state)
-  24   1          {
-  25   2              case wait_press:
-  26   2              {
-  27   3                  if (press != 0x0F)
-  28   3                  {
-  29   4                      state = eliminate;
-  30   4                  }
-  31   3              }
-  32   2              break;
-  33   2      
-  34   2              case eliminate:
-  35   2              {
-  36   3                  if (press == 0x0F)
-  37   3                  {
-  38   4                      state = wait_press;
-  39   4                  }
-  40   3                  else
-  41   3                  {
-  42   4                      P3 = press | 0xF0;
-  43   4                      P42 = 1; P44 = 1;
-  44   4                      P36 = P42; P37 = P44;
-  45   4      
-  46   4                      press = P3;
-  47   4                      state = short_press;
-  48   4                      switch (press)
-  49   4                      {
-  50   5                          case 0x77: { value = 4; break; }
-  51   5                          default: state = wait_press;
-  52   5                      }
-  53   4                  }
-  54   3              }
-C51 COMPILER V9.60.7.0   KEY                                                               05/20/2025 20:08:39 PAGE 2   
+  14   1          switch (state)
+  15   1          {
+  16   2              case 0:
+  17   2              {
+  18   3                  if (press != 0x0F)
+  19   3                  {
+  20   4                      state = 1;
+  21   4                  }
+  22   3              }
+  23   2              break;
+  24   2      
+  25   2           
+  26   2              case 1:
+  27   2              {
+  28   3                  if (press == 0x0F)
+  29   3                  {
+  30   4                      state = 0;
+  31   4                  }
+  32   3                  else
+  33   3                  {
+  34   4                      P3 = press | 0xF0;
+  35   4                      P42 = 1; P44 = 1;
+  36   4                      P36 = P42; P37 = P44;
+  37   4      
+  38   4                      press = P3;
+  39   4                      state = 2;
+  40   4      
+  41   4                      switch (press)
+  42   4                      {
+  43   5                          case 0x77: { value = 4; break; }
+  44   5                          case 0x7b: { value = 5; break; }
+  45   5                          case 0x7d: { value = 6; break; }
+  46   5                          case 0x7e: { value = 7; break; }
+  47   5      
+  48   5                          case 0xb7: { value = 8; break; }
+  49   5                          case 0xbb: { value = 9; break; }
+  50   5                          case 0xbd: { value = 10; break; }
+  51   5                          case 0xbe: { value = 11; break; }
+  52   5      
+  53   5                          case 0xd7: { value = 12; break; }
+  54   5                          case 0xdb: { value = 13; break; }
+C51 COMPILER V9.60.7.0   KEY                                                               05/21/2025 19:14:58 PAGE 2   
 
-  55   2              break;
-  56   2      
-  57   2              case short_press:
-  58   2              {
-  59   3                  if (press != 0x0F)
-  60   3                  {
-  61   4                      i++;
-  62   4                      if (i > 100)
-  63   4                      {
-  64   5                          i = 0;
-  65   5                          state = long_press;
-  66   5                      }
-  67   4                  }
-  68   3                  else
-  69   3                  {
-  70   4                      i = 0;
-  71   4                      temp = value;
-  72   4                      value = 0;
-  73   4                      state = wait_press;
-  74   4                  }
-  75   3              }
-  76   2              break;
-  77   2      
-  78   2              case long_press:
-  79   2              {
-  80   3                  if (press == 0x0F)
-  81   3                  {
-  82   4                      temp = value;
-  83   4                      value = 0;
-  84   4                      state = wait_press;
+  55   5                          case 0xdd: { value = 14; break; }
+  56   5                          case 0xde: { value = 15; break; }
+  57   5      
+  58   5                          case 0xe7: { value = 16; break; }
+  59   5                          case 0xeb: { value = 17; break; }
+  60   5                          case 0xed: { value = 18; break; }
+  61   5                          case 0xee: { value = 19; break; }
+  62   5                          
+  63   5                          default: {state = 0; }
+  64   5                      }
+  65   4                  }
+  66   3              }
+  67   2              break;
+  68   2      
+  69   2              case 2:
+  70   2              {
+  71   3                  if (press != 0x0F)
+  72   3                  {
+  73   4                      i++;
+  74   4                      if (i > 100)
+  75   4                      {
+  76   5                          state = 3;
+  77   5                      }
+  78   4                  }
+  79   3                  else
+  80   3                  {
+  81   4                      temp =value;
+  82   4                      value = 0;
+  83   4                      state = 0;
+  84   4                      i = 0;
   85   4                  }
   86   3              }
   87   2              break;
-  88   2          }
-  89   1      
-  90   1          return temp;
-  91   1      }
+  88   2      
+  89   2              case 3:
+  90   2              {
+  91   3                  temp = value + 20;
+  92   3                  value = 0;
+  93   3                  state = 0;
+  94   3              }
+  95   2              break;
+  96   2          }
+  97   1          return temp;
+  98   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    131    ----
+   CODE SIZE        =    286    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      3       1
+   DATA SIZE        =      3       2
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
