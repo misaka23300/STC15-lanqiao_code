@@ -37,5 +37,4 @@ void uart_send(uchar *Data)
 
         Data++;
     }
-	
 }

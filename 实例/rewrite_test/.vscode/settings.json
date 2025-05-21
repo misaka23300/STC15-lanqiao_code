@@ -18,6 +18,7 @@
         }
     ],
     "files.associations": {
-        "iic.h": "c"
+        "iic.h": "c",
+        "stdio.h": "c"
     }
 }

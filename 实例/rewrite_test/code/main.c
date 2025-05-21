@@ -1,9 +1,6 @@
 #include "main.h"
 
-enum {
-    STATE_TIME = 50,
-    UART_TIME = 1000
-};
+
 
 typedef struct {
     uchar time;
@@ -18,7 +15,23 @@ typedef struct {
 } UART;
 
 code uchar str[] = "ciallo~";
+code float number = 0.0721;
 UART uart;
+
+
+typedef struct {
+    uchar time;
+    uchar press;
+} KEY;
+
+KEY key;
+
+
+enum {
+    STATE_TIME = 50,
+    UART_TIME = 1000,
+    KEY_TIME = 20
+};
 
 
 
@@ -36,6 +49,12 @@ void task_loop()
         uart_task();
         uart.time = 0;
     }
+
+    if (key.time == KEY_TIME)
+    {
+        key_task();
+        key.time = 0;
+    }
 }
 
 void timer_1_interrupt() interrupt 3
@@ -45,6 +64,8 @@ void timer_1_interrupt() interrupt 3
     if ( state.time < STATE_TIME ) { state.time++; }
 
     if ( uart.time < UART_TIME ) { uart.time++; }
+
+    if ( key.time < KEY_TIME ) { key.time++; }
     
     seg_display();
 }
@@ -58,7 +79,7 @@ void display_task()
     {
         case 0:
         {
-            set_seg_value(2, 3, 0, 0, 0, 0, 0, 0);
+            //set_seg_value(2, 3, 0, 0, 0, 0, 0, 0);
         }
         break;
 
@@ -71,11 +92,41 @@ void uart_task()
     //uart_send(str);
 }
 
+
+void key_task()
+{
+    key.press = key_scan();
+
+    switch (key.press)
+    {
+        case 4:
+        {
+            set_seg_value(4, 0, 0, 0, 0, 0, 0, 0);
+        }
+        break;
+
+        case 5:
+        {
+            set_seg_value(5, 0, 0, 0, 0, 0, 0, 0);
+        }
+        break;
+    }
+}
+
+
+
+
 void main()
 {
     
+    char buf[20];  
+
     boot_init();
     uart_send("设备完成了初始化");
+
+    sprintf(buf, "%.2f\r\n", number);
+    uart_send(buf);
+
     while (1)
     {
         task_loop();

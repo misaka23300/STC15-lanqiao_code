@@ -4,6 +4,9 @@
 #include "machine.h"
 #include "display.h"
 #include "uart.h"
+#include "key.h"
+
+#include <stdio.h>
 
 void boot_init();
 void task_loop();

@@ -421,6 +421,16 @@
               <FileType>5</FileType>
               <FilePath>.\code\uart.h</FilePath>
             </File>
+            <File>
+              <FileName>key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\code\key.c</FilePath>
+            </File>
+            <File>
+              <FileName>key.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\code\key.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
