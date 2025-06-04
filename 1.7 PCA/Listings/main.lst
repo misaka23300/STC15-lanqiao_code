@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              06/05/2025 00:10:20 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              06/05/2025 00:13:11 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -14,7 +14,7 @@ line level    source
    4          
    5          enum {
    6              TIME_CCAP_0 = 1000,
-   7              LED_TIME = 20,
+   7              LED_TIME = 2,
    8              WATERLED_TIME = 500
    9          };
   10          
@@ -62,7 +62,7 @@ line level    source
   52   2      
   53   2              if ( led.time < LED_TIME ) { led.time++; } 
   54   2              if ( led.waterTime < WATERLED_TIME) { led.waterTime++; }
-C51 COMPILER V9.60.7.0   MAIN                                                              06/05/2025 00:10:20 PAGE 2   
+C51 COMPILER V9.60.7.0   MAIN                                                              06/05/2025 00:13:11 PAGE 2   
 
   55   2          }
   56   1      }
@@ -126,7 +126,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    PDATA SIZE       =   ----    ----
    DATA SIZE        =      6    ----
    IDATA SIZE       =   ----    ----
-C51 COMPILER V9.60.7.0   MAIN                                                              06/05/2025 00:10:20 PAGE 3   
+C51 COMPILER V9.60.7.0   MAIN                                                              06/05/2025 00:13:11 PAGE 3   
 
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

@@ -4,7 +4,7 @@ extern uchar led_array[8];
 
 enum {
     TIME_CCAP_0 = 1000,
-    LED_TIME = 20,
+    LED_TIME = 2,
     WATERLED_TIME = 500
 };
 
