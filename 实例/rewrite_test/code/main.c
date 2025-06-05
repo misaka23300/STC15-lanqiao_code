@@ -1,7 +1,7 @@
 #include "main.h"
 
 
-
+// 显示状态
 typedef struct {
     uchar time;
     uchar mode_0;
@@ -9,6 +9,7 @@ typedef struct {
 
 STATE state;
 
+// 串口
 typedef struct {
     uint time;
     
@@ -16,9 +17,10 @@ typedef struct {
 
 code uchar str[] = "ciallo~";
 code float number = 0.0721;
+
 UART uart;
 
-
+// 键盘
 typedef struct {
     uchar time;
     uchar press;
@@ -26,11 +28,29 @@ typedef struct {
 
 KEY key;
 
+// 日期
+typedef struct {
+    uchar number[8];
+    uchar i;
+    uchar input;
+
+} CAL;
+
+CAL calculator;
+
+// 超声波
+typedef struct {
+    uint distance;
+    uint time;
+} SONIC;
+    
+SONIC sonic;
 
 enum {
     STATE_TIME = 50,
     UART_TIME = 1000,
-    KEY_TIME = 20
+    KEY_TIME = 20,
+    SONIC_TIME = 100
 };
 
 
@@ -55,6 +75,12 @@ void task_loop()
         key_task();
         key.time = 0;
     }
+
+    if (sonic.time == SONIC_TIME)
+    {
+        sonic_task();
+        sonic.time = 0;
+    }
 }
 
 void timer_1_interrupt() interrupt 3
@@ -66,6 +92,8 @@ void timer_1_interrupt() interrupt 3
     if ( uart.time < UART_TIME ) { uart.time++; }
 
     if ( key.time < KEY_TIME ) { key.time++; }
+
+    if (sonic.time < SONIC_TIME) {sonic.time++; }
     
     seg_display();
 }
@@ -79,7 +107,7 @@ void display_task()
     {
         case 0:
         {
-            //set_seg_value(2, 3, 0, 0, 0, 0, 0, 0);
+            set_seg_value(sonic.distance % 10 / 10 , sonic.distance / 10, 0, 0, 0, 0, 0, 0);
         }
         break;
 
@@ -96,24 +124,12 @@ void uart_task()
 void key_task()
 {
     key.press = key_scan();
-
-    switch (key.press)
-    {
-        case 4:
-        {
-            set_seg_value(4, 0, 0, 0, 0, 0, 0, 0);
-        }
-        break;
-
-        case 5:
-        {
-            set_seg_value(5, 0, 0, 0, 0, 0, 0, 0);
-        }
-        break;
-    }
 }
 
-
+void sonic_task()
+{
+    sonic.distance = measurePCA();
+}
 
 
 void main()
@@ -137,8 +153,8 @@ void boot_init()
 {
     clean_display();
 
-    
     Timer1_Init();
+    pcaInit();
     Uart1_Init();
     EA = 1;
 

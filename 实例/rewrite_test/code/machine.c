@@ -36,6 +36,7 @@ void batch(uchar i)
     P2 = (P2 & 0x1F);
 }
 
+// 时间片
 void Timer1_Init(void)		//1毫秒@12.000MHz
 {
 	AUXR &= 0xBF;			//定时器时钟12T模式
@@ -66,3 +67,12 @@ void Delay500ms(void)	//@12.000MHz
 	} while (--i);
 }
 
+void Delay14us(void)	//@12.000MHz
+{
+	unsigned char data i;
+
+	_nop_();
+	_nop_();
+	i = 39;
+	while (--i);
+}

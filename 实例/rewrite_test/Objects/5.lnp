@@ -3,6 +3,7 @@
 ".\Objects\machine.obj",
 ".\Objects\main.obj",
 ".\Objects\uart.obj",
-".\Objects\key.obj" 
+".\Objects\key.obj",
+".\Objects\sonic.obj" 
 TO ".\Objects\5.19" 
 PRINT(".\Listings\5.m51") RAMSIZE(256) 
