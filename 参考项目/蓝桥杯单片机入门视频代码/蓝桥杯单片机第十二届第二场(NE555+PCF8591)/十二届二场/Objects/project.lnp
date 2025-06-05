@@ -1,9 +1,0 @@
-".\Objects\STARTUP.obj",
-".\Objects\key.obj",
-".\Objects\main.obj",
-".\Objects\sys.obj",
-".\Objects\tube.obj",
-".\Objects\iic.obj" 
-TO ".\Objects\project" 
-PRINT(".\Listings\project.m51") RAMSIZE(256) 
-DISABLEWARNING (16) 
