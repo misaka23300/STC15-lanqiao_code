@@ -160,3 +160,25 @@ void boot_init()
 
     
 }
+
+
+void pcaInit()
+{
+    CMOD = 0x00;    // 配置时钟源 12分频
+    CCON = 0x00;    // 清除标志位，停止PCA
+    CCAPM0 = 0x49;  // 
+    CL = 0x00;
+    CH = 0x00;
+
+    CCAP0L = 1000 & 0xFF;
+    CCAP0H = (1000 >> 8) & 0xFF;
+
+    EA = 1;     // 开启使能总中断
+    ECF = 1;    // 开启PCA中断
+    CCON |=  0x40;  // 启动PCA
+}
+
+void PCAInterrupt() interrupt 7
+{
+    
+}
