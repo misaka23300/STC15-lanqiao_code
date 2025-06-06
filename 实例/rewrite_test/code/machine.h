@@ -12,6 +12,7 @@ typedef unsigned int uint;
 void batch(uchar i);
 void Timer1_Init(void);
 void Delay500ms(void);
+void Delay14us(void);
 void clean_display();
 
 

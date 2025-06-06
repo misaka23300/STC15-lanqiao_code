@@ -5,6 +5,8 @@
 #include "display.h"
 #include "uart.h"
 #include "key.h"
+#include "sonic.h"
+
 
 #include <stdio.h>
 
@@ -15,8 +17,8 @@ void led_task();
 void key_task();
 void display_task();
 void uart_task();
-
-
+void calculator_task();
+void sonic_task();
 
 
 #endif

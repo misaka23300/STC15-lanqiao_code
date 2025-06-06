@@ -13,6 +13,7 @@ void Uart1_Isr(void) interrupt 4
 	}
 }
 
+// 定时器2
 void Uart1_Init(void)	//4800bps@12.000MHz
 {
 	SCON = 0x50;		//8位数据,可变波特率

@@ -26,7 +26,7 @@ void set_seg_value(uchar d0, d1, d2, d3, d4, d5, d6, d7)
     seg_data[7] = d7;
 }
 
-/* void set_seg_list(uchar *list)
+void set_seg_list(uchar *list)
 {
     seg_data[0] = list[0];
     seg_data[1] = list[1];
@@ -37,7 +37,7 @@ void set_seg_value(uchar d0, d1, d2, d3, d4, d5, d6, d7)
     seg_data[6] = list[6];
     seg_data[7] = list[7];
 
-} */
+} 
 
 
 /* void set_led_value(uchar d0, d1, d2, d3, d4, d5, d6, d7)
@@ -120,6 +120,8 @@ void relay(bit state)
     }
 }
 
+
+
 // 蜂鸣器 6
 void buzz(bit state)
 {
@@ -142,3 +144,4 @@ void buzz(bit state)
 
 
  */
+
