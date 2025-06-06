@@ -1,0 +1,6 @@
+".\Objects\STARTUP.obj",
+".\Objects\display.obj",
+".\Objects\machine.obj",
+".\Objects\main.obj" 
+TO ".\Objects\64" 
+PRINT(".\Listings\64.m51") RAMSIZE(256) 
