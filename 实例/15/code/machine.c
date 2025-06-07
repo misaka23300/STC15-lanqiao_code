@@ -1,5 +1,6 @@
 #include "machine.h"
 
+
 void clean_display()
 {
     P0M0 = 0x00; P0M1 = 0x00; 
@@ -14,7 +15,7 @@ void clean_display()
     P0 = 0xFF;
     batch(4);
 
-    P0 = 0xAF:
+    P0 = 0xAF;
     batch(5);
 
     P0 = 0x00;
@@ -38,18 +39,7 @@ void batch(uchar i)
     P2 = (P2 & 0x1F);
 }
 
-void timer()
-{
-    // timer2 -> 串口
-    // timer1 -> 时间片调度
-    // timer0 -> 超声波
 
-    Uart1_Init();	
-    Timer1_Init();
-    Timer0_Init();
-
-    EA = 1;
-}
 
 
 
@@ -77,17 +67,7 @@ void Timer1_Init(void)		//1毫秒@12.000MHz
 	ET1 = 1;				//使能定时器1中断
 }
 
-void Uart1_Isr(void) interrupt 4
-{
-	if (TI)				//检测串口1发送中断
-	{
-		TI = 0;			//清除串口1发送中断请求位
-	}
-	if (RI)				//检测串口1接收中断
-	{
-		RI = 0;			//清除串口1接收中断请求位
-	}
-}
+
 
 void Uart1_Init(void)	//9600bps@12.000MHz
 {
@@ -99,4 +79,41 @@ void Uart1_Init(void)	//9600bps@12.000MHz
 	AUXR |= 0x10;		//定时器2开始计时
 	ES = 1;				//使能串口1中断
 }
+
+void pcaInit()
+{
+    uint CCAP0_TIME = 1000;
+
+    CMOD = 0x00;
+    CCON = 0x00;
+
+    CH = 0x00; CL = 0x00;
+
+    CCAPM0 = 0x49;  // 0100 1001
+    CCAP0L = CCAP0_TIME; CCAP0H = CCAP0_TIME >> 8;
+
+    
+
+    EA = 1;
+    CCON = 0x41;     // 0100 0001
+    PPCA = 1;
+}
+
+
+void timer()
+{
+    // timer2 -> 串口
+    // timer1 -> 超声波
+    // timer0 -> 频率
+
+    Timer0_Init();
+    Timer1_Init();
+    pcaInit();
+    Uart1_Init();
+    EA = 1;
+}
+
+
+
+
 
