@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MACHINE                                                           06/07/2025 19:16:18 PAGE 1   
+C51 COMPILER V9.60.7.0   MACHINE                                                           06/07/2025 21:00:56 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MACHINE
@@ -62,7 +62,7 @@ line level    source
   52   1        TF0 = 0;        //清除TF0标志
   53   1        TR0 = 0;        //定时器0开始计时
   54   1        ET0 = 1;        //使能定时器0中断
-C51 COMPILER V9.60.7.0   MACHINE                                                           06/07/2025 19:16:18 PAGE 2   
+C51 COMPILER V9.60.7.0   MACHINE                                                           06/07/2025 21:00:56 PAGE 2   
 
   55   1      }
   56          
@@ -126,7 +126,7 @@ line level    source
  114   1      }
  115          
  116          
-C51 COMPILER V9.60.7.0   MACHINE                                                           06/07/2025 19:16:18 PAGE 3   
+C51 COMPILER V9.60.7.0   MACHINE                                                           06/07/2025 21:00:56 PAGE 3   
 
  117          
  118          

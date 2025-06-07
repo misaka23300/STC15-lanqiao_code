@@ -1,10 +1,10 @@
-C51 COMPILER V9.54   KEY                                                                   01/28/2023 16:56:47 PAGE 1   
+C51 COMPILER V9.60.7.0   KEY                                                               06/07/2025 20:53:27 PAGE 1   
 
 
-C51 COMPILER V9.54, COMPILATION OF MODULE KEY
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE KEY
 OBJECT MODULE PLACED IN .\Objects\key.obj
-COMPILER INVOKED BY: D:\Keil5\C51\BIN\C51.EXE key.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\key.lst
-                    -) OBJECT(.\Objects\key.obj)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE key.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\key.l
+                    -st) TABS(2) OBJECT(.\Objects\key.obj)
 
 line level    source
 
@@ -13,37 +13,37 @@ line level    source
    3          #define key_state_1 1
    4          #define key_state_2 2
    5          u8 Key_Scan(){
-   6   1              static u8 key_state=0;
-   7   1              u8 keynum=0;
-   8   1              u8 keypress;
-   9   1              keypress = P3 & 0x0f;
-  10   1              
-  11   1              switch(key_state){
-  12   2                      case 0:
-  13   2                              if(keypress!=0x0f)key_state=1;
-  14   2                              break;
-  15   2                      case 1:
-  16   2                              if(keypress!=0x0f){
-  17   3                                      if(keypress==0x07)keynum=4;
-  18   3                                      if(keypress==0x0b)keynum=5;
-  19   3                                      if(keypress==0x0d)keynum=6;
-  20   3                                      if(keypress==0x0e)keynum=7;
-  21   3                                      key_state=2;
-  22   3                              }
-  23   2                              else
-  24   2                                      key_state=0;
-  25   2                              break;
-  26   2                      case 2:
-  27   2                              if(keypress==0x0f)key_state=0;
-  28   2                              break;
-  29   2                      
-  30   2              }
-  31   1              return keynum;
+   6   1        static u8 key_state=0;
+   7   1        u8 keynum=0;
+   8   1        u8 keypress;
+   9   1        keypress = P3 & 0x0f;
+  10   1        
+  11   1        switch(key_state){
+  12   2          case 0:
+  13   2            if(keypress!=0x0f)key_state=1;
+  14   2            break;
+  15   2          case 1:
+  16   2            if(keypress!=0x0f){
+  17   3              if(keypress==0x07)keynum=4;
+  18   3              if(keypress==0x0b)keynum=5;
+  19   3              if(keypress==0x0d)keynum=6;
+  20   3              if(keypress==0x0e)keynum=7;
+  21   3              key_state=2;
+  22   3            }
+  23   2            else
+  24   2              key_state=0;
+  25   2            break;
+  26   2          case 2:
+  27   2            if(keypress==0x0f)key_state=0;
+  28   2            break;
+  29   2          
+  30   2        }
+  31   1        return keynum;
   32   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     66    ----
+   CODE SIZE        =     64    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

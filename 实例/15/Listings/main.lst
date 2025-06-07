@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              06/07/2025 19:16:18 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              06/07/2025 21:00:56 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -62,7 +62,7 @@ line level    source
   52   2              while (TI == 0);
   53   2              TI = 0;
   54   2              str++;
-C51 COMPILER V9.60.7.0   MAIN                                                              06/07/2025 19:16:18 PAGE 2   
+C51 COMPILER V9.60.7.0   MAIN                                                              06/07/2025 21:00:56 PAGE 2   
 
   55   2          }
   56   1      }
@@ -70,97 +70,101 @@ line level    source
   58          
   59          void Uart1_Isr(void) interrupt 4
   60          {
-  61   1        uchar Data;
-  62   1          static uchar index;
-  63   1          
-  64   1          led_list[0] = 1;
-  65   1          seg_list[0] = 1;
-  66   1        if (RI)       //检测串口1接收中断
-  67   1        {
-  68   2          RI = 0;     //清除串口1接收中断请求位
-  69   2              Data = SBUF;
-  70   2      
-  71   2              if (Data != '\n' && index < (UART_LEN - 1))
-  72   2              {
-  73   3                  receiveData[index] = Data;
-  74   3                  index++;
-  75   3              }
-  76   2              else
-  77   2              {
-  78   3                  receiveData[index] = '\0';
-  79   3                  index = 0;
-  80   3                  
-  81   3              }
-  82   2              //uartSend("ciallo~");
-  83   2        }
-  84   1          //uartSend("ciallo.cc");
-  85   1          
-  86   1      }
-  87          
-  88          
-  89          // 任务调度_______________________________________
+  61   1        //uchar Data;
+  62   1          //static uchar index;
+  63   1             
+  64   1        if (RI)       //检测串口1接收中断
+  65   1        {
+  66   2              //清除串口1接收中断请求位
+  67   2              ET0 = 0;
+  68   2              P0 = SBUF;
+  69   2      
+  70   2              ET0 = 1;
+  71   2              batch(4);
+  72   2              RI = 0; 
+  73   2              /* if (Data != '\n' && index < (UART_LEN - 1))
+  74   2              {
+  75   2                  receiveData[index] = Data;
+  76   2                  index++;
+  77   2              }
+  78   2              else
+  79   2              {
+  80   2                  receiveData[index] = '\0';
+  81   2                  index = 0;
+  82   2                  
+  83   2              } */
+  84   2              //uartSend("ciallo~");
+  85   2        }
+  86   1          //uartSend("ciallo.cc");
+  87   1          
+  88   1      }
+  89          
   90          
-  91          
-  92          void time_1ms()
-  93          {
-  94   1          seg_display();
-  95   1          led_display();
-  96   1      
-  97   1          if (key.time < KEY_TIME) { key.time++; }
-  98   1          times++;
-  99   1      
- 100   1       }
- 101          
- 102          
- 103          void task_loop()
- 104          {
- 105   1          if (key.time == KEY_TIME)
- 106   1          {
- 107   2              key_task();
- 108   2              key.time = 0;
- 109   2          }
- 110   1      }
- 111          
- 112          void main()
- 113          {
- 114   1          uchar message[] = "start";
- 115   1          clean_display();
- 116   1          timer();
-C51 COMPILER V9.60.7.0   MAIN                                                              06/07/2025 19:16:18 PAGE 3   
+  91          // 任务调度_______________________________________
+  92          
+  93          
+  94          void time_1ms()
+  95          {
+  96   1          seg_display();
+  97   1          led_display();
+  98   1      
+  99   1          if (key.time < KEY_TIME) { key.time++; }
+ 100   1          times++;
+ 101   1      
+ 102   1       }
+ 103          
+ 104          
+ 105          void task_loop()
+ 106          {
+ 107   1          if (key.time == KEY_TIME)
+ 108   1          {
+ 109   2              key_task();
+ 110   2              key.time = 0;
+ 111   2          }
+ 112   1      }
+ 113          
+ 114          void main()
+ 115          {
+ 116   1          uchar message[] = "start";
+C51 COMPILER V9.60.7.0   MAIN                                                              06/07/2025 21:00:56 PAGE 3   
 
- 117   1          uartSend("start");
- 118   1          while (1)
- 119   1          {
- 120   2              task_loop();
- 121   2          }
- 122   1      }
- 123          
- 124          
- 125          // _________________________________________任务函数
+ 117   1          clean_display();
+ 118   1          timer();
+ 119   1          uartSend("start");
+ 120   1          while (1)
+ 121   1          {
+ 122   2              task_loop();
+ 123   2          }
+ 124   1      }
+ 125          
  126          
- 127          void key_task()
- 128          {
- 129   1          key.press = key_scan();
- 130   1          /* if (key.press != 99)
- 131   1          {
- 132   1              seg_list[0] = key.press / 10;
- 133   1              seg_list[1] = key.press / 10 % 10;
- 134   1          } */
- 135   1         seg_list[3] = times / 10000 % 10;
- 136   1         seg_list[4] = times / 1000 % 10;
- 137   1         seg_list[5] = times / 100 % 10;
- 138   1         seg_list[6] = times / 10 % 10;
- 139   1         seg_list[7] = times % 10;
- 140   1          
- 141   1      }
+ 127          // _________________________________________任务函数
+ 128          
+ 129          void key_task()
+ 130          {
+ 131   1          key.press = key_scan();
+ 132   1          /* if (key.press != 99)
+ 133   1          {
+ 134   1              seg_list[0] = key.press / 10;
+ 135   1              seg_list[1] = key.press / 10 % 10;
+ 136   1          } */
+ 137   1         seg_list[3] = times / 10000 % 10;
+ 138   1         seg_list[4] = times / 1000 % 10;
+ 139   1         seg_list[5] = times / 100 % 10;
+ 140   1         seg_list[6] = times / 10 % 10;
+ 141   1         seg_list[7] = times % 10;
+ 142   1      
+ 143   1      }
+ 144          
+ 145          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    412    ----
+   CODE SIZE        =    419    ----
    CONSTANT SIZE    =     12    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =     25       6
+   DATA SIZE        =     24       6
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

@@ -1,10 +1,10 @@
-C51 COMPILER V9.54   TUBE                                                                  01/28/2023 16:56:49 PAGE 1   
+C51 COMPILER V9.60.7.0   TUBE                                                              06/07/2025 20:53:27 PAGE 1   
 
 
-C51 COMPILER V9.54, COMPILATION OF MODULE TUBE
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TUBE
 OBJECT MODULE PLACED IN .\Objects\tube.obj
-COMPILER INVOKED BY: D:\Keil5\C51\BIN\C51.EXE tube.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\tube.l
-                    -st) OBJECT(.\Objects\tube.obj)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE tube.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\tube
+                    -.lst) TABS(2) OBJECT(.\Objects\tube.obj)
 
 line level    source
 
@@ -23,26 +23,26 @@ line level    source
   13          
   14          
   15          void Seg_Show(){
-  16   1              static u8 num;
-  17   1              
-  18   1              P0=0xff;Y7;Y0;
-  19   1              P0=wei[num];Y6;Y0;
-  20   1              P0=~duan[seg[num]];Y7;Y0;
-  21   1              
-  22   1              num++;
-  23   1              num%=8;
+  16   1        static u8 num;
+  17   1        
+  18   1        P0=0xff;Y7;Y0;
+  19   1        P0=wei[num];Y6;Y0;
+  20   1        P0=~duan[seg[num]];Y7;Y0;
+  21   1        
+  22   1        num++;
+  23   1        num%=8;
   24   1      }
   25          
   26          void Seg_Set(u8 t1,t2,t3,t4,t5,t6,t7,t8){
-  27   1              seg[0]=t1;
-  28   1              seg[1]=t2;
-  29   1              seg[2]=t3;
-  30   1              seg[3]=t4;
-  31   1              seg[4]=t5;
-  32   1              seg[5]=t6;
-  33   1              seg[6]=t7;
-  34   1              seg[7]=t8;
-  35   1              
+  27   1        seg[0]=t1;
+  28   1        seg[1]=t2;
+  29   1        seg[2]=t3;
+  30   1        seg[3]=t4;
+  31   1        seg[4]=t5;
+  32   1        seg[5]=t6;
+  33   1        seg[6]=t7;
+  34   1        seg[7]=t8;
+  35   1        
   36   1      }
   37          
   38          

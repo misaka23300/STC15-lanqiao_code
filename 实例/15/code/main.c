@@ -58,17 +58,19 @@ void uartSend(uchar *str)
 
 void Uart1_Isr(void) interrupt 4
 {
-	uchar Data;
-    static uchar index;
-    
-    led_list[0] = 1;
-    seg_list[0] = 1;
+	//uchar Data;
+    //static uchar index;
+       
 	if (RI)				//检测串口1接收中断
 	{
-		RI = 0;			//清除串口1接收中断请求位
-        Data = SBUF;
+				//清除串口1接收中断请求位
+        ET0 = 0;
+        P0 = SBUF;
 
-        if (Data != '\n' && index < (UART_LEN - 1))
+        ET0 = 1;
+        batch(4);
+        RI = 0;	
+        /* if (Data != '\n' && index < (UART_LEN - 1))
         {
             receiveData[index] = Data;
             index++;
@@ -78,7 +80,7 @@ void Uart1_Isr(void) interrupt 4
             receiveData[index] = '\0';
             index = 0;
             
-        }
+        } */
         //uartSend("ciallo~");
 	}
     //uartSend("ciallo.cc");
@@ -137,7 +139,7 @@ void key_task()
    seg_list[5] = times / 100 % 10;
    seg_list[6] = times / 10 % 10;
    seg_list[7] = times % 10;
-   
+
 }
 
 
