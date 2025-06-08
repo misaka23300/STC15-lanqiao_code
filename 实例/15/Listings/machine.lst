@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MACHINE                                                           06/07/2025 21:00:56 PAGE 1   
+C51 COMPILER V9.60.7.0   MACHINE                                                           06/08/2025 17:53:51 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MACHINE
@@ -53,88 +53,93 @@ line level    source
   43          
   44          
   45          
-  46          void Timer0_Init(void)    //1毫秒@11.0592MHz
-  47          {
-  48   1        AUXR &= 0x7F;     //定时器时钟12T模式
-  49   1        TMOD &= 0xF0;     //设置定时器模式
-  50   1        TL0 = 0x00;       //设置定时初始值
-  51   1        TH0 = 0x00;       //设置定时初始值
-  52   1        TF0 = 0;        //清除TF0标志
-  53   1        TR0 = 0;        //定时器0开始计时
-  54   1        ET0 = 1;        //使能定时器0中断
-C51 COMPILER V9.60.7.0   MACHINE                                                           06/07/2025 21:00:56 PAGE 2   
+  46          
+  47          void Timer0_Init(void)    //1微秒@12.000MHz
+  48          {
+  49   1        AUXR |= 0x80;     //定时器时钟1T模式
+  50   1        TMOD &= 0xF0;     //设置定时器模式
+  51   1        TMOD |= 0x02;     //设置定时器模式
+  52   1          TMOD |= 0x04;
+  53   1          // 0000 0100
+  54   1        TL0 = 0xFF;       //设置定时初始值
+C51 COMPILER V9.60.7.0   MACHINE                                                           06/08/2025 17:53:51 PAGE 2   
 
-  55   1      }
-  56          
-  57          
-  58          
-  59          void Timer1_Init(void)    //1毫秒@12.000MHz
-  60          {
-  61   1        AUXR |= 0x40;     //定时器时钟1T模式
-  62   1        TMOD &= 0x0F;     //设置定时器模式
-  63   1        TL1 = 0x20;       //设置定时初始值
-  64   1        TH1 = 0xD1;       //设置定时初始值
-  65   1        TF1 = 0;        //清除TF1标志
-  66   1        TR1 = 1;        //定时器1开始计时
-  67   1        ET1 = 1;        //使能定时器1中断
-  68   1      }
-  69          
-  70          
-  71          
-  72          void Uart1_Init(void) //9600bps@12.000MHz
-  73          {
-  74   1        SCON = 0x50;    //8位数据,可变波特率
-  75   1        AUXR |= 0x01;   //串口1选择定时器2为波特率发生器
-  76   1        AUXR |= 0x04;   //定时器时钟1T模式
-  77   1        T2L = 0xC7;     //设置定时初始值
-  78   1        T2H = 0xFE;     //设置定时初始值
-  79   1        AUXR |= 0x10;   //定时器2开始计时
-  80   1        ES = 1;       //使能串口1中断
-  81   1      }
-  82          
-  83          void pcaInit()
-  84          {
-  85   1          uint CCAP0_TIME = 1000;
-  86   1      
-  87   1          CMOD = 0x00;
-  88   1          CCON = 0x00;
-  89   1      
-  90   1          CH = 0x00; CL = 0x00;
+  55   1        TH0 = 0xFF;       //设置定时重载值
+  56   1        TF0 = 0;        //清除TF0标志
+  57   1        TR0 = 1;        //定时器0开始计时
+  58   1        ET0 = 1;        //使能定时器0中断
+  59   1      }
+  60          
+  61          
+  62          
+  63          void Timer1_Init(void)    //1毫秒@12.000MHz
+  64          {
+  65   1        AUXR |= 0x40;     //定时器时钟1T模式
+  66   1        TMOD &= 0x0F;     //设置定时器模式
+  67   1        TL1 = 0x20;       //设置定时初始值
+  68   1        TH1 = 0xD1;       //设置定时初始值
+  69   1        TF1 = 0;        //清除TF1标志
+  70   1        TR1 = 1;        //定时器1开始计时
+  71   1        ET1 = 1;        //使能定时器1中断
+  72   1      }
+  73          
+  74          
+  75          
+  76          void Uart1_Init(void) //9600bps@12.000MHz
+  77          {
+  78   1        SCON = 0x50;    //8位数据,可变波特率
+  79   1        AUXR |= 0x01;   //串口1选择定时器2为波特率发生器
+  80   1        AUXR |= 0x04;   //定时器时钟1T模式
+  81   1        T2L = 0xC7;     //设置定时初始值
+  82   1        T2H = 0xFE;     //设置定时初始值
+  83   1        AUXR |= 0x10;   //定时器2开始计时
+  84   1        ES = 1;       //使能串口1中断
+  85   1          PS = 1;
+  86   1      }
+  87          
+  88          void pcaInit()
+  89          {
+  90   1          uint CCAP0_TIME = 1000;
   91   1      
-  92   1          CCAPM0 = 0x49;  // 0100 1001
-  93   1          CCAP0L = CCAP0_TIME; CCAP0H = CCAP0_TIME >> 8;
+  92   1          CMOD = 0x00;
+  93   1          CCON = 0x00;
   94   1      
-  95   1          
+  95   1          CH = 0x00; CL = 0x00;
   96   1      
-  97   1          EA = 1;
-  98   1          CCON = 0x41;     // 0100 0001
-  99   1          PPCA = 1;
- 100   1      }
- 101          
- 102          
- 103          void timer()
- 104          {
- 105   1          // timer2 -> 串口
- 106   1          // timer1 -> 超声波
- 107   1          // timer0 -> 频率
- 108   1      
- 109   1          Timer0_Init();
- 110   1          Timer1_Init();
- 111   1          pcaInit();
- 112   1          Uart1_Init();
- 113   1          EA = 1;
- 114   1      }
- 115          
- 116          
-C51 COMPILER V9.60.7.0   MACHINE                                                           06/07/2025 21:00:56 PAGE 3   
+  97   1          CCAPM0 = 0x49;  // 0100 1001
+  98   1          CCAP0L = CCAP0_TIME; CCAP0H = CCAP0_TIME >> 8;
+  99   1      
+ 100   1          
+ 101   1      
+ 102   1          EA = 1;
+ 103   1          CCON = 0x41;     // 0100 0001
+ 104   1          PPCA = 1;
+ 105   1      }
+ 106          
+ 107          
+ 108          void timer()
+ 109          {
+ 110   1          // timer2 -> 串口
+ 111   1          // timer1 -> 超声波
+ 112   1          // timer0 -> 频率
+ 113   1      
+ 114   1          Timer0_Init();
+ 115   1          Timer1_Init();
+ 116   1          pcaInit();
+C51 COMPILER V9.60.7.0   MACHINE                                                           06/08/2025 17:53:51 PAGE 3   
 
- 117          
- 118          
- 119          
+ 117   1          Uart1_Init();
+ 118   1          EA = 1;
+ 119   1      }
+ 120          
+ 121          
+ 122          
+ 123          
+ 124          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    223    ----
+   CODE SIZE        =    232    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

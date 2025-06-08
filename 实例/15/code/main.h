@@ -2,6 +2,8 @@
 #define __MAIN_H__
 
 #include "machine.h"
+#include "math.h"       // ->
+#include "string.h"     // -> strcmp();
 
 #include "key.h"
 #include "display.h"
@@ -22,6 +24,10 @@ void main();
 void key_task();
 
 
+/* void free_state(uchar x, uchar y); */
+void freq_task();
+
+void number_display(uint i);
 
 
 #endif

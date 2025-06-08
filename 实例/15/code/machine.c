@@ -43,14 +43,18 @@ void batch(uchar i)
 
 
 
-void Timer0_Init(void)		//1毫秒@11.0592MHz
+
+void Timer0_Init(void)		//1微秒@12.000MHz
 {
-	AUXR &= 0x7F;			//定时器时钟12T模式
+	AUXR |= 0x80;			//定时器时钟1T模式
 	TMOD &= 0xF0;			//设置定时器模式
-	TL0 = 0x00;				//设置定时初始值
-	TH0 = 0x00;				//设置定时初始值
+	TMOD |= 0x02;			//设置定时器模式
+    TMOD |= 0x04;
+    // 0000 0100
+	TL0 = 0xFF;				//设置定时初始值
+	TH0 = 0xFF;				//设置定时重载值
 	TF0 = 0;				//清除TF0标志
-	TR0 = 0;				//定时器0开始计时
+	TR0 = 1;				//定时器0开始计时
 	ET0 = 1;				//使能定时器0中断
 }
 
@@ -78,6 +82,7 @@ void Uart1_Init(void)	//9600bps@12.000MHz
 	T2H = 0xFE;			//设置定时初始值
 	AUXR |= 0x10;		//定时器2开始计时
 	ES = 1;				//使能串口1中断
+    PS = 1;
 }
 
 void pcaInit()
