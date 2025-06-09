@@ -1,0 +1,8 @@
+".\Objects\STARTUP.obj",
+".\Objects\display.obj",
+".\Objects\key.obj",
+".\Objects\machine.obj",
+".\Objects\main.obj",
+".\Objects\uart.obj" 
+TO ".\Objects\1555" 
+PRINT(".\Listings\1555.m51") RAMSIZE(256) 

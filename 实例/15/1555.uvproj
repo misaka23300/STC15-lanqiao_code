@@ -13,7 +13,7 @@
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
-          <Device>STC15F2K60S2</Device>
+          <Device>STC15F2K60S2 Series</Device>
           <Vendor>STC</Vendor>
           <Cpu>IRAM(0-0xFF) XRAM(0-0x6FF) IROM(0-0xEFF8) CLOCK(35000000) MODP2</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -46,7 +46,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\Objects\</OutputDirectory>
-          <OutputName>prj</OutputName>
+          <OutputName>1555</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
@@ -377,44 +377,59 @@
           <GroupName>Source Group 1</GroupName>
           <Files>
             <File>
-              <FileName>key.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\key.c</FilePath>
+              <FileName>STARTUP.A51</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\STARTUP.A51</FilePath>
             </File>
             <File>
-              <FileName>key.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\key.h</FilePath>
+              <FileName>display.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\code\display.c</FilePath>
+            </File>
+            <File>
+              <FileName>key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\code\key.c</FilePath>
+            </File>
+            <File>
+              <FileName>machine.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\code\machine.c</FilePath>
             </File>
             <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\main.c</FilePath>
+              <FilePath>.\code\main.c</FilePath>
+            </File>
+            <File>
+              <FileName>display.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\code\display.h</FilePath>
+            </File>
+            <File>
+              <FileName>key.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\code\key.h</FilePath>
+            </File>
+            <File>
+              <FileName>machine.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\code\machine.h</FilePath>
             </File>
             <File>
               <FileName>main.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\main.h</FilePath>
+              <FilePath>.\code\main.h</FilePath>
             </File>
             <File>
-              <FileName>sys.c</FileName>
+              <FileName>uart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\sys.c</FilePath>
+              <FilePath>.\code\uart.c</FilePath>
             </File>
             <File>
-              <FileName>sys.h</FileName>
+              <FileName>uart.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\sys.h</FilePath>
-            </File>
-            <File>
-              <FileName>tube.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\tube.c</FilePath>
-            </File>
-            <File>
-              <FileName>tube.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\tube.h</FilePath>
+              <FilePath>.\code\uart.h</FilePath>
             </File>
           </Files>
         </Group>

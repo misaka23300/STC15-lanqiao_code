@@ -29,15 +29,30 @@ void pcaInit()
     CCAP0H = TIME_CCAP_0 >> 8;
 
     EA = 1;
-    CCON = 0x41;
+    CCON = 0x41;    // 0100 0001
 
-    CCON |= 0x40;               // CR = 1;
+    //CCON |= 0x40;               // CR = 1;
     PPCA = 1;
 
 
     timer_0 = TIME_CCAP_0;
 }
 
+
+void pcaInit()
+{
+    CMOD = 0x00;
+    CCON = 0x00;
+
+    CL = 0x00; CH = 0x00;
+
+    CCAPM0  0x49;
+    CCAP0L = TIME_CCAP_0; 
+    CCAP0H = TIME_CCAP_0 >> 8;
+
+    EA = 1;
+    CCON = 0x41;
+}
 
 void pcaInterrupt() interrupt 7
 {
