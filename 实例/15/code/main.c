@@ -8,7 +8,8 @@ enum {
     FREQ_TIME = 1000
 };
 
-uint setPcaTime;
+uint setPcaTime = CCAP0_TIME;
+
 uchar receiveData[UART_LEN];
 uchar delay_send_flag;
 uchar send_temp[];
@@ -81,11 +82,11 @@ void Uart1_Isr(void) interrupt 4
 {
     uchar Data;
     static uchar index;
-
     uchar receive_ciallo[] = "ciallo";
 
     if (RI)
     {
+        /*
         RI = 0;
         Data = SBUF;
 
@@ -99,42 +100,8 @@ void Uart1_Isr(void) interrupt 4
             receiveData[index] = '\0';
             index = 0;
         }
-
-        
-
-
+        */
     }
-
-    /* uchar Data[UART_LEN];
-    static uchar index;
-    uchar receive_ciallo[] = "ciallo"; 
-
-	if (RI)				//检测串口1接收中断
-	{
-				//清除串口1接收中断请求位
-        RI = 0;
-        Data[index] = SBUF;
-        
-        if (Data[index] != '\n' && index < (UART_LEN - 1))
-        {
-            receiveData[index] = Data;
-            index++;
-        }
-        else
-        {
-            receiveData[index] = '\0';
-            index = 0;
-        }
-
-        if (strcmp(Data, receive_ciallo) == 0)
-        {
-            //uartSend("ciallo~");
-        }
-	} */
-
-    
-    
-    
 }
 
 // 频率
@@ -182,13 +149,13 @@ void task_loop()
     if (delay_send_flag)
     {
         delay_send_flag = 0;
-        //uartSend();
+        
     }
 }
 
 void main()
 {
-    //uchar message[] = "start";
+    
     clean_display();
     timer();
     uartSend("start");

@@ -26,7 +26,6 @@ void key_task();
 
 /* void free_state(uchar x, uchar y); */
 void freq_task();
-
 void number_display(uint i);
 
 
