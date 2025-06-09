@@ -1,53 +1,18 @@
 #include "main.h"
 
 
-enum {
-    CCAP0_TIME = 1000,
-    UART_LEN = 16,
-    KEY_TIME = 20,
-    FREQ_TIME = 1000
-};
 
-uint setPcaTime = CCAP0_TIME;
-
-uchar receiveData[UART_LEN];
-uchar delay_send_flag;
-uchar send_temp[];
-
-typedef struct {
-    uchar time;
-    uchar press;
-
-} KEY;
 
 KEY key;
-
-
-idata long times;
-idata uint time_1000;
-
-typedef struct {
-    uint time;
-    long times;
-    long times_out;
-} FREQ;
-
 FREQ freq;
-
-typedef struct {
-    uchar now_x;
-    uchar now_y;
-
-
-} CAR;
-
 CAR car;
+
 
 
 
 // PCA_______________________________________
 
-void pcaInterrupt() interrupt 7
+/* void pcaInterrupt() interrupt 7
 {
     if (CCF0)
     {
@@ -60,50 +25,12 @@ void pcaInterrupt() interrupt 7
         time_1ms();
     }
 }
+ */
 
-
-// 串口_______________________________________
-
-// str -> 指针地址
-// *str -> 指针的取值
-void uartSend(uchar *str)
-{       
-    while (*str != '\0')
-    {
-        SBUF = *str;
-        while (TI == 0);
-        TI = 0;
-        str++;
-    }
-}
-
-
-void Uart1_Isr(void) interrupt 4
+void Timer1_Isr(void) interrupt 3
 {
-    uchar Data;
-    static uchar index;
-    uchar receive_ciallo[] = "ciallo";
-
-    if (RI)
-    {
-        /*
-        RI = 0;
-        Data = SBUF;
-
-        if (Data != '\n' && index < (UART_LEN - 1))
-        {
-            receiveData[index] = Data;
-            index++;
-        }
-        else
-        {
-            receiveData[index] = '\0';
-            index = 0;
-        }
-        */
-    }
+    time_1ms();
 }
-
 // 频率
 void Timer0_Isr(void) interrupt 1
 {
@@ -118,16 +45,14 @@ void time_1ms()
 {
     seg_display();
     led_display();
+    uart_task();
 
     if (key.time < KEY_TIME) { key.time++; }
     if (freq.time < FREQ_TIME) { freq.time++; }
+    if (uart.out_time_flag && uart.out_time < 11) { uart.out_time++; }
+    
 
-    time_1000++;
-    if (time_1000 == 1000)
-    {
-        time_1000 = 0;
-        times++;
-    }
+    
     
  }
 
@@ -158,7 +83,8 @@ void main()
     
     clean_display();
     timer();
-    uartSend("start");
+    uart_send("start");
+    
     while (1)
     {
         task_loop();
@@ -207,7 +133,5 @@ void number_display(uint i)
 
 }
 
-void delay_send_uart()
-{
 
-}
+

@@ -97,7 +97,7 @@ void timer()
 
     Timer0_Init();
     Timer1_Init();
-    pcaInit();
+    //pcaInit();
     Uart1_Init();
     EA = 1;
 }

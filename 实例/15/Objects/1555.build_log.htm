@@ -19,7 +19,7 @@ CPU DLL:         S8051.DLL V3.125.1.0
 Dialog DLL:      DP51.DLL V2.69.0.0 
 <h2>Project:</h2>
 C:\code_V5.0\STC15-lanqiao_code\ÊµÀý\15\1555.uvproj
-Project File Date:  06/07/2025
+Project File Date:  06/09/2025
 
 <h2>Output:</h2>
 Rebuild target 'Target 1'
@@ -28,8 +28,7 @@ compiling display.c...
 compiling key.c...
 compiling machine.c...
 compiling main.c...
-code\main.c(83): warning C280: 'Data': unreferenced local variable
-code\main.c(84): warning C280: 'index': unreferenced local variable
+compiling uart.c...
 linking...
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?_SET_SEG?DISPLAY
@@ -42,13 +41,15 @@ linking...
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?BUZZ?DISPLAY
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?PCAINIT?MACHINE
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?_NUMBER_DISPLAY?MAIN
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?DELAY_SEND_UART?MAIN
-Program Size: data=99.2 xdata=0 code=1984
+    SEGMENT: ?PR?GET_POSITION?UART
+Program Size: data=111.2 xdata=0 code=1726
 creating hex file from ".\Objects\1555"...
-".\Objects\1555" - 0 Error(s), 9 Warning(s).
-Build Time Elapsed:  00:00:00
+".\Objects\1555" - 0 Error(s), 8 Warning(s).
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>
