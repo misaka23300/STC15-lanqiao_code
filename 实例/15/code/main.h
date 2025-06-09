@@ -4,6 +4,7 @@
 #include "machine.h"
 #include "math.h"       // ->
 #include "string.h"     // -> strcmp();
+#include "stdio.h"
 
 #include "key.h"
 #include "display.h"
@@ -13,7 +14,8 @@ enum {
     CCAP0_TIME = 1000,
     UART_LEN = 16,
     KEY_TIME = 20,
-    FREQ_TIME = 1000
+    FREQ_TIME = 1000,
+    UART_TIME = 10
 };
 
 
@@ -29,7 +31,7 @@ typedef struct {
 
 } KEY;
 
-KEY key;
+idata KEY key;
 
 
 idata long times;
@@ -41,7 +43,7 @@ typedef struct {
     long times_out;
 } FREQ;
 
-FREQ freq;
+idata FREQ freq;
 
 typedef struct {
     uchar now_x;
@@ -50,7 +52,7 @@ typedef struct {
 
 } CAR;
 
-CAR car;
+idata CAR car;
 
 
 //void pcaInterrupt() interrupt 7;
@@ -68,6 +70,6 @@ void key_task();
 void freq_task();
 void number_display(uint i);
 
-void uart_send_commond();
 
+void uart_task();
 #endif

@@ -2,7 +2,7 @@
 
 
 
-UART uart;
+idata UART uart;
 INPUT input;
 
 
@@ -23,6 +23,7 @@ void uart_receive() interrupt 4
     if (RI)
     {
         RI = 0;
+        ET1 = 0;
         seg_list[0] = 1;
         // 串口超时判断
         uart.out_time = 0;
@@ -32,7 +33,8 @@ void uart_receive() interrupt 4
         uart.index++;
 
         if (uart.index > RECEIVE_LEN) {uart.index = 0; }
-        
+        ET1 = 1;
+        PT1 = 1;
     }
 }
 
@@ -66,17 +68,12 @@ void get_position() // uart.receive_data -> input.x input.y
     }
 }
 
-void uart_task()
+
+
+char putchar(char c) 
 {
-    if (uart.index == 0) {return ;}
-
-    if (uart.out_time > 10)
-    {
-        uart.out_time = 0;
-        uart.out_time_flag = 0;
-
-        uart_send("ciallo~");
-    }
+    SBUF = c;         // 发送字符到串口
+    while (!TI);      // 等待发送完成
+    TI = 0;           // 清除发送中断标志
+    return c;
 }
-
-

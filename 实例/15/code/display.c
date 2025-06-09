@@ -34,7 +34,7 @@ void seg_display()
     if (i == 8) { i = 0; }
 }
 
-void set_seg(uchar a0, a1, a2, a3, a4, a5, a6, a7)
+/* void set_seg(uchar a0, a1, a2, a3, a4, a5, a6, a7)
 {
     seg_list[0] = a0;
     seg_list[1] = a1;
@@ -59,7 +59,7 @@ void seg_seg_list(uchar * list)
     seg_list[6] = list[6];
     seg_list[7] = list[7];
 }
-
+ */
 // ____________________________________________________LED灯显示
 
 void led_display()
@@ -88,11 +88,11 @@ void led_display()
     if (i == 8) { i = 0; }
 }
 
-void set_led()
+/* void set_led()
 {
 
 }     
-
+ */
 // __________________________________________________继电器与超声波
 
 void relay(bit state)
