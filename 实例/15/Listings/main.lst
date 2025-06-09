@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              06/08/2025 17:53:51 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              06/09/2025 08:54:28 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -62,7 +62,7 @@ line level    source
   52   1          {
   53   2              CCF0 = 0;
   54   2              setPcaTime += CCAP0_TIME;
-C51 COMPILER V9.60.7.0   MAIN                                                              06/08/2025 17:53:51 PAGE 2   
+C51 COMPILER V9.60.7.0   MAIN                                                              06/09/2025 08:54:28 PAGE 2   
 
   55   2      
   56   2              CCAP0L = setPcaTime;
@@ -126,7 +126,7 @@ line level    source
  114   1              //清除串口1接收中断请求位
  115   1              RI = 0;
  116   1              Data[index] = SBUF;
-C51 COMPILER V9.60.7.0   MAIN                                                              06/08/2025 17:53:51 PAGE 3   
+C51 COMPILER V9.60.7.0   MAIN                                                              06/09/2025 08:54:28 PAGE 3   
 
  117   1              
  118   1              if (Data[index] != '\n' && index < (UART_LEN - 1))
@@ -190,7 +190,7 @@ line level    source
  176   1          if (freq.time == FREQ_TIME)
  177   1          {
  178   2              freq.time = 0;
-C51 COMPILER V9.60.7.0   MAIN                                                              06/08/2025 17:53:51 PAGE 4   
+C51 COMPILER V9.60.7.0   MAIN                                                              06/09/2025 08:54:28 PAGE 4   
 
  179   2              freq_task();
  180   2          }
@@ -254,7 +254,7 @@ line level    source
  238   1          seg_list[6] = i / 10 % 10;
  239   1          seg_list[7] = i % 10;
  240   1      
-C51 COMPILER V9.60.7.0   MAIN                                                              06/08/2025 17:53:51 PAGE 5   
+C51 COMPILER V9.60.7.0   MAIN                                                              06/09/2025 08:54:28 PAGE 5   
 
  241   1      }
  242          

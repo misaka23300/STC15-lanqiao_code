@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MACHINE                                                           06/08/2025 17:53:51 PAGE 1   
+C51 COMPILER V9.60.7.0   MACHINE                                                           06/09/2025 08:54:28 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MACHINE
@@ -62,7 +62,7 @@ line level    source
   52   1          TMOD |= 0x04;
   53   1          // 0000 0100
   54   1        TL0 = 0xFF;       //设置定时初始值
-C51 COMPILER V9.60.7.0   MACHINE                                                           06/08/2025 17:53:51 PAGE 2   
+C51 COMPILER V9.60.7.0   MACHINE                                                           06/09/2025 08:54:28 PAGE 2   
 
   55   1        TH0 = 0xFF;       //设置定时重载值
   56   1        TF0 = 0;        //清除TF0标志
@@ -109,33 +109,32 @@ line level    source
   97   1          CCAPM0 = 0x49;  // 0100 1001
   98   1          CCAP0L = CCAP0_TIME; CCAP0H = CCAP0_TIME >> 8;
   99   1      
- 100   1          
- 101   1      
- 102   1          EA = 1;
- 103   1          CCON = 0x41;     // 0100 0001
- 104   1          PPCA = 1;
- 105   1      }
+ 100   1      
+ 101   1          EA = 1;
+ 102   1          CCON = 0x41;     // 0100 0001
+ 103   1          PPCA = 1;
+ 104   1      }
+ 105          
  106          
- 107          
- 108          void timer()
- 109          {
- 110   1          // timer2 -> 串口
- 111   1          // timer1 -> 超声波
- 112   1          // timer0 -> 频率
- 113   1      
- 114   1          Timer0_Init();
- 115   1          Timer1_Init();
- 116   1          pcaInit();
-C51 COMPILER V9.60.7.0   MACHINE                                                           06/08/2025 17:53:51 PAGE 3   
+ 107          void timer()
+ 108          {
+ 109   1          // timer2 -> 串口
+ 110   1          // timer1 -> 超声波
+ 111   1          // timer0 -> 频率
+ 112   1      
+ 113   1          Timer0_Init();
+ 114   1          Timer1_Init();
+ 115   1          pcaInit();
+ 116   1          Uart1_Init();
+C51 COMPILER V9.60.7.0   MACHINE                                                           06/09/2025 08:54:28 PAGE 3   
 
- 117   1          Uart1_Init();
- 118   1          EA = 1;
- 119   1      }
+ 117   1          EA = 1;
+ 118   1      }
+ 119          
  120          
  121          
  122          
  123          
- 124          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE

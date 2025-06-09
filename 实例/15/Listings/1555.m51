@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    06/08/2025  17:53:52  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    06/09/2025  08:54:28  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
@@ -59,7 +59,7 @@ LINK MAP OF MODULE:  .\Objects\1555 (?C_STARTUP)
             CODE    003BH     0003H     ABSOLUTE     
             CODE    003EH     01CFH     UNIT         ?C?LIB_CODE
             CODE    020DH     0120H     UNIT         ?PR?KEY_SCAN?KEY
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/08/2025  17:53:52  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/09/2025  08:54:28  PAGE 2
 
 
             CODE    032DH     008CH     UNIT         ?C_C51STARTUP
@@ -119,7 +119,7 @@ SEGMENT                             DATA_GROUP
   +--> ?PR?KEY_TASK?MAIN
   +--> ?PR?FREQ_TASK?MAIN
 
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/08/2025  17:53:52  PAGE 3
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/09/2025  08:54:28  PAGE 3
 
 
 ?PR?KEY_TASK?MAIN                 -----    -----
@@ -179,7 +179,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\1555 (?C_STARTUP)
   N:0000H         SYMBOL        XBPSTACK
   N:0000H         SYMBOL        XBPSTACKTOP
   N:0000H         SYMBOL        XDATALEN
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/08/2025  17:53:52  PAGE 4
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/09/2025  08:54:28  PAGE 4
 
 
   N:0000H         SYMBOL        XDATASTART
@@ -239,7 +239,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\1555 (?C_STARTUP)
   C:062FH         LINE#         35
   -------         ENDPROC       SEG_DISPLAY
   -------         PROC          _SET_SEG
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/08/2025  17:53:52  PAGE 5
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/09/2025  08:54:28  PAGE 5
 
 
   D:0007H         SYMBOL        a0
@@ -299,7 +299,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\1555 (?C_STARTUP)
   C:056DH         LINE#         85
   C:056DH         LINE#         87
   C:056FH         LINE#         88
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/08/2025  17:53:52  PAGE 6
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/09/2025  08:54:28  PAGE 6
 
 
   C:0577H         LINE#         89
@@ -359,7 +359,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\1555 (?C_STARTUP)
   D:00C8H         PUBLIC        P5
   D:00E8H         PUBLIC        P6
   D:00F8H         PUBLIC        P7
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/08/2025  17:53:52  PAGE 7
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/09/2025  08:54:28  PAGE 7
 
 
   D:00A8H         PUBLIC        IE
@@ -419,7 +419,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\1555 (?C_STARTUP)
   C:02B5H         LINE#         44
   C:02BAH         LINE#         46
   C:02BFH         LINE#         47
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/08/2025  17:53:52  PAGE 8
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/09/2025  08:54:28  PAGE 8
 
 
   C:02C4H         LINE#         48
@@ -479,7 +479,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\1555 (?C_STARTUP)
   D:0096H         PUBLIC        P2M0
   D:0091H         PUBLIC        P1M1
   D:0080H         PUBLIC        P0
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/08/2025  17:53:52  PAGE 9
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/09/2025  08:54:28  PAGE 9
 
 
   D:00B2H         PUBLIC        P3M0
@@ -539,7 +539,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\1555 (?C_STARTUP)
   B:0088H.6       PUBLIC        TR1
   C:0578H         PUBLIC        clean_display
   D:00D0H         PUBLIC        PSW
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/08/2025  17:53:52  PAGE 10
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/09/2025  08:54:28  PAGE 10
 
 
   D:0094H         PUBLIC        P0M0
@@ -599,7 +599,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\1555 (?C_STARTUP)
   C:002CH         LINE#         67
   C:002FH         LINE#         68
   C:0032H         LINE#         69
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/08/2025  17:53:52  PAGE 11
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/09/2025  08:54:28  PAGE 11
 
 
   C:0034H         LINE#         70
@@ -631,20 +631,20 @@ SYMBOL TABLE OF MODULE:  .\Objects\1555 (?C_STARTUP)
   C:072DH         LINE#         95
   C:0731H         LINE#         97
   C:0734H         LINE#         98
-  C:0738H         LINE#         102
-  C:073AH         LINE#         103
-  C:073DH         LINE#         104
-  C:073FH         LINE#         105
+  C:0738H         LINE#         101
+  C:073AH         LINE#         102
+  C:073DH         LINE#         103
+  C:073FH         LINE#         104
   -------         ENDPROC       PCAINIT
   -------         PROC          TIMER
+  C:07CDH         LINE#         107
   C:07CDH         LINE#         108
-  C:07CDH         LINE#         109
-  C:07CDH         LINE#         114
-  C:07D0H         LINE#         115
-  C:07D3H         LINE#         116
-  C:07D6H         LINE#         117
-  C:07D9H         LINE#         118
-  C:07DBH         LINE#         119
+  C:07CDH         LINE#         113
+  C:07D0H         LINE#         114
+  C:07D3H         LINE#         115
+  C:07D6H         LINE#         116
+  C:07D9H         LINE#         117
+  C:07DBH         LINE#         118
   -------         ENDPROC       TIMER
   -------         ENDMOD        MACHINE
 
@@ -659,7 +659,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\1555 (?C_STARTUP)
   D:00E8H         PUBLIC        P6
   D:00F8H         PUBLIC        P7
   C:04DEH         PUBLIC        pcaInterrupt
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/08/2025  17:53:52  PAGE 12
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/09/2025  08:54:28  PAGE 12
 
 
   D:00A8H         PUBLIC        IE
@@ -719,7 +719,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\1555 (?C_STARTUP)
   C:07ADH         LINE#         75
   C:07B4H         LINE#         76
   C:07B6H         LINE#         77
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/08/2025  17:53:52  PAGE 13
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/09/2025  08:54:28  PAGE 13
 
 
   -------         ENDPROC       _UARTSEND
@@ -779,7 +779,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\1555 (?C_STARTUP)
   C:06DAH         LINE#         177
   C:06DAH         LINE#         178
   C:06DFH         LINE#         179
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/08/2025  17:53:52  PAGE 14
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/09/2025  08:54:28  PAGE 14
 
 
   C:06E2H         LINE#         180
@@ -839,7 +839,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\1555 (?C_STARTUP)
   C:0134H         PUBLIC        ?C?CLDPTR
   -------         ENDMOD        ?C?CLDPTR
 
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/08/2025  17:53:52  PAGE 15
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/09/2025  08:54:28  PAGE 15
 
 
   -------         MODULE        ?C?CLDOPTR

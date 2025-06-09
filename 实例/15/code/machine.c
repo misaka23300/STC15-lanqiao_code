@@ -97,7 +97,6 @@ void pcaInit()
     CCAPM0 = 0x49;  // 0100 1001
     CCAP0L = CCAP0_TIME; CCAP0H = CCAP0_TIME >> 8;
 
-    
 
     EA = 1;
     CCON = 0x41;     // 0100 0001
