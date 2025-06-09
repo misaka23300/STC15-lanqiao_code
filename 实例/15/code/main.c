@@ -3,9 +3,9 @@
 
 
 
-KEY key;
-FREQ freq;
-CAR car;
+idata KEY key;
+idata FREQ freq;
+idata CAR car;
 
 
 
@@ -45,15 +45,13 @@ void time_1ms()
 {
     seg_display();
     led_display();
-    uart_task();
+
 
     if (key.time < KEY_TIME) { key.time++; }
     if (freq.time < FREQ_TIME) { freq.time++; }
+    if (uart.time < UART_TIME) {uart.time++; }
     if (uart.out_time_flag && uart.out_time < 11) { uart.out_time++; }
-    
 
-    
-    
  }
 
 
@@ -71,9 +69,10 @@ void task_loop()
         freq_task();
     }
 
-    if (delay_send_flag)
+    if (uart.time == UART_TIME)
     {
-        delay_send_flag = 0;
+        uart.time = 0;
+        uart_task();
         
     }
 }
@@ -83,7 +82,7 @@ void main()
     
     clean_display();
     timer();
-    uart_send("start");
+    printf("start");
     
     while (1)
     {
@@ -134,4 +133,16 @@ void number_display(uint i)
 }
 
 
+void uart_task()
+{
+    if (uart.index == 0) {return ;}
+
+    if (uart.out_time > 10)
+    {
+        uart.out_time = 0;
+        uart.out_time_flag = 0;
+
+        printf("ciallo~");
+    }
+}
 

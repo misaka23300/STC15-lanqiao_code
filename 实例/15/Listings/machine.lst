@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MACHINE                                                           06/09/2025 18:26:58 PAGE 1   
+C51 COMPILER V9.60.7.0   MACHINE                                                           06/09/2025 19:01:23 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MACHINE
@@ -62,7 +62,7 @@ line level    source
   52          void Timer1_Init(void) // 1毫秒@12.000MHz
   53          {
   54   1          AUXR |= 0x40;      // 定时器时钟1T模式
-C51 COMPILER V9.60.7.0   MACHINE                                                           06/09/2025 18:26:58 PAGE 2   
+C51 COMPILER V9.60.7.0   MACHINE                                                           06/09/2025 19:01:23 PAGE 2   
 
   55   1          TMOD &= 0x0F;      // 设置定时器模式
   56   1          TL1 = 0x20;        // 设置定时初始值
@@ -126,7 +126,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
-C51 COMPILER V9.60.7.0   MACHINE                                                           06/09/2025 18:26:58 PAGE 3   
+C51 COMPILER V9.60.7.0   MACHINE                                                           06/09/2025 19:01:23 PAGE 3   
 
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----

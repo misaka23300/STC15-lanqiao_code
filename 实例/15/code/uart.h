@@ -13,9 +13,10 @@ typedef struct {
     uchar out_time;
     uchar out_time_flag;
     uchar index;
+    uchar time;
 } UART;
 
-extern UART uart;
+extern idata UART uart;
 
 typedef struct {
     uchar x;
@@ -24,9 +25,9 @@ typedef struct {
 
 extern INPUT input;
 
-void uart_send(uchar *str);
+//void uart_send(uchar *str);
 //void uart_receive() interrupt 4;
 void get_position(); // uart.receive_data -> input.x input.y
-void uart_task();
 
+char putchar(char c);
 #endif
