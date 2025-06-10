@@ -9,21 +9,21 @@
 #include "key.h"
 #include "display.h"
 #include "uart.h"
+#include "sonic.h"
+
 
 enum {
     CCAP0_TIME = 1000,
     UART_LEN = 16,
     KEY_TIME = 20,
     FREQ_TIME = 1000,
-    UART_TIME = 10
+    UART_TIME = 10,
+    SONIC_TIME = 1000
 };
 
 
-uint setPcaTime = CCAP0_TIME;
+//xdata uint setPcaTime = CCAP0_TIME;
 
-uchar receiveData[UART_LEN];
-uchar delay_send_flag;
-uchar send_temp[];
 
 typedef struct {
     uchar time;
@@ -34,9 +34,6 @@ typedef struct {
 idata KEY key;
 
 
-idata long times;
-idata uint time_1000;
-
 typedef struct {
     uint time;
     long times;
@@ -44,6 +41,7 @@ typedef struct {
 } FREQ;
 
 idata FREQ freq;
+
 
 typedef struct {
     uchar now_x;
@@ -54,6 +52,14 @@ typedef struct {
 
 idata CAR car;
 
+
+typedef struct
+{
+    uint time;
+    uchar distance;
+} SONIC;
+
+idata SONIC sonic;
 
 //void pcaInterrupt() interrupt 7;
 void uartSend(uchar *str);
@@ -72,4 +78,6 @@ void number_display(uint i);
 
 
 void uart_task();
+
+
 #endif

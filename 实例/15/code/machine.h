@@ -10,6 +10,7 @@ void clean_display();
 void batch(uchar i);
 void timer();
 
+void Delay14us(void);
 
 
 
