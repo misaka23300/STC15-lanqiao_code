@@ -103,6 +103,15 @@ void timer()
 }
 
 
+void Delay14us(void)	//@12.000MHz
+{
+	unsigned char data i;
+
+	_nop_();
+	_nop_();
+	i = 39;
+	while (--i);
+}
 
 
 

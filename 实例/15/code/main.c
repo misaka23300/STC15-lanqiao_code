@@ -6,7 +6,7 @@
 idata KEY key;
 idata FREQ freq;
 idata CAR car;
-
+idata SONIC sonic;
 
 
 
@@ -48,15 +48,21 @@ void time_1ms()
 
 
     if (key.time < KEY_TIME) { key.time++; }
+
     if (freq.time < FREQ_TIME) { freq.time++; }
+
     if (uart.time < UART_TIME) {uart.time++; }
+
     if (uart.out_time_flag && uart.out_time < 11) { uart.out_time++; }
+
+    if (sonic.time < SONIC_TIME) {sonic.time++; }
 
  }
 
 
 void task_loop()
 {
+    uchar *p = &sonic.distance;
     if (key.time == KEY_TIME)
     {
         key_task();        
@@ -73,7 +79,16 @@ void task_loop()
     {
         uart.time = 0;
         uart_task();
-        
+    }
+
+    if (sonic.time == SONIC_TIME)
+    {
+        sonic.time = 0;
+        sonic.distance = sonic_measure();
+        printf(p);
+        seg_list[5] = sonic.distance / 100 % 10;
+        seg_list[6] = sonic.distance / 10 % 10;
+        seg_list[7] = sonic.distance % 10;
     }
 }
 
