@@ -9,6 +9,8 @@ idata CAR car;
 idata SONIC sonic;
 
 
+xdata PCF8591 adc;
+xdata DISPLAY display;
 
 // PCA_______________________________________
 
@@ -62,7 +64,7 @@ void time_1ms()
 
 void task_loop()
 {
-    uchar *p = &sonic.distance;
+
     if (key.time == KEY_TIME)
     {
         key_task();        
@@ -84,11 +86,7 @@ void task_loop()
     if (sonic.time == SONIC_TIME)
     {
         sonic.time = 0;
-        sonic.distance = sonic_measure();
-        printf(p);
-        seg_list[5] = sonic.distance / 100 % 10;
-        seg_list[6] = sonic.distance / 10 % 10;
-        seg_list[7] = sonic.distance % 10;
+        sonic_task();
     }
 }
 
@@ -108,28 +106,16 @@ void main()
 
 // _________________________________________任务函数
 
-void key_task()
+void key_task()     // -> key.press
 {
     key.press = key_scan();
 }
 
 
 
-/* void free_state(uchar xx, yy)
-{
-    uchar distance_x;
-    uchar distance_y;
-		uchar distance;
-    distance_x = car.x - xx;
-    distance_y = car.y - yy;
-
-    distance = distance_x * distance_x + distance_y *distance_y;
-    distance = sqrt(distance);
-
-} */
 
 
-void freq_task()
+void freq_task()    // -> freq.times_out
 {
     freq.times_out = freq.times;
     freq.times = 0;
@@ -148,7 +134,7 @@ void number_display(uint i)
 }
 
 
-void uart_task()
+void uart_task()    // <- uart.receive 
 {
     if (uart.index == 0) {return ;}
 
@@ -157,7 +143,58 @@ void uart_task()
         uart.out_time = 0;
         uart.out_time_flag = 0;
 
+        if (uart.receive_data[0] == '(')
+        {
+            if (state.mode = 0)
+            {
+                printf("Got it");
+            }
+            else
+            {
+                printf("Busy");
+            }
+        }
         printf("ciallo~");
     }
 }
 
+void adc_task()     // -> adc.is_dat_no_night
+{
+    adc.value = ADC(0x03);
+
+    if (adc.value > 61)
+    {
+        adc.is_day_no_night = 1;
+    }
+    else
+    {
+        adc.is_day_no_night = 0;
+    }
+}
+
+void display_task()
+{
+    switch (display.state)
+    {
+        // L XXX - YYY
+        case 0:
+        {
+            seg_list[0] = 18;
+            seg_list[1] = 1;
+        }
+        break;
+    }
+}
+
+
+void speed_task()
+{
+    
+}
+
+
+void sonic_task()   // -> sonic.distance
+{
+    sonic.distance = sonic_measure();
+    
+}

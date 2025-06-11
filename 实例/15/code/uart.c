@@ -23,6 +23,7 @@ void uart_receive() interrupt 4
     if (RI)
     {
         RI = 0;
+        
         ET1 = 0;
         seg_list[0] = 1;
         // 串口超时判断
