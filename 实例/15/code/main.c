@@ -11,6 +11,8 @@ idata SONIC sonic;
 
 xdata PCF8591 adc;
 xdata DISPLAY display;
+idata POSITION position;
+xdata SPEED speed;
 
 // PCA_______________________________________
 
@@ -109,17 +111,79 @@ void main()
 void key_task()     // -> key.press
 {
     key.press = key_scan();
+
+    switch (key.press)
+    {
+        case  4:
+        {
+            if (state.mode == 0)
+            {
+                if (uart.receive_dat_flag == 1)
+                {
+                    uart.receive_data_flag = 0;
+                    state.mode = 1;
+                }
+                
+            }
+            else if (state.mode == 2)
+            {
+                if (sonic.distance >= 30)
+                {
+                    sonic.lock = 0;
+                    state.mode = 1;
+                }
+            }
+
+        }
+        break;
+        
+        case 5:
+        {
+            if (state.mode == 2)
+            {
+                position.now[0] = 0;
+                position.now[1] = 0;
+            }
+        }
+        break;
+
+        case 8:
+        {
+            if (display.state == 1) {speed.argument_state = 0;}
+
+            display.state++;
+            
+            if (display.state == 3) {display.mode = 0;}
+        }
+        break;
+
+        case 9:
+        {
+            if (display.state == 2)
+            {
+                speed.argument_state++;
+                if (speed.argument_state == 2) {speed.argumen_state = 0; }
+            }
+        }
+        break;
+
+        case 12:
+        {
+            if (display.state == 2)
+            {
+                if (speed.argument_state == 0) { speed.r += 0.1; }
+            }
+        }
+        break;
+    }
 }
 
 
-
-
-
-void freq_task()    // -> freq.times_out
+void freq_task()    // -> freq.times_out  -> speed.value
 {
     freq.times_out = freq.times;
     freq.times = 0;
-    
+    speed.value = 3.14 * speed.r * freq.times / 100 + speed.b;
 }
 
 
@@ -148,13 +212,33 @@ void uart_task()    // <- uart.receive
             if (state.mode = 0)
             {
                 printf("Got it");
+                get_position();
+                position.going[0] = input.x;
+                position.going[1] = input.y;
             }
             else
             {
                 printf("Busy");
             }
         }
-        printf("ciallo~");
+        else if (uart.receive_data[0] = '?')
+        {
+            if (state.mode == 0) { printf("Idle"); }
+            else if (state.mode == 1) { printf("Wait"); }
+            else if (state.mode == 2) { printf("Busy"); }
+        }
+        else if (uart.receive_data[0] = '#')
+        {
+            printf("(");
+            printf(position.now[0]);
+            printf(",");
+            printf(position.now[1]);
+            printf(")");
+        }
+        else 
+        {
+            printf("Error");
+        }
     }
 }
 
@@ -179,8 +263,28 @@ void display_task()
         // L XXX - YYY
         case 0:
         {
-            seg_list[0] = 18;
-            seg_list[1] = 1;
+            if (state.mode == 0)
+            {
+                seg_list[0] = 18;
+                seg_list[1] = position.now[0] / 100 % 10;
+                seg_list[2] = position.now[0] / 10 % 10;
+                seg_list[3] = position.now[0] % 10;
+                seg_list[4] = 16;
+                seg_list[5] = position.now[1] / 100 % 10;
+                seg_list[6] = position.now[1] / 10 % 10;
+                seg_list[7] = position.now[1] % 10;
+            }
+            else if (state.mode == 1 || state.mode == 2)
+            {
+                seg_list[0] = 18;
+                seg_list[1] = position.going[0] / 100 % 10;
+                seg_list[2] = position.going[0] / 10 % 10;
+                seg_list[3] = position.going[0] % 10;
+                seg_list[4] = 16;
+                seg_list[5] = position.going[1] / 100 % 10;
+                seg_list[6] = position.going[1] / 10 % 10;
+                seg_list[7] = position.going[1] % 10;
+            }
         }
         break;
     }
@@ -196,5 +300,10 @@ void speed_task()
 void sonic_task()   // -> sonic.distance
 {
     sonic.distance = sonic_measure();
+    if (sonic.distance < 30 && sonic.lock == 0)
+    {
+        state.mode = 2;
+        sonic.lock = 1;
+    }
     
 }

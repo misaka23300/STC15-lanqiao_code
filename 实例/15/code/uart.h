@@ -2,7 +2,7 @@
 #define __UART_H__
 
 #include "machine.h"
-#include "display.h"
+
 
 enum {
     RECEIVE_LEN = 16
@@ -14,6 +14,7 @@ typedef struct {
     uchar out_time_flag;
     uchar index;
     uchar time;
+    uchar receive_data_flag;
 } UART;
 
 extern idata UART uart;

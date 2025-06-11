@@ -34,8 +34,23 @@ typedef sturct {
     uchar mode;     // 0 -> 空闲    1 -> 运行   2 -> 等待
 } STATE;
 
-STATE state;
+xdata STATE state;
 
+typedef struct {
+    uint going[2];    // 0 -> x   // 1 -> y
+    uint now[2];
+} POSITION;
+
+idata POSITION position;
+
+typedef struct {
+    float value;
+    uchar r;
+    uchar b;
+    uchar argument_state;
+} SPEED;
+
+xdata SPEED speed;
 
 typedef struct {
     uint time;
@@ -59,6 +74,7 @@ typedef struct
 {
     uint time;
     uchar distance;
+    uchar lock;
 } SONIC;
 
 idata SONIC sonic;
