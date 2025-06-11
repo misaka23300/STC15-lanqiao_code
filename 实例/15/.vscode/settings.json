@@ -32,6 +32,8 @@
     "random": false
   },
   "files.associations": {
-    "stdio.h": "c"
+    "stdio.h": "c",
+    "type_traits": "c",
+    "xtr1common": "c"
   }
 }

@@ -23,12 +23,13 @@ void uart_receive() interrupt 4
     if (RI)
     {
         RI = 0;
+
         ET1 = 0;
         seg_list[0] = 1;
         // 串口超时判断
         uart.out_time = 0;
         uart.out_time_flag = 1;
-
+        uart.receive_data_flag = 1;
         uart.receive_data[uart.index] = SBUF;
         uart.index++;
 
