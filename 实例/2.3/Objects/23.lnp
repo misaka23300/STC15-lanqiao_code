@@ -1,0 +1,9 @@
+".\Objects\STARTUP.obj",
+".\Objects\display.obj",
+".\Objects\key.obj",
+".\Objects\machine.obj",
+".\Objects\main.obj",
+".\Objects\sonic.obj",
+".\Objects\timer.obj" 
+TO ".\Objects\23" 
+PRINT(".\Listings\23.m51") RAMSIZE(256) 

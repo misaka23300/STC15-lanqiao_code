@@ -1,0 +1,90 @@
+C51 COMPILER V9.60.7.0   SONIC                                                             06/13/2025 15:01:07 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE SONIC
+OBJECT MODULE PLACED IN .\Objects\sonic.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE code\sonic.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listing
+                    -s\sonic.lst) TABS(2) OBJECT(.\Objects\sonic.obj)
+
+line level    source
+
+   1          #include "sonic.h"
+   2          
+   3          sbit tx = P1^0;
+   4          sbit rx = P1^1; 
+   5          
+   6          
+   7          
+   8          void Delay14us()    //@12.000MHz
+   9          {
+  10   1        unsigned char i;
+  11   1      
+  12   1        _nop_();
+  13   1        _nop_();
+  14   1        i = 39;
+  15   1        while (--i);
+  16   1      }
+  17          
+  18          
+  19          void pca_init()
+  20          {
+  21   1          CMOD = 0x00;
+  22   1          CR = 0;
+  23   1          CL = 0; CH = 0;
+  24   1          CF = 0;
+  25   1      }
+  26          
+  27          void sonic_send()
+  28          {
+  29   1          uchar i;
+  30   1          for (i = 0;i < 10;i++)
+  31   1          {
+  32   2              tx = 1;
+  33   2              Delay14us();
+  34   2              tx = 0;
+  35   2              Delay14us();
+  36   2          }
+  37   1      }
+  38          
+  39          
+  40          uchar sonic_measure()
+  41          {
+  42   1          uint temp;
+  43   1          uchar distance;
+  44   1      
+  45   1          pca_init();
+  46   1      
+  47   1          sonic_send();
+  48   1      
+  49   1          CR = 1;
+  50   1          while (rx == 1 && CF == 0);
+  51   1          CR = 0;
+  52   1      
+  53   1          if (CF == 1)
+  54   1          {
+C51 COMPILER V9.60.7.0   SONIC                                                             06/13/2025 15:01:07 PAGE 2   
+
+  55   2              distance = 255;
+  56   2          }
+  57   1          else
+  58   1          {
+  59   2              temp = CH << 8 | CL;
+  60   2              distance = (uchar) (temp * 0.017 + 1);
+  61   2              //distance = (uchar) (temp + 29) / 58;
+  62   2          }
+  63   1          return distance;
+  64   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    102    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

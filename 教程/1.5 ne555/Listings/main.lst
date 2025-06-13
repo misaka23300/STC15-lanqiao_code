@@ -1,0 +1,138 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              06/13/2025 15:16:19 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE code\main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "main.h"
+   2          
+   3          enum {
+   4             
+   5              FREQ_TASK = 1000,
+   6              DISPLAY_TASK = 50
+   7          };
+   8          
+   9          
+  10          
+  11          
+  12          /* typedef struct {
+  13              uint time;
+  14              uint times;
+  15              uint out_times;
+  16          } FREQ;
+  17          
+  18          FREQ freq; */
+  19          
+  20          uint freq_time;
+  21          uint freq_times;
+  22          uint freq_out_times;
+  23          
+  24          uchar display_mode;     // -> 显示状态
+  25          uchar display_time;
+  26          
+  27          // ---------------------------------------------------- 任务调度
+  28          void main()
+  29          {
+  30   1          clean_display();
+  31   1          timer();
+  32   1      
+  33   1          test();
+  34   1          while (1)
+  35   1          {
+  36   2              task_loop();
+  37   2          }
+  38   1      }
+  39          
+  40          void task_loop() 
+  41          {
+  42   1      
+  43   1          if (freq_time == FREQ_TASK)
+  44   1          {
+  45   2              freq_time = 0;
+  46   2              freq_task();
+  47   2              printf("%u", freq_out_times);
+  48   2          }
+  49   1      
+  50   1          if (display_time == DISPLAY_TASK)
+  51   1          {
+  52   2              display_time = 0;
+  53   2              display_task();
+  54   2          }
+C51 COMPILER V9.60.7.0   MAIN                                                              06/13/2025 15:16:19 PAGE 2   
+
+  55   1              
+  56   1          
+  57   1      }
+  58          
+  59          void timer1_interrupt() interrupt 3
+  60          {
+  61   1          seg_display();
+  62   1          led_display();
+  63   1          //display_task();
+  64   1      
+  65   1          if (freq_time < FREQ_TASK) {freq_time++; }
+  66   1      
+  67   1          if (display_time < DISPLAY_TASK) { display_time++; }
+  68   1      }
+  69          
+  70          
+  71          
+  72          void Timer0_Isr(void) interrupt 1
+  73          {
+  74   1          freq_times++;
+  75   1      }
+  76          
+  77          // -----------------------------------------------------------任务函数
+  78          void test()
+  79          {
+  80   1          relay(1);
+  81   1          led_list[0] = 1;
+  82   1          putchar('c');
+  83   1      }
+  84          
+  85          
+  86          
+  87          void display_task()
+  88          {
+  89   1      
+  90   1              
+  91   1          seg_list[0] = (uchar) freq_out_times / 10000;
+  92   1          seg_list[1] = (uchar) freq_out_times / 1000 % 10;
+  93   1          seg_list[2] = (uchar) freq_out_times / 100 % 10;
+  94   1          seg_list[3] = (uchar) freq_out_times / 10 % 10;
+  95   1          seg_list[4] = (uchar) freq_out_times % 10;
+  96   1              
+  97   1              
+  98   1      }
+  99          
+ 100          
+ 101          
+ 102          void freq_task()
+ 103          {
+ 104   1      
+ 105   1          TR0 = 0;//�ر�T0;
+ 106   1          freq_out_times =(uint)(TH0 << 8) | TL0;
+ 107   1          TR0 = 1;//�ٴδ�
+ 108   1          TH0 = 0;
+ 109   1          TL0 = 0;//��ռ�����
+ 110   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    265    ----
+   CONSTANT SIZE    =      3    ----
+   XDATA SIZE       =   ----    ----
+C51 COMPILER V9.60.7.0   MAIN                                                              06/13/2025 15:16:19 PAGE 3   
+
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      8    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,69 @@
+C51 COMPILER V9.60.7.0   TIMER                                                             06/13/2025 15:16:19 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TIMER
+OBJECT MODULE PLACED IN .\Objects\timer.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE code\timer.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listing
+                    -s\timer.lst) TABS(2) OBJECT(.\Objects\timer.obj)
+
+line level    source
+
+   1          #include "timer.h"
+   2          
+   3          
+   4          // timer0 -> freq
+   5          // timer1 -> 1ms
+   6          // timer2 -> uart
+   7          
+   8          
+   9          
+  10          
+  11          
+  12          
+  13          void Timer0Init(void)   //100微秒@12.000MHz
+  14          {
+  15   1        AUXR &= 0x7F;   //��ʱ��ʱ��12Tģʽ
+  16   1        TMOD = 0x05;    //���ö�ʱ��T0Ϊ������ģʽ
+  17   1        TL0 = 0;    //���ö�ʱ��ֵ
+  18   1        TH0 = 0;    //���ö�ʱ��ֵ��Ϊ0
+  19   1        TF0 = 0;    //���TF0��־
+  20   1        TR0 = 1;    //��ʱ��0��ʼ��ʱ
+  21   1        ET0 = 1;    //����Ҫ�ж�
+  22   1      }
+  23          
+  24          void Timer1Init(void)   //1毫秒@12.000MHz
+  25          {
+  26   1        AUXR |= 0x40;   //定时器时钟1T模式
+  27   1        TMOD &= 0x0F;   //设置定时器模式
+  28   1        TL1 = 0x20;   //设置定时初值
+  29   1        TH1 = 0xD1;   //设置定时初值
+  30   1        TF1 = 0;    //清除TF1标志
+  31   1        TR1 = 1;    //定时器1开始计时
+  32   1          ET1 = 1;
+  33   1      }
+  34          
+  35          
+  36          
+  37          void timer()
+  38          {
+  39   1          Timer0Init();
+  40   1          
+  41   1        Timer1Init();
+  42   1          EA = 1;
+  43   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     46    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+C51 COMPILER V9.60.7.0   TIMER                                                             06/13/2025 15:16:19 PAGE 2   
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

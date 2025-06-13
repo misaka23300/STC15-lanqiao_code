@@ -1,0 +1,7 @@
+".\Objects\STARTUP.obj",
+".\Objects\display.obj",
+".\Objects\machine.obj",
+".\Objects\main.obj",
+".\Objects\timer.obj" 
+TO ".\Objects\2333333" 
+PRINT(".\Listings\2333333.m51") RAMSIZE(256) 
