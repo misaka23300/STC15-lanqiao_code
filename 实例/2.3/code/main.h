@@ -19,4 +19,5 @@ void test();
 void display_task();
 void key_task();
 void freq_task();
+void uart_task();
 #endif

@@ -44,7 +44,7 @@ void task_loop()
     {
         freq_time = 0;
         freq_task();
-        printf("%u", freq_out_times);
+        printf("timer: %u", freq_out_times);
     }
 
     if (display_time == DISPLAY_TASK)

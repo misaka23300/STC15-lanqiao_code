@@ -12,6 +12,8 @@ void clean_display()
     P5M1 = 0;   P5M0 = 0;   //设置为准双向口
     P6M1 = 0;   P6M0 = 0;   //设置为准双向口
     P7M1 = 0;   P7M0 = 0;   //设置为准双向口
+    P3M0 = 0x00; P3M1 = 0x10; 
+
 
     P0 = 0xFF;
     batch(4);

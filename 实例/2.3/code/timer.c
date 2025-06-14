@@ -10,7 +10,7 @@ UART uart;
 
 
 
-void Timer0Init(void)		//100微秒@12.000MHz
+/* void Timer0Init(void)		//100微秒@12.000MHz
 {
 	AUXR &= 0x7F;		//��ʱ��ʱ��12Tģʽ
 	TMOD = 0x05;		//���ö�ʱ��T0Ϊ������ģʽ
@@ -18,10 +18,21 @@ void Timer0Init(void)		//100微秒@12.000MHz
 	TH0 = 0;		//���ö�ʱ��ֵ��Ϊ0
 	TF0 = 0;		//���TF0��־
 	TR0 = 1;		//��ʱ��0��ʼ��ʱ
-	ET0 = 1;		//����Ҫ�ж�
+
+} */
+
+
+void Timer0Init(void)		//100微秒@12.000MHz
+{
+	AUXR &= 0x7F;			//定时器时钟12T模式
+	//TMOD &= 0xF0;			//设置定时器模式
+    TMOD = 0x05;			//设置定时器0为模式2
+	TL0 = 0x00;				//设置定时初始值
+	TH0 = 0x00;				//设置定时初始值
+	TF0 = 0;				//清除TF0标志
+	TR0 = 1;				//定时器0开始计时
+	//ET0 = 1;				//使能定时器0中断
 }
-
-
 
 
 void Timer1Init(void)		//1毫秒@12.000MHz
@@ -41,8 +52,8 @@ void Timer1Init(void)		//1毫秒@12.000MHz
 void UartInit(void)		//9600bps@12.000MHz
 {
 	SCON = 0x50;		//8位数据,可变波特率
-	AUXR |= 0x01;		//串口1选择定时器2为波特率发生器
-	AUXR |= 0x04;		//定时器2时钟为Fosc,即1T
+	//AUXR |= 0x01;		//串口1选择定时器2为波特率发生器
+	AUXR |= 0x05;		//定时器2时钟为Fosc,即1T
 	T2L = 0xC7;		//设定定时初值
 	T2H = 0xFE;		//设定定时初值
 	AUXR |= 0x10;		//启动定时器2

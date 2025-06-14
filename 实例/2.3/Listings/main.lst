@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              06/13/2025 15:01:07 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              06/13/2025 23:29:51 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -14,187 +14,284 @@ line level    source
    4              KEY_TASK = 20,
    5              SONIC_TASK = 100,
    6              FREQ_TASK = 1000,
-   7              DISPLAY_TASK = 50
-   8          };
-   9          
+   7              DISPLAY_TASK = 50,
+   8              UART_TASK = 10
+   9          };
   10          
-  11          typedef struct {
-  12              uchar time;
-  13              uchar press;
-  14          } KEY;
-  15          
-  16          KEY key;
-  17          
-  18          typedef struct {
-  19              uint time;
-  20              uchar distance;
-  21          } SONIC;
-  22          
-  23          SONIC sonic;
-  24          
-  25          /* typedef struct {
-  26              uint time;
-  27              uint times;
-  28              uint out_times;
-  29          } FREQ;
-  30          
-  31          FREQ freq; */
-  32          
-  33          uint freq_time;
-  34          uint freq_times;
-  35          uint freq_out_times;
-  36          
-  37          uchar display_mode;     // -> 显示状态
-  38          uchar display_time;
+  11          
+  12          typedef struct {
+  13              uchar time;
+  14              uchar press;
+  15          } KEY;
+  16          
+  17          KEY key;
+  18          
+  19          typedef struct {
+  20              uint time;
+  21              uchar distance;
+  22          } SONIC;
+  23          
+  24          SONIC sonic;
+  25          
+  26          /* typedef struct {
+  27              uint time;
+  28              uint times;
+  29              uint out_times;
+  30          } FREQ;
+  31          
+  32          FREQ freq; */
+  33          
+  34          typedef struct{
+  35              uint time;
+  36              uint times;
+  37              uint out_times;
+  38          } FREQ;
   39          
-  40          // ---------------------------------------------------- 任务调度
-  41          void main()
-  42          {
-  43   1          clean_display();
-  44   1          timer();
-  45   1      
-  46   1          test();
-  47   1          while (1)
-  48   1          {
-  49   2              task_loop();
-  50   2          }
-  51   1      }
-  52          
-  53          void task_loop() 
-  54          {
-C51 COMPILER V9.60.7.0   MAIN                                                              06/13/2025 15:01:07 PAGE 2   
+  40          FREQ freq;
+  41          
+  42          //freq_times = 13233;
+  43          
+  44          uchar display_mode;     // -> 显示状态
+  45          uchar display_time;
+  46          
+  47          
+  48          uint x = 2333;
+  49          uint y = 721;
+  50          // ---------------------------------------------------- 任务调度
+  51          void main()
+  52          {
+  53   1          freq.times = 12345;
+  54   1          clean_display();
+C51 COMPILER V9.60.7.0   MAIN                                                              06/13/2025 23:29:51 PAGE 2   
 
-  55   1          if (key.time == KEY_TASK)
-  56   1          {
-  57   2              key.time = 0;
-  58   2              key.press = key_scan();
-  59   2              key_task();
-  60   2      
-  61   2              if (sonic.time == SONIC_TASK)
-  62   2              {
-  63   3                  sonic.time = 0;
-  64   3                  sonic.distance = sonic_measure();
-  65   3          }
-  66   2                  
-  67   2      
-  68   2              if (freq_time == FREQ_TASK)
-  69   2              {
-  70   3                  freq_time = 0;
-  71   3                  freq_task();
-  72   3                  printf("%u", freq_out_times);
-  73   3              }
-  74   2      
-  75   2              if (display_time == DISPLAY_TASK)
-  76   2              {
-  77   3                  display_time = 0;
-  78   3                  display_task();
-  79   3              }
-  80   2              
-  81   2          }
-  82   1      }
-  83          
-  84          void timer1_interrupt() interrupt 3
-  85          {
-  86   1          seg_display();
-  87   1          led_display();
-  88   1          //display_task();
-  89   1      
-  90   1          if (key.time < KEY_TASK) { key.time++; }
-  91   1      
-  92   1          if (sonic.time < SONIC_TASK) {sonic.time++;}
-  93   1      
-  94   1          if (freq_time < FREQ_TASK) {freq_time++; }
-  95   1      
-  96   1          if (display_time < DISPLAY_TASK) { display_time++; }
+  55   1          timer();
+  56   1      
+  57   1          test();
+  58   1          while (1)
+  59   1          {
+  60   2              task_loop();
+  61   2          }
+  62   1      }
+  63          
+  64          void task_loop() 
+  65          {
+  66   1          if (key.time == KEY_TASK)
+  67   1          {
+  68   2              key.time = 0;
+  69   2              key.press = key_scan();
+  70   2              key_task();
+  71   2          }
+  72   1          if (sonic.time == SONIC_TASK)
+  73   1          {
+  74   2              sonic.time = 0;
+  75   2              sonic.distance = sonic_measure();
+  76   2          }
+  77   1              
+  78   1      
+  79   1          if (freq.time == FREQ_TASK)
+  80   1          {
+  81   2              freq.time = 0;
+  82   2              freq_task();
+  83   2              //printf("%u", freq.out_times);
+  84   2          }
+  85   1      
+  86   1          if (display_time == DISPLAY_TASK)
+  87   1          {
+  88   2              display_time = 0;
+  89   2              display_task();
+  90   2          }
+  91   1              
+  92   1          if (uart.time == UART_TASK)
+  93   1          {
+  94   2              uart.time = 0;
+  95   2              uart_task();
+  96   2          }
   97   1      }
   98          
-  99          
- 100          
- 101          void Timer0_Isr(void) interrupt 1
- 102          {
- 103   1          freq_times++;
- 104   1      }
- 105          
- 106          // -----------------------------------------------------------任务函数
- 107          void test()
- 108          {
- 109   1          relay(1);
- 110   1          led_list[0] = 1;
- 111   1          putchar('c');
- 112   1      }
- 113          
- 114          
- 115          
- 116          void display_task()
-C51 COMPILER V9.60.7.0   MAIN                                                              06/13/2025 15:01:07 PAGE 3   
+  99          // 1ms
+ 100          void timer1_interrupt() interrupt 3
+ 101          {
+ 102   1          seg_display();
+ 103   1          led_display();
+ 104   1          //display_task();
+ 105   1      
+ 106   1          if (key.time < KEY_TASK) { key.time++; }
+ 107   1      
+ 108   1          if (sonic.time < SONIC_TASK) {sonic.time++;}
+ 109   1      
+ 110   1          if (freq.time < FREQ_TASK) {freq.time++; }
+ 111   1      
+ 112   1          if (display_time < DISPLAY_TASK) { display_time++; }
+ 113   1      
+ 114   1          if (uart.out_time_flag == 1 && uart.out_time < 10) { uart.out_time++; }
+ 115   1      
+ 116   1          if (uart.time < UART_TASK) { uart.time++; }
+C51 COMPILER V9.60.7.0   MAIN                                                              06/13/2025 23:29:51 PAGE 3   
 
- 117          {
- 118   1          switch (display_mode)
- 119   1          {
- 120   2              case 0:
- 121   2              {
- 122   3                  if (key.press != 99)
- 123   3                  {
- 124   4                      seg_list[1] = key.press % 10;
- 125   4                      seg_list[0] = key.press / 10 % 10;
- 126   4                  }
- 127   3              }
- 128   2              break; 
- 129   2      
- 130   2              case 1:
- 131   2              {
- 132   3                  seg_list[5] = sonic.distance % 10;
- 133   3                  seg_list[4] = sonic.distance / 10 % 10;
- 134   3                  seg_list[3] = sonic.distance / 100 % 10;
- 135   3              }
- 136   2              break; 
- 137   2      
- 138   2              case 2:
- 139   2              {
- 140   3                  seg_list[0] = (uchar) freq_out_times / 10000;
- 141   3                  seg_list[1] = (uchar) freq_out_times / 1000 % 10;
- 142   3                  seg_list[2] = (uchar) freq_out_times / 100 % 10;
- 143   3                  seg_list[3] = (uchar) freq_out_times / 10 % 10;
- 144   3                  seg_list[4] = (uchar) freq_out_times % 10;
- 145   3              }
- 146   2              break; 
- 147   2          }
- 148   1      }
- 149          
- 150          
- 151          void key_task()
- 152          {
- 153   1          switch (key.press)
- 154   1          {
- 155   2              case 4: 
- 156   2              {
- 157   3                  display_mode++;
- 158   3                  if (display_mode == 3) { display_mode = 0;}
- 159   3              }
- 160   2              break;
- 161   2          }
- 162   1      }
- 163          
- 164          
- 165          void freq_task()
- 166          {
- 167   1      
- 168   1          TR0 = 0;//�ر�T0;
- 169   1          freq_out_times =(uint)(TH0 << 8) | TL0;
- 170   1          TR0 = 1;//�ٴδ�
- 171   1          TH0 = 0;
- 172   1          TL0 = 0;//��ռ�����
- 173   1      }
+ 117   1      }
+ 118          
+ 119          
+ 120          
+ 121          void Timer0_Isr(void) interrupt 1
+ 122          {
+ 123   1          /* freq_times++; */
+ 124   1      }
+ 125          
+ 126          // -----------------------------------------------------------任务函数
+ 127          void test()
+ 128          {
+ 129   1          relay(1);
+ 130   1          led_list[0] = 1;
+ 131   1          putchar('c');
+ 132   1      }
+ 133          
+ 134          
+ 135          
+ 136          void display_task()
+ 137          {
+ 138   1          switch (display_mode)
+ 139   1          {
+ 140   2              case 0:
+ 141   2              {
+ 142   3                  if (key.press != 99)
+ 143   3                  {
+ 144   4                      seg_list[1] = key.press % 10;
+ 145   4                      seg_list[0] = key.press / 10 % 10;
+ 146   4                  }
+ 147   3              }
+ 148   2              break; 
+ 149   2      
+ 150   2              case 1:
+ 151   2              {
+ 152   3                  seg_list[5] = sonic.distance % 10;
+ 153   3                  seg_list[4] = sonic.distance / 10 % 10;
+ 154   3                  seg_list[3] = sonic.distance / 100 % 10;
+ 155   3              }
+ 156   2              break; 
+ 157   2      
+ 158   2              case 2:
+ 159   2              {
+ 160   3                  seg_list[0] =  freq.out_times / 10000;
+ 161   3                  seg_list[1] =  freq.out_times / 1000 % 10;
+ 162   3                  seg_list[2] =  freq.out_times / 100 % 10;
+ 163   3                  seg_list[3] =  freq.out_times / 10 % 10;
+ 164   3                  seg_list[4] =  freq.out_times % 10;
+ 165   3              }
+ 166   2              break; 
+ 167   2          }
+ 168   1      }
+ 169          
+ 170          
+ 171          void key_task()
+ 172          {
+ 173   1          switch (key.press)
+ 174   1          {
+ 175   2              case 4: 
+ 176   2              {
+ 177   3                  display_mode++;
+ 178   3                  if (display_mode == 3) { display_mode = 0;}
+C51 COMPILER V9.60.7.0   MAIN                                                              06/13/2025 23:29:51 PAGE 4   
+
+ 179   3              }
+ 180   2              break;
+ 181   2          }
+ 182   1      }
+ 183          
+ 184          
+ 185          void freq_task()
+ 186          {
+ 187   1      
+ 188   1          TR0 = 0;
+ 189   1          freq.times = (uint)(TH0 << 8) | TL0;
+ 190   1          freq.out_times = freq.times;
+ 191   1          freq.times = 0;
+ 192   1      
+ 193   1          //printf("freq: %u",freq.out_times);
+ 194   1          TH0 = 0; TL0 = 0;
+ 195   1          TR0 = 1;
+ 196   1      
+ 197   1          //freq_out_times = freq_time;
+ 198   1      
+ 199   1          //freq_times = 0;    
+ 200   1      }
+ 201          
+ 202          void uart_task()
+ 203          {
+ 204   1          uchar k = 1;
+ 205   1          //uchar position[2];
+ 206   1          uchar towards = 0;
+ 207   1          uchar i = 4;
+ 208   1          uchar j = 5;
+ 209   1          if (uart.index == 0) { return; }
+ 210   1      
+ 211   1          if (uart.out_time == 10)
+ 212   1          {
+ 213   2              uart.out_time = 0;
+ 214   2              uart.out_time_flag = 0;
+ 215   2              uart.index = 0;
+ 216   2              switch (uart.receive_data[0])
+ 217   2              {
+ 218   3                  case '#':
+ 219   3                  {
+ 220   4                      printf("ciallo~");
+ 221   4                  }
+ 222   3                  break;
+ 223   3      
+ 224   3                  case '?':
+ 225   3                  {
+ 226   4                      printf("%d",x);
+ 227   4                  }
+ 228   3                  break;
+ 229   3      
+ 230   3                  case '^':
+ 231   3                  {
+ 232   4                     printf("(%d,%d)",x,y);
+ 233   4                     
+ 234   4                  }
+ 235   3                  break;
+ 236   3      
+ 237   3                  case '(':
+ 238   3                  {
+ 239   4                      x = 0;y = 0;
+ 240   4                      while (uart.receive_data[k] != ')')
+C51 COMPILER V9.60.7.0   MAIN                                                              06/13/2025 23:29:51 PAGE 5   
+
+ 241   4                      {
+ 242   5                          if (uart.receive_data[k] >= '0' && uart.receive_data[k] <= '9')
+ 243   5                          {
+ 244   6                              if (towards == 0)
+ 245   6                              {
+ 246   7                                  x = x * 10 + uart.receive_data[k] - '0';
+ 247   7                              }
+ 248   6                              else
+ 249   6                              {
+ 250   7                                  y = y * 10 + uart.receive_data[k] - '0';
+ 251   7                              }
+ 252   6                          }
+ 253   5                          else if (uart.receive_data[k] == ',')
+ 254   5                          {
+ 255   6                              towards = 1;
+ 256   6                          }
+ 257   5                          
+ 258   5      
+ 259   5                          k++;
+ 260   5                      }
+ 261   4                      printf("(%d,%d)", x, y);
+ 262   4                  }
+ 263   3                  break;
+ 264   3      
+ 265   3                  default: {printf("error");}
+ 266   3              }
+ 267   2          }
+ 268   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    426    ----
-   CONSTANT SIZE    =      3    ----
-C51 COMPILER V9.60.7.0   MAIN                                                              06/13/2025 15:01:07 PAGE 4   
-
+   CODE SIZE        =    712    ----
+   CONSTANT SIZE    =     25    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =     13    ----
+   DATA SIZE        =     17       4
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

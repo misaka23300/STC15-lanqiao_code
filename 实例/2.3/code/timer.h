@@ -14,6 +14,7 @@ typedef struct{
     uchar index;
     uchar out_time;
     uchar out_time_flag;
+    uchar time;
 } UART;
 
 extern UART uart;
