@@ -1,0 +1,42 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              09/27/2025 17:03:15 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main\main.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\include) DEBUG OBJECTEXTEN
+                    -D PRINT(.\Listings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "stc15F2k60s2.h"
+   2          #include "stdbool.h"
+   3          
+   4          int main()
+   5          {
+   6   1          P0 = 0xFF;
+   7   1          P2 = (P2 & 0x1F) | 0xC0;
+   8   1          P2 = P2 & 0x1F;
+   9   1      
+  10   1          P0 = 0xFF;
+  11   1          P2 = (P2 & 0x1F) | 0xE0;
+  12   1          P2 = P2 & 0x1F;
+  13   1      
+  14   1          P0 = ~0x01;
+  15   1          P2 = (P2 & 0x1F) | 0x80;
+  16   1          P2 = P2 & 0x1F;
+  17   1          while(true);
+  18   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     44    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
