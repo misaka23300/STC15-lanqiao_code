@@ -46,7 +46,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\Objects\</OutputDirectory>
-          <OutputName>2.0led</OutputName>
+          <OutputName>2.1轮询</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
@@ -390,11 +390,6 @@
               <FileName>main.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\include\main.h</FilePath>
-            </File>
-            <File>
-              <FileName>stdbool.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\include\stdbool.h</FilePath>
             </File>
           </Files>
         </Group>
