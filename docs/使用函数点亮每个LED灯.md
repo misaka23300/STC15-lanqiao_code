@@ -10,24 +10,20 @@
 #include "led.h"
 
 
-uchar led_value[8] = {0, 0, 0, 0, 0 ,0 ,0 ,0};
+uint8_t led_value[8] = {0, 0, 0, 0, 0 ,0 ,0 ,0};
 
-void led(uchar i, bit state)
+void led(uint8_t i, bit state)
 {
-    static uchar temp;
-    static uchar last = 0xFF;
+    static uint8_t temp;
+    static uint8_t last = 0xFF;
     
-    if (state)
-    {
+    if (state) {
         temp = temp | (0x01 << i);
-    }
-    else
-    {
+    } else {
         temp = temp & ~(0x01 << i);
     }
 
-    if (temp != last)
-    {
+    if (temp != last) {
         P0 = ~temp;
         batch(4);
         batch(0);
@@ -45,7 +41,7 @@ uint8_t set_led(uint8_t i, bit state)
 
 void led_display()
 {
-    static uchar i;
+    static uint8_t i;
 
     led(i, led_value[i]);
     batch(4);
