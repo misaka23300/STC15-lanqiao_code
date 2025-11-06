@@ -8,14 +8,19 @@
 
 ## 一、LED 点亮原理
 
+### LED灯实物图
+在板子上的贴片led灯封装为**0603**，非常小，我们来看看他的实物图。
+<img src="./%E7%82%B9%E4%BA%AElED%E7%81%AF.assets/19A23F6943857869CBE27DE741B1F55B.jpg" alt="A-SP192DGHC-C01-4T实物图" style="zoom: 25%;" />
+
+
 点亮 LED 灯的条件很简单：
 
-> **正极接高电平（3.3V 或 5V）**，**负极接地（低电平）**，LED 即会发光。
+> **正极接3.3v电压，**负极接地（低电平）**，LED 即会发光。
 
 在我们的电路中，LED 的正极经过限流电阻接到 5V 电源，负极接到 **74HC573** 芯片的输出引脚。
 因此，只需控制输出端为 **低电平**，即可点亮对应的 LED。
 
-![原理图](./%E7%82%B9%E4%BA%AElED%E7%81%AF.assets/image-20250927133133263.png)
+<img src="./%E7%82%B9%E4%BA%AElED%E7%81%AF.assets/image-20250927133133263.png" alt="原理图" style="zoom:80%;" />
 
 ---
 
@@ -25,6 +30,10 @@
 我们只需要让这些引脚输出 **低电平**，LED 灯即可点亮。
 
 ---
+
+### 📸 芯片外观
+
+<img src="./%E7%82%B9%E4%BA%AElED%E7%81%AF.assets/671C96A40BA1A6914AC0E172685B2FE7.jpg" alt="芯片外观" style="zoom:33%;" />
 
 ### 🧩 芯片简介
 
@@ -92,12 +101,6 @@
 
 ---
 
-### 📸 芯片外观
-
-![芯片外观](./%E7%82%B9%E4%BA%AElED%E7%81%AF.assets/671C96A40BA1A6914AC0E172685B2FE7.jpg)
-
----
-
 ### ⚙️ 控制逻辑在电路中的作用
 
 在原理图中：
@@ -114,7 +117,15 @@
 
 ## 三、74HC02 —— 四路或非门（NOR）
 
-![QQ\_1758952942382](./%E7%82%B9%E4%BA%AElED%E7%81%AF.assets/QQ_1758952942382.png)
+### 芯片外观
+
+<img src="./%E7%82%B9%E4%BA%AElED%E7%81%AF.assets/ED07E25F32818007EFDCA1FBBB2E90A5.jpg" alt="74HC02D,653实物图" style="zoom:33%;" />
+
+### 芯片原理图
+
+<img src="./%E7%82%B9%E4%BA%AElED%E7%81%AF.assets/QQ_1758952942382.png" alt="QQ\_1758952942382" style="zoom:67%;" />
+
+### 芯片介绍
 
 `74HC02` 是一款 **四路二输入或非门（NOR）芯片**。
 其逻辑关系如下：
@@ -137,12 +148,17 @@
 
 ## 四、74HC138 —— 三选八译码器
 
-> 74HC138 是一种 **3-线至 8-线 译码器**，常用于存储器地址解码或数据选择。
-> 它具有 3 个输入端（A、B、C）和 3 个使能端（G1、G2A、G2B）。
+### 芯片外观
+
+<img src="./%E7%82%B9%E4%BA%AElED%E7%81%AF.assets/79A89FC7DE84C54C326B7274BCB233BA.jpg" alt="74HC138D,653实物图" style="zoom: 33%;" />
+
+### 芯片介绍
+74HC138 是一种 **3线 至 8线 译码器**，常用于存储器地址解码或数据选择。
+它具有 3 个输入端（A、B、C）和 3 个使能端（G1、G2A、G2B）。
 
 芯片真值表如下：
 
-![QQ\_1758954577525](./%E7%82%B9%E4%BA%AElED%E7%81%AF.assets/QQ_1758954577525.png)
+<img src="./%E7%82%B9%E4%BA%AElED%E7%81%AF.assets/QQ_1758954577525.png" alt="QQ\_1758954577525" style="zoom: 50%;" />
 
 ![QQ\_1758954720021](./%E7%82%B9%E4%BA%AElED%E7%81%AF.assets/QQ_1758954720021.png)
 
@@ -208,7 +224,7 @@ int main()
 为了便于调用，我们将锁存器操作封装为函数：
 
 ```c
-void batch(uint8_t i)
+uint8_t latch(uint8_t i)
 {
     switch (i) {
         case 4: {P2 = (P2 & 0x1F) | 0x80; break;}
@@ -217,6 +233,7 @@ void batch(uint8_t i)
         case 7: {P2 = (P2 & 0x1F) | 0xE0; break;}
     }
     P2 = P2 & 0x1F;   // 关闭锁存器，锁存数据
+    ret
 }
 ```
 
