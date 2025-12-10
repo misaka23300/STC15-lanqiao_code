@@ -1,0 +1,12 @@
+BasedOnStyle: LLVM
+UseTab: Always
+IndentWidth: 4
+TabWidth: 4
+PackConstructorInitializers: NextLineOnly
+BreakConstructorInitializers: AfterColon
+IndentAccessModifiers: false
+AccessModifierOffset: -4
+
+# 以下可按你项目需要调整
+PointerAlignment: Left      # 或根据风格用 Right/Middle
+# ColumnLimit: 0           # 如果你不希望 clang-format 换行，可以禁用列宽限制

@@ -11,27 +11,27 @@ enum {
 
 
 typedef struct {
-    uchar time;
+    uint8_t time;
 } LED;
 
 
 typedef struct {
-    uchar time;
-    uchar press;
+    uint8_t time;
+    uint8_t press;
 } KEY;
 
 
 typedef struct {
-    uchar rtc_time;
-    uchar init_time[7]; // 秒 分 时 天 月 星期 年 
-    uchar now_time[3];
-    uint time;
+    uint8_t rtc_time;
+    uint8_t init_time[7]; // 秒 分 时 天 月 星期 年 
+    uint8_t now_time[3];
+    uint16_t time;
 } RTC;
 
 
 typedef struct {
-    uchar time;
-    uchar mode_0;
+    uint8_t time;
+    uint8_t mode_0;
 } STATE;
 
 

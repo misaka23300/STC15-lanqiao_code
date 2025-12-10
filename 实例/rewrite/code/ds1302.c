@@ -5,8 +5,8 @@ sbit SCK = P1^7;
 sbit RST = P2^7;
 
 // 秒 分 时 天 月 星期 年
-uchar code write_address[7] = {0x80, 0x82, 0x84, 0x86, 0x88, 0x8A, 0x8C};
-uchar code read_address[7] = {0x81, 0x83, 0x85, 0x87, 0x89, 0x8B, 0x8D};
+uint8_t code write_address[7] = {0x80, 0x82, 0x84, 0x86, 0x88, 0x8A, 0x8C};
+uint8_t code read_address[7] = {0x81, 0x83, 0x85, 0x87, 0x89, 0x8B, 0x8D};
 
 
 
@@ -74,22 +74,22 @@ uchar bcd_to_hex(uchar BCD)
 } 
 */
 
-uchar hex_to_bcd(uchar hex)
+uint8_t hex_to_bcd(uint8_t hex)
 {
 	return (hex / 10 * 16) + (hex % 10);
 }
 
-uchar bcd_to_hex(uchar bcd)
+uint8_t bcd_to_hex(uint8_t bcd)
 {
 	return (bcd / 16 * 10) + (bcd % 16);
 }
 
 
 
-void write_datetime(uchar *time_init)
+void write_datetime(uint8_t *time_init)
 {
 	// time -> bcd
-	uchar i;
+	uint8_t i;
 	Write_Ds1302_Byte(0x8E, 0x00);
 	
 	for (i = 0;i < 7;i++)
@@ -100,9 +100,9 @@ void write_datetime(uchar *time_init)
 	Write_Ds1302_Byte(0x8E, 0x80);
 }
 
-void read_datetime(uchar *now_time)
+void read_datetime(uint8_t *now_time)
 {
-	uchar i;
+	uint8_t i;
 	for (i = 0;i < 3;i++)
 	{
 		now_time[i] = Read_Ds1302_Byte(read_address[i]);

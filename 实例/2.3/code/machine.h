@@ -8,10 +8,10 @@
 #include "stdio.h"
 
 
-typedef unsigned char uchar;
-typedef unsigned int uint;
+typedef unsigned char uint8_t;
+typedef unsigned int uint16_t;
 
-void batch(uchar i);
+void batch(uint8_t i);
 void clean_display();
 
 

@@ -4,11 +4,11 @@
 #include "stc15f2k60s2.h"
 #include "intrins.h"
 
-typedef unsigned char uchar;
+typedef unsigned char uint8_t;
 #define uint unsigned int
 
 void boot_init();
 void timer_1();
-void batch(uchar i);
+void latch(uchar i);
 
 #endif

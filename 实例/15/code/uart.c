@@ -6,7 +6,7 @@ idata UART uart;
 INPUT input;
 
 
-void uart_send(uchar *str)
+void uart_send(uint8_t *str)
 {
     while (*str != '\0')
     {

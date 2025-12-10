@@ -6,10 +6,10 @@
 #include "STC15F2K60S2.H"
 #include "intrins.h"
  
-typedef unsigned char uchar;
-typedef unsigned int uint;
+typedef unsigned char uint8_t;
+typedef unsigned int uint16_t;
 
-void batch(uchar i);
+void latch(uint8_t i);
 void Timer1_Init(void);
 void Delay500ms(void);
 void clean_display();

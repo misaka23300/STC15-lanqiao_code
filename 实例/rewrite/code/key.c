@@ -8,13 +8,13 @@ typedef enum {
 } press_task;
 
 
-uchar key_scan()
+uint8_t key_scan()
 {
 
     static press_task state = wait_press;
 
-    static uchar value, i;
-    uchar press = 0xFF, temp = 99;
+    static uint8_t value, i;
+    uint8_t press = 0xFF, temp = 99;
 
     P3 = 0x0F;
     P42 = 0; P44 = 0;

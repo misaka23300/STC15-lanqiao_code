@@ -19,13 +19,13 @@ void seg_display()
     static uchar i;
 
     P0 = 0xFF;
-    batch(7);
+    latch(7);
 
     P0 = 0x01 << i;
-    batch(6);
+    latch(6);
 
     P0 = ~letter[seg_array];
-    batch(7);
+    latch(7);
 
     i = i + 1;
     if (i == 8) {i = 0;}
@@ -49,7 +49,7 @@ void led_display()
     if (temp != last)
     {
         P0 = ~temp;
-        batch(4);
+        latch(4);
 
         last = temp;
     }
@@ -74,7 +74,7 @@ void relay(bit state)
     if (randzNow != ranzLast)
     {
         P0 = randzNow;
-        batch(5);
+        latch(5);
         ranzLast = randzNow;
     }
 }
@@ -93,7 +93,7 @@ void buzz(bit state)
     if (randzNow != randzLast)
     {
         P0 = randzNow;
-        batch(5);
+        latch(5);
         randzLast = randzNow;
     }
 }

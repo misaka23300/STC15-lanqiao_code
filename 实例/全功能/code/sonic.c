@@ -12,9 +12,9 @@ void sonic_send()
 }
 
 
-uchar sonic_measure()
+uint8_t sonic_measure()
 {
-    uchar distance;
+    uint8_t distance;
 
     TR0 = 0;    // 不允许中断
     TF0 = 0;    // 溢出标志位
@@ -35,7 +35,7 @@ uchar sonic_measure()
     }
     else
     {
-        distance = (uchar) ((TH0 << 8 | TL0) * 0.017);
+        distance = (uint8_t) ((TH0 << 8 | TL0) * 0.017);
     }
 
     return distance;

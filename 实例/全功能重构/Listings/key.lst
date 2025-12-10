@@ -1,0 +1,145 @@
+C51 COMPILER V9.60.7.0   KEY                                                               12/10/2025 17:56:40 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE KEY
+OBJECT MODULE PLACED IN .\Objects\key.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main\key.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\include) DEBUG OBJECTEXTEND
+                    - PRINT(.\Listings\key.lst) TABS(2) OBJECT(.\Objects\key.obj)
+
+line level    source
+
+   1          /**
+   2           * @file key.c
+   3           * @brief 按键扫描与去抖/长按识别模块
+   4           * @details 通过读取 P3 口并配合 P4.x 控制列线实现矩阵按键扫描，
+   5           *          使用简单状态机进行去抖与长按判断，返回简化的按键码或默认值。
+   6           * @date 2025-12-10
+   7           */
+   8          
+   9          #include "key.h"
+  10          
+  11          /**
+  12           * @brief 扫描按键并进行去抖与长按识别
+  13           *
+  14           * 本函数为轮询式扫描，内部使用静态局部变量维护状态机：
+  15           * - state: 当前状态（0=空闲,1=检测到按下,2=消抖计时,3=长按确认）
+  16           * - i: 用于消抖/长按计数的计时器
+  17           * - value: 当前解析出的按键短按码
+  18           * - temp: 返回值缓冲，初始为 99 表示无按键
+  19           *
+  20           * 读取流程简述：
+  21           * 1. 将 P3 设置为输入/上拉相关，然后通过 P4 控制列线（P42,P44）扫描。
+  22           * 2. 当检测到按下（press != 0x0F）进入去抖并解析按键码。
+  23           * 3. 若在去抖期内持续按下，计数达到阈值进入长按状态并返回不同码。
+  24           *
+  25           * @return uint8_t 返回按键码：短按返回 value，对应 case 中设置的值；
+  26           *         长按返回 value + 20；无按键返回初始值 99。
+  27           * @note 该函数应被主循环或定时器周期性调用以获得正确的去抖与长按识别。
+  28           */
+  29          uint8_t key_scan()
+  30          {
+  31   1          static uint8_t i;
+  32   1          static uint8_t state;
+  33   1          static uint8_t value;
+  34   1      
+  35   1          uint8_t press = 0xFF;
+  36   1          uint8_t temp = 99;
+  37   1      
+  38   1          P3 = 0x0F;
+  39   1          P42 = 0;
+  40   1          P44 = 0;
+  41   1          P36 = P42;
+  42   1          P37 = P44;
+  43   1      
+  44   1          press = P3 & 0x0F;
+  45   1      
+  46   1          switch (state) {
+  47   2              case 0: {
+  48   3                  if (press != 0x0F) {
+  49   4                      state = 1;
+  50   4                  }
+  51   3              } break;
+  52   2      
+  53   2              case 1: {
+  54   3                  if (press == 0x0F) {
+C51 COMPILER V9.60.7.0   KEY                                                               12/10/2025 17:56:40 PAGE 2   
+
+  55   4                      state = 0;
+  56   4                  } else {
+  57   4                      P3 = press | 0xF0;
+  58   4                      P42 = 1;
+  59   4                      P44 = 1;
+  60   4                      P36 = P42;
+  61   4                      P37 = P44;
+  62   4      
+  63   4                      press = P3;
+  64   4                      state = 2;
+  65   4      
+  66   4                      switch (press) {
+  67   5                          case 0xE7: {value = 16; break;}
+  68   5                          case 0xEB: {value = 17; break;}
+  69   5                          case 0xED: {value = 18; break;}
+  70   5                          case 0xEE: {value = 19; break;}
+  71   5                          
+  72   5                          case 0x77: {value = 4; break;}
+  73   5                          case 0x7B: {value = 5; break;}
+  74   5                          case 0x7D: {value = 6; break;}
+  75   5                          case 0x7E: {value = 7; break;}
+  76   5      
+  77   5                          case 0xB7: {value = 8; break;}
+  78   5                          case 0xBB: {value = 9; break;}
+  79   5                          case 0xBD: {value = 10; break;}
+  80   5                          case 0xBE: {value = 11; break;}
+  81   5      
+  82   5                          case 0xD7: {value = 12; break;}
+  83   5                          case 0xDB: {value = 13; break;}
+  84   5                          case 0xDD: {value = 14; break;}
+  85   5                          case 0xDE: {value = 15; break;}
+  86   5      
+  87   5                          
+  88   5                          default: state = 0;
+  89   5                      }
+  90   4                  }
+  91   3              } break;
+  92   2      
+  93   2              case 2: {
+  94   3                  if (press != 0x0F) {
+  95   4                      i++;
+  96   4                      if (i > 70) {
+  97   5                          i = 0;
+  98   5                          state = 3;
+  99   5                      }
+ 100   4                  } else {
+ 101   4                      i = 0;
+ 102   4                      state = 0;
+ 103   4                      temp = value;
+ 104   4                      value = 0;
+ 105   4                  }
+ 106   3              } break;
+ 107   2      
+ 108   2              case 3: {
+ 109   3                  if (press == 0x0F) {
+ 110   4                      state = 0;
+ 111   4                      temp = value + 20;
+ 112   4                      value = 0;
+ 113   4                  }
+ 114   3              } break;
+ 115   2          }
+ 116   1          return temp;
+C51 COMPILER V9.60.7.0   KEY                                                               12/10/2025 17:56:40 PAGE 3   
+
+ 117   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    297    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      3       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

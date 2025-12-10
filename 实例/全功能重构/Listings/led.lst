@@ -1,0 +1,86 @@
+C51 COMPILER V9.60.7.0   LED                                                               12/10/2025 17:56:40 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE LED
+OBJECT MODULE PLACED IN .\Objects\led.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main\led.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\include) DEBUG OBJECTEXTEND
+                    - PRINT(.\Listings\led.lst) TABS(2) OBJECT(.\Objects\led.obj)
+
+line level    source
+
+   1          /**
+   2           * @file led.c
+   3           * @brief LED 位图缓冲与显示刷新模块
+   4           * @details 提供 8 位 LED 显示缓冲（led[]）和逐位刷新函数 led_display()。
+   5           * @date 2025-12-09
+   6           */
+   7          
+   8          #include "led.h"
+   9          
+  10          /**
+  11           * @brief LED 显示缓冲
+  12           * @details 每个元素表示对应位是否点亮（0=灭，非0=亮），
+  13           *          led_display() 会根据该缓冲更新物理 IO。
+  14           */
+  15          uint8_t led_value[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+  16          
+  17          /**
+  18           * @brief LED 逐位刷新显示函数
+  19           * @details 本函数使用静态局部变量维护当前扫描位和临时状态：
+  20           *          - i: 当前扫描位索引（0..7）
+  21           *          - temp: 当前输出位掩码缓存
+  22           *          - last: 上一次输出值，用于避免不必要的 IO 更新
+  23           *
+  24           *          每次调用会处理一位的显示，建议由周期性中断或主循环频繁调用以维�
+             -��稳定显示。
+  25           *
+  26           * @note 输出到 P0 之前对 temp 取反（~temp）以匹配硬件驱动极性；随后通过 latch(4)/
+             -latch(0) 完成锁存。
+  27           * @return void
+  28           */
+  29          void led_display()
+  30          {
+  31   1          static uint8_t i;
+  32   1          static uint8_t temp;
+  33   1          static uint8_t last = 0xFF;
+  34   1      
+  35   1          if (led_value[i]) {
+  36   2              temp = temp | (0x01 << i);
+  37   2          } else {
+  38   2              temp = temp & ~(0x01 << i);
+  39   2          }
+  40   1      
+  41   1          if (last != temp) {
+  42   2              P0 = ~temp;
+  43   2              latch(4);
+  44   2              latch(0);
+  45   2              last = temp;
+  46   2          }
+  47   1      
+  48   1          i++;
+  49   1          if (i == 8) {
+  50   2              i = 0;
+  51   2          }
+  52   1      }
+C51 COMPILER V9.60.7.0   LED                                                               12/10/2025 17:56:40 PAGE 2   
+
+  53          
+  54          
+  55          void led_set(uint8_t position, bit value)
+  56          {
+  57   1          led_value[position] = value;
+  58   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     88    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     11    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       1
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,6 +1,6 @@
 #include "main.h"
 
-extern uchar led_array[8];
+extern uint8_t led_array[8];
 
 enum {
     TIME_CCAP_0 = 1000,
@@ -8,11 +8,11 @@ enum {
     WATERLED_TIME = 500
 };
 
-uint timer_0;
+uint16_t timer_0;
 
 typedef struct{
-    uchar time;
-    uint waterTime;
+    uint8_t time;
+    uint16_t waterTime;
 } LED;
 
 LED led;

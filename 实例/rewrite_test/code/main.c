@@ -11,7 +11,7 @@ STATE state;
 
 // 串口
 typedef struct {
-    uint time;
+    uint16_t time;
     
 } UART;
 
@@ -40,8 +40,8 @@ CAL calculator;
 
 // 超声波
 typedef struct {
-    uint distance;
-    uint time;
+    uint16_t distance;
+    uint16_t time;
 } SONIC;
     
 SONIC sonic;

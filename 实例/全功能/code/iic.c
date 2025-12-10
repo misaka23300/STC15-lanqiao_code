@@ -107,9 +107,9 @@ void I2CSendAck(unsigned char ackbit)
 }
 
 // 0x01 光敏 0x03 旋钮
-uchar ADC(uchar channel)
+uint8_t ADC(uint8_t channel)
 {
-    uchar adc;
+    uint8_t adc;
 
     I2CStart();
 
@@ -132,7 +132,7 @@ uchar ADC(uchar channel)
     return adc;
 }
 
-void DAC(uchar value)
+void DAC(uint8_t value)
 {
     I2CStart();
 

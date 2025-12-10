@@ -3,7 +3,7 @@
 
 #include "machine.h"
 
-uchar ADC(uchar address);
+uint8_t ADC(uint8_t address);
 
 
 #endif

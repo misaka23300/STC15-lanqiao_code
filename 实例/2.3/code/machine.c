@@ -16,20 +16,20 @@ void clean_display()
 
 
     P0 = 0xFF;
-    batch(4);
+    latch(4);
 
     P0 = 0xAF;
-    batch(5);
+    latch(5);
 
     P0 = 0x00;
-    batch(6);
+    latch(6);
 
     P0 = 0xFF;
-    batch(7);
+    latch(7);
 
 }
 
-void batch(uchar i)
+void latch(uint8_t i)
 {
     switch (i)
     {

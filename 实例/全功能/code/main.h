@@ -10,6 +10,6 @@
 #include "onewire.h"
 #include "sonic.h"
 
-void delete_0(uchar *list, uchar len, uchar is_negative);
+void delete_0(uint8_t *list, uint8_t len, uint8_t is_negative);
 
 #endif

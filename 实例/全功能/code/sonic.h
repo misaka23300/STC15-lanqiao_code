@@ -3,6 +3,6 @@
 
 #include "boot.h"
 
-uchar sonic_measure();
+uint8_t sonic_measure();
 
 #endif

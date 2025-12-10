@@ -3,8 +3,8 @@
 
 #include "STC15F2K60S2.H"
 
-typedef unsigned char uchar;
-typedef unsigned int uint;
+typedef unsigned char uint8_t;
+typedef unsigned int uint16_t;
 
 void clean_display();
 void batch(uchar i);

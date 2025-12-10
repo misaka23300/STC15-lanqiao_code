@@ -30,9 +30,9 @@ void sendSonic()
 }
  */
 
-uchar measureTimer1()
+uint8_t measureTimer1()
 {
-    uchar distance;
+    uint8_t distance;
 
     TR1 = 0; TF1 = 0;
     TH1 = 0x00; TL1 = 0x00;
@@ -50,7 +50,7 @@ uchar measureTimer1()
     }
     else
     {
-        distance = (uchar)(TH1 << 8 | TL1)* 0.017;
+        distance = (uint8_t)(TH1 << 8 | TL1)* 0.017;
 
     }
 
@@ -70,9 +70,9 @@ void pcaInit()
 
 
 
-uint measurePCA()
+uint16_t measurePCA()
  {
-    uint distance;
+    uint16_t distance;
 
     CH = 0; CL = 0;
     CR = 0; CF = 0;
@@ -93,7 +93,7 @@ uint measurePCA()
     }
     else
     {
-        distance = (uint) (CH << 8 | CL)* 17 / 1000;
+        distance = (uint16_t) (CH << 8 | CL)* 17 / 1000;
     }
 
     return distance;
