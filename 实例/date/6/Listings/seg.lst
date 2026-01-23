@@ -24,16 +24,16 @@ line level    source
   14   1          static uchar i;
   15   1      
   16   1          P0 = 0xFF;
-  17   1          batch(7);
-  18   1          batch(0);
+  17   1          latch(7);
+  18   1          latch(0);
   19   1      
   20   1          P0 = 0x01 << i;
-  21   1          batch(6);
-  22   1          batch(0);
+  21   1          latch(6);
+  22   1          latch(0);
   23   1      
   24   1          P0 = ~letter[seg[i]];
-  25   1          batch(7);
-  26   1          batch(0);
+  25   1          latch(7);
+  26   1          latch(0);
   27   1      
   28   1          i = (i + 1) % 8;
   29   1      }

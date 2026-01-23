@@ -1,10 +1,10 @@
-C51 COMPILER V9.60.7.0   SEG                                                               12/10/2025 17:56:40 PAGE 1   
+C51 COMPILER V9.60.7.0   SEG                                                               12/11/2025 18:04:12 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE SEG
 OBJECT MODULE PLACED IN .\Objects\seg.obj
-COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main\seg.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\include) DEBUG OBJECTEXTEND
-                    - PRINT(.\Listings\seg.lst) TABS(2) OBJECT(.\Objects\seg.obj)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main\seg.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\include\) DEBUG OBJECTEXTEN
+                    -D PRINT(.\Listings\seg.lst) TABS(2) OBJECT(.\Objects\seg.obj)
 
 line level    source
 
@@ -18,6 +18,8 @@ line level    source
    7           */
    8          
    9          #include "seg.h"
+*** ERROR C132 IN LINE 6 OF .\include\seg.h: 'seg_display': not in formal parameter list
+*** ERROR C132 IN LINE 7 OF .\include\seg.h: '_seg_set': not in formal parameter list
   10          
   11          /**
   12           * @brief 数码管显示缓冲
@@ -25,6 +27,8 @@ line level    source
   14           *          seg_display() 会逐位读取并输出到数码管。
   15           */
   16          uint8_t seg[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+*** ERROR C244 IN LINE 16 OF main\seg.c: 'seg': can't initialize, bad type or class
+*** ERROR C132 IN LINE 16 OF main\seg.c: 'seg': not in formal parameter list
   17          
   18          /**
   19           * @brief 7 段字模表（标准数字与部分字母/符号）
@@ -50,43 +54,31 @@ line level    source
   38           */
   39          void seg_display()
   40          {
-  41   1          static uint8_t i = 0;
-  42   1      
-  43   1          P0 = 0xFF;
-  44   1          latch(7);
-  45   1          latch(0);
-  46   1      
-  47   1          P0 = 0x01 << i;
-  48   1          latch(6);
-  49   1          latch(0);
-  50   1      
-  51   1          P0 = ~letter[seg[i]];
-  52   1          latch(7);
-C51 COMPILER V9.60.7.0   SEG                                                               12/10/2025 17:56:40 PAGE 2   
+  41              static uint8_t i = 0;
+  42          
+  43              P0 = 0xFF;
+  44              latch(7);
+  45              latch(0);
+  46          
+  47              P0 = 0x01 << i;
+  48              latch(6);
+C51 COMPILER V9.60.7.0   SEG                                                               12/11/2025 18:04:12 PAGE 2   
 
-  53   1          latch(0);
-  54   1      
-  55   1          i++;
-  56   1          if (i == 8) {
-  57   2              i = 0;
-  58   2          }
-  59   1      }
+  49              latch(0);
+  50          
+  51              P0 = ~letter[seg[i]];
+  52              latch(7);
+  53              latch(0);
+  54          
+  55              i++;
+  56              if (i == 8) {
+  57                  i = 0;
+  58              }
+  59          }
   60          
   61          void seg_set(uint8_t position, uint8_t number)
   62          {
   63   1          seg[position] = number;
   64   1      }
 
-
-MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     79    ----
-   CONSTANT SIZE    =     44    ----
-   XDATA SIZE       =   ----    ----
-   PDATA SIZE       =   ----    ----
-   DATA SIZE        =      9    ----
-   IDATA SIZE       =   ----    ----
-   BIT SIZE         =   ----    ----
-END OF MODULE INFORMATION.
-
-
-C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  0 WARNING(S),  4 ERROR(S)

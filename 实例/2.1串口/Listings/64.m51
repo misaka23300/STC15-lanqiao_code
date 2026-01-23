@@ -38,7 +38,7 @@ LINK MAP OF MODULE:  .\Objects\64 (?C_STARTUP)
             CODE    003EH     008CH     UNIT         ?C_C51STARTUP
             CODE    00CAH     0047H     UNIT         ?PR?LED_DISPLAY?DISPLAY
             CODE    0111H     003DH     UNIT         ?PR?PCAINTERRUPT?MAIN
-            CODE    014EH     0039H     UNIT         ?PR?_BATCH?MACHINE
+            CODE    014EH     0039H     UNIT         ?PR?_latch?MACHINE
             CODE    0187H     0023H     UNIT         ?PR?PCAINIT?MAIN
             CODE    01AAH     001EH     UNIT         ?PR?TASKLOOP?MAIN
 
@@ -66,7 +66,7 @@ SEGMENT
   +--> ?PR?WATERLED?MAIN
 
 ?PR?LED_DISPLAY?DISPLAY
-  +--> ?PR?_BATCH?MACHINE
+  +--> ?PR?_latch?MACHINE
 
 
 
@@ -164,7 +164,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\64 (?C_STARTUP)
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
   D:00C0H         PUBLIC        P4
-  C:014EH         PUBLIC        _batch
+  C:014EH         PUBLIC        _latch
   D:00C8H         PUBLIC        P5
   D:00E8H         PUBLIC        P6
   D:00F8H         PUBLIC        P7
@@ -174,7 +174,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\64 (?C_STARTUP)
   D:0098H         PUBLIC        SCON
   D:0088H         PUBLIC        TCON
   D:00D0H         PUBLIC        PSW
-  -------         PROC          _BATCH
+  -------         PROC          _latch
   D:0007H         SYMBOL        i
   C:014EH         LINE#         4
   C:014EH         LINE#         5
@@ -190,7 +190,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\64 (?C_STARTUP)
   C:0183H         LINE#         12
   C:0183H         LINE#         14
   C:0186H         LINE#         15
-  -------         ENDPROC       _BATCH
+  -------         ENDPROC       _latch
   -------         ENDMOD        MACHINE
 
   -------         MODULE        MAIN

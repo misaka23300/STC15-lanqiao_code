@@ -24,20 +24,20 @@ line level    source
   14   1          P7M1 = 0;   P7M0 = 0;   //设置为准双向口
   15   1      
   16   1          P0 = 0xFF;
-  17   1          batch(4);
+  17   1          latch(4);
   18   1      
   19   1          P0 = 0xAF;
-  20   1          batch(5);
+  20   1          latch(5);
   21   1      
   22   1          P0 = 0x00;
-  23   1          batch(6);
+  23   1          latch(6);
   24   1      
   25   1          P0 = 0xFF;
-  26   1          batch(7);
+  26   1          latch(7);
   27   1      
   28   1      }
   29          
-  30          void batch(uchar i)
+  30          void latch(uchar i)
   31          {
   32   1          switch (i)
   33   1          {

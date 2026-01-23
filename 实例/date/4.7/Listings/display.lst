@@ -38,8 +38,8 @@ line level    source
   28   1          if (last != temp)
   29   1          {
   30   2              P0 = ~temp;
-  31   2              batch(4);
-  32   2              batch(0);
+  31   2              latch(4);
+  32   2              latch(0);
   33   2      
   34   2              last = temp;
   35   2          }
@@ -52,16 +52,16 @@ line level    source
   42   1          static uchar i;
   43   1      
   44   1          P0 = 0xFF;
-  45   1          batch(7);
-  46   1          batch(0);
+  45   1          latch(7);
+  46   1          latch(0);
   47   1      
   48   1          P0 = 0x01 << i;
-  49   1          batch(6);
-  50   1          batch(0);
+  49   1          latch(6);
+  50   1          latch(0);
   51   1      
   52   1          P0 = ~letter[seg[i]];
-  53   1          batch(7);
-  54   1          batch(0);
+  53   1          latch(7);
+  54   1          latch(0);
 C51 COMPILER V9.60.7.0   DISPLAY                                                           04/07/2025 17:00:10 PAGE 2   
 
   55   1      
@@ -84,8 +84,8 @@ line level    source
   72   1          if (temp != last)
   73   1          {
   74   2              P0 = temp;
-  75   2              batch(5);
-  76   2              batch(0);
+  75   2              latch(5);
+  76   2              latch(0);
   77   2              last = temp;
   78   2          }
   79   1      }

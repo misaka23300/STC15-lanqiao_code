@@ -11,7 +11,7 @@
 typedef unsigned char uchar;
 typedef unsigned int uint;
 
-void batch(uchar i);
+void latch(uchar i);
 void clean_display();
 
 

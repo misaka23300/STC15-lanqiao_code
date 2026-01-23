@@ -25,7 +25,7 @@ void timer_0_interrupt() interrupt 1
     
 }
 
-uint8_t batch(uint8_t i)
+uint8_t latch(uint8_t i)
 {
     switch(i) {
         case 4: {P2 = (P2 & 0x1F) | 0x80; break; }
@@ -43,7 +43,7 @@ uint8_t batch(uint8_t i)
 uint8_t led_display(uint8_t i)
 {
     P0 = i;
-    batch(4);
+    latch(4);
     return 0;
 }
 

@@ -2,7 +2,7 @@ BL51 BANKED LINKER/LOCATER V6.22.4.0                                            
 
 
 BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
-C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\main.obj TO .\Objects\2.1ÂÖÑ¯ PRINT (.\Listings\2.m51) RAMSIZE (256)
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\main.obj TO .\Objects\2.1ï¿½ï¿½Ñ¯ PRINT (.\Listings\2.m51) RAMSIZE (256)
 
 
 MEMORY MODEL: SMALL
@@ -13,7 +13,7 @@ INPUT MODULES INCLUDED:
   C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
 
 
-LINK MAP OF MODULE:  .\Objects\2.1ÂÖÑ¯ (MAIN)
+LINK MAP OF MODULE:  .\Objects\2.1ï¿½ï¿½Ñ¯ (MAIN)
 
 
             TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
@@ -28,7 +28,7 @@ LINK MAP OF MODULE:  .\Objects\2.1ÂÖÑ¯ (MAIN)
             CODE    0000H     0003H     ABSOLUTE     
                     0003H     0008H                  *** GAP ***
             CODE    000BH     0003H     ABSOLUTE     
-            CODE    000EH     0040H     UNIT         ?PR?_BATCH?MAIN
+            CODE    000EH     0040H     UNIT         ?PR?_latch?MAIN
             CODE    004EH     0029H     UNIT         ?PR?TIMER_0_INTERRUPT?MAIN
             CODE    0077H     001CH     UNIT         ?PR?MAIN?MAIN
             CODE    0093H     000CH     UNIT         ?C_C51STARTUP
@@ -36,7 +36,7 @@ LINK MAP OF MODULE:  .\Objects\2.1ÂÖÑ¯ (MAIN)
 
 
 
-OVERLAY MAP OF MODULE:   .\Objects\2.1ÂÖÑ¯ (MAIN)
+OVERLAY MAP OF MODULE:   .\Objects\2.1ï¿½ï¿½Ñ¯ (MAIN)
 
 
 SEGMENT
@@ -49,7 +49,7 @@ SEGMENT
   +--> ?PR?_LED_DISPLAY?MAIN
 
 ?PR?_LED_DISPLAY?MAIN
-  +--> ?PR?_BATCH?MAIN
+  +--> ?PR?_latch?MAIN
 
 
 
@@ -58,7 +58,7 @@ IGNORED SYMBOLS:
 
 
 
-SYMBOL TABLE OF MODULE:  .\Objects\2.1ÂÖÑ¯ (MAIN)
+SYMBOL TABLE OF MODULE:  .\Objects\2.1ï¿½ï¿½Ñ¯ (MAIN)
 BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/04/2025  12:47:54  PAGE 2
 
 
@@ -73,7 +73,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\2.1ÂÖÑ¯ (MAIN)
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
   D:00C0H         PUBLIC        P4
-  C:000EH         PUBLIC        _batch
+  C:000EH         PUBLIC        _latch
   D:00C8H         PUBLIC        P5
   D:00E8H         PUBLIC        P6
   D:00F8H         PUBLIC        P7
@@ -108,7 +108,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\2.1ÂÖÑ¯ (MAIN)
   C:0070H         LINE#         26
   C:0070H         LINE#         28
   -------         ENDPROC       TIMER_0_INTERRUPT
-  -------         PROC          _BATCH
+  -------         PROC          _latch
   D:0007H         SYMBOL        i
   C:000EH         LINE#         30
   C:000EH         LINE#         31
@@ -125,7 +125,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\2.1ÂÖÑ¯ (MAIN)
   C:0048H         LINE#         39
   C:004BH         LINE#         40
   C:004DH         LINE#         42
-  -------         ENDPROC       _BATCH
+  -------         ENDPROC       _latch
   -------         PROC          _LED_DISPLAY
   D:0007H         SYMBOL        i
   C:009FH         LINE#         45

@@ -72,7 +72,7 @@ LINK MAP OF MODULE:  3.22 (?C_STARTUP)
             CODE    0B34H     004CH     UNIT         ?PR?_WRITE_DATETIME?DS1302
             CODE    0B80H     0045H     UNIT         ?PR?SEG_DISPLAY?SEG
             CODE    0BC5H     0042H     UNIT         ?PR?LED_PROC?MAIN
-            CODE    0C07H     003AH     UNIT         ?PR?_BATCH?BOOT
+            CODE    0C07H     003AH     UNIT         ?PR?_latch?BOOT
             CODE    0C41H     0039H     UNIT         ?PR?_LED?LED
             CODE    0C7AH     0034H     UNIT         ?PR?_READ_DS1302_BYTE?DS1302
             CODE    0CAEH     002EH     UNIT         ?C_INITSEG
@@ -131,7 +131,7 @@ SEGMENT                                  BIT_GROUP          DATA_GROUP
   +--> ?PR?_WRITE_DS1302?DS1302
 
 ?PR?BOOT_INIT?BOOT                    -----    -----      -----    -----
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
   +--> ?PR?TIMER_0?BOOT
   +--> ?PR?TIMER_1?BOOT
 
@@ -192,7 +192,7 @@ SEGMENT                                  BIT_GROUP          DATA_GROUP
   +--> ?PR?_LED?LED
 
 ?PR?_LED?LED                          0020H.7  0000H.1    -----    -----
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
 
 *** NEW ROOT ***************************************************
 
@@ -200,7 +200,7 @@ SEGMENT                                  BIT_GROUP          DATA_GROUP
   +--> ?PR?SEG_DISPLAY?SEG
 
 ?PR?SEG_DISPLAY?SEG                   -----    -----      -----    -----
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
   +--> ?CO?SEG
 
 
@@ -266,7 +266,7 @@ SYMBOL TABLE OF MODULE:  3.22 (?C_STARTUP)
   D:00CCH         PUBLIC        P6M0
   D:00C9H         PUBLIC        P5M1
   D:00C0H         PUBLIC        P4
-  C:0C07H         PUBLIC        _batch
+  C:0C07H         PUBLIC        _latch
   D:00E2H         PUBLIC        P7M0
   D:00CBH         PUBLIC        P6M1
   D:00C8H         PUBLIC        P5
@@ -351,7 +351,7 @@ SYMBOL TABLE OF MODULE:  3.22 (?C_STARTUP)
   C:0E32H         LINE#         57
   C:0E34H         LINE#         58
   -------         ENDPROC       TIMER_1
-  -------         PROC          _BATCH
+  -------         PROC          _latch
   D:0007H         SYMBOL        i
   C:0C07H         LINE#         60
   C:0C07H         LINE#         61
@@ -367,7 +367,7 @@ SYMBOL TABLE OF MODULE:  3.22 (?C_STARTUP)
   C:0C38H         LINE#         68
   C:0C40H         LINE#         69
   C:0C40H         LINE#         70
-  -------         ENDPROC       _BATCH
+  -------         ENDPROC       _latch
   -------         ENDMOD        BOOT
 
   -------         MODULE        KEY

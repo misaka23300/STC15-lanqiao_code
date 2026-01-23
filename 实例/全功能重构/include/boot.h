@@ -14,6 +14,6 @@ void boot_init();
 void latch(uint8_t i);
 void Timer1_Init(void);
 void Delay14us(void);
-
+void loop_0to8(uint8_t *i)
 
 #endif

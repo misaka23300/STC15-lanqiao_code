@@ -10,42 +10,15 @@
 
 #include "main.h"
 
-/* 定时型任务创建 
-
-1. 创建枚举，记录执行间隔
-2. 创建变量，记录定时
-3. while主循环判断是否达到间隔
-4. 1ms定时器中断，对变量自加
-*/
-
-/**
- * @brief 任务时间间隔枚举（单位：ms）
- * @details LED 与按键调度周期定义为常量，方便调整与统一管理。
- */
-enum {
-    LED_TIME = 10,
-    KEY_TIME = 9,
+led_t led = {
+    .time = 0,
 };
 
-/**
- * @brief LED 任务控制块类型
- */
-typedef struct {
-    uint8_t time;
-} LED;
 
-LED led;
-/**
- * @brief 按键任务控制块类型
- * @details 包含计时器和按键扫描结果字段。
- */
-typedef struct {
-    uint8_t time;
-    uint8_t press;
-} KEY;
-
-KEY key;
-/* 实例化任务控制块变量（保持原来代码中对 led.time / key.time 的访问不变） */
+key_t key = {
+    .press = 0,
+    .time = 0
+};
 
 
  /**
@@ -56,8 +29,13 @@ KEY key;
 void main()
 {
     boot_init();
-
-
+    seg_set(2, 17);
+    seg_set(3, 17);
+    seg_set(4, 17);
+    seg_set(5, 17);
+    seg_set(6, 17);
+    seg_set(7, 17);
+    
     while(1) {
         if (led.time == LED_TIME) {
             led.time = 0;

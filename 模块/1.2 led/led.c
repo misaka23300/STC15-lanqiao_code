@@ -40,8 +40,8 @@ void led(uint8_t i, bit state)
     if (temp != last)
     {
         P0 = ~temp;
-        batch(4);
-        batch(0);
+        latch(4);
+        latch(0);
 
         last = temp;
     }
@@ -55,7 +55,7 @@ void led_display()
     i = (i + 1) % 8;
 }
 
-void batch(uint8_t i)
+void latch(uint8_t i)
 {
     siwtch(i):
     {

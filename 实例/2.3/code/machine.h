@@ -11,7 +11,7 @@
 typedef unsigned char uint8_t;
 typedef unsigned int uint16_t;
 
-void batch(uint8_t i);
+void latch(uint8_t i);
 void clean_display();
 
 

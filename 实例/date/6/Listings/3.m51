@@ -3,7 +3,7 @@ BL51 BANKED LINKER/LOCATER V6.22.4.0                                            
 
 BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
 C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\STARTUP.obj, .\Objects\boot.obj, .\Objects\key.obj, .\Objects\led.obj, .\Objects\n
->> e555.obj, .\Objects\seg.obj, .\Objects\sonic.obj, .\Objects\main.obj, .\Objects\onewire.obj TO .\Objects\3.19999¡® PR
+>> e555.obj, .\Objects\seg.obj, .\Objects\sonic.obj, .\Objects\main.obj, .\Objects\onewire.obj TO .\Objects\3.19999ï¿½ï¿½ PR
 >> INT (.\Listings\3.m51) RAMSIZE (256)
 
 
@@ -31,7 +31,7 @@ INPUT MODULES INCLUDED:
   C:\KEIL_V5\C51\LIB\C51S.LIB (?C?CCASE)
 
 
-LINK MAP OF MODULE:  .\Objects\3.19999¡® (?C_STARTUP)
+LINK MAP OF MODULE:  .\Objects\3.19999ï¿½ï¿½ (?C_STARTUP)
 
 
             TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
@@ -66,7 +66,7 @@ LINK MAP OF MODULE:  .\Objects\3.19999¡® (?C_STARTUP)
             CODE    0689H     0047H     UNIT         ?PR?SONIC_MEASURE?SONIC
             CODE    06D0H     0045H     UNIT         ?PR?SEG_DISPLAY?SEG
             CODE    0715H     003EH     UNIT         ?PR?READ_TEMPERATURE?ONEWIRE
-            CODE    0753H     003AH     UNIT         ?PR?_BATCH?BOOT
+            CODE    0753H     003AH     UNIT         ?PR?_latch?BOOT
             CODE    078DH     0039H     UNIT         ?PR?_LED?LED
             CODE    07C6H     0039H     UNIT         ?PR?MAIN?MAIN
             CODE    07FFH     002BH     UNIT         ?CO?SEG
@@ -86,7 +86,7 @@ LINK MAP OF MODULE:  .\Objects\3.19999¡® (?C_STARTUP)
 
 
 
-OVERLAY MAP OF MODULE:   .\Objects\3.19999¡® (?C_STARTUP)
+OVERLAY MAP OF MODULE:   .\Objects\3.19999ï¿½ï¿½ (?C_STARTUP)
 
 
 SEGMENT                                 BIT_GROUP          DATA_GROUP 
@@ -107,7 +107,7 @@ SEGMENT                                 BIT_GROUP          DATA_GROUP
   +--> ?PR?TEMP_PROC?MAIN
 
 ?PR?BOOT_INIT?BOOT                   -----    -----      -----    -----
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
   +--> ?PR?TIMER_0?BOOT
   +--> ?PR?TIMER_1?BOOT
 
@@ -126,10 +126,10 @@ SEGMENT                                 BIT_GROUP          DATA_GROUP
   +--> ?PR?_LED?LED
 
 ?PR?_LED?LED                         0020H.6  0000H.1    -----    -----
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
 
 ?PR?SEG_DISPLAY?SEG                  -----    -----      -----    -----
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
   +--> ?CO?SEG
 
 ?PR?STATE_PROC?MAIN                  -----    -----      -----    -----
@@ -162,7 +162,7 @@ SEGMENT                                 BIT_GROUP          DATA_GROUP
 
 
 
-SYMBOL TABLE OF MODULE:  .\Objects\3.19999¡® (?C_STARTUP)
+SYMBOL TABLE OF MODULE:  .\Objects\3.19999ï¿½ï¿½ (?C_STARTUP)
 
   VALUE           TYPE          NAME
   ----------------------------------
@@ -223,7 +223,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\3.19999¡® (?C_STARTUP)
   D:00CCH         PUBLIC        P6M0
   D:00C9H         PUBLIC        P5M1
   D:00C0H         PUBLIC        P4
-  C:0753H         PUBLIC        _batch
+  C:0753H         PUBLIC        _latch
   D:00E2H         PUBLIC        P7M0
   D:00CBH         PUBLIC        P6M1
   D:00C8H         PUBLIC        P5
@@ -308,7 +308,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\3.19999¡® (?C_STARTUP)
   C:0942H         LINE#         54
   C:0944H         LINE#         55
   -------         ENDPROC       TIMER_1
-  -------         PROC          _BATCH
+  -------         PROC          _latch
   D:0007H         SYMBOL        i
   C:0753H         LINE#         57
   C:0753H         LINE#         58
@@ -321,7 +321,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\3.19999¡® (?C_STARTUP)
   C:0784H         LINE#         65
   C:078CH         LINE#         66
   C:078CH         LINE#         67
-  -------         ENDPROC       _BATCH
+  -------         ENDPROC       _latch
   -------         PROC          DELAY14US
   -------         DO            
   D:0007H         SYMBOL        i

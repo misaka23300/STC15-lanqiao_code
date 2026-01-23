@@ -11,7 +11,7 @@
 
 
 void boot_init();
-void batch(uchar i);
+void latch(uchar i);
 void Timer2_Init(void);
 
 

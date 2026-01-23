@@ -2,7 +2,7 @@
 
 void boot_init();
 void timer_0();
-void batch(char i);
+void latch(char i);
 
 void boot_init()
 {
@@ -16,15 +16,15 @@ void boot_init()
     P7M1 = 0;   P7M0 = 0;   //设置为准双向口
 
     P0 = 0xFF;
-    batch(4);
-    batch(7);
-    batch(0);
+    latch(4);
+    latch(7);
+    latch(0);
 
     P0 = 0xAF;
-    batch(5);
+    latch(5);
 
     P0 = 0x00;
-    batch(6);
+    latch(6);
 
     timer_0();
 }
@@ -34,7 +34,7 @@ void timer_0()
 
 }
 
-void batch(char i)
+void latch(char i)
 {
     switch (i)
     {

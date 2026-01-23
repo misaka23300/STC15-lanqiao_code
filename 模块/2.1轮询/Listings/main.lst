@@ -39,7 +39,7 @@ line level    source
   25   1          
   26   1      }
   27          
-  28          uint8_t batch(uint8_t i)
+  28          uint8_t latch(uint8_t i)
   29          {
   30   1          switch(i) {
   31   2              case 4: {P2 = (P2 & 0x1F) | 0x80; break; }
@@ -57,7 +57,7 @@ line level    source
   43          uint8_t led_display(uint8_t i)
   44          {
   45   1          P0 = i;
-  46   1          batch(4);
+  46   1          latch(4);
   47   1          return 0;
   48   1      }
   49          

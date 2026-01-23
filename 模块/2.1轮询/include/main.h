@@ -15,7 +15,7 @@ typedef signed int int16_t;
 #define false 0
 
 
-uint8_t batch(uint8_t i);
+uint8_t latch(uint8_t i);
 uint8_t led_display(uint8_t i);
 
 #endif

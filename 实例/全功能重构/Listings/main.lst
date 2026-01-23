@@ -1,10 +1,10 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              12/10/2025 17:56:40 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              12/11/2025 18:04:12 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
 OBJECT MODULE PLACED IN .\Objects\main.obj
-COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main\main.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\include) DEBUG OBJECTEXTEN
-                    -D PRINT(.\Listings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main\main.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\include\) DEBUG OBJECTEXTE
+                    -ND PRINT(.\Listings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
 
 line level    source
 
@@ -21,114 +21,124 @@ line level    source
    9           */
   10          
   11          #include "main.h"
+*** ERROR C127 IN LINE 6 OF \code_V5.0\clone\STC15-lanqiao_code\ʵ�\ȫ�����ع�\include\led.h: 'led_value': invalid stora
+             -ge class
+*** ERROR C132 IN LINE 7 OF \code_V5.0\clone\STC15-lanqiao_code\ʵ�\ȫ�����ع�\include\led.h: 'led_display': not in form
+             -al parameter list
+*** ERROR C132 IN LINE 8 OF \code_V5.0\clone\STC15-lanqiao_code\ʵ�\ȫ�����ع�\include\led.h: '_led_set': not in formal 
+             -parameter list
+*** ERROR C132 IN LINE 6 OF \code_V5.0\clone\STC15-lanqiao_code\ʵ�\ȫ�����ع�\include\seg.h: 'seg_display': not in form
+             -al parameter list
+*** ERROR C132 IN LINE 7 OF \code_V5.0\clone\STC15-lanqiao_code\ʵ�\ȫ�����ع�\include\seg.h: '_seg_set': not in formal 
+             -parameter list
+*** ERROR C132 IN LINE 6 OF \code_V5.0\clone\STC15-lanqiao_code\ʵ�\ȫ�����ع�\include\key.h: 'key_scan': not in formal 
+             -parameter list
+*** ERROR C132 IN LINE 9 OF .\include\main.h: 'key_task': not in formal parameter list
+*** ERROR C127 IN LINE 19 OF .\include\main.h: 'led_t': invalid storage class
+*** ERROR C127 IN LINE 24 OF .\include\main.h: 'key_t': invalid storage class
   12          
-  13          /* 定时型任务创建 
-  14          
-  15          1. 创建枚举，记录执行间隔
-  16          2. 创建变量，记录定时
-  17          3. while主循环判断是否达到间隔
-  18          4. 1ms定时器中断，对变量自加
-  19          */
-  20          
-  21          /**
-  22           * @brief 任务时间间隔枚举（单位：ms）
-  23           * @details LED 与按键调度周期定义为常量，方便调整与统一管理。
-  24           */
-  25          enum {
-  26              LED_TIME = 10,
-  27              KEY_TIME = 9,
-  28          };
-  29          
-  30          /**
-  31           * @brief LED 任务控制块类型
-  32           */
-  33          typedef struct {
-  34              uint8_t time;
-  35          } LED;
-  36          
-  37          LED led;
-  38          /**
-  39           * @brief 按键任务控制块类型
-  40           * @details 包含计时器和按键扫描结果字段。
-  41           */
-  42          typedef struct {
-  43              uint8_t time;
-  44              uint8_t press;
-  45          } KEY;
-  46          
-  47          KEY key;
-  48          /* 实例化任务控制块变量（保持原来代码中对 led.time / key.time 的访问不变） */
-  49          
-  50          
-  51           /**
-  52           * @brief 程序入口
-C51 COMPILER V9.60.7.0   MAIN                                                              12/10/2025 17:56:40 PAGE 2   
+  13          led_t led = {
+*** ERROR C132 IN LINE 13 OF main\main.c: 'led_t': not in formal parameter list
+*** ERROR C141 IN LINE 13 OF main\main.c: syntax error near 'led', expected ';'
+*** ERROR C244 IN LINE 13 OF main\main.c: 'led': can't initialize, bad type or class
+  14              .time = 0,
+*** ERROR C141 IN LINE 14 OF main\main.c: syntax error near '.', expected 'sizeof'
+  15          };
+*** ERROR C132 IN LINE 15 OF main\main.c: 'led': not in formal parameter list
+  16          
+  17          
+  18          key_t key = {
+*** ERROR C132 IN LINE 18 OF main\main.c: 'key_t': not in formal parameter list
+*** ERROR C141 IN LINE 18 OF main\main.c: syntax error near 'key', expected ';'
+*** ERROR C244 IN LINE 18 OF main\main.c: 'key': can't initialize, bad type or class
+  19              .press = 0,
+*** ERROR C141 IN LINE 19 OF main\main.c: syntax error near '.', expected 'sizeof'
+  20              .time = 0
+  21          };
+*** ERROR C132 IN LINE 21 OF main\main.c: 'key': not in formal parameter list
+  22          
+  23          
+  24           /**
+  25           * @brief 程序入口
+  26           * @details 初始化硬件后进入主循环，基于计时器变量周期性调用各任务。
+  27           * @note 该函数不返回，应为 MCU 主循环。
+C51 COMPILER V9.60.7.0   MAIN                                                              12/11/2025 18:04:12 PAGE 2   
 
-  53           * @details 初始化硬件后进入主循环，基于计时器变量周期性调用各任务。
-  54           * @note 该函数不返回，应为 MCU 主循环。
-  55           */
-  56          void main()
-  57          {
-  58   1          boot_init();
-  59   1      
-  60   1      
-  61   1          while(1) {
-  62   2              if (led.time == LED_TIME) {
-  63   3                  led.time = 0;
-  64   3                  led_display();
-  65   3              }
-  66   2      
-  67   2              if (key.time == KEY_TIME) {
-  68   3                  key.time = 0;
-  69   3                  key_task();
-  70   3              }
-  71   2          }
-  72   1      }
+  28           */
+  29          void main()
+  30          {
+*** ERROR C132 IN LINE 30 OF main\main.c: 'main': not in formal parameter list
+*** ERROR C141 IN LINE 30 OF main\main.c: syntax error near '{', expected ';'
+  31              boot_init();
+*** ERROR C132 IN LINE 31 OF main\main.c: 'boot_init': not in formal parameter list
+  32              seg_set(2, 17);
+*** ERROR C141 IN LINE 32 OF main\main.c: syntax error near '2', expected 'bit'
+*** ERROR C132 IN LINE 32 OF main\main.c: 'seg_set': not in formal parameter list
+  33              seg_set(3, 17);
+*** ERROR C141 IN LINE 33 OF main\main.c: syntax error near '3', expected 'bit'
+*** ERROR C132 IN LINE 33 OF main\main.c: 'seg_set': not in formal parameter list
+  34              seg_set(4, 17);
+*** ERROR C141 IN LINE 34 OF main\main.c: syntax error near '4', expected 'bit'
+*** ERROR C132 IN LINE 34 OF main\main.c: 'seg_set': not in formal parameter list
+  35              seg_set(5, 17);
+*** ERROR C141 IN LINE 35 OF main\main.c: syntax error near '5', expected 'bit'
+*** ERROR C132 IN LINE 35 OF main\main.c: 'seg_set': not in formal parameter list
+  36              seg_set(6, 17);
+*** ERROR C141 IN LINE 36 OF main\main.c: syntax error near '6', expected 'bit'
+*** ERROR C132 IN LINE 36 OF main\main.c: 'seg_set': not in formal parameter list
+  37              seg_set(7, 17);
+*** ERROR C141 IN LINE 37 OF main\main.c: syntax error near '7', expected 'bit'
+*** ERROR C132 IN LINE 37 OF main\main.c: 'seg_set': not in formal parameter list
+  38              
+  39              while(1) {
+*** ERROR C141 IN LINE 39 OF main\main.c: syntax error near 'while', expected 'hdata'
+*** ERROR C141 IN LINE 39 OF main\main.c: syntax error near '1', expected 'hdata'
+  40                  if (led.time == LED_TIME) {
+*** ERROR C141 IN LINE 40 OF main\main.c: syntax error near '.', expected ')'
+*** ERROR C129 IN LINE 40 OF main\main.c: missing ';' before '=='
+  41                      led.time = 0;
+  42                      led_display();
+  43                  }
+  44          
+  45                  if (key.time == KEY_TIME) {
+  46                      key.time = 0;
+  47                      key_task();
+  48                  }
+  49              }
+  50          }
+  51          
+  52          /**
+  53           * @brief 定时器1 中断处理，1ms 基准（interrupt 3）
+  54           * @details 在中断中执行短周期显示刷新(seg_display)并对任务计时器自增。
+  55           *          建议仅执行必要的短耗时操作以保证中断及时返回。
+  56           */
+  57          void timer_1_1ms() interrupt 3
+  58          {
+  59              seg_display();
+  60              if (led.time < LED_TIME) {
+  61                  led.time++;
+  62              }
+  63              if (key.time < KEY_TIME) {
+  64                  key.time++;
+  65              }
+  66          }
+  67          
+  68          
+  69          
+  70          void key_task()
+C51 COMPILER V9.60.7.0   MAIN                                                              12/11/2025 18:04:12 PAGE 3   
+
+  71          {
+  72              
   73          
-  74          /**
-  75           * @brief 定时器1 中断处理，1ms 基准（interrupt 3）
-  76           * @details 在中断中执行短周期显示刷新(seg_display)并对任务计时器自增。
-  77           *          建议仅执行必要的短耗时操作以保证中断及时返回。
-  78           */
-  79          void timer_1_1ms() interrupt 3
-  80          {
-  81   1          seg_display();
-  82   1          if (led.time < LED_TIME) {
-  83   2              led.time++;
-  84   2          }
-  85   1          if (key.time < KEY_TIME) {
-  86   2              key.time++;
-  87   2          }
-  88   1      }
-  89          
-  90          
-  91          
-  92          void key_task()
-  93          {
-  94   1          
-  95   1      
-  96   1          key.press = key_scan();
-  97   1          if (key.press != 99) {
-  98   2              seg_set(0, key.press / 10);
-  99   2              seg_set(1, key.press % 10);
- 100   2              
- 101   2          }
- 102   1          
- 103   1          
- 104   1      }
+  74              key.press = key_scan();
+  75              if (key.press != 99) {
+  76                  seg_set(0, key.press / 10);
+  77                  seg_set(1, key.press % 10);
+  78                  
+  79              }
+  80              
+  81              
+  82          }
 
-
-MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    141    ----
-   CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =   ----    ----
-   PDATA SIZE       =   ----    ----
-   DATA SIZE        =      3    ----
-   IDATA SIZE       =   ----    ----
-   BIT SIZE         =   ----    ----
-C51 COMPILER V9.60.7.0   MAIN                                                              12/10/2025 17:56:40 PAGE 3   
-
-END OF MODULE INFORMATION.
-
-
-C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  0 WARNING(S),  38 ERROR(S)

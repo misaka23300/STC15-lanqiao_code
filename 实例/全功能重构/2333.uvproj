@@ -55,7 +55,7 @@
           <ListingPath>.\Listings\</ListingPath>
           <HexFormatSelection>0</HexFormatSelection>
           <Merge32K>0</Merge32K>
-          <CreateBatchFile>0</CreateBatchFile>
+          <CreatelatchFile>0</CreatelatchFile>
           <BeforeCompile>
             <RunUserProg1>0</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
@@ -86,7 +86,7 @@
             <nStopA1X>0</nStopA1X>
             <nStopA2X>0</nStopA2X>
           </AfterMake>
-          <SelectedForBatchBuild>0</SelectedForBatchBuild>
+          <SelectedForlatchBuild>0</SelectedForlatchBuild>
           <SVCSIdString></SVCSIdString>
         </TargetCommonOption>
         <CommonProperty>
@@ -324,7 +324,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\include</IncludePath>
+              <IncludePath>.\include\</IncludePath>
             </VariousControls>
           </C51>
           <Ax51>
@@ -374,7 +374,7 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>Source Group 1</GroupName>
+          <GroupName>c</GroupName>
           <Files>
             <File>
               <FileName>boot.c</FileName>
@@ -401,7 +401,40 @@
               <FileType>1</FileType>
               <FilePath>.\main\seg.c</FilePath>
             </File>
+            <File>
+              <FileName>boot.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\include\boot.h</FilePath>
+            </File>
+            <File>
+              <FileName>key.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\include\key.h</FilePath>
+            </File>
+            <File>
+              <FileName>led.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\include\led.h</FilePath>
+            </File>
+            <File>
+              <FileName>main.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\include\main.h</FilePath>
+            </File>
+            <File>
+              <FileName>seg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\include\seg.h</FilePath>
+            </File>
+            <File>
+              <FileName>task.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\include\task.h</FilePath>
+            </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>h</GroupName>
         </Group>
       </Groups>
     </Target>

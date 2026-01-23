@@ -27,8 +27,8 @@ line level    source
   17   1          if (last != tmp)
   18   1          {
   19   2              P0 = ~tmp;
-  20   2              batch(4);
-  21   2              batch(0);
+  20   2              latch(4);
+  21   2              latch(0);
   22   2      
   23   2              last = tmp;
   24   2          }

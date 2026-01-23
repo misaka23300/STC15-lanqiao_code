@@ -29,16 +29,16 @@ line level    source
   20   1          static uchar i;
   21   1      
   22   1          P0 = 0xFF;
-  23   1          batch(7);
-  24   1          batch(0);
+  23   1          latch(7);
+  24   1          latch(0);
   25   1      
   26   1          P0 = 0x01 << i;
-  27   1          batch(6);
-  28   1          batch(0);
+  27   1          latch(6);
+  28   1          latch(0);
   29   1      
   30   1          P0 = ~letter[seg[i]];
-  31   1          batch(7);
-  32   1          batch(0);
+  31   1          latch(7);
+  32   1          latch(0);
   33   1      
   34   1          i = (i + 1) % 8;
   35   1      }
@@ -70,8 +70,8 @@ line level    source
   59   1          if (last != temp)
   60   1          {
   61   2              P0 = ~temp;
-  62   2              batch(4);
-  63   2              batch(0);
+  62   2              latch(4);
+  63   2              latch(0);
   64   2              last = temp;
   65   2          }
   66   1      
@@ -95,8 +95,8 @@ line level    source
   84   1          if (last != temp)
   85   1          {
   86   2              P0 = temp;
-  87   2              batch(5);
-  88   2              batch(0);
+  87   2              latch(5);
+  88   2              latch(0);
   89   2              last = temp;
   90   2          }
   91   1      

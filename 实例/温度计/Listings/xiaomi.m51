@@ -69,7 +69,7 @@ LINK MAP OF MODULE:  .\Objects\xiaomi (?C_STARTUP)
             CODE    09F8H     004EH     UNIT         ?PR?LED_DISPLAY?DISPLAY
             CODE    0A46H     0045H     UNIT         ?PR?SEG_DISPLAY?DISPLAY
             CODE    0A8BH     003BH     UNIT         ?PR?READ_TEMP?ONEWIRE
-            CODE    0AC6H     003AH     UNIT         ?PR?_BATCH?BOOT
+            CODE    0AC6H     003AH     UNIT         ?PR?_latch?BOOT
             CODE    0B00H     0037H     UNIT         ?PR?_SANDY?DISPLAY
             CODE    0B37H     0034H     UNIT         ?PR?_READ_DS1302_BYTE?DS1302
             CODE    0B6BH     002CH     UNIT         ?CO?DISPLAY
@@ -127,7 +127,7 @@ SEGMENT                                  BIT_GROUP          DATA_GROUP
   +--> ?PR?_PCF8591_ADC?IIC
 
 ?PR?BOOT_INIT?BOOT                    -----    -----      -----    -----
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
   +--> ?PR?TIMER2_INIT?BOOT
 
 ?PR?_AT2402_READ?IIC                  -----    -----      -----    -----
@@ -184,7 +184,7 @@ SEGMENT                                  BIT_GROUP          DATA_GROUP
 
 
 ?PR?LED_DISPLAY?DISPLAY               0020H.7  0000H.1    -----    -----
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
 
 ?PR?KEY_SCAN?KEY                      -----    -----      0051H    0002H
 
@@ -217,7 +217,7 @@ SEGMENT                                  BIT_GROUP          DATA_GROUP
   +--> ?PR?SEG_DISPLAY?DISPLAY
 
 ?PR?SEG_DISPLAY?DISPLAY               -----    -----      -----    -----
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
   +--> ?CO?DISPLAY
 
 
@@ -283,7 +283,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\xiaomi (?C_STARTUP)
   D:00CCH         PUBLIC        P6M0
   D:00C9H         PUBLIC        P5M1
   D:00C0H         PUBLIC        P4
-  C:0AC6H         PUBLIC        _batch
+  C:0AC6H         PUBLIC        _latch
   D:00E2H         PUBLIC        P7M0
   D:00CBH         PUBLIC        P6M1
   D:00C8H         PUBLIC        P5
@@ -342,7 +342,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\xiaomi (?C_STARTUP)
   C:005FH         LINE#         37
   C:0062H         LINE#         38
   -------         ENDPROC       TIMER2_INIT
-  -------         PROC          _BATCH
+  -------         PROC          _latch
   D:0007H         SYMBOL        i
   C:0AC6H         LINE#         40
   C:0AC6H         LINE#         41
@@ -355,7 +355,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\xiaomi (?C_STARTUP)
   C:0AF7H         LINE#         48
   C:0AFFH         LINE#         49
   C:0AFFH         LINE#         50
-  -------         ENDPROC       _BATCH
+  -------         ENDPROC       _latch
   -------         PROC          DELAY500MS
   -------         DO            
   D:0007H         SYMBOL        i

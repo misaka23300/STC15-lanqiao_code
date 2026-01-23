@@ -33,7 +33,7 @@ line level    source
   23   1          if (temp != last)
   24   1          {
   25   2              P0 = ~temp;
-  26   2              batch(4);
+  26   2              latch(4);
   27   2      
   28   2              last = temp;
   29   2          }

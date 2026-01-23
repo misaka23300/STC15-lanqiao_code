@@ -14,7 +14,7 @@ typedef signed short   int16_t;
 
 void led(uint8_t i, bit state);
 void led_display();
-void batch(uint8_t i);
+void latch(uint8_t i);
 void Delay500ms(void);
 
 

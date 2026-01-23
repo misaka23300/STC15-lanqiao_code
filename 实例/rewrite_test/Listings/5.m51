@@ -79,7 +79,7 @@ LINK MAP OF MODULE:  .\Objects\5.19 (?C_STARTUP)
             CODE    0DCDH     003EH     UNIT         ?PR?MEASURETIMER1?SONIC
             CODE    0E0BH     003AH     UNIT         ?PR?MAIN?MAIN
             CODE    0E45H     0039H     UNIT         ?PR?SEG_DISPLAY?DISPLAY
-            CODE    0E7EH     0039H     UNIT         ?PR?_BATCH?MACHINE
+            CODE    0E7EH     0039H     UNIT         ?PR?_latch?MACHINE
             CODE    0EB7H     0039H     UNIT         ?PR?TASK_LOOP?MAIN
             CODE    0EF0H     002CH     UNIT         ?CO?MAIN
             CODE    0F1CH     002BH     UNIT         ?CO?DISPLAY
@@ -126,7 +126,7 @@ SEGMENT                               BIT_GROUP          DATA_GROUP
   +--> ?PR?UART1_INIT?UART
 
 ?PR?CLEAN_DISPLAY?MACHINE          -----    -----      -----    -----
-  +--> ?PR?_BATCH?MACHINE
+  +--> ?PR?_latch?MACHINE
 
 ?PR?PRINTF?PRINTF                  0020H.0  0001H.1    0036H    001CH
   +--> ?PR?PUTCHAR?PUTCHAR
@@ -162,7 +162,7 @@ SEGMENT                               BIT_GROUP          DATA_GROUP
   +--> ?PR?SEG_DISPLAY?DISPLAY
 
 ?PR?SEG_DISPLAY?DISPLAY            -----    -----      -----    -----
-  +--> ?PR?_BATCH?MACHINE
+  +--> ?PR?_latch?MACHINE
   +--> ?CO?DISPLAY
 
 
@@ -313,7 +313,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\5.19 (?C_STARTUP)
   D:00CCH         PUBLIC        P6M0
   D:00C9H         PUBLIC        P5M1
   D:00C0H         PUBLIC        P4
-  C:0E7EH         PUBLIC        _batch
+  C:0E7EH         PUBLIC        _latch
   D:00E2H         PUBLIC        P7M0
   D:00CBH         PUBLIC        P6M1
   D:00C8H         PUBLIC        P5
@@ -362,7 +362,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\5.19 (?C_STARTUP)
 BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/02/2025  19:16:56  PAGE 7
 
 
-  -------         PROC          _BATCH
+  -------         PROC          _latch
   D:0007H         SYMBOL        i
   C:0E7EH         LINE#         26
   C:0E7EH         LINE#         27
@@ -375,7 +375,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\5.19 (?C_STARTUP)
   C:0EB3H         LINE#         35
   C:0EB3H         LINE#         36
   C:0EB6H         LINE#         37
-  -------         ENDPROC       _BATCH
+  -------         ENDPROC       _latch
   -------         PROC          TIMER1_INIT
   C:0FAFH         LINE#         40
   C:0FAFH         LINE#         41

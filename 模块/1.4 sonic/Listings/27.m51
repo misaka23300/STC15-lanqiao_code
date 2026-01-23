@@ -50,7 +50,7 @@ LINK MAP OF MODULE:  .\Objects\27 (?C_STARTUP)
             CODE    031AH     0074H     UNIT         ?PR?TIMER2_ISR?MAIN
             CODE    038EH     0045H     UNIT         ?PR?SEG_DISPLAY?SEG
             CODE    03D3H     003EH     UNIT         ?PR?SONIC_MEASURE?SONIC
-            CODE    0411H     003AH     UNIT         ?PR?_BATCH?BOOT
+            CODE    0411H     003AH     UNIT         ?PR?_latch?BOOT
             CODE    044BH     002BH     UNIT         ?CO?SEG
             CODE    0476H     0024H     UNIT         ?PR?STATE_PROC?MAIN
             CODE    049AH     0017H     UNIT         ?PR?MAIN?MAIN
@@ -81,7 +81,7 @@ SEGMENT                           DATA_GROUP
   +--> ?PR?STATE_PROC?MAIN
 
 ?PR?BOOT_INIT?BOOT              -----    -----
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
   +--> ?PR?TIMER2_INIT?BOOT
   +--> ?PR?TIMER1_INIT?BOOT
 
@@ -97,7 +97,7 @@ SEGMENT                           DATA_GROUP
   +--> ?PR?SEG_DISPLAY?SEG
 
 ?PR?SEG_DISPLAY?SEG             -----    -----
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
   +--> ?CO?SEG
 
 
@@ -163,7 +163,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\27 (?C_STARTUP)
   D:00CCH         PUBLIC        P6M0
   D:00C9H         PUBLIC        P5M1
   D:00C0H         PUBLIC        P4
-  C:0411H         PUBLIC        _batch
+  C:0411H         PUBLIC        _latch
   D:00E2H         PUBLIC        P7M0
   D:00CBH         PUBLIC        P6M1
   D:00C8H         PUBLIC        P5
@@ -222,7 +222,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\27 (?C_STARTUP)
   C:005EH         LINE#         33
   C:0060H         LINE#         34
   -------         ENDPROC       BOOT_INIT
-  -------         PROC          _BATCH
+  -------         PROC          _latch
   D:0007H         SYMBOL        i
   C:0411H         LINE#         36
   C:0411H         LINE#         37
@@ -235,7 +235,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\27 (?C_STARTUP)
   C:0442H         LINE#         44
   C:044AH         LINE#         45
   C:044AH         LINE#         46
-  -------         ENDPROC       _BATCH
+  -------         ENDPROC       _latch
   -------         PROC          DELAY14US
   -------         DO            
   D:0007H         SYMBOL        i

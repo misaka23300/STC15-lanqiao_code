@@ -5,20 +5,20 @@ void boot_init(void)
     P0M0 = 0x00;
 
     P0 = 0xFF;
-    batch(4);
-    batch(0);
+    latch(4);
+    latch(0);
 
     P0 = 0xAF;
-    batch(5);
-    batch(0);
+    latch(5);
+    latch(0);
 
     P0 = 0x00;
-    batch(6);
-    batch(0);
+    latch(6);
+    latch(0);
 
     P0 = 0xFF;
-    batch(7);
-    batch(0);
+    latch(7);
+    latch(0);
 
     timer_0();
     timer_1();
@@ -68,7 +68,7 @@ void timer_2(void)
 
 }
 
-void batch(uchar i)
+void latch(uchar i)
 {
     switch (i)
     {

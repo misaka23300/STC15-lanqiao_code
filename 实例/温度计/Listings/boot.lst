@@ -22,16 +22,16 @@ line level    source
   12   1          P7M0 = 0x00; P7M1 = 0x00; 
   13   1      
   14   1          P0 = 0xFF;
-  15   1          batch(4);
-  16   1          batch(0);
+  15   1          latch(4);
+  16   1          latch(0);
   17   1      
   18   1          P0 = 0xFF;
-  19   1          batch(6);
-  20   1          batch(0);
+  19   1          latch(6);
+  20   1          latch(0);
   21   1      
   22   1          P0 = 0xAF;
-  23   1          batch(5);
-  24   1          batch(0);
+  23   1          latch(5);
+  24   1          latch(0);
   25   1      
   26   1          Timer2_Init();
   27   1          EA = 1;
@@ -47,7 +47,7 @@ line level    source
   37   1        IE2 |= 0x04;      //使能定时器2中断
   38   1      }
   39          
-  40          void batch(uchar i)
+  40          void latch(uchar i)
   41          {
   42   1          switch (i)
   43   1          {

@@ -28,8 +28,8 @@ line level    source
   18   1        if (last != temp)
   19   1        {
   20   2          P0 = ~temp;
-  21   2          batch(4);
-  22   2          batch(0);
+  21   2          latch(4);
+  22   2          latch(0);
   23   2          
   24   2          last = temp; 
   25   2        }      

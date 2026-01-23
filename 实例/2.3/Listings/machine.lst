@@ -26,20 +26,20 @@ line level    source
   16   1      
   17   1      
   18   1          P0 = 0xFF;
-  19   1          batch(4);
+  19   1          latch(4);
   20   1      
   21   1          P0 = 0xAF;
-  22   1          batch(5);
+  22   1          latch(5);
   23   1      
   24   1          P0 = 0x00;
-  25   1          batch(6);
+  25   1          latch(6);
   26   1      
   27   1          P0 = 0xFF;
-  28   1          batch(7);
+  28   1          latch(7);
   29   1      
   30   1      }
   31          
-  32          void batch(uchar i)
+  32          void latch(uchar i)
   33          {
   34   1          switch (i)
   35   1          {

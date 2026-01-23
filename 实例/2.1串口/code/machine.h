@@ -9,7 +9,7 @@ typedef unsigned char uint8_t;
 typedef unsigned int uint16_t;
 
 
-void batch(uchar i);
+void latch(uchar i);
 
 
 

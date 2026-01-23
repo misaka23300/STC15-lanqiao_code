@@ -1,10 +1,10 @@
-C51 COMPILER V9.60.7.0   BOOT                                                              12/10/2025 17:56:40 PAGE 1   
+C51 COMPILER V9.60.7.0   BOOT                                                              12/11/2025 18:04:12 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE BOOT
 OBJECT MODULE PLACED IN .\Objects\boot.obj
-COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main\boot.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\include) DEBUG OBJECTEXTEN
-                    -D PRINT(.\Listings\boot.lst) TABS(2) OBJECT(.\Objects\boot.obj)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main\boot.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\include\) DEBUG OBJECTEXTE
+                    -ND PRINT(.\Listings\boot.lst) TABS(2) OBJECT(.\Objects\boot.obj)
 
 line level    source
 
@@ -29,45 +29,105 @@ line level    source
   18           */
   19          void boot_init()
   20          {
-  21   1          P0M0 = 0x00;
-  22   1          P0M1 = 0x00;
-  23   1          P1M0 = 0x00;
-  24   1          P1M1 = 0x00;
-  25   1          P2M0 = 0x00;
-  26   1          P2M1 = 0x00;
-  27   1          P3M0 = 0x00;
-  28   1          P3M1 = 0x00;
-  29   1          P4M0 = 0x00;
-  30   1          P4M1 = 0x00;
-  31   1          P5M0 = 0x00;
-  32   1          P5M1 = 0x00;
-  33   1          P6M0 = 0x00;
-  34   1          P6M1 = 0x00;
-  35   1          P7M0 = 0x00;
-  36   1          P7M1 = 0x00;
-  37   1      
-  38   1          P0 = 0xFF;
-  39   1          latch(4);
-  40   1      
-  41   1          P0 = 0xAF;
-  42   1          latch(5);
-  43   1      
-  44   1          P0 = 0x00;
-  45   1          latch(6);
-  46   1      
-  47   1          P0 = 0xFF;
-  48   1          latch(7);
-  49   1      
-  50   1          latch(0);
-  51   1      
-  52   1          Timer1_Init();
-  53   1          EA = 1;
-C51 COMPILER V9.60.7.0   BOOT                                                              12/10/2025 17:56:40 PAGE 2   
+*** ERROR C132 IN LINE 20 OF main\boot.c: 'boot_init': not in formal parameter list
+*** ERROR C141 IN LINE 20 OF main\boot.c: syntax error near '{', expected ';'
+  21              P0M0 = 0x00;
+*** ERROR C136 IN LINE 21 OF main\boot.c: 'P0M0': 'void' on variable
+*** ERROR C244 IN LINE 21 OF main\boot.c: 'P0M0': can't initialize, bad type or class
+*** ERROR C136 IN LINE 21 OF main\boot.c: 'P0M0': 'void' on variable
+*** ERROR C132 IN LINE 21 OF main\boot.c: 'P0M0': not in formal parameter list
+  22              P0M1 = 0x00;
+*** ERROR C244 IN LINE 22 OF main\boot.c: 'P0M1': can't initialize, bad type or class
+*** ERROR C132 IN LINE 22 OF main\boot.c: 'P0M1': not in formal parameter list
+  23              P1M0 = 0x00;
+*** ERROR C244 IN LINE 23 OF main\boot.c: 'P1M0': can't initialize, bad type or class
+*** ERROR C132 IN LINE 23 OF main\boot.c: 'P1M0': not in formal parameter list
+  24              P1M1 = 0x00;
+*** ERROR C244 IN LINE 24 OF main\boot.c: 'P1M1': can't initialize, bad type or class
+*** ERROR C132 IN LINE 24 OF main\boot.c: 'P1M1': not in formal parameter list
+  25              P2M0 = 0x00;
+*** ERROR C244 IN LINE 25 OF main\boot.c: 'P2M0': can't initialize, bad type or class
+*** ERROR C132 IN LINE 25 OF main\boot.c: 'P2M0': not in formal parameter list
+  26              P2M1 = 0x00;
+*** ERROR C244 IN LINE 26 OF main\boot.c: 'P2M1': can't initialize, bad type or class
+*** ERROR C132 IN LINE 26 OF main\boot.c: 'P2M1': not in formal parameter list
+  27              P3M0 = 0x00;
+*** ERROR C244 IN LINE 27 OF main\boot.c: 'P3M0': can't initialize, bad type or class
+*** ERROR C132 IN LINE 27 OF main\boot.c: 'P3M0': not in formal parameter list
+  28              P3M1 = 0x00;
+*** ERROR C244 IN LINE 28 OF main\boot.c: 'P3M1': can't initialize, bad type or class
+*** ERROR C132 IN LINE 28 OF main\boot.c: 'P3M1': not in formal parameter list
+  29              P4M0 = 0x00;
+*** ERROR C244 IN LINE 29 OF main\boot.c: 'P4M0': can't initialize, bad type or class
+*** ERROR C132 IN LINE 29 OF main\boot.c: 'P4M0': not in formal parameter list
+  30              P4M1 = 0x00;
+*** ERROR C244 IN LINE 30 OF main\boot.c: 'P4M1': can't initialize, bad type or class
+C51 COMPILER V9.60.7.0   BOOT                                                              12/11/2025 18:04:12 PAGE 2   
 
-  54   1      }
+*** ERROR C132 IN LINE 30 OF main\boot.c: 'P4M1': not in formal parameter list
+  31              P5M0 = 0x00;
+*** ERROR C244 IN LINE 31 OF main\boot.c: 'P5M0': can't initialize, bad type or class
+*** ERROR C132 IN LINE 31 OF main\boot.c: 'P5M0': not in formal parameter list
+  32              P5M1 = 0x00;
+*** ERROR C244 IN LINE 32 OF main\boot.c: 'P5M1': can't initialize, bad type or class
+*** ERROR C132 IN LINE 32 OF main\boot.c: 'P5M1': not in formal parameter list
+  33              P6M0 = 0x00;
+*** ERROR C244 IN LINE 33 OF main\boot.c: 'P6M0': can't initialize, bad type or class
+*** ERROR C132 IN LINE 33 OF main\boot.c: 'P6M0': not in formal parameter list
+  34              P6M1 = 0x00;
+*** ERROR C244 IN LINE 34 OF main\boot.c: 'P6M1': can't initialize, bad type or class
+*** ERROR C132 IN LINE 34 OF main\boot.c: 'P6M1': not in formal parameter list
+  35              P7M0 = 0x00;
+*** ERROR C244 IN LINE 35 OF main\boot.c: 'P7M0': can't initialize, bad type or class
+*** ERROR C132 IN LINE 35 OF main\boot.c: 'P7M0': not in formal parameter list
+  36              P7M1 = 0x00;
+*** ERROR C244 IN LINE 36 OF main\boot.c: 'P7M1': can't initialize, bad type or class
+*** ERROR C132 IN LINE 36 OF main\boot.c: 'P7M1': not in formal parameter list
+  37          
+  38              P0 = 0xFF;
+*** ERROR C244 IN LINE 38 OF main\boot.c: 'P0': can't initialize, bad type or class
+*** ERROR C132 IN LINE 38 OF main\boot.c: 'P0': not in formal parameter list
+  39              latch(4);
+*** ERROR C141 IN LINE 39 OF main\boot.c: syntax error near '4', expected 'bit'
+*** ERROR C132 IN LINE 39 OF main\boot.c: 'latch': not in formal parameter list
+  40          
+  41              P0 = 0xAF;
+*** ERROR C244 IN LINE 41 OF main\boot.c: 'P0': can't initialize, bad type or class
+*** ERROR C132 IN LINE 41 OF main\boot.c: 'P0': not in formal parameter list
+  42              latch(5);
+*** ERROR C141 IN LINE 42 OF main\boot.c: syntax error near '5', expected 'bit'
+*** ERROR C132 IN LINE 42 OF main\boot.c: 'latch': not in formal parameter list
+  43          
+  44              P0 = 0x00;
+*** ERROR C244 IN LINE 44 OF main\boot.c: 'P0': can't initialize, bad type or class
+*** ERROR C132 IN LINE 44 OF main\boot.c: 'P0': not in formal parameter list
+  45              latch(6);
+*** ERROR C141 IN LINE 45 OF main\boot.c: syntax error near '6', expected 'bit'
+*** ERROR C132 IN LINE 45 OF main\boot.c: 'latch': not in formal parameter list
+  46          
+  47              P0 = 0xFF;
+*** ERROR C244 IN LINE 47 OF main\boot.c: 'P0': can't initialize, bad type or class
+*** ERROR C132 IN LINE 47 OF main\boot.c: 'P0': not in formal parameter list
+  48              latch(7);
+*** ERROR C141 IN LINE 48 OF main\boot.c: syntax error near '7', expected 'bit'
+*** ERROR C132 IN LINE 48 OF main\boot.c: 'latch': not in formal parameter list
+  49          
+  50              latch(0);
+*** ERROR C141 IN LINE 50 OF main\boot.c: syntax error near '0', expected 'bit'
+*** ERROR C132 IN LINE 50 OF main\boot.c: 'latch': not in formal parameter list
+  51          
+  52              Timer1_Init();
+*** ERROR C132 IN LINE 52 OF main\boot.c: 'Timer1_Init': not in formal parameter list
+  53              EA = 1;
+*** ERROR C244 IN LINE 53 OF main\boot.c: 'EA': can't initialize, bad type or class
+*** ERROR C132 IN LINE 53 OF main\boot.c: 'EA': not in formal parameter list
+  54          }
+*** ERROR C141 IN LINE 54 OF main\boot.c: syntax error near '}', expected 'hdata'
   55          
   56          /**
   57           * @brief 设置 P2 端口以选择不同的 latch 状态
+C51 COMPILER V9.60.7.0   BOOT                                                              12/11/2025 18:04:12 PAGE 3   
+
   58           *
   59           * 根据参数 i 修改 P2 的高三位以控制不同的锁存设备/通路：
   60           * - 4 => 设置为 0x80
@@ -126,56 +186,50 @@ line level    source
  113           * @note 依赖编译器的空操作指令与循环消耗来实现短延时。
  114           */
  115          void Delay14us(void) //@12.000MHz
-C51 COMPILER V9.60.7.0   BOOT                                                              12/10/2025 17:56:40 PAGE 3   
-
  116          {
  117   1          unsigned char data i;
  118   1      
  119   1          _nop_();
+C51 COMPILER V9.60.7.0   BOOT                                                              12/11/2025 18:04:12 PAGE 4   
+
  120   1          _nop_();
  121   1          i = 39;
  122   1          while (--i);
  123   1      }
  124          
- 125          /*
- 126           * 以下为备用/注释掉的定时器配置函数，保留原注释并添加文档说明以便未来使
+ 125          
+ 126          void loop_0to8(uint8_t *i)
+ 127          {
+ 128   1          *i = (*i + 1) & 0x07;
+ 129   1      }
+ 130          
+ 131          /*
+ 132           * 以下为备用/注释掉的定时器配置函数，保留原注释并添加文档说明以便未来使
              -用或文档生成。
- 127           *
- 128           * @brief 注释掉的函数：timer_0_sonic - 用于定时器0的声纳计时（示例）
- 129           * @brief 注释掉的函数：timer_0_ne555 - 用于 NE555 外部脉冲处理（示例）
- 130           */
- 131          /* void timer_0_sonic()
- 132          {
- 133              AUXR &= 0x7F;     //定时器时钟12T模式
- 134              TMOD &= 0xF0;     //设置定时器模式
- 135              TL0 = 0x00;       //设置定时初始值
- 136              TH0 = 0x00;       //设置定时初始值
- 137              TF0 = 0;        //清除TF0标志
- 138              TR0 = 0;        //定时器0开始计时
- 139              ET0 = 0;        //使能定时器0中断
- 140          }
- 141          
- 142          void timer_0_ne555()
- 143          {
- 144              //TMOD -> 0000 0110
- 145              // AUXR -> 0xxx xxxx
- 146              TMOD = (TMOD & 0xF0) | 0x06;
- 147              TL0 = 0xFF;
- 148              TH0 = 0xFF;
- 149              ET0 = 1;
- 150          }
- 151           */
+ 133           *
+ 134           * @brief 注释掉的函数：timer_0_sonic - 用于定时器0的声纳计时（示例）
+ 135           * @brief 注释掉的函数：timer_0_ne555 - 用于 NE555 外部脉冲处理（示例）
+ 136           */
+ 137          /* void timer_0_sonic()
+ 138          {
+ 139              AUXR &= 0x7F;     //定时器时钟12T模式
+ 140              TMOD &= 0xF0;     //设置定时器模式
+ 141              TL0 = 0x00;       //设置定时初始值
+ 142              TH0 = 0x00;       //设置定时初始值
+ 143              TF0 = 0;        //清除TF0标志
+ 144              TR0 = 0;        //定时器0开始计时
+ 145              ET0 = 0;        //使能定时器0中断
+ 146          }
+ 147          
+ 148          void timer_0_ne555()
+ 149          {
+ 150              //TMOD -> 0000 0110
+ 151              // AUXR -> 0xxx xxxx
+ 152              TMOD = (TMOD & 0xF0) | 0x06;
+ 153              TL0 = 0xFF;
+ 154              TH0 = 0xFF;
+ 155              ET0 = 1;
+ 156          }
+ 157           */
 
-
-MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    159    ----
-   CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =   ----    ----
-   PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----    ----
-   IDATA SIZE       =   ----    ----
-   BIT SIZE         =   ----    ----
-END OF MODULE INFORMATION.
-
-
-C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  0 WARNING(S),  58 ERROR(S)

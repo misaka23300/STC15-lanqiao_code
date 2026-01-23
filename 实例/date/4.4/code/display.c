@@ -28,8 +28,8 @@ void led_display()
     if (temp != last)
     {
         P0 = ~temp;
-        batch(4);
-        batch(0);
+        latch(4);
+        latch(0);
 
         last = temp;
     }
@@ -42,16 +42,16 @@ void seg_display()
     static uchar i;
 
     P0 = 0xFF;
-    batch(7);
-    batch(0);
+    latch(7);
+    latch(0);
 
     P0 = 0x01 << i;
-    batch(6);
-    batch(0);
+    latch(6);
+    latch(0);
 
     P0 = ~letter[seg[i]];
-    batch(7);
-    batch(0);
+    latch(7);
+    latch(0);
 
     i = (i + 1) % 8;
 }

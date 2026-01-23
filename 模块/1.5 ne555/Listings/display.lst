@@ -29,13 +29,13 @@ line level    source
   19   1          static uchar i;
   20   1          
   21   1          P0 = 0x00;
-  22   1          batch(7);
+  22   1          latch(7);
   23   1      
   24   1          P0 = 0x01 << i;
-  25   1          batch(6);
+  25   1          latch(6);
   26   1      
   27   1          P0 = ~letter[seg_list[i]];
-  28   1          batch(7);
+  28   1          latch(7);
   29   1      
   30   1          i = i + 1;
   31   1          if (i == 8) { i = 0;}
@@ -60,7 +60,7 @@ line level    source
   50   1          if (last != temp)
   51   1          {
   52   2              P0 = ~temp;
-  53   2              batch(4);
+  53   2              latch(4);
   54   2      
 C51 COMPILER V9.60.7.0   DISPLAY                                                           06/13/2025 15:16:18 PAGE 2   
 
@@ -82,7 +82,7 @@ line level    source
   70   2          }
   71   1      
   72   1          P0 = randz;
-  73   1          batch(5);
+  73   1          latch(5);
   74   1      }
 
 

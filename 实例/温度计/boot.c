@@ -12,16 +12,16 @@ void boot_init()
     P7M0 = 0x00; P7M1 = 0x00; 
 
     P0 = 0xFF;
-    batch(4);
-    batch(0);
+    latch(4);
+    latch(0);
 
     P0 = 0xFF;
-    batch(6);
-    batch(0);
+    latch(6);
+    latch(0);
 
     P0 = 0xAF;
-    batch(5);
-    batch(0);
+    latch(5);
+    latch(0);
 
     Timer2_Init();
     EA = 1;
@@ -37,7 +37,7 @@ void Timer2_Init()		//1毫秒@12.000MHz
 	IE2 |= 0x04;			//使能定时器2中断
 }
 
-void batch(uchar i)
+void latch(uchar i)
 {
     switch (i)
     {

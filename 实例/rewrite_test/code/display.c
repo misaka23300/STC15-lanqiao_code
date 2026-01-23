@@ -88,7 +88,7 @@ void seg_display()
     if (last != now)
     {
         P0 = ~now;
-        batch(4);
+        latch(4);
 
         last = now;
     }
@@ -115,7 +115,7 @@ void relay(bit state)
     if (randz_now != randz_last)
     {
         P0 = randz_now;
-        batch(5);
+        latch(5);
         randz_last = randz_now;
     }
 }
@@ -137,7 +137,7 @@ void buzz(bit state)
     if (randz_now != randz_last)
     {
         P0 = randz_now;
-        batch(5);
+        latch(5);
         randz_last = randz_now;
     }
 }
