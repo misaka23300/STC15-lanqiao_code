@@ -1,0 +1,24 @@
+".\Objects\croutine.obj",
+".\Objects\event_groups.obj",
+".\Objects\list.obj",
+".\Objects\queue.obj",
+".\Objects\stream_buffer.obj",
+".\Objects\tasks.obj",
+".\Objects\timers.obj",
+".\Objects\port.obj",
+".\Objects\heap_1.obj",
+".\Objects\main.obj",
+".\Objects\adc.obj",
+".\Objects\adckey.obj",
+".\Objects\display.obj",
+".\Objects\rtc.obj",
+".\Objects\DebugPrintf.obj",
+".\Objects\putchar.obj",
+".\Objects\uart2_3.obj",
+".\Objects\MatrixKey.obj",
+".\Objects\ntc.obj" 
+TO ".\Objects\FreeRTOS_Demo" 
+PRINT(".\Listings\FreeRTOS_Demo.map") CASE DISABLEWARNING (16, 57) 
+REMOVEUNUSED 
+CLASSES (EDATA (0x0-0xFFF), 
+HDATA (0x0-0xFFF)) 

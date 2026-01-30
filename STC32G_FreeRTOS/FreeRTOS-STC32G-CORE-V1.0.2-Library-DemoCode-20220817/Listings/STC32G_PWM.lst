@@ -1,0 +1,720 @@
+C251 COMPILER V5.60.0,  STC32G_PWM                                                         30/01/26  13:24:45  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE STC32G_PWM
+OBJECT MODULE PLACED IN .\Objects\STC32G_PWM.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE Sources\Driver\src\STC32G_PWM.c XSMALL FUNCTIONS(REENTRANT) OPTIMIZE(4
+                    -,SPEED) BROWSE INCDIR(.\Sources\User;.\Sources\User\include;.\Sources\FreeRTOS\include;.\Sources\FreeRTOS\portable\STC32
+                    -G12K128;.\Sources\Driver\inc;.\Sources\Task\inc) DEBUG PRINT(.\Listings\STC32G_PWM.lst) TABS(2) OBJECT(.\Objects\STC32G_
+                    -PWM.obj) 
+
+stmt  level    source
+
+    1          /*---------------------------------------------------------------------*/
+    2          /* --- STC MCU Limited ------------------------------------------------*/
+    3          /* --- STC 1T Series MCU Demo Programme -------------------------------*/
+    4          /* --- Mobile: (86)13922805190 ----------------------------------------*/
+    5          /* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
+    6          /* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+    7          /* --- Web: www.STCMCU.com --------------------------------------------*/
+    8          /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
+    9          /* --- QQ:  800003751 -------------------------------------------------*/
+   10          /* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+   11          /*---------------------------------------------------------------------*/
+   12          
+   13          #include "STC32G_PWM.h"
+   14          
+   15          //========================================================================
+   16          // 函数: PWM_Configuration
+   17          // 描述: PWM初始化程序.
+   18          // 参数: PWMx: 结构参数,请参考PWM.h里的定义.
+   19          // 返回: 成功返回 SUCCESS, 错误返回 FAIL.
+   20          // 版本: V1.0, 2012-10-22
+   21          //========================================================================
+   22          uint8_t PWM_Configuration(uint8_t PWM, PWMx_InitDefine *PWMx)
+   23          {
+   24   1        if(PWM == PWM1)
+   25   1        {
+   26   2          PWMA_CC1E_Disable();    //关闭输入捕获/比较输出
+   27   2          PWMA_CC1NE_Disable();   //关闭比较输出
+   28   2          PWMA_CC1S_Direction(CCAS_OUTPUT);   //CCnS仅在通道关闭时才是可写的
+   29   2          PWMA_OC1ModeSet(PWMx->PWM_Mode);    //设置输出比较模式
+   30   2      
+   31   2          if(PWMx->PWM_EnoSelect & ENO1P)
+   32   2          {
+   33   3            PWMA_CC1E_Enable();     //开启输入捕获/比较输出
+   34   3            PWMA_ENO |= ENO1P;
+   35   3          }
+   36   2          else
+   37   2          {
+   38   3            PWMA_CC1E_Disable();    //关闭输入捕获/比较输出
+   39   3            PWMA_ENO &= ~ENO1P;
+   40   3          }
+   41   2          if(PWMx->PWM_EnoSelect & ENO1N)
+   42   2          {
+   43   3            PWMA_CC1NE_Enable();    //开启输入捕获/比较输出
+   44   3            PWMA_ENO |= ENO1N;
+   45   3          }
+   46   2          else
+   47   2          {
+   48   3            PWMA_CC1NE_Disable();   //关闭输入捕获/比较输出
+   49   3            PWMA_ENO &= ~ENO1N;
+   50   3          }
+   51   2          
+   52   2          PWMA_Duty1(PWMx->PWM_Duty);
+   53   2          return  SUCCESS;
+   54   2        }
+   55   1        
+   56   1        if(PWM == PWM2)
+C251 COMPILER V5.60.0,  STC32G_PWM                                                         30/01/26  13:24:45  PAGE 2   
+
+   57   1        {
+   58   2          PWMA_CC2E_Disable();    //关闭输入捕获/比较输出
+   59   2          PWMA_CC2NE_Disable();   //关闭比较输出
+   60   2          PWMA_CC2S_Direction(CCAS_OUTPUT);   //CCnS仅在通道关闭时才是可写的
+   61   2          PWMA_OC2ModeSet(PWMx->PWM_Mode);    //设置输出比较模式
+   62   2      
+   63   2          if(PWMx->PWM_EnoSelect & ENO2P)
+   64   2          {
+   65   3            PWMA_CC2E_Enable();     //开启输入捕获/比较输出
+   66   3            PWMA_ENO |= ENO2P;
+   67   3          }
+   68   2          else
+   69   2          {
+   70   3            PWMA_CC2E_Disable();    //关闭输入捕获/比较输出
+   71   3            PWMA_ENO &= ~ENO2P;
+   72   3          }
+   73   2          if(PWMx->PWM_EnoSelect & ENO2N)
+   74   2          {
+   75   3            PWMA_CC2NE_Enable();    //开启输入捕获/比较输出
+   76   3            PWMA_ENO |= ENO2N;
+   77   3          }
+   78   2          else
+   79   2          {
+   80   3            PWMA_CC2NE_Disable();   //关闭输入捕获/比较输出
+   81   3            PWMA_ENO &= ~ENO2N;
+   82   3          }
+   83   2          
+   84   2          PWMA_Duty2(PWMx->PWM_Duty);
+   85   2          return  SUCCESS;
+   86   2        }
+   87   1        
+   88   1        if(PWM == PWM3)
+   89   1        {
+   90   2          PWMA_CC3E_Disable();    //关闭输入捕获/比较输出
+   91   2          PWMA_CC3NE_Disable();   //关闭比较输出
+   92   2          PWMA_CC3S_Direction(CCAS_OUTPUT);   //CCnS仅在通道关闭时才是可写的
+   93   2          PWMA_OC3ModeSet(PWMx->PWM_Mode);    //设置输出比较模式
+   94   2      
+   95   2          if(PWMx->PWM_EnoSelect & ENO3P)
+   96   2          {
+   97   3            PWMA_CC3E_Enable();     //开启输入捕获/比较输出
+   98   3            PWMA_ENO |= ENO3P;
+   99   3          }
+  100   2          else
+  101   2          {
+  102   3            PWMA_CC3E_Disable();    //关闭输入捕获/比较输出
+  103   3            PWMA_ENO &= ~ENO3P;
+  104   3          }
+  105   2          if(PWMx->PWM_EnoSelect & ENO3N)
+  106   2          {
+  107   3            PWMA_CC3NE_Enable();    //开启输入捕获/比较输出
+  108   3            PWMA_ENO |= ENO3N;
+  109   3          }
+  110   2          else
+  111   2          {
+  112   3            PWMA_CC3NE_Disable();   //关闭输入捕获/比较输出
+  113   3            PWMA_ENO &= ~ENO3N;
+  114   3          }
+  115   2          
+  116   2          PWMA_Duty3(PWMx->PWM_Duty);
+  117   2          return  SUCCESS;
+  118   2        }
+  119   1        
+  120   1        if(PWM == PWM4)
+  121   1        {
+  122   2          PWMA_CC4E_Disable();    //关闭输入捕获/比较输出
+C251 COMPILER V5.60.0,  STC32G_PWM                                                         30/01/26  13:24:45  PAGE 3   
+
+  123   2          PWMA_CC4NE_Disable();   //关闭比较输出
+  124   2          PWMA_CC4S_Direction(CCAS_OUTPUT);   //CCnS仅在通道关闭时才是可写的
+  125   2          PWMA_OC4ModeSet(PWMx->PWM_Mode);    //设置输出比较模式
+  126   2      
+  127   2          if(PWMx->PWM_EnoSelect & ENO4P)
+  128   2          {
+  129   3            PWMA_CC4E_Enable();     //开启输入捕获/比较输出
+  130   3            PWMA_ENO |= ENO4P;
+  131   3          }
+  132   2          else
+  133   2          {
+  134   3            PWMA_CC4E_Disable();    //关闭输入捕获/比较输出
+  135   3            PWMA_ENO &= ~ENO4P;
+  136   3          }
+  137   2          if(PWMx->PWM_EnoSelect & ENO4N)
+  138   2          {
+  139   3            PWMA_CC4NE_Enable();    //开启输入捕获/比较输出
+  140   3            PWMA_ENO |= ENO4N;
+  141   3          }
+  142   2          else
+  143   2          {
+  144   3            PWMA_CC4NE_Disable();   //关闭输入捕获/比较输出
+  145   3            PWMA_ENO &= ~ENO4N;
+  146   3          }
+  147   2          
+  148   2          PWMA_Duty4(PWMx->PWM_Duty);
+  149   2          return  SUCCESS;
+  150   2        }
+  151   1        
+  152   1        if(PWM == PWMA)
+  153   1        {
+  154   2      //    PWMA_OC1_ReloadEnable(PWMx->PWM_Reload);  //输出比较的预装载使能
+  155   2      //    PWMA_OC1_FastEnable(PWMx->PWM_Fast);    //输出比较快速功能使能
+  156   2      //    PWMA_CCPCAPreloaded(PWMx->PWM_PreLoad); //捕获/比较预装载控制位(该位只对具有互补输出的通道起作用)
+  157   2      //    PWMA_BrakeEnable(PWMx->PWM_BrakeEnable);  //开启/禁止刹车输入
+  158   2      
+  159   2          PWMA_DeadTime(PWMx->PWM_DeadTime);  //死区发生器设置
+  160   2          PWMA_AutoReload(PWMx->PWM_Period);  //周期设置
+  161   2          PWMA_BrakeOutputEnable(PWMx->PWM_MainOutEnable);  //主输出使能
+  162   2          PWMA_CEN_Enable(PWMx->PWM_CEN_Enable);  //使能计数器
+  163   2          return  SUCCESS;
+  164   2        }
+  165   1      
+  166   1        if(PWM == PWM5)
+  167   1        {
+  168   2          PWMB_CC5E_Disable();    //关闭输入捕获/比较输出
+  169   2          PWMB_CC5S_Direction(CCAS_OUTPUT);   //CCnS仅在通道关闭时才是可写的
+  170   2          PWMB_OC5ModeSet(PWMx->PWM_Mode);    //设置输出比较模式
+  171   2      
+  172   2          if(PWMx->PWM_EnoSelect & ENO5P)
+  173   2          {
+  174   3            PWMB_CC5E_Enable();     //开启输入捕获/比较输出
+  175   3            PWMB_ENO |= ENO5P;
+  176   3          }
+  177   2          else
+  178   2          {
+  179   3            PWMB_CC5E_Disable();    //关闭输入捕获/比较输出
+  180   3            PWMB_ENO &= ~ENO5P;
+  181   3          }
+  182   2          
+  183   2          PWMB_Duty5(PWMx->PWM_Duty);
+  184   2          return  SUCCESS;
+  185   2        }
+  186   1        
+  187   1        if(PWM == PWM6)
+  188   1        {
+C251 COMPILER V5.60.0,  STC32G_PWM                                                         30/01/26  13:24:45  PAGE 4   
+
+  189   2          PWMB_CC6E_Disable();    //关闭输入捕获/比较输出
+  190   2          PWMB_CC6S_Direction(CCAS_OUTPUT);   //CCnS仅在通道关闭时才是可写的
+  191   2          PWMB_OC6ModeSet(PWMx->PWM_Mode);    //设置输出比较模式
+  192   2      
+  193   2          if(PWMx->PWM_EnoSelect & ENO6P)
+  194   2          {
+  195   3            PWMB_CC6E_Enable();     //开启输入捕获/比较输出
+  196   3            PWMB_ENO |= ENO6P;
+  197   3          }
+  198   2          else
+  199   2          {
+  200   3            PWMB_CC6E_Disable();    //关闭输入捕获/比较输出
+  201   3            PWMB_ENO &= ~ENO6P;
+  202   3          }
+  203   2          
+  204   2          PWMB_Duty6(PWMx->PWM_Duty);
+  205   2          return  SUCCESS;
+  206   2        }
+  207   1        
+  208   1        if(PWM == PWM7)
+  209   1        {
+  210   2          PWMB_CC7E_Disable();    //关闭输入捕获/比较输出
+  211   2          PWMB_CC7S_Direction(CCAS_OUTPUT);   //CCnS仅在通道关闭时才是可写的
+  212   2          PWMB_OC7ModeSet(PWMx->PWM_Mode);    //设置输出比较模式
+  213   2      
+  214   2          if(PWMx->PWM_EnoSelect & ENO7P)
+  215   2          {
+  216   3            PWMB_CC7E_Enable();     //开启输入捕获/比较输出
+  217   3            PWMB_ENO |= ENO7P;
+  218   3          }
+  219   2          else
+  220   2          {
+  221   3            PWMB_CC7E_Disable();    //关闭输入捕获/比较输出
+  222   3            PWMB_ENO &= ~ENO7P;
+  223   3          }
+  224   2          
+  225   2          PWMB_Duty7(PWMx->PWM_Duty);
+  226   2          return  SUCCESS;
+  227   2        }
+  228   1        
+  229   1        if(PWM == PWM8)
+  230   1        {
+  231   2          PWMB_CC8E_Disable();    //关闭输入捕获/比较输出
+  232   2          PWMB_CC8S_Direction(CCAS_OUTPUT);   //CCnS仅在通道关闭时才是可写的
+  233   2          PWMB_OC8ModeSet(PWMx->PWM_Mode);    //设置输出比较模式
+  234   2      
+  235   2          if(PWMx->PWM_EnoSelect & ENO8P)
+  236   2          {
+  237   3            PWMB_CC8E_Enable();     //开启输入捕获/比较输出
+  238   3            PWMB_ENO |= ENO8P;
+  239   3          }
+  240   2          else
+  241   2          {
+  242   3            PWMB_CC8E_Disable();    //关闭输入捕获/比较输出
+  243   3            PWMB_ENO &= ~ENO8P;
+  244   3          }
+  245   2          
+  246   2          PWMB_Duty8(PWMx->PWM_Duty);
+  247   2          return  SUCCESS;
+  248   2        }
+  249   1        
+  250   1        if(PWM == PWMB)
+  251   1        {
+  252   2      //    PWMB_OC5_ReloadEnable(PWMx->PWM_Reload);  //输出比较的预装载使能
+  253   2      //    PWMB_OC5_FastEnable(PWMx->PWM_Fast);    //输出比较快速功能使能
+  254   2      //    PWMB_CCPCBPreloaded(PWMx->PWM_PreLoad); //捕获/比较预装载控制位(该位只对具有互补输出的通道起作用)
+C251 COMPILER V5.60.0,  STC32G_PWM                                                         30/01/26  13:24:45  PAGE 5   
+
+  255   2      //    PWMB_BrakeEnable(PWMx->PWM_BrakeEnable);  //开启/禁止刹车输入
+  256   2      
+  257   2          PWMB_DeadTime(PWMx->PWM_DeadTime);  //死区发生器设置
+  258   2          PWMB_AutoReload(PWMx->PWM_Period);  //周期设置
+  259   2          PWMB_BrakeOutputEnable(PWMx->PWM_MainOutEnable);  //主输出使能
+  260   2          PWMB_CEN_Enable(PWMx->PWM_CEN_Enable);  //使能计数器
+  261   2          return  SUCCESS;
+  262   2        }
+  263   1      
+  264   1        return  FAIL; //错误
+  265   1      }
+  266          
+  267          //========================================================================
+  268          // 函数: UpdatePwm
+  269          // 描述: PWM占空比更新程序.
+  270          // 参数: PWM: PWM通道/组号, PWMx结构参数,请参考PWM.h里的定义.
+  271          // 返回: none.
+  272          // 版本: V1.0, 2012-10-22
+  273          //========================================================================
+  274          void UpdatePwm(uint8_t PWM, PWMx_Duty *PWMx)
+  275          {
+  276   1        switch(PWM)
+  277   1        {
+  278   2          case PWM1:
+  279   2            PWMA_Duty1(PWMx->PWM1_Duty);
+  280   2          break;
+  281   2      
+  282   2          case PWM2:
+  283   2            PWMA_Duty2(PWMx->PWM2_Duty);
+  284   2          break;
+  285   2      
+  286   2          case PWM3:
+  287   2            PWMA_Duty3(PWMx->PWM3_Duty);
+  288   2          break;
+  289   2      
+  290   2          case PWM4:
+  291   2            PWMA_Duty4(PWMx->PWM4_Duty);
+  292   2          break;
+  293   2      
+  294   2          case PWM5:
+  295   2            PWMB_Duty5(PWMx->PWM5_Duty);
+  296   2          break;
+  297   2      
+  298   2          case PWM6:
+  299   2            PWMB_Duty6(PWMx->PWM6_Duty);
+  300   2          break;
+  301   2      
+  302   2          case PWM7:
+  303   2            PWMB_Duty7(PWMx->PWM7_Duty);
+  304   2          break;
+  305   2      
+  306   2          case PWM8:
+  307   2            PWMB_Duty8(PWMx->PWM8_Duty);
+  308   2          break;
+  309   2      
+  310   2          case PWMA:
+  311   2            PWMA_Duty1(PWMx->PWM1_Duty);
+  312   2            PWMA_Duty2(PWMx->PWM2_Duty);
+  313   2            PWMA_Duty3(PWMx->PWM3_Duty);
+  314   2            PWMA_Duty4(PWMx->PWM4_Duty);
+  315   2          break;
+  316   2      
+  317   2          case PWMB:
+  318   2            PWMB_Duty5(PWMx->PWM5_Duty);
+  319   2            PWMB_Duty6(PWMx->PWM6_Duty);
+  320   2            PWMB_Duty7(PWMx->PWM7_Duty);
+C251 COMPILER V5.60.0,  STC32G_PWM                                                         30/01/26  13:24:45  PAGE 6   
+
+  321   2            PWMB_Duty8(PWMx->PWM8_Duty);
+  322   2          break;
+  323   2        }
+  324   1      }
+  325          
+  326          //========================================================================
+  327          // 函数: ReadPWMA(void)
+  328          // 描述: 异步读取PWMA特殊功能寄存器函数. 
+  329          // 参数: addr: 读取特殊功能寄存器地址.
+  330          // 返回: dat:  读取特殊功能寄存器内容.
+  331          // 版本: V1.0, 2022-03-16
+  332          //========================================================================
+  333          uint8_t ReadPWMA(uint8_t addr)
+  334          {
+  335   1        uint8_t dat;
+  336   1        
+  337   1        while (HSPWMA_ADR & 0x80); //等待前一个异步读写完成
+  338   1        HSPWMA_ADR = addr | 0x80;  //设置间接访问地址,只需要设置原XFR地址的低7位
+  339   1                      //HSPWMA_ADDR寄存器的最高位写1,表示读数据
+  340   1        while (HSPWMA_ADR & 0x80); //等待当前异步读取完成
+  341   1        dat = HSPWMA_DAT;      //读取异步数据
+  342   1        
+  343   1        return dat;
+  344   1      }
+  345          
+  346          //========================================================================
+  347          // 函数: ReadPWMB(void)
+  348          // 描述: 异步读取PWMB特殊功能寄存器函数. 
+  349          // 参数: addr: 读取特殊功能寄存器地址.
+  350          // 返回: dat:  读取特殊功能寄存器内容.
+  351          // 版本: V1.0, 2022-03-16
+  352          //========================================================================
+  353          uint8_t ReadPWMB(uint8_t addr)
+  354          {
+  355   1        uint8_t dat;
+  356   1        
+  357   1        while (HSPWMB_ADR & 0x80); //等待前一个异步读写完成
+  358   1        HSPWMB_ADR = addr | 0x80;  //设置间接访问地址,只需要设置原XFR地址的低7位
+  359   1                      //HSPWMB_ADDR寄存器的最高位写1,表示读数据
+  360   1        while (HSPWMB_ADR & 0x80); //等待当前异步读取完成
+  361   1        dat = HSPWMB_DAT;      //读取异步数据
+  362   1        
+  363   1        return dat;
+  364   1      }
+  365          
+  366          //========================================================================
+  367          // 函数: WritePWMA(void)
+  368          // 描述: 异步读取PWMA特殊功能寄存器函数. 
+  369          // 参数: addr: 写入特殊功能寄存器地址.
+  370          // 参数: dat:  写入特殊功能寄存器内容.
+  371          // 返回: none.
+  372          // 版本: V1.0, 2022-03-16
+  373          //========================================================================
+  374          void WritePWMA(uint8_t  addr, uint8_t dat)
+  375          {
+  376   1        while (HSPWMA_ADR & 0x80); //等待前一个异步读写完成
+  377   1        HSPWMA_DAT = dat;      //准备需要写入的数据
+  378   1        HSPWMA_ADR = addr & 0x7f;  //设置间接访问地址,只需要设置原XFR地址的低7位
+  379   1                      //HSPWMA_ADDR寄存器的最高位写0,表示写数据
+  380   1      }
+  381          
+  382          //========================================================================
+  383          // 函数: WritePWMB(void)
+  384          // 描述: 异步读取PWMB特殊功能寄存器函数. 
+  385          // 参数: addr: 写入特殊功能寄存器地址.
+  386          // 参数: dat:  写入特殊功能寄存器内容.
+C251 COMPILER V5.60.0,  STC32G_PWM                                                         30/01/26  13:24:45  PAGE 7   
+
+  387          // 返回: none.
+  388          // 版本: V1.0, 2022-03-16
+  389          //========================================================================
+  390          void WritePWMB(uint8_t  addr, uint8_t dat)
+  391          {
+  392   1        while (HSPWMB_ADR & 0x80); //等待前一个异步读写完成
+  393   1        HSPWMB_DAT = dat;      //准备需要写入的数据
+  394   1        HSPWMB_ADR = addr & 0x7f;  //设置间接访问地址,只需要设置原XFR地址的低7位
+  395   1                      //HSPWMB_ADDR寄存器的最高位写0,表示写数据
+  396   1      }
+  397          
+  398          //========================================================================
+  399          // 函数: HSPWM_Configuration
+  400          // 描述: HSPWM初始化程序.
+  401          // 参数: PWMx: 结构参数,请参考PWM.h里的定义.
+  402          // 返回: 成功返回 SUCCESS, 错误返回 FAIL.
+  403          // 版本: V1.0, 2022-04-05
+  404          //========================================================================
+  405          void HSPWM_Configuration(uint8_t PWM, HSPWMx_InitDefine *PWMx, PWMx_Duty *DUTYx)
+  406          {
+  407   1        uint8_t tmpENO,tmpCCER1,tmpCCER2;
+  408   1        
+  409   1        if(PWM == PWMA)
+  410   1        {
+  411   2          HSPWMA_CFG = 0x03;      //使能PWMA相关寄存器异步访问功能
+  412   2      
+  413   2          if(PWMx->PWM_EnoSelect & ENO1P)
+  414   2          {
+  415   3            tmpENO |= ENO1P;
+  416   3            tmpCCER1 |= 0x01;
+  417   3          }
+  418   2          else
+  419   2          {
+  420   3            tmpENO &= ~ENO1P;
+  421   3            tmpCCER1 &= ~0x01;
+  422   3          }
+  423   2          if(PWMx->PWM_EnoSelect & ENO1N)
+  424   2          {
+  425   3            tmpENO |= ENO1N;
+  426   3            tmpCCER1 |= 0x04;
+  427   3          }
+  428   2          else
+  429   2          {
+  430   3            tmpENO &= ~ENO1N;
+  431   3            tmpCCER1 &= ~0x04;
+  432   3          }
+  433   2          if(PWMx->PWM_EnoSelect & ENO2P)
+  434   2          {
+  435   3            tmpENO |= ENO2P;
+  436   3            tmpCCER1 |= 0x10;
+  437   3          }
+  438   2          else
+  439   2          {
+  440   3            tmpENO &= ~ENO2P;
+  441   3            tmpCCER1 &= ~0x10;
+  442   3          }
+  443   2          if(PWMx->PWM_EnoSelect & ENO2N)
+  444   2          {
+  445   3            tmpENO |= ENO2N;
+  446   3            tmpCCER1 |= 0x40;
+  447   3          }
+  448   2          else
+  449   2          {
+  450   3            tmpENO &= ~ENO2N;
+  451   3            tmpCCER1 &= ~0x40;
+  452   3          }
+C251 COMPILER V5.60.0,  STC32G_PWM                                                         30/01/26  13:24:45  PAGE 8   
+
+  453   2          if(PWMx->PWM_EnoSelect & ENO3P)
+  454   2          {
+  455   3            tmpENO |= ENO3P;
+  456   3            tmpCCER2 |= 0x01;
+  457   3          }
+  458   2          else
+  459   2          {
+  460   3            tmpENO &= ~ENO3P;
+  461   3            tmpCCER2 &= ~0x01;
+  462   3          }
+  463   2          if(PWMx->PWM_EnoSelect & ENO3N)
+  464   2          {
+  465   3            tmpENO |= ENO3N;
+  466   3            tmpCCER2 |= 0x04;
+  467   3          }
+  468   2          else
+  469   2          {
+  470   3            tmpENO &= ~ENO3N;
+  471   3            tmpCCER2 &= ~0x04;
+  472   3          }
+  473   2          if(PWMx->PWM_EnoSelect & ENO4P)
+  474   2          {
+  475   3            tmpENO |= ENO4P;
+  476   3            tmpCCER2 |= 0x10;
+  477   3          }
+  478   2          else
+  479   2          {
+  480   3            tmpENO &= ~ENO4P;
+  481   3            tmpCCER2 &= ~0x10;
+  482   3          }
+  483   2          if(PWMx->PWM_EnoSelect & ENO4N)
+  484   2          {
+  485   3            tmpENO |= ENO4N;
+  486   3            tmpCCER2 |= 0x40;
+  487   3          }
+  488   2          else
+  489   2          {
+  490   3            tmpENO &= ~ENO4N;
+  491   3            tmpCCER2 &= ~0x40;
+  492   3          }
+  493   2          
+  494   2          //通过异步方式设置PWMA的相关寄存器
+  495   2          WritePWMA((uint8_t)&PWMA_CCER1, 0x00);
+  496   2          WritePWMA((uint8_t)&PWMA_CCER2, 0x00);
+  497   2          WritePWMA((uint8_t)&PWMA_CCMR1, CCMRn_PWM_MODE1);     //通道模式配置
+  498   2          WritePWMA((uint8_t)&PWMA_CCMR2, CCMRn_PWM_MODE1);
+  499   2          WritePWMA((uint8_t)&PWMA_CCMR3, CCMRn_PWM_MODE1);
+  500   2          WritePWMA((uint8_t)&PWMA_CCMR4, CCMRn_PWM_MODE1);
+  501   2          WritePWMA((uint8_t)&PWMA_CCER1, tmpCCER1);      //配置通道输出使能和极性
+  502   2          WritePWMA((uint8_t)&PWMA_CCER2, tmpCCER2);
+  503   2          WritePWMA((uint8_t)&PWMA_ENO, tmpENO);  //使能PWM信号输出端口
+  504   2          WritePWMA((uint8_t)&PWMA_CCR1H, (uint8_t)(DUTYx->PWM1_Duty >> 8));  //设置输出PWM的占空比
+  505   2          WritePWMA((uint8_t)&PWMA_CCR1L, (uint8_t)DUTYx->PWM1_Duty);
+  506   2          WritePWMA((uint8_t)&PWMA_CCR2H, (uint8_t)(DUTYx->PWM2_Duty >> 8));  //设置输出PWM的占空比
+  507   2          WritePWMA((uint8_t)&PWMA_CCR2L, (uint8_t)DUTYx->PWM2_Duty);
+  508   2          WritePWMA((uint8_t)&PWMA_CCR3H, (uint8_t)(DUTYx->PWM3_Duty >> 8));  //设置输出PWM的占空比
+  509   2          WritePWMA((uint8_t)&PWMA_CCR3L, (uint8_t)DUTYx->PWM3_Duty);
+  510   2          WritePWMA((uint8_t)&PWMA_CCR4H, (uint8_t)(DUTYx->PWM4_Duty >> 8));  //设置输出PWM的占空比
+  511   2          WritePWMA((uint8_t)&PWMA_CCR4L, (uint8_t)DUTYx->PWM4_Duty);
+  512   2          WritePWMA((uint8_t)&PWMA_ARRH,  (uint8_t)(PWMx->PWM_Period >> 8));  //设置输出PWM的周期
+  513   2          WritePWMA((uint8_t)&PWMA_ARRL,  (uint8_t)(PWMx->PWM_Period));
+  514   2          WritePWMA((uint8_t)&PWMA_DTR, PWMx->PWM_DeadTime);          //设置互补对称输出PWM的死区
+  515   2          WritePWMA((uint8_t)&PWMA_BRK, PWMx->PWM_MainOutEnable<<7);  //使能主输出
+  516   2          WritePWMA((uint8_t)&PWMA_CR1, PWMx->PWM_CEN_Enable);        //开始PWM计数
+  517   2        }
+  518   1        else if(PWM == PWMB)
+C251 COMPILER V5.60.0,  STC32G_PWM                                                         30/01/26  13:24:45  PAGE 9   
+
+  519   1        {
+  520   2          HSPWMB_CFG = 0x03;      //使能PWMB相关寄存器异步访问功能
+  521   2      
+  522   2          if(PWMx->PWM_EnoSelect & ENO5P)
+  523   2          {
+  524   3            tmpENO |= ENO5P;
+  525   3            tmpCCER1 |= 0x01;
+  526   3          }
+  527   2          else
+  528   2          {
+  529   3            tmpENO &= ~ENO5P;
+  530   3            tmpCCER1 &= ~0x01;
+  531   3          }
+  532   2          if(PWMx->PWM_EnoSelect & ENO6P)
+  533   2          {
+  534   3            tmpENO |= ENO6P;
+  535   3            tmpCCER1 |= 0x10;
+  536   3          }
+  537   2          else
+  538   2          {
+  539   3            tmpENO &= ~ENO6P;
+  540   3            tmpCCER1 &= ~0x10;
+  541   3          }
+  542   2          if(PWMx->PWM_EnoSelect & ENO7P)
+  543   2          {
+  544   3            tmpENO |= ENO7P;
+  545   3            tmpCCER2 |= 0x01;
+  546   3          }
+  547   2          else
+  548   2          {
+  549   3            tmpENO &= ~ENO7P;
+  550   3            tmpCCER2 &= ~0x01;
+  551   3          }
+  552   2          if(PWMx->PWM_EnoSelect & ENO8P)
+  553   2          {
+  554   3            tmpENO |= ENO8P;
+  555   3            tmpCCER2 |= 0x10;
+  556   3          }
+  557   2          else
+  558   2          {
+  559   3            tmpENO &= ~ENO8P;
+  560   3            tmpCCER2 &= ~0x10;
+  561   3          }
+  562   2          
+  563   2          //通过异步方式设置PWMA的相关寄存器
+  564   2          WritePWMB((uint8_t)&PWMB_CCER1, 0x00);
+  565   2          WritePWMB((uint8_t)&PWMB_CCER2, 0x00);
+  566   2          WritePWMB((uint8_t)&PWMB_CCMR1, CCMRn_PWM_MODE1);     //通道模式配置
+  567   2          WritePWMB((uint8_t)&PWMB_CCMR2, CCMRn_PWM_MODE1);
+  568   2          WritePWMB((uint8_t)&PWMB_CCMR3, CCMRn_PWM_MODE1);
+  569   2          WritePWMB((uint8_t)&PWMB_CCMR4, CCMRn_PWM_MODE1);
+  570   2          WritePWMB((uint8_t)&PWMB_CCER1, tmpCCER1);      //配置通道输出使能和极性
+  571   2          WritePWMB((uint8_t)&PWMB_CCER2, tmpCCER2);
+  572   2          WritePWMB((uint8_t)&PWMB_ENO, tmpENO);  //使能PWM信号输出端口
+  573   2          WritePWMB((uint8_t)&PWMB_CCR5H, (uint8_t)(DUTYx->PWM5_Duty >> 8));  //设置输出PWM的占空比
+  574   2          WritePWMB((uint8_t)&PWMB_CCR5L, (uint8_t)DUTYx->PWM5_Duty);
+  575   2          WritePWMB((uint8_t)&PWMB_CCR6H, (uint8_t)(DUTYx->PWM6_Duty >> 8));  //设置输出PWM的占空比
+  576   2          WritePWMB((uint8_t)&PWMB_CCR6L, (uint8_t)DUTYx->PWM6_Duty);
+  577   2          WritePWMB((uint8_t)&PWMB_CCR7H, (uint8_t)(DUTYx->PWM7_Duty >> 8));  //设置输出PWM的占空比
+  578   2          WritePWMB((uint8_t)&PWMB_CCR7L, (uint8_t)DUTYx->PWM7_Duty);
+  579   2          WritePWMB((uint8_t)&PWMB_CCR8H, (uint8_t)(DUTYx->PWM8_Duty >> 8));  //设置输出PWM的占空比
+  580   2          WritePWMB((uint8_t)&PWMB_CCR8L, (uint8_t)DUTYx->PWM8_Duty);
+  581   2          WritePWMB((uint8_t)&PWMB_ARRH,  (uint8_t)(PWMx->PWM_Period >> 8));  //设置输出PWM的周期
+  582   2          WritePWMB((uint8_t)&PWMB_ARRL,  (uint8_t)(PWMx->PWM_Period));
+  583   2          WritePWMB((uint8_t)&PWMB_DTR, PWMx->PWM_DeadTime);          //设置互补对称输出PWM的死区
+  584   2          WritePWMB((uint8_t)&PWMB_BRK, PWMx->PWM_MainOutEnable<<7);  //使能主输出
+C251 COMPILER V5.60.0,  STC32G_PWM                                                         30/01/26  13:24:45  PAGE 10  
+
+  585   2          WritePWMB((uint8_t)&PWMB_CR1, PWMx->PWM_CEN_Enable);        //开始PWM计数
+  586   2        }
+  587   1      }
+  588          
+  589          //========================================================================
+  590          // 函数: UpdateHSPwm
+  591          // 描述: HSPWM占空比更新程序.
+  592          // 参数: PWM: PWM通道/组号, PWMx结构参数,请参考PWM.h里的定义.
+  593          // 返回: none.
+  594          // 版本: V1.0, 2022-04-05
+  595          //========================================================================
+  596          void UpdateHSPwm(uint8_t PWM, PWMx_Duty *PWMx)
+  597          {
+  598   1        switch(PWM)
+  599   1        {
+  600   2          case PWM1:
+  601   2            WritePWMA((uint8_t)&PWMA_CCR1H, (uint8_t)(PWMx->PWM1_Duty >> 8)); //设置输出PWM的占空比
+  602   2            WritePWMA((uint8_t)&PWMA_CCR1L, (uint8_t)PWMx->PWM1_Duty);
+  603   2          break;
+  604   2      
+  605   2          case PWM2:
+  606   2            WritePWMA((uint8_t)&PWMA_CCR2H, (uint8_t)(PWMx->PWM2_Duty >> 8)); //设置输出PWM的占空比
+  607   2            WritePWMA((uint8_t)&PWMA_CCR2L, (uint8_t)PWMx->PWM2_Duty);
+  608   2          break;
+  609   2      
+  610   2          case PWM3:
+  611   2            WritePWMA((uint8_t)&PWMA_CCR3H, (uint8_t)(PWMx->PWM3_Duty >> 8)); //设置输出PWM的占空比
+  612   2            WritePWMA((uint8_t)&PWMA_CCR3L, (uint8_t)PWMx->PWM3_Duty);
+  613   2          break;
+  614   2      
+  615   2          case PWM4:
+  616   2            WritePWMA((uint8_t)&PWMA_CCR4H, (uint8_t)(PWMx->PWM4_Duty >> 8)); //设置输出PWM的占空比
+  617   2            WritePWMA((uint8_t)&PWMA_CCR4L, (uint8_t)PWMx->PWM4_Duty);
+  618   2          break;
+  619   2      
+  620   2          case PWM5:
+  621   2            WritePWMB((uint8_t)&PWMB_CCR5H, (uint8_t)(PWMx->PWM5_Duty >> 8)); //设置输出PWM的占空比
+  622   2            WritePWMB((uint8_t)&PWMB_CCR5L, (uint8_t)PWMx->PWM5_Duty);
+  623   2          break;
+  624   2      
+  625   2          case PWM6:
+  626   2            WritePWMB((uint8_t)&PWMB_CCR6H, (uint8_t)(PWMx->PWM6_Duty >> 8)); //设置输出PWM的占空比
+  627   2            WritePWMB((uint8_t)&PWMB_CCR6L, (uint8_t)PWMx->PWM6_Duty);
+  628   2          break;
+  629   2      
+  630   2          case PWM7:
+  631   2            WritePWMB((uint8_t)&PWMB_CCR7H, (uint8_t)(PWMx->PWM7_Duty >> 8)); //设置输出PWM的占空比
+  632   2            WritePWMB((uint8_t)&PWMB_CCR7L, (uint8_t)PWMx->PWM7_Duty);
+  633   2          break;
+  634   2      
+  635   2          case PWM8:
+  636   2            WritePWMB((uint8_t)&PWMB_CCR8H, (uint8_t)(PWMx->PWM8_Duty >> 8)); //设置输出PWM的占空比
+  637   2            WritePWMB((uint8_t)&PWMB_CCR8L, (uint8_t)PWMx->PWM8_Duty);
+  638   2          break;
+  639   2      
+  640   2          case PWMA:
+  641   2            WritePWMA((uint8_t)&PWMA_CCR1H, (uint8_t)(PWMx->PWM1_Duty >> 8)); //设置输出PWM的占空比
+  642   2            WritePWMA((uint8_t)&PWMA_CCR1L, (uint8_t)PWMx->PWM1_Duty);
+  643   2            WritePWMA((uint8_t)&PWMA_CCR2H, (uint8_t)(PWMx->PWM2_Duty >> 8)); //设置输出PWM的占空比
+  644   2            WritePWMA((uint8_t)&PWMA_CCR2L, (uint8_t)PWMx->PWM2_Duty);
+  645   2            WritePWMA((uint8_t)&PWMA_CCR3H, (uint8_t)(PWMx->PWM3_Duty >> 8)); //设置输出PWM的占空比
+  646   2            WritePWMA((uint8_t)&PWMA_CCR3L, (uint8_t)PWMx->PWM3_Duty);
+  647   2            WritePWMA((uint8_t)&PWMA_CCR4H, (uint8_t)(PWMx->PWM4_Duty >> 8)); //设置输出PWM的占空比
+  648   2            WritePWMA((uint8_t)&PWMA_CCR4L, (uint8_t)PWMx->PWM4_Duty);
+  649   2          break;
+  650   2      
+C251 COMPILER V5.60.0,  STC32G_PWM                                                         30/01/26  13:24:45  PAGE 11  
+
+  651   2          case PWMB:
+  652   2            WritePWMB((uint8_t)&PWMB_CCR5H, (uint8_t)(PWMx->PWM5_Duty >> 8)); //设置输出PWM的占空比
+  653   2            WritePWMB((uint8_t)&PWMB_CCR5L, (uint8_t)PWMx->PWM5_Duty);
+  654   2            WritePWMB((uint8_t)&PWMB_CCR6H, (uint8_t)(PWMx->PWM6_Duty >> 8)); //设置输出PWM的占空比
+  655   2            WritePWMB((uint8_t)&PWMB_CCR6L, (uint8_t)PWMx->PWM6_Duty);
+  656   2            WritePWMB((uint8_t)&PWMB_CCR7H, (uint8_t)(PWMx->PWM7_Duty >> 8)); //设置输出PWM的占空比
+  657   2            WritePWMB((uint8_t)&PWMB_CCR7L, (uint8_t)PWMx->PWM7_Duty);
+  658   2            WritePWMB((uint8_t)&PWMB_CCR8H, (uint8_t)(PWMx->PWM8_Duty >> 8)); //设置输出PWM的占空比
+  659   2            WritePWMB((uint8_t)&PWMB_CCR8L, (uint8_t)PWMx->PWM8_Duty);
+  660   2          break;
+  661   2        }
+  662   1      }
+  663          
+  664          /*********************************************************/
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =      3984     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,75 @@
+C251 COMPILER V5.60.0,  adc                                                                08/06/22  09:46:18  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE adc
+OBJECT MODULE PLACED IN .\Objects\adc.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE Sources\User\adc.c XSMALL OA FUNCTIONS(REENTRANT) BROWSE INCDIR(.\Sour
+                    -ces\User;.\Sources\User\include;.\Sources\FreeRTOS\include;.\Sources\FreeRTOS\portable\STC32G12K128) DEBUG PRINT(.\Listi
+                    -ngs\adc.lst) OBJECT(.\Objects\adc.obj) 
+
+stmt  level    source
+
+    1          #include "FreeRTOS.h"
+    2          #include "task.h"
+    3          
+    4          #include "adc.h"
+    5          
+    6          void vAdcInit( void )
+    7          {
+    8   1          ADCTIM = 0x3f;                                              //设置 ADC 内部时序，ADC采样时间建议设最大值
+    9   1          ADCCFG = 0x2f;                                              //设置 ADC 时钟为系统时钟/2/16/16
+   10   1          ADC_CONTR = 0x80;                                   //使能 ADC 模块
+   11   1      }
+   12          
+   13          //========================================================================
+   14          // 函数: uint16_t usAdcGetResult(uint8_t ucChannel)
+   15          // 描述: 查询法读一次ADC结果.
+   16          // 参数: ucChannel: 选择要转换的ADC.
+   17          // 返回: 12位ADC结果.
+   18          // 版本: V1.0, 2012-10-22
+   19          //========================================================================
+   20          uint16_t usAdcGetResult(uint8_t ucChannel)              //ucChannel:ADC通道,取值范围0~15
+   21          {
+   22   1          uint16_t usResult;
+   23   1      
+   24   1          ADC_RES = 0;
+   25   1          ADC_RESL = 0;
+   26   1      
+   27   1          ADC_CONTR = (ADC_CONTR & 0xF0) | 0x40 | ucChannel;  //启动 AD 转换
+   28   1          _nop_();
+   29   1          _nop_();
+   30   1          _nop_();
+   31   1          _nop_();
+   32   1      
+   33   1          while((ADC_CONTR & 0x20) == 0);                     //等待ADC转换结束
+   34   1          ADC_CONTR &= ~0x20;                                 //清除ADC结束标志
+   35   1          usResult = (((uint16_t)ADC_RES << 8) | ADC_RESL);
+   36   1      
+   37   1          return usResult;
+   38   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =        66     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+C251 COMPILER V5.60.0,  adc                                                                08/06/22  09:46:18  PAGE 2   
+
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

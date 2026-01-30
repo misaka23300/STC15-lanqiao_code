@@ -1,0 +1,1 @@
+"Sources\FreeRTOS\portable\STC32G12K128\port.c" XSMALL FUNCTIONS (REENTRANT) OPTIMIZE (4,SPEED) BROWSE INCDIR(.\Sources\User;.\Sources\User\include;.\Sources\FreeRTOS\include;.\Sources\FreeRTOS\portable\STC32G12K128;.\Sources\Driver\inc;.\Sources\Task\inc) DEBUG PRINT(.\Listings\port.lst) TABS (2) SRC (.\Objects\port.SRC)

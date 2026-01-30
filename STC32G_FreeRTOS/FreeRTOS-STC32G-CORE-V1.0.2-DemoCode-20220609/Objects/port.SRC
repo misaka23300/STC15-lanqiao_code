@@ -1,0 +1,896 @@
+$NOMACRO
+$MODSRC
+$MODEL(6)
+$CASE
+
+;
+; '.\Objects\port.SRC' generated from 'Sources\FreeRTOS\portable\STC32G12K128\port.c'
+; COMPILER INVOKED BY:
+;        C:\Keil_v5\C251\BIN\C251.EXE Sources\FreeRTOS\portable\STC32G12K128\port.c XSMALL OA FUNCTIONS(REENTRANT) BROWSE INCDIR(.\Sources\User;.\Sources\User\include;.\Sources\FreeRTOS\include;.\Sources\FreeRTOS\portable\STC32G12K128) DEBUG PRINT(.\Listings\port.lst) SRC(.\Objects\port.SRC) 
+;
+                NAME port
+
+        EXTRN         EDATA (pxCurrentTCB)
+        EXTRN         CODE : NEAR (xTaskIncrementTick?_)
+        EXTRN         CODE : NEAR (vTaskSwitchContext?_)
+        EXTRN         NUMBER (?C?CODESEG)
+
+    ?PR?VPORTYIELD?_?PORT  SEGMENT  CODE  
+    ?PR?VTIMER0ISR?_?PORT  SEGMENT  CODE  
+?PR?PXPORTINITIALISESTACK?_?PORT  SEGMENT  CODE  
+?PR?XPORTSTARTSCHEDULER?_?PORT  SEGMENT  CODE  
+?PR?VPORTENDSCHEDULER?_?PORT  SEGMENT  CODE  
+?PR?PRVPORTSETUPTIMERINTERRUPT?_?PORT  SEGMENT  CODE  
+                 ?DT?PORT  SEGMENT  DATA  
+
+        RSEG       ?DT?PORT
+            xPCB:  DSB  1
+            xPCH:  DSB  1
+            xPCL:  DSB  1
+
+
+;--- special function registers and bits:
+           T2_CT  BIT   08EH.3
+            P0M0  DATA  094H
+           SPDAT  DATA  0CFH
+           T1_CT  BIT   089H.6
+           PLINH  BIT   0F9H.3
+           T0_CT  BIT   089H.2
+         V33TRIM  DATA  0A3H
+            ?PSW  DATA  0D0H
+           LINDR  DATA  0FBH
+           PCMPH  BIT   0B6H.5
+           LINEN  BIT   097H.0
+           EAXFR  BIT   0BAH.7
+           LINAR  DATA  0FAH
+         IRCBAND  DATA  09DH
+             ?F0  BIT   0D0H.5
+           CMPOE  BIT   0E6H.1
+           CMPEN  BIT   0E6H.7
+           AUXR2  DATA  097H
+           LINIF  BIT   0F9H.2
+        IAP_TRIG  DATA  0C6H
+           LINIE  BIT   0F9H.1
+           CMPIF  BIT   0E6H.6
+           SADDR  DATA  0A9H
+           CKCON  DATA  0EAH
+           PCANL  BIT   0F1H.0
+           IAPEN  BIT   0C7H.7
+           DMAIR  DATA  0EDH
+           S1BRT  BIT   08EH.0
+           S4REN  BIT   0FDH.4
+           S3REN  BIT   0ACH.4
+           SADEN  DATA  0B9H
+             SPH  DATA  085H
+           S2REN  BIT   09AH.4
+             PSH  BIT   0B7H.4
+        WDT_FLAG  BIT   0C1H.7
+        AUXINTIF  DATA  0EFH
+           PCANH  BIT   0F1H.3
+         CAN2_S1  BIT   0BBH.1
+           S1_S1  BIT   0A2H.7
+         CAN2_S0  BIT   0BBH.0
+           S4CON  DATA  0FDH
+           S1_S0  BIT   0A2H.6
+           S3CON  DATA  0ACH
+             DPS  DATA  0E3H
+           PI2SH  BIT   0EEH.3
+           CANEN  BIT   097H.1
+           S2CON  DATA  09AH
+          VRTRIM  DATA  0A6H
+             POF  BIT   087H.4
+             REN  BIT   098H.4
+          USBRST  BIT   0F4H.6
+           DFREC  BIT   0F4H.2
+           S4BUF  DATA  0FEH
+           SMOD0  BIT   087H.6
+           S3BUF  DATA  0ADH
+           T4x12  BIT   0DDH.5
+           T1_M1  BIT   089H.5
+           S2BUF  DATA  09BH
+          CMPO_S  BIT   0BAH.3
+          EN_WDT  BIT   0C1H.5
+           T3x12  BIT   0DDH.1
+           S4ST4  BIT   0FDH.6
+           T1_M0  BIT   089H.4
+           T0_M1  BIT   089H.1
+           T2x12  BIT   08EH.2
+           CANIF  BIT   0F1H.2
+           T0_M0  BIT   089H.0
+           T1x12  BIT   08EH.6
+           S3ST3  BIT   0ACH.6
+             IPH  DATA  0B7H
+           PADCH  BIT   0B7H.5
+          SPSTAT  DATA  0CDH
+           CANIE  BIT   0F1H.1
+            ?DPL  DATA  082H
+           T0x12  BIT   08EH.7
+        ADC_RESL  DATA  0BEH
+             PIE  BIT   0E6H.5
+           T4T3M  DATA  0DDH
+            ?DPH  DATA  083H
+             PX4  BIT   0B5H.4
+             NIE  BIT   0E6H.4
+             T4R  BIT   0DDH.7
+           S4SM2  BIT   0FDH.5
+             IDL  BIT   087H.0
+          IRTRIM  DATA  09FH
+           S3SM2  BIT   0ACH.5
+             PX1  BIT   0B8H.2
+             T3R  BIT   0DDH.3
+             T2R  BIT   08EH.4
+           S2SM2  BIT   09AH.5
+             PX0  BIT   0B8H.0
+       WDT_CONTR  DATA  0C1H
+           S4SM0  BIT   0FDH.7
+             TR1  BIT   088H.6
+           S2SM1  BIT   09AH.6
+           S3SM0  BIT   0ACH.7
+           PI2CH  BIT   0B6H.6
+        S2SPI_S1  BIT   0BBH.5
+             PS4  BIT   0DFH.1
+             TR0  BIT   088H.4
+           S2SM0  BIT   09AH.7
+        S2SPI_S0  BIT   0BBH.4
+        S1SPI_S1  BIT   0BBH.3
+        IAP_DATA  DATA  0C2H
+            ?RS1  BIT   0D0H.4
+             PS3  BIT   0DFH.0
+           S4TB8  BIT   0FDH.3
+           S3TB8  BIT   0ACH.3
+             PS2  BIT   0B5H.0
+             PT1  BIT   0B8H.3
+        S1SPI_S0  BIT   0BBH.2
+            ?RS0  BIT   0D0H.3
+           S2TB8  BIT   09AH.3
+             PT0  BIT   0B8H.1
+             T4L  DATA  0D3H
+           S4RB8  BIT   0FDH.2
+          EXTRAM  BIT   08EH.1
+           S3RB8  BIT   0ACH.2
+             T3L  DATA  0D5H
+          RESFMT  BIT   0DEH.5
+            WTST  DATA  0E9H
+             SM2  BIT   098H.5
+           S2RB8  BIT   09AH.2
+        CMD_FAIL  BIT   0C7H.4
+             T2L  DATA  0D7H
+             TL1  DATA  08BH
+             EX4  BIT   08FH.6
+             SM1  BIT   098H.6
+          SPI_S1  BIT   0A2H.3
+             TL0  DATA  08AH
+             EX3  BIT   08FH.5
+             SM0  BIT   098H.7
+          SPI_S0  BIT   0A2H.2
+          PPWMBH  BIT   0B6H.3
+             T4H  DATA  0D2H
+             EX2  BIT   08FH.4
+          PPWMAH  BIT   0B6H.2
+              ?P  BIT   0D0H.0
+             T3H  DATA  0D4H
+             IT1  BIT   088H.2
+             TB8  BIT   098H.3
+             EX1  BIT   0A8H.2
+             T2H  DATA  0D6H
+             IT0  BIT   088H.0
+             TH1  DATA  08DH
+          USBCKS  BIT   09DH.7
+             EX0  BIT   0A8H.0
+             ET4  BIT   0AFH.6
+             TH0  DATA  08CH
+             RB8  BIT   098H.2
+             ET3  BIT   0AFH.5
+             ES4  BIT   0AFH.4
+             IP3  DATA  0DFH
+          CMPRES  BIT   0E6H.0
+          USBCON  DATA  0F4H
+             TF1  BIT   088H.7
+             ES3  BIT   0AFH.3
+             ET2  BIT   0AFH.2
+             IP2  DATA  0B5H
+          RSTCFG  DATA  0FFH
+             TF0  BIT   088H.5
+             ET1  BIT   0A8H.3
+             ES2  BIT   0AFH.0
+             ET0  BIT   0A8H.1
+          LIN_S1  BIT   0A2H.1
+          DISFLT  BIT   0E7H.6
+          LIN_S0  BIT   0A2H.0
+          BGTRIM  DATA  0A5H
+            MSTR  BIT   0CEH.4
+            ?ACC  DATA  0E0H
+          USBCLK  DATA  0DCH
+          USBDAT  DATA  0ECH
+        ADC_FLAG  BIT   0BCH.5
+       IAP_CONTR  DATA  0C7H
+          LINICR  DATA  0F9H
+          USBADR  DATA  0FCH
+            AUXR  DATA  08EH
+              ?B  DATA  0F0H
+             IE2  DATA  0AFH
+            SWBS  BIT   0C7H.6
+             IE1  BIT   088H.3
+            MXAX  DATA  0EBH
+             GF1  BIT   087H.3
+             IE0  BIT   088H.1
+        HIRCSEL1  BIT   09DH.1
+       BUS_SPEED  DATA  0A1H
+             P77  BIT   0F8H.7
+             GF0  BIT   087H.2
+        HIRCSEL0  BIT   09DH.0
+            PSPI  BIT   0B5H.1
+             P67  BIT   0E8H.7
+             P76  BIT   0F8H.6
+             P57  BIT   0C8H.7
+             P66  BIT   0E8H.6
+             P75  BIT   0F8H.5
+            PUSB  BIT   0B5H.7
+             P47  BIT   0C0H.7
+             P56  BIT   0C8H.6
+             P65  BIT   0E8H.5
+             P74  BIT   0F8H.4
+             P37  BIT   0B0H.7
+            S4_S  BIT   0BAH.2
+             P46  BIT   0C0H.6
+             P55  BIT   0C8H.5
+            PRTC  BIT   0DFH.2
+             P64  BIT   0E8H.4
+             P73  BIT   0F8H.3
+            DPXL  DATA  084H
+             P27  BIT   0A0H.7
+             P36  BIT   0B0H.6
+            S3_S  BIT   0BAH.1
+       ADC_START  BIT   0BCH.6
+             P45  BIT   0C0H.5
+             P54  BIT   0C8H.4
+             P63  BIT   0E8H.3
+            PUEN  BIT   0F4H.4
+             P72  BIT   0F8H.2
+             P17  BIT   090H.7
+          CANSEL  BIT   097H.3
+             P26  BIT   0A0H.6
+             P35  BIT   0B0H.5
+            S2_S  BIT   0BAH.0
+       ADC_POWER  BIT   0BCH.7
+       ADC_EPWMT  BIT   0BCH.4
+             P44  BIT   0C0H.4
+             P53  BIT   0C8H.3
+             P62  BIT   0E8H.2
+             P71  BIT   0F8H.1
+             P07  BIT   080H.7
+             P16  BIT   090H.6
+             P25  BIT   0A0H.5
+          CAN_S1  BIT   0A2H.5
+             P34  BIT   0B0H.4
+            PLVD  BIT   0B8H.6
+             P43  BIT   0C0H.3
+             P52  BIT   0C8H.2
+            SSIG  BIT   0CEH.7
+            SPEN  BIT   0CEH.6
+             P61  BIT   0E8H.1
+             P70  BIT   0F8H.0
+             P06  BIT   080H.6
+             P15  BIT   090H.5
+             P24  BIT   0A0H.4
+          CAN_S0  BIT   0A2H.4
+             P33  BIT   0B0H.3
+             P42  BIT   0C0H.2
+             P51  BIT   0C8H.1
+            WCOL  BIT   0CDH.6
+             P60  BIT   0E8H.0
+             P05  BIT   080H.5
+            TCON  DATA  088H
+            TMOD  DATA  089H
+             P14  BIT   090H.4
+             P23  BIT   0A0H.3
+             P32  BIT   0B0H.2
+             P41  BIT   0C0H.1
+             P50  BIT   0C8H.0
+             P04  BIT   080H.4
+            SMOD  BIT   087H.7
+             P13  BIT   090H.3
+            SCON  DATA  098H
+             P22  BIT   0A0H.2
+             P31  BIT   0B0H.1
+             P40  BIT   0C0H.0
+          P54RST  BIT   0FFH.4
+             P03  BIT   080H.3
+             P12  BIT   090H.2
+             P21  BIT   0A0H.1
+             P30  BIT   0B0H.0
+          I2S_S1  BIT   0BBH.7
+            SPIF  BIT   0CDH.7
+          T4CLKO  BIT   0DDH.4
+         IAP_TPS  DATA  0F5H
+             P02  BIT   080H.2
+             P11  BIT   090H.1
+             P20  BIT   0A0H.0
+            ESPI  BIT   0AFH.1
+          I2S_S0  BIT   0BBH.6
+         CLR_WDT  BIT   0C1H.4
+          T3CLKO  BIT   0DDH.0
+          CANICR  DATA  0F1H
+             P01  BIT   080H.1
+            PCON  DATA  087H
+          S1M0x6  BIT   08EH.5
+          T2CLKO  BIT   08FH.2
+             P10  BIT   090H.0
+            SBUF  DATA  099H
+            PCMP  BIT   0B5H.5
+       ADC_CONTR  DATA  0BCH
+             P00  BIT   080H.0
+          T1CLKO  BIT   08FH.1
+            EUSB  BIT   0AFH.7
+          INT4IF  BIT   0EFH.6
+          ICHECR  DATA  0F7H
+          T0CLKO  BIT   08FH.0
+            CPOL  BIT   0CEH.3
+          INT3IF  BIT   0EFH.5
+          INT2IF  BIT   0EFH.4
+            LVDF  BIT   087H.5
+            ELVD  BIT   0A8H.6
+           ?PSW1  DATA  0D1H
+         IDL_WDT  BIT   0C1H.3
+            DORD  BIT   0CEH.5
+          CMPCR2  DATA  0E7H
+          CMPCR1  DATA  0E6H
+            PDEN  BIT   0F4H.3
+            SPR1  BIT   0CEH.1
+         LIRTRIM  DATA  09EH
+            SPR0  BIT   0CEH.0
+            PX4H  BIT   0B6H.4
+           SWRST  BIT   0C7H.5
+             ?OV  BIT   0D0H.2
+            S4TI  BIT   0FDH.1
+            S3TI  BIT   0ACH.1
+       IAP_ADDRL  DATA  0C4H
+             ?SP  DATA  081H
+            S2TI  BIT   09AH.1
+              PS  BIT   0B8H.4
+          I2C_S1  BIT   0BAH.5
+            PS2M  BIT   0F4H.5
+            S4RI  BIT   0FDH.0
+            S3RI  BIT   0ACH.0
+            PX1H  BIT   0B7H.2
+          I2C_S0  BIT   0BAH.4
+          PCAN2L  BIT   0F1H.4
+            S2RI  BIT   09AH.0
+            PX0H  BIT   0B7H.0
+       IAP_ADDRH  DATA  0C3H
+            PS4H  BIT   0EEH.1
+            PI2S  BIT   0DFH.3
+         INVCMPO  BIT   0E7H.7
+            PS3H  BIT   0EEH.0
+            PS2H  BIT   0B6H.0
+            PT1H  BIT   0B7H.3
+          PCAN2H  BIT   0F1H.7
+              TI  BIT   098H.1
+            PT0H  BIT   0B7H.1
+            CPHA  BIT   0CEH.2
+       IAP_ADDRE  DATA  0F6H
+              CY  BIT   0D0H.7
+              RI  BIT   098H.0
+          ADCCFG  DATA  0DEH
+          CAN2EN  BIT   097H.2
+              IP  DATA  0B8H
+            PADC  BIT   0B8H.5
+              ES  BIT   0A8H.4
+            T4IF  BIT   0EFH.2
+         INTCLKO  DATA  08FH
+            T3IF  BIT   0EFH.1
+            T2IF  BIT   0EFH.0
+              TA  DATA  0AEH
+            IP3H  DATA  0EEH
+          CAN2IF  BIT   0F1H.6
+              PD  BIT   087H.1
+            IP2H  DATA  0B6H
+         ADC_RES  DATA  0BDH
+          CAN2IE  BIT   0F1H.5
+              DP  BIT   0F4H.1
+            DPL1  DATA  0E4H
+              DM  BIT   0F4H.0
+         IAP_CMD  DATA  0C5H
+            PI2C  BIT   0B5H.6
+              IE  DATA  0A8H
+            EADC  BIT   0A8H.5
+           P_SW3  DATA  0BBH
+            DPH1  DATA  0E5H
+           P_SW2  DATA  0BAH
+           P_SW1  DATA  0A2H
+           ENLVR  BIT   0FFH.6
+         T1_GATE  BIT   089H.7
+           PPWMB  BIT   0B5H.3
+           SPCTL  DATA  0CEH
+         T0_GATE  BIT   089H.3
+           WKTCL  DATA  0AAH
+           PPWMA  BIT   0B5H.2
+              P7  DATA  0F8H
+             ?EA  BIT   0A8H.7
+           PSPIH  BIT   0B6H.1
+            P7M1  DATA  0E1H
+              P6  DATA  0E8H
+              P5  DATA  0C8H
+            P6M1  DATA  0CBH
+            P7M0  DATA  0E2H
+           PUSBH  BIT   0B6H.7
+              P4  DATA  0C0H
+            P5M1  DATA  0C9H
+            P6M0  DATA  0CCH
+             ?AC  BIT   0D0H.6
+           WKTCH  DATA  0ABH
+              P3  DATA  0B0H
+            P4M1  DATA  0B3H
+            P5M0  DATA  0CAH
+           PRTCH  BIT   0EEH.2
+              P2  DATA  0A0H
+            P3M1  DATA  0B1H
+            P4M0  DATA  0B4H
+              P1  DATA  090H
+            P2M1  DATA  095H
+            P3M0  DATA  0B2H
+           PLINL  BIT   0F9H.0
+              P0  DATA  080H
+            P1M1  DATA  091H
+            P2M0  DATA  096H
+         USBCKS2  BIT   09DH.6
+           PLVDH  BIT   0B7H.6
+           T4_CT  BIT   0DDH.6
+            P1M0  DATA  092H
+            P0M1  DATA  093H
+           T3_CT  BIT   0DDH.2
+           ENUSB  BIT   0F4H.7
+             ACC  DATA  0E0H
+             PSW  DATA  0D0H
+             DPL  DATA  082H
+             DPH  DATA  083H
+               B  DATA  0F0H
+              SP  DATA  081H
+            PSW1  DATA  0D1H
+               Z  BIT   0D1H.1
+              EA  BIT   0A8H.7
+              OV  BIT   0D0H.2
+               P  BIT   0D0H.0
+              F0  BIT   0D0H.5
+             RS1  BIT   0D0H.4
+             RS0  BIT   0D0H.3
+              AC  BIT   0D0H.6
+;--- end of special function registers and bits.
+
+        PUBLIC        vPortYield?_
+        PUBLIC        vTimer0ISR?_
+        PUBLIC        pxPortInitialiseStack?_
+        PUBLIC        xPortStartScheduler?_
+        PUBLIC        vPortEndScheduler?_
+
+; line 1: /*
+; line 2:  * FreeRTOS Kernel V10.4.6
+; line 3:  * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
+; line 4:  *
+; line 5:  * SPDX-License-Identifier: MIT
+; line 6:  *
+; line 7:  * Permission is hereby granted, free of charge, to any person obtaining a copy of
+; line 8:  * this software and associated documentation files (the "Software"), to deal in
+; line 9:  * the Software without restriction, including without limitation the rights to
+; line 10:  * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+; line 11:  * the Software, and to permit persons to whom the Software is furnished to do so,
+; line 12:  * subject to the following conditions:
+; line 13:  *
+; line 14:  * The above copyright notice and this permission notice shall be included in all
+; line 15:  * copies or substantial portions of the Software.
+; line 16:  *
+; line 17:  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+; line 18:  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+; line 19:  * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+; line 20:  * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+; line 21:  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+; line 22:  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+; line 23:  *
+; line 24:  * https://www.FreeRTOS.org
+; line 25:  * https://github.com/FreeRTOS
+; line 26:  *
+; line 27:  */
+; line 28: 
+; line 29: 
+; line 30: /* Standard includes. */
+; line 31: #include <stdlib.h>
+; line 32: 
+; line 33: /* Scheduler includes. */
+; line 34: #include "FreeRTOS.h"
+; line 35: #include "task.h"
+; line 36: #include "portasm.h"
+; line 37: 
+; line 38: /* Constants required to setup the tick ISR. */
+; line 39: 
+; line 40: #define portRELOAD_VALUE                    ( 65536 - configCPU_CLOCK_HZ / configTICK_RATE_HZ )
+; line 41: 
+; line 42: 
+; line 43: static StackType_t data xPCL;
+; line 44: static StackType_t data xPCH;
+; line 45: static StackType_t data xPCB;
+; line 46: 
+; line 47: 
+; line 48: /* Setup the timer to generate the tick interrupts. */
+; line 49: static void prvPortSetupTimerInterrupt( void );
+; line 50: 
+; line 51: 
+; line 52: /*-----------------------------------------------------------*/
+; line 53: 
+; line 54: 
+; line 55: /*
+; line 56:  * See header file for description.
+; line 57:  */
+; line 58: StackType_t *pxPortInitialiseStack( StackType_t *pxTopOfStack, TaskFunction_t pxCode, void *pvParameters )
+
+        RSEG       ?PR?PXPORTINITIALISESTACK?_?PORT
+        pxPortInitialiseStack?_ PROC
+;---- Variable 'pxCode' assigned to Register 'WR6' ----
+        MOV      DR28,DR0
+;---- Variable 'pxTopOfStack' assigned to Register 'DR28' ----
+; line 59: {
+; line 60:     uint32_t ulAddress;
+; line 61: 	uint8_t index;
+; line 62: 
+; line 63:     /* Place a few bytes of known values on the bottom of the stack.
+; line 64:     This is just useful for debugging and can be uncommented if required.*/
+; line 65:     /*
+; line 66:     *pxTopOfStack = 0x11;
+; line 67:     pxTopOfStack++;
+; line 68:     *pxTopOfStack = 0x22;
+; line 69:     pxTopOfStack++;
+; line 70:     *pxTopOfStack = 0x33;
+; line 71:     pxTopOfStack++;
+; line 72:     */
+; line 73: 
+; line 74:     /* Simulate how the stack would look after a call to the scheduler tick
+; line 75:     ISR. The return address that would have been pushed by the MCU. */
+; line 76:     ulAddress = ( uint32_t ) pxCode;
+        MOV      WR4,#?C?CODESEG
+;---- Variable 'ulAddress' assigned to Register 'DR4' ----
+; line 77:     *pxTopOfStack = ( StackType_t ) ( ulAddress >> 16 );    /* PC[23:16] */
+        MOV      @DR28,R5
+; line 78:     pxTopOfStack++;
+        INC      WR30,#01H
+; line 79:     *pxTopOfStack = ( StackType_t ) ( ulAddress >> 8 );     /* PC[15:8] */
+        MOV      @DR28,R6
+; line 80:     pxTopOfStack++;
+        INC      WR30,#01H
+; line 81:     *pxTopOfStack = ( StackType_t ) ( ulAddress );          /* PC[7:0] */
+        MOV      @DR28,R7
+; line 82: 
+; line 83: 	pxTopOfStack++;
+        INC      WR30,#01H
+; line 84: 	*pxTopOfStack = 0;                                      /* PSW1 */
+        CLR      A                              ; A=R11
+        MOV      @DR28,R11                      ; A=R11
+; line 85: 
+; line 86:     /* Next all the registers will have been pushed by portSAVE_CONTEXT(). */
+; line 87: 	/* DR56 */
+; line 88: 	pxTopOfStack++;
+        INC      WR30,#01H
+; line 89: 	*pxTopOfStack = 0;                                      /* R56 */
+        MOV      @DR28,R11                      ; A=R11
+; line 90: 	pxTopOfStack++;
+        INC      WR30,#01H
+; line 91: 	*pxTopOfStack = 1;                                      /* R57(DPXL) */
+        MOV      A,#01H                         ; A=R11
+        MOV      @DR28,R11                      ; A=R11
+; line 92: 	pxTopOfStack++;
+        INC      WR30,#01H
+; line 93: 	*pxTopOfStack = 0;                                      /* R58(DPH) */
+        CLR      A                              ; A=R11
+        MOV      @DR28,R11                      ; A=R11
+; line 94: 	pxTopOfStack++;
+        INC      WR30,#01H
+; line 95: 	*pxTopOfStack = 0;                                      /* R59(DPL) */
+        MOV      @DR28,R11                      ; A=R11
+; line 96: 
+; line 97: 	/* DR28 DR24 DR20 DR16 DR12 DR8 DR4 */
+; line 98: 	for(index = 0; index < 28; index++)
+        XRL      R10,R10
+;---- Variable 'index' assigned to Register 'R10' ----
+?C0004:
+; line 99: 	{
+; line 100: 		pxTopOfStack++;
+        INC      WR30,#01H
+; line 101: 		*pxTopOfStack = 0;
+        CLR      A                              ; A=R11
+        MOV      @DR28,R11                      ; A=R11
+; line 102: 	}
+        INC      R10,#01H
+        CMP      R10,#01CH
+        JC       ?C0004
+; line 103: 
+; line 104:     /* The function parameters will be passed in the DR0 register as
+; line 105:     a four byte generic pointer is used. */
+; line 106: 	pxTopOfStack++;
+        INC      WR30,#01H
+; line 107:     ulAddress = ( uint32_t ) pvParameters;
+        MOV      WR6,@DR60-0x3                  ; pvParameters
+        MOV      WR4,@DR60-0x5                  ; pvParameters
+; line 108:     *pxTopOfStack = ( StackType_t ) ( ulAddress >> 24 );    /* R0 */
+        MOV      @DR28,R4
+; line 109:     pxTopOfStack++;
+        INC      WR30,#01H
+; line 110:     *pxTopOfStack = ( StackType_t ) ( ulAddress >> 16 );    /* R1 */
+        MOV      @DR28,R5
+; line 111:     pxTopOfStack++;
+        INC      WR30,#01H
+; line 112:     *pxTopOfStack = ( StackType_t ) ( ulAddress >> 8 );     /* R2 */
+        MOV      @DR28,R6
+; line 113:     pxTopOfStack++;
+        INC      WR30,#01H
+; line 114:     *pxTopOfStack = ( StackType_t ) ( ulAddress );          /* R3 */
+        MOV      @DR28,R7
+; line 115: 	pxTopOfStack++;
+        INC      WR30,#01H
+; line 116: 	*pxTopOfStack = ( StackType_t ) 0;                      /* PSW */
+        CLR      A                              ; A=R11
+        MOV      @DR28,R11                      ; A=R11
+; line 117: 
+; line 118:     /* we return the top of the stack */
+; line 119:     return pxTopOfStack;
+        MOV      DR4,DR28
+; line 120: }
+        RET      
+        ENDP
+
+        RSEG       ?PR?XPORTSTARTSCHEDULER?_?PORT
+        xPortStartScheduler?_ PROC
+; line 121: /*-----------------------------------------------------------*/
+; line 122: 
+; line 123: BaseType_t xPortStartScheduler( void )
+; line 124: {
+; line 125:     UNUSED( pxCurrentTCB );
+; line 126: 
+; line 127: 	/* Start the timer that generates the tick ISR. */
+; line 128:     prvPortSetupTimerInterrupt();
+        LCALL    prvPortSetupTimerInterrupt?_
+; line 129: 
+; line 130:     /* Start the first task. */
+; line 131:     portRESTORE_SPX();
+        MOV DR4,pxCurrentTCB 
+        MOV WR2,@WR6+0x2 
+        XRL WR0,WR0 
+        MOV DR60,DR0 
+; line 132:     portRESTORE_CONTEXT();
+        POP PSW 
+        POP DR0 
+        POP DR4 
+        POP DR8 
+        POP DR12 
+        POP DR16 
+        POP DR20 
+        POP DR24 
+        POP DR28 
+        POP DR56 
+; line 133:     portRETURN_TASK();
+        POP PSW1 
+        SETB EA 
+        DB 0AAH 
+; line 134: 
+; line 135:     /* Should never get here! */
+; line 136:     return pdTRUE;
+        MOV      A,#01H                         ; A=R11
+; line 137: }
+        RET      
+        ENDP
+
+        RSEG       ?PR?VPORTENDSCHEDULER?_?PORT
+        vPortEndScheduler?_ PROC
+; line 138: /*-----------------------------------------------------------*/
+; line 139: 
+; line 140: void vPortEndScheduler( void )
+; line 141: {
+; line 142:     /* Not implemented for this port. */
+; line 143: }
+        RET      
+        ENDP
+
+        RSEG       ?PR?VPORTYIELD?_?PORT
+        vPortYield?_ PROC
+; line 144: /*-----------------------------------------------------------*/
+; line 145: 
+; line 146: /* Manual context switch.   */
+; line 147: void vPortYield( void )
+; line 148: {
+; line 149:     UNUSED( pxCurrentTCB );
+; line 150: 
+; line 151:     /* Normalize the return address of the function
+; line 152:     call in stack to ECALL mode, then push the current
+; line 153:     execution context onto the stack.*/
+; line 154:     portNORMALIZE_FUNCTION_STACK();
+        CLR EA 
+        POP xPCH 
+        POP xPCL 
+        PUSH #BYTE0 0FFH 
+        PUSH xPCH 
+        PUSH xPCL 
+        PUSH PSW1 
+; line 155:     portSAVE_CONTEXT();
+        PUSH DR56 
+        PUSH DR28 
+        PUSH DR24 
+        PUSH DR20 
+        PUSH DR16 
+        PUSH DR12 
+        PUSH DR8 
+        PUSH DR4 
+        PUSH DR0 
+        PUSH PSW 
+; line 156: 
+; line 157:     /* Saves the stack pointer for one task into its TCB, calls
+; line 158:     vTaskSwitchContext() to update the TCB being used, then restores the stack
+; line 159:     from the new TCB read to run the task. */
+; line 160:     portEND_SWITCHING_ISR();
+        MOV DR0,DR60 
+        MOV DR4,pxCurrentTCB 
+        MOV @WR6+0x2,WR2 
+        LCALL    vTaskSwitchContext?_
+        MOV DR4,pxCurrentTCB 
+        MOV WR2,@WR6+0x2 
+        XRL WR0,WR0 
+        MOV DR60,DR0 
+; line 161: 
+; line 162: 	/* Restores the execution context from the stack,
+; line 163:     then returned using ERET */
+; line 164:     portRESTORE_CONTEXT();
+        POP PSW 
+        POP DR0 
+        POP DR4 
+        POP DR8 
+        POP DR12 
+        POP DR16 
+        POP DR20 
+        POP DR24 
+        POP DR28 
+        POP DR56 
+; line 165:     portRETURN_TASK();
+        POP PSW1 
+        SETB EA 
+        DB 0AAH 
+; line 166: }
+        RET      
+        ENDP
+
+        RSEG       ?PR?VTIMER0ISR?_?PORT
+        vTimer0ISR?_ PROC
+; line 167: 
+; line 168: /*-----------------------------------------------------------*/
+; line 169: 
+; line 170: /* The ISR used depends on whether the preemptive or cooperative
+; line 171: scheduler is being used. */
+; line 172: 
+; line 173: void vTimer0ISR( void )
+; line 174: {
+; line 175:     UNUSED( pxCurrentTCB );
+; line 176: 
+; line 177:     /* Normalize the return address of the interrupt
+; line 178:     call in stack to ECALL mode, then push the current
+; line 179:     execution context onto the stack.*/
+; line 180:     portNORMALIZE_INTERRUPT_STACK();
+        POP xPCH 
+        POP xPCL 
+        POP xPCB 
+        POP PSW1 
+        PUSH xPCB 
+        PUSH xPCH 
+        PUSH xPCL 
+        PUSH PSW1 
+; line 181:     portSAVE_CONTEXT();
+        PUSH DR56 
+        PUSH DR28 
+        PUSH DR24 
+        PUSH DR20 
+        PUSH DR16 
+        PUSH DR12 
+        PUSH DR8 
+        PUSH DR4 
+        PUSH DR0 
+        PUSH PSW 
+; line 182: 
+; line 183: #if configUSE_PREEMPTION == 1
+; line 184: 
+; line 185:     /* Get the scheduler to update the task states following the tick. */
+; line 186:     if( xTaskIncrementTick() != pdFALSE )
+        LCALL    xTaskIncrementTick?_
+        JZ       ?C0011
+; line 187:     {
+; line 188:         /* Saves the stack pointer for one task into its TCB, calls
+; line 189:         vTaskSwitchContext() to update the TCB being used, then restores the stack
+; line 190:         from the new TCB read to run the task. */
+; line 191:         portEND_SWITCHING_ISR();
+        MOV DR0,DR60 
+        MOV DR4,pxCurrentTCB 
+        MOV @WR6+0x2,WR2 
+        LCALL    vTaskSwitchContext?_
+        MOV DR4,pxCurrentTCB 
+        MOV WR2,@WR6+0x2 
+        XRL WR0,WR0 
+        MOV DR60,DR0 
+; line 192:     }
+?C0011:
+; line 193: 
+; line 194: #else
+; line 195: 
+; line 196:     /* Same as preemptive tick, but the cooperative scheduler is being used
+; line 197:     so we don't have to switch in the context of the next task. */
+; line 198:     xTaskIncrementTick();
+; line 199: 
+; line 200: #endif
+; line 201: 
+; line 202: 	/* Restores the execution context from the stack,
+; line 203:     then returned using ERET */
+; line 204:     portRESTORE_CONTEXT();
+        POP PSW 
+        POP DR0 
+        POP DR4 
+        POP DR8 
+        POP DR12 
+        POP DR16 
+        POP DR20 
+        POP DR24 
+        POP DR28 
+        POP DR56 
+; line 205:     portRELEASE_INTERRUPT();
+        CLR EA 
+        PUSH PSW1 
+        PUSH #BYTE2 ($+10) 
+        PUSH #BYTE0 ($+7) 
+        PUSH #BYTE1 ($+4) 
+        RETI 
+; line 206:     portRETURN_TASK();
+        POP PSW1 
+        SETB EA 
+        DB 0AAH 
+; line 207: }
+        RET      
+        ENDP
+
+        RSEG       ?PR?PRVPORTSETUPTIMERINTERRUPT?_?PORT
+        prvPortSetupTimerInterrupt?_ PROC
+; line 208: 
+; line 209: /*-----------------------------------------------------------*/
+; line 210: 
+; line 211: /*Setup the systick timer to generate the tick interrupts at the required
+; line 212: frequency. */
+; line 213: static void prvPortSetupTimerInterrupt( void )
+; line 214: {
+; line 215:     /* Timer0 work at 1T mode. */
+; line 216:     AUXR |= 0x80;
+        ORL      AUXR,#080H
+; line 217: 
+; line 218:     /* Timer0 work at mode0 (16-bit auto reload mode) */
+; line 219:     TMOD &= ~0x0f;
+        ANL      TMOD,#0F0H
+; line 220: 
+; line 221:     /* Initial timer0 reload value (1ms per cycle). */
+; line 222:     TL0 = ( uint8_t )( portRELOAD_VALUE );
+        MOV      TL0,#040H
+; line 223:     TH0 = ( uint8_t )( portRELOAD_VALUE >> 8 );
+        MOV      TH0,#0A2H
+; line 224: 
+; line 225:     /* Interrupts are disabled when this is called so
+; line 226:     the timer can be started here. */
+; line 227:     TR0 = 1;
+        SETB     TR0
+; line 228: 
+; line 229:     /* Enable timer0 interrupts. */
+; line 230:     ET0 = 1;
+        SETB     ET0
+; line 231: }
+        RET      
+        ENDP
+; line 232: 
+; line 233: 
+; line 234:     __asm   { CSEG    AT  0BH       }
+        CSEG    AT  0BH       
+; line 235: #if ( configUSE_ROMHUGE == 0 )
+; line 236:     __asm   { JMP     vTimer0ISR?_  }
+        JMP     vTimer0ISR?_  
+; line 237: #else
+; line 238:     __asm   { JMP     vTimer0ISR??  }
+; line 239: #endif
+
+        END
+

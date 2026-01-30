@@ -1,0 +1,129 @@
+C251 COMPILER V5.60.0,  main                                                               30/01/26  13:24:29  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE main
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE Sources\User\main.c XSMALL FUNCTIONS(REENTRANT) OPTIMIZE(4,SPEED) BROW
+                    -SE INCDIR(.\Sources\User;.\Sources\User\include;.\Sources\FreeRTOS\include;.\Sources\FreeRTOS\portable\STC32G12K128;.\So
+                    -urces\Driver\inc;.\Sources\Task\inc) DEBUG PRINT(.\Listings\main.lst) TABS(2) OBJECT(.\Objects\main.obj) 
+
+stmt  level    source
+
+    1          
+    2          /*
+    3           * FreeRTOS STC port V1.0.2
+    4           * 
+    5           * STC32G12K128功能简介：
+    6           *    2组 CAN, 3组Lin, USB, 32位 8051, RMB5,
+    7           *    高精准12位ADC, DMA 支持(TFT彩屏, ADC, 4组串口, SPI, I2C )
+    8           *  
+    9           *  各位用户在后续的使用过程中，如果发现有不正确的地方或者
+   10           *  有可改善的地方，请和STC联系，由STC官方进行统一修改并更新版本
+   11           *
+   12           *  若您的代码或文章中需要引用本程序包中的部分移植代码，请在您的
+   13           *  代码或文章中注明参考或使用了STC的FreeRTOS的移植代码
+   14          */
+   15          
+   16          #include "FreeRTOS.h"
+   17          #include "task.h"
+   18          #include "System_init.h"
+   19          
+   20          #include "display.h"
+   21          #include "rtc.h"
+   22          #include "ntc.h"
+   23          #include "adckey.h"
+   24          #include "uart2_3.h"
+   25          #include "MatrixKey.h"
+   26          #include "i2c_ps.h"
+   27          #include "pwmb.h"
+   28          
+   29          void vSystemInit( void );
+   30          
+   31          void main( void )
+   32          {
+   33   1          /* 系统初始化 */
+   34   1          vSystemInit();
+   35   1      
+   36   1        /* 创建任务 */
+   37   1          xTaskCreate((TaskFunction_t )vDisplayTask,
+   38   1                      (const char*    )"DISPLAY",
+   39   1                      (uint16_t       )configDEFAULT_STACK_SIZE,
+   40   1                      (void*          )NULL,
+   41   1                      (UBaseType_t    )(configDEFAULT_PRIORITIES + 1),
+   42   1                      (TaskHandle_t*  )NULL);
+   43   1          xTaskCreate((TaskFunction_t )vRtcTask,
+   44   1                      (const char*    )"RTC",
+   45   1                      (uint16_t       )configDEFAULT_STACK_SIZE,
+   46   1                      (void*          )NULL,
+   47   1                      (UBaseType_t    )(configDEFAULT_PRIORITIES + 1),
+   48   1                      (TaskHandle_t*  )NULL);
+   49   1          xTaskCreate((TaskFunction_t )vAdcKeyTask,
+   50   1                      (const char*    )"ADCKEY",
+   51   1                      (uint16_t       )configDEFAULT_STACK_SIZE,
+   52   1                      (void*          )NULL,
+   53   1                      (UBaseType_t    )(configDEFAULT_PRIORITIES),
+   54   1                      (TaskHandle_t*  )NULL);
+   55   1          xTaskCreate((TaskFunction_t )vNtcTask,
+   56   1                      (const char*    )"NTC",
+   57   1                      (uint16_t       )configDEFAULT_STACK_SIZE,
+C251 COMPILER V5.60.0,  main                                                               30/01/26  13:24:29  PAGE 2   
+
+   58   1                      (void*          )NULL,
+   59   1                      (UBaseType_t    )(configDEFAULT_PRIORITIES),
+   60   1                      (TaskHandle_t*  )NULL);
+   61   1          xTaskCreate((TaskFunction_t )vUart2_3Task,
+   62   1                      (const char*    )"UART2_3",
+   63   1                      (uint16_t       )configDEFAULT_STACK_SIZE,
+   64   1                      (void*          )1000,  //注意pvParameters参数传地址或者立即数时只有低24位是有效位，最高8
+             -位编译时会自动填0. 可通过变量或者常量传送32字节数据.
+   65   1                      (UBaseType_t    )(configDEFAULT_PRIORITIES),
+   66   1                      (TaskHandle_t*  )NULL);
+   67   1          xTaskCreate((TaskFunction_t )vMatrixKeyTask,
+   68   1                      (const char*    )"MatrixKey",
+   69   1                      (uint16_t       )configDEFAULT_STACK_SIZE,
+   70   1                      (void*          )NULL,
+   71   1                      (UBaseType_t    )(configDEFAULT_PRIORITIES),
+   72   1                      (TaskHandle_t*  )NULL);
+   73   1          xTaskCreate((TaskFunction_t )vI2C_PsTask,
+   74   1                      (const char*    )"I2C_PS",
+   75   1                      (uint16_t       )configDEFAULT_STACK_SIZE,
+   76   1                      (void*          )NULL,
+   77   1                      (UBaseType_t    )(configDEFAULT_PRIORITIES),
+   78   1                      (TaskHandle_t*  )NULL);
+   79   1          xTaskCreate((TaskFunction_t )vPWMB_LedTask,
+   80   1                      (const char*    )"PWMB_LED",
+   81   1                      (uint16_t       )configDEFAULT_STACK_SIZE,
+   82   1                      (void*          )NULL,
+   83   1                      (UBaseType_t    )(configDEFAULT_PRIORITIES),
+   84   1                      (TaskHandle_t*  )NULL);
+   85   1      
+   86   1          /* 启动任务调度器开始任务调度 */
+   87   1          vTaskStartScheduler();
+   88   1      
+   89   1          /* 正常情况下不会运行到此处 */
+   90   1          while (1);
+   91   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       260     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =        57     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

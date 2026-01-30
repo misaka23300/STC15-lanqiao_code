@@ -1,0 +1,368 @@
+C251 COMPILER V5.60.0,  uart2_3                                                            08/06/22  09:46:20  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE uart2_3
+OBJECT MODULE PLACED IN .\Objects\uart2_3.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE Sources\User\uart2_3.c XSMALL OA FUNCTIONS(REENTRANT) BROWSE INCDIR(.\
+                    -Sources\User;.\Sources\User\include;.\Sources\FreeRTOS\include;.\Sources\FreeRTOS\portable\STC32G12K128) DEBUG PRINT(.\L
+                    -istings\uart2_3.lst) OBJECT(.\Objects\uart2_3.obj) 
+
+stmt  level    source
+
+    1          /*---------------------------------------------------------------------*/
+    2          /* --- STC MCU Limited ------------------------------------------------*/
+    3          /* --- STC 1T Series MCU Demo Programme -------------------------------*/
+    4          /* --- Mobile: (86)13922805190 ----------------------------------------*/
+    5          /* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
+    6          /* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+    7          /* --- Web: www.STCMCU.com --------------------------------------------*/
+    8          /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
+    9          /* --- QQ:  800003751 -------------------------------------------------*/
+   10          /* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+   11          /*---------------------------------------------------------------------*/
+   12          
+   13          
+   14          /*************  功能说明    **************
+   15          
+   16          本例程基于STC32G为主控芯片的实验箱9进行编写测试.
+   17          
+   18          短接实验箱上的J7、J8跳线进行测试.
+   19          
+   20          串口3定时发送一串数据给串口2.
+   21          
+   22          串口2输出从串口3接收到的数据.
+   23          
+   24          往串口2发送数据，MCU收到后从串口2原样输出.
+   25          
+   26          ******************************************/
+   27          
+   28          #include "FreeRTOS.h"
+   29          #include "task.h"
+   30          
+   31          #include "uart2_3.h"
+   32          
+   33          /****************************** 用户定义宏 ***********************************/
+   34          
+   35          #define Baudrate2   (65536 - MAIN_Fosc / 115200 / 4)
+   36          #define Baudrate3   (65536 - MAIN_Fosc / 115200 / 4)
+   37          
+   38          #define UART2_BUF_LENGTH    64
+   39          #define UART3_BUF_LENGTH    64
+   40          
+   41          bit B_TX2_Busy; //发送忙标志
+   42          bit B_TX3_Busy; //发送忙标志
+   43          uint8_t  TX2_Send;   //已发计数
+   44          uint8_t  TX2_Cnt;    //发送计数
+   45          uint8_t  RX2_Cnt;    //接收计数
+   46          uint8_t  TX3_Send;   //已发计数
+   47          uint8_t  TX3_Cnt;    //发送计数
+   48          uint8_t  RX3_Cnt;    //接收计数
+   49          uint8_t  RX2_TimeOut;
+   50          uint8_t  RX3_TimeOut;
+   51          
+   52          uint8_t  TX2_Buffer[UART2_BUF_LENGTH]; //接收缓冲
+   53          uint8_t  RX2_Buffer[UART2_BUF_LENGTH]; //接收缓冲
+   54          uint8_t  TX3_Buffer[UART3_BUF_LENGTH]; //接收缓冲
+   55          uint8_t  RX3_Buffer[UART3_BUF_LENGTH]; //接收缓冲
+   56          
+   57          uint16_t Sec_Cnt;    //1秒计数
+C251 COMPILER V5.60.0,  uart2_3                                                            08/06/22  09:46:20  PAGE 2   
+
+   58          
+   59          void UART2_config(uint8_t brt);   // 选择波特率, 2: 使用Timer2做波特率, 其它值: 无效.
+   60          void UART3_config(uint8_t brt);   // 选择波特率, 2: 使用Timer2做波特率, 其它值: 使用Timer3做波特率.
+   61          void UART2_TxByte(uint8_t dat);
+   62          void UART3_TxByte(uint8_t dat);
+   63          void PrintString2(uint8_t *puts);
+   64          void PrintString3(uint8_t *puts);
+   65          
+   66          /* RTC任务函数 */
+   67          portTASK_FUNCTION_PROTO( vUart2_3Task, pvParameters )
+   68          {
+   69   1          uint8_t i;
+   70   1          
+   71   1          Sec_Cnt = 0;
+   72   1          UART2_config(2);    // 选择波特率, 2: 使用Timer2做波特率, 其它值: 无效.
+   73   1          UART3_config(3);    // 选择波特率, 2: 使用Timer2做波特率, 其它值: 使用Timer3做波特率.
+   74   1      
+   75   1          PrintString2("STC32G UART2-UART3 Test Programme!\r\n");  //UART2发送一个字符串
+   76   1          PrintString3("STC32G UART3-UART2 Test Programme!\r\n");  //UART3发送一个字符串
+   77   1          while(1)
+   78   1          {
+   79   2              Sec_Cnt++;
+   80   2              if(Sec_Cnt >= (uint16_t)pvParameters)
+   81   2              {
+   82   3                  Sec_Cnt = 0;
+   83   3                  PrintString3("STC32G UART3-UART2 Test Programme!\r\n");  //UART3发送一个字符串
+   84   3              }
+   85   2      
+   86   2              if(RX2_TimeOut > 0)     //超时计数
+   87   2              {
+   88   3                  if(--RX2_TimeOut == 0)
+   89   3                  {
+   90   4                      for(i=0; i<RX2_Cnt; i++)    UART2_TxByte(RX2_Buffer[i]);    //把收到的数据通过串口2输出
+   91   4                      RX2_Cnt  = 0;   //清除字节数
+   92   4                  }
+   93   3              }
+   94   2              
+   95   2              vTaskDelay(1);
+   96   2          }
+   97   1          
+   98   1          vTaskDelete(NULL);
+   99   1      }   
+  100          
+  101          //========================================================================
+  102          // 函数: void UART2_TxByte(uint8_t dat)
+  103          // 描述: 发送一个字节.
+  104          // 参数: 无.
+  105          // 返回: 无.
+  106          // 版本: V1.0, 2014-6-30
+  107          //========================================================================
+  108          void UART2_TxByte(uint8_t dat)
+  109          {
+  110   1              TX2_Buffer[TX2_Cnt] = dat;      //装发送缓冲
+  111   1              if(++TX2_Cnt >= UART2_BUF_LENGTH)       TX2_Cnt = 0;
+  112   1      
+  113   1              if(B_TX2_Busy == 0)             //空闲
+  114   1              {  
+  115   2                      B_TX2_Busy = 1;         //标志忙
+  116   2                      S2TI = 1;                       //触发发送中断
+  117   2              }
+  118   1      }
+  119          
+  120          //========================================================================
+  121          // 函数: void UART3_TxByte(uint8_t dat)
+  122          // 描述: 发送一个字节.
+  123          // 参数: 无.
+C251 COMPILER V5.60.0,  uart2_3                                                            08/06/22  09:46:20  PAGE 3   
+
+  124          // 返回: 无.
+  125          // 版本: V1.0, 2014-6-30
+  126          //========================================================================
+  127          void UART3_TxByte(uint8_t dat)
+  128          {
+  129   1              TX3_Buffer[TX3_Cnt] = dat;      //装发送缓冲
+  130   1              if(++TX3_Cnt >= UART3_BUF_LENGTH)       TX3_Cnt = 0;
+  131   1      
+  132   1              if(B_TX3_Busy == 0)             //空闲
+  133   1              {  
+  134   2                      B_TX3_Busy = 1;         //标志忙
+  135   2                      S3TI = 1;                       //触发发送中断
+  136   2              }
+  137   1      }
+  138          
+  139          //========================================================================
+  140          // 函数: void PrintString2(uint8_t *puts)
+  141          // 描述: 串口2发送字符串函数。
+  142          // 参数: puts:  字符串指针.
+  143          // 返回: none.
+  144          // 版本: VER1.0
+  145          // 日期: 2014-11-28
+  146          // 备注: 
+  147          //========================================================================
+  148          void PrintString2(uint8_t *puts)
+  149          {
+  150   1          for (; *puts != 0;  puts++)     //遇到停止符0结束
+  151   1          {
+  152   2              UART2_TxByte(*puts);
+  153   2          }
+  154   1      }
+  155          
+  156          //========================================================================
+  157          // 函数: void PrintString3(uint8_t *puts)
+  158          // 描述: 串口3发送字符串函数。
+  159          // 参数: puts:  字符串指针.
+  160          // 返回: none.
+  161          // 版本: VER1.0
+  162          // 日期: 2014-11-28
+  163          // 备注: 
+  164          //========================================================================
+  165          void PrintString3(uint8_t *puts)
+  166          {
+  167   1          for (; *puts != 0;  puts++)     //遇到停止符0结束
+  168   1          {
+  169   2              UART3_TxByte(*puts);
+  170   2          }
+  171   1      }
+  172          
+  173          //========================================================================
+  174          // 函数: SetTimer2Baudraye(uint16_t dat)
+  175          // 描述: 设置Timer2做波特率发生器。
+  176          // 参数: dat: Timer2的重装值.
+  177          // 返回: none.
+  178          // 版本: VER1.0
+  179          // 日期: 2014-11-28
+  180          // 备注: 
+  181          //========================================================================
+  182          void SetTimer2Baudraye(uint16_t dat)
+  183          {
+  184   1          T2R = 0;            //Timer stop
+  185   1          T2_CT = 0;  //Timer2 set As Timer
+  186   1          T2x12 = 1;  //Timer2 set as 1T mode
+  187   1          T2H = (uint8_t)(dat / 256);
+  188   1          T2L = (uint8_t)(dat % 256);
+  189   1          ET2 = 0;    //禁止中断
+C251 COMPILER V5.60.0,  uart2_3                                                            08/06/22  09:46:20  PAGE 4   
+
+  190   1          T2R = 1;            //Timer run enable
+  191   1      }
+  192          
+  193          //========================================================================
+  194          // 函数: void UART3_config(uint8_t brt)
+  195          // 描述: UART3初始化函数。
+  196          // 参数: brt: 选择波特率, 2: 使用Timer2做波特率, 其它值: 使用Timer3做波特率.
+  197          // 返回: none.
+  198          // 版本: VER1.0
+  199          // 日期: 2014-11-28
+  200          // 备注: 
+  201          //========================================================================
+  202          void UART3_config(uint8_t brt)    // 选择波特率, 2: 使用Timer2做波特率, 其它值: 使用Timer3做波特率.
+  203          {
+  204   1          if(brt == 2)
+  205   1          {
+  206   2              SetTimer2Baudraye((uint16_t)Baudrate3);
+  207   2              S3CON = 0x10;       //8位数据, 使用Timer2做波特率发生器, 允许接收
+  208   2          }
+  209   1          else
+  210   1          {
+  211   2              T3R = 0;                //Timer stop
+  212   2              S3CON = 0x50;       //8位数据, 使用Timer3做波特率发生器, 允许接收
+  213   2              T3H = (uint8_t)(Baudrate3 / 256);
+  214   2              T3L = (uint8_t)(Baudrate3 % 256);
+  215   2              T3_CT = 0;      //Timer3 set As Timer
+  216   2              T3x12 = 1;      //Timer3 set as 1T mode
+  217   2              T3R = 1;                //Timer run enable
+  218   2          }
+  219   1          ES3  = 1;       //允许UART3中断
+  220   1          S3_S = 1;       //UART3 switch bit1 to: 0: P0.0 P0.1,  1: P5.0 P5.1
+  221   1      
+  222   1          B_TX3_Busy = 0;
+  223   1          TX3_Send = 0;
+  224   1          TX3_Cnt = 0;
+  225   1          RX3_Cnt = 0;
+  226   1      }
+  227          
+  228          //========================================================================
+  229          // 函数: void UART2_config(uint8_t brt)
+  230          // 描述: UART2初始化函数。
+  231          // 参数: brt: 选择波特率, 2: 使用Timer2做波特率, 其它值: 无效.
+  232          // 返回: none.
+  233          // 版本: VER1.0
+  234          // 日期: 2014-11-28
+  235          // 备注: 
+  236          //========================================================================
+  237          void UART2_config(uint8_t brt)    // 选择波特率, 2: 使用Timer2做波特率, 其它值: 无效.
+  238          {
+  239   1          if(brt == 2)
+  240   1          {
+  241   2              SetTimer2Baudraye((uint16_t)Baudrate2);
+  242   2      
+  243   2              S2CON = (S2CON & 0x3f) | 0x40;    //UART2模式, 0x00: 同步移位输出, 0x40: 8位数据,可变波特率, 0x80
+             -: 9位数据,固定波特率, 0xc0: 9位数据,可变波特率
+  244   2              ES2   = 1;         //允许中断
+  245   2              S2REN = 1;         //允许接收
+  246   2              S2_S  = 1;         //UART2 switch to: 0: P1.0 P1.1,  1: P4.6 P4.7
+  247   2      
+  248   2              B_TX2_Busy = 0;
+  249   2              TX2_Send = 0;
+  250   2              TX2_Cnt = 0;
+  251   2              RX2_Cnt = 0;
+  252   2          }
+  253   1      }
+  254          
+C251 COMPILER V5.60.0,  uart2_3                                                            08/06/22  09:46:20  PAGE 5   
+
+  255          //========================================================================
+  256          // 函数: void UART2_int (void) interrupt UART2_VECTOR
+  257          // 描述: UART2中断函数。
+  258          // 参数: nine.
+  259          // 返回: none.
+  260          // 版本: VER1.0
+  261          // 日期: 2014-11-28
+  262          // 备注: 
+  263          //========================================================================
+  264          void UART2_int (void) interrupt UART2_VECTOR
+  265          {
+  266   1          if(S2RI)
+  267   1          {
+  268   2              S2RI = 0;    //Clear Rx flag
+  269   2              if(RX2_Cnt >= UART2_BUF_LENGTH)  RX2_Cnt = 0;
+  270   2              RX2_Buffer[RX2_Cnt] = S2BUF;
+  271   2              RX2_Cnt++;
+  272   2              RX2_TimeOut = 5;
+  273   2          }
+  274   1      
+  275   1          if(S2TI)
+  276   1          {
+  277   2              S2TI = 0;    //Clear Tx flag
+  278   2              if(TX2_Send != TX2_Cnt)
+  279   2              {
+  280   3                  S2BUF = TX2_Buffer[TX2_Send];
+  281   3                  if(++TX2_Send >= UART2_BUF_LENGTH)  TX2_Send = 0;
+  282   3              }
+  283   2              else
+  284   2              {
+  285   3                  B_TX2_Busy = 0;
+  286   3              }
+  287   2          }
+  288   1      }
+  289          
+  290          //========================================================================
+  291          // 函数: void UART3_int (void) interrupt UART3_VECTOR
+  292          // 描述: UART3中断函数。
+  293          // 参数: nine.
+  294          // 返回: none.
+  295          // 版本: VER1.0
+  296          // 日期: 2014-11-28
+  297          // 备注: 
+  298          //========================================================================
+  299          void UART3_int (void) interrupt UART3_VECTOR
+  300          {
+  301   1          if(S3RI)
+  302   1          {
+  303   2              S3RI = 0;    //Clear Rx flag
+  304   2              RX3_Buffer[RX3_Cnt] = S3BUF;
+  305   2              if(++RX3_Cnt >= UART3_BUF_LENGTH)   RX3_Cnt = 0;
+  306   2              RX3_TimeOut = 5;
+  307   2          }
+  308   1      
+  309   1          if(S3TI)
+  310   1          {
+  311   2              S3TI = 0;   //Clear Tx flag
+  312   2              if(TX3_Send != TX3_Cnt)
+  313   2              {
+  314   3                  S3BUF = TX3_Buffer[TX3_Send];
+  315   3                  if(++TX3_Send >= UART3_BUF_LENGTH)  TX3_Send = 0;
+  316   3              }
+  317   2              else
+  318   2              {
+  319   3                  B_TX3_Busy = 0;
+  320   3              }
+C251 COMPILER V5.60.0,  uart2_3                                                            08/06/22  09:46:20  PAGE 6   
+
+  321   2          }
+  322   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       678     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =       266     ------
+  bit size             =         2     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =        74     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

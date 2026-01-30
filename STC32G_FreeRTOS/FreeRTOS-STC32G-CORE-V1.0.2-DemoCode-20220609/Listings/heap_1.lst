@@ -1,0 +1,194 @@
+C251 COMPILER V5.60.0,  heap_1                                                             08/06/22  09:46:17  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE heap_1
+OBJECT MODULE PLACED IN .\Objects\heap_1.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE Sources\FreeRTOS\portable\MemMang\heap_1.c XSMALL OA FUNCTIONS(REENTRA
+                    -NT) BROWSE INCDIR(.\Sources\User;.\Sources\User\include;.\Sources\FreeRTOS\include;.\Sources\FreeRTOS\portable\STC32G12K
+                    -128) DEBUG PRINT(.\Listings\heap_1.lst) OBJECT(.\Objects\heap_1.obj) 
+
+stmt  level    source
+
+    1          /*
+    2           * FreeRTOS Kernel V10.4.6
+    3           * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
+    4           *
+    5           * SPDX-License-Identifier: MIT
+    6           *
+    7           * Permission is hereby granted, free of charge, to any person obtaining a copy of
+    8           * this software and associated documentation files (the "Software"), to deal in
+    9           * the Software without restriction, including without limitation the rights to
+   10           * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+   11           * the Software, and to permit persons to whom the Software is furnished to do so,
+   12           * subject to the following conditions:
+   13           *
+   14           * The above copyright notice and this permission notice shall be included in all
+   15           * copies or substantial portions of the Software.
+   16           *
+   17           * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   18           * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+   19           * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+   20           * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+   21           * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+   22           * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+   23           *
+   24           * https://www.FreeRTOS.org
+   25           * https://github.com/FreeRTOS
+   26           *
+   27           */
+   28          
+   29          
+   30          /*
+   31           * The simplest possible implementation of pvPortMalloc().  Note that this
+   32           * implementation does NOT allow allocated memory to be freed again.
+   33           *
+   34           * See heap_2.c, heap_3.c and heap_4.c for alternative implementations, and the
+   35           * memory management pages of https://www.FreeRTOS.org for more information.
+   36           */
+   37          #include <stdlib.h>
+   38          
+   39          /* Defining MPU_WRAPPERS_INCLUDED_FROM_API_FILE prevents task.h from redefining
+   40           * all the API functions to use the MPU wrappers.  That should only be done when
+   41           * task.h is included from an application file. */
+   42          #define MPU_WRAPPERS_INCLUDED_FROM_API_FILE
+   43          
+   44          #include "FreeRTOS.h"
+   45          #include "task.h"
+   46          
+   47          #undef MPU_WRAPPERS_INCLUDED_FROM_API_FILE
+   48          
+   49          #if ( configSUPPORT_DYNAMIC_ALLOCATION == 0 )
+                   #error This file must not be used if configSUPPORT_DYNAMIC_ALLOCATION is 0
+               #endif
+   52          
+   53          /* A few bytes might be lost to byte aligning the heap start address. */
+   54          #define configADJUSTED_HEAP_SIZE    ( configTOTAL_HEAP_SIZE - portBYTE_ALIGNMENT )
+   55          
+   56          /* Allocate the memory for the heap. */
+   57          #if ( configAPPLICATION_ALLOCATED_HEAP == 1 )
+C251 COMPILER V5.60.0,  heap_1                                                             08/06/22  09:46:17  PAGE 2   
+
+               
+               /* The application writer has already defined the array used for the RTOS
+               * heap - probably so it can be placed in a special segment or address. */
+                   extern uint8_t ucHeap[ configTOTAL_HEAP_SIZE ];
+               #else
+   63              static uint8_t ucHeap[ configTOTAL_HEAP_SIZE ];
+   64          #endif /* configAPPLICATION_ALLOCATED_HEAP */
+   65          
+   66          /* Index into the ucHeap array. */
+   67          static size_t xNextFreeByte = ( size_t ) 0;
+   68          
+   69          /*-----------------------------------------------------------*/
+   70          
+   71          void * pvPortMalloc( size_t xWantedSize )
+   72          {
+   73   1          void * pvReturn = NULL;
+   74   1          static uint8_t * pucAlignedHeap = NULL;
+   75   1      
+   76   1          /* Ensure that blocks are always aligned. */
+   77   1          #if ( portBYTE_ALIGNMENT != 1 )
+   78   1              {
+   79   2                  if( xWantedSize & portBYTE_ALIGNMENT_MASK )
+   80   2                  {
+   81   3                      /* Byte alignment required. Check for overflow. */
+   82   3                      if ( (xWantedSize + ( portBYTE_ALIGNMENT - ( xWantedSize & portBYTE_ALIGNMENT_MASK ) )) >
+             - xWantedSize )
+   83   3                      {
+   84   4                          xWantedSize += ( portBYTE_ALIGNMENT - ( xWantedSize & portBYTE_ALIGNMENT_MASK ) );
+   85   4                      }
+   86   3                      else
+   87   3                      {
+   88   4                          xWantedSize = 0;
+   89   4                      }
+   90   3                  }
+   91   2              }
+   92   1          #endif
+   93   1      
+   94   1          vTaskSuspendAll();
+   95   1          {
+   96   2              if( pucAlignedHeap == NULL )
+   97   2              {
+   98   3                  /* Ensure the heap starts on a correctly aligned boundary. */
+   99   3                  pucAlignedHeap = ( uint8_t * ) ( ( ( portPOINTER_SIZE_TYPE ) & ucHeap[ portBYTE_ALIGNMENT - 1
+             - ] ) & ( ~( ( portPOINTER_SIZE_TYPE ) portBYTE_ALIGNMENT_MASK ) ) );
+  100   3              }
+  101   2      
+  102   2              /* Check there is enough room left for the allocation and. */
+  103   2              if( ( xWantedSize > 0 ) && /* valid size */
+  104   2                  ( ( xNextFreeByte + xWantedSize ) < configADJUSTED_HEAP_SIZE ) &&
+  105   2                  ( ( xNextFreeByte + xWantedSize ) > xNextFreeByte ) ) /* Check for overflow. */
+  106   2              {
+  107   3                  /* Return the next free byte then increment the index past this
+  108   3                   * block. */
+  109   3                  pvReturn = pucAlignedHeap + xNextFreeByte;
+  110   3                  xNextFreeByte += xWantedSize;
+  111   3              }
+  112   2      
+  113   2              traceMALLOC( pvReturn, xWantedSize );
+  114   2          }
+  115   1          ( void ) xTaskResumeAll();
+  116   1      
+  117   1          #if ( configUSE_MALLOC_FAILED_HOOK == 1 )
+                       {
+                           if( pvReturn == NULL )
+                           {
+                               extern void vApplicationMallocFailedHook( void );
+C251 COMPILER V5.60.0,  heap_1                                                             08/06/22  09:46:17  PAGE 3   
+
+                               vApplicationMallocFailedHook();
+                           }
+                       }
+                   #endif
+  126   1      
+  127   1          return pvReturn;
+  128   1      }
+  129          /*-----------------------------------------------------------*/
+  130          
+  131          void vPortFree( void * pv )
+  132          {
+  133   1          /* Memory cannot be freed using this scheme.  See heap_2.c, heap_3.c and
+  134   1           * heap_4.c for alternative implementations, and the memory management pages of
+  135   1           * https://www.FreeRTOS.org for more information. */
+  136   1          UNUSED( pv );
+  137   1      
+  138   1          /* Force an assert as it is invalid to call this function. */
+  139   1          configASSERT( pv == NULL );
+  140   1      }
+  141          /*-----------------------------------------------------------*/
+  142          
+  143          void vPortInitialiseBlocks( void )
+  144          {
+  145   1          /* Only required when static memory is not cleared. */
+  146   1          xNextFreeByte = ( size_t ) 0;
+  147   1      }
+  148          /*-----------------------------------------------------------*/
+  149          
+  150          size_t xPortGetFreeHeapSize( void )
+  151          {
+  152   1          return( configADJUSTED_HEAP_SIZE - xNextFreeByte );
+  153   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       162     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =      2054     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =        14     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

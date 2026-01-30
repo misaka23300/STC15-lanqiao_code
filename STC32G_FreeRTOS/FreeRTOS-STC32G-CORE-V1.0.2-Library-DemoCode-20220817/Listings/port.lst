@@ -1,0 +1,284 @@
+C251 COMPILER V5.60.0,  port                                                               30/01/26  13:24:28  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE port
+NO OBJECT MODULE REQUESTED
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE Sources\FreeRTOS\portable\STC32G12K128\port.c XSMALL FUNCTIONS(REENTRA
+                    -NT) OPTIMIZE(4,SPEED) BROWSE INCDIR(.\Sources\User;.\Sources\User\include;.\Sources\FreeRTOS\include;.\Sources\FreeRTOS\
+                    -portable\STC32G12K128;.\Sources\Driver\inc;.\Sources\Task\inc) DEBUG PRINT(.\Listings\port.lst) TABS(2) SRC(.\Objects\po
+                    -rt.SRC) 
+
+stmt  level    source
+
+    1          /*
+    2           * FreeRTOS Kernel V10.4.6
+    3           * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
+    4           *
+    5           * SPDX-License-Identifier: MIT
+    6           *
+    7           * Permission is hereby granted, free of charge, to any person obtaining a copy of
+    8           * this software and associated documentation files (the "Software"), to deal in
+    9           * the Software without restriction, including without limitation the rights to
+   10           * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+   11           * the Software, and to permit persons to whom the Software is furnished to do so,
+   12           * subject to the following conditions:
+   13           *
+   14           * The above copyright notice and this permission notice shall be included in all
+   15           * copies or substantial portions of the Software.
+   16           *
+   17           * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   18           * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+   19           * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+   20           * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+   21           * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+   22           * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+   23           *
+   24           * https://www.FreeRTOS.org
+   25           * https://github.com/FreeRTOS
+   26           *
+   27           */
+   28          
+   29          
+   30          /* Standard includes. */
+   31          #include <stdlib.h>
+   32          
+   33          /* Scheduler includes. */
+   34          #include "FreeRTOS.h"
+   35          #include "task.h"
+   36          #include "portasm.h"
+   37          
+   38          /* Constants required to setup the tick ISR. */
+   39          
+   40          #define portRELOAD_VALUE                    ( 65536 - configCPU_CLOCK_HZ / configTICK_RATE_HZ )
+   41          
+   42          
+   43          static StackType_t data xPCL;
+   44          static StackType_t data xPCH;
+   45          static StackType_t data xPCB;
+   46          
+   47          
+   48          /* Setup the timer to generate the tick interrupts. */
+   49          static void prvPortSetupTimerInterrupt( void );
+   50          
+   51          
+   52          /*-----------------------------------------------------------*/
+   53          
+   54          
+   55          /*
+   56           * See header file for description.
+C251 COMPILER V5.60.0,  port                                                               30/01/26  13:24:28  PAGE 2   
+
+   57           */
+   58          StackType_t *pxPortInitialiseStack( StackType_t *pxTopOfStack, TaskFunction_t pxCode, void *pvParameters 
+             -)
+   59          {
+   60   1          uint32_t ulAddress;
+   61   1        uint8_t index;
+   62   1      
+   63   1          /* Place a few bytes of known values on the bottom of the stack.
+   64   1          This is just useful for debugging and can be uncommented if required.*/
+   65   1          /*
+   66   1          *pxTopOfStack = 0x11;
+   67   1          pxTopOfStack++;
+   68   1          *pxTopOfStack = 0x22;
+   69   1          pxTopOfStack++;
+   70   1          *pxTopOfStack = 0x33;
+   71   1          pxTopOfStack++;
+   72   1          */
+   73   1      
+   74   1          /* Simulate how the stack would look after a call to the scheduler tick
+   75   1          ISR. The return address that would have been pushed by the MCU. */
+   76   1          ulAddress = ( uint32_t ) pxCode;
+   77   1          *pxTopOfStack = ( StackType_t ) ( ulAddress >> 16 );    /* PC[23:16] */
+   78   1          pxTopOfStack++;
+   79   1          *pxTopOfStack = ( StackType_t ) ( ulAddress >> 8 );     /* PC[15:8] */
+   80   1          pxTopOfStack++;
+   81   1          *pxTopOfStack = ( StackType_t ) ( ulAddress );          /* PC[7:0] */
+   82   1      
+   83   1        pxTopOfStack++;
+   84   1        *pxTopOfStack = 0;                                      /* PSW1 */
+   85   1      
+   86   1          /* Next all the registers will have been pushed by portSAVE_CONTEXT(). */
+   87   1        /* DR56 */
+   88   1        pxTopOfStack++;
+   89   1        *pxTopOfStack = 0;                                      /* R56 */
+   90   1        pxTopOfStack++;
+   91   1        *pxTopOfStack = 1;                                      /* R57(DPXL) */
+   92   1        pxTopOfStack++;
+   93   1        *pxTopOfStack = 0;                                      /* R58(DPH) */
+   94   1        pxTopOfStack++;
+   95   1        *pxTopOfStack = 0;                                      /* R59(DPL) */
+   96   1      
+   97   1        /* DR28 DR24 DR20 DR16 DR12 DR8 DR4 */
+   98   1        for(index = 0; index < 28; index++)
+   99   1        {
+  100   2          pxTopOfStack++;
+  101   2          *pxTopOfStack = 0;
+  102   2        }
+  103   1      
+  104   1          /* The function parameters will be passed in the DR0 register as
+  105   1          a four byte generic pointer is used. */
+  106   1        pxTopOfStack++;
+  107   1          ulAddress = ( uint32_t ) pvParameters;
+  108   1          *pxTopOfStack = ( StackType_t ) ( ulAddress >> 24 );    /* R0 */
+  109   1          pxTopOfStack++;
+  110   1          *pxTopOfStack = ( StackType_t ) ( ulAddress >> 16 );    /* R1 */
+  111   1          pxTopOfStack++;
+  112   1          *pxTopOfStack = ( StackType_t ) ( ulAddress >> 8 );     /* R2 */
+  113   1          pxTopOfStack++;
+  114   1          *pxTopOfStack = ( StackType_t ) ( ulAddress );          /* R3 */
+  115   1        pxTopOfStack++;
+  116   1        *pxTopOfStack = ( StackType_t ) 0;                      /* PSW */
+  117   1      
+  118   1          /* we return the top of the stack */
+  119   1          return pxTopOfStack;
+  120   1      }
+  121          /*-----------------------------------------------------------*/
+C251 COMPILER V5.60.0,  port                                                               30/01/26  13:24:28  PAGE 3   
+
+  122          
+  123          BaseType_t xPortStartScheduler( void )
+  124          {
+  125   1          UNUSED( pxCurrentTCB );
+  126   1      
+  127   1        /* Start the timer that generates the tick ISR. */
+  128   1          prvPortSetupTimerInterrupt();
+  129   1      
+  130   1          /* Start the first task. */
+  131   1          portRESTORE_SPX();
+  132   1          portRESTORE_CONTEXT();
+  133   1          portRETURN_TASK();
+  134   1      
+  135   1          /* Should never get here! */
+  136   1          return pdTRUE;
+  137   1      }
+  138          /*-----------------------------------------------------------*/
+  139          
+  140          void vPortEndScheduler( void )
+  141          {
+  142   1          /* Not implemented for this port. */
+  143   1      }
+  144          /*-----------------------------------------------------------*/
+  145          
+  146          /* Manual context switch.   */
+  147          void vPortYield( void )
+  148          {
+  149   1          UNUSED( pxCurrentTCB );
+  150   1      
+  151   1          /* Normalize the return address of the function
+  152   1          call in stack to ECALL mode, then push the current
+  153   1          execution context onto the stack.*/
+  154   1          portNORMALIZE_FUNCTION_STACK();
+  155   1          portSAVE_CONTEXT();
+  156   1      
+  157   1          /* Saves the stack pointer for one task into its TCB, calls
+  158   1          vTaskSwitchContext() to update the TCB being used, then restores the stack
+  159   1          from the new TCB read to run the task. */
+  160   1          portEND_SWITCHING_ISR();
+  161   1      
+  162   1        /* Restores the execution context from the stack,
+  163   1          then returned using ERET */
+  164   1          portRESTORE_CONTEXT();
+  165   1          portRETURN_TASK();
+  166   1      }
+  167          
+  168          /*-----------------------------------------------------------*/
+  169          
+  170          /* The ISR used depends on whether the preemptive or cooperative
+  171          scheduler is being used. */
+  172          
+  173          void vTimer0ISR( void )
+  174          {
+  175   1          UNUSED( pxCurrentTCB );
+  176   1      
+  177   1          /* Normalize the return address of the interrupt
+  178   1          call in stack to ECALL mode, then push the current
+  179   1          execution context onto the stack.*/
+  180   1          portNORMALIZE_INTERRUPT_STACK();
+  181   1          portSAVE_CONTEXT();
+  182   1      
+  183   1      #if configUSE_PREEMPTION == 1
+  184   1      
+  185   1          /* Get the scheduler to update the task states following the tick. */
+  186   1          if( xTaskIncrementTick() != pdFALSE )
+  187   1          {
+C251 COMPILER V5.60.0,  port                                                               30/01/26  13:24:28  PAGE 4   
+
+  188   2              /* Saves the stack pointer for one task into its TCB, calls
+  189   2              vTaskSwitchContext() to update the TCB being used, then restores the stack
+  190   2              from the new TCB read to run the task. */
+  191   2              portEND_SWITCHING_ISR();
+  192   2          }
+  193   1      
+  194   1      #else
+               
+                   /* Same as preemptive tick, but the cooperative scheduler is being used
+                   so we don't have to switch in the context of the next task. */
+                   xTaskIncrementTick();
+               
+               #endif
+  201   1      
+  202   1        /* Restores the execution context from the stack,
+  203   1          then returned using ERET */
+  204   1          portRESTORE_CONTEXT();
+  205   1          portRELEASE_INTERRUPT();
+  206   1          portRETURN_TASK();
+  207   1      }
+  208          
+  209          /*-----------------------------------------------------------*/
+  210          
+  211          /*Setup the systick timer to generate the tick interrupts at the required
+  212          frequency. */
+  213          static void prvPortSetupTimerInterrupt( void )
+  214          {
+  215   1          /* Timer0 work at 1T mode. */
+  216   1          AUXR |= 0x80;
+  217   1      
+  218   1          /* Timer0 work at mode0 (16-bit auto reload mode) */
+  219   1          TMOD &= ~0x0f;
+  220   1      
+  221   1          /* Initial timer0 reload value (1ms per cycle). */
+  222   1          TL0 = ( uint8_t )( portRELOAD_VALUE );
+  223   1          TH0 = ( uint8_t )( portRELOAD_VALUE >> 8 );
+  224   1      
+  225   1          /* Interrupts are disabled when this is called so
+  226   1          the timer can be started here. */
+  227   1          TR0 = 1;
+  228   1      
+  229   1          /* Enable timer0 interrupts. */
+  230   1          ET0 = 1;
+  231   1      }
+  232          
+  233          
+  234              __asm   { CSEG    AT  0BH       }
+  235          #if ( configUSE_ROMHUGE == 0 )
+  236              __asm   { JMP     vTimer0ISR?_  }
+  237          #else
+                   __asm   { JMP     vTimer0ISR??  }
+               #endif
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       545     ------
+  ecode size           =    ------     ------
+  data size            =         3     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+C251 COMPILER V5.60.0,  port                                                               30/01/26  13:24:28  PAGE 5   
+
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

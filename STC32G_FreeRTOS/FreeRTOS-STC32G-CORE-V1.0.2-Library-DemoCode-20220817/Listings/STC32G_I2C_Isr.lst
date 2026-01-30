@@ -1,0 +1,127 @@
+C251 COMPILER V5.60.0,  STC32G_I2C_Isr                                                     30/01/26  13:24:54  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE STC32G_I2C_Isr
+OBJECT MODULE PLACED IN .\Objects\STC32G_I2C_Isr.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE Sources\Driver\isr\STC32G_I2C_Isr.c XSMALL FUNCTIONS(REENTRANT) OPTIMI
+                    -ZE(4,SPEED) BROWSE INCDIR(.\Sources\User;.\Sources\User\include;.\Sources\FreeRTOS\include;.\Sources\FreeRTOS\portable\S
+                    -TC32G12K128;.\Sources\Driver\inc;.\Sources\Task\inc) DEBUG PRINT(.\Listings\STC32G_I2C_Isr.lst) TABS(2) OBJECT(.\Objects
+                    -\STC32G_I2C_Isr.obj) 
+
+stmt  level    source
+
+    1          /*---------------------------------------------------------------------*/
+    2          /* --- STC MCU Limited ------------------------------------------------*/
+    3          /* --- STC 1T Series MCU Demo Programme -------------------------------*/
+    4          /* --- Mobile: (86)13922805190 ----------------------------------------*/
+    5          /* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
+    6          /* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+    7          /* --- Web: www.STCMCU.com --------------------------------------------*/
+    8          /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
+    9          /* --- QQ:  800003751 -------------------------------------------------*/
+   10          /* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+   11          /*---------------------------------------------------------------------*/
+   12          
+   13          #include  "STC32G_I2C.h"
+   14          
+   15          //========================================================================
+   16          //                               本地变量声明
+   17          //========================================================================
+   18          
+   19          I2C_IsrTypeDef I2CIsr;
+   20          bit I2C_DisplayFlag;
+   21          
+   22          //========================================================================
+   23          //                            外部函数和变量声明
+   24          //========================================================================
+   25          
+   26          
+   27          //========================================================================
+   28          // 函数: I2C_ISR_Handler
+   29          // 描述: I2C中断函数.
+   30          // 参数: none.
+   31          // 返回: none.
+   32          // 版本: V1.0, 2020-09-23
+   33          //========================================================================
+   34          void I2C_ISR_Handler() interrupt I2C_VECTOR
+   35          {
+   36   1        // TODO: 在此处添加用户代码
+   37   1      
+   38   1        // 主机模式
+   39   1        I2CMSST &= ~0x40;       //I2C指令发送完成状态清除
+   40   1      
+   41   1        if(DMA_I2C_CR & 0x04)   //ACKERR
+   42   1        {
+   43   2          DMA_I2C_CR &= ~0x04;  //发数据后收到NAK
+   44   2        }
+   45   1      
+   46   1        // 从机模式
+   47   1        if (I2CSLST & 0x40)
+   48   1        {
+   49   2          I2CSLST &= ~0x40;                       //处理START事件
+   50   2        }
+   51   1        else if (I2CSLST & 0x20)
+   52   1        {
+   53   2          I2CSLST &= ~0x20;                       //处理RECV事件，SLACKO设置为0
+   54   2          if (I2CIsr.isda)
+   55   2          {
+   56   3            I2CIsr.isda = 0;                           //处理RECV事件（RECV DEVICE ADDR）
+C251 COMPILER V5.60.0,  STC32G_I2C_Isr                                                     30/01/26  13:24:54  PAGE 2   
+
+   57   3          }
+   58   2          else if (I2CIsr.isma)
+   59   2          {
+   60   3            I2CIsr.isma = 0;                           //处理RECV事件（RECV MEMORY ADDR）
+   61   3            I2CIsr.addr = I2CRXD;
+   62   3            I2CTXD = I2C_Buffer[I2CIsr.addr];
+   63   3          }
+   64   2          else
+   65   2          {
+   66   3            I2C_Buffer[I2CIsr.addr++] = I2CRXD;            //处理RECV事件（RECV DATA）
+   67   3          }
+   68   2        }
+   69   1        else if (I2CSLST & 0x10)
+   70   1        {
+   71   2          I2CSLST &= ~0x10;                       //处理SEND事件
+   72   2          if (I2CSLST & 0x02)
+   73   2          {
+   74   3            I2CTXD = 0xff;
+   75   3          }
+   76   2          else
+   77   2          {
+   78   3            I2CTXD = I2C_Buffer[++I2CIsr.addr];
+   79   3          }
+   80   2        }
+   81   1        else if (I2CSLST & 0x08)
+   82   1        {
+   83   2          I2CSLST &= ~0x08;                       //处理STOP事件
+   84   2          I2CIsr.isda = 1;
+   85   2          I2CIsr.isma = 1;
+   86   2          I2C_DisplayFlag = 1;
+   87   2        }
+   88   1      }
+   89          
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       277     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =         3     ------
+  bit size             =         1     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

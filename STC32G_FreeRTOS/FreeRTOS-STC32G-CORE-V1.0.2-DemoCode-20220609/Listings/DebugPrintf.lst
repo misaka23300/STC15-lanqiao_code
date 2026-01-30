@@ -1,0 +1,102 @@
+C251 COMPILER V5.60.0,  DebugPrintf                                                        08/06/22  09:46:19  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE DebugPrintf
+OBJECT MODULE PLACED IN .\Objects\DebugPrintf.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE Sources\User\DebugPrintf.c XSMALL OA FUNCTIONS(REENTRANT) BROWSE INCDI
+                    -R(.\Sources\User;.\Sources\User\include;.\Sources\FreeRTOS\include;.\Sources\FreeRTOS\portable\STC32G12K128) DEBUG PRINT
+                    -(.\Listings\DebugPrintf.lst) OBJECT(.\Objects\DebugPrintf.obj) 
+
+stmt  level    source
+
+    1          /*---------------------------------------------------------------------*/
+    2          /* --- STC MCU Limited ------------------------------------------------*/
+    3          /* --- STC 1T Series MCU Demo Programme -------------------------------*/
+    4          /* --- Mobile: (86)13922805190 ----------------------------------------*/
+    5          /* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
+    6          /* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+    7          /* --- Web: www.STCMCU.com --------------------------------------------*/
+    8          /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
+    9          /* --- QQ:  800003751 -------------------------------------------------*/
+   10          /* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+   11          /*---------------------------------------------------------------------*/
+   12          
+   13          
+   14          /*************  功能说明    **************
+   15          
+   16          包含printf所需函数，重定向到串口输出，可用于调试打印信息.
+   17          
+   18          ******************************************/
+   19          
+   20          #include "FreeRTOS.h"
+   21          #include "DebugPrintf.h"
+   22          
+   23          #define Baudrate      115200L
+   24          #define TM            (65536 -(MAIN_Fosc/Baudrate/4))
+   25          #define PrintUart     1        //1:printf 使用 UART1; 2:printf 使用 UART2
+   26          
+   27          /******************** 串口打印函数 ********************/
+   28          void DebugPrintfInit(void)
+   29          {
+   30   1      #if(PrintUart == 1)
+   31   1              SCON = (SCON & 0x3f) | 0x40; 
+   32   1              AUXR |= 0x40;           //定时器时钟1T模式
+   33   1              AUXR &= 0xFE;           //串口1选择定时器1为波特率发生器
+   34   1              TL1  = TM;
+   35   1              TH1  = TM>>8;
+   36   1              TR1 = 1;                                //定时器1开始计时
+   37   1      //      REN = 1;        //允许接收
+   38   1      
+   39   1      //      SCON = (SCON & 0x3f) | 0x40; 
+   40   1      //      T2L  = TM;
+   41   1      //      T2H  = TM>>8;
+   42   1      //      AUXR |= 0x15;   //串口1选择定时器2为波特率发生器
+   43   1      //      REN = 1;        //允许接收
+   44   1      #else
+                       P_SW2 |= 1;         //UART2 switch to: 0: P1.0 P1.1,  1: P4.6 P4.7
+                       S2CON = (S2CON & 0x3f) | 0x40;
+                       T2L  = TM;
+                       T2H  = TM>>8;
+                       AUXR |= 0x14;         //定时器2时钟1T模式,开始计时
+               //      S2CON |= (1<<4);    //允许接收
+               #endif
+   52   1      }
+   53          
+   54          void UartPutc(unsigned char dat)
+   55          {
+   56   1      #if(PrintUart == 1)
+   57   1              SBUF = dat; 
+C251 COMPILER V5.60.0,  DebugPrintf                                                        08/06/22  09:46:19  PAGE 2   
+
+   58   1              while(TI==0);
+   59   1              TI = 0;
+   60   1      #else
+                       S2BUF  = dat; 
+                       while((S2CON & 2) == 0);
+                       S2CON &= ~2;    //Clear Tx flag
+               #endif
+   65   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =        38     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

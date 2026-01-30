@@ -1,0 +1,302 @@
+C251 COMPILER V5.60.0,  STC32G_CAN                                                         30/01/26  13:24:36  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE STC32G_CAN
+OBJECT MODULE PLACED IN .\Objects\STC32G_CAN.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE Sources\Driver\src\STC32G_CAN.c XSMALL FUNCTIONS(REENTRANT) OPTIMIZE(4
+                    -,SPEED) BROWSE INCDIR(.\Sources\User;.\Sources\User\include;.\Sources\FreeRTOS\include;.\Sources\FreeRTOS\portable\STC32
+                    -G12K128;.\Sources\Driver\inc;.\Sources\Task\inc) DEBUG PRINT(.\Listings\STC32G_CAN.lst) TABS(2) OBJECT(.\Objects\STC32G_
+                    -CAN.obj) 
+
+stmt  level    source
+
+    1          /*---------------------------------------------------------------------*/
+    2          /* --- STC MCU Limited ------------------------------------------------*/
+    3          /* --- STC 1T Series MCU Demo Programme -------------------------------*/
+    4          /* --- Mobile: (86)13922805190 ----------------------------------------*/
+    5          /* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
+    6          /* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+    7          /* --- Web: www.STCMCU.com --------------------------------------------*/
+    8          /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
+    9          /* --- QQ:  800003751 -------------------------------------------------*/
+   10          /* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+   11          /*---------------------------------------------------------------------*/
+   12          
+   13          #include "STC32G_CAN.h"
+   14          
+   15          //========================================================================
+   16          // 函数: uint8_t ReadReg(uint8_t addr)
+   17          // 描述: CAN功能寄存器读取函数。
+   18          // 参数: CAN功能寄存器地址.
+   19          // 返回: CAN功能寄存器数据.
+   20          // 版本: VER1.0
+   21          // 日期: 2020-11-16
+   22          // 备注: 
+   23          //========================================================================
+   24          uint8_t CanReadReg(uint8_t addr)
+   25          {
+   26   1        uint8_t dat;
+   27   1        CANAR = addr;
+   28   1        dat = CANDR;
+   29   1        return dat;
+   30   1      }
+   31          
+   32          //========================================================================
+   33          // 函数: void WriteReg(uint8_t addr, uint8_t dat)
+   34          // 描述: CAN功能寄存器配置函数。
+   35          // 参数: CAN功能寄存器地址, CAN功能寄存器数据.
+   36          // 返回: none.
+   37          // 版本: VER1.0
+   38          // 日期: 2020-11-16
+   39          // 备注: 
+   40          //========================================================================
+   41          void CanWriteReg(uint8_t addr, uint8_t dat)
+   42          {
+   43   1        CANAR = addr;
+   44   1        CANDR = dat;
+   45   1      }
+   46          
+   47          //========================================================================
+   48          // 函数: void CAN_Inilize(uint8_t CANx, CAN_InitTypeDef *CAN)
+   49          // 描述: CAN 初始化程序.
+   50          // 参数: CAN: 结构参数,请参考CAN.h里的定义.
+   51          // 返回: none.
+   52          // 版本: V1.0, 2021-06-02
+   53          //========================================================================
+   54          void CAN_Inilize(uint8_t CANx, CAN_InitTypeDef *CAN)
+   55          {
+   56   1        if(CANx == CAN1)
+C251 COMPILER V5.60.0,  STC32G_CAN                                                         30/01/26  13:24:36  PAGE 2   
+
+   57   1        {
+   58   2          CANSEL = CAN1;    //选择CAN1模块
+   59   2          CanWriteReg(MR  ,0x04);   //使能 Reset Mode
+   60   2      
+   61   2          if(CAN->CAN_Enable == ENABLE) CANEN = 1;    //使能CAN1模块
+   62   2          else                CANEN = 0;    //关闭CAN1模块
+   63   2          
+   64   2          CanWriteReg(BTR0,(uint8_t)((CAN->CAN_SJW << 6) + CAN->CAN_BRP));
+   65   2          CanWriteReg(BTR1,(uint8_t)((CAN->CAN_SAM << 7) + (CAN->CAN_TSG2 << 4) + CAN->CAN_TSG1));
+   66   2      
+   67   2          CanWriteReg(ACR0,CAN->CAN_ACR0);    //总线验收代码寄存器
+   68   2          CanWriteReg(ACR1,CAN->CAN_ACR1);
+   69   2          CanWriteReg(ACR2,CAN->CAN_ACR2);
+   70   2          CanWriteReg(ACR3,CAN->CAN_ACR3);
+   71   2          CanWriteReg(AMR0,CAN->CAN_AMR0);    //总线验收屏蔽寄存器
+   72   2          CanWriteReg(AMR1,CAN->CAN_AMR1);
+   73   2          CanWriteReg(AMR2,CAN->CAN_AMR2);
+   74   2          CanWriteReg(AMR3,CAN->CAN_AMR3);
+   75   2      
+   76   2          CanWriteReg(ISR ,0xff);   //清中断标志
+   77   2          CanWriteReg(IMR ,CAN->CAN_IMR);     //中断寄存器设置
+   78   2          CanWriteReg(MR  ,0x00);   //退出 Reset Mode
+   79   2        }
+   80   1        else if(CANx == CAN2)
+   81   1        {
+   82   2          CANSEL = CAN2;    //选择CAN2模块
+   83   2          
+   84   2          CanWriteReg(MR  ,0x04);   //使能 Reset Mode
+   85   2      
+   86   2          if(CAN->CAN_Enable == ENABLE) CAN2EN = 1;   //使能CAN2模块
+   87   2          else                CAN2EN = 0;   //关闭CAN2模块
+   88   2          
+   89   2          CanWriteReg(BTR0,(uint8_t)((CAN->CAN_SJW << 6) + CAN->CAN_BRP));
+   90   2          CanWriteReg(BTR1,(uint8_t)((CAN->CAN_SAM << 7) + (CAN->CAN_TSG2 << 4) + CAN->CAN_TSG1));
+   91   2      
+   92   2          CanWriteReg(ACR0,CAN->CAN_ACR0);    //总线验收代码寄存器
+   93   2          CanWriteReg(ACR1,CAN->CAN_ACR1);
+   94   2          CanWriteReg(ACR2,CAN->CAN_ACR2);
+   95   2          CanWriteReg(ACR3,CAN->CAN_ACR3);
+   96   2          CanWriteReg(AMR0,CAN->CAN_AMR0);    //总线验收屏蔽寄存器
+   97   2          CanWriteReg(AMR1,CAN->CAN_AMR1);
+   98   2          CanWriteReg(AMR2,CAN->CAN_AMR2);
+   99   2          CanWriteReg(AMR3,CAN->CAN_AMR3);
+  100   2      
+  101   2          CanWriteReg(ISR ,0xff);   //清中断标志
+  102   2          CanWriteReg(IMR ,CAN->CAN_IMR);     //中断寄存器设置
+  103   2          CanWriteReg(MR  ,0x00);   //退出 Reset Mode
+  104   2        }
+  105   1      }
+  106          
+  107          //========================================================================
+  108          // 函数: void CanReadFifo(uint8_t *pdat)
+  109          // 描述: 读取CAN缓冲区数据函数。
+  110          // 参数: *pdat: 存放CAN缓冲区数据.
+  111          // 返回: none.
+  112          // 版本: VER1.0
+  113          // 日期: 2020-11-16
+  114          // 备注: 
+  115          //========================================================================
+  116          void CanReadFifo(uint8_t *pdat)
+  117          {
+  118   1        pdat[0]  = CanReadReg(RX_BUF0);
+  119   1        pdat[1]  = CanReadReg(RX_BUF1);
+  120   1        pdat[2]  = CanReadReg(RX_BUF2);
+  121   1        pdat[3]  = CanReadReg(RX_BUF3);
+  122   1      
+C251 COMPILER V5.60.0,  STC32G_CAN                                                         30/01/26  13:24:36  PAGE 3   
+
+  123   1        pdat[4]  = CanReadReg(RX_BUF0);
+  124   1        pdat[5]  = CanReadReg(RX_BUF1);
+  125   1        pdat[6]  = CanReadReg(RX_BUF2);
+  126   1        pdat[7]  = CanReadReg(RX_BUF3);
+  127   1      
+  128   1        pdat[8]  = CanReadReg(RX_BUF0);
+  129   1        pdat[9]  = CanReadReg(RX_BUF1);
+  130   1        pdat[10] = CanReadReg(RX_BUF2);
+  131   1        pdat[11] = CanReadReg(RX_BUF3);
+  132   1      
+  133   1        pdat[12]  = CanReadReg(RX_BUF0);
+  134   1        pdat[13]  = CanReadReg(RX_BUF1);
+  135   1        pdat[14]  = CanReadReg(RX_BUF2);
+  136   1        pdat[15]  = CanReadReg(RX_BUF3);
+  137   1      }
+  138          
+  139          //========================================================================
+  140          // 函数: uint16_t CanReadStandardFrame(uint8_t *pdat)
+  141          // 描述: CAN读取标准帧函数。
+  142          // 参数: *pdat: 接收数据缓冲区.
+  143          // 返回: CAN ID.
+  144          // 版本: VER1.0
+  145          // 日期: 2020-11-19
+  146          // 备注: 
+  147          //========================================================================
+  148          uint16_t CanReadStandardFrame(uint8_t *pdat)
+  149          {
+  150   1        uint8_t i;
+  151   1        uint16_t CanID;
+  152   1        uint8_t buffer[16];
+  153   1      
+  154   1        CanReadFifo(buffer);
+  155   1        CanID = ((buffer[1] << 8) + buffer[2]) >> 5;
+  156   1        for(i=0;i<8;i++)
+  157   1        {
+  158   2          pdat[i] = buffer[i+3];
+  159   2        }
+  160   1        return CanID;
+  161   1      }
+  162          
+  163          //========================================================================
+  164          // 函数: uint32_t CanReadExtendedFrame(uint8_t *pdat)
+  165          // 描述: CAN读取扩展帧函数。
+  166          // 参数: *pdat: 接收数据缓冲区.
+  167          // 返回: CAN ID.
+  168          // 版本: VER1.0
+  169          // 日期: 2020-11-19
+  170          // 备注: 
+  171          //========================================================================
+  172          uint32_t CanReadExtendedFrame(uint8_t *pdat)
+  173          {
+  174   1        uint8_t i;
+  175   1        uint32_t CanID;
+  176   1        uint8_t buffer[16];
+  177   1      
+  178   1        CanReadFifo(buffer);
+  179   1        CanID = (((uint32_t)buffer[1] << 24) + ((uint32_t)buffer[2] << 16) + ((uint32_t)buffer[3] << 8) + buffer
+             -[4]) >> 3;
+  180   1        for(i=0;i<8;i++)
+  181   1        {
+  182   2          pdat[i] = buffer[i+5];
+  183   2        }
+  184   1        return CanID;
+  185   1      }
+  186          
+  187          //========================================================================
+C251 COMPILER V5.60.0,  STC32G_CAN                                                         30/01/26  13:24:36  PAGE 4   
+
+  188          // 函数: void CanSendStandardFrame(uint16_t canid, uint8_t *pdat)
+  189          // 描述: CAN发送标准帧函数。
+  190          // 参数: canid: CAN ID; *pdat: 发送数据缓冲区.
+  191          // 返回: none.
+  192          // 版本: VER1.0
+  193          // 日期: 2020-11-19
+  194          // 备注: 
+  195          //========================================================================
+  196          void CanSendStandardFrame(uint16_t canid, uint8_t *pdat)
+  197          {
+  198   1        uint16_t CanID;
+  199   1      
+  200   1        CanID = canid << 5;
+  201   1        CanWriteReg(TX_BUF0,0x08);  //bit7: 标准帧(0)/扩展帧(1), bit6: 数据帧(0)/远程帧(1), bit3~bit0: 数据长度(D
+             -LC)
+  202   1        CanWriteReg(TX_BUF1,(uint8_t)(CanID>>8));
+  203   1        CanWriteReg(TX_BUF2,(uint8_t)CanID);
+  204   1        CanWriteReg(TX_BUF3,pdat[0]);
+  205   1      
+  206   1        CanWriteReg(TX_BUF0,pdat[1]);
+  207   1        CanWriteReg(TX_BUF1,pdat[2]);
+  208   1        CanWriteReg(TX_BUF2,pdat[3]);
+  209   1        CanWriteReg(TX_BUF3,pdat[4]);
+  210   1      
+  211   1        CanWriteReg(TX_BUF0,pdat[5]);
+  212   1        CanWriteReg(TX_BUF1,pdat[6]);
+  213   1        CanWriteReg(TX_BUF2,pdat[7]);
+  214   1        
+  215   1        CanWriteReg(TX_BUF3,0x00);
+  216   1        CanWriteReg(CMR ,0x04);   //发起一次帧传输
+  217   1      }
+  218          
+  219          //========================================================================
+  220          // 函数: void CanSendExtendedFrame(uint32_t canid, uint8_t *pdat)
+  221          // 描述: CAN发送扩展帧函数。
+  222          // 参数: canid: CAN ID; *pdat: 发送数据缓冲区.
+  223          // 返回: none.
+  224          // 版本: VER1.0
+  225          // 日期: 2020-11-19
+  226          // 备注: 
+  227          //========================================================================
+  228          void CanSendExtendedFrame(uint32_t canid, uint8_t *pdat)
+  229          {
+  230   1        uint32_t CanID;
+  231   1      
+  232   1        CanID = canid << 3;
+  233   1        CanWriteReg(TX_BUF0,0x88);  //bit7: 标准帧(0)/扩展帧(1), bit6: 数据帧(0)/远程帧(1), bit3~bit0: 数据长度(D
+             -LC)
+  234   1        CanWriteReg(TX_BUF1,(uint8_t)(CanID>>24));
+  235   1        CanWriteReg(TX_BUF2,(uint8_t)(CanID>>16));
+  236   1        CanWriteReg(TX_BUF3,(uint8_t)(CanID>>8));
+  237   1      
+  238   1        CanWriteReg(TX_BUF0,(uint8_t)CanID);
+  239   1        CanWriteReg(TX_BUF1,pdat[0]);
+  240   1        CanWriteReg(TX_BUF2,pdat[1]);
+  241   1        CanWriteReg(TX_BUF3,pdat[2]);
+  242   1      
+  243   1        CanWriteReg(TX_BUF0,pdat[3]);
+  244   1        CanWriteReg(TX_BUF1,pdat[4]);
+  245   1        CanWriteReg(TX_BUF2,pdat[5]);
+  246   1        CanWriteReg(TX_BUF3,pdat[6]);
+  247   1      
+  248   1        CanWriteReg(TX_BUF0,pdat[7]);
+  249   1        CanWriteReg(TX_BUF1,0x00);
+  250   1        CanWriteReg(TX_BUF2,0x00);
+  251   1        CanWriteReg(TX_BUF3,0x00);
+C251 COMPILER V5.60.0,  STC32G_CAN                                                         30/01/26  13:24:36  PAGE 5   
+
+  252   1      
+  253   1        CanWriteReg(CMR ,0x04);   //发起一次帧传输
+  254   1      }
+  255          
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =      1117     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,238 @@
+C251 COMPILER V5.60.0,  adckey                                                             30/01/26  13:24:31  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE adckey
+OBJECT MODULE PLACED IN .\Objects\adckey.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE Sources\Task\src\adckey.c XSMALL FUNCTIONS(REENTRANT) OPTIMIZE(4,SPEED
+                    -) BROWSE INCDIR(.\Sources\User;.\Sources\User\include;.\Sources\FreeRTOS\include;.\Sources\FreeRTOS\portable\STC32G12K12
+                    -8;.\Sources\Driver\inc;.\Sources\Task\inc) DEBUG PRINT(.\Listings\adckey.lst) TABS(2) OBJECT(.\Objects\adckey.obj) 
+
+stmt  level    source
+
+    1          /*---------------------------------------------------------------------*/
+    2          /* --- STC MCU Limited ------------------------------------------------*/
+    3          /* --- STC 1T Series MCU Demo Programme -------------------------------*/
+    4          /* --- Mobile: (86)13922805190 ----------------------------------------*/
+    5          /* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
+    6          /* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+    7          /* --- Web: www.STCMCU.com --------------------------------------------*/
+    8          /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
+    9          /* --- QQ:  800003751 -------------------------------------------------*/
+   10          /* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+   11          /*---------------------------------------------------------------------*/
+   12          
+   13          /*************  功能说明    **************
+   14          
+   15          本例程基于STC32G为主控芯片的实验箱进行编写测试。
+   16          
+   17          通过ADC采集按键口ADC值，根据ADC值设置键码为1~16.
+   18          
+   19          按键只支持单键按下, 不支持多键同时按下, 那样将会有不可预知的结果.
+   20          
+   21          键按下超过1秒后,将以10键/秒的速度提供重键输出. 用户只需要检测KeyCode是否非0来判断键是否按下.
+   22          
+   23          调整时间键:
+   24          键码1: 小时+.
+   25          键码2: 小时-.
+   26          键码3: 分钟+.
+   27          键码4: 分钟-.
+   28          
+   29          ******************************************/
+   30          
+   31          #include "FreeRTOS.h"
+   32          #include "task.h"
+   33          
+   34          #include "STC32G_ADC.h"
+   35          
+   36          #include "adckey.h"
+   37          #include "rtc.h"
+   38          //#include "display.h"
+   39          
+   40          #define ADCKEY_CHANNEL          0                       //ADC按键的输入通道（P1.0）
+   41          #define ADC_OFFSET              64                      //ADC按键扫描时的偏差范围
+   42          
+   43          
+   44          static void prvAdcKeyInit( void );
+   45          static void prvAdcCalculateKey( void );
+   46          static void prvAdcKeyEvent( void );
+   47          
+   48          
+   49          static uint8_t ucKeyState;                              //ADC按键状态
+   50          static uint8_t ucKeyState1;
+   51          static uint8_t ucKeyState2;
+   52          static uint8_t ucKeyState3;
+   53          static uint8_t ucKeyHoldCnt;                            //键按下计时
+   54          
+   55          uint8_t ucKeyCode;                                      //给用户使用的键码, 1~16有效
+   56          
+   57          /* ADC按键扫描任务函数 */
+C251 COMPILER V5.60.0,  adckey                                                             30/01/26  13:24:31  PAGE 2   
+
+   58          portTASK_FUNCTION( vAdcKeyTask, pvParameters )
+   59          {
+   60   1          
+   61   1        UNUSED( pvParameters );
+   62   1      
+   63   1          prvAdcKeyInit();
+   64   1          while(1)
+   65   1          {
+   66   2              prvAdcCalculateKey();
+   67   2              prvAdcKeyEvent();
+   68   2      
+   69   2              vTaskDelay(10);
+   70   2          }
+   71   1          
+   72   1          vTaskDelete(NULL);
+   73   1      }   
+   74          
+   75          static void prvAdcKeyInit( void )
+   76          {
+   77   1      //    P1M1 |= 0x01;                                       //设置 P1.0 为 ADC 输入口
+   78   1      //    P1M0 &= ~0x01;
+   79   1      
+   80   1          ucKeyState  = 0;
+   81   1          ucKeyState1 = 0;
+   82   1          ucKeyState2 = 0;
+   83   1          ucKeyState3 = 0;                                    //键状态
+   84   1          ucKeyHoldCnt = 0;                                   //键按下计时
+   85   1          ucKeyCode = 0;                                      //给用户使用的键码, 1~16有效
+   86   1      }
+   87          
+   88          /***************** ADC键盘计算键码 *****************************
+   89          电路和软件算法设计: Coody
+   90          本ADC键盘方案在很多实际产品设计中, 验证了其稳定可靠, 即使按键使用导电膜,都很可靠.
+   91          16个键,理论上各个键对应的ADC值为 (4096 / 16) * k = 256 * k, k = 1 ~ 16, 特别的, k=16时,对应的ADC值是4095.
+   92          但是实际会有偏差,则判断时限制这个偏差, ADC_OFFSET为+-偏差, 则ADC值在 (256*k-ADC_OFFSET) 与 (256*k+ADC_OFF
+             -SET)之间为键有效.
+   93          间隔一定的时间,就采样一次ADC,比如10ms.
+   94          为了避免偶然的ADC值误判, 或者避免ADC在上升或下降时误判, 使用连续3次ADC值均在偏差范围内时, ADC值才认为有效
+             -.
+   95          以上算法, 能保证读键非常可靠.
+   96          **********************************************/
+   97          static void prvAdcCalculateKey( void )
+   98          {
+   99   1          uint16_t usResult;
+  100   1          uint8_t i;
+  101   1          uint16_t j;
+  102   1          
+  103   1          usResult = Get_ADCResult(ADCKEY_CHANNEL);
+  104   1          
+  105   1          if(usResult < (256 - ADC_OFFSET))
+  106   1          {
+  107   2              ucKeyState = 0;                                 //键状态归0
+  108   2              ucKeyHoldCnt = 0;
+  109   2          }
+  110   1          
+  111   1          j = 256;
+  112   1          for (i = 1; i <= 16; i++)
+  113   1          {
+  114   2              if ((usResult >= (j - ADC_OFFSET)) &&
+  115   2                  (usResult <= (j + ADC_OFFSET)))
+  116   2                 break;                                       //判断是否在偏差范围内
+  117   2              j += 256;
+  118   2          }
+  119   1          
+  120   1          ucKeyState3 = ucKeyState2;
+  121   1          ucKeyState2 = ucKeyState1;
+C251 COMPILER V5.60.0,  adckey                                                             30/01/26  13:24:31  PAGE 3   
+
+  122   1          
+  123   1          if (i > 16)
+  124   1              ucKeyState1 = 0;                                //键无效
+  125   1          else                                                //键有效
+  126   1          {
+  127   2              ucKeyState1 = i;
+  128   2              if ((ucKeyState3 == ucKeyState2) &&
+  129   2                  (ucKeyState2 == ucKeyState1) &&
+  130   2                  (ucKeyState3 > 0) &&
+  131   2                  (ucKeyState2 > 0) &&
+  132   2                  (ucKeyState1 > 0))
+  133   2              {
+  134   3                  if (ucKeyState == 0)                        //第一次检测到
+  135   3                  {
+  136   4                      ucKeyCode = i;                          //保存键码
+  137   4                      ucKeyState = i;                         //保存键状态
+  138   4                      ucKeyHoldCnt = 0;
+  139   4                  }
+  140   3                  
+  141   3                  if (ucKeyState == i)                        //连续检测到同一键按着
+  142   3                  {
+  143   4                      if (++ucKeyHoldCnt >= 100)              //按下1秒后,以10次每秒的速度Repeat Key
+  144   4                      {
+  145   5                          ucKeyHoldCnt = 90;
+  146   5                          ucKeyCode  = i;                     //保存键码
+  147   5                      }
+  148   4                  }
+  149   3                  else
+  150   3                      ucKeyHoldCnt = 0;                       //按下时间计数归0
+  151   3              }
+  152   2          }
+  153   1      }
+  154          
+  155          static void prvAdcKeyEvent( void )
+  156          {
+  157   1          uint8_t ucCode;
+  158   1          
+  159   1          ucCode = ucKeyCode;
+  160   1          ucKeyCode = 0;
+  161   1          
+  162   1          if (ucCode > 0)                                     //有键按下
+  163   1          {
+  164   2      //        pucLEDBuffer[6] = ucCode / 10;                  //显示键码
+  165   2      //        pucLEDBuffer[7] = ucCode % 10;                  //显示键码
+  166   2      
+  167   2              switch (ucCode)
+  168   2              {
+  169   3              case 1:                                         //hour +1
+  170   3                  if (++ucHour >= 24)
+  171   3                      ucHour = 0;
+  172   3                  break;
+  173   3              case 2:                                         //hour -1
+  174   3                  if (--ucHour >= 24)
+  175   3                      ucHour = 23;
+  176   3                  break;
+  177   3              case 3:                                         //minute +1
+  178   3                  ucSecond = 0;
+  179   3                  if (++ucMinute >= 60)
+  180   3                      ucMinute = 0;
+  181   3                  break;
+  182   3              case 4:                                         //minute -1
+  183   3                  ucSecond = 0;
+  184   3                  if (--ucMinute >= 60)
+  185   3                      ucMinute = 59;
+  186   3                  break;
+  187   3              default:
+C251 COMPILER V5.60.0,  adckey                                                             30/01/26  13:24:31  PAGE 4   
+
+  188   3                  return;
+  189   3              }
+  190   2              
+  191   2              vRtcUpdateDisplay();
+  192   2          }
+  193   1      }
+  194          
+  195          
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       370     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =         6     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

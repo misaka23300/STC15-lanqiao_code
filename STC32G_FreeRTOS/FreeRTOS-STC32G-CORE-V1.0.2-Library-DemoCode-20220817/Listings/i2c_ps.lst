@@ -1,0 +1,104 @@
+C251 COMPILER V5.60.0,  i2c_ps                                                             30/01/26  13:24:31  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE i2c_ps
+OBJECT MODULE PLACED IN .\Objects\i2c_ps.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE Sources\Task\src\i2c_ps.c XSMALL FUNCTIONS(REENTRANT) OPTIMIZE(4,SPEED
+                    -) BROWSE INCDIR(.\Sources\User;.\Sources\User\include;.\Sources\FreeRTOS\include;.\Sources\FreeRTOS\portable\STC32G12K12
+                    -8;.\Sources\Driver\inc;.\Sources\Task\inc) DEBUG PRINT(.\Listings\i2c_ps.lst) TABS(2) OBJECT(.\Objects\i2c_ps.obj) 
+
+stmt  level    source
+
+    1          /*---------------------------------------------------------------------*/
+    2          /* --- STC MCU Limited ------------------------------------------------*/
+    3          /* --- STC 1T Series MCU Demo Programme -------------------------------*/
+    4          /* --- Mobile: (86)13922805190 ----------------------------------------*/
+    5          /* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
+    6          /* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+    7          /* --- Web: www.STCMCU.com --------------------------------------------*/
+    8          /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
+    9          /* --- QQ:  800003751 -------------------------------------------------*/
+   10          /* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+   11          /*---------------------------------------------------------------------*/
+   12          
+   13          
+   14          /*************  功能说明    **************
+   15          
+   16          本例程基于STC32G为主控芯片的实验箱9进行编写测试.
+   17          
+   18          内部集成I2C串行总线控制器做从机模式，SCL->P3.2, SDA->P3.3;
+   19          IO口模拟I2C做主机模式，SCL->P0.0, SDA->P0.1;
+   20          通过外部飞线连接 P0.0->P3.2, P0.1->P3.3，实现I2C自发自收功能。
+   21          
+   22          计数器每秒钟加1, 计数范围为0~9999.
+   23          上电后主机每秒钟发送一次计数数据，从机接收到计数值后通过串口2输出.
+   24          
+   25          ******************************************/
+   26          
+   27          #include "FreeRTOS.h"
+   28          #include "task.h"
+   29          
+   30          #include "STC32G_UART.h"
+   31          #include "STC32G_I2C.h"
+   32          #include "STC32G_Soft_I2C.h"
+   33          #include "i2c_ps.h"
+   34          
+   35          static uint16_t second;
+   36          static uint8_t temp[4];
+   37          
+   38          
+   39          /* I2C任务函数 */
+   40          portTASK_FUNCTION( vI2C_PsTask, pvParameters )
+   41          {
+   42   1          UNUSED( pvParameters );
+   43   1          
+   44   1          second = 0;
+   45   1          while(1)
+   46   1          {
+   47   2              if(I2C_DisplayFlag)
+   48   2              {
+   49   3                  I2C_DisplayFlag = 0;
+   50   3                  printf("UART2: %d%d%d%d\r\n", I2C_Buffer[0], I2C_Buffer[1], I2C_Buffer[2], I2C_Buffer[3]);
+   51   3              }
+   52   2      
+   53   2          second++;         //秒计数+1
+   54   2          if(second >= 9999)    second = 0;   //秒计数范围为0~9999
+   55   2      
+   56   2          temp[0] = second / 1000;
+   57   2          temp[1] = (second % 1000) / 100;
+C251 COMPILER V5.60.0,  i2c_ps                                                             30/01/26  13:24:31  PAGE 2   
+
+   58   2          temp[2] = (second % 100) / 10;
+   59   2          temp[3] = second % 10;
+   60   2      
+   61   2          SI2C_WriteNbyte(0, temp, 4);
+   62   2              
+   63   2              vTaskDelay(1000);
+   64   2          }
+   65   1          
+   66   1          vTaskDelete(NULL);
+   67   1      }   
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       161     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =         6     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =        18     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

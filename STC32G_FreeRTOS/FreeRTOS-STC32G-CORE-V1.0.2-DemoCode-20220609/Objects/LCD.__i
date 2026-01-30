@@ -1,0 +1,1 @@
+"Sources\User\LCD.c" XSMALL OA FUNCTIONS (REENTRANT) BROWSE INCDIR(.\Sources\User;.\Sources\User\include;.\Sources\FreeRTOS\include;.\Sources\FreeRTOS\portable\STC32G12K128) DEBUG PRINT(.\Listings\LCD.lst) OBJECT(.\Objects\LCD.obj)
