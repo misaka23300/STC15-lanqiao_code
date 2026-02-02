@@ -3,8 +3,8 @@
 
 #include "boot.h"
 
-extern uchar seg[8];
-extern uchar led[8];
+extern uint8_t seg[8];
+extern uint8_t led[8];
 
 void led_display();
 void seg_display();

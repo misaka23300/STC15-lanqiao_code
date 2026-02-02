@@ -30,8 +30,8 @@ void led_display()
 
     if (last != tmp){
         P0 = ~tmp;
-        batch(4);
-        batch(0);
+        latch(4);
+        latch(0);
 
         last = tmp;
     }
@@ -51,8 +51,8 @@ void sandy(uchar i,bit state)
 
     if (last != tmp){
         P0 = tmp;
-        batch(5);
-        batch(0);
+        latch(5);
+        latch(0);
 
         last = tmp;
     }
@@ -62,16 +62,16 @@ void seg_display()
 {
     static uchar i;
     P0 = 0xFF;
-    batch(7);
-    batch(0);
+    latch(7);
+    latch(0);
 
     P0 = 0x01 << i;
-    batch(6);
-    batch(0);
+    latch(6);
+    latch(0);
 
     P0 = ~letter[seg[i]];
-    batch(7);
-    batch(0);
+    latch(7);
+    latch(0);
 
     i = (i + 1) % 8;
 }

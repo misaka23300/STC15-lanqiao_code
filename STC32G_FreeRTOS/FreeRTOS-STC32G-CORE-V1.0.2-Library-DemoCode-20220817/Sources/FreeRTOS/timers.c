@@ -1,37 +1,24 @@
 /*
- * FreeRTOS Kernel V10.4.6
- * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
+ * FreeRTOS 内核 V10.4.6
+ * Copyright (C) 2021 Amazon.com, Inc. 或其关联公司。保留所有权利。
  *
  * SPDX-License-Identifier: MIT
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
- * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
- * the Software, and to permit persons to whom the Software is furnished to do so,
- * subject to the following conditions:
+ * 特此免费授予任何获得本软件及相关文档文件（"软件"）副本的人无限制处置该软件的权利，包含但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售软件的副本，并允许向其提供软件的人在符合以下条件的情况下如法使用：
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * 上述版权声明和本许可声明应包含在软件的所有副本或重要部分中。
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
- * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
- * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
- * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
- * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * 本软件按“原样”提供，不提供任何形式的明示或暗示担保，包括但不限于对适销性、特定用途适用性及非侵权性的担保。在任何情况下，作者或版权持有人均不对因本软件或其使用或其他交易所引起的任何索赔、损害或其他责任承担责任，无论是在合同诉讼中、侵权或其他方面。
  *
  * https://www.FreeRTOS.org
  * https://github.com/FreeRTOS
  *
  */
 
-/* Standard includes. */
+/* 标准包含文件。 */
 #include <stdlib.h>
 
-/* Defining MPU_WRAPPERS_INCLUDED_FROM_API_FILE prevents task.h from redefining
- * all the API functions to use the MPU wrappers.  That should only be done when
- * task.h is included from an application file. */
+/* 定义 MPU_WRAPPERS_INCLUDED_FROM_API_FILE 可防止 task.h 将所有 API 函数重定义为使用 MPU 包装器。仅当从应用程序文件包含 task.h 时才应这样做。 */
 #define MPU_WRAPPERS_INCLUDED_FROM_API_FILE
 
 #include "FreeRTOS.h"
@@ -43,73 +30,62 @@
     #error configUSE_TIMERS must be set to 1 to make the xTimerPendFunctionCall() function available.
 #endif
 
-/* Lint e9021, e961 and e750 are suppressed as a MISRA exception justified
- * because the MPU ports require MPU_WRAPPERS_INCLUDED_FROM_API_FILE to be defined
- * for the header files above, but not in this file, in order to generate the
- * correct privileged Vs unprivileged linkage and placement. */
+/* 将 lint 的 e9021、e961 和 e750 抑制为 MISRA 例外，理由是 MPU 端口要求在上面的头文件中定义 MPU_WRAPPERS_INCLUDED_FROM_API_FILE，但在此文件中不需要定义，以便生成正确的特权/非特权链接和放置。 */
 #undef MPU_WRAPPERS_INCLUDED_FROM_API_FILE /*lint !e9021 !e961 !e750. */
 
 
-/* This entire source file will be skipped if the application is not configured
- * to include software timer functionality.  This #if is closed at the very bottom
- * of this file.  If you want to include software timer functionality then ensure
- * configUSE_TIMERS is set to 1 in FreeRTOSConfig.h. */
+/* 如果应用程序未配置包含软件定时器功能，则整个源文件将被跳过。此 #if 在文件底部结束。如果希望包含软件定时器功能，请在 FreeRTOSConfig.h 中将 configUSE_TIMERS 设置为 1。 */
 #if ( configUSE_TIMERS == 1 )
 
-/* Misc definitions. */
+/* 杂项定义。 */
     #define tmrNO_DELAY                    ( ( TickType_t ) 0U )
     #define tmrMAX_TIME_BEFORE_OVERFLOW    ( ( TickType_t ) -1 )
 
-/* The name assigned to the timer service task.  This can be overridden by
- * defining trmTIMER_SERVICE_TASK_NAME in FreeRTOSConfig.h. */
+/* 分配给定时器服务任务的名称。可通过在 FreeRTOSConfig.h 中定义 trmTIMER_SERVICE_TASK_NAME 来覆盖此名称。 */
     #ifndef configTIMER_SERVICE_TASK_NAME
         #define configTIMER_SERVICE_TASK_NAME    "Tmr Svc"
     #endif
 
-/* Bit definitions used in the ucStatus member of a timer structure. */
+/* 用于定时器结构 ucStatus 成员的位定义。 */
     #define tmrSTATUS_IS_ACTIVE                  ( ( uint8_t ) 0x01 )
     #define tmrSTATUS_IS_STATICALLY_ALLOCATED    ( ( uint8_t ) 0x02 )
     #define tmrSTATUS_IS_AUTORELOAD              ( ( uint8_t ) 0x04 )
 
-/* The definition of the timers themselves. */
-    typedef struct tmrTimerControl                  /* The old naming convention is used to prevent breaking kernel aware debuggers. */
+/* 定时器本身的定义。 */
+    typedef struct tmrTimerControl                  /* 为了避免破坏内核感知调试器，保留了旧的命名约定。 */
     {
-        const char * pcTimerName;                   /*<< Text name.  This is not used by the kernel, it is included simply to make debugging easier. */ /*lint !e971 Unqualified char types are allowed for strings and single characters only. */
-        ListItem_t xTimerListItem;                  /*<< Standard linked list item as used by all kernel features for event management. */
-        TickType_t xTimerPeriodInTicks;             /*<< How quickly and often the timer expires. */
-        void * pvTimerID;                           /*<< An ID to identify the timer.  This allows the timer to be identified when the same callback is used for multiple timers. */
-        TimerCallbackFunction_t pxCallbackFunction; /*<< The function that will be called when the timer expires. */
+        const char * pcTimerName;                   /*<< 文本名称。内核不使用此名称，仅用于便于调试。 */ /*lint !e971 Unqualified char types are allowed for strings and single characters only. */
+        ListItem_t xTimerListItem;                  /*<< 标准链表项，供所有内核特性用于事件管理。 */
+        TickType_t xTimerPeriodInTicks;             /*<< 定时器到期的快慢及频率。 */
+        void * pvTimerID;                           /*<< 用于标识定时器的 ID。当多个定时器共享相同回调时，可用此 ID 区分定时器。 */
+        TimerCallbackFunction_t pxCallbackFunction; /*<< 定时器到期时将被调用的函数。 */
         #if ( configUSE_TRACE_FACILITY == 1 )
-            UBaseType_t uxTimerNumber;              /*<< An ID assigned by trace tools such as FreeRTOS+Trace */
+            UBaseType_t uxTimerNumber;              /*<< 由跟踪工具（例如 FreeRTOS+Trace）分配的 ID。 */
         #endif
-        uint8_t ucStatus;                           /*<< Holds bits to say if the timer was statically allocated or not, and if it is active or not. */
+        uint8_t ucStatus;                           /*<< 包含位标志，指示定时器是否为静态分配，以及是否处于活动状态。 */
     } xTIMER;
 
-/* The old xTIMER name is maintained above then typedefed to the new Timer_t
- * name below to enable the use of older kernel aware debuggers. */
+/* 保留旧的 xTIMER 名称（见上）并在下面将其 typedef 为新的 Timer_t 名称，以便兼容较旧的内核感知调试器。 */
     typedef xTIMER Timer_t;
 
-/* The definition of messages that can be sent and received on the timer queue.
- * Two types of message can be queued - messages that manipulate a software timer,
- * and messages that request the execution of a non-timer related callback.  The
- * two message types are defined in two separate structures, xTimerParametersType
- * and xCallbackParametersType respectively. */
+/* 定时器队列上可发送和接收的消息定义。
+ * 可排队的消息有两种类型：操作软件定时器的消息，和请求执行与定时器无关回调的消息。
+ * 这两种消息类型分别在两个独立结构体 xTimerParametersType 和 xCallbackParametersType 中定义。 */
     typedef struct tmrTimerParameters
     {
-        TickType_t xMessageValue; /*<< An optional value used by a subset of commands, for example, when changing the period of a timer. */
-        Timer_t * pxTimer;        /*<< The timer to which the command will be applied. */
+        TickType_t xMessageValue; /*<< 在部分命令中使用的可选值，例如在更改定时器周期时使用。 */
+        Timer_t * pxTimer;        /*<< 命令将应用到的定时器。 */
     } TimerParameter_t;
 
 
     typedef struct tmrCallbackParameters
     {
-        PendedFunction_t pxCallbackFunction; /* << The callback function to execute. */
-        void * pvParameter1;                 /* << The value that will be used as the callback functions first parameter. */
-        uint32_t ulParameter2;               /* << The value that will be used as the callback functions second parameter. */
+        PendedFunction_t pxCallbackFunction; /* << 要执行的回调函数。 */
+        void * pvParameter1;                 /* << 将作为回调函数第一个参数使用的值。 */
+        uint32_t ulParameter2;               /* << 将作为回调函数第二个参数使用的值。 */
     } CallbackParameters_t;
 
-/* The structure that contains the two message types, along with an identifier
- * that is used to determine which message type is valid. */
+/* 此结构包含上述两种消息类型，以及用于确定哪种消息类型有效的标识符。 */
     typedef struct tmrTimerQueueMessage
     {
         BaseType_t xMessageID; /*<< The command being sent to the timer service task. */
@@ -128,18 +104,14 @@
 /*lint -save -e956 A manual analysis and inspection has been used to determine
  * which static variables must be declared volatile. */
 
-/* The list in which active timers are stored.  Timers are referenced in expire
- * time order, with the nearest expiry time at the front of the list.  Only the
- * timer service task is allowed to access these lists.
- * xActiveTimerList1 and xActiveTimerList2 could be at function scope but that
- * breaks some kernel aware debuggers, and debuggers that reply on removing the
- * static qualifier. */
+/* 用于存放活动定时器的列表。定时器按到期时间排序，最先到期的定时器在列表前端。只有定时器服务任务可以访问这些列表。
+ * xActiveTimerList1 和 xActiveTimerList2 本可放在函数作用域，但那样会破坏某些内核感知调试器，以及依赖移除 static 限定符的调试器。 */
     PRIVILEGED_DATA static List_t xActiveTimerList1;
     PRIVILEGED_DATA static List_t xActiveTimerList2;
     PRIVILEGED_DATA static List_t * pxCurrentTimerList;
     PRIVILEGED_DATA static List_t * pxOverflowTimerList;
 
-/* A queue that is used to send commands to the timer service task. */
+/* 用于向定时器服务任务发送命令的队列。 */
     PRIVILEGED_DATA static QueueHandle_t xTimerQueue = NULL;
     PRIVILEGED_DATA static TaskHandle_t xTimerTaskHandle = NULL;
 
@@ -148,21 +120,17 @@
 /*-----------------------------------------------------------*/
 
 /*
- * Initialise the infrastructure used by the timer service task if it has not
- * been initialised already.
+ * 初始化定时器服务任务使用的基础设施（如果尚未初始化）。
  */
     static void prvCheckForValidListAndQueue( void ) PRIVILEGED_FUNCTION;
 
 /*
- * The timer service task (daemon).  Timer functionality is controlled by this
- * task.  Other tasks communicate with the timer service task using the
- * xTimerQueue queue.
+ * 定时器服务任务（守护任务）。定时器功能由此任务控制，其它任务通过 xTimerQueue 与定时器服务任务通信。
  */
     static portTASK_FUNCTION_PROTO( prvTimerTask, pvParameters ) PRIVILEGED_FUNCTION;
 
 /*
- * Called by the timer service task to interpret and process a command it
- * received on the timer queue.
+ * 由定时器服务任务调用，用于解释并处理在定时器队列上接收到的命令。
  */
     static void prvProcessReceivedCommands( void ) PRIVILEGED_FUNCTION;
 
@@ -1113,7 +1081,5 @@
     #endif /* configUSE_TRACE_FACILITY */
 /*-----------------------------------------------------------*/
 
-/* This entire source file will be skipped if the application is not configured
- * to include software timer functionality.  If you want to include software timer
- * functionality then ensure configUSE_TIMERS is set to 1 in FreeRTOSConfig.h. */
+/* 如果应用程序未配置包含软件定时器功能，则整个源文件将被跳过。若要包含软件定时器功能，请在 FreeRTOSConfig.h 中将 configUSE_TIMERS 设置为 1。 */
 #endif /* configUSE_TIMERS == 1 */

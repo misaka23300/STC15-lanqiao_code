@@ -7,8 +7,8 @@ enum {
 
 
 typedef struct {
-    uchar receiveData[UART_MAX_LEN];
-    uchar index;
+    uint8_t receiveData[UART_MAX_LEN];
+    uint8_t index;
     
 } UART;
 
@@ -16,7 +16,7 @@ UART uart;
 
 void Uart1_Isr(void) interrupt 4
 {
-    uchar Data;
+    uint8_t Data;
 
 	if (RI)				//检测串口1接收中断
 	{

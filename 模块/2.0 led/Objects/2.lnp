@@ -1,0 +1,3 @@
+".\Objects\main.obj" 
+TO ".\Objects\2.0led" 
+PRINT(".\Listings\2.m51") RAMSIZE(256) 

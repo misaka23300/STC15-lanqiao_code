@@ -3,7 +3,7 @@
 
 #include "boot.h"
 
-uchar ADC(uchar channel);
-void DAC(uchar value);
+uint8_t ADC(uint8_t channel);
+void DAC(uint8_t value);
 
 #endif

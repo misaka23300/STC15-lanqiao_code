@@ -5,9 +5,9 @@
 
 void led_display();
 void seg_display();
-void sandy(uchar i, bit state);
+void sandy(uint8_t i, bit state);
 
-extern uchar idata led[8];
-extern uchar idata seg[8];
+extern uint8_t idata led[8];
+extern uint8_t idata seg[8];
 
 #endif

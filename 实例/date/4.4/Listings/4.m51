@@ -49,7 +49,7 @@ LINK MAP OF MODULE:  .\Objects\4.7 (?C_STARTUP)
             CODE    0275H     0049H     UNIT         ?PR?LED_DISPLAY?DISPLAY
             CODE    02BEH     0045H     UNIT         ?PR?SEG_DISPLAY?DISPLAY
             CODE    0303H     0040H     UNIT         ?PR?_READ_DATATIME?DS1302
-            CODE    0343H     003AH     UNIT         ?PR?_BATCH?BOOT
+            CODE    0343H     003AH     UNIT         ?PR?_latch?BOOT
             CODE    037DH     0034H     UNIT         ?PR?_READ_DS1302_BYTE?DS1302
             CODE    03B1H     0032H     UNIT         ?PR?_WRITE_DATETIME?DS1302
             CODE    03E3H     0031H     UNIT         ?PR?ADC_PROC?MAIN
@@ -85,7 +85,7 @@ SEGMENT                                 DATA_GROUP
   +--> ?PR?KEY_PROC?MAIN
 
 ?PR?BOOT_INIT?BOOT                    -----    -----
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
   +--> ?PR?TIMER2_INIT?BOOT
 
 ?PR?_WRITE_DATETIME?DS1302            0041H    0003H
@@ -111,11 +111,11 @@ SEGMENT                                 DATA_GROUP
   +--> ?PR?LED_DISPLAY?DISPLAY
 
 ?PR?SEG_DISPLAY?DISPLAY               -----    -----
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
   +--> ?CO?DISPLAY
 
 ?PR?LED_DISPLAY?DISPLAY               -----    -----
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
 
 
 
@@ -322,7 +322,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\4.7 (?C_STARTUP)
   D:00CCH         PUBLIC        P6M0
   D:00C9H         PUBLIC        P5M1
   D:00C0H         PUBLIC        P4
-  C:0343H         PUBLIC        _batch
+  C:0343H         PUBLIC        _latch
   D:00E2H         PUBLIC        P7M0
   D:00CBH         PUBLIC        P6M1
   D:00C8H         PUBLIC        P5
@@ -365,7 +365,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\4.7 (?C_STARTUP)
   C:005BH         LINE#         23
   C:005DH         LINE#         24
   -------         ENDPROC       BOOT_INIT
-  -------         PROC          _BATCH
+  -------         PROC          _latch
   D:0007H         SYMBOL        i
   C:0343H         LINE#         26
   C:0343H         LINE#         27
@@ -378,7 +378,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\4.7 (?C_STARTUP)
   C:0374H         LINE#         34
   C:037CH         LINE#         35
   C:037CH         LINE#         36
-  -------         ENDPROC       _BATCH
+  -------         ENDPROC       _latch
   -------         PROC          TIMER2_INIT
   C:04A1H         LINE#         55
   C:04A1H         LINE#         56

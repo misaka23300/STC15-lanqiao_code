@@ -10,7 +10,7 @@ line level    source
 
    1          #include "seg.h"
    2          
-   3          const uchar code letter[] = {                       //±ê×¼×Ö¿â
+   3          const uchar code letter[] = {                       //ï¿½ï¿½×¼ï¿½Ö¿ï¿½
    4          //   0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F
    5              0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x7F,0x6F,0x77,0x7C,0x39,0x5E,0x79,0x71,
    6          //black  -     H    J    K    L    N    o   P    U     t    G    Q    r   M    y
@@ -24,16 +24,16 @@ line level    source
   14          {
   15   1        static uchar i;
   16   1        P0 = 0xFF;
-  17   1        batch(7);
-  18   1        batch(0);
+  17   1        latch(7);
+  18   1        latch(0);
   19   1      
   20   1        P0 = 0x01 << i;
-  21   1        batch(6);
-  22   1        batch(0);
+  21   1        latch(6);
+  22   1        latch(0);
   23   1      
   24   1        P0 = ~letter[seg[i]];
-  25   1        batch(7);
-  26   1        batch(0);
+  25   1        latch(7);
+  26   1        latch(0);
   27   1      
   28   1        i = (i + 1) % 8;
   29   1      }

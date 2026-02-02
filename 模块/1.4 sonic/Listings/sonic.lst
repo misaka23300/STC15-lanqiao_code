@@ -1,0 +1,105 @@
+C51 COMPILER V9.60.7.0   SONIC                                                             02/02/2026 18:28:27 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE SONIC
+OBJECT MODULE PLACED IN .\Objects\sonic.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main\sonic.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\include) DEBUG OBJECTEXTE
+                    -ND PRINT(.\Listings\sonic.lst) TABS(2) OBJECT(.\Objects\sonic.obj)
+
+line level    source
+
+   1          #include "sonic.h"
+   2          
+   3          sbit tx = P1 ^ 0;
+   4          sbit rx = P1 ^ 1;
+   5          
+   6          extern void sonic_send()
+   7          {
+   8   1          uint8_t i;
+   9   1          for (i = 0;i < 6;i++)
+  10   1          {
+  11   2              tx = 1;
+  12   2              Delay14us();
+  13   2              tx = 0;
+  14   2              Delay14us();
+  15   2          }
+  16   1      }
+  17          
+  18          uint8_t sonic_measure_mode1()
+  19          {
+  20   1          uint8_t distance;
+  21   1      
+  22   1          TR1 = 0;
+  23   1          TL1 = 0; TH1 = 0;
+  24   1          TF1 = 0;
+  25   1      
+  26   1          sonic_send();
+  27   1          while (rx == 0);
+  28   1      
+  29   1          TR1 = 1;
+  30   1      
+  31   1          while (rx == 1 && TF1 == 0);
+  32   1          TR1 = 0;
+  33   1      
+  34   1          if (TF1 == 1)
+  35   1          {
+  36   2              distance = 255;
+  37   2          }
+  38   1          else
+  39   1          {
+  40   2              distance = (uint8_t) ((TH1 << 8) | TL1)* 0.017;
+  41   2          }
+  42   1      
+  43   1          return distance;
+  44   1          
+  45   1      }
+  46          
+  47          
+  48          uint8_t sonic_measure_mode2()
+  49          {
+  50   1          uint8_t distance;
+  51   1      
+  52   1          TR1 = 0;
+  53   1          TL1 = 0; TH1 = 0;
+  54   1          TF1 = 0;
+C51 COMPILER V9.60.7.0   SONIC                                                             02/02/2026 18:28:27 PAGE 2   
+
+  55   1      
+  56   1          tx = 1;
+  57   1          Delay14us();
+  58   1          tx = 0;
+  59   1          Delay14us();
+  60   1      
+  61   1          while (rx == 0);
+  62   1      
+  63   1          TR1 = 1;
+  64   1      
+  65   1          while (rx == 1 && TF1 == 0);
+  66   1          TR1 = 0;
+  67   1      
+  68   1          if (TF1 == 1)
+  69   1          {
+  70   2              distance = 255;
+  71   2          }
+  72   1          else
+  73   1          {
+  74   2              distance = (uint8_t) ((TH1 << 8) | TL1)* 0.017;
+  75   2          }
+  76   1      
+  77   1          return distance;
+  78   1          
+  79   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    154    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,89 @@
+C51 COMPILER V9.60.7.0   LED                                                               12/11/2025 18:04:12 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE LED
+OBJECT MODULE PLACED IN .\Objects\led.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main\led.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\include\) DEBUG OBJECTEXTEN
+                    -D PRINT(.\Listings\led.lst) TABS(2) OBJECT(.\Objects\led.obj)
+
+line level    source
+
+   1          /**
+   2           * @file led.c
+   3           * @brief LED 位图缓冲与显示刷新模块
+   4           * @details 提供 8 位 LED 显示缓冲（led[]）和逐位刷新函数 led_display()。
+   5           * @date 2025-12-09
+   6           */
+   7          
+   8          #include "led.h"
+*** ERROR C127 IN LINE 6 OF .\include\led.h: 'led_value': invalid storage class
+*** ERROR C132 IN LINE 7 OF .\include\led.h: 'led_display': not in formal parameter list
+*** ERROR C132 IN LINE 8 OF .\include\led.h: '_led_set': not in formal parameter list
+   9          
+  10          /**
+  11           * @brief LED 显示缓冲
+  12           * @details 每个元素表示对应位是否点亮（0=灭，非0=亮），
+  13           *          led_display() 会根据该缓冲更新物理 IO。
+  14           */
+  15          uint8_t led_value[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+*** ERROR C244 IN LINE 15 OF main\led.c: 'led_value': can't initialize, bad type or class
+*** ERROR C132 IN LINE 15 OF main\led.c: 'led_value': not in formal parameter list
+  16          
+  17          /**
+  18           * @brief LED 逐位刷新显示函数
+  19           * @details 本函数使用静态局部变量维护当前扫描位和临时状态：
+  20           *          - i: 当前扫描位索引（0..7）
+  21           *          - temp: 当前输出位掩码缓存
+  22           *          - last: 上一次输出值，用于避免不必要的 IO 更新
+  23           *
+  24           *          每次调用会处理一位的显示，建议由周期性中断或主循环频繁调用以维�
+             -��稳定显示。
+  25           *
+  26           * @note 输出到 P0 之前对 temp 取反（~temp）以匹配硬件驱动极性；随后通过 latch(4)/
+             -latch(0) 完成锁存。
+  27           * @return void
+  28           */
+  29          void led_display()
+  30          {
+*** ERROR C132 IN LINE 30 OF main\led.c: 'led_display': not in formal parameter list
+*** ERROR C141 IN LINE 30 OF main\led.c: syntax error near '{', expected ';'
+  31              static uint8_t i;
+*** ERROR C136 IN LINE 31 OF main\led.c: 'i': 'void' on variable
+*** ERROR C131 IN LINE 31 OF main\led.c: 'i': duplicate function-parameter
+  32              static uint8_t temp;
+*** ERROR C127 IN LINE 32 OF main\led.c: 'temp': invalid storage class
+  33              static uint8_t last = 0xFF;
+*** ERROR C127 IN LINE 33 OF main\led.c: 'last': invalid storage class
+  34          
+  35              if (led_value[i]) {
+*** ERROR C141 IN LINE 35 OF main\led.c: syntax error near 'if', expected 'hdata'
+*** ERROR C202 IN LINE 35 OF main\led.c: 'i': undefined identifier
+*** ERROR C136 IN LINE 35 OF main\led.c: invalid dimension size: [0]
+*** ERROR C129 IN LINE 35 OF main\led.c: missing ';' before '{'
+  36                  temp = temp | (0x01 << i);
+  37              } else {
+C51 COMPILER V9.60.7.0   LED                                                               12/11/2025 18:04:12 PAGE 2   
+
+  38                  temp = temp & ~(0x01 << i);
+  39              }
+  40          
+  41              if (last != temp) {
+  42                  P0 = ~temp;
+  43                  latch(4);
+  44                  latch(0);
+  45                  last = temp;
+  46              }
+  47          
+  48              i++;
+  49              if (i == 8) {
+  50                  i = 0;
+  51              }
+  52          }
+  53          
+  54          
+  55          void led_set(uint8_t position, bit value)
+  56          {
+  57              led_value[position] = value;
+  58          }
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  15 ERROR(S)

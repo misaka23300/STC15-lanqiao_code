@@ -36,7 +36,7 @@ line level    source
   26   1        ET1 = 1;        //使能定时器1中断
   27   1      }
   28          
-  29          void batch(uchar i)
+  29          void latch(uchar i)
   30          {
   31   1          switch (i)
   32   1          {

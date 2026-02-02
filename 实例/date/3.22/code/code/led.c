@@ -18,8 +18,8 @@ void led(uchar i,bit state)
 	if (last != temp)
 	{
 		P0 = ~temp;
-		batch(4);
-		batch(0);
+		latch(4);
+		latch(0);
 		
 		last = temp; 
 	}			 

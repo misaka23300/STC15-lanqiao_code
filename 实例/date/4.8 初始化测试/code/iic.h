@@ -3,6 +3,6 @@
 
 #include "boot.h"
 
-uchar ADC(uchar channel);
+uint8_t ADC(uint8_t channel);
 
 #endif

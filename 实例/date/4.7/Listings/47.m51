@@ -63,7 +63,7 @@ LINK MAP OF MODULE:  .\Objects\47 (?C_STARTUP)
 
 
             CODE    05EBH     003BH     UNIT         ?PR?READ_TEMP?ONEWIRE
-            CODE    0626H     003AH     UNIT         ?PR?_BATCH?BOOT
+            CODE    0626H     003AH     UNIT         ?PR?_latch?BOOT
             CODE    0660H     0037H     UNIT         ?PR?_SANDY?DISPLAY
             CODE    0697H     002BH     UNIT         ?CO?DISPLAY
             CODE    06C2H     0027H     UNIT         ?PR?INIT_DS18B20?ONEWIRE
@@ -93,7 +93,7 @@ SEGMENT                               BIT_GROUP          DATA_GROUP
   +--> ?PR?STATE_PROC?MAIN
 
 ?PR?BOOT_INIT?BOOT                 -----    -----      -----    -----
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
   +--> ?PR?TIMER0_INIT?BOOT
 
 ?PR?READ_TEMP?ONEWIRE              -----    -----      -----    -----
@@ -127,11 +127,11 @@ SEGMENT                               BIT_GROUP          DATA_GROUP
   +--> ?PR?STATE_PROC?MAIN
 
 ?PR?SEG_DISPLAY?DISPLAY            -----    -----      -----    -----
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
   +--> ?CO?DISPLAY
 
 ?PR?LED_DISPLAY?DISPLAY            -----    -----      -----    -----
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
 
 
 
@@ -201,7 +201,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\47 (?C_STARTUP)
   D:00CCH         PUBLIC        P6M0
   D:00C9H         PUBLIC        P5M1
   D:00C0H         PUBLIC        P4
-  C:0626H         PUBLIC        _batch
+  C:0626H         PUBLIC        _latch
   D:00E2H         PUBLIC        P7M0
   D:00CBH         PUBLIC        P6M1
   D:00C8H         PUBLIC        P5
@@ -255,7 +255,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\47 (?C_STARTUP)
   C:04CDH         LINE#         31
   C:04CFH         LINE#         32
   -------         ENDPROC       BOOT_INIT
-  -------         PROC          _BATCH
+  -------         PROC          _latch
   D:0007H         SYMBOL        i
   C:0626H         LINE#         34
   C:0626H         LINE#         35
@@ -268,7 +268,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\47 (?C_STARTUP)
   C:0657H         LINE#         42
   C:065FH         LINE#         43
   C:065FH         LINE#         44
-  -------         ENDPROC       _BATCH
+  -------         ENDPROC       _latch
   -------         PROC          TIMER0_INIT
   C:0773H         LINE#         47
   C:0773H         LINE#         48

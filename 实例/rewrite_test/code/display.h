@@ -16,8 +16,8 @@ void relay(bit state);
 void buzz(bit state);
  */
 // 配置数码管的显示数据
-void set_seg_value(uchar d0, d1, d2, d3, d4, d5, d6, d7);
-void set_seg_list(uchar *list);
+void set_seg_value(uint8_t d0, d1, d2, d3, d4, d5, d6, d7);
+void set_seg_list(uint8_t *list);
 
 /* // 配置led灯的显示数据
 void set_led_value(uchar d0, d1, d2, d3, d4, d5, d6, d7); */

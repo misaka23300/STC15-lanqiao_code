@@ -14,17 +14,17 @@ void boot_init()
     P7M1 = 0;   P7M0 = 0;   //设置为准双向口
 
     P0 = 0xFF;
-    batch(4);
-    batch(7);
-    batch(0);
+    latch(4);
+    latch(7);
+    latch(0);
 
     P0 = 0xAF;
-    batch(5);
-    batch(0);
+    latch(5);
+    latch(0);
 
     P0 = 0x00;
-    batch(6);
-    batch(0);
+    latch(6);
+    latch(0);
 
     timer_0();
     timer_1();
@@ -56,7 +56,7 @@ void timer_1()  // 1ms
 	ET1 = 1;				//使能定时器1中断
 }
 
-void batch(char i)
+void latch(char i)
 {
     switch (i)
     {

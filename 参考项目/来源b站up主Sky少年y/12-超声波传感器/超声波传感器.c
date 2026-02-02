@@ -7,7 +7,7 @@ sbit TX=P1^0;
 sbit RX=P1^1;
 
 code unsigned char DuanMa[]={0xc0,0xf9,0xa4,0xb0,0x99,
-0x92,0x82,0xf8,0x80,0x90,0xbf,0xff};   //¶ÔÓ¦×Å0-9ºÍ-¹²11¸ö×Ö·û¼ÓÉÏÈ«Ãğ
+0x92,0x82,0xf8,0x80,0x90,0xbf,0xff};   //å¯¹åº”ç€0-9å’Œ-å…±11ä¸ªå­—ç¬¦åŠ ä¸Šå…¨ç­
 
 uchar SMGa[8]={11,11,11,11,11,11,11,11};  //SMGa[0]
 
@@ -16,7 +16,7 @@ void control(char x,y)
 {
 	switch(x)
 	{
-		case 4:P2=(P2 & 0x1f)|0x80;break;   //Y4CÎª¸ßµçÆ½
+		case 4:P2=(P2 & 0x1f)|0x80;break;   //Y4Cä¸ºé«˜ç”µå¹³
 		case 5:P2=(P2 & 0x1f)|0xa0;break;   //5
 		case 6:P2=(P2 & 0x1f)|0xc0;break;
 		case 7:P2=(P2 & 0x1f)|0xe0;break;
@@ -27,44 +27,44 @@ void control(char x,y)
 
 
 
-void aloneSMG(char pos,value)   //µ¥¸öÊıÂë¹ÜÏÔÊ¾   
+void aloneSMG(char pos,value)   //å•ä¸ªæ•°ç ç®¡æ˜¾ç¤º   
 {
-	control(7,0xff);         //ÏûÓ°
-	control(6,0x01<<pos);    //Î»Ñ¡ x=0 x=7
-	control(7,DuanMa[value]);//¶ÎÂë
+	control(7,0xff);         //æ¶ˆå½±
+	control(6,0x01<<pos);    //ä½é€‰ x=0 x=7
+	control(7,DuanMa[value]);//æ®µç 
 }
 
 void T_Reset()
 {
-	AUXR &= 0x7F;			//¶¨Ê±Æ÷Ê±ÖÓ12TÄ£Ê½
-	TMOD &= 0xF0;			//ÉèÖÃ¶¨Ê±Æ÷Ä£Ê½
-	TL0 = 0x18;				//ÉèÖÃ¶¨Ê±³õÊ¼Öµ
-	TH0 = 0xFC;				//ÉèÖÃ¶¨Ê±³õÊ¼Öµ				//ÉèÖÃ¶¨Ê±³õÊ¼Öµ
-  TF0 = 0;
+	AUXR &= 0x7F;			//å®šæ—¶å™¨æ—¶é’Ÿ12Tæ¨¡å¼
+	TMOD &= 0xF0;			//è®¾ç½®å®šæ—¶å™¨æ¨¡å¼
+	TL0 = 0x18;				//è®¾ç½®å®šæ—¶åˆå§‹å€¼
+	TH0 = 0xFC;				//è®¾ç½®å®šæ—¶åˆå§‹å€¼				//è®¾ç½®å®šæ—¶åˆå§‹å€¼
+  	TF0 = 0;
 	TR0 = 1;
-	ET0 = 1;//´ò¿ª¶ÔÓ¦µÄÖĞ¶Ï
+	ET0 = 1;//æ‰“å¼€å¯¹åº”çš„ä¸­æ–­
 	EA = 1;
 }
 uchar SMGi=0;   //0-7     
 
-//¾ØÕó°´¼ü²Ù×÷
+//çŸ©é˜µæŒ‰é”®æ“ä½œ
 uchar Key_Delay=0;
 uchar Wave_Delay=0;
-uchar Key_Read()       //¶ÁÈ¡¼üÖµµÄº¯Êı
+uchar Key_Read()       //è¯»å–é”®å€¼çš„å‡½æ•°
 {
 	uint Key_New;
 	uchar key_value=0;
 	
-	P44=0;P42=1;P35=1;P34=1;  //É¨ÃèµÚÒ»ÁĞ
-	Key_New = P3 & 0x0f;      //»ñÈ¡µÚÒ»ÁĞµÄËÄĞĞµÄÎ»ÖÃµÄ¶ş½øÖÆÊıÖµ
+	P44=0;P42=1;P35=1;P34=1;  //æ‰«æç¬¬ä¸€åˆ—
+	Key_New = P3 & 0x0f;      //è·å–ç¬¬ä¸€åˆ—çš„å››è¡Œçš„ä½ç½®çš„äºŒè¿›åˆ¶æ•°å€¼
 	
-	P44=1;P42=0;P35=1;P34=1;  //É¨ÃèµÚ2ÁĞ
+	P44=1;P42=0;P35=1;P34=1;  //æ‰«æç¬¬2åˆ—
 	Key_New = (Key_New<<4) | (P3 & 0x0f);
 	
-	P44=1;P42=1;P35=0;P34=1;  //É¨ÃèµÚ3ÁĞ
+	P44=1;P42=1;P35=0;P34=1;  //æ‰«æç¬¬3åˆ—
 	Key_New = (Key_New<<4) | (P3 & 0x0f);
 	
-	P44=1;P42=1;P35=1;P34=0;  //É¨ÃèµÚ4ÁĞ
+	P44=1;P42=1;P35=1;P34=0;  //æ‰«æç¬¬4åˆ—
 	Key_New = (Key_New<<4) | (P3 & 0x0f);
 	
 	switch(~Key_New)
@@ -109,7 +109,7 @@ void Key_pro()
 	}
 }
 
-void T1_Server() interrupt 1    //Ã¿´ÎÖ´ĞĞº¯Êı¾ÍÊÇ1ms  		T1
+void T1_Server() interrupt 1    //æ¯æ¬¡æ‰§è¡Œå‡½æ•°å°±æ˜¯1ms  		T1
 {
 	aloneSMG(SMGi,SMGa[SMGi]);    //SMGa[0] SMGa[1]   ----   SMGa[7]
 	if(++SMGi==8)SMGi=0; 
@@ -129,7 +129,7 @@ void Delay12us(void)	//@12.000MHz
 }
 
 
-uchar Get_Distance()  //µ¥Î»cm
+uchar Get_Distance()  //å•ä½cm
 {
 	uint time_Dis=0;
 	uchar i=0;

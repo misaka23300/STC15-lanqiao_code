@@ -1,10 +1,10 @@
 #include "display.h"
 
 
-uchar idata led[8] = {0, 0, 0, 0, 0, 0, 0, 0};
-uchar idata seg[8] = {0, 0, 0, 0, 0, 0, 0 ,0};
+uint8_t idata led[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+uint8_t idata seg[8] = {0, 0, 0, 0, 0, 0, 0 ,0};
 
-const uchar code letter[] = {                       //标准字库
+const uint8_t code letter[] = {                       //标准字库
     //   0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F
         0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x7F,0x6F,0x77,0x7C,0x39,0x5E,0x79,0x71,
     //black  -     H    J    K    L    N    o   P    U     t    G    Q    r   M    y
@@ -13,8 +13,8 @@ const uchar code letter[] = {                       //标准字库
 
 void led_display()
 {
-    static uchar temp, last = 0xFF;
-    static uchar i;
+    static uint8_t temp, last = 0xFF;
+    static uint8_t i;
 
     if (led[i])
     {
@@ -28,8 +28,8 @@ void led_display()
     if (last != temp)
     {
         P0 = ~temp;
-        batch(4);
-        batch(0);
+        latch(4);
+        latch(0);
 
         last = temp;
     }
@@ -39,27 +39,27 @@ void led_display()
 
 void seg_display()
 {
-    static uchar i;
+    static uint8_t i;
 
     P0 = 0xFF;
-    batch(7);
-    batch(0);
+    latch(7);
+    latch(0);
 
     P0 = 0x01 << i;
-    batch(6);
-    batch(0);
+    latch(6);
+    latch(0);
 
     P0 = ~letter[seg[i]];
-    batch(7);
-    batch(0);
+    latch(7);
+    latch(0);
 
     i = (i + 1) % 8;
 }
 
 //
-void sandy(uchar i, bit state)
+void sandy(uint8_t i, bit state)
 {
-    static uchar temp, last = 0xFF;
+    static uint8_t temp, last = 0xFF;
     if (state)
     {
         temp = temp | (0x01 << i);
@@ -72,8 +72,8 @@ void sandy(uchar i, bit state)
     if (temp != last)
     {
         P0 = temp;
-        batch(5);
-        batch(0);
+        latch(5);
+        latch(0);
         last = temp;
     }
 }

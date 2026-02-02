@@ -10,15 +10,15 @@ enum {
 
 
 typedef struct {
-    uchar time;
-    uchar press;
+    uint8_t time;
+    uint8_t press;
 } KEY;
 
 KEY key;
 
 typedef struct {
-    uint time;
-    uchar distance;
+    uint16_t time;
+    uint8_t distance;
 } SONIC;
 
 SONIC sonic;
@@ -32,21 +32,21 @@ SONIC sonic;
 FREQ freq; */
 
 typedef struct{
-    uint time;
-    uint times;
-    uint out_times;
+    uint16_t time;
+    uint16_t times;
+    uint16_t out_times;
 } FREQ;
 
 FREQ freq;
 
 //freq_times = 13233;
 
-uchar display_mode;     // -> 显示状态
-uchar display_time;
+uint8_t display_mode;     // -> 显示状态
+uint8_t display_time;
 
 
-uint x = 2333;
-uint y = 721;
+uint16_t x = 2333;
+uint16_t y = 721;
 // ---------------------------------------------------- 任务调度
 void main()
 {
@@ -186,7 +186,7 @@ void freq_task()
 {
 
     TR0 = 0;
-    freq.times = (uint)(TH0 << 8) | TL0;
+    freq.times = (uint16_t)(TH0 << 8) | TL0;
     freq.out_times = freq.times;
     freq.times = 0;
 
@@ -201,11 +201,11 @@ void freq_task()
 
 void uart_task()
 {
-    uchar k = 1;
+    uint8_t k = 1;
     //uchar position[2];
-    uchar towards = 0;
-    uchar i = 4;
-    uchar j = 5;
+    uint8_t towards = 0;
+    uint8_t i = 4;
+    uint8_t j = 5;
     if (uart.index == 0) { return; }
 
     if (uart.out_time == 10)

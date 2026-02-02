@@ -10,11 +10,11 @@ enum {
 
 
 typedef struct{
-    uchar receive_data[UART_LEN];
-    uchar index;
-    uchar out_time;
-    uchar out_time_flag;
-    uchar time;
+    uint8_t receive_data[UART_LEN];
+    uint8_t index;
+    uint8_t out_time;
+    uint8_t out_time_flag;
+    uint8_t time;
 } UART;
 
 extern UART uart;

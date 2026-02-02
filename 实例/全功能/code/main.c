@@ -13,13 +13,13 @@ enum {
 
 // key
 idata uint key_time;
-uchar key_press;
+uint8_t key_press;
 
 
 // state
 idata uint state_time;
-uchar state_mode1;
-uchar state_only;
+uint8_t state_mode1;
+uint8_t state_only;
 
 // 时间
 idata uint date_time;
@@ -31,8 +31,8 @@ idata uint led_time;
 
 // ADC
 idata uint adc_time;
-uchar adc_1;
-uchar adc_3;
+uint8_t adc_1;
+uint8_t adc_3;
 
 uint adc_3_value;
 bit is_3_flag;
@@ -42,17 +42,17 @@ idata uint temp_time;
 uint temp;
 
 // mode2 
-uchar is_sonic;
+uint8_t is_sonic;
 
 // 超声波
 idata uint sonic_time;
-uchar distance;
+uint8_t distance;
 
 // 测量频率
 idata uint freq_time;
 idata uint freq;
 uint freq_number;
-uchar freq_list[5] = {0, 0, 0, 0, 0};
+uint8_t freq_list[5] = {0, 0, 0, 0, 0};
 
 
 freq_timer_0() interrupt 1

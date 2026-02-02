@@ -26,7 +26,7 @@ void Uart1_Init(void)	//4800bps@12.000MHz
 }
 
 
-void uart_send(uchar *Data)
+void uart_send(uint8_t *Data)
 {
     while ( *Data != '\0' )
     {

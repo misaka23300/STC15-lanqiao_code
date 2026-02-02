@@ -15,20 +15,20 @@ line level    source
    5   1          P0M0 = 0x00;
    6   1      
    7   1          P0 = 0xFF;
-   8   1          batch(4);
-   9   1          batch(0);
+   8   1          latch(4);
+   9   1          latch(0);
   10   1      
   11   1          P0 = 0xAF;
-  12   1          batch(5);
-  13   1          batch(0);
+  12   1          latch(5);
+  13   1          latch(0);
   14   1      
   15   1          P0 = 0x00;
-  16   1          batch(6);
-  17   1          batch(0);
+  16   1          latch(6);
+  17   1          latch(0);
   18   1      
   19   1          P0 = 0xFF;
-  20   1          batch(7);
-  21   1          batch(0);
+  20   1          latch(7);
+  21   1          latch(0);
   22   1      
   23   1          timer_0();
   24   1          timer_1();
@@ -80,7 +80,7 @@ line level    source
   68   1      
   69   1      }
   70          
-  71          void batch(uchar i)
+  71          void latch(uchar i)
   72          {
   73   1          switch (i)
   74   1          {

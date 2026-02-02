@@ -1,0 +1,113 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              02/02/2026 18:28:25 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main\main.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\include) DEBUG OBJECTEXTEN
+                    -D PRINT(.\Listings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "main.h"
+   2          
+   3          enum {
+   4              SONIC_TIME = 1000,
+   5              KEY_TIME = 20,
+   6          };
+   7          
+   8          
+   9          
+  10          
+  11          sonic_t sonic;
+  12          key_t key;
+  13          
+  14          
+  15          void sonic_display()
+  16          {
+  17   1          set_seg(0, sonic.distance / 100 % 10);
+  18   1          set_seg(1, sonic.distance / 10 % 10);
+  19   1          set_seg(2, sonic.distance % 10);
+  20   1      }
+  21          
+  22          void key_task()
+  23          {
+  24   1          if (key.press == 4) {
+  25   2              if (sonic.mode == 0) {
+  26   3                  sonic.mode = 1;
+  27   3              }
+  28   2              else if (sonic.mode == 1) {
+  29   3                  sonic.mode = 0;
+  30   3              }
+  31   2          }
+  32   1      }
+  33          
+  34          
+  35          
+  36          void main()
+  37          {
+  38   1          boot_init();
+  39   1      
+  40   1          while (1)
+  41   1          {
+  42   2              /* if (sonic_flag)
+  43   2              {
+  44   2                  sonic_flag = 0;
+  45   2                  distance = sonic_measure();
+  46   2              }
+  47   2      
+  48   2              if (state_flag)
+  49   2              {
+  50   2                  state_flag = 0;
+  51   2                  state_proc();
+  52   2              } */
+  53   2      
+  54   2              if (sonic.time == SONIC_TIME) {
+C51 COMPILER V9.60.7.0   MAIN                                                              02/02/2026 18:28:25 PAGE 2   
+
+  55   3                  if (sonic.mode == 1) {
+  56   4                      sonic.distance = sonic_measure_mode1();
+  57   4                  }
+  58   3                  else if (sonic.mode == 2) {
+  59   4                      sonic.distance = sonic_measure_mode2();
+  60   4                  }
+  61   3      
+  62   3                  sonic_display();
+  63   3                  sonic.time = 0;
+  64   3              }
+  65   2      
+  66   2              if (key.time == KEY_TIME) {
+  67   3                  key.time = 0;
+  68   3                  key.press = key_scan();
+  69   3                  key_task();
+  70   3              }
+  71   2          }
+  72   1      }
+  73          
+  74          void Timer2_Isr(void) interrupt 12
+  75          {
+  76   1          seg_display();
+  77   1      
+  78   1          if (sonic.time < SONIC_TIME) {
+  79   2              sonic.time++;
+  80   2          }
+  81   1      
+  82   1          if (key.time < KEY_TIME) {
+  83   2              key.time++;
+  84   2          }
+  85   1      }
+  86          
+  87          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    209    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      5    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

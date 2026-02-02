@@ -1,20 +1,20 @@
 #include "display.h"
 
-uchar code letter[] = {                       //标准字库
+uint8_t code letter[] = {                       //标准字库
     //   0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F
         0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x7F,0x6F,0x77,0x7C,0x39,0x5E,0x79,0x71,
     //black  -     H    J    K    L    N    o   P    U     t    G    Q    r   M    y
         0x00,0x40,0x76,0x1E,0x70,0x38,0x37,0x5C,0x73,0x3E,0x78,0x3d,0x67,0x50,0x37,0x6e,
         0xBF,0x86,0xDB,0xCF,0xE6,0xED,0xFD,0x87,0xFF,0xEF,0x46};    //0. 1. 2. 3. 4. 5. 6. 7. 8. 9. -1
 
-uchar seg_data[8] = {0, 0, 0, 0, 0, 0, 0 ,0};
-uchar led_data[8] = {0, 0, 0, 0, 0, 0, 0 ,0};
+uint8_t seg_data[8] = {0, 0, 0, 0, 0, 0, 0 ,0};
+uint8_t led_data[8] = {0, 0, 0, 0, 0, 0, 0 ,0};
 
 
-static uchar randz_now;
-static uchar randz_last = 0xFF;
+static uint8_t randz_now;
+static uint8_t randz_last = 0xFF;
  
-void set_seg_value(uchar d0, d1, d2, d3, d4, d5, d6, d7)
+void set_seg_value(uint8_t d0, d1, d2, d3, d4, d5, d6, d7)
 {
     seg_data[0] = d0;
     seg_data[1] = d1;
@@ -26,7 +26,7 @@ void set_seg_value(uchar d0, d1, d2, d3, d4, d5, d6, d7)
     seg_data[7] = d7;
 }
 
-void set_seg_list(uchar *list)
+void set_seg_list(uint8_t *list)
 {
     seg_data[0] = list[0];
     seg_data[1] = list[1];
@@ -40,7 +40,7 @@ void set_seg_list(uchar *list)
 }
 
 
-void set_led_value(uchar d0, d1, d2, d3, d4, d5, d6, d7)
+void set_led_value(uint8_t d0, d1, d2, d3, d4, d5, d6, d7)
 {
     led_data[0] = d0;
     led_data[1] = d1;
@@ -55,16 +55,16 @@ void set_led_value(uchar d0, d1, d2, d3, d4, d5, d6, d7)
 
 void seg_display()
 {
-    static uchar i;
+    static uint8_t i;
 
     P0 = 0xFF;
-    batch(7);
+    latch(7);
     
     P0 = 0x01 << i;
-    batch(6);
+    latch(6);
 
     P0 = ~letter[seg_data[i]]; 
-    batch(7);
+    latch(7);
 
     i = i + 1;
     if (i == 8) { i = 0; }
@@ -72,9 +72,9 @@ void seg_display()
 
 void led_display()
 {
-    static uchar i;
-    static uchar now;
-    static uchar last;
+    static uint8_t i;
+    static uint8_t now;
+    static uint8_t last;
 
     if (led_data[i])
     {
@@ -88,7 +88,7 @@ void led_display()
     if (last != now)
     {
         P0 = ~now;
-        batch(4);
+        latch(4);
 
         last = now;
     }
@@ -115,7 +115,7 @@ void relay(bit state)
     if (randz_now != randz_last)
     {
         P0 = randz_now;
-        batch(5);
+        latch(5);
         randz_last = randz_now;
     }
 }
@@ -135,7 +135,7 @@ void buzz(bit state)
     if (randz_now != randz_last)
     {
         P0 = randz_now;
-        batch(5);
+        latch(5);
         randz_last = randz_now;
     }
 }

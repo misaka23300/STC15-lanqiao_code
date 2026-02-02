@@ -3,7 +3,7 @@
 
 #include "boot.h"
 
-extern uchar time_now[3];
+extern uint8_t time_now[3];
 
 void date_write();
 void date_read();

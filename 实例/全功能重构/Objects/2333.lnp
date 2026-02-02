@@ -1,0 +1,7 @@
+".\Objects\boot.obj",
+".\Objects\key.obj",
+".\Objects\led.obj",
+".\Objects\main.obj",
+".\Objects\seg.obj" 
+TO ".\Objects\2333" 
+PRINT(".\Listings\2333.m51") RAMSIZE(256) 

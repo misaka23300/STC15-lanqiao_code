@@ -9,19 +9,19 @@ enum {
 };
 
 typedef struct {
-    uchar receive_data[RECEIVE_LEN];
-    uchar out_time;
-    uchar out_time_flag;
-    uchar index;
-    uchar time;
-    uchar receive_data_flag;
+    uint8_t receive_data[RECEIVE_LEN];
+    uint8_t out_time;
+    uint8_t out_time_flag;
+    uint8_t index;
+    uint8_t time;
+    uint8_t receive_data_flag;
 } UART;
 
 extern idata UART uart;
 
 typedef struct {
-    uchar x;
-    uchar y;
+    uint8_t x;
+    uint8_t y;
 } INPUT;
 
 extern INPUT input;

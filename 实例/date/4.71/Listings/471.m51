@@ -44,7 +44,7 @@ LINK MAP OF MODULE:  .\Objects\471 (?C_STARTUP)
             CODE    01AFH     0051H     UNIT         ?PR?TIMER0_ISR?MAIN
             CODE    0200H     0049H     UNIT         ?PR?LED_DISPLAY?DISPLAY
             CODE    0249H     0045H     UNIT         ?PR?SEG_DISPLAY?DISPLAY
-            CODE    028EH     003AH     UNIT         ?PR?_BATCH?BOOT
+            CODE    028EH     003AH     UNIT         ?PR?_latch?BOOT
             CODE    02C8H     0037H     UNIT         ?PR?_SANDY?DISPLAY
             CODE    02FFH     002BH     UNIT         ?CO?DISPLAY
             CODE    032AH     001BH     UNIT         ?C_INITSEG
@@ -72,7 +72,7 @@ SEGMENT
   +--> ?PR?STATE_PROC?MAIN
 
 ?PR?BOOT_INIT?BOOT
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
   +--> ?PR?TIMER0_INIT?BOOT
 
 *** NEW ROOT ***************************************************
@@ -82,11 +82,11 @@ SEGMENT
   +--> ?PR?LED_DISPLAY?DISPLAY
 
 ?PR?SEG_DISPLAY?DISPLAY
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
   +--> ?CO?DISPLAY
 
 ?PR?LED_DISPLAY?DISPLAY
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
 
 
 
@@ -151,7 +151,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\471 (?C_STARTUP)
   D:00CCH         PUBLIC        P6M0
   D:00C9H         PUBLIC        P5M1
   D:00C0H         PUBLIC        P4
-  C:028EH         PUBLIC        _batch
+  C:028EH         PUBLIC        _latch
   D:00E2H         PUBLIC        P7M0
   D:00CBH         PUBLIC        P6M1
   D:00C8H         PUBLIC        P5
@@ -205,7 +205,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\471 (?C_STARTUP)
   C:01ACH         LINE#         31
   C:01AEH         LINE#         32
   -------         ENDPROC       BOOT_INIT
-  -------         PROC          _BATCH
+  -------         PROC          _latch
   D:0007H         SYMBOL        i
   C:028EH         LINE#         34
   C:028EH         LINE#         35
@@ -218,7 +218,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\471 (?C_STARTUP)
   C:02BFH         LINE#         42
   C:02C7H         LINE#         43
   C:02C7H         LINE#         44
-  -------         ENDPROC       _BATCH
+  -------         ENDPROC       _latch
   -------         PROC          TIMER0_INIT
   C:035CH         LINE#         47
   C:035CH         LINE#         48

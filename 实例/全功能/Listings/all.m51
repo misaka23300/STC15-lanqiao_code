@@ -71,7 +71,7 @@ LINK MAP OF MODULE:  .\Objects\all (?C_STARTUP)
             CODE    0517H     0067H     UNIT         ?PR?MAIN?MAIN
             CODE    057EH     0047H     UNIT         ?PR?BOOT_INIT?BOOT
             CODE    05C5H     0047H     UNIT         ?PR?LED_DISPLAY?DIS
-            CODE    060CH     0039H     UNIT         ?PR?_BATCH?BOOT
+            CODE    060CH     0039H     UNIT         ?PR?_latch?BOOT
 BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/12/2025  10:05:04  PAGE 2
 
 
@@ -115,7 +115,7 @@ LINK MAP OF MODULE:  .\Objects\all (?C_STARTUP)
             CODE    09A7H     0047H     UNIT         ?PR?LED_DISPLAY?DIS
             CODE    09EEH     003EH     UNIT         ?PR?SONIC_MEASURE?SONIC
             CODE    0A2CH     003BH     UNIT         ?PR?READ_TEMPERATURE?ONEWIRE
-            CODE    0A67H     0039H     UNIT         ?PR?_BATCH?BOOT
+            CODE    0A67H     0039H     UNIT         ?PR?_latch?BOOT
             CODE    0AA0H     0039H     UNIT         ?PR?SEG_DISPLAY?DIS
             CODE    0AD9H     0034H     UNIT         ?PR?_READ_DS1302_BYTE?DS1302
             CODE    0B0DH     002CH     UNIT         ?CO?DIS
@@ -178,7 +178,7 @@ SEGMENT                                  BIT_GROUP          DATA_GROUP
   +--> ?PR?FREQ_PROC?MAIN
 
 ?PR?BOOT_INIT?BOOT                    -----    -----      -----    -----
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
   +--> ?PR?TIMER1_INIT?BOOT
 
 ?PR?READ_TEMPERATURE?ONEWIRE          -----    -----      -----    -----
@@ -241,7 +241,7 @@ SEGMENT                                  BIT_GROUP          DATA_GROUP
   +--> ?PR?_I2C_DELAY?IIC
 
 ?PR?LED_DISPLAY?DIS                   -----    -----      -----    -----
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
 
 ?PR?KEY_PROC?MAIN                     -----    -----      -----    -----
   +--> ?PR?KEY_SCAN?KEY
@@ -290,7 +290,7 @@ SEGMENT                                  BIT_GROUP          DATA_GROUP
 BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/12/2025  12:17:41  PAGE 5
 
 
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
   +--> ?CO?DIS
 
 <<<<<<< HEAD
@@ -366,12 +366,12 @@ SYMBOL TABLE OF MODULE:  .\Objects\all (?C_STARTUP)
   D:00CCH         PUBLIC        P6M0
   D:00C9H         PUBLIC        P5M1
   D:00C0H         PUBLIC        P4
-  C:060CH         PUBLIC        _batch
+  C:060CH         PUBLIC        _latch
 =======
   D:00CCH         PUBLIC        P6M0
   D:00C9H         PUBLIC        P5M1
   D:00C0H         PUBLIC        P4
-  C:0A67H         PUBLIC        _batch
+  C:0A67H         PUBLIC        _latch
 >>>>>>> 699e296f4e707adbeb00689010ffe74631757aaa
   D:00E2H         PUBLIC        P7M0
   D:00CBH         PUBLIC        P6M1
@@ -436,7 +436,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\all (?C_STARTUP)
   C:05C2H         LINE#         27
   C:05C4H         LINE#         28
   -------         ENDPROC       BOOT_INIT
-  -------         PROC          _BATCH
+  -------         PROC          _latch
   D:0007H         SYMBOL        i
   C:060CH         LINE#         32
   C:060CH         LINE#         33
@@ -452,7 +452,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\all (?C_STARTUP)
   C:0641H         LINE#         40
   C:0641H         LINE#         42
   C:0644H         LINE#         43
-  -------         ENDPROC       _BATCH
+  -------         ENDPROC       _latch
   -------         PROC          TIMER1_INIT
   C:087DH         LINE#         47
   C:087DH         LINE#         48
@@ -490,7 +490,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\all (?C_STARTUP)
   C:09A4H         LINE#         27
   C:09A6H         LINE#         28
   -------         ENDPROC       BOOT_INIT
-  -------         PROC          _BATCH
+  -------         PROC          _latch
   D:0007H         SYMBOL        i
   C:0A67H         LINE#         32
   C:0A67H         LINE#         33
@@ -503,7 +503,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\all (?C_STARTUP)
   C:0A9CH         LINE#         40
   C:0A9CH         LINE#         42
   C:0A9FH         LINE#         43
-  -------         ENDPROC       _BATCH
+  -------         ENDPROC       _latch
   -------         PROC          TIMER1_INIT
   C:0D34H         LINE#         47
   C:0D34H         LINE#         48

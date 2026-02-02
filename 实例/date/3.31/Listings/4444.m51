@@ -69,7 +69,7 @@ LINK MAP OF MODULE:  .\Objects\4444 (?C_STARTUP)
             CODE    07F4H     0045H     UNIT         ?PR?SEG_DISPLAY?DISPLAY
             CODE    0839H     0045H     UNIT         ?PR?ADJUST_OUT?MAIN
             CODE    087EH     0045H     UNIT         ?PR?SONIC_MEASURE?SONIC
-            CODE    08C3H     003AH     UNIT         ?PR?_BATCH?BOOT
+            CODE    08C3H     003AH     UNIT         ?PR?_latch?BOOT
             CODE    08FDH     0039H     UNIT         ?PR?_LED?DISPLAY
             CODE    0936H     0037H     UNIT         ?PR?_SANDY?DISPLAY
             CODE    096DH     0036H     UNIT         ?PR?SONIC_PROC?MAIN
@@ -111,7 +111,7 @@ SEGMENT                            BIT_GROUP          DATA_GROUP
   +--> ?PR?ADC_PROC?MAIN
 
 ?PR?BOOT_INIT?BOOT              -----    -----      -----    -----
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
   +--> ?PR?TIMER2_INIT?BOOT
 
 ?PR?KEY_PROC?MAIN               -----    -----      -----    -----
@@ -174,7 +174,7 @@ SEGMENT                            BIT_GROUP          DATA_GROUP
   +--> ?PR?ADJUST_OUT?MAIN
 
 ?PR?SEG_DISPLAY?DISPLAY         -----    -----      -----    -----
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
   +--> ?CO?DISPLAY
 
 ?PR?LED_DISPLAY?DISPLAY         -----    -----      -----    -----
@@ -184,7 +184,7 @@ SEGMENT                            BIT_GROUP          DATA_GROUP
 
 
 ?PR?_LED?DISPLAY                0020H.2  0000H.1    -----    -----
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
 
 
 
@@ -249,7 +249,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\4444 (?C_STARTUP)
   D:00CCH         PUBLIC        P6M0
   D:00C9H         PUBLIC        P5M1
   D:00C0H         PUBLIC        P4
-  C:08C3H         PUBLIC        _batch
+  C:08C3H         PUBLIC        _latch
   D:00E2H         PUBLIC        P7M0
   D:00CBH         PUBLIC        P6M1
   D:00C8H         PUBLIC        P5
@@ -302,7 +302,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\4444 (?C_STARTUP)
 BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/01/2025  17:41:46  PAGE 6
 
 
-  -------         PROC          _BATCH
+  -------         PROC          _latch
   D:0007H         SYMBOL        i
   C:08C3H         LINE#         34
   C:08C3H         LINE#         35
@@ -315,7 +315,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\4444 (?C_STARTUP)
   C:08F4H         LINE#         42
   C:08FCH         LINE#         43
   C:08FCH         LINE#         44
-  -------         ENDPROC       _BATCH
+  -------         ENDPROC       _latch
   -------         PROC          TIMER2_INIT
   C:0AD1H         LINE#         46
   C:0AD1H         LINE#         47

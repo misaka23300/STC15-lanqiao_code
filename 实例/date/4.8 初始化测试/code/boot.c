@@ -26,7 +26,7 @@ void timer_1()
 	ET1 = 1;				//使能定时器1中断
 }
 
-void batch(uchar i)
+void latch(uint8_t i)
 {
     switch (i)
     {

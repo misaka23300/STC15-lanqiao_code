@@ -7,6 +7,6 @@
 void sendSonic();
 uchar measureTimer1();
 void pcaInit();
-uint measurePCA();
+uint16_t measurePCA();
 
 #endif

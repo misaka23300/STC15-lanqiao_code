@@ -31,8 +31,8 @@ line level    source
   17   1          if (last != temp)
   18   1          {
   19   2              P0 = ~temp;
-  20   2              batch(4);
-  21   2              batch(0);
+  20   2              latch(4);
+  21   2              latch(0);
   22   2      
   23   2              last = temp;
   24   2          }
@@ -62,8 +62,8 @@ line level    source
   48   1          if (state != last)
   49   1          {
   50   2              P0 = temp;
-  51   2              batch(5);
-  52   2              batch(0);
+  51   2              latch(5);
+  52   2              latch(0);
   53   2      
   54   2              last = temp;
 <<<<<<< HEAD

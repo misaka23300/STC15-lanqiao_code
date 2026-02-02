@@ -1,0 +1,145 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    10/04/2025  12:47:54  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\main.obj TO .\Objects\2.1��ѯ PRINT (.\Listings\2.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\main.obj (MAIN)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\Objects\2.1��ѯ (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0004H     UNIT         ?DT?MAIN
+            IDATA   000CH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+            CODE    000EH     0040H     UNIT         ?PR?_latch?MAIN
+            CODE    004EH     0029H     UNIT         ?PR?TIMER_0_INTERRUPT?MAIN
+            CODE    0077H     001CH     UNIT         ?PR?MAIN?MAIN
+            CODE    0093H     000CH     UNIT         ?C_C51STARTUP
+            CODE    009FH     000AH     UNIT         ?PR?_LED_DISPLAY?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\2.1��ѯ (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?_LED_DISPLAY?MAIN
+
+?PR?_LED_DISPLAY?MAIN
+  +--> ?PR?_latch?MAIN
+
+
+
+IGNORED SYMBOLS:
+   LED_TIME
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\2.1��ѯ (MAIN)
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/04/2025  12:47:54  PAGE 2
+
+
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00C0H         PUBLIC        P4
+  C:000EH         PUBLIC        _latch
+  D:00C8H         PUBLIC        P5
+  D:00E8H         PUBLIC        P6
+  D:00F8H         PUBLIC        P7
+  C:004EH         PUBLIC        timer_0_interrupt
+  D:00A8H         PUBLIC        IE
+  C:009FH         PUBLIC        _led_display
+  D:00B8H         PUBLIC        IP
+  D:00D8H         PUBLIC        CCON
+  C:0077H         PUBLIC        main
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00F0H         PUBLIC        B
+  D:00E0H         PUBLIC        ACC
+  D:0008H         PUBLIC        led_time
+  D:000AH         PUBLIC        LED_TIME
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          MAIN
+  C:0077H         LINE#         10
+  C:0077H         LINE#         11
+  C:0077H         LINE#         12
+  C:007DH         LINE#         13
+  C:007DH         LINE#         15
+  C:0087H         LINE#         16
+  C:008CH         LINE#         17
+  C:0091H         LINE#         18
+  C:0091H         LINE#         19
+  -------         ENDPROC       MAIN
+  -------         PROC          TIMER_0_INTERRUPT
+  C:004EH         LINE#         22
+  C:0057H         LINE#         24
+  C:0068H         LINE#         25
+  C:0070H         LINE#         26
+  C:0070H         LINE#         28
+  -------         ENDPROC       TIMER_0_INTERRUPT
+  -------         PROC          _latch
+  D:0007H         SYMBOL        i
+  C:000EH         LINE#         30
+  C:000EH         LINE#         31
+  C:000EH         LINE#         32
+  C:001DH         LINE#         33
+  C:0027H         LINE#         34
+  C:0031H         LINE#         35
+  C:003BH         LINE#         36
+  C:0045H         LINE#         37
+  C:0048H         LINE#         38
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/04/2025  12:47:54  PAGE 3
+
+
+  C:0048H         LINE#         39
+  C:004BH         LINE#         40
+  C:004DH         LINE#         42
+  -------         ENDPROC       _latch
+  -------         PROC          _LED_DISPLAY
+  D:0007H         SYMBOL        i
+  C:009FH         LINE#         45
+  C:009FH         LINE#         46
+  C:009FH         LINE#         47
+  C:00A1H         LINE#         48
+  C:00A6H         LINE#         49
+  C:00A8H         LINE#         50
+  -------         ENDPROC       _LED_DISPLAY
+  -------         ENDMOD        MAIN
+
+*** ERROR L104: MULTIPLE PUBLIC DEFINITIONS
+    SYMBOL:  LED_TIME
+    MODULE:  .\Objects\main.obj (MAIN)
+
+Program Size: data=13.0 xdata=0 code=161
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  1 ERROR(S)

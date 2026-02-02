@@ -12,24 +12,24 @@ void boot_init()
     P7M0 = 0x00; P7M1 = 0x00; 
 
     P0 = 0x00;
-    batch(4);
-    batch(0);
+    latch(4);
+    latch(0);
 
     P0 = 0xFF;
-    batch(7);
-    batch(0);
+    latch(7);
+    latch(0);
 
-    batch(6);
-    batch(0);
+    latch(6);
+    latch(0);
     
     P0 = 0xAF;
-    batch(5);
-    batch(0);
+    latch(5);
+    latch(0);
 	Timer1_Init();
     EA = 1;
 }
 
-void batch(uchar i)
+void latch(uchar i)
 {
     switch (i)
     {

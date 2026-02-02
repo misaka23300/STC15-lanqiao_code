@@ -1,7 +1,7 @@
 #include "machine.h"
 
 
-void batch(uchar i)
+void latch(uint8_t i)
 {
     switch (i)
     {

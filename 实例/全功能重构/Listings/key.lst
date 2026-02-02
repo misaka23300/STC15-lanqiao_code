@@ -1,0 +1,155 @@
+C51 COMPILER V9.60.7.0   KEY                                                               12/11/2025 18:04:12 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE KEY
+OBJECT MODULE PLACED IN .\Objects\key.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main\key.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\include\) DEBUG OBJECTEXTEN
+                    -D PRINT(.\Listings\key.lst) TABS(2) OBJECT(.\Objects\key.obj)
+
+line level    source
+
+   1          /**
+   2           * @file key.c
+   3           * @brief 按键扫描与去抖/长按识别模块
+   4           * @details 通过读取 P3 口并配合 P4.x 控制列线实现矩阵按键扫描，
+   5           *          使用简单状态机进行去抖与长按判断，返回简化的按键码或默认值。
+   6           * @date 2025-12-10
+   7           */
+   8          
+   9          #include "key.h"
+*** ERROR C132 IN LINE 6 OF .\include\key.h: 'key_scan': not in formal parameter list
+  10          
+  11          /**
+  12           * @brief 扫描按键并进行去抖与长按识别
+  13           *
+  14           * 本函数为轮询式扫描，内部使用静态局部变量维护状态机：
+  15           * - state: 当前状态（0=空闲,1=检测到按下,2=消抖计时,3=长按确认）
+  16           * - i: 用于消抖/长按计数的计时器
+  17           * - value: 当前解析出的按键短按码
+  18           * - temp: 返回值缓冲，初始为 99 表示无按键
+  19           *
+  20           * 读取流程简述：
+  21           * 1. 将 P3 设置为输入/上拉相关，然后通过 P4 控制列线（P42,P44）扫描。
+  22           * 2. 当检测到按下（press != 0x0F）进入去抖并解析按键码。
+  23           * 3. 若在去抖期内持续按下，计数达到阈值进入长按状态并返回不同码。
+  24           *
+  25           * @return uint8_t 返回按键码：短按返回 value，对应 case 中设置的值；
+  26           *         长按返回 value + 20；无按键返回初始值 99。
+  27           * @note 该函数应被主循环或定时器周期性调用以获得正确的去抖与长按识别。
+  28           */
+  29          uint8_t key_scan()
+  30          {
+*** ERROR C132 IN LINE 30 OF main\key.c: 'key_scan': not in formal parameter list
+*** ERROR C141 IN LINE 30 OF main\key.c: syntax error near '{', expected ';'
+  31              static uint8_t i;
+*** ERROR C131 IN LINE 31 OF main\key.c: 'i': duplicate function-parameter
+  32              static uint8_t state;
+*** ERROR C127 IN LINE 32 OF main\key.c: 'state': invalid storage class
+  33              static uint8_t value;
+*** ERROR C127 IN LINE 33 OF main\key.c: 'value': invalid storage class
+  34          
+  35              uint8_t press = 0xFF;
+*** ERROR C244 IN LINE 35 OF main\key.c: 'press': can't initialize, bad type or class
+*** ERROR C132 IN LINE 35 OF main\key.c: 'press': not in formal parameter list
+  36              uint8_t temp = 99;
+*** ERROR C244 IN LINE 36 OF main\key.c: 'temp': can't initialize, bad type or class
+*** ERROR C132 IN LINE 36 OF main\key.c: 'temp': not in formal parameter list
+  37          
+  38              P3 = 0x0F;
+*** ERROR C244 IN LINE 38 OF main\key.c: 'P3': can't initialize, bad type or class
+*** ERROR C132 IN LINE 38 OF main\key.c: 'P3': not in formal parameter list
+  39              P42 = 0;
+*** ERROR C244 IN LINE 39 OF main\key.c: 'P42': can't initialize, bad type or class
+*** ERROR C132 IN LINE 39 OF main\key.c: 'P42': not in formal parameter list
+  40              P44 = 0;
+C51 COMPILER V9.60.7.0   KEY                                                               12/11/2025 18:04:12 PAGE 2   
+
+*** ERROR C244 IN LINE 40 OF main\key.c: 'P44': can't initialize, bad type or class
+*** ERROR C132 IN LINE 40 OF main\key.c: 'P44': not in formal parameter list
+  41              P36 = P42;
+*** ERROR C244 IN LINE 41 OF main\key.c: 'P36': can't initialize, bad type or class
+*** ERROR C132 IN LINE 41 OF main\key.c: 'P36': not in formal parameter list
+  42              P37 = P44;
+*** ERROR C244 IN LINE 42 OF main\key.c: 'P37': can't initialize, bad type or class
+*** ERROR C132 IN LINE 42 OF main\key.c: 'P37': not in formal parameter list
+  43          
+  44              press = P3 & 0x0F;
+*** ERROR C244 IN LINE 44 OF main\key.c: 'press': can't initialize, bad type or class
+*** ERROR C132 IN LINE 44 OF main\key.c: 'press': not in formal parameter list
+  45          
+  46              switch (state) {
+*** ERROR C141 IN LINE 46 OF main\key.c: syntax error near 'switch', expected 'hdata'
+*** ERROR C129 IN LINE 46 OF main\key.c: missing ';' before '{'
+  47                  case 0: {
+  48                      if (press != 0x0F) {
+  49                          state = 1;
+  50                      }
+  51                  } break;
+  52          
+  53                  case 1: {
+  54                      if (press == 0x0F) {
+  55                          state = 0;
+  56                      } else {
+  57                          P3 = press | 0xF0;
+  58                          P42 = 1;
+  59                          P44 = 1;
+  60                          P36 = P42;
+  61                          P37 = P44;
+  62          
+  63                          press = P3;
+  64                          state = 2;
+  65          
+  66                          switch (press) {
+  67                              case 0x77: {value = 4; break;}
+  68                              case 0x7B: {value = 5; break;}
+  69                              case 0x7D: {value = 6; break;}
+  70                              case 0x7E: {value = 7; break;}
+  71          
+  72                              case 0xB7: {value = 8; break;}
+  73                              case 0xBB: {value = 9; break;}
+  74                              case 0xBD: {value = 10; break;}
+  75                              case 0xBE: {value = 11; break;}
+  76          
+  77                              case 0xD7: {value = 12; break;}
+  78                              case 0xDB: {value = 13; break;}
+  79                              case 0xDD: {value = 14; break;}
+  80                              case 0xDE: {value = 15; break;}
+  81          
+  82                              case 0xE7: {value = 16; break;}
+  83                              case 0xEB: {value = 17; break;}
+  84                              case 0xED: {value = 18; break;}
+  85                              case 0xEE: {value = 19; break;}
+  86                              default: state = 0;
+  87                          }
+  88                      }
+  89                  } break;
+  90          
+  91                  case 2: {
+  92                      if (press != 0x0F) {
+C51 COMPILER V9.60.7.0   KEY                                                               12/11/2025 18:04:12 PAGE 3   
+
+  93                          i++;
+  94                          if (i > 70) {
+  95                              i = 0;
+  96                              state = 3;
+  97                          }
+  98                      } else {
+  99                          i = 0;
+ 100                          state = 0;
+ 101                          temp = value;
+ 102                          value = 0;
+ 103                      }
+ 104                  } break;
+ 105          
+ 106                  case 3: {
+ 107                      if (press == 0x0F) {
+ 108                          state = 0;
+ 109                          temp = value + 20;
+ 110                          value = 0;
+ 111                      }
+ 112                  } break;
+ 113              }
+ 114              return temp;
+ 115          }
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  24 ERROR(S)

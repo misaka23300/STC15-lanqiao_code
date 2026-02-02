@@ -7,6 +7,6 @@ void Delay14us();
 
 void pca_init();
 void sonic_send();
-uchar sonic_measure();
+uint8_t sonic_measure();
 
 #endif

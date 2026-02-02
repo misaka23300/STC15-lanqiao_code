@@ -79,7 +79,7 @@ LINK MAP OF MODULE:  .\Objects\23 (?C_STARTUP)
             CODE    0F06H     0046H     UNIT         ?PR?CLEAN_DISPLAY?MACHINE
             CODE    0F4CH     0042H     UNIT         ?PR?SONIC_MEASURE?SONIC
             CODE    0F8EH     0039H     UNIT         ?PR?SEG_DISPLAY?DISPLAY
-            CODE    0FC7H     0039H     UNIT         ?PR?_BATCH?MACHINE
+            CODE    0FC7H     0039H     UNIT         ?PR?_latch?MACHINE
             CODE    1000H     0032H     UNIT         ?PR?UART_INTERRUPT?TIMER
             CODE    1032H     002BH     UNIT         ?CO?DISPLAY
             CODE    105DH     001DH     UNIT         ?C_INITSEG
@@ -115,7 +115,7 @@ SEGMENT                              BIT_GROUP          DATA_GROUP
   +--> ?PR?TASK_LOOP?MAIN
 
 ?PR?CLEAN_DISPLAY?MACHINE         -----    -----      -----    -----
-  +--> ?PR?_BATCH?MACHINE
+  +--> ?PR?_latch?MACHINE
 
 ?PR?TIMER?TIMER                   -----    -----      -----    -----
   +--> ?PR?TIMER0INIT?TIMER
@@ -130,7 +130,7 @@ SEGMENT                              BIT_GROUP          DATA_GROUP
   +--> ?PR?_PUTCHAR?TIMER
 
 ?PR?_RELAY?DISPLAY                -----    -----      -----    -----
-  +--> ?PR?_BATCH?MACHINE
+  +--> ?PR?_latch?MACHINE
 
 ?PR?TASK_LOOP?MAIN                -----    -----      -----    -----
   +--> ?PR?KEY_SCAN?KEY
@@ -163,11 +163,11 @@ SEGMENT                              BIT_GROUP          DATA_GROUP
   +--> ?PR?LED_DISPLAY?DISPLAY
 
 ?PR?SEG_DISPLAY?DISPLAY           -----    -----      -----    -----
-  +--> ?PR?_BATCH?MACHINE
+  +--> ?PR?_latch?MACHINE
   +--> ?CO?DISPLAY
 
 ?PR?LED_DISPLAY?DISPLAY           -----    -----      -----    -----
-  +--> ?PR?_BATCH?MACHINE
+  +--> ?PR?_latch?MACHINE
 
 
 
@@ -440,7 +440,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\23 (?C_STARTUP)
   D:00CCH         PUBLIC        P6M0
   D:00C9H         PUBLIC        P5M1
   D:00C0H         PUBLIC        P4
-  C:0FC7H         PUBLIC        _batch
+  C:0FC7H         PUBLIC        _latch
   D:00E2H         PUBLIC        P7M0
   D:00CBH         PUBLIC        P6M1
   D:00C8H         PUBLIC        P5
@@ -476,7 +476,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\23 (?C_STARTUP)
   C:0F44H         LINE#         27
   C:0F47H         LINE#         28
   -------         ENDPROC       CLEAN_DISPLAY
-  -------         PROC          _BATCH
+  -------         PROC          _latch
   D:0007H         SYMBOL        i
   C:0FC7H         LINE#         32
 BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/13/2025  23:29:52  PAGE 9
@@ -492,7 +492,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\23 (?C_STARTUP)
   C:0FFCH         LINE#         41
   C:0FFCH         LINE#         42
   C:0FFFH         LINE#         43
-  -------         ENDPROC       _BATCH
+  -------         ENDPROC       _latch
   -------         ENDMOD        MACHINE
 
   -------         MODULE        MAIN

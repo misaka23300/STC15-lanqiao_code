@@ -23,7 +23,7 @@ enum {
 
 
 typedef struct {
-    uint time;
+    uint16_t time;
     long times;
     long times_out;
 } FREQ;
@@ -37,25 +37,25 @@ typedef sturct {
 xdata STATE state;
 
 typedef struct {
-    uint going[2];    // 0 -> x   // 1 -> y
-    uint now[2];
+    uint16_t going[2];    // 0 -> x   // 1 -> y
+    uint16_t now[2];
 } POSITION;
 
 idata POSITION position;
 
 typedef struct {
     float value;
-    uchar r;
-    uchar b;
-    uchar argument_state;
+    uint8_t r;
+    uint8_t b;
+    uint8_t argument_state;
 } SPEED;
 
 xdata SPEED speed;
 
 typedef struct {
-    uint time;
-    uchar value;
-    uchar is_day_no_night;
+    uint16_t time;
+    uint8_t value;
+    uint8_t is_day_no_night;
 } PCF8591;
 
 xdata PCF8591 adc;
@@ -63,7 +63,7 @@ xdata PCF8591 adc;
 
 typedef struct 
 {
-    uchar state;
+    uint8_t state;
 } DISPLAY;
 
 xdata DISPLAY display;
@@ -72,17 +72,17 @@ xdata DISPLAY display;
 
 typedef struct
 {
-    uint time;
-    uchar distance;
-    uchar lock;
+    uint16_t time;
+    uint8_t distance;
+    uint8_t lock;
 } SONIC;
 
 idata SONIC sonic;
 
 
 typedef struct {
-    uchar time;
-    uchar press;
+    uint8_t time;
+    uint8_t press;
 
 } KEY;
 
@@ -104,7 +104,7 @@ void speed_task();
 void sonic_task();
 
 
-void number_display(uint i);
+void number_display(uint16_t i);
 
 
 

@@ -3,6 +3,6 @@
 
 #include "machine.h"
 
-uchar key_scan();
+uint8_t key_scan();
 
 #endif

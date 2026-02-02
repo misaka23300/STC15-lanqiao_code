@@ -26,7 +26,7 @@ void pca_init()
 
 void sonic_send()
 {
-    uchar i;
+    uint8_t i;
     for (i = 0;i < 10;i++)
     {
         tx = 1;
@@ -37,10 +37,10 @@ void sonic_send()
 }
 
 
-uchar sonic_measure()
+uint8_t sonic_measure()
 {
-    uint temp;
-    uchar distance;
+    uint16_t temp;
+    uint8_t distance;
 
     pca_init();
 
@@ -57,7 +57,7 @@ uchar sonic_measure()
     else
     {
         temp = CH << 8 | CL;
-        distance = (uchar) (temp * 0.017 + 1);
+        distance = (uint8_t) (temp * 0.017 + 1);
         //distance = (uchar) (temp + 29) / 58;
     }
     return distance;

@@ -12,19 +12,19 @@ void clean_display()
     P7M0 = 0x00; P7M1 = 0x00;
 
     P0 = 0xFF;
-    batch(4);
+    latch(4);
 
     P0 = 0xAF;
-    batch(5);
+    latch(5);
 
     P0 = 0x00;
-    batch(6);
+    latch(6);
 
     P0 = 0xFF;
-    batch(7);
+    latch(7);
 }
 
-void batch(uchar i)
+void latch(uint8_t i)
 {
     switch (i)
     {
@@ -72,7 +72,7 @@ void Uart1_Init(void) // 9600bps@12.000MHz
 
 void pcaInit()
 {
-    uint CCAP0_TIME = 1000;
+    uint16_t CCAP0_TIME = 1000;
 
     CMOD = 0x00;
     CCON = 0x00;

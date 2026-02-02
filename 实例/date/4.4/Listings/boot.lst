@@ -21,19 +21,19 @@ line level    source
   11   1          P6M0 = 0x00; P6M1 = 0x00; 
   12   1          P7M0 = 0x00; P7M1 = 0x00; 
   13   1      
-  14   1          P0 = 0xFF; batch(4); batch(0);
+  14   1          P0 = 0xFF; latch(4); latch(0);
   15   1      
-  16   1          P0 = 0xAF; batch(5); batch(0);
+  16   1          P0 = 0xAF; latch(5); latch(0);
   17   1      
-  18   1          P0 = 0x00; batch(6); batch(0);
+  18   1          P0 = 0x00; latch(6); latch(0);
   19   1      
-  20   1          P0 = 0xFF; batch(7); batch(0);
+  20   1          P0 = 0xFF; latch(7); latch(0);
   21   1      
   22   1          Timer2_Init();
   23   1          EA = 1;
   24   1      }
   25          
-  26          void batch(uchar i)
+  26          void latch(uchar i)
   27          {
   28   1          switch (i)
   29   1          {

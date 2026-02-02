@@ -105,9 +105,9 @@ void I2CSendAck(unsigned char ackbit)
 	I2C_Delay(DELAY_TIME);
 }
 
-uchar ADC(uchar address)
+uint8_t ADC(uint8_t address)
 {   
-    uchar value;
+    uint8_t value;
 
     I2CStart();
 

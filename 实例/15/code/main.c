@@ -187,7 +187,7 @@ void freq_task()    // -> freq.times_out  -> speed.value
 }
 
 
-void number_display(uint i)
+void number_display(uint16_t i)
 {
     seg_list[3] = i / 10000 % 10;
     seg_list[4] = i / 1000 % 10;

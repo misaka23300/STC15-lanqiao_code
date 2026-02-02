@@ -1,8 +1,8 @@
 #include "uart.h"
 
 typedef struct {
-	uchar buffData[16];
-	uchar buffIndex;
+	uint8_t buffData[16];
+	uint8_t buffIndex;
 } UART;
 
 UART uart;

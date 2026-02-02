@@ -70,7 +70,7 @@ LINK MAP OF MODULE:  3232323 (?C_STARTUP)
             CODE    0B36H     0045H     UNIT         ?PR?SEG_DISPLAY?DISPLAY
             CODE    0B7BH     0042H     UNIT         ?PR?_SANDY?DISPLAY
             CODE    0BBDH     003CH     UNIT         ?PR?READ_TEMPERATRUE?ONEWIRE
-            CODE    0BF9H     003AH     UNIT         ?PR?_BATCH?BOOT
+            CODE    0BF9H     003AH     UNIT         ?PR?_latch?BOOT
             CODE    0C33H     0034H     UNIT         ?PR?_READ_DS1302_BYTE?DS1302
             CODE    0C67H     002CH     UNIT         ?CO?DISPLAY
             CODE    0C93H     002CH     UNIT         ?PR?_I2CSENDBYTE?IIC
@@ -124,7 +124,7 @@ SEGMENT                                  BIT_GROUP          DATA_GROUP
 
 
 ?PR?BOOT_INIT?BOOT                    -----    -----      -----    -----
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
   +--> ?PR?TIMER0_INIT?BOOT
 
 ?PR?INIT_TIME?DS1302                  -----    -----      -----    -----
@@ -163,7 +163,7 @@ SEGMENT                                  BIT_GROUP          DATA_GROUP
   +--> ?PR?_I2C_DELAY?IIC
 
 ?PR?_SANDY?DISPLAY                    0020H.6  0000H.1    0052H    0001H
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
 
 ?PR?READ_TIME?DS1302                  -----    -----      -----    -----
   +--> ?PR?_READ_DS1302_BYTE?DS1302
@@ -217,11 +217,11 @@ SEGMENT                                  BIT_GROUP          DATA_GROUP
   +--> ?PR?LED_DISPLAY?DISPLAY
 
 ?PR?SEG_DISPLAY?DISPLAY               -----    -----      -----    -----
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
   +--> ?CO?DISPLAY
 
 ?PR?LED_DISPLAY?DISPLAY               -----    -----      -----    -----
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
 
 
 
@@ -286,7 +286,7 @@ SYMBOL TABLE OF MODULE:  3232323 (?C_STARTUP)
   D:00CCH         PUBLIC        P6M0
   D:00C9H         PUBLIC        P5M1
   D:00C0H         PUBLIC        P4
-  C:0BF9H         PUBLIC        _batch
+  C:0BF9H         PUBLIC        _latch
   D:00E2H         PUBLIC        P7M0
   D:00CBH         PUBLIC        P6M1
   D:00C8H         PUBLIC        P5
@@ -341,7 +341,7 @@ SYMBOL TABLE OF MODULE:  3232323 (?C_STARTUP)
   C:0A4EH         LINE#         33
   C:0A50H         LINE#         34
   -------         ENDPROC       BOOT_INIT
-  -------         PROC          _BATCH
+  -------         PROC          _latch
   D:0007H         SYMBOL        i
   C:0BF9H         LINE#         37
   C:0BF9H         LINE#         38
@@ -354,7 +354,7 @@ SYMBOL TABLE OF MODULE:  3232323 (?C_STARTUP)
   C:0C2AH         LINE#         45
   C:0C32H         LINE#         46
   C:0C32H         LINE#         47
-  -------         ENDPROC       _BATCH
+  -------         ENDPROC       _latch
   -------         PROC          TIMER0_INIT
   C:0E67H         LINE#         50
   C:0E67H         LINE#         51

@@ -39,7 +39,7 @@ LINK MAP OF MODULE:  .\Objects\facxie (?C_STARTUP)
             CODE    00D8H     0047H     UNIT         ?PR?LED_DISPLAY?DISPLAY
             CODE    011FH     0039H     UNIT         ?PR?SEG_DISPLAY?DISPLAY
             CODE    0158H     002BH     UNIT         ?CO?DISPLAY
-            CODE    0183H     0025H     UNIT         ?PR?_BATCH?BOOT
+            CODE    0183H     0025H     UNIT         ?PR?_latch?BOOT
             CODE    01A8H     001DH     UNIT         ?PR?RELAY?DISPLAY
             CODE    01C5H     001DH     UNIT         ?PR?BUZZ?DISPLAY
             CODE    01E2H     0018H     UNIT         ?C_INITSEG
@@ -68,11 +68,11 @@ SEGMENT                            BIT_GROUP
   +--> ?PR?DELAY500MS?BOOT
 
 ?PR?BOOT_INIT?BOOT              -----    -----
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
   +--> ?PR?TIMER1_INIT?BOOT
 
 ?PR?BUZZ?DISPLAY                0020H.1  0000H.1
-  +--> ?PR?_BATCH?BOOT
+  +--> ?PR?_latch?BOOT
 
 
 
@@ -137,7 +137,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\facxie (?C_STARTUP)
   D:00CCH         PUBLIC        P6M0
   D:00C9H         PUBLIC        P5M1
   D:00C0H         PUBLIC        P4
-  C:0183H         PUBLIC        _batch
+  C:0183H         PUBLIC        _latch
   D:00E2H         PUBLIC        P7M0
   D:00CBH         PUBLIC        P6M1
   D:00C8H         PUBLIC        P5
@@ -190,7 +190,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\facxie (?C_STARTUP)
   C:00D5H         LINE#         26
   C:00D7H         LINE#         27
   -------         ENDPROC       BOOT_INIT
-  -------         PROC          _BATCH
+  -------         PROC          _latch
   D:0007H         SYMBOL        i
   C:0183H         LINE#         30
   C:0183H         LINE#         31
@@ -203,7 +203,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\facxie (?C_STARTUP)
   C:01A4H         LINE#         39
   C:01A4H         LINE#         40
   C:01A7H         LINE#         41
-  -------         ENDPROC       _BATCH
+  -------         ENDPROC       _latch
   -------         PROC          TIMER1_INIT
   C:020FH         LINE#         46
   C:020FH         LINE#         47

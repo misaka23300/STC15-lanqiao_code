@@ -5,7 +5,7 @@
 
 void sonic_send();
 void pca_init();
-uchar sonic_measure();
+uint8_t sonic_measure();
 
 
 

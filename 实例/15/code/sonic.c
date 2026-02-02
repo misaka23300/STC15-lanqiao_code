@@ -7,7 +7,7 @@ sbit rx = P1^1;
 
 void sonic_send()
 {
-    uchar i;
+    uint8_t i;
     for (i = 0;i < 5;i++)
     {
         tx = 1;
@@ -26,10 +26,10 @@ void pca_init()
     CF = 0;
 }
 
-uchar sonic_measure()
+uint8_t sonic_measure()
 {
-    uchar distance;
-    uint ticks;
+    uint8_t distance;
+    uint16_t ticks;
 
     pca_init();
     sonic_send();
@@ -41,7 +41,7 @@ uchar sonic_measure()
     if (CF == 0)
     {
         ticks = (CH << 8) | CL;
-        distance = (uchar)((ticks + 29) / 58);  // ≈ ticks * 0.017
+        distance = (uint8_t)((ticks + 29) / 58);  // ≈ ticks * 0.017
         //distance = (uchar) ((((CH << 8) | CL) *0.017) + 1);
     }
     else

@@ -11,7 +11,7 @@ void boot_init();
 void timer_0();
 void timer_1();
 
-void batch(char i);
+void latch(char i);
 void Delay14us(void);
 
 #endif

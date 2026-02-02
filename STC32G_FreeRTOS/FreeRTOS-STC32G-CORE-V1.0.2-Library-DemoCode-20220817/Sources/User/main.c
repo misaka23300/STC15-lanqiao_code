@@ -2,15 +2,15 @@
 /*
  * FreeRTOS STC port V1.0.2
  * 
- * STC32G12K128¹¦ÄÜ¼ò½é£º
- *    2×é CAN, 3×éLin, USB, 32Î» 8051, RMB5,
- *    ¸ß¾«×¼12Î»ADC, DMA Ö§³Ö(TFT²ÊÆÁ, ADC, 4×é´®¿Ú, SPI, I2C )
+ * STC32G12K128åŠŸèƒ½ç®€ä»‹ï¼š
+ *    2ç»„ CAN, 3ç»„Lin, USB, 32ä½ 8051, RMB5,
+ *    é«˜ç²¾å‡†12ä½ADC, DMA æ”¯æŒ(TFTå½©å±, ADC, 4ç»„ä¸²å£, SPI, I2C )
  *  
- *  ¸÷Î»ÓÃ»§ÔÚºóÐøµÄÊ¹ÓÃ¹ý³ÌÖÐ£¬Èç¹û·¢ÏÖÓÐ²»ÕýÈ·µÄµØ·½»òÕß
- *  ÓÐ¿É¸ÄÉÆµÄµØ·½£¬ÇëºÍSTCÁªÏµ£¬ÓÉSTC¹Ù·½½øÐÐÍ³Ò»ÐÞ¸Ä²¢¸üÐÂ°æ±¾
+ *  å„ä½ç”¨æˆ·åœ¨åŽç»­çš„ä½¿ç”¨è¿‡ç¨‹ä¸­ï¼Œå¦‚æžœå‘çŽ°æœ‰ä¸æ­£ç¡®çš„åœ°æ–¹æˆ–è€…
+ *  æœ‰å¯æ”¹å–„çš„åœ°æ–¹ï¼Œè¯·å’ŒSTCè”ç³»ï¼Œç”±STCå®˜æ–¹è¿›è¡Œç»Ÿä¸€ä¿®æ”¹å¹¶æ›´æ–°ç‰ˆæœ¬
  *
- *  ÈôÄúµÄ´úÂë»òÎÄÕÂÖÐÐèÒªÒýÓÃ±¾³ÌÐò°üÖÐµÄ²¿·ÖÒÆÖ²´úÂë£¬ÇëÔÚÄúµÄ
- *  ´úÂë»òÎÄÕÂÖÐ×¢Ã÷²Î¿¼»òÊ¹ÓÃÁËSTCµÄFreeRTOSµÄÒÆÖ²´úÂë
+ *  è‹¥æ‚¨çš„ä»£ç æˆ–æ–‡ç« ä¸­éœ€è¦å¼•ç”¨æœ¬ç¨‹åºåŒ…ä¸­çš„éƒ¨åˆ†ç§»æ¤ä»£ç ï¼Œè¯·åœ¨æ‚¨çš„
+ *  ä»£ç æˆ–æ–‡ç« ä¸­æ³¨æ˜Žå‚è€ƒæˆ–ä½¿ç”¨äº†STCçš„FreeRTOSçš„ç§»æ¤ä»£ç 
 */
 
 #include "FreeRTOS.h"
@@ -30,10 +30,10 @@ void vSystemInit( void );
 
 void main( void )
 {
-    /* ÏµÍ³³õÊ¼»¯ */
+    /* ç³»ç»Ÿåˆå§‹åŒ– */
     vSystemInit();
 
-	/* ´´½¨ÈÎÎñ */
+	/* åˆ›å»ºä»»åŠ¡ */
     xTaskCreate((TaskFunction_t )vDisplayTask,
                 (const char*    )"DISPLAY",
                 (uint16_t       )configDEFAULT_STACK_SIZE,
@@ -61,7 +61,7 @@ void main( void )
     xTaskCreate((TaskFunction_t )vUart2_3Task,
                 (const char*    )"UART2_3",
                 (uint16_t       )configDEFAULT_STACK_SIZE,
-                (void*          )1000,  //×¢ÒâpvParameters²ÎÊý´«µØÖ·»òÕßÁ¢¼´ÊýÊ±Ö»ÓÐµÍ24Î»ÊÇÓÐÐ§Î»£¬×î¸ß8Î»±àÒëÊ±»á×Ô¶¯Ìî0. ¿ÉÍ¨¹ý±äÁ¿»òÕß³£Á¿´«ËÍ32×Ö½ÚÊý¾Ý.
+                (void*          )1000,  //æ³¨æ„pvParameterså‚æ•°ä¼ åœ°å€æˆ–è€…ç«‹å³æ•°æ—¶åªæœ‰ä½Ž24ä½æ˜¯æœ‰æ•ˆä½ï¼Œæœ€é«˜8ä½ç¼–è¯‘æ—¶ä¼šè‡ªåŠ¨å¡«0. å¯é€šè¿‡å˜é‡æˆ–è€…å¸¸é‡ä¼ é€32å­—èŠ‚æ•°æ®.
                 (UBaseType_t    )(configDEFAULT_PRIORITIES),
                 (TaskHandle_t*  )NULL);
     xTaskCreate((TaskFunction_t )vMatrixKeyTask,
@@ -83,9 +83,9 @@ void main( void )
                 (UBaseType_t    )(configDEFAULT_PRIORITIES),
                 (TaskHandle_t*  )NULL);
 
-    /* Æô¶¯ÈÎÎñµ÷¶ÈÆ÷¿ªÊ¼ÈÎÎñµ÷¶È */
+    /* å¯åŠ¨ä»»åŠ¡è°ƒåº¦å™¨å¼€å§‹ä»»åŠ¡è°ƒåº¦ */
     vTaskStartScheduler();
 
-    /* Õý³£Çé¿öÏÂ²»»áÔËÐÐµ½´Ë´¦ */
+    /* æ­£å¸¸æƒ…å†µä¸‹ä¸ä¼šè¿è¡Œåˆ°æ­¤å¤„ */
     while (1);
 }
