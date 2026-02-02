@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   BOOT                                                              02/02/2026 18:28:25 PAGE 1   
+C51 COMPILER V9.60.7.0   BOOT                                                              02/02/2026 18:52:31 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE BOOT
@@ -62,7 +62,7 @@ line level    source
   52   1        _nop_();
   53   1        _nop_();
   54   1        i = 39;
-C51 COMPILER V9.60.7.0   BOOT                                                              02/02/2026 18:28:25 PAGE 2   
+C51 COMPILER V9.60.7.0   BOOT                                                              02/02/2026 18:52:31 PAGE 2   
 
   55   1        while (--i);
   56   1      }
