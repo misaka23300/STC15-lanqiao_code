@@ -7,7 +7,7 @@
 #include "key.h"
 
 typedef struct {
-    uint8_t time;
+    uint16_t time;
     uint8_t distance;
     uint8_t mode;
 } sonic_t;
