@@ -9,14 +9,17 @@ sonic_t sonic;
 key_t key;
 
 void key_task() {
-  if (key.press == 4) {
-    if (sonic.mode == 1) {
-      sonic.mode = 2;
-      set_seg(7, 2);
-    } else if (sonic.mode == 2) {
-      sonic.mode = 1;
-      set_seg(7, 1);
-    }
+
+    key.press = key_scan();
+    seg_set(6, key.press);
+    if (key.press == 4) {
+        if (sonic.mode == 1) {
+            sonic.mode = 2;
+            set_seg(7, 2);
+        } else if (sonic.mode == 2) {
+            sonic.mode = 1;
+            set_seg(7, 1);
+        }
   }
 }
 
@@ -34,7 +37,7 @@ void sonic_task() {
   set_seg(3, 17);
   set_seg(4, 17);
   set_seg(5, 17);
-  set_seg(6, 17);
+  //set_seg(6, 17);
 }
 void main() {
   boot_init();
@@ -49,7 +52,7 @@ void main() {
 
     if (key.time == KEY_TIME) {
       key.time = 0;
-      key.press = key_scan();
+      
       key_task();
     }
   }
