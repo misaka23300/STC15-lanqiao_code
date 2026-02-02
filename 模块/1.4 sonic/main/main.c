@@ -32,7 +32,17 @@ void key_task()
 }
 
 
+void sonic_task()
+{
+    if (sonic.mode == 1) {
+        sonic.distance = sonic_measure_mode1();
+    }
+    else if (sonic.mode == 2) {
+        sonic.distance = sonic_measure_mode2();
+    }
 
+    sonic_display();
+}
 void main()
 {
     boot_init();
@@ -52,15 +62,8 @@ void main()
         } */
 
         if (sonic.time == SONIC_TIME) {
-            if (sonic.mode == 1) {
-                sonic.distance = sonic_measure_mode1();
-            }
-            else if (sonic.mode == 2) {
-                sonic.distance = sonic_measure_mode2();
-            }
-
-            sonic_display();
             sonic.time = 0;
+            sonic_task();
         }
 
         if (key.time == KEY_TIME) {
