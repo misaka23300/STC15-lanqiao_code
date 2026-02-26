@@ -1,19 +1,19 @@
-#inlcude "boot.h"
+#include "boot.h"
 
 void boot_init();
 void timer_0();
-void latch(char i);
+void latch(uint8_t i);
 
 void boot_init()
 {
-    P0M1 = 0;   P0M0 = 0;   //设置为准双向口
-    P1M1 = 0;   P1M0 = 0;   //设置为准双向口
-    P2M1 = 0;   P2M0 = 0;   //设置为准双向口
-    P3M1 = 0;   P3M0 = 0;   //设置为准双向口
-    P4M1 = 0;   P4M0 = 0;   //设置为准双向口
-    P5M1 = 0;   P5M0 = 0;   //设置为准双向口
-    P6M1 = 0;   P6M0 = 0;   //设置为准双向口
-    P7M1 = 0;   P7M0 = 0;   //设置为准双向口
+    P0M1 = 0;   P0M0 = 0;   
+    P1M1 = 0;   P1M0 = 0;   
+    P2M1 = 0;   P2M0 = 0;   
+    P3M1 = 0;   P3M0 = 0;   
+    P4M1 = 0;   P4M0 = 0;   
+    P5M1 = 0;   P5M0 = 0;   
+    P6M1 = 0;   P6M0 = 0;   
+    P7M1 = 0;   P7M0 = 0;   
 
     P0 = 0xFF;
     latch(4);
@@ -34,7 +34,7 @@ void timer_0()
 
 }
 
-void latch(char i)
+void latch(uint8_t i)
 {
     switch (i)
     {
@@ -48,7 +48,7 @@ void latch(char i)
 
 void Delay14us(void)	//@12.000MHz
 {
-	unsigned char data i;
+	uint8_t i;
 
 	_nop_();
 	_nop_();

@@ -56,7 +56,7 @@ void Timer1_Init(void)		//1毫秒@12.000MHz
 
 void Delay14us(void)	//@12.000MHz
 {
-	unsigned char data i;
+	uint8_t i;
 
 	_nop_();
 	_nop_();

@@ -3,8 +3,7 @@
 
 #define DELAY_TIME	10
 
-//
-static void I2C_Delay(unsigned char n)
+static void I2C_Delay(uint8_t n)
 {
     do
     {
@@ -15,7 +14,6 @@ static void I2C_Delay(unsigned char n)
     while(n--);      	
 }
 
-//
 void I2CStart(void)
 {
     sda = 1;
@@ -26,7 +24,6 @@ void I2CStart(void)
     scl = 0;    
 }
 
-//
 void I2CStop(void)
 {
     sda = 0;
@@ -36,10 +33,9 @@ void I2CStop(void)
 	I2C_Delay(DELAY_TIME);
 }
 
-//
-void I2CSendByte(unsigned char byt)
+void I2CSendByte(uint8_t byt)
 {
-    unsigned char i;
+    uint8_t i;
 	
     for(i=0; i<8; i++){
         scl = 0;

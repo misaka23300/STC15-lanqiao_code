@@ -1,23 +1,21 @@
 #include "ds1302.h"
+#include "intrins.h"
 
-sbid SDA = P2^3;
+sbit SDA = P2^3;
 sbit SCL = P1^7;
 sbit RST = P2^7;
 
-// 秒 分 时 天 月 星期 年
-code uchar write_address[7] = {0x80, 0x82, 0x84, 0x86, 0x88, 0x8A, 0x8C};
-code uchar read_address[7] = {0x81, 0x83, 0x85, 0x87, 0x89, 0x8B, 0x8D};
+const uint8_t write_address[7] = {0x80, 0x82, 0x84, 0x86, 0x88, 0x8A, 0x8C};
+const uint8_t read_address[7] = {0x81, 0x83, 0x85, 0x87, 0x89, 0x8B, 0x8D};
 
 
-idata uchar time_now[3] = {0, 0, 0};
-code uchar time_init[7] = {0x50, 0x59, 0x23, 0x09, 0x04, 0x03, 0x25};	// BCD
+uint8_t time_now[3] = {0, 0, 0};
+const uint8_t time_init[7] = {0x50, 0x59, 0x23, 0x09, 0x04, 0x03, 0x25};	
 
-							
 
-//
-void Write_Ds1302(unsigned  char temp) 
+void Write_Ds1302(uint8_t temp) 
 {
-	unsigned char i;
+	uint8_t i;
 	for (i=0;i<8;i++)     	
 	{ 
 		SCK = 0;
@@ -27,8 +25,7 @@ void Write_Ds1302(unsigned  char temp)
 	}
 }   
 
-//
-void Write_Ds1302_Byte( unsigned char address,unsigned char dat )     
+void Write_Ds1302_Byte( uint8_t address,uint8_t dat )     
 {
  	RST=0;	_nop_();
  	SCK=0;	_nop_();
@@ -38,10 +35,9 @@ void Write_Ds1302_Byte( unsigned char address,unsigned char dat )
  	RST=0; 
 }
 
-//
-unsigned char Read_Ds1302_Byte ( unsigned char address )
+uint8_t Read_Ds1302_Byte ( uint8_t address )
 {
- 	unsigned char i,temp=0x00;
+ 	uint8_t i,temp=0x00;
  	RST=0;	_nop_();
  	SCK=0;	_nop_();
  	RST=1;	_nop_();
@@ -62,28 +58,12 @@ unsigned char Read_Ds1302_Byte ( unsigned char address )
 	return (temp);			
 }
 
-/* 
-uchar hex_to_bcd(uchar HEX)
-{
-	uchar BCD;
-	BCD = (HEX / 10) << 4 | (HEX % 10);
-	return BCD;
-}
-
-uchar bcd_to_hex(uchar BCD)
-{
-	uchar HEX;
-	HEX = (BCD << 4)* 10 | (BCD & 0x0F);
-	return BCD;
-} 
-*/
-
-uchar hex_to_bcd(uchar hex)
+uint8_t hex_to_bcd(uint8_t hex)
 {
 	return (hex / 10 * 16) + (hex % 10);
 }
 
-uchar bcd_to_hex(uchar bcd)
+uint8_t bcd_to_hex(uint8_t bcd)
 {
 	return (bcd / 16 * 10) + (bcd % 16);
 }
@@ -92,8 +72,7 @@ uchar bcd_to_hex(uchar bcd)
 
 void datetime_write()
 {
-	// time -> bcd
-	uchar i;
+	uint8_t i;
 	Write_Ds1302_Byte(0x8E, 0x00);
 	
 	for (i = 0;i < 7;i++)
@@ -106,7 +85,7 @@ void datetime_write()
 
 void datetime_read()
 {
-	uchar i;
+	uint8_t i;
 	for (i = 0;i < 3;i++)
 	{
 		time_now[i] = Read_Ds1302_Byte(read_address[i]);

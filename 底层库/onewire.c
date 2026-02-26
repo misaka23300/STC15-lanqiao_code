@@ -1,21 +1,19 @@
 #include "onewire.h"
+#include "intrins.h"
 
 sbit DQ = P1^4;
 
-
-
-void Delay_OneWire(unsigned int t)  
+void Delay_OneWire(uint16_t t)  
 {
-	unsigned char i;
+	uint8_t i;
 	while(t--){
 		for(i=0;i<12;i++);
 	}
 }
 
-//
-void Write_DS18B20(unsigned char dat)
+void Write_DS18B20(uint8_t dat)
 {
-	unsigned char i;
+	uint8_t i;
 	for(i=0;i<8;i++)
 	{
 		DQ = 0;
@@ -27,11 +25,10 @@ void Write_DS18B20(unsigned char dat)
 	Delay_OneWire(5);
 }
 
-//
-unsigned char Read_DS18B20(void)
+uint8_t Read_DS18B20(void)
 {
-	unsigned char i;
-	unsigned char dat;
+	uint8_t i;
+	uint8_t dat;
   
 	for(i=0;i<8;i++)
 	{
@@ -47,9 +44,7 @@ unsigned char Read_DS18B20(void)
 	return dat;
 }
 
-//
 bit init_ds18b20(void)
-{
   	bit initflag = 0;
   	
   	DQ = 1;
@@ -64,12 +59,10 @@ bit init_ds18b20(void)
   	return initflag;
 }
 
-
-
 float read_temperature()
 {
 	float temperature;
-	uchar high, low;
+	uint8_t high, low;
 
 	init_ds18b20();
 	Write_DS18B20(0xcc);

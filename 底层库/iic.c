@@ -1,12 +1,12 @@
 #include "iic.h"
+#include "intrins.h"
 
 sbit scl = P2^0;
 sbit sda = P2^1;
 
 #define DELAY_TIME	10
 
-//
-static void I2C_Delay(unsigned char n)
+static void I2C_Delay(uint8_t n)
 {
     do
     {
@@ -17,7 +17,6 @@ static void I2C_Delay(unsigned char n)
     while(n--);      	
 }
 
-//
 void I2CStart(void)
 {
     sda = 1;
@@ -28,7 +27,6 @@ void I2CStart(void)
     scl = 0;    
 }
 
-//
 void I2CStop(void)
 {
     sda = 0;
@@ -38,10 +36,9 @@ void I2CStop(void)
 	I2C_Delay(DELAY_TIME);
 }
 
-//
-void I2CSendByte(unsigned char byt)
+void I2CSendByte(uint8_t byt)
 {
-    unsigned char i;
+    uint8_t i;
 	
     for(i=0; i<8; i++){
         scl = 0;
@@ -61,11 +58,10 @@ void I2CSendByte(unsigned char byt)
     scl = 0;  
 }
 
-//
-unsigned char I2CReceiveByte(void)
+uint8_t I2CReceiveByte(void)
 {
-	unsigned char da;
-	unsigned char i;
+	uint8_t da;
+	uint8_t i;
 	for(i=0;i<8;i++){   
 		scl = 1;
 		I2C_Delay(DELAY_TIME);
@@ -78,10 +74,9 @@ unsigned char I2CReceiveByte(void)
 	return da;    
 }
 
-//
-unsigned char I2CWaitAck(void)
+uint8_t I2CWaitAck(void)
 {
-	unsigned char ackbit;
+	uint8_t ackbit;
 	
     scl = 1;
 	I2C_Delay(DELAY_TIME);
@@ -92,8 +87,7 @@ unsigned char I2CWaitAck(void)
 	return ackbit;
 }
 
-//
-void I2CSendAck(unsigned char ackbit)
+void I2CSendAck(uint8_t ackbit)
 {
     scl = 0;
     sda = ackbit; 
@@ -105,10 +99,9 @@ void I2CSendAck(unsigned char ackbit)
 	I2C_Delay(DELAY_TIME);
 }
 
-
-uchar ADC(uchar address)
+uint8_t ADC(uint8_t address)
 {
-    uchar adc;
+    uint8_t adc;
     I2CStart();
 
     I2CSendByte(0x90);
@@ -128,7 +121,7 @@ uchar ADC(uchar address)
     I2CStop();
 }
 
-void DAC(uchar value)
+void DAC(uint8_t value)
 {
     I2CStart();
 
@@ -144,7 +137,7 @@ void DAC(uchar value)
     I2CStop();
 }
 
-write_2k(uchar address, Data)
+void write_2k(uint8_t address, uint8_t Data)
 {
     I2CStart();
 
@@ -161,11 +154,11 @@ write_2k(uchar address, Data)
 
 }
 
-uchar Read_2k(uchar address)
+uint8_t Read_2k(uint8_t address)
 {
-    uchar Data;
+    uint8_t Data;
 
-    I2CStart(0xA0);
+    I2CStart();
     I2CWaitAck();
 
     I2CSendByte(address);

@@ -1,22 +1,22 @@
 #include "main.h"
 
-const uchar code SONIC_TIME = 500; 
-const uchar code KEY_TIME = 150;
-const uchar code SEG_TIME = 1;
-const uchar code LED_TIME = 5;
-const uchar code TEMPERATURE_TIME = 500;
+const uint8_t SONIC_TIME = 500; 
+const uint8_t KEY_TIME = 150;
+const uint8_t SEG_TIME = 1;
+const uint8_t LED_TIME = 5;
+const uint8_t TEMPERATURE_TIME = 500;
 bit seg_flag, led_flag, sonic_flag, key_flag, temp_flag;
 bit sonic_units;
-uchar state;
+uint8_t state;
  
-uint distance;
-uchar temperature;
+uint16_t distance;
+uint8_t temperature;
 
-extern uchar seg[8];
+extern uint8_t seg[8];
 
-uchar argument_state;
-uchar argument_temp;
-uchar factory_state;
+uint8_t argument_state;
+uint8_t argument_temp;
+uint8_t factory_state;
 
 void main()
 {
@@ -31,7 +31,7 @@ void main()
 
         if (key_flag)
         {
-            uchar press;
+            uint8_t press;
 
             key_flag = 0;
             press = key_scan();
@@ -61,7 +61,7 @@ void main()
 
 void timer_1_1ms() interrupt 3
 {
-    static uint i;
+    static uint16_t i;
     i = (i + 1) % 30000;
 
    

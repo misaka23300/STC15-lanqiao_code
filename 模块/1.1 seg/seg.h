@@ -1,9 +1,9 @@
 #ifndef __SEG_H__
 #define __SEG_H__
 
-#include "boot.h"
+#include <stdint.h>
 
 void seg_display();
-void set_seg(uchar s0, s1, s2, s3, s4, s5, s6, s7);
+void set_seg(uint8_t s0, uint8_t s1, uint8_t s2, uint8_t s3, uint8_t s4, uint8_t s5, uint8_t s6, uint8_t s7);
 
 #endif

@@ -3,11 +3,12 @@
 
 #include "STC15F2K60S2.H"
 #include "intrins.h"
+#include <stdint.h>
 
-#define uchar unsigned char
-#define uint unsigned int
+#define uchar uint8_t
+#define uint uint16_t
 
-void latch(char i);
+void latch(uint8_t i);
 void Delay14us(void);
 
 #endif

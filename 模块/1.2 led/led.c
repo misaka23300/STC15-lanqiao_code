@@ -57,7 +57,7 @@ void led_display()
 
 void latch(uint8_t i)
 {
-    siwtch(i):
+    switch(i)
     {
         case 4: {P2 = (P2 & 0x1F) | 0x80;break;}
         case 6: {P2 = (P2 & 0x1F) | 0x80;break;}
@@ -68,7 +68,7 @@ void latch(uint8_t i)
 
 void Delay500ms(void)	//@12.000MHz
 {
-	unsigned char data i, j, k;
+	uint8_t i, j, k;
 
 	_nop_();
 	_nop_();

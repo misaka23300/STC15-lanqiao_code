@@ -3,15 +3,11 @@
 
 #include "STC15F2K60S2.H"
 #include "intrins.h"
-
+#include <stdint.h>
 
 #include "stdio.h"
 
-
-typedef unsigned char uchar;
-typedef unsigned int uint;
-
-void latch(uchar i);
+void latch(uint8_t i);
 void clean_display();
 
 

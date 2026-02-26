@@ -1,12 +1,12 @@
 #ifndef __DISPLAY_H__
 #define __DISPLAY_H__
 
-#include "boot.h"
+#include <stdint.h>
 
 void led_display();
-void sandy(uchar i,bit state);
+void sandy(uint8_t i,bit state);
 void seg_display();
 
-// extern uchar led[8];
-// extern uchar seg[8];
+// extern uint8_t led[8];
+// extern uint8_t seg[8];
 #endif

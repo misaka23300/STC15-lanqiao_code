@@ -1,9 +1,9 @@
 #include "key.h"
 
-uchar key_scan()
+uint8_t key_scan()
 {
-    static uchar i, state, value;
-    uchar temp = 99, press = 0xFF;
+    static uint8_t i, state, value;
+    uint8_t temp = 99, press = 0xFF;
 
     P3 = 0x0F;
     P42 = 0; P44 = 0;
