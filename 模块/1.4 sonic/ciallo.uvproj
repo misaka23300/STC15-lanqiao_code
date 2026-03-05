@@ -374,22 +374,12 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>main</GroupName>
+          <GroupName>driver</GroupName>
           <Files>
-            <File>
-              <FileName>boot.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\main\boot.c</FilePath>
-            </File>
             <File>
               <FileName>key.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\main\key.c</FilePath>
-            </File>
-            <File>
-              <FileName>main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\main\main.c</FilePath>
             </File>
             <File>
               <FileName>seg.c</FileName>
@@ -400,6 +390,31 @@
               <FileName>sonic.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\main\sonic.c</FilePath>
+            </File>
+            <File>
+              <FileName>led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\main\led.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>user</GroupName>
+          <Files>
+            <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\main\main.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>task</GroupName>
+          <Files>
+            <File>
+              <FileName>boot.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\main\boot.c</FilePath>
             </File>
           </Files>
         </Group>

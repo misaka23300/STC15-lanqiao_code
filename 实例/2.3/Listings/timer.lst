@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   TIMER                                                             06/13/2025 23:29:51 PAGE 1   
+C51 COMPILER V9.60.7.0   TIMER                                                             02/03/2026 16:52:37 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TIMER
@@ -62,7 +62,7 @@ line level    source
   52          void UartInit(void)   //9600bps@12.000MHz
   53          {
   54   1        SCON = 0x50;    //8位数据,可变波特率
-C51 COMPILER V9.60.7.0   TIMER                                                             06/13/2025 23:29:51 PAGE 2   
+C51 COMPILER V9.60.7.0   TIMER                                                             02/03/2026 16:52:37 PAGE 2   
 
   55   1        //AUXR |= 0x01;   //串口1选择定时器2为波特率发生器
   56   1        AUXR |= 0x05;   //定时器2时钟为Fosc,即1T
@@ -77,14 +77,18 @@ line level    source
   65          void uart_interrupt() interrupt 4
   66          {
   67   1          uchar Data;
+*** ERROR C202 IN LINE 67 OF code\timer.c: 'uchar': undefined identifier
+*** ERROR C141 IN LINE 67 OF code\timer.c: syntax error near 'Data', expected ';'
   68   1          if (RI)
   69   1          {
   70   2              RI = 0;
   71   2              Data = SBUF;
+*** ERROR C202 IN LINE 71 OF code\timer.c: 'Data': undefined identifier
   72   2              uart.out_time = 0;
   73   2              uart.out_time_flag = 1;
   74   2      
   75   2              uart.receive_data[uart.index] = Data;
+*** ERROR C202 IN LINE 75 OF code\timer.c: 'Data': undefined identifier
   76   2              uart.index++;
   77   2      
   78   2              if (uart.index == (UART_LEN - 1) )
@@ -111,16 +115,4 @@ line level    source
   99   1          EA = 1;
  100   1      }
 
-
-MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    123    ----
-   CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =   ----    ----
-   PDATA SIZE       =   ----    ----
-   DATA SIZE        =     20    ----
-   IDATA SIZE       =   ----    ----
-   BIT SIZE         =   ----    ----
-END OF MODULE INFORMATION.
-
-
-C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  0 WARNING(S),  4 ERROR(S)

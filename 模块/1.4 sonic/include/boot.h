@@ -16,7 +16,7 @@ typedef signed int int16_t; */
 void boot_init();
 void latch(uint8_t i);
 void Delay14us(void);
-void Timer2_Init(void);
+void Delay1000ms(void);
+void while_plus(uint8_t *num, uint8_t init, uint8_t max);
 
-void Timer1_Init(void);	
 #endif

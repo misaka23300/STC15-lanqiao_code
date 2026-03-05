@@ -1,0 +1,62 @@
+version: "4.1"
+name: ciallo
+type: C51
+deviceName: null
+packDir: null
+srcDirs: []
+virtualFolder:
+  name: <virtual_root>
+  files: []
+  folders:
+    - name: driver
+      files:
+        - path: main/key.c
+        - path: main/seg.c
+        - path: main/sonic.c
+        - path: main/led.c
+      folders: []
+    - name: user
+      files:
+        - path: main/main.c
+      folders: []
+    - name: task
+      files:
+        - path: main/boot.c
+      folders: []
+dependenceList: []
+outDir: build
+miscInfo:
+  uid: b5c9275fb1bb580f86cdceb5cbeac4f0
+targets:
+  Target 1:
+    cppPreprocessAttrs:
+      defineList: []
+      incList:
+        - ../../../../Keil_v5/C51/INC/STC
+        - include
+      libList: []
+    excludeList: []
+    toolchain: Keil_C51
+    toolchainConfigMap:
+      Keil_C51:
+        options:
+          version: 2
+          afterBuildTasks: []
+          asm-compiler: {}
+          beforeBuildTasks: []
+          c/cpp-compiler:
+            optimization-level: level-8
+            optimization-type: SPEED
+          global:
+            ram-mode: SMALL
+            rom-mode: LARGE
+          linker:
+            misc-controls: ""
+            output-format: elf
+            remove-unused: true
+    uploadConfigMap:
+      Custom:
+        bin: ""
+        commandLine: ""
+        eraseChipCommand: ""
+    uploader: Custom

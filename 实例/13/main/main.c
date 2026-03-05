@@ -58,6 +58,9 @@ int8_t relay_5s_flag = 0;  // 继电器5秒标志
 uint16_t tick_100ms = 0;  // 100ms计数器
 uint8_t flag_100ms = 0;  // 100ms闪烁标志
 
+
+float temperature;
+
 void key_task()
 {
     key_press = key_scan();
@@ -88,7 +91,7 @@ void key_task()
 
 void temp_task()
 {
-    read_temperature();
+    temperature = read_temperature();
 
     if (temperature > temp_argument) {
         relay(1);  // 温度高于设定值，开启继电器

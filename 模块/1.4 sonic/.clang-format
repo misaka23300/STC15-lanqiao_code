@@ -1,0 +1,65 @@
+# =========================================================
+# .clang-format 控制语句大括号同一行风格
+# =========================================================
+
+BasedOnStyle: LLVM
+Language: Cpp
+
+# ---------- 缩进 ----------
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+IndentCaseLabels: false
+IndentCaseBlocks: true
+
+# ---------- 大括号 ----------
+BreakBeforeBraces: Attach        # <<<<< 控制语句大括号同一行
+BraceWrapping:
+  AfterFunction: true           # 函数定义大括号换行
+  AfterControlStatement: false  # if/for/while 在同一行
+  AfterStruct: true
+  AfterEnum: true
+  AfterClass: true
+  AfterUnion: true
+  BeforeElse: false
+  BeforeCatch: false
+  IndentBraces: false
+
+# ---------- 空格 ----------
+SpaceBeforeParens: ControlStatements
+SpaceAfterCStyleCast: true
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+SpacesInAngles: false
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCpp11BracedList: true
+
+# ---------- 对齐 ----------
+AlignAfterOpenBracket: Align
+AlignOperands: true
+AlignTrailingComments: true
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+
+# ---------- 换行 ----------
+AllowShortIfStatementsOnASingleLine: true
+AllowShortLoopsOnASingleLine: true
+AllowShortFunctionsOnASingleLine: None
+AllowShortBlocksOnASingleLine: true
+BreakBeforeBinaryOperators: None
+BreakBeforeTernaryOperators: true
+
+# ---------- 行宽 ----------
+ColumnLimit: 100
+
+# ---------- 注释 ----------
+ReflowComments: true
+CommentPragmas: '^ IWYU pragma:'
+
+# ---------- 指针 / 引用 ----------
+PointerAlignment: Left
+
+# ---------- 其他 ----------
+Cpp11BracedListStyle: true
+KeepEmptyLinesAtTheStartOfBlocks: false
+MaxEmptyLinesToKeep: 1

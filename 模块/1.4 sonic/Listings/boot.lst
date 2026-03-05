@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   BOOT                                                              02/02/2026 19:21:09 PAGE 1   
+C51 COMPILER V9.60.7.0   BOOT                                                              02/03/2026 17:51:37 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE BOOT
@@ -10,91 +10,145 @@ line level    source
 
    1          #include "boot.h"
    2          
-   3          void boot_init()
-   4          {
-   5   1          P0M1 = 0;   P0M0 = 0;   //设置为准双向口
-   6   1          P1M1 = 0;   P1M0 = 0;   //设置为准双向口
-   7   1          P2M1 = 0;   P2M0 = 0;   //设置为准双向口
-   8   1          P3M1 = 0;   P3M0 = 0;   //设置为准双向口
-   9   1          P4M1 = 0;   P4M0 = 0;   //设置为准双向口
-  10   1          P5M1 = 0;   P5M0 = 0;   //设置为准双向口
-  11   1          P6M1 = 0;   P6M0 = 0;   //设置为准双向口
-  12   1          P7M1 = 0;   P7M0 = 0;   //设置为准双向口
-  13   1      
-  14   1      
-  15   1          P0 = 0xFF;
-  16   1          latch(4);
-  17   1          latch(0);
-  18   1      
-  19   1          P0 = 0xAF;
-  20   1          latch(5);
-  21   1          latch(0);
-  22   1      
-  23   1          P0 = 0x00;
-  24   1          latch(6);
-  25   1          latch(0);
-  26   1      
-  27   1          P0 = 0XFF;
-  28   1          latch(7);
-  29   1          latch(0);
-  30   1      
-  31   1          Timer2_Init();
-  32   1          Timer1_Init();
-  33   1          EA = 1;
-  34   1      }
-  35          
-  36          void latch(uint8_t i)
-  37          {
-  38   1          switch (i)
-  39   1          {
-  40   2              case 0: {P2 = P2 & 0x1F; break;}
-  41   2              case 4: {P2 = (P2 & 0x1F) | 0x80; break;}
-  42   2              case 5: {P2 = (P2 & 0x1F) | 0xA0; break;}
-  43   2              case 6: {P2 = (P2 & 0x1F) | 0xC0; break;}
-  44   2              case 7: {P2 = (P2 & 0x1F) | 0xE0; break;}
-  45   2          }
-  46   1      }
-  47          
-  48          void Delay14us(void)  //@12.000MHz
-  49          {
-  50   1        unsigned char data i;
-  51   1      
-  52   1        _nop_();
-  53   1        _nop_();
-  54   1        i = 39;
-C51 COMPILER V9.60.7.0   BOOT                                                              02/02/2026 19:21:09 PAGE 2   
+   3          
+   4          void Timer2_Init(void) // 1毫秒@12.000MHz
+   5          {
+   6   1          AUXR &= 0xFB; // 定时器时钟12T模式
+   7   1          T2L = 0x18;   // 设置定时初始值
+   8   1          T2H = 0xFC;   // 设置定时初始值
+   9   1          AUXR |= 0x10; // 定时器2开始计时
+  10   1          IE2 |= 0x04;  // 使能定时器2中断
+  11   1      }
+  12          
+  13          void Timer1_Init(void) // 1毫秒@12.000MHz
+  14          {
+  15   1          AUXR &= 0xBF; // 定时器时钟12T模式
+  16   1          TMOD &= 0x0F; // 设置定时器模式
+  17   1          TL1 = 0x00;   // 设置定时初始值
+  18   1          TH1 = 0x00;   // 设置定时初始值
+  19   1          TF1 = 0;      // 清除TF1标志
+  20   1          TR1 = 0;      // 定时器1开始计时
+  21   1      }
+  22          
+  23          
+  24          void boot_init() {
+  25   1          P0M1 = 0;
+  26   1          P0M0 = 0; // 设置为准双向口
+  27   1          P1M1 = 0;
+  28   1          P1M0 = 0; // 设置为准双向口
+  29   1          P2M1 = 0;
+  30   1          P2M0 = 0; // 设置为准双向口
+  31   1          P3M1 = 0;
+  32   1          P3M0 = 0; // 设置为准双向口
+  33   1          P4M1 = 0;
+  34   1          P4M0 = 0; // 设置为准双向口
+  35   1          P5M1 = 0;
+  36   1          P5M0 = 0; // 设置为准双向口
+  37   1          P6M1 = 0;
+  38   1          P6M0 = 0; // 设置为准双向口
+  39   1          P7M1 = 0;
+  40   1          P7M0 = 0; // 设置为准双向口
+  41   1      
+  42   1          P0 = 0xFF;
+  43   1          latch(4);
+  44   1          latch(0);
+  45   1      
+  46   1          P0 = 0xAF;
+  47   1          latch(5);
+  48   1          latch(0);
+  49   1      
+  50   1          P0 = 0x00;
+  51   1          latch(6);
+  52   1          latch(0);
+  53   1      
+  54   1          P0 = 0XFF;
+C51 COMPILER V9.60.7.0   BOOT                                                              02/03/2026 17:51:37 PAGE 2   
 
-  55   1        while (--i);
-  56   1      }
-  57          
-  58          
-  59          
-  60          void Timer2_Init(void)    //1毫秒@12.000MHz
-  61          {
-  62   1        AUXR &= 0xFB;     //定时器时钟12T模式
-  63   1        T2L = 0x18;       //设置定时初始值
-  64   1        T2H = 0xFC;       //设置定时初始值
-  65   1        AUXR |= 0x10;     //定时器2开始计时
-  66   1        IE2 |= 0x04;      //使能定时器2中断
-  67   1      }
-  68          
-  69          void Timer1_Init(void)    //1毫秒@12.000MHz
-  70          {
-  71   1        AUXR &= 0xBF;     //定时器时钟12T模式
-  72   1        TMOD &= 0x0F;     //设置定时器模式
-  73   1        TL1 = 0x00;       //设置定时初始值
-  74   1        TH1 = 0x00;       //设置定时初始值
-  75   1        TF1 = 0;        //清除TF1标志
-  76   1        TR1 = 0;        //定时器1开始计时
-  77   1      }
+  55   1          latch(7);
+  56   1          latch(0);
+  57   1      
+  58   1          Timer2_Init();
+  59   1          Timer1_Init();
+  60   1          EA = 1;
+  61   1      }
+  62          
+  63          void latch(uint8_t i) {
+  64   1          switch (i) {
+  65   2          case 0:
+  66   2              {
+  67   3                  P2 = P2 & 0x1F;
+  68   3                  break;
+  69   3              }
+  70   2          case 4:
+  71   2              {
+  72   3                  P2 = (P2 & 0x1F) | 0x80;
+  73   3                  break;
+  74   3              }
+  75   2          case 5:
+  76   2              {
+  77   3                  P2 = (P2 & 0x1F) | 0xA0;
+  78   3                  break;
+  79   3              }
+  80   2          case 6:
+  81   2              {
+  82   3                  P2 = (P2 & 0x1F) | 0xC0;
+  83   3                  break;
+  84   3              }
+  85   2          case 7:
+  86   2              {
+  87   3                  P2 = (P2 & 0x1F) | 0xE0;
+  88   3                  break;
+  89   3              }
+  90   2          }
+  91   1      }
+  92          
+  93          void Delay14us(void) //@12.000MHz
+  94          {
+  95   1          unsigned char data i;
+  96   1      
+  97   1          _nop_();
+  98   1          _nop_();
+  99   1          i = 39;
+ 100   1          while (--i);
+ 101   1      }
+ 102          
+ 103          void Delay1000ms(void)  //@12.000MHz
+ 104          {
+ 105   1        unsigned char data i, j, k;
+ 106   1      
+ 107   1        _nop_();
+ 108   1        _nop_();
+ 109   1        i = 46;
+ 110   1        j = 153;
+ 111   1        k = 245;
+ 112   1        do
+ 113   1        {
+ 114   2          do
+ 115   2          {
+ 116   3            while (--k);
+C51 COMPILER V9.60.7.0   BOOT                                                              02/03/2026 17:51:37 PAGE 3   
+
+ 117   3          } while (--j);
+ 118   2        } while (--i);
+ 119   1      }
+ 120          
+ 121          
+ 122          
+ 123          void while_plus(uint8_t *num, uint8_t init, uint8_t max)
+ 124          {
+ 125   1          (*num)++;
+ 126   1          if (*num == max + 1) {
+ 127   2              *num = init;
+ 128   2          }
+ 129   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    191    ----
+   CODE SIZE        =    241    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----    ----
+   DATA SIZE        =   ----       5
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

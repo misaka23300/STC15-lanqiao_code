@@ -1,5 +1,5 @@
 #include "seg.h"
-#include "boot.h"
+
 
 static int8_t randz_now = 0;
 static int8_t randz_last = 0;
@@ -28,7 +28,10 @@ void seg_display()
     latch(7);
     latch(0);
     
-    i = (i + 1) % 8;
+    i = i + 1;
+    if (i == 8) {
+        i = 0;
+    }
 }
 
 void set_seg(uint8_t s0, uint8_t s1, uint8_t s2, uint8_t s3, uint8_t s4, uint8_t s5, uint8_t s6, uint8_t s7)
@@ -58,7 +61,7 @@ void relay(bit state)
     {
         P0 = randz_now;
         latch(4);
-
+        latch(0);
         randz_last = randz_now;
     }
 }
