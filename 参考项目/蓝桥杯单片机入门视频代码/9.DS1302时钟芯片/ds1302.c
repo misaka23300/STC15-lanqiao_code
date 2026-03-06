@@ -1,6 +1,6 @@
 #include "ds1302.h"  									
 
-//Ğ´×Ö½Ú
+//ÄÂ´Ã—Ã–ËÃš
 void Write_Ds1302(unsigned  char temp) 
 {
 	unsigned char i;
@@ -13,7 +13,7 @@ void Write_Ds1302(unsigned  char temp)
 	}
 }   
 
-//ÏòDS1302¼Ä´æÆ÷Ğ´ÈëÊı¾İ
+//ÄÅˆDS1302Ä½Ã„Â´Ä‡Ä†Ã·ÄÂ´ÄŒÃ«Ä˜Ã½Ä¾Ã
 void Write_Ds1302_Byte( unsigned char address,unsigned char dat )     
 {
  	RST=0;	_nop_();
@@ -24,7 +24,7 @@ void Write_Ds1302_Byte( unsigned char address,unsigned char dat )
  	RST=0; 
 }
 
-//´ÓDS1302¼Ä´æÆ÷¶Á³öÊı¾İ
+//Â´Ã“DS1302Ä½Ã„Â´Ä‡Ä†Ã·Â¶ÃÅ‚Ã¶Ä˜Ã½Ä¾Ã
 unsigned char Read_Ds1302_Byte ( unsigned char address )
 {
  	unsigned char i,temp=0x00;
@@ -62,7 +62,7 @@ void Ds1302_Settime(u8 nian,yue,ri,zhou,shi,fen,miao){
 	
 u8 Ds1302_Readtime(unsigned char address){
 	u8 a;
-	a = Read_Ds1302_Byte(address);//ÄÃµ½BCDÂë
+	a = Read_Ds1302_Byte(address);//Ã„Ä‚ÂµËBCDÃ‚Ã«
 	a = a/16*10+a%16;
 	return a;
 }

@@ -1,0 +1,1 @@
+"..\User\Src\NE555.c" OMF2 OPTIMIZE (8,SPEED) BROWSE INCDIR(..\Project;..\User;..\User\Inc) DEBUG PRINT(C:\Users\86132\Documents\NE555.lst) TABS (2) OBJECT(..\Output\NE555.obj)

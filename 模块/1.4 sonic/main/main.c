@@ -131,8 +131,3 @@ void Timer2_Isr(void) interrupt 12 {
     if (leds.time < LED_TIME) { leds.time++; }
 }
 
-
-void run_task(uint16_t *task_time, uint)
-{
-
-}

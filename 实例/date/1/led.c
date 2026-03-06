@@ -7,11 +7,11 @@ static uchar led_temp=0x00;
 static uchar last_temp=0xff;
 	if(1==state)
 	{
-	 led_temp|=1<<p;     //ÖÃ1µÚnÎ»
+	 led_temp|=1<<p;     //Ã–Ä†1ÂµÅšnÄªÂ»
 	}
 	else
 	{
-	 led_temp&=~(1<<p); // Çå0µÚnÎ»
+	 led_temp&=~(1<<p); // Ä’Ã¥0ÂµÅšnÄªÂ»
 	}
 	if(led_temp!=last_temp)
 	{
@@ -20,7 +20,7 @@ static uchar last_temp=0xff;
 	}
 }
 
-void wmq(uchar d,bit state)    //   0 ÎËÃùÆ÷½Ð
+void wmq(uchar d,bit state)    //   0 ÄªÄ–Ä†Å‚Ä˜Ã·Â½Å 
 {
  static uchar wmq_temp=0x00;
 	static uchar last_temp=0xff;

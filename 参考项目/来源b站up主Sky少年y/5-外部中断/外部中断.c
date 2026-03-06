@@ -48,7 +48,7 @@ void INT0_Server() interrupt 0
 	uchar j=0;
 	for(j=0;j<3;j++)
 	{
-		control(4,0xfe);         //P00 = 0;ÆäËûÏ¨Ãð 1111 1110
+		control(4,0xfe);         //P00 = 0;Ã³Ã°Ã¹Â«Ã¼Â´Ã»Ãž 1111 1110
 		Delay500ms();
 		control(4,0xff);
 		Delay500ms();
@@ -60,7 +60,7 @@ void INT1_Server() interrupt 2
 	uchar j=0;
 	for(j=0;j<3;j++)
 	{
-		control(4,0x7f);         //P00 = 0;ÆäËûÏ¨Ãð 0111 1111
+		control(4,0x7f);         //P00 = 0;Ã³Ã°Ã¹Â«Ã¼Â´Ã»Ãž 0111 1111
 		Delay500ms();
 		control(4,0xff);
 		Delay500ms();

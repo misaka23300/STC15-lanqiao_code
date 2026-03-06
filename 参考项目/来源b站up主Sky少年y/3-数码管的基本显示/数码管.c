@@ -2,7 +2,7 @@
 #include "intrins.h"
 
 code unsigned char DuanMa[]={0xc0,0xf9,0xa4,0xb0,0x99,
-0x92,0x82,0xf8,0x80,0x90,0xbf,0xff};   //��Ӧ��0-9��-��11���ַ�����ȫ��
+0x92,0x82,0xf8,0x80,0x90,0xbf,0xff};   //ﭘﺿﺽ۵ﻉﺧ0-9ﭦﺱ-ﺗﺎ11ﺕﺉﻉﻅﺓﻳﺙﺽﺭﺵﺫ،ﺣﻭ
 
 void Delay1ms(void)	//@11.0592MHz
 {
@@ -30,7 +30,7 @@ void control(char x,y)
 {
 	switch(x)
 	{
-		case 4:P2=(P2 & 0x1f)|0x80;break;   //Y4CΪ�ߵ�ƽ
+		case 4:P2=(P2 & 0x1f)|0x80;break;   //Y4Cﺳ۹ﺕﻑﭖﻝﺩﺛ
 		case 5:P2=(P2 & 0x1f)|0xa0;break;   //5
 		case 6:P2=(P2 & 0x1f)|0xc0;break;
 		case 7:P2=(P2 & 0x1f)|0xe0;break;
@@ -41,9 +41,9 @@ void control(char x,y)
 
 void aloneSMG(char pos,value)     
 {
-	control(7,0xff);         //��Ӱ
-	control(6,0x01<<pos);    //λѡ x=0 x=7
-	control(7,DuanMa[value]);//����
+	control(7,0xff);         //ﺵﻳﺽﺍ
+	control(6,0x01<<pos);    //ﺳﭨﺹ۰ x=0 x=7
+	control(7,DuanMa[value]);//ﭘﺳﺡﻣ
 	delay(1);
 }
 

@@ -1,0 +1,18 @@
+#ifndef __MAIN_H__
+#define __MAIN_H__
+
+#include "boot.h"
+#include "led.h"
+#include "seg.h"
+#include "key.h"
+
+
+
+
+void key_task();
+void shan_task();
+void display_task();
+void freq_task();
+
+
+#endif

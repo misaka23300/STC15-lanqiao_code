@@ -44,12 +44,12 @@ void main(){
 			case 4:Tmp_Show();break;
 		}
 		
-		//读DS1302也需要减速
+		//露脕DS1302脪膶膼猫脪葮艗艖脣脵
 		if(time_flag){
 			time_flag=0;
 			hour = Read_Ds1302_Byte(0x85);
 			min = Read_Ds1302_Byte(0x83);
-			sec = Read_Ds1302_Byte(0x81);//秒读做定时器
+			sec = Read_Ds1302_Byte(0x81);//膫毛露脕艢枚露拧脢卤脝艣
 			if((hour/16*10+hour%16)==clk[0]){
 				if((min/16*10+min%16)==clk[1]){
 					if((sec/16*10+sec%16)==clk[2]){

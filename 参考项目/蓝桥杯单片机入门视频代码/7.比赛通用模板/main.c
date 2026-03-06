@@ -1,7 +1,7 @@
 #include "main.h"
 
-u16 cnt;//¶¨Ê±Æ÷0¼ÆÊý
-u8 num;//½Ó°´¼üÖµ
+u16 cnt;//Â¶Â¨ÃŠÂ±Ã†Ã·0Â¼Ã†ÃŠÄ±
+u8 num;//Â½Ã“Â°Â´Â¼Ã¼Ã–Âµ
 bit key_flag,led_flag;
 void main(){
 	Sys_Init();

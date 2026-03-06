@@ -1,0 +1,1 @@
+"..\User\Src\PCF8591.c" LARGE OMF2 OPTIMIZE (8,SPEED) BROWSE INCDIR(..\Project;..\User;..\User\Inc) DEBUG PRINT(C:\Users\86132\Documents\PCF8591.lst) TABS (2) OBJECT(..\Output\PCF8591.obj)

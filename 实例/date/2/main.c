@@ -12,7 +12,7 @@ extern uchar led_value[8];
 bit key_flag, sonic_flag, adc_flag, adc_state, shan_flag;
 
 uchar press;
-// ģʽ
+// Ä£Ź½
 uchar state, mode = 1;
 uchar distance[2];
 uchar adc;
@@ -153,9 +153,9 @@ void sonic_proc()
 	uint dis;
 	// 99.23 -> 9923
 	dis = sonic_measure() * 100;
-	// ��λ��
+	// øöĪ»Źż
 	distance[1] = dis / 100 % 10;
-	// ʮλ��
+	// Ź®Ī»Źż
     distance[0] = dis / 1000 % 10;
 	if (distance[0] == 0)
 		distance[0] = 16;

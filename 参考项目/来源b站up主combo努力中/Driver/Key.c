@@ -25,7 +25,7 @@
 //	if(P30 == 0) temp = 19;
 //	return temp;
 //}
-unsigned char Key_Read()//°å×Ó
+unsigned char Key_Read()//Â°Ã¥Ã—Ã“
 {
 	unsigned char temp = 0;
 	P44 = 0;P42 =1;P35 =1;P34 =1;

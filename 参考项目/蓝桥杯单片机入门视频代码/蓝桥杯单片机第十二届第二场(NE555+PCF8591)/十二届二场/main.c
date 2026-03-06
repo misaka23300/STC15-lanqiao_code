@@ -31,7 +31,7 @@ void main(){
 			num = Key_Scan();
 		}
 		
-		//频率全局检测
+		//脝碌脗脢脠芦戮脰录矛虏芒
 		if(f_mea){
 			f_mea=0;
 			TR0 = 0;
@@ -45,17 +45,17 @@ void main(){
 		if(v1_mea&&ad_mode==1){
 			v1_mea=0;
 			ET1=0;
-			ad1 = PCF8591_ReadAD(0x01);//光敏
+			ad1 = PCF8591_ReadAD(0x01);//鹿芒脙么
 			ET1=1;
 		}
 		if(v3_mea&&ad_mode==3){
 			v3_mea=0;
 			ET1=0;
-			ad3 = PCF8591_ReadAD(0x03);//光敏
+			ad3 = PCF8591_ReadAD(0x03);//鹿芒脙么
 			ET1=1;
 		}
 		
-		if(num==6)//缓存电压
+		if(num==6)//禄潞麓忙碌莽脩鹿
 		{
 			num=0;
 			v_tmp = advalue(ad3);
@@ -85,12 +85,12 @@ void main(){
 }
 
 void NE555_Init(){
-	AUXR &= 0x7F;		//定时器时钟12T模式
-	TMOD = 0x05;		//设置定时器模式
-	TL0 = 0;		//设置定时初值
-	TH0 = 0;		//设置定时初值
-	TF0 = 0;		//清除TF0标志
-	TR0 = 1;		//定时器0开始计时
+	AUXR &= 0x7F;		//露篓脢卤脝梅脢卤脰脫12T脛拢脢陆
+	TMOD = 0x05;		//脡猫脰脙露篓脢卤脝梅脛拢脢陆
+	TL0 = 0;		//脡猫脰脙露篓脢卤鲁玫脰碌
+	TH0 = 0;		//脡猫脰脙露篓脢卤鲁玫脰碌
+	TF0 = 0;		//脟氓鲁媒TF0卤锚脰戮
+	TR0 = 1;		//露篓脢卤脝梅0驴陋脢录录脝脢卤
 }
 
 void freq_show(){
@@ -113,7 +113,7 @@ void T_show(){
 	if(num==4){
 		num=0;
 		mode=3;
-		ad_mode=1;//默认进入读光敏电阻
+		ad_mode=1;//脛卢脠脧陆酶脠毛露脕鹿芒脙么碌莽脳猫
 	}
 	if(T<100)
 		Seg_Set(22,16,16,16,16,16,shi(T),ge(T));	

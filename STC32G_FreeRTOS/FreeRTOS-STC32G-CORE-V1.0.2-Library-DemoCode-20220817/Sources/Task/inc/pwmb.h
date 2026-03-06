@@ -3,7 +3,7 @@
 #define PWMB_H
 
 
-/* PWMB呼吸灯任务函数 */
+/* PWMB潞么脦眉碌脝脠脦脦帽潞炉脢谋 */
 portTASK_FUNCTION( vPWMB_LedTask, pvParameters );
 
 #endif

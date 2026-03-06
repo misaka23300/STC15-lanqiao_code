@@ -26,9 +26,9 @@ void Lalala()
 	delay(200);
 }
 
-void delay(unsigned int t)  //一次为4.5us
+void delay(unsigned int t)  //脴拢脟枚枚藛4.5us
 {
-	while(t--);      //10000为0.45s
+	while(t--);      //10000枚藛0.45s
 	while(t--);
 }
 

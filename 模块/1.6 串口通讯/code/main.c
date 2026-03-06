@@ -1,51 +1,44 @@
 #include "main.h"
 
-enum {
-    UART_TASK = 2000
-};
+enum { UART_TASK = 2000 };
 
 struct {
-    uint time; 
-    
+  uint8_t time;
+
 } uart;
 
-void main()
-{
-    uchar send_data[] = "ciallo \r \n";
-    boot_init();
-    
-    while (1)
-    {
-        if (uart.time == UART_TASK)
-        {
-            uart.time = 0;
-            uart_send(send_data);
-        }
+void main() {
+  uint8_t send_data[] = "ciallo \r \n";
+
+  boot_init();
+
+  while (1) {
+
+    if (uart.time == UART_TASK) {
+      uart.time = 0;
+      uart_send(send_data);
     }
+  }
 }
 
-void Timer1_Isr(void) interrupt 3
-{
-    if (uart.time < UART_TASK) { uart.time++; }
+void Timer1_Isr(void) interrupt 3 {
+  if (uart.time < UART_TASK) {
+    uart.time++;
+  }
 }
 
-void uart_send(uchar *str)
-{
-    while (*str != '\0')
-    {
-        SBUF = *str;
-        while (TI == 0);
-        TI = 0;
-        str++;
-    }
+void uart_send(uint8_t *str) {
+  while (*str != '\0') {
+    SBUF = *str;
+    while (TI == 0);
+    TI = 0;
+    str++;
+  }
 }
 
-void uart_receive() interrupt 4
-{
-	if(RI)
-	{
-		RI=0;
-		//LED_BUFF = SBUF;//获取串口数据点灯
-	}
+void uart_receive() interrupt 4 {
+  if (RI) {
+    RI = 0;
+    // LED_BUFF = SBUF;//获取串口数据点灯
+  }
 }
-

@@ -3,7 +3,7 @@
 #define UART2_3_H
 
 
-/* UART2，UART3通信任务函数 */
+/* UART2锛孶ART3閫氫俊浠诲姟鍑芥暟 */
 portTASK_FUNCTION_PROTO( vUart2_3Task, pvParameters );
 
 #endif

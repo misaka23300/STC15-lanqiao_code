@@ -1,6 +1,6 @@
 #ifndef __CSB_H__
 #define __CSB_H__
 #include "main.h"
-void csb_timer_init(void);		//1ºÁÃë@12.000MHz
+void csb_timer_init(void);		//1È™ÃÄ‚Ã«@12.000MHz
 u8 csb_measure();
 #endif

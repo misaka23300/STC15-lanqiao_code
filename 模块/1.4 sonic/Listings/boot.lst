@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   BOOT                                                              02/03/2026 17:51:37 PAGE 1   
+C51 COMPILER V9.60.7.0   BOOT                                                              03/06/2026 11:14:19 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE BOOT
@@ -62,7 +62,7 @@ line level    source
   52   1          latch(0);
   53   1      
   54   1          P0 = 0XFF;
-C51 COMPILER V9.60.7.0   BOOT                                                              02/03/2026 17:51:37 PAGE 2   
+C51 COMPILER V9.60.7.0   BOOT                                                              03/06/2026 11:14:19 PAGE 2   
 
   55   1          latch(7);
   56   1          latch(0);
@@ -126,7 +126,7 @@ line level    source
  114   2          do
  115   2          {
  116   3            while (--k);
-C51 COMPILER V9.60.7.0   BOOT                                                              02/03/2026 17:51:37 PAGE 3   
+C51 COMPILER V9.60.7.0   BOOT                                                              03/06/2026 11:14:19 PAGE 3   
 
  117   3          } while (--j);
  118   2        } while (--i);

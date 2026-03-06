@@ -3,6 +3,6 @@
 
 #include "boot.h"
 
-void uart_send(uchar *str);
+void uart_send(uint8_t *str);
 
 #endif

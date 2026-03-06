@@ -1,0 +1,9 @@
+"..\Output\main.obj",
+"..\Output\Timer.obj",
+"..\Output\SMG.obj",
+"..\Output\UART.obj",
+"..\Output\LED.obj",
+"..\Output\Sys.obj" 
+TO "..\Output\Project" 
+
+PRINT("C:\Users\laffe\Documents\Project.map") REMOVEUNUSED 
