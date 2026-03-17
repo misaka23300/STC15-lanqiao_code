@@ -110,7 +110,7 @@ void display()
         set_seg(5, channel_3 / 100 % 10);
         set_seg(6, channel_3 / 10 % 10);
         set_seg(7, channel_3 % 10);
-    }break;
+    } break;
 
     case 4: {
         set_seg(0, temp_10 / 100 % 10);
