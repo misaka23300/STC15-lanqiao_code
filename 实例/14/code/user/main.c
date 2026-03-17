@@ -52,7 +52,7 @@ void adc_task()
 
 void key_task()
 {
-    press = key_scan();
+    press = key_read();
     display();
 
     if (press == 4) {
