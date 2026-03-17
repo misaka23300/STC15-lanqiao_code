@@ -3,6 +3,6 @@
 
 #include "boot.h"
 
-uint8_t  pcf8591_adc(address);
+uint8_t  adc_read(uint8_t address);
 
 #endif

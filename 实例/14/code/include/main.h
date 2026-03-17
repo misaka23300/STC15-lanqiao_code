@@ -8,8 +8,14 @@
 #include "key.h"
 #include "ds1302.h"
 #include "iic.h"
+#include "onewire.h"
+
 
 void display();
 void key_task();
 void freq_task();
+void adc_task();
+void temp_task();
+
 #endif
+
