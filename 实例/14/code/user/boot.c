@@ -33,6 +33,10 @@ void boot_init()
 
     Timer0_Init();
     Timer2_Init();
+
+    INT0 = 1;
+    
+    EX0 = 1;
     EA = 1;
 
 }
@@ -40,11 +44,11 @@ void boot_init()
 void latch(uint8_t i)
 {
     switch (i) {
-        case 0: P2 = (P2 & 0x1F);
-        case 4: P2 = (P2 & 0x1F) | 0x80;
-        case 5: P2 = (P2 & 0x1F) | 0xA0;
-        case 6: P2 = (P2 & 0x1F) | 0xC0;
-        case 7: P2 = (P2 & 0x1F) | 0xE0;
+        case 0: P2 = (P2 & 0x1F);break;
+        case 4: P2 = (P2 & 0x1F) | 0x80;break;
+        case 5: P2 = (P2 & 0x1F) | 0xA0;break;
+        case 6: P2 = (P2 & 0x1F) | 0xC0;break;
+        case 7: P2 = (P2 & 0x1F) | 0xE0;break;
     }
 }
 
@@ -52,14 +56,17 @@ void latch(uint8_t i)
 
 void Timer0_Init(void)		//100微秒@12.000MHz
 {
-	AUXR |= 0x80;			//定时器时钟1T模式
-	
-    TMOD = 0x04;
+	AUXR &= 0x7F;			//定时器时钟12T模式
+
+    //TMOD = 0x04;
+    TMOD &= 0xF0;			//设置定时器模式
+    TMOD |= 0x04;
 	TL0 = 0xFF;				//设置定时初始值
 	TH0 = 0xFF;				//设置定时初始值
 	TF0 = 0;				//清除TF0标志
 	TR0 = 1;				//定时器0开始计时
 	ET0 = 1;				//使能定时器0中断
+    PT0 = 1;
 }
 
 

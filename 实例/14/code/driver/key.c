@@ -35,6 +35,8 @@ uint8_t key_scan()
 
                 switch (press) {
                     case 0x77: value = 4; break;
+                    case 0x7b: value = 5; break;
+                    case 0x7d: value = 6; break;
                     default: state = 0;
                 }
 

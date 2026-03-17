@@ -105,3 +105,26 @@ void I2CSendAck(unsigned char ackbit)
 	I2C_Delay(DELAY_TIME);
 }
 
+uint8_t  pcf8591_adc(address)
+{
+
+    uint8_t Data;
+    I2CStart();
+    I2CSendByte(0x90);
+    I2CWaitAck();
+
+    I2CSendByte(address);
+    I2CWaitAck();
+
+    I2CStart();
+    I2CSendByte(0x91);
+
+    Data =  I2CReceiveByte();
+    I2CSendAck(1);
+
+   I2CStop();
+   return Data;
+   
+}
+
+
