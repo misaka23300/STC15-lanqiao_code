@@ -3,14 +3,14 @@
 enum { LED_TIME = 10,
     KEY_TIME = 20,
     SHAN_TIME = 500, 
-    DS1302_TASK = 100,
+    DS1302_TIME = 100,
 
 };
 
 uint8_t led_time;
 uint8_t key_time;
 uint16_t shan_time;
-uint8_t ds1302_Time;
+uint8_t ds1302_time;
 
 
 void main()
@@ -57,6 +57,9 @@ void Timer2_Isr(void) interrupt 12
     if (shan_time < SHAN_TIME) {
         shan_time++;
     }
+    if (ds1302_time < DS1302_TIME) {
+        ds1302_time++;
+    }
 }
 
 void key_task()
@@ -85,6 +88,7 @@ void shan_task()
 void ds1302_task()
 {
     datetime_read();
+    display_task();
 }
 
 

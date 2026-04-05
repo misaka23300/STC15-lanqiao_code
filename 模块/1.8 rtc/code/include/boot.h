@@ -20,6 +20,6 @@ typedef signed long int32_t; */
 
 void boot_init();
 void latch(uint8_t i);
-void Delay14us(void);
+//void Delay14us(void);
 void Timer2_Init(void);
 #endif

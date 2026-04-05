@@ -13,6 +13,6 @@
 
 void key_task();
 void shan_task();
-
+void ds1302_task();
 
 #endif

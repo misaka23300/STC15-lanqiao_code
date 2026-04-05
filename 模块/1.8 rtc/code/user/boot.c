@@ -69,7 +69,7 @@ void latch(uint8_t i)
     }
 }
 
-void Delay14us(void) //@12.000MHz
+/* void Delay14us(void) //@12.000MHz
 {
     uint8_t i;
 
@@ -79,3 +79,4 @@ void Delay14us(void) //@12.000MHz
     while (--i)
         ;
 }
+ */

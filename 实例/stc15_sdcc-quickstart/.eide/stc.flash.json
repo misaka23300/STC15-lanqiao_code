@@ -1,0 +1,5 @@
+{
+    "device": "stc15",
+    "baudrate": "115200",
+    "oscFreq": "12000"
+}

@@ -45,7 +45,7 @@ void set_seg(uint8_t i,uint8_t state)
     }
 }
 
-void relay(bit state)
+/* void relay(bit state)
 {
     if (state) {
         randz_now = randz_now | (0x10);
@@ -59,7 +59,7 @@ void relay(bit state)
         latch(0);
         randz_last = randz_now;
     }
-}
+} */
 
 /* void buzz(bit state)
 {

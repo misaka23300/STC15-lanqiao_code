@@ -5,4 +5,5 @@
 
 void led(uint8_t i,uint8_t state);
 
+extern uint8_t temp;
 #endif

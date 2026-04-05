@@ -1,0 +1,66 @@
+version: "4.1"
+name: stc15_sdcc
+type: C51
+deviceName: null
+packDir: null
+srcDirs: []
+virtualFolder:
+  name: <virtual_root>
+  files: []
+  folders:
+    - name: Application
+      files:
+        - path: source/main.c
+      folders: []
+    - name: Firmware
+      files:
+        - path: libraries/stc15_lib/source/delay.c
+        - path: libraries/stc15_lib/source/GPIO.c
+        - path: libraries/stc15_lib/source/timer.c
+        - path: libraries/stc15_lib/source/USART.C
+        - path: libraries/stc15_lib/source/ADC.c
+        - path: libraries/stc15_lib/source/EEPROM.c
+        - path: libraries/stc15_lib/source/Exti.c
+        - path: libraries/stc15_lib/source/PCA.c
+        - path: libraries/stc15_lib/source/soft_uart.c
+      folders: []
+dependenceList: []
+outDir: build
+miscInfo:
+  uid: 31c064306d7d6ef41babf05495e50dc0
+targets:
+  Debug:
+    cppPreprocessAttrs:
+      defineList:
+        - DEBUG
+      incList:
+        - libraries/stc15_lib/include
+        - libraries/stc15_lib
+      libList: []
+    excludeList: []
+    settings:
+      debugger: unknown
+    toolchain: SDCC
+    toolchainConfigMap:
+      SDCC:
+        options:
+          version: 3
+          afterBuildTasks: []
+          asm-compiler: {}
+          beforeBuildTasks: []
+          c/cpp-compiler:
+            language-c: c99
+          global:
+            device: mcs51
+            misc-controls: --iram-size 128 --xram-size 0 --code-size 4096
+            optimize-type: balanced
+          linker:
+            $mainFileName: main
+            output-format: hex
+    uploadConfigMap:
+      stcgal:
+        bin: ""
+        eepromImgPath: "null"
+        extraOptions: ""
+        options: .eide/stc.flash.json
+    uploader: stcgal

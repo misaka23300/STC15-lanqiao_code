@@ -411,6 +411,11 @@
               <FileType>1</FileType>
               <FilePath>..\code\driver\seg.c</FilePath>
             </File>
+            <File>
+              <FileName>ds1302.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\code\driver\ds1302.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

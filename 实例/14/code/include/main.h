@@ -3,13 +3,14 @@
 
 #include "boot.h"
 
-#include "led.h"
-#include "seg.h"
-#include "key.h"
 #include "ds1302.h"
 #include "iic.h"
+#include "key.h"
+#include "led.h"
+#include "log.h"
 #include "onewire.h"
-
+#include "seg.h"
+#include "uart.h"
 
 void display();
 void key_task();
@@ -18,4 +19,3 @@ void adc_task();
 void temp_task();
 
 #endif
-

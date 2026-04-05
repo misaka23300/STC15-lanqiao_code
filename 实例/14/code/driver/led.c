@@ -1,10 +1,10 @@
 #include "led.h"
 
-
+uint8_t temp;
 
 void led(uint8_t i,uint8_t state)
 {
-    static uint8_t temp;
+    
     static uint8_t last = 0xFF;
 
     if (state) {

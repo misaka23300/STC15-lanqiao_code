@@ -2,8 +2,8 @@
 #include "intrins.h"
 
 sbit SDA = P2^3;
-sbit SCL = P1^7;
-sbit RST = P1^7;
+sbit SCK = P1^7;
+sbit RST = P1^3;
 
 const uint8_t write_address[7] = {0x80, 0x82, 0x84, 0x86, 0x88, 0x8A, 0x8C};
 const uint8_t read_address[7] = {0x81, 0x83, 0x85, 0x87, 0x89, 0x8B, 0x8D};
@@ -58,10 +58,10 @@ uint8_t Read_Ds1302_Byte ( uint8_t address )
 	return (temp);			
 }
 
-uint8_t hex_to_bcd(uint8_t hex)
+/* uint8_t hex_to_bcd(uint8_t hex)
 {
 	return (hex / 10 * 16) + (hex % 10);
-}
+} */
 
 uint8_t bcd_to_hex(uint8_t bcd)
 {

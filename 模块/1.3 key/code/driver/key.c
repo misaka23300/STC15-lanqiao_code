@@ -11,13 +11,15 @@ uint8_t key_scan()
     P31 = 1;
     P32 = 1;
     P33 = 1;
-    // P34 = 0;
+
+    P34 = 0;
     P35 = 0;
     P42 = 0;
     P44 = 0;
+
+    // 获取列
     P36 = P42;
     P37 = P44;
-
     press = P3 & 0x0F;
 
     switch (state) {
@@ -32,8 +34,10 @@ uint8_t key_scan()
         if (press == 0x0F) {
             state = 0;
         } else {
-            P3 = press | 0xF0;
-            //P34 = 1;
+            P3 = press | 0xF0;// 屏蔽p34改为0xe0
+            
+    
+            P34 = 1; 
             P35 = 1;
             P42 = 1;
             P44 = 1;
@@ -150,4 +154,21 @@ uint8_t key_scan()
     } break;
     }
     return temp;
+}
+
+void key_press()
+{
+    uint8_t press;
+    P31 = 0;
+    P31 = 0;
+    P32 = 0;
+    P33 = 0;
+    P44 = 1;
+    P42 = 1;
+    P34 = 1;
+    P35 = 1;
+
+    press = if (P44 && P42 && P34 && P35)
+    {
+    }
 }

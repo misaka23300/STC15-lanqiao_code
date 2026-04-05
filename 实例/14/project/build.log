@@ -1,0 +1,26 @@
+Build target 'Target 1'
+compiling main.c...
+\code V4.1\STC15-lanqiao_code\实繺14\code\include\error.h(20): error C141: syntax error near ';', expected '<id>'
+\code V4.1\STC15-lanqiao_code\实繺14\code\include\error.h(23): error C141: syntax error near '}', expected 'hdata'
+\code V4.1\STC15-lanqiao_code\实繺14\code\include\error.h(27): error C141: syntax error near ')', expected '<id>'
+\code V4.1\STC15-lanqiao_code\实繺14\code\include\error.h(29): error C129: missing ';' before 'error_get_status'
+compiling ds1302.c...
+..\code\include\error.h(20): error C141: syntax error near ';', expected '<id>'
+..\code\include\error.h(23): error C141: syntax error near '}', expected 'hdata'
+..\code\include\error.h(27): error C141: syntax error near ')', expected '<id>'
+..\code\include\error.h(29): error C129: missing ';' before 'error_get_status'
+compiling iic.c...
+..\code\include\error.h(20): error C141: syntax error near ';', expected '<id>'
+..\code\include\error.h(23): error C141: syntax error near '}', expected 'hdata'
+..\code\include\error.h(27): error C141: syntax error near ')', expected '<id>'
+..\code\include\error.h(29): error C129: missing ';' before 'error_get_status'
+compiling onewire.c...
+..\code\include\error.h(20): error C141: syntax error near ';', expected '<id>'
+..\code\include\error.h(23): error C141: syntax error near '}', expected 'hdata'
+..\code\include\error.h(27): error C141: syntax error near ')', expected '<id>'
+..\code\include\error.h(29): error C129: missing ';' before 'error_get_status'
+compiling key.c...
+compiling led.c...
+compiling seg.c...
+Target not created.
+Build Time Elapsed:  00:00:08

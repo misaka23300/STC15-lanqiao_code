@@ -1,5 +1,5 @@
 #ifndef __IIC_H__
-#define __IIC_H_
+#define __IIC_H__
 
 #include "boot.h"
 
