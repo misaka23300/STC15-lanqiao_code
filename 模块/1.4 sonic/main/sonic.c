@@ -69,8 +69,7 @@ uint8_t sonic_measure_mode2() {
 
 uint8_t sonic_measure_mode3() {
     uint16_t time_Dis = 0;
-    uint8_t i = 0;
-    CMOD = 0x01;
+    CMOD = 0x00;
     CCON = 0x00;
     CH = 0x00;
     CL = 0x00;
@@ -80,14 +79,15 @@ uint8_t sonic_measure_mode3() {
     tx = 0;
     Delay14us();
 
+    while(rx == 0);
     CR = 1;
-    while ((rx == 1) && (CH < 0x40));
+    while ((rx == 1) && (CH > 0x40));
     CR = 0;
     if (CH >= 0x40) {
         CF = 0;
         return 0;
     } else {
         time_Dis = (CH << 8) | CL;
-        return (time_Dis * 0.0172);
+        return (time_Dis * 0.0172)-2;
     }
 }

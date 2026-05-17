@@ -2,6 +2,8 @@
 #define __BOOT_H__
 
 #include "stc15f2k60s2.h"
+#include "stdio.h"
+#include "intrins.h"
 
 typedef unsigned char uint8_t;
 typedef signed char int8_t;

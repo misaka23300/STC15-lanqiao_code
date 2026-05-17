@@ -1,0 +1,104 @@
+#include "key.h"
+
+
+uint8_t key_scan()
+{
+    uint8_t press = 0x99, temp = 0x99;
+
+    static uint8_t state = 0, value = 0, i = 0;
+    //P3 = 0x0F;
+
+    P30 = 1;
+    P31 = 1;
+    P32 = 1;
+    P33 = 1;
+
+    P34 = 0;
+    P35 = 0;
+    P42 = 0;
+    P44 = 0;
+
+    P36 = P42; P37 = P44;
+
+
+    press = P3 & 0x0F;
+
+    switch (state) {
+        case 0:
+            if (press != 0x0F) {
+                state = 1;
+            }
+        break;
+
+        case 1:
+            if (press == 0x0F) {
+                state = 0;
+            }
+            else {
+                state = 2;
+                P3 = press | 0xF0;
+
+                P34 = 1;
+                P35 = 1;
+                P42 = 1;
+                P44 = 1;
+
+                P36 = P42; P37 = P44;
+                //press = P3 | 0x10;
+                press = P3;
+                switch (press) {
+                    case 0x77: value = 4; break;
+                    case 0x7b: value = 5; break;
+                    case 0x7d: value = 6; break;
+                    case 0x7e: value = 7; break;
+
+                    case 0xb7: value = 8; break;
+                    case 0xbb: value = 9; break;
+                    case 0xbd: value = 10; break;
+                    case 0xbe: value = 11; break;
+
+                    case 0xd7: value = 12; break;
+                    case 0xdb: value = 13; break;
+                    case 0xdd: value = 14; break;
+                    case 0xde: value = 15; break;
+
+                    case 0xe7: value = 16; break;
+                    case 0xeb: value = 17; break;
+                    case 0xed: value = 18; break;
+                    case 0xee: value = 19; break;
+                    default: state = 0;
+                }
+            }
+        break;
+
+        case 2:
+            if (press != 0x0F) {
+                i++;
+                if (i > 300) {
+                    i = 0;
+                    state = 3;
+                }
+            }
+            else {
+                i = 0;
+                temp = value;
+                value = 0;
+                state = 0;
+            }
+        break;
+
+        case 3:
+            temp = value + 20;
+            value = 0;
+            state = 4;
+        break;
+        
+        case 4:
+            if (press == 0x0f) {
+                state = 0;
+            }
+        break;
+    }
+
+    return temp;
+}
