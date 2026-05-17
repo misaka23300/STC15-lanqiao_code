@@ -18,7 +18,7 @@ typedef signed int int16_t;
 void boot_init();
 void latch(uint8_t i);
 void Timer2_Init(void);
-
+void Uart1_Init(void);
 
 
 #endif

@@ -396,6 +396,11 @@
               <FileType>1</FileType>
               <FilePath>..\code\user\main\task.c</FilePath>
             </File>
+            <File>
+              <FileName>led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\code\driver\main\led.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -5,7 +5,7 @@ enum {
     SEG_TIME = 200,
     DISPLAY_TIME = 103,
     SONIC_TIME = 400,
-
+    LED_TIME = 16,
 } ;
 
 
@@ -13,6 +13,8 @@ idata uint8_t key_time = 0;
 idata uint16_t seg_time = 0;
 idata uint16_t display_time = 0;
 idata uint16_t sonic_time  = 0;
+idata uint8_t led_time = 0;
+
 
 void main()
 {
@@ -40,6 +42,11 @@ void main()
             sonic_task();
         }
 
+
+        if (led_time >= LED_TIME) {
+            led_time = 0;
+            led_display(7, !TI);
+        }
     }
 
 
@@ -55,4 +62,5 @@ void Timer2_Isr(void) interrupt 12
     display_time++;
     key_time++;
     sonic_time++;
+    led_time++;
 }
