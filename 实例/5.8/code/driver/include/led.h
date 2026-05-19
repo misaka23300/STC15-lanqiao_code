@@ -4,5 +4,7 @@
 #include "boot.h"
 
 void led_display(uint8_t i,uint8_t state);
+void buzz(uint8_t state);
+void relay(uint8_t state);
 
 #endif

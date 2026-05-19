@@ -6,6 +6,8 @@ xdata int8_t send_temp[100] = {0};
 uint8_t tx_flag = 0;
 uint8_t rx_flag = 0;
 
+
+
 int8_t putchar(int8_t Data) 
 {
     

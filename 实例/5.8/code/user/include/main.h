@@ -11,4 +11,6 @@
 #include "task.h"
 
 
+void work_3s();
+
 #endif

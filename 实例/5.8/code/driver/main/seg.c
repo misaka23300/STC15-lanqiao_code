@@ -19,13 +19,16 @@ void seg_display()
 
     P0 = 0xff;
     latch(7);   
+    latch(0);
 
     P0 = 0x01 << i;
     latch(6);
+    latch(0);
 
     P0 = ~letter[seg_value[i]];
-    latch(7);
-
+    latch(7);   
+    latch(0);
+    
     i++;
     if (i == 8) {
         i = 0;
