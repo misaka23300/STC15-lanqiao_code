@@ -49,8 +49,9 @@ void Timer1_Isr(void) interrupt 3
         led_timer.cnt++;
     }
 
-   
-
+    if (task_500ms.cnt < task_500ms.period) {
+        task_500ms.cnt++;
+    }
 }
 
 
