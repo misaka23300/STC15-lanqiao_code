@@ -1,0 +1,116 @@
+#include "onewire.h"
+#include "intrins.h"
+
+sbit DQ = P1^4;
+
+void Delay_OneWire(uint16_t t)  
+{
+	uint8_t i;
+	while(t--){
+		for(i=0;i<12;i++);
+	}
+}
+
+void Write_DS18B20(uint8_t dat)
+{
+	uint8_t i;
+	for(i=0;i<8;i++)
+	{
+		DQ = 0;
+		DQ = dat&0x01;
+		Delay_OneWire(5);
+		DQ = 1;
+		dat >>= 1;
+	}
+	Delay_OneWire(5);
+}
+
+uint8_t Read_DS18B20(void)
+{
+	uint8_t i;
+	uint8_t dat;
+  
+	for(i=0;i<8;i++)
+	{
+		DQ = 0;
+		dat >>= 1;
+		DQ = 1;
+		if(DQ)
+		{
+			dat |= 0x80;
+		}	    
+		Delay_OneWire(5);
+	}
+	return dat;
+}
+
+bit init_ds18b20(void)
+{
+  	bit initflag = 0;
+  	
+  	DQ = 1;
+  	Delay_OneWire(12);
+  	DQ = 0;
+  	Delay_OneWire(80);
+  	DQ = 1;
+  	Delay_OneWire(10); 
+    initflag = DQ;     
+  	Delay_OneWire(5);
+  
+  	return initflag;
+}
+
+int16_t read_temperature()
+{
+    uint8_t high = 0;
+    uint8_t low = 0;
+
+	int16_t raw = 0;
+	int16_t temp = 0;
+
+
+    init_ds18b20();
+	Write_DS18B20(0xcc);
+	Write_DS18B20(0x44);
+
+	Delay_OneWire(200);
+
+	init_ds18b20();
+	Write_DS18B20(0xcc);
+	Write_DS18B20(0xbe);
+
+	high = Read_DS18B20();
+	low = Read_DS18B20();
+
+	raw = ( (int16_t)high << 8) | low;
+	temp = raw * 10 / 16;
+
+	return temp;	
+}
+
+
+
+
+
+/* uint8_t read_temperature()
+{
+	float temp;
+	uint8_t high, low;
+
+	init_ds18b20();
+	Write_DS18B20(0xcc);
+	Write_DS18B20(0x44);
+
+	init_ds18b20();
+	Write_DS18B20(0xcc);
+	Write_DS18B20(0xbe);
+
+	Delay_OneWire(200);
+
+	low = Read_DS18B20();
+	high = Read_DS18B20();
+
+	temp = (high << 8) | low;
+	return (uint8_t) (temp / 16.0 * 10);
+}
+ */
