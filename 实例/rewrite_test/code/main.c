@@ -107,11 +107,11 @@ void display_task()
     {
         case 0:
         {
-            set_seg_value(sonic.distance % 10 / 10 , sonic.distance / 10, 0, 0, 0, 0, 0, 0);
+            set_seg_value(sonic.distance / 10, sonic.distance % 10, 0, 0, 0, 0, 0, 0);
         }
         break;
 
-     
+
     }
 }
 

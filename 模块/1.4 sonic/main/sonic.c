@@ -32,7 +32,7 @@ uint8_t sonic_measure_mode1() {
     if (TF1 == 1) {
         distance = 255;
     } else {
-        distance = (uint8_t) ((TH1 << 8) | TL1) * 0.017;
+        distance = (uint8_t)(((TH1 << 8) | TL1) * 0.017);
     }
 
     return distance;
@@ -61,7 +61,7 @@ uint8_t sonic_measure_mode2() {
     if (TF1 == 1) {
         distance = 255;
     } else {
-        distance = (uint8_t) ((TH1 << 8) | TL1) * 0.017;
+        distance = (uint8_t)(((TH1 << 8) | TL1) * 0.017);
     }
 
     return distance;
@@ -88,6 +88,6 @@ uint8_t sonic_measure_mode3() {
         return 0;
     } else {
         time_Dis = (CH << 8) | CL;
-        return (time_Dis * 0.0172)-2;
+        return (uint8_t)((time_Dis * 0.0172) - 2);
     }
 }
