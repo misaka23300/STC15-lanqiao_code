@@ -1,8 +1,8 @@
 #ifndef __KEY_H__
 #define __KEY_H__
 
-#include <stdint.h>
+#include "boot.h"
 
-uint8_t key_scan();
+uchar key_scan();
 
 #endif
