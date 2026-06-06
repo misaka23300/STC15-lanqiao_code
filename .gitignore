@@ -1,4 +1,87 @@
+# Visual Studio
 .vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Keil/MDK-ARM
+*.uvproj
+*.uvopt
+*.uvgui.laffey
+*.uvgui.laffe
+*.uvproj.*
+*.uvopt.*
+*.lst
+*.obj
+*.bin
+*.hex
+*.elf
+*.axf
+*.a51
+*.lnp
+*.m51
+*.map
+*.crf
+*.htm
+*.htm
+*.dep
+*.d
+*.o
+*.out
 Listings/
 Objects/
-.vscode
+output/
+build/
+Output/
+Build/
+
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# EIDE
+.eide/
+*.code-workspace
+
+# clangd
+.clangd/
+.cache/
+*.cache
+
+# Temporary files
+*.tmp
+*.bak
+*.backup
+*.orig
+*.rej
+*.log
+
+# Archives
+*.zip
+*.rar
+*.tar.gz
+*.7z
+
+# SDCC
+*.asm
+*.sym
+*.rst
+*.rel
+*.rst
+*.sym
+*.lk
+*.ihx
+*.mem
+*.map
+*.cdb
+*.omf
+
+# STC
+*.STC
+*.ISP
