@@ -122,11 +122,12 @@ void key_task()
     {
         case 4:
         {
-            
+            // 按键4处理
         }
         break;
+        default:
+        break;
     }
-
 }
 
 void display_task()

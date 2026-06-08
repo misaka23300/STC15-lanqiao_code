@@ -69,14 +69,9 @@ void timer_1_1ms() interrupt 3
 
 void key_task()
 {
-    
-
     key.press = key_scan();
     if (key.press != 99) {
         seg_set(0, key.press / 10);
         seg_set(1, key.press % 10);
-        
     }
-    
-    
 }

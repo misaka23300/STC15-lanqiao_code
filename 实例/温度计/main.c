@@ -333,20 +333,20 @@ void main()
             // ne555
             case 3:
             {
-
+                // ne555 频率测量模式（待实现）
             }
             break;
             // 超声波
             case 4:
             {
-
+                // 超声波测距模式（待实现）
             }
             break;
             
             // pwm
             case 5:
             {
-
+                // PWM控制模式（待实现）
             }
             break;
         }
