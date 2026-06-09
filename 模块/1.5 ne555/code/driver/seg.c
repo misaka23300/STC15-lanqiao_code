@@ -1,3 +1,10 @@
+/**
+ * @file seg.c
+ * @brief 数码管驱动文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "seg.h"
 
 static int8_t randz_now = 0;
@@ -21,61 +28,61 @@ void seg_display()
     static uint8_t i;
 
     P0 = 0xFF;
-    latch(7);
-    latch(0);
+    latch(7 );
+    latch(0 );
 
     P0 = 0x01 << i;
-    latch(6);
-    latch(0);
+    latch(6 );
+    latch(0 );
 
     P0 = ~letter[seg_value[i]];
-    latch(7);
-    latch(0);
+    latch(7 );
+    latch(0 );
 
     i = i + 1;
-    if (i == 8) {
+    if ( i == 8 ) {
         i = 0;
     }
 }
 
-void seg_set(uint8_t i, uint8_t state)
+void seg_set( uint8_t i, uint8_t state )
 {
-    if (i < 8) {
+    if ( i < 8 ) {
         seg_value[i] = state;
     }
 }
 
-void relay(bit state)
+void relay( bit state )
 {
-    if (state) {
-        randz_now = randz_now | (0x10);
+    if ( state ) {
+        randz_now = randz_now | (0x10 );
     } else {
-        randz_now = randz_now & ~(0x10);
+        randz_now = randz_now & ~(0x10 );
     }
 
-    if (randz_now != randz_last) {
+    if ( randz_now != randz_last ) {
         P0 = randz_now;
-        latch(5);
-        latch(0);
+        latch(5 );
+        latch(0 );
         randz_last = randz_now;
     }
 }
 
-/* void buzz(bit state)
+/* void buzz( bit state )
 {
-    if (state)
+    if ( state )
     {
-        randz_now = randz_now | (0x40);
+        randz_now = randz_now | (0x40 );
     }
     else
     {
-        randz_now = randz_now & ~(0x40);
+        randz_now = randz_now & ~(0x40 );
     }
 
-    if (randz_now != randz_last)
+    if ( randz_now != randz_last )
     {
         P0 = randz_now;
-        latch(4);
+        latch(4 );
 
         randz_last = randz_now;
     }

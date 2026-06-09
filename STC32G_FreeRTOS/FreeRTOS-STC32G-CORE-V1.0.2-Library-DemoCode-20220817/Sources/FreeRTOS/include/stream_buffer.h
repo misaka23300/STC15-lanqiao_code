@@ -1,13 +1,20 @@
+/**
+ * @file stream_buffer.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*
  * FreeRTOS Kernel V10.4.6
- * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
+ * Copyright ( C ) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
- * SPDX-License-Identifier: MIT
+ * SPDX - icense - dentifier: MIT
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
+ * this software and associated documentation files ( the "Software"), to deal in
  * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * use, copy, modify, merge, publish, distribute, sublicense, and / r sell copies of
  * the Software, and to permit persons to whom the Software is furnished to do so,
  * subject to the following conditions:
  *
@@ -22,7 +29,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * https://www.FreeRTOS.org
- * https://github.com/FreeRTOS
+ * https://github.com / reeRTOS
  *
  */
 
@@ -33,18 +40,18 @@
  * scenarios.
  *
  * ***NOTE***:  Uniquely among FreeRTOS objects, the stream buffer
- * implementation (so also the message buffer implementation, as message buffers
- * are built on top of stream buffers) assumes there is only one task or
- * interrupt that will write to the buffer (the writer), and only one task or
- * interrupt that will read from the buffer (the reader).  It is safe for the
+ * implementation ( so also the message buffer implementation, as message buffers
+ * are built on top of stream buffers ) assumes there is only one task or
+ * interrupt that will write to the buffer ( the writer ), and only one task or
+ * interrupt that will read from the buffer ( the reader ).  It is safe for the
  * writer and reader to be different tasks or interrupts, but, unlike other
  * FreeRTOS objects, it is not safe to have multiple different writers or
  * multiple different readers.  If there are to be multiple different writers
  * then the application writer must place each call to a writing API function
- * (such as xStreamBufferSend()) inside a critical section and set the send
+ * ( such as xStreamBufferSend()) inside a critical section and set the send
  * block time to 0.  Likewise, if there are to be multiple different readers
  * then the application writer must place each call to a reading API function
- * (such as xStreamBufferReceive()) inside a critical section section and set the
+ * ( such as xStreamBufferReceive()) inside a critical section section and set the
  * receive block time to 0.
  *
  */
@@ -56,11 +63,11 @@
     #error "include FreeRTOS.h must appear in source files before include stream_buffer.h"
 #endif
 
-/* *INDENT-OFF* */
+/* *INDENT - FF* */
 #if defined( __cplusplus )
     extern "C" {
 #endif
-/* *INDENT-ON* */
+/* *INDENT - N* */
 
 /**
  * Type by which stream buffers are referenced.  For example, a call to
@@ -71,7 +78,6 @@
 struct StreamBufferDef_t;
 typedef struct StreamBufferDef_t * StreamBufferHandle_t;
 
-
 /**
  * stream_buffer.h
  *
@@ -81,7 +87,7 @@ typedef struct StreamBufferDef_t * StreamBufferHandle_t;
  *
  * Creates a new stream buffer using dynamically allocated memory.  See
  * xStreamBufferCreateStatic() for a version that uses statically allocated
- * memory (memory that is allocated at compile time).
+ * memory ( memory that is allocated at compile time ).
  *
  * configSUPPORT_DYNAMIC_ALLOCATION must be set to 1 or left undefined in
  * FreeRTOSConfig.h for xStreamBufferCreate() to be available.
@@ -105,7 +111,7 @@ typedef struct StreamBufferDef_t * StreamBufferHandle_t;
  *
  * @return If NULL is returned, then the stream buffer cannot be created
  * because there is insufficient heap memory available for FreeRTOS to allocate
- * the stream buffer data structures and storage area.  A non-NULL value being
+ * the stream buffer data structures and storage area.  A non - ULL value being
  * returned indicates that the stream buffer has been created successfully -
  * the returned value should be stored as the handle to the created stream
  * buffer.
@@ -123,7 +129,7 @@ typedef struct StreamBufferDef_t * StreamBufferHandle_t;
  *  // allocated dynamically.
  *  xStreamBuffer = xStreamBufferCreate( xStreamBufferSizeBytes, xTriggerLevel );
  *
- *  if( xStreamBuffer == NULL )
+ *  if ( xStreamBuffer == NULL )
  *  {
  *      // There was not enough heap memory space available to create the
  *      // stream buffer.
@@ -234,23 +240,23 @@ typedef struct StreamBufferDef_t * StreamBufferHandle_t;
  * Sends bytes to a stream buffer.  The bytes are copied into the stream buffer.
  *
  * ***NOTE***:  Uniquely among FreeRTOS objects, the stream buffer
- * implementation (so also the message buffer implementation, as message buffers
- * are built on top of stream buffers) assumes there is only one task or
- * interrupt that will write to the buffer (the writer), and only one task or
- * interrupt that will read from the buffer (the reader).  It is safe for the
+ * implementation ( so also the message buffer implementation, as message buffers
+ * are built on top of stream buffers ) assumes there is only one task or
+ * interrupt that will write to the buffer ( the writer ), and only one task or
+ * interrupt that will read from the buffer ( the reader ).  It is safe for the
  * writer and reader to be different tasks or interrupts, but, unlike other
  * FreeRTOS objects, it is not safe to have multiple different writers or
  * multiple different readers.  If there are to be multiple different writers
  * then the application writer must place each call to a writing API function
- * (such as xStreamBufferSend()) inside a critical section and set the send
+ * ( such as xStreamBufferSend()) inside a critical section and set the send
  * block time to 0.  Likewise, if there are to be multiple different readers
  * then the application writer must place each call to a reading API function
- * (such as xStreamBufferReceive()) inside a critical section and set the receive
+ * ( such as xStreamBufferReceive()) inside a critical section and set the receive
  * block time to 0.
  *
  * Use xStreamBufferSend() to write to a stream buffer from a task.  Use
  * xStreamBufferSendFromISR() to write to a stream buffer from an interrupt
- * service routine (ISR).
+ * service routine ( ISR ).
  *
  * @param xStreamBuffer The handle of the stream buffer to which a stream is
  * being sent.
@@ -268,7 +274,7 @@ typedef struct StreamBufferDef_t * StreamBufferHandle_t;
  * so the absolute time it represents is dependent on the tick frequency.  The
  * macro pdMS_TO_TICKS() can be used to convert a time specified in milliseconds
  * into a time specified in ticks.  Setting xTicksToWait to portMAX_DELAY will
- * cause the task to wait indefinitely (without timing out), provided
+ * cause the task to wait indefinitely ( without timing out ), provided
  * INCLUDE_vTaskSuspend is set to 1 in FreeRTOSConfig.h.  If a task times out
  * before it can write all xDataLengthBytes into the buffer it will still write
  * as many bytes as possible.  A task does not use any CPU time when it is in
@@ -291,7 +297,7 @@ typedef struct StreamBufferDef_t * StreamBufferHandle_t;
  *  // wait for enough space to be available in the stream buffer.
  *  xBytesSent = xStreamBufferSend( xStreamBuffer, ( void * ) ucArrayToSend, sizeof( ucArrayToSend ), x100ms );
  *
- *  if( xBytesSent != sizeof( ucArrayToSend ) )
+ *  if ( xBytesSent != sizeof( ucArrayToSend ) )
  *  {
  *      // The call to xStreamBufferSend() times out before there was enough
  *      // space in the buffer for the data to be written, but it did
@@ -302,7 +308,7 @@ typedef struct StreamBufferDef_t * StreamBufferHandle_t;
  *  // enough space in the buffer.
  *  xBytesSent = xStreamBufferSend( xStreamBuffer, ( void * ) pcStringToSend, strlen( pcStringToSend ), 0 );
  *
- *  if( xBytesSent != strlen( pcStringToSend ) )
+ *  if ( xBytesSent != strlen( pcStringToSend ) )
  *  {
  *      // The entire string could not be added to the stream buffer because
  *      // there was not enough free space in the buffer, but xBytesSent bytes
@@ -332,23 +338,23 @@ size_t xStreamBufferSend( StreamBufferHandle_t xStreamBuffer,
  * the stream buffer.
  *
  * ***NOTE***:  Uniquely among FreeRTOS objects, the stream buffer
- * implementation (so also the message buffer implementation, as message buffers
- * are built on top of stream buffers) assumes there is only one task or
- * interrupt that will write to the buffer (the writer), and only one task or
- * interrupt that will read from the buffer (the reader).  It is safe for the
+ * implementation ( so also the message buffer implementation, as message buffers
+ * are built on top of stream buffers ) assumes there is only one task or
+ * interrupt that will write to the buffer ( the writer ), and only one task or
+ * interrupt that will read from the buffer ( the reader ).  It is safe for the
  * writer and reader to be different tasks or interrupts, but, unlike other
  * FreeRTOS objects, it is not safe to have multiple different writers or
  * multiple different readers.  If there are to be multiple different writers
  * then the application writer must place each call to a writing API function
- * (such as xStreamBufferSend()) inside a critical section and set the send
+ * ( such as xStreamBufferSend()) inside a critical section and set the send
  * block time to 0.  Likewise, if there are to be multiple different readers
  * then the application writer must place each call to a reading API function
- * (such as xStreamBufferReceive()) inside a critical section and set the receive
+ * ( such as xStreamBufferReceive()) inside a critical section and set the receive
  * block time to 0.
  *
  * Use xStreamBufferSend() to write to a stream buffer from a task.  Use
  * xStreamBufferSendFromISR() to write to a stream buffer from an interrupt
- * service routine (ISR).
+ * service routine ( ISR ).
  *
  * @param xStreamBuffer The handle of the stream buffer to which a stream is
  * being sent.
@@ -364,8 +370,8 @@ size_t xStreamBufferSend( StreamBufferHandle_t xStreamBuffer,
  * xStreamBufferSendFromISR() can make data available, and so cause a task that
  * was waiting for data to leave the Blocked state.  If calling
  * xStreamBufferSendFromISR() causes a task to leave the Blocked state, and the
- * unblocked task has a priority higher than the currently executing task (the
- * task that was interrupted), then, internally, xStreamBufferSendFromISR()
+ * unblocked task has a priority higher than the currently executing task ( the
+ * task that was interrupted ), then, internally, xStreamBufferSendFromISR()
  * will set *pxHigherPriorityTaskWoken to pdTRUE.  If
  * xStreamBufferSendFromISR() sets this value to pdTRUE, then normally a
  * context switch should be performed before the interrupt is exited.  This will
@@ -394,7 +400,7 @@ size_t xStreamBufferSend( StreamBufferHandle_t xStreamBuffer,
  *                                         strlen( pcStringToSend ),
  *                                         &xHigherPriorityTaskWoken );
  *
- *  if( xBytesSent != strlen( pcStringToSend ) )
+ *  if ( xBytesSent != strlen( pcStringToSend ) )
  *  {
  *      // There was not enough free space in the stream buffer for the entire
  *      // string to be written, ut xBytesSent bytes were written.
@@ -432,23 +438,23 @@ size_t xStreamBufferSendFromISR( StreamBufferHandle_t xStreamBuffer,
  * Receives bytes from a stream buffer.
  *
  * ***NOTE***:  Uniquely among FreeRTOS objects, the stream buffer
- * implementation (so also the message buffer implementation, as message buffers
- * are built on top of stream buffers) assumes there is only one task or
- * interrupt that will write to the buffer (the writer), and only one task or
- * interrupt that will read from the buffer (the reader).  It is safe for the
+ * implementation ( so also the message buffer implementation, as message buffers
+ * are built on top of stream buffers ) assumes there is only one task or
+ * interrupt that will write to the buffer ( the writer ), and only one task or
+ * interrupt that will read from the buffer ( the reader ).  It is safe for the
  * writer and reader to be different tasks or interrupts, but, unlike other
  * FreeRTOS objects, it is not safe to have multiple different writers or
  * multiple different readers.  If there are to be multiple different writers
  * then the application writer must place each call to a writing API function
- * (such as xStreamBufferSend()) inside a critical section and set the send
+ * ( such as xStreamBufferSend()) inside a critical section and set the send
  * block time to 0.  Likewise, if there are to be multiple different readers
  * then the application writer must place each call to a reading API function
- * (such as xStreamBufferReceive()) inside a critical section and set the receive
+ * ( such as xStreamBufferReceive()) inside a critical section and set the receive
  * block time to 0.
  *
  * Use xStreamBufferReceive() to read from a stream buffer from a task.  Use
  * xStreamBufferReceiveFromISR() to read from a stream buffer from an
- * interrupt service routine (ISR).
+ * interrupt service routine ( ISR ).
  *
  * @param xStreamBuffer The handle of the stream buffer from which bytes are to
  * be received.
@@ -468,7 +474,7 @@ size_t xStreamBufferSendFromISR( StreamBufferHandle_t xStreamBuffer,
  * represents is dependent on the tick frequency.  The macro pdMS_TO_TICKS() can
  * be used to convert a time specified in milliseconds into a time specified in
  * ticks.  Setting xTicksToWait to portMAX_DELAY will cause the task to wait
- * indefinitely (without timing out), provided INCLUDE_vTaskSuspend is set to 1
+ * indefinitely ( without timing out ), provided INCLUDE_vTaskSuspend is set to 1
  * in FreeRTOSConfig.h.  A task does not use any CPU time when it is in the
  * Blocked state.
  *
@@ -485,7 +491,7 @@ size_t xStreamBufferSendFromISR( StreamBufferHandle_t xStreamBuffer,
  * const TickType_t xBlockTime = pdMS_TO_TICKS( 20 );
  *
  *  // Receive up to another sizeof( ucRxData ) bytes from the stream buffer.
- *  // Wait in the Blocked state (so not using any CPU processing time) for a
+ *  // Wait in the Blocked state ( so not using any CPU processing time ) for a
  *  // maximum of 100ms for the full sizeof( ucRxData ) number of bytes to be
  *  // available.
  *  xReceivedBytes = xStreamBufferReceive( xStreamBuffer,
@@ -493,7 +499,7 @@ size_t xStreamBufferSendFromISR( StreamBufferHandle_t xStreamBuffer,
  *                                         sizeof( ucRxData ),
  *                                         xBlockTime );
  *
- *  if( xReceivedBytes > 0 )
+ *  if ( xReceivedBytes > 0 )
  *  {
  *      // A ucRxData contains another xRecievedBytes bytes of data, which can
  *      // be processed here....
@@ -523,7 +529,7 @@ size_t xStreamBufferReceive( StreamBufferHandle_t xStreamBuffer,
  *
  * Use xStreamBufferReceive() to read bytes from a stream buffer from a task.
  * Use xStreamBufferReceiveFromISR() to read bytes from a stream buffer from an
- * interrupt service routine (ISR).
+ * interrupt service routine ( ISR ).
  *
  * @param xStreamBuffer The handle of the stream buffer from which a stream
  * is being received.
@@ -542,7 +548,7 @@ size_t xStreamBufferReceive( StreamBufferHandle_t xStreamBuffer,
  * that is waiting for space to leave the Blocked state.  If calling
  * xStreamBufferReceiveFromISR() causes a task to leave the Blocked state, and
  * the unblocked task has a priority higher than the currently executing task
- * (the task that was interrupted), then, internally,
+ * ( the task that was interrupted ), then, internally,
  * xStreamBufferReceiveFromISR() will set *pxHigherPriorityTaskWoken to pdTRUE.
  * If xStreamBufferReceiveFromISR() sets this value to pdTRUE, then normally a
  * context switch should be performed before the interrupt is exited.  That will
@@ -569,7 +575,7 @@ size_t xStreamBufferReceive( StreamBufferHandle_t xStreamBuffer,
  *                                                sizeof( ucRxData ),
  *                                                &xHigherPriorityTaskWoken );
  *
- *  if( xReceivedBytes > 0 )
+ *  if ( xReceivedBytes > 0 )
  *  {
  *      // ucRxData contains xReceivedBytes read from the stream buffer.
  *      // Process the stream here....
@@ -603,7 +609,7 @@ size_t xStreamBufferReceiveFromISR( StreamBufferHandle_t xStreamBuffer,
  *
  * Deletes a stream buffer that was previously created using a call to
  * xStreamBufferCreate() or xStreamBufferCreateStatic().  If the stream
- * buffer was created using dynamic memory (that is, by xStreamBufferCreate()),
+ * buffer was created using dynamic memory ( that is, by xStreamBufferCreate()),
  * then the allocated memory is freed.
  *
  * A stream buffer handle must not be used after the stream buffer has been
@@ -776,7 +782,7 @@ BaseType_t xStreamBufferSetTriggerLevel( StreamBufferHandle_t xStreamBuffer,
  * thing.  It is provided to enable application writers to implement their own
  * version of sbSEND_COMPLETED(), and MUST NOT BE USED AT ANY OTHER TIME.
  *
- * See the example implemented in FreeRTOS/Demo/Minimal/MessageBufferAMP.c for
+ * See the example implemented in FreeRTOS / emo / inimal / essageBufferAMP.c for
  * additional information.
  *
  * @param xStreamBuffer The handle of the stream buffer to which data was
@@ -817,7 +823,7 @@ BaseType_t xStreamBufferSendCompletedFromISR( StreamBufferHandle_t xStreamBuffer
  * implement their own version of sbRECEIVE_COMPLETED(), and MUST NOT BE USED AT
  * ANY OTHER TIME.
  *
- * See the example implemented in FreeRTOS/Demo/Minimal/MessageBufferAMP.c for
+ * See the example implemented in FreeRTOS / emo / inimal / essageBufferAMP.c for
  * additional information.
  *
  * @param xStreamBuffer The handle of the stream buffer from which data was
@@ -860,10 +866,10 @@ size_t xStreamBufferNextMessageLengthBytes( StreamBufferHandle_t xStreamBuffer )
     uint8_t ucStreamBufferGetStreamBufferType( StreamBufferHandle_t xStreamBuffer ) PRIVILEGED_FUNCTION;
 #endif
 
-/* *INDENT-OFF* */
+/* *INDENT - FF* */
 #if defined( __cplusplus )
     }
 #endif
-/* *INDENT-ON* */
+/* *INDENT - N* */
 
 #endif /* !defined( STREAM_BUFFER_H ) */

@@ -1,6 +1,11 @@
+/**
+ * @file boot.c
+ * @brief 系统启动初始化文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "boot.h"
-
-
 
 void boot_init()
 {
@@ -14,38 +19,36 @@ void boot_init()
     P7M1 = 0;   P7M0 = 0;   //设置为准双向口
 
     P0 = 0xFF;
-    latch(4);
-    latch(0);
+    latch(4 );
+    latch(0 );
 
     P0 = 0x00;
-    latch(6);
-    latch(0);
+    latch(6 );
+    latch(0 );
 
     P0 = 0xFF;
-    latch(7);
-    latch(0);
+    latch(7 );
+    latch(0 );
 
     P0 = 0xAF;
-    latch(5);
-    latch(0);
+    latch(5 );
+    latch(0 );
 
     Timer0_Init();
     EA = 1;
 }
 
-
-void latch(uchar i)
+void latch( uchar i )
 {
-    switch (i)
+    switch ( i )
     {
         case 0: {P2 &= 0x1F; break;}
-        case 4: {P2 = (P2 & 0x1F) | 0x80; break; }
-        case 5: {P2 = (P2 & 0x1F) | 0xA0; break; }
-        case 6: {P2 = (P2 & 0x1F) | 0xC0; break; }
-        case 7: {P2 = (P2 & 0x1F) | 0xE0; break; }
+        case 4: {P2 = ( P2 & 0x1F ) | 0x80; break; }
+        case 5: {P2 = ( P2 & 0x1F ) | 0xA0; break; }
+        case 6: {P2 = ( P2 & 0x1F ) | 0xC0; break; }
+        case 7: {P2 = ( P2 & 0x1F ) | 0xE0; break; }
     }
 }
-
 
 void Timer0_Init()		//1毫秒@12.000MHz
 {
@@ -57,7 +60,6 @@ void Timer0_Init()		//1毫秒@12.000MHz
 	TR0 = 1;				//定时器0开始计时
 	ET0 = 1;				//使能定时器0中断
 }
-
 
 void Delay15ms()		//@12.000MHz
 {
@@ -72,7 +74,7 @@ void Delay15ms()		//@12.000MHz
 	{
 		do
 		{
-			while (--k);
-		} while (--j);
-	} while (--i);
+			while (--k );
+		} while (--j );
+	} while (--i );
 }

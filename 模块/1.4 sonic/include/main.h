@@ -1,11 +1,18 @@
+/**
+ * @file main.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #ifndef __MAIN_H__
 #define __MAIN_H__
 
 #include "boot.h"
-#include "sonic.h"
-#include "seg.h"
 #include "key.h"
 #include "led.h"
+#include "seg.h"
+#include "sonic.h"
 
 enum {
     SONIC_TIME = 400,
@@ -39,7 +46,5 @@ typedef struct {
     display_mode_t mode;
     uint8_t time;
 } seg_state_t;
-
-
 
 #endif

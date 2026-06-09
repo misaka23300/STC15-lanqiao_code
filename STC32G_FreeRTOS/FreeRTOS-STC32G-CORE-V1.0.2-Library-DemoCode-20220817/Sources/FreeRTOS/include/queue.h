@@ -1,13 +1,20 @@
+/**
+ * @file queue.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*
  * FreeRTOS Kernel V10.4.6
- * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
+ * Copyright ( C ) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
- * SPDX-License-Identifier: MIT
+ * SPDX - icense - dentifier: MIT
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
+ * this software and associated documentation files ( the "Software"), to deal in
  * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * use, copy, modify, merge, publish, distribute, sublicense, and / r sell copies of
  * the Software, and to permit persons to whom the Software is furnished to do so,
  * subject to the following conditions:
  *
@@ -22,10 +29,9 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * https://www.FreeRTOS.org
- * https://github.com/FreeRTOS
+ * https://github.com / reeRTOS
  *
  */
-
 
 #ifndef QUEUE_H
 #define QUEUE_H
@@ -34,11 +40,11 @@
     #error "include FreeRTOS.h" must appear in source files before "include queue.h"
 #endif
 
-/* *INDENT-OFF* */
+/* *INDENT - FF* */
 #ifdef __cplusplus
     extern "C" {
 #endif
-/* *INDENT-ON* */
+/* *INDENT - N* */
 
 #include "task.h"
 
@@ -93,13 +99,13 @@ typedef struct QueueDefinition   * QueueSetMemberHandle_t;
  * memory.  The first block is used to hold the queue's data structures.  The
  * second block is used to hold items placed into the queue.  If a queue is
  * created using xQueueCreate() then both blocks of memory are automatically
- * dynamically allocated inside the xQueueCreate() function.  (see
- * https://www.FreeRTOS.org/a00111.html).  If a queue is created using
+ * dynamically allocated inside the xQueueCreate() function.  ( see
+ * https://www.FreeRTOS.org / 00111.html ).  If a queue is created using
  * xQueueCreateStatic() then the application writer must provide the memory that
  * will get used by the queue.  xQueueCreateStatic() therefore allows a queue to
  * be created without using any dynamic memory allocation.
  *
- * https://www.FreeRTOS.org/Embedded-RTOS-Queues.html
+ * https://www.FreeRTOS.org / mbedded - TOS - ueues.html
  *
  * @param uxQueueLength The maximum number of items that the queue can contain.
  *
@@ -126,7 +132,7 @@ typedef struct QueueDefinition   * QueueSetMemberHandle_t;
  *
  *  // Create a queue capable of containing 10 uint32_t values.
  *  xQueue1 = xQueueCreate( 10, sizeof( uint32_t ) );
- *  if( xQueue1 == 0 )
+ *  if ( xQueue1 == 0 )
  *  {
  *      // Queue was not created and must not be used.
  *  }
@@ -134,7 +140,7 @@ typedef struct QueueDefinition   * QueueSetMemberHandle_t;
  *  // Create a queue capable of containing 10 pointers to AMessage structures.
  *  // These should be passed by pointer as they contain a lot of data.
  *  xQueue2 = xQueueCreate( 10, sizeof( struct AMessage * ) );
- *  if( xQueue2 == 0 )
+ *  if ( xQueue2 == 0 )
  *  {
  *      // Queue was not created and must not be used.
  *  }
@@ -167,13 +173,13 @@ typedef struct QueueDefinition   * QueueSetMemberHandle_t;
  * memory.  The first block is used to hold the queue's data structures.  The
  * second block is used to hold items placed into the queue.  If a queue is
  * created using xQueueCreate() then both blocks of memory are automatically
- * dynamically allocated inside the xQueueCreate() function.  (see
- * https://www.FreeRTOS.org/a00111.html).  If a queue is created using
+ * dynamically allocated inside the xQueueCreate() function.  ( see
+ * https://www.FreeRTOS.org / 00111.html ).  If a queue is created using
  * xQueueCreateStatic() then the application writer must provide the memory that
  * will get used by the queue.  xQueueCreateStatic() therefore allows a queue to
  * be created without using any dynamic memory allocation.
  *
- * https://www.FreeRTOS.org/Embedded-RTOS-Queues.html
+ * https://www.FreeRTOS.org / mbedded - TOS - ueues.html
  *
  * @param uxQueueLength The maximum number of items that the queue can contain.
  *
@@ -209,7 +215,7 @@ typedef struct QueueDefinition   * QueueSetMemberHandle_t;
  * StaticQueue_t xQueueBuffer;
  *
  * // ucQueueStorage will hold the items posted to the queue.  Must be at least
- * // [(queue length) * ( queue item size)] bytes long.
+ * // [( queue length ) * ( queue item size )] bytes long.
  * uint8_t ucQueueStorage[ QUEUE_LENGTH * ITEM_SIZE ];
  *
  * void vATask( void *pvParameters )
@@ -289,17 +295,17 @@ typedef struct QueueDefinition   * QueueSetMemberHandle_t;
  *
  *  // ...
  *
- *  if( xQueue1 != 0 )
+ *  if ( xQueue1 != 0 )
  *  {
  *      // Send an uint32_t.  Wait for 10 ticks for space to become
  *      // available if necessary.
- *      if( xQueueSendToFront( xQueue1, ( void * ) &ulVar, ( TickType_t ) 10 ) != pdPASS )
+ *      if ( xQueueSendToFront( xQueue1, ( void * ) &ulVar, ( TickType_t ) 10 ) != pdPASS )
  *      {
  *          // Failed to post the message, even after 10 ticks.
  *      }
  *  }
  *
- *  if( xQueue2 != 0 )
+ *  if ( xQueue2 != 0 )
  *  {
  *      // Send a pointer to a struct AMessage object.  Don't block if the
  *      // queue is already full.
@@ -372,17 +378,17 @@ typedef struct QueueDefinition   * QueueSetMemberHandle_t;
  *
  *  // ...
  *
- *  if( xQueue1 != 0 )
+ *  if ( xQueue1 != 0 )
  *  {
  *      // Send an uint32_t.  Wait for 10 ticks for space to become
  *      // available if necessary.
- *      if( xQueueSendToBack( xQueue1, ( void * ) &ulVar, ( TickType_t ) 10 ) != pdPASS )
+ *      if ( xQueueSendToBack( xQueue1, ( void * ) &ulVar, ( TickType_t ) 10 ) != pdPASS )
  *      {
  *          // Failed to post the message, even after 10 ticks.
  *      }
  *  }
  *
- *  if( xQueue2 != 0 )
+ *  if ( xQueue2 != 0 )
  *  {
  *      // Send a pointer to a struct AMessage object.  Don't block if the
  *      // queue is already full.
@@ -457,17 +463,17 @@ typedef struct QueueDefinition   * QueueSetMemberHandle_t;
  *
  *  // ...
  *
- *  if( xQueue1 != 0 )
+ *  if ( xQueue1 != 0 )
  *  {
  *      // Send an uint32_t.  Wait for 10 ticks for space to become
  *      // available if necessary.
- *      if( xQueueSend( xQueue1, ( void * ) &ulVar, ( TickType_t ) 10 ) != pdPASS )
+ *      if ( xQueueSend( xQueue1, ( void * ) &ulVar, ( TickType_t ) 10 ) != pdPASS )
  *      {
  *          // Failed to post the message, even after 10 ticks.
  *      }
  *  }
  *
- *  if( xQueue2 != 0 )
+ *  if ( xQueue2 != 0 )
  *  {
  *      // Send a pointer to a struct AMessage object.  Don't block if the
  *      // queue is already full.
@@ -538,7 +544,7 @@ typedef struct QueueDefinition   * QueueSetMemberHandle_t;
  *  ulValReceived = 0;
  *  xQueuePeek( xQueue, &ulValReceived, 0 );
  *
- *  if( ulValReceived != 10 )
+ *  if ( ulValReceived != 10 )
  *  {
  *      // Error unless the item was removed by a different task.
  *  }
@@ -554,7 +560,7 @@ typedef struct QueueDefinition   * QueueSetMemberHandle_t;
  *
  *  // The value read should be the last value written, even though the
  *  // queue was already full when the value was written.
- *  if( ulValReceived != 100 )
+ *  if ( ulValReceived != 100 )
  *  {
  *      // Error!
  *  }
@@ -567,7 +573,6 @@ typedef struct QueueDefinition   * QueueSetMemberHandle_t;
  */
 #define xQueueOverwrite( xQueue, pvItemToQueue ) \
     xQueueGenericSend( ( xQueue ), ( pvItemToQueue ), 0, queueOVERWRITE )
-
 
 /**
  * queue. h
@@ -602,7 +607,7 @@ typedef struct QueueDefinition   * QueueSetMemberHandle_t;
  *
  * @param xCopyPosition Can take the value queueSEND_TO_BACK to place the
  * item at the back of the queue, or queueSEND_TO_FRONT to place the item
- * at the front of the queue (for high priority messages).
+ * at the front of the queue ( for high priority messages ).
  *
  * @return pdTRUE if the item was successfully posted, otherwise errQUEUE_FULL.
  *
@@ -630,17 +635,17 @@ typedef struct QueueDefinition   * QueueSetMemberHandle_t;
  *
  *  // ...
  *
- *  if( xQueue1 != 0 )
+ *  if ( xQueue1 != 0 )
  *  {
  *      // Send an uint32_t.  Wait for 10 ticks for space to become
  *      // available if necessary.
- *      if( xQueueGenericSend( xQueue1, ( void * ) &ulVar, ( TickType_t ) 10, queueSEND_TO_BACK ) != pdPASS )
+ *      if ( xQueueGenericSend( xQueue1, ( void * ) &ulVar, ( TickType_t ) 10, queueSEND_TO_BACK ) != pdPASS )
  *      {
  *          // Failed to post the message, even after 10 ticks.
  *      }
  *  }
  *
- *  if( xQueue2 != 0 )
+ *  if ( xQueue2 != 0 )
  *  {
  *      // Send a pointer to a struct AMessage object.  Don't block if the
  *      // queue is already full.
@@ -715,7 +720,7 @@ BaseType_t xQueueGenericSend( QueueHandle_t xQueue,
  *  // Create a queue capable of containing 10 pointers to AMessage structures.
  *  // These should be passed by pointer as they contain a lot of data.
  *  xQueue = xQueueCreate( 10, sizeof( struct AMessage * ) );
- *  if( xQueue == 0 )
+ *  if ( xQueue == 0 )
  *  {
  *      // Failed to create the queue.
  *  }
@@ -735,11 +740,11 @@ BaseType_t xQueueGenericSend( QueueHandle_t xQueue,
  * {
  * struct AMessage *pxRxedMessage;
  *
- *  if( xQueue != 0 )
+ *  if ( xQueue != 0 )
  *  {
  *      // Peek a message on the created queue.  Block for 10 ticks if a
  *      // message is not immediately available.
- *      if( xQueuePeek( xQueue, &( pxRxedMessage ), ( TickType_t ) 10 ) )
+ *      if ( xQueuePeek( xQueue, &( pxRxedMessage ), ( TickType_t ) 10 ) )
  *      {
  *          // pcRxedMessage now points to the struct AMessage variable posted
  *          // by vATask, but the item still remains on the queue.
@@ -766,7 +771,7 @@ BaseType_t xQueuePeek( QueueHandle_t xQueue,
  * @endcode
  *
  * A version of xQueuePeek() that can be called from an interrupt service
- * routine (ISR).
+ * routine ( ISR ).
  *
  * Receive an item from a queue without removing the item from the queue.
  * The item is received by copy so a buffer of adequate size must be
@@ -844,7 +849,7 @@ BaseType_t xQueuePeekFromISR( QueueHandle_t xQueue,
  *  // Create a queue capable of containing 10 pointers to AMessage structures.
  *  // These should be passed by pointer as they contain a lot of data.
  *  xQueue = xQueueCreate( 10, sizeof( struct AMessage * ) );
- *  if( xQueue == 0 )
+ *  if ( xQueue == 0 )
  *  {
  *      // Failed to create the queue.
  *  }
@@ -864,11 +869,11 @@ BaseType_t xQueuePeekFromISR( QueueHandle_t xQueue,
  * {
  * struct AMessage *pxRxedMessage;
  *
- *  if( xQueue != 0 )
+ *  if ( xQueue != 0 )
  *  {
  *      // Receive a message on the created queue.  Block for 10 ticks if a
  *      // message is not immediately available.
- *      if( xQueueReceive( xQueue, &( pxRxedMessage ), ( TickType_t ) 10 ) )
+ *      if ( xQueueReceive( xQueue, &( pxRxedMessage ), ( TickType_t ) 10 ) )
  *      {
  *          // pcRxedMessage now points to the struct AMessage variable posted
  *          // by vATask.
@@ -972,8 +977,8 @@ void vQueueDelete( QueueHandle_t xQueue ) PRIVILEGED_FUNCTION;
  * @return pdTRUE if the data was successfully sent to the queue, otherwise
  * errQUEUE_FULL.
  *
- * Example usage for buffered IO (where the ISR can obtain more than one value
- * per call):
+ * Example usage for buffered IO ( where the ISR can obtain more than one value
+ * per call ):
  * @code{c}
  * void vBufferISR( void )
  * {
@@ -992,10 +997,10 @@ void vQueueDelete( QueueHandle_t xQueue ) PRIVILEGED_FUNCTION;
  *      // Post the byte.
  *      xQueueSendToFrontFromISR( xRxQueue, &cIn, &xHigherPriorityTaskWoken );
  *
- *  } while( portINPUT_BYTE( BUFFER_COUNT ) );
+ *  } while ( portINPUT_BYTE( BUFFER_COUNT ) );
  *
  *  // Now the buffer is empty we can switch context if necessary.
- *  if( xHigherPriorityTaskWoken )
+ *  if ( xHigherPriorityTaskWoken )
  *  {
  *      taskYIELD ();
  *  }
@@ -1007,7 +1012,6 @@ void vQueueDelete( QueueHandle_t xQueue ) PRIVILEGED_FUNCTION;
  */
 #define xQueueSendToFrontFromISR( xQueue, pvItemToQueue, pxHigherPriorityTaskWoken ) \
     xQueueGenericSendFromISR( ( xQueue ), ( pvItemToQueue ), ( pxHigherPriorityTaskWoken ), queueSEND_TO_FRONT )
-
 
 /**
  * queue. h
@@ -1044,8 +1048,8 @@ void vQueueDelete( QueueHandle_t xQueue ) PRIVILEGED_FUNCTION;
  * @return pdTRUE if the data was successfully sent to the queue, otherwise
  * errQUEUE_FULL.
  *
- * Example usage for buffered IO (where the ISR can obtain more than one value
- * per call):
+ * Example usage for buffered IO ( where the ISR can obtain more than one value
+ * per call ):
  * @code{c}
  * void vBufferISR( void )
  * {
@@ -1064,10 +1068,10 @@ void vQueueDelete( QueueHandle_t xQueue ) PRIVILEGED_FUNCTION;
  *      // Post the byte.
  *      xQueueSendToBackFromISR( xRxQueue, &cIn, &xHigherPriorityTaskWoken );
  *
- *  } while( portINPUT_BYTE( BUFFER_COUNT ) );
+ *  } while ( portINPUT_BYTE( BUFFER_COUNT ) );
  *
  *  // Now the buffer is empty we can switch context if necessary.
- *  if( xHigherPriorityTaskWoken )
+ *  if ( xHigherPriorityTaskWoken )
  *  {
  *      taskYIELD ();
  *  }
@@ -1091,7 +1095,7 @@ void vQueueDelete( QueueHandle_t xQueue ) PRIVILEGED_FUNCTION;
  * @endcode
  *
  * A version of xQueueOverwrite() that can be used in an interrupt service
- * routine (ISR).
+ * routine ( ISR ).
  *
  * Only for use with queues that can hold a single item - so the queue is either
  * empty or full.
@@ -1152,11 +1156,11 @@ void vQueueDelete( QueueHandle_t xQueue ) PRIVILEGED_FUNCTION;
  *
  *  // ...
  *
- *  if( xHigherPrioritytaskWoken == pdTRUE )
+ *  if ( xHigherPrioritytaskWoken == pdTRUE )
  *  {
  *      // Writing to the queue caused a task to unblock and the unblocked task
  *      // has a priority higher than or equal to the priority of the currently
- *      // executing task (the task this interrupt interrupted).  Perform a context
+ *      // executing task ( the task this interrupt interrupted ).  Perform a context
  *      // switch so this interrupt returns directly to the unblocked task.
  *      portYIELD_FROM_ISR(); // or portEND_SWITCHING_ISR() depending on the port.
  *  }
@@ -1206,8 +1210,8 @@ void vQueueDelete( QueueHandle_t xQueue ) PRIVILEGED_FUNCTION;
  * @return pdTRUE if the data was successfully sent to the queue, otherwise
  * errQUEUE_FULL.
  *
- * Example usage for buffered IO (where the ISR can obtain more than one value
- * per call):
+ * Example usage for buffered IO ( where the ISR can obtain more than one value
+ * per call ):
  * @code{c}
  * void vBufferISR( void )
  * {
@@ -1226,10 +1230,10 @@ void vQueueDelete( QueueHandle_t xQueue ) PRIVILEGED_FUNCTION;
  *      // Post the byte.
  *      xQueueSendFromISR( xRxQueue, &cIn, &xHigherPriorityTaskWoken );
  *
- *  } while( portINPUT_BYTE( BUFFER_COUNT ) );
+ *  } while ( portINPUT_BYTE( BUFFER_COUNT ) );
  *
  *  // Now the buffer is empty we can switch context if necessary.
- *  if( xHigherPriorityTaskWoken )
+ *  if ( xHigherPriorityTaskWoken )
  *  {
  *      // Actual macro used here is port specific.
  *      portYIELD_FROM_ISR ();
@@ -1281,13 +1285,13 @@ void vQueueDelete( QueueHandle_t xQueue ) PRIVILEGED_FUNCTION;
  *
  * @param xCopyPosition Can take the value queueSEND_TO_BACK to place the
  * item at the back of the queue, or queueSEND_TO_FRONT to place the item
- * at the front of the queue (for high priority messages).
+ * at the front of the queue ( for high priority messages ).
  *
  * @return pdTRUE if the data was successfully sent to the queue, otherwise
  * errQUEUE_FULL.
  *
- * Example usage for buffered IO (where the ISR can obtain more than one value
- * per call):
+ * Example usage for buffered IO ( where the ISR can obtain more than one value
+ * per call ):
  * @code{c}
  * void vBufferISR( void )
  * {
@@ -1306,11 +1310,11 @@ void vQueueDelete( QueueHandle_t xQueue ) PRIVILEGED_FUNCTION;
  *      // Post each byte.
  *      xQueueGenericSendFromISR( xRxQueue, &cIn, &xHigherPriorityTaskWokenByPost, queueSEND_TO_BACK );
  *
- *  } while( portINPUT_BYTE( BUFFER_COUNT ) );
+ *  } while ( portINPUT_BYTE( BUFFER_COUNT ) );
  *
  *  // Now the buffer is empty we can switch context if necessary.  Note that the
  *  // name of the yield function required is port specific.
- *  if( xHigherPriorityTaskWokenByPost )
+ *  if ( xHigherPriorityTaskWokenByPost )
  *  {
  *      portYIELD_FROM_ISR();
  *  }
@@ -1367,7 +1371,7 @@ BaseType_t xQueueGiveFromISR( QueueHandle_t xQueue,
  *
  *  // Create a queue capable of containing 10 characters.
  *  xQueue = xQueueCreate( 10, sizeof( char ) );
- *  if( xQueue == 0 )
+ *  if ( xQueue == 0 )
  *  {
  *      // Failed to create the queue.
  *  }
@@ -1394,7 +1398,7 @@ BaseType_t xQueueGiveFromISR( QueueHandle_t xQueue,
  * BaseType_t xTaskWokenByReceive = pdFALSE;
  * char cRxedChar;
  *
- *  while( xQueueReceiveFromISR( xQueue, ( void * ) &cRxedChar, &xTaskWokenByReceive) )
+ *  while ( xQueueReceiveFromISR( xQueue, ( void * ) &cRxedChar, &xTaskWokenByReceive ) )
  *  {
  *      // A character was received.  Output the character now.
  *      vOutputCharacter( cRxedChar );
@@ -1405,7 +1409,7 @@ BaseType_t xQueueGiveFromISR( QueueHandle_t xQueue,
  *      // task will be woken.
  *  }
  *
- *  if( cTaskWokenByPost != ( char ) pdFALSE;
+ *  if ( cTaskWokenByPost != ( char ) pdFALSE;
  *  {
  *      taskYIELD ();
  *  }
@@ -1429,9 +1433,9 @@ UBaseType_t uxQueueMessagesWaitingFromISR( const QueueHandle_t xQueue ) PRIVILEG
 /*
  * The functions defined above are for passing data to and from tasks.  The
  * functions below are the equivalents for passing data to and from
- * co-routines.
+ * co - outines.
  *
- * These functions are called from the co-routine macro implementation and
+ * These functions are called from the co - outine macro implementation and
  * should not be called directly from application code.  Instead use the macro
  * wrappers defined within croutine.h.
  */
@@ -1503,8 +1507,8 @@ BaseType_t xQueueGiveMutexRecursive( QueueHandle_t xMutex ) PRIVILEGED_FUNCTION;
  *
  * @param pcQueueName The name to be associated with the handle.  This is the
  * name that the kernel aware debugger will display.  The queue registry only
- * stores a pointer to the string - so the string must be persistent (global or
- * preferably in ROM/Flash), not on the stack.
+ * stores a pointer to the string - so the string must be persistent ( global or
+ * preferably in ROM / lash ), not on the stack.
  */
 #if ( configQUEUE_REGISTRY_SIZE > 0 )
     void vQueueAddToRegistry( QueueHandle_t xQueue,
@@ -1565,10 +1569,10 @@ BaseType_t xQueueGiveMutexRecursive( QueueHandle_t xMutex ) PRIVILEGED_FUNCTION;
 #endif
 
 /*
- * Queue sets provide a mechanism to allow a task to block (pend) on a read
+ * Queue sets provide a mechanism to allow a task to block ( pend ) on a read
  * operation from multiple queues or semaphores simultaneously.
  *
- * See FreeRTOS/Source/Demo/Common/Minimal/QueueSet.c for an example using this
+ * See FreeRTOS / ource / emo / ommon / inimal / ueueSet.c for an example using this
  * function.
  *
  * A queue set must be explicitly created using a call to xQueueCreateSet()
@@ -1578,7 +1582,7 @@ BaseType_t xQueueGiveMutexRecursive( QueueHandle_t xMutex ) PRIVILEGED_FUNCTION;
  * or semaphores contained in the set is in a state where a queue read or
  * semaphore take operation would be successful.
  *
- * Note 1:  See the documentation on https://www.FreeRTOS.org/RTOS-queue-sets.html
+ * Note 1:  See the documentation on https://www.FreeRTOS.org / TOS - ueue - ets.html
  * for reasons why queue sets are very rarely needed in practice as there are
  * simpler methods of blocking on multiple objects.
  *
@@ -1589,8 +1593,8 @@ BaseType_t xQueueGiveMutexRecursive( QueueHandle_t xMutex ) PRIVILEGED_FUNCTION;
  * queue added to a queue set.  Therefore counting semaphores that have a high
  * maximum count value should not be added to a queue set.
  *
- * Note 4:  A receive (in the case of a queue) or take (in the case of a
- * semaphore) operation must not be performed on a member of a queue set unless
+ * Note 4:  A receive ( in the case of a queue ) or take ( in the case of a
+ * semaphore ) operation must not be performed on a member of a queue set unless
  * a call to xQueueSelectFromSet() has first returned a handle to that set member.
  *
  * @param uxEventQueueLength Queue sets store events that occur on
@@ -1602,12 +1606,12 @@ BaseType_t xQueueGiveMutexRecursive( QueueHandle_t xMutex ) PRIVILEGED_FUNCTION;
  * length set by their maximum count value.  Examples:
  *  + If a queue set is to hold a queue of length 5, another queue of length 12,
  *    and a binary semaphore, then uxEventQueueLength should be set to
- *    (5 + 12 + 1), or 18.
+ *    (5 + 12 + 1 ), or 18.
  *  + If a queue set is to hold three binary semaphores then uxEventQueueLength
  *    should be set to (1 + 1 + 1 ), or 3.
  *  + If a queue set is to hold a counting semaphore that has a maximum count of
  *    5, and a counting semaphore that has a maximum count of 3, then
- *    uxEventQueueLength should be set to (5 + 3), or 8.
+ *    uxEventQueueLength should be set to (5 + 3 ), or 8.
  *
  * @return If the queue set is created successfully then a handle to the created
  * queue set is returned.  Otherwise NULL is returned.
@@ -1618,15 +1622,15 @@ QueueSetHandle_t xQueueCreateSet( const UBaseType_t uxEventQueueLength ) PRIVILE
  * Adds a queue or semaphore to a queue set that was previously created by a
  * call to xQueueCreateSet().
  *
- * See FreeRTOS/Source/Demo/Common/Minimal/QueueSet.c for an example using this
+ * See FreeRTOS / ource / emo / ommon / inimal / ueueSet.c for an example using this
  * function.
  *
- * Note 1:  A receive (in the case of a queue) or take (in the case of a
- * semaphore) operation must not be performed on a member of a queue set unless
+ * Note 1:  A receive ( in the case of a queue ) or take ( in the case of a
+ * semaphore ) operation must not be performed on a member of a queue set unless
  * a call to xQueueSelectFromSet() has first returned a handle to that set member.
  *
  * @param xQueueOrSemaphore The handle of the queue or semaphore being added to
- * the queue set (cast to an QueueSetMemberHandle_t type).
+ * the queue set ( cast to an QueueSetMemberHandle_t type ).
  *
  * @param xQueueSet The handle of the queue set to which the queue or semaphore
  * is being added.
@@ -1643,53 +1647,53 @@ BaseType_t xQueueAddToSet( QueueSetMemberHandle_t xQueueOrSemaphore,
  * Removes a queue or semaphore from a queue set.  A queue or semaphore can only
  * be removed from a set if the queue or semaphore is empty.
  *
- * See FreeRTOS/Source/Demo/Common/Minimal/QueueSet.c for an example using this
+ * See FreeRTOS / ource / emo / ommon / inimal / ueueSet.c for an example using this
  * function.
  *
  * @param xQueueOrSemaphore The handle of the queue or semaphore being removed
- * from the queue set (cast to an QueueSetMemberHandle_t type).
+ * from the queue set ( cast to an QueueSetMemberHandle_t type ).
  *
  * @param xQueueSet The handle of the queue set in which the queue or semaphore
  * is included.
  *
  * @return If the queue or semaphore was successfully removed from the queue set
  * then pdPASS is returned.  If the queue was not in the queue set, or the
- * queue (or semaphore) was not empty, then pdFAIL is returned.
+ * queue ( or semaphore ) was not empty, then pdFAIL is returned.
  */
 BaseType_t xQueueRemoveFromSet( QueueSetMemberHandle_t xQueueOrSemaphore,
                                 QueueSetHandle_t xQueueSet ) PRIVILEGED_FUNCTION;
 
 /*
  * xQueueSelectFromSet() selects from the members of a queue set a queue or
- * semaphore that either contains data (in the case of a queue) or is available
- * to take (in the case of a semaphore).  xQueueSelectFromSet() effectively
- * allows a task to block (pend) on a read operation on all the queues and
+ * semaphore that either contains data ( in the case of a queue ) or is available
+ * to take ( in the case of a semaphore ).  xQueueSelectFromSet() effectively
+ * allows a task to block ( pend ) on a read operation on all the queues and
  * semaphores in a queue set simultaneously.
  *
- * See FreeRTOS/Source/Demo/Common/Minimal/QueueSet.c for an example using this
+ * See FreeRTOS / ource / emo / ommon / inimal / ueueSet.c for an example using this
  * function.
  *
- * Note 1:  See the documentation on https://www.FreeRTOS.org/RTOS-queue-sets.html
+ * Note 1:  See the documentation on https://www.FreeRTOS.org / TOS - ueue - ets.html
  * for reasons why queue sets are very rarely needed in practice as there are
  * simpler methods of blocking on multiple objects.
  *
  * Note 2:  Blocking on a queue set that contains a mutex will not cause the
  * mutex holder to inherit the priority of the blocked task.
  *
- * Note 3:  A receive (in the case of a queue) or take (in the case of a
- * semaphore) operation must not be performed on a member of a queue set unless
+ * Note 3:  A receive ( in the case of a queue ) or take ( in the case of a
+ * semaphore ) operation must not be performed on a member of a queue set unless
  * a call to xQueueSelectFromSet() has first returned a handle to that set member.
  *
- * @param xQueueSet The queue set on which the task will (potentially) block.
+ * @param xQueueSet The queue set on which the task will ( potentially ) block.
  *
  * @param xTicksToWait The maximum time, in ticks, that the calling task will
- * remain in the Blocked state (with other tasks executing) to wait for a member
+ * remain in the Blocked state ( with other tasks executing ) to wait for a member
  * of the queue set to be ready for a successful queue read or semaphore take
  * operation.
  *
- * @return xQueueSelectFromSet() will return the handle of a queue (cast to
- * a QueueSetMemberHandle_t type) contained in the queue set that contains data,
- * or the handle of a semaphore (cast to a QueueSetMemberHandle_t type) contained
+ * @return xQueueSelectFromSet() will return the handle of a queue ( cast to
+ * a QueueSetMemberHandle_t type ) contained in the queue set that contains data,
+ * or the handle of a semaphore ( cast to a QueueSetMemberHandle_t type ) contained
  * in the queue set that is available, or NULL if no such queue or semaphore
  * exists before before the specified block time expires.
  */
@@ -1712,11 +1716,10 @@ void vQueueSetQueueNumber( QueueHandle_t xQueue,
 UBaseType_t uxQueueGetQueueNumber( QueueHandle_t xQueue ) PRIVILEGED_FUNCTION;
 uint8_t ucQueueGetQueueType( QueueHandle_t xQueue ) PRIVILEGED_FUNCTION;
 
-
-/* *INDENT-OFF* */
+/* *INDENT - FF* */
 #ifdef __cplusplus
     }
 #endif
-/* *INDENT-ON* */
+/* *INDENT - N* */
 
 #endif /* QUEUE_H */

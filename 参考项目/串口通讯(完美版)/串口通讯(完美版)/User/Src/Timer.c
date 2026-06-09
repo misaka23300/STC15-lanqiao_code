@@ -1,3 +1,10 @@
+/**
+ * @file Timer.c
+ * @brief 定时器驱动文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "./Timer.h"//硬件定时器库
 #include "./SMG.h"//数码管库
 #include "./UART.h"//硬件串口库
@@ -13,14 +20,14 @@ Timer_Delay_TypeDef timer_delay;//定义句柄
 //定时器变量初始化函数
 void Timer_Tag_Init()
 {
-	timer_delay.Msecflag1=0x00;
-	timer_delay.Msecflag2=0x00;
-	timer_delay.Msecflag3=0x00;
-	timer_delay.Msecflag4=0x00;
-	timer_delay.Msecflag5=0x00;
-	timer_delay.Msecflag6=0x00;
-	timer_delay.Msecflag7=0x00;
-	timer_delay.Msecflag8=0x00;
+	timer_delay.Msecflag1 = x00;
+	timer_delay.Msecflag2 = x00;
+	timer_delay.Msecflag3 = x00;
+	timer_delay.Msecflag4 = x00;
+	timer_delay.Msecflag5 = x00;
+	timer_delay.Msecflag6 = x00;
+	timer_delay.Msecflag7 = x00;
+	timer_delay.Msecflag8 = x00;
 }
 
 //定时器2初始化函数
@@ -31,7 +38,7 @@ void Timer2_Init()
 	T2H = Timer2_Reload>>8;//设置定时初始值
 	AUXR |= 0x10;//定时器2开始计时
 	IE2 |= 0x04;//使能定时器2中断
-	EA=1;//打开总中断
+	EA = ;//打开总中断
 }
 
 //定时器2中断服务函数
@@ -46,16 +53,16 @@ void Timer2_Isr() interrupt 12
 	timer_delay.Msecflag7++;
 	timer_delay.Msecflag8++;	
 	
-	if(timer_delay.Msecflag1==5)//LED刷新时间5ms
+	if ( timer_delay.Msecflag1 == )//LED刷新时间5ms
 	{
 		LED_Sta_Handler();//LED状态判断函数
-		timer_delay.Msecflag1=0;
+		timer_delay.Msecflag1 = ;
 	}	
 	
-	if(timer_delay.Msecflag2==1)//数码管刷新时间1ms
+	if ( timer_delay.Msecflag2 == )//数码管刷新时间1ms
 	{	
-		SMG_Display(UART_Rx_Buf[0]);
-		timer_delay.Msecflag2=0;
+		SMG_Display( UART_Rx_Buf[0]);
+		timer_delay.Msecflag2 = ;
 	}
 	
 }

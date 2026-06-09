@@ -1,3 +1,10 @@
+/**
+ * @file boot.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #ifndef __BOOT_H__
 #define __BOOT_H__
 
@@ -19,10 +26,9 @@ typedef signed long int32_t; */
 #define int16_t signed int
 
 void boot_init();
-void latch(uint8_t i);
-void Delay14us(void);
-void Timer2_Init(void);
-void Timer0_Init(void);
-
+void latch( uint8_t i );
+void Delay14us( void );
+void Timer2_Init( void );
+void Timer0_Init( void );
 
 #endif

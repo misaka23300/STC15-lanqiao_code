@@ -1,13 +1,20 @@
+/**
+ * @file mpu_prototypes.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*
  * FreeRTOS Kernel V10.4.6
- * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
+ * Copyright ( C ) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
- * SPDX-License-Identifier: MIT
+ * SPDX - icense - dentifier: MIT
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
+ * this software and associated documentation files ( the "Software"), to deal in
  * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * use, copy, modify, merge, publish, distribute, sublicense, and / r sell copies of
  * the Software, and to permit persons to whom the Software is furnished to do so,
  * subject to the following conditions:
  *
@@ -22,18 +29,17 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * https://www.FreeRTOS.org
- * https://github.com/FreeRTOS
+ * https://github.com / reeRTOS
  *
  */
 
 /*
- * When the MPU is used the standard (non MPU) API functions are mapped to
+ * When the MPU is used the standard ( non MPU ) API functions are mapped to
  * equivalents that start "MPU_", the prototypes for which are defined in this
  * header files.  This will cause the application code to call the MPU_ version
- * which wraps the non-MPU version with privilege promoting then demoting code,
+ * which wraps the non - PU version with privilege promoting then demoting code,
  * so the kernel code always runs will full privileges.
  */
-
 
 #ifndef MPU_PROTOTYPES_H
 #define MPU_PROTOTYPES_H
@@ -228,7 +234,7 @@ EventBits_t MPU_xEventGroupSync( EventGroupHandle_t xEventGroup,
 void MPU_vEventGroupDelete( EventGroupHandle_t xEventGroup ) FREERTOS_SYSTEM_CALL;
 UBaseType_t MPU_uxEventGroupGetNumber( void * xEventGroup ) FREERTOS_SYSTEM_CALL;
 
-/* MPU versions of message/stream_buffer.h API functions. */
+/* MPU versions of message / tream_buffer.h API functions. */
 size_t MPU_xStreamBufferSend( StreamBufferHandle_t xStreamBuffer,
                               const void * pvTxData,
                               size_t xDataLengthBytes,
@@ -254,7 +260,5 @@ StreamBufferHandle_t MPU_xStreamBufferGenericCreateStatic( size_t xBufferSizeByt
                                                            BaseType_t xIsMessageBuffer,
                                                            uint8_t * const pucStreamBufferStorageArea,
                                                            StaticStreamBuffer_t * const pxStaticStreamBuffer ) FREERTOS_SYSTEM_CALL;
-
-
 
 #endif /* MPU_PROTOTYPES_H */

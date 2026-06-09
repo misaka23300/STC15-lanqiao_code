@@ -1,13 +1,20 @@
+/**
+ * @file croutine.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*
  * FreeRTOS Kernel V10.4.6
- * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
+ * Copyright ( C ) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
- * SPDX-License-Identifier: MIT
+ * SPDX - icense - dentifier: MIT
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
+ * this software and associated documentation files ( the "Software"), to deal in
  * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * use, copy, modify, merge, publish, distribute, sublicense, and / r sell copies of
  * the Software, and to permit persons to whom the Software is furnished to do so,
  * subject to the following conditions:
  *
@@ -22,7 +29,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * https://www.FreeRTOS.org
- * https://github.com/FreeRTOS
+ * https://github.com / reeRTOS
  *
  */
 
@@ -35,19 +42,19 @@
 
 #include "list.h"
 
-/* *INDENT-OFF* */
+/* *INDENT - FF* */
 #ifdef __cplusplus
     extern "C" {
 #endif
-/* *INDENT-ON* */
+/* *INDENT - N* */
 
-/* Used to hide the implementation of the co-routine control block.  The
+/* Used to hide the implementation of the co - outine control block.  The
  * control block structure however has to be included in the header due to
- * the macro implementation of the co-routine functionality. */
+ * the macro implementation of the co - outine functionality. */
 typedef void * CoRoutineHandle_t;
 
-/* Defines the prototype to which co-routine functions must conform. */
-typedef void (* crCOROUTINE_CODE)( CoRoutineHandle_t,
+/* Defines the prototype to which co - outine functions must conform. */
+typedef void (* crCOROUTINE_CODE )( CoRoutineHandle_t,
                                    UBaseType_t );
 
 typedef struct corCoRoutineControlBlock
@@ -55,10 +62,10 @@ typedef struct corCoRoutineControlBlock
     crCOROUTINE_CODE pxCoRoutineFunction;
     ListItem_t xGenericListItem; /*< List item used to place the CRCB in ready and blocked queues. */
     ListItem_t xEventListItem;   /*< List item used to place the CRCB in event lists. */
-    UBaseType_t uxPriority;      /*< The priority of the co-routine in relation to other co-routines. */
-    UBaseType_t uxIndex;         /*< Used to distinguish between co-routines when multiple co-routines use the same co-routine function. */
-    uint16_t uxState;            /*< Used internally by the co-routine implementation. */
-} CRCB_t;                        /* Co-routine control block.  Note must be identical in size down to uxPriority with TCB_t. */
+    UBaseType_t uxPriority;      /*< The priority of the co - outine in relation to other co - outines. */
+    UBaseType_t uxIndex;         /*< Used to distinguish between co - outines when multiple co - outines use the same co - outine function. */
+    uint16_t uxState;            /*< Used internally by the co - outine implementation. */
+} CRCB_t;                        /* Co - outine control block.  Note must be identical in size down to uxPriority with TCB_t. */
 
 /**
  * croutine. h
@@ -70,61 +77,61 @@ typedef struct corCoRoutineControlBlock
  *                             );
  * @endcode
  *
- * Create a new co-routine and add it to the list of co-routines that are
+ * Create a new co - outine and add it to the list of co - outines that are
  * ready to run.
  *
- * @param pxCoRoutineCode Pointer to the co-routine function.  Co-routine
- * functions require special syntax - see the co-routine section of the WEB
+ * @param pxCoRoutineCode Pointer to the co - outine function.  Co - outine
+ * functions require special syntax - see the co - outine section of the WEB
  * documentation for more information.
  *
- * @param uxPriority The priority with respect to other co-routines at which
- *  the co-routine will run.
+ * @param uxPriority The priority with respect to other co - outines at which
+ *  the co - outine will run.
  *
- * @param uxIndex Used to distinguish between different co-routines that
- * execute the same function.  See the example below and the co-routine section
+ * @param uxIndex Used to distinguish between different co - outines that
+ * execute the same function.  See the example below and the co - outine section
  * of the WEB documentation for further information.
  *
- * @return pdPASS if the co-routine was successfully created and added to a ready
+ * @return pdPASS if the co - outine was successfully created and added to a ready
  * list, otherwise an error code defined with ProjDefs.h.
  *
  * Example usage:
  * @code{c}
- * // Co-routine to be created.
+ * // Co - outine to be created.
  * void vFlashCoRoutine( CoRoutineHandle_t xHandle, UBaseType_t uxIndex )
  * {
- * // Variables in co-routines must be declared static if they must maintain value across a blocking call.
+ * // Variables in co - outines must be declared static if they must maintain value across a blocking call.
  * // This may not be necessary for const variables.
  * static const char cLedToFlash[ 2 ] = { 5, 6 };
  * static const TickType_t uxFlashRates[ 2 ] = { 200, 400 };
  *
- *   // Must start every co-routine with a call to crSTART();
+ *   // Must start every co - outine with a call to crSTART();
  *   crSTART( xHandle );
  *
- *   for( ;; )
+ *   for ( ;; )
  *   {
- *       // This co-routine just delays for a fixed period, then toggles
- *       // an LED.  Two co-routines are created using this function, so
- *       // the uxIndex parameter is used to tell the co-routine which
+ *       // This co - outine just delays for a fixed period, then toggles
+ *       // an LED.  Two co - outines are created using this function, so
+ *       // the uxIndex parameter is used to tell the co - outine which
  *       // LED to flash and how int32_t to delay.  This assumes xQueue has
  *       // already been created.
  *       vParTestToggleLED( cLedToFlash[ uxIndex ] );
  *       crDELAY( xHandle, uxFlashRates[ uxIndex ] );
  *   }
  *
- *   // Must end every co-routine with a call to crEND();
+ *   // Must end every co - outine with a call to crEND();
  *   crEND();
  * }
  *
- * // Function that creates two co-routines.
+ * // Function that creates two co - outines.
  * void vOtherFunction( void )
  * {
  * uint8_t ucParameterToPass;
  * TaskHandle_t xHandle;
  *
- *   // Create two co-routines at priority 0.  The first is given index 0
- *   // so (from the code above) toggles LED 5 every 200 ticks.  The second
+ *   // Create two co - outines at priority 0.  The first is given index 0
+ *   // so ( from the code above ) toggles LED 5 every 200 ticks.  The second
  *   // is given index 1 so toggles LED 6 every 400 ticks.
- *   for( uxIndex = 0; uxIndex < 2; uxIndex++ )
+ *   for ( uxIndex = 0; uxIndex < 2; uxIndex++ )
  *   {
  *       xCoRoutineCreate( vFlashCoRoutine, 0, uxIndex );
  *   }
@@ -137,28 +144,27 @@ BaseType_t xCoRoutineCreate( crCOROUTINE_CODE pxCoRoutineCode,
                              UBaseType_t uxPriority,
                              UBaseType_t uxIndex );
 
-
 /**
  * croutine. h
  * @code{c}
  * void vCoRoutineSchedule( void );
  * @endcode
  *
- * Run a co-routine.
+ * Run a co - outine.
  *
- * vCoRoutineSchedule() executes the highest priority co-routine that is able
- * to run.  The co-routine will execute until it either blocks, yields or is
- * preempted by a task.  Co-routines execute cooperatively so one
- * co-routine cannot be preempted by another, but can be preempted by a task.
+ * vCoRoutineSchedule() executes the highest priority co - outine that is able
+ * to run.  The co - outine will execute until it either blocks, yields or is
+ * preempted by a task.  Co - outines execute cooperatively so one
+ * co - outine cannot be preempted by another, but can be preempted by a task.
  *
- * If an application comprises of both tasks and co-routines then
- * vCoRoutineSchedule should be called from the idle task (in an idle task
- * hook).
+ * If an application comprises of both tasks and co - outines then
+ * vCoRoutineSchedule should be called from the idle task ( in an idle task
+ * hook ).
  *
  * Example usage:
  * @code{c}
- * // This idle task hook will schedule a co-routine each time it is called.
- * // The rest of the idle task will execute between co-routine calls.
+ * // This idle task hook will schedule a co - outine each time it is called.
+ * // The rest of the idle task will execute between co - outine calls.
  * void vApplicationIdleHook( void )
  * {
  *  vCoRoutineSchedule();
@@ -169,7 +175,7 @@ BaseType_t xCoRoutineCreate( crCOROUTINE_CODE pxCoRoutineCode,
  * // infinite loop.
  * void vApplicationIdleHook( void )
  * {
- *  for( ;; )
+ *  for ( ;; )
  *  {
  *      vCoRoutineSchedule();
  *  }
@@ -186,25 +192,25 @@ void vCoRoutineSchedule( void );
  * crSTART( CoRoutineHandle_t xHandle );
  * @endcode
  *
- * This macro MUST always be called at the start of a co-routine function.
+ * This macro MUST always be called at the start of a co - outine function.
  *
  * Example usage:
  * @code{c}
- * // Co-routine to be created.
+ * // Co - outine to be created.
  * void vACoRoutine( CoRoutineHandle_t xHandle, UBaseType_t uxIndex )
  * {
- * // Variables in co-routines must be declared static if they must maintain value across a blocking call.
+ * // Variables in co - outines must be declared static if they must maintain value across a blocking call.
  * static int32_t ulAVariable;
  *
- *   // Must start every co-routine with a call to crSTART();
+ *   // Must start every co - outine with a call to crSTART();
  *   crSTART( xHandle );
  *
- *   for( ;; )
+ *   for ( ;; )
  *   {
- *        // Co-routine functionality goes here.
+ *        // Co - outine functionality goes here.
  *   }
  *
- *   // Must end every co-routine with a call to crEND();
+ *   // Must end every co - outine with a call to crEND();
  *   crEND();
  * }
  * @endcode
@@ -221,25 +227,25 @@ void vCoRoutineSchedule( void );
  * crEND();
  * @endcode
  *
- * This macro MUST always be called at the end of a co-routine function.
+ * This macro MUST always be called at the end of a co - outine function.
  *
  * Example usage:
  * @code{c}
- * // Co-routine to be created.
+ * // Co - outine to be created.
  * void vACoRoutine( CoRoutineHandle_t xHandle, UBaseType_t uxIndex )
  * {
- * // Variables in co-routines must be declared static if they must maintain value across a blocking call.
+ * // Variables in co - outines must be declared static if they must maintain value across a blocking call.
  * static int32_t ulAVariable;
  *
- *   // Must start every co-routine with a call to crSTART();
+ *   // Must start every co - outine with a call to crSTART();
  *   crSTART( xHandle );
  *
- *   for( ;; )
+ *   for ( ;; )
  *   {
- *        // Co-routine functionality goes here.
+ *        // Co - outine functionality goes here.
  *   }
  *
- *   // Must end every co-routine with a call to crEND();
+ *   // Must end every co - outine with a call to crEND();
  *   crEND();
  * }
  * @endcode
@@ -249,7 +255,7 @@ void vCoRoutineSchedule( void );
 #define crEND()    }
 
 /*
- * These macros are intended for internal use by the co-routine implementation
+ * These macros are intended for internal use by the co - outine implementation
  * only.  The macros should not be used directly by application writers.
  */
 #define crSET_STATE0( xHandle )                                       \
@@ -265,34 +271,34 @@ void vCoRoutineSchedule( void );
  * crDELAY( CoRoutineHandle_t xHandle, TickType_t xTicksToDelay );
  * @endcode
  *
- * Delay a co-routine for a fixed period of time.
+ * Delay a co - outine for a fixed period of time.
  *
- * crDELAY can only be called from the co-routine function itself - not
- * from within a function called by the co-routine function.  This is because
- * co-routines do not maintain their own stack.
+ * crDELAY can only be called from the co - outine function itself - not
+ * from within a function called by the co - outine function.  This is because
+ * co - outines do not maintain their own stack.
  *
- * @param xHandle The handle of the co-routine to delay.  This is the xHandle
- * parameter of the co-routine function.
+ * @param xHandle The handle of the co - outine to delay.  This is the xHandle
+ * parameter of the co - outine function.
  *
- * @param xTickToDelay The number of ticks that the co-routine should delay
+ * @param xTickToDelay The number of ticks that the co - outine should delay
  * for.  The actual amount of time this equates to is defined by
- * configTICK_RATE_HZ (set in FreeRTOSConfig.h).  The constant portTICK_PERIOD_MS
+ * configTICK_RATE_HZ ( set in FreeRTOSConfig.h ).  The constant portTICK_PERIOD_MS
  * can be used to convert ticks to milliseconds.
  *
  * Example usage:
  * @code{c}
- * // Co-routine to be created.
+ * // Co - outine to be created.
  * void vACoRoutine( CoRoutineHandle_t xHandle, UBaseType_t uxIndex )
  * {
- * // Variables in co-routines must be declared static if they must maintain value across a blocking call.
+ * // Variables in co - outines must be declared static if they must maintain value across a blocking call.
  * // This may not be necessary for const variables.
  * // We are to delay for 200ms.
  * static const xTickType xDelayTime = 200 / portTICK_PERIOD_MS;
  *
- *   // Must start every co-routine with a call to crSTART();
+ *   // Must start every co - outine with a call to crSTART();
  *   crSTART( xHandle );
  *
- *   for( ;; )
+ *   for ( ;; )
  *   {
  *      // Delay for 200ms.
  *      crDELAY( xHandle, xDelayTime );
@@ -300,7 +306,7 @@ void vCoRoutineSchedule( void );
  *      // Do something here.
  *   }
  *
- *   // Must end every co-routine with a call to crEND();
+ *   // Must end every co - outine with a call to crEND();
  *   crEND();
  * }
  * @endcode
@@ -308,7 +314,7 @@ void vCoRoutineSchedule( void );
  * \ingroup Tasks
  */
 #define crDELAY( xHandle, xTicksToDelay )                      \
-    if( ( xTicksToDelay ) > 0 )                                \
+    if ( ( xTicksToDelay ) > 0 )                                \
     {                                                          \
         vCoRoutineAddToDelayedList( ( xTicksToDelay ), NULL ); \
     }                                                          \
@@ -325,22 +331,22 @@ void vCoRoutineSchedule( void );
  *           )
  * @endcode
  *
- * The macro's crQUEUE_SEND() and crQUEUE_RECEIVE() are the co-routine
+ * The macro's crQUEUE_SEND() and crQUEUE_RECEIVE() are the co - outine
  * equivalent to the xQueueSend() and xQueueReceive() functions used by tasks.
  *
- * crQUEUE_SEND and crQUEUE_RECEIVE can only be used from a co-routine whereas
+ * crQUEUE_SEND and crQUEUE_RECEIVE can only be used from a co - outine whereas
  * xQueueSend() and xQueueReceive() can only be used from tasks.
  *
- * crQUEUE_SEND can only be called from the co-routine function itself - not
- * from within a function called by the co-routine function.  This is because
- * co-routines do not maintain their own stack.
+ * crQUEUE_SEND can only be called from the co - outine function itself - not
+ * from within a function called by the co - outine function.  This is because
+ * co - outines do not maintain their own stack.
  *
- * See the co-routine section of the WEB documentation for information on
- * passing data between tasks and co-routines and between ISR's and
- * co-routines.
+ * See the co - outine section of the WEB documentation for information on
+ * passing data between tasks and co - outines and between ISR's and
+ * co - outines.
  *
- * @param xHandle The handle of the calling co-routine.  This is the xHandle
- * parameter of the co-routine function.
+ * @param xHandle The handle of the calling co - outine.  This is the xHandle
+ * parameter of the co - outine function.
  *
  * @param pxQueue The handle of the queue on which the data will be posted.
  * The handle is obtained as the return value when the queue is created using
@@ -351,12 +357,12 @@ void vCoRoutineSchedule( void );
  * created.  This number of bytes is copied from pvItemToQueue into the queue
  * itself.
  *
- * @param xTickToDelay The number of ticks that the co-routine should block
+ * @param xTickToDelay The number of ticks that the co - outine should block
  * to wait for space to become available on the queue, should space not be
  * available immediately. The actual amount of time this equates to is defined
- * by configTICK_RATE_HZ (set in FreeRTOSConfig.h).  The constant
- * portTICK_PERIOD_MS can be used to convert ticks to milliseconds (see example
- * below).
+ * by configTICK_RATE_HZ ( set in FreeRTOSConfig.h ).  The constant
+ * portTICK_PERIOD_MS can be used to convert ticks to milliseconds ( see example
+ * below ).
  *
  * @param pxResult The variable pointed to by pxResult will be set to pdPASS if
  * data was successfully posted onto the queue, otherwise it will be set to an
@@ -364,23 +370,23 @@ void vCoRoutineSchedule( void );
  *
  * Example usage:
  * @code{c}
- * // Co-routine function that blocks for a fixed period then posts a number onto
+ * // Co - outine function that blocks for a fixed period then posts a number onto
  * // a queue.
  * static void prvCoRoutineFlashTask( CoRoutineHandle_t xHandle, UBaseType_t uxIndex )
  * {
- * // Variables in co-routines must be declared static if they must maintain value across a blocking call.
+ * // Variables in co - outines must be declared static if they must maintain value across a blocking call.
  * static BaseType_t xNumberToPost = 0;
  * static BaseType_t xResult;
  *
- *  // Co-routines must begin with a call to crSTART().
+ *  // Co - outines must begin with a call to crSTART().
  *  crSTART( xHandle );
  *
- *  for( ;; )
+ *  for ( ;; )
  *  {
  *      // This assumes the queue has already been created.
  *      crQUEUE_SEND( xHandle, xCoRoutineQueue, &xNumberToPost, NO_DELAY, &xResult );
  *
- *      if( xResult != pdPASS )
+ *      if ( xResult != pdPASS )
  *      {
  *          // The message was not posted!
  *      }
@@ -392,7 +398,7 @@ void vCoRoutineSchedule( void );
  *      crDELAY( xHandle, 100 );
  *  }
  *
- *  // Co-routines must end with a call to crEND().
+ *  // Co - outines must end with a call to crEND().
  *  crEND();
  * }
  * @endcode
@@ -402,12 +408,12 @@ void vCoRoutineSchedule( void );
 #define crQUEUE_SEND( xHandle, pxQueue, pvItemToQueue, xTicksToWait, pxResult )           \
     {                                                                                     \
         *( pxResult ) = xQueueCRSend( ( pxQueue ), ( pvItemToQueue ), ( xTicksToWait ) ); \
-        if( *( pxResult ) == errQUEUE_BLOCKED )                                           \
+        if ( *( pxResult ) == errQUEUE_BLOCKED )                                           \
         {                                                                                 \
             crSET_STATE0( ( xHandle ) );                                                  \
             *pxResult = xQueueCRSend( ( pxQueue ), ( pvItemToQueue ), 0 );                \
         }                                                                                 \
-        if( *pxResult == errQUEUE_YIELD )                                                 \
+        if ( *pxResult == errQUEUE_YIELD )                                                 \
         {                                                                                 \
             crSET_STATE1( ( xHandle ) );                                                  \
             *pxResult = pdPASS;                                                           \
@@ -426,22 +432,22 @@ void vCoRoutineSchedule( void );
  *               )
  * @endcode
  *
- * The macro's crQUEUE_SEND() and crQUEUE_RECEIVE() are the co-routine
+ * The macro's crQUEUE_SEND() and crQUEUE_RECEIVE() are the co - outine
  * equivalent to the xQueueSend() and xQueueReceive() functions used by tasks.
  *
- * crQUEUE_SEND and crQUEUE_RECEIVE can only be used from a co-routine whereas
+ * crQUEUE_SEND and crQUEUE_RECEIVE can only be used from a co - outine whereas
  * xQueueSend() and xQueueReceive() can only be used from tasks.
  *
- * crQUEUE_RECEIVE can only be called from the co-routine function itself - not
- * from within a function called by the co-routine function.  This is because
- * co-routines do not maintain their own stack.
+ * crQUEUE_RECEIVE can only be called from the co - outine function itself - not
+ * from within a function called by the co - outine function.  This is because
+ * co - outines do not maintain their own stack.
  *
- * See the co-routine section of the WEB documentation for information on
- * passing data between tasks and co-routines and between ISR's and
- * co-routines.
+ * See the co - outine section of the WEB documentation for information on
+ * passing data between tasks and co - outines and between ISR's and
+ * co - outines.
  *
- * @param xHandle The handle of the calling co-routine.  This is the xHandle
- * parameter of the co-routine function.
+ * @param xHandle The handle of the calling co - outine.  This is the xHandle
+ * parameter of the co - outine function.
  *
  * @param pxQueue The handle of the queue from which the data will be received.
  * The handle is obtained as the return value when the queue is created using
@@ -451,12 +457,12 @@ void vCoRoutineSchedule( void );
  * The number of bytes of each queued item is specified when the queue is
  * created.  This number of bytes is copied into pvBuffer.
  *
- * @param xTickToDelay The number of ticks that the co-routine should block
+ * @param xTickToDelay The number of ticks that the co - outine should block
  * to wait for data to become available from the queue, should data not be
  * available immediately. The actual amount of time this equates to is defined
- * by configTICK_RATE_HZ (set in FreeRTOSConfig.h).  The constant
- * portTICK_PERIOD_MS can be used to convert ticks to milliseconds (see the
- * crQUEUE_SEND example).
+ * by configTICK_RATE_HZ ( set in FreeRTOSConfig.h ).  The constant
+ * portTICK_PERIOD_MS can be used to convert ticks to milliseconds ( see the
+ * crQUEUE_SEND example ).
  *
  * @param pxResult The variable pointed to by pxResult will be set to pdPASS if
  * data was successfully retrieved from the queue, otherwise it will be set to
@@ -464,23 +470,23 @@ void vCoRoutineSchedule( void );
  *
  * Example usage:
  * @code{c}
- * // A co-routine receives the number of an LED to flash from a queue.  It
+ * // A co - outine receives the number of an LED to flash from a queue.  It
  * // blocks on the queue until the number is received.
  * static void prvCoRoutineFlashWorkTask( CoRoutineHandle_t xHandle, UBaseType_t uxIndex )
  * {
- * // Variables in co-routines must be declared static if they must maintain value across a blocking call.
+ * // Variables in co - outines must be declared static if they must maintain value across a blocking call.
  * static BaseType_t xResult;
  * static UBaseType_t uxLEDToFlash;
  *
- *  // All co-routines must start with a call to crSTART().
+ *  // All co - outines must start with a call to crSTART().
  *  crSTART( xHandle );
  *
- *  for( ;; )
+ *  for ( ;; )
  *  {
  *      // Wait for data to become available on the queue.
  *      crQUEUE_RECEIVE( xHandle, xCoRoutineQueue, &uxLEDToFlash, portMAX_DELAY, &xResult );
  *
- *      if( xResult == pdPASS )
+ *      if ( xResult == pdPASS )
  *      {
  *          // We received the LED to flash - flash it!
  *          vParTestToggleLED( uxLEDToFlash );
@@ -496,12 +502,12 @@ void vCoRoutineSchedule( void );
 #define crQUEUE_RECEIVE( xHandle, pxQueue, pvBuffer, xTicksToWait, pxResult )           \
     {                                                                                   \
         *( pxResult ) = xQueueCRReceive( ( pxQueue ), ( pvBuffer ), ( xTicksToWait ) ); \
-        if( *( pxResult ) == errQUEUE_BLOCKED )                                         \
+        if ( *( pxResult ) == errQUEUE_BLOCKED )                                         \
         {                                                                               \
             crSET_STATE0( ( xHandle ) );                                                \
             *( pxResult ) = xQueueCRReceive( ( pxQueue ), ( pvBuffer ), 0 );            \
         }                                                                               \
-        if( *( pxResult ) == errQUEUE_YIELD )                                           \
+        if ( *( pxResult ) == errQUEUE_YIELD )                                           \
         {                                                                               \
             crSET_STATE1( ( xHandle ) );                                                \
             *( pxResult ) = pdPASS;                                                     \
@@ -519,20 +525,20 @@ void vCoRoutineSchedule( void );
  * @endcode
  *
  * The macro's crQUEUE_SEND_FROM_ISR() and crQUEUE_RECEIVE_FROM_ISR() are the
- * co-routine equivalent to the xQueueSendFromISR() and xQueueReceiveFromISR()
+ * co - outine equivalent to the xQueueSendFromISR() and xQueueReceiveFromISR()
  * functions used by tasks.
  *
  * crQUEUE_SEND_FROM_ISR() and crQUEUE_RECEIVE_FROM_ISR() can only be used to
- * pass data between a co-routine and and ISR, whereas xQueueSendFromISR() and
+ * pass data between a co - outine and and ISR, whereas xQueueSendFromISR() and
  * xQueueReceiveFromISR() can only be used to pass data between a task and and
  * ISR.
  *
  * crQUEUE_SEND_FROM_ISR can only be called from an ISR to send data to a queue
- * that is being used from within a co-routine.
+ * that is being used from within a co - outine.
  *
- * See the co-routine section of the WEB documentation for information on
- * passing data between tasks and co-routines and between ISR's and
- * co-routines.
+ * See the co - outine section of the WEB documentation for information on
+ * passing data between tasks and co - outines and between ISR's and
+ * co - outines.
  *
  * @param xQueue The handle to the queue on which the item is to be posted.
  *
@@ -546,55 +552,55 @@ void vCoRoutineSchedule( void );
  * should always pass in pdFALSE.  Subsequent calls should pass in
  * the value returned from the previous call.
  *
- * @return pdTRUE if a co-routine was woken by posting onto the queue.  This is
+ * @return pdTRUE if a co - outine was woken by posting onto the queue.  This is
  * used by the ISR to determine if a context switch may be required following
  * the ISR.
  *
  * Example usage:
  * @code{c}
- * // A co-routine that blocks on a queue waiting for characters to be received.
+ * // A co - outine that blocks on a queue waiting for characters to be received.
  * static void vReceivingCoRoutine( CoRoutineHandle_t xHandle, UBaseType_t uxIndex )
  * {
  * char cRxedChar;
  * BaseType_t xResult;
  *
- *   // All co-routines must start with a call to crSTART().
+ *   // All co - outines must start with a call to crSTART().
  *   crSTART( xHandle );
  *
- *   for( ;; )
+ *   for ( ;; )
  *   {
  *       // Wait for data to become available on the queue.  This assumes the
  *       // queue xCommsRxQueue has already been created!
  *       crQUEUE_RECEIVE( xHandle, xCommsRxQueue, &uxLEDToFlash, portMAX_DELAY, &xResult );
  *
  *       // Was a character received?
- *       if( xResult == pdPASS )
+ *       if ( xResult == pdPASS )
  *       {
  *           // Process the character here.
  *       }
  *   }
  *
- *   // All co-routines must end with a call to crEND().
+ *   // All co - outines must end with a call to crEND().
  *   crEND();
  * }
  *
  * // An ISR that uses a queue to send characters received on a serial port to
- * // a co-routine.
+ * // a co - outine.
  * void vUART_ISR( void )
  * {
  * char cRxedChar;
  * BaseType_t xCRWokenByPost = pdFALSE;
  *
  *   // We loop around reading characters until there are none left in the UART.
- *   while( UART_RX_REG_NOT_EMPTY() )
+ *   while ( UART_RX_REG_NOT_EMPTY() )
  *   {
  *       // Obtain the character from the UART.
  *       cRxedChar = UART_RX_REG;
  *
  *       // Post the character onto a queue.  xCRWokenByPost will be pdFALSE
- *       // the first time around the loop.  If the post causes a co-routine
- *       // to be woken (unblocked) then xCRWokenByPost will be set to pdTRUE.
- *       // In this manner we can ensure that if more than one co-routine is
+ *       // the first time around the loop.  If the post causes a co - outine
+ *       // to be woken ( unblocked ) then xCRWokenByPost will be set to pdTRUE.
+ *       // In this manner we can ensure that if more than one co - outine is
  *       // blocked on the queue only one is woken by this ISR no matter how
  *       // many characters are posted to the queue.
  *       xCRWokenByPost = crQUEUE_SEND_FROM_ISR( xCommsRxQueue, &cRxedChar, xCRWokenByPost );
@@ -607,7 +613,6 @@ void vCoRoutineSchedule( void );
 #define crQUEUE_SEND_FROM_ISR( pxQueue, pvItemToQueue, xCoRoutinePreviouslyWoken ) \
     xQueueCRSendFromISR( ( pxQueue ), ( pvItemToQueue ), ( xCoRoutinePreviouslyWoken ) )
 
-
 /**
  * croutine. h
  * @code{c}
@@ -619,21 +624,21 @@ void vCoRoutineSchedule( void );
  * @endcode
  *
  * The macro's crQUEUE_SEND_FROM_ISR() and crQUEUE_RECEIVE_FROM_ISR() are the
- * co-routine equivalent to the xQueueSendFromISR() and xQueueReceiveFromISR()
+ * co - outine equivalent to the xQueueSendFromISR() and xQueueReceiveFromISR()
  * functions used by tasks.
  *
  * crQUEUE_SEND_FROM_ISR() and crQUEUE_RECEIVE_FROM_ISR() can only be used to
- * pass data between a co-routine and and ISR, whereas xQueueSendFromISR() and
+ * pass data between a co - outine and and ISR, whereas xQueueSendFromISR() and
  * xQueueReceiveFromISR() can only be used to pass data between a task and and
  * ISR.
  *
  * crQUEUE_RECEIVE_FROM_ISR can only be called from an ISR to receive data
- * from a queue that is being used from within a co-routine (a co-routine
- * posted to the queue).
+ * from a queue that is being used from within a co - outine ( a co - outine
+ * posted to the queue ).
  *
- * See the co-routine section of the WEB documentation for information on
- * passing data between tasks and co-routines and between ISR's and
- * co-routines.
+ * See the co - outine section of the WEB documentation for information on
+ * passing data between tasks and co - outines and between ISR's and
+ * co - outines.
  *
  * @param xQueue The handle to the queue on which the item is to be posted.
  *
@@ -642,9 +647,9 @@ void vCoRoutineSchedule( void );
  * queue was created, so this many bytes will be copied from the queue into
  * pvBuffer.
  *
- * @param pxCoRoutineWoken A co-routine may be blocked waiting for space to become
+ * @param pxCoRoutineWoken A co - outine may be blocked waiting for space to become
  * available on the queue.  If crQUEUE_RECEIVE_FROM_ISR causes such a
- * co-routine to unblock *pxCoRoutineWoken will get set to pdTRUE, otherwise
+ * co - outine to unblock *pxCoRoutineWoken will get set to pdTRUE, otherwise
  * *pxCoRoutineWoken will remain unchanged.
  *
  * @return pdTRUE an item was successfully received from the queue, otherwise
@@ -652,24 +657,24 @@ void vCoRoutineSchedule( void );
  *
  * Example usage:
  * @code{c}
- * // A co-routine that posts a character to a queue then blocks for a fixed
+ * // A co - outine that posts a character to a queue then blocks for a fixed
  * // period.  The character is incremented each time.
  * static void vSendingCoRoutine( CoRoutineHandle_t xHandle, UBaseType_t uxIndex )
  * {
- * // cChar holds its value while this co-routine is blocked and must therefore
+ * // cChar holds its value while this co - outine is blocked and must therefore
  * // be declared static.
  * static char cCharToTx = 'a';
  * BaseType_t xResult;
  *
- *   // All co-routines must start with a call to crSTART().
+ *   // All co - outines must start with a call to crSTART().
  *   crSTART( xHandle );
  *
- *   for( ;; )
+ *   for ( ;; )
  *   {
  *       // Send the next character to the queue.
  *       crQUEUE_SEND( xHandle, xCoRoutineQueue, &cCharToTx, NO_DELAY, &xResult );
  *
- *       if( xResult == pdPASS )
+ *       if ( xResult == pdPASS )
  *       {
  *           // The character was successfully posted to the queue.
  *       }
@@ -687,14 +692,14 @@ void vCoRoutineSchedule( void );
  *       // cCharToTx will maintain its value across the delay as it is
  *       // declared static.
  *       cCharToTx++;
- *       if( cCharToTx > 'x' )
+ *       if ( cCharToTx > 'x' )
  *       {
  *          cCharToTx = 'a';
  *       }
  *       crDELAY( 100 );
  *   }
  *
- *   // All co-routines must end with a call to crEND().
+ *   // All co - outines must end with a call to crEND().
  *   crEND();
  * }
  *
@@ -704,13 +709,13 @@ void vCoRoutineSchedule( void );
  * char cCharToTx;
  * BaseType_t xCRWokenByPost = pdFALSE;
  *
- *   while( UART_TX_REG_EMPTY() )
+ *   while ( UART_TX_REG_EMPTY() )
  *   {
  *       // Are there any characters in the queue waiting to be sent?
- *       // xCRWokenByPost will automatically be set to pdTRUE if a co-routine
- *       // is woken by the post - ensuring that only a single co-routine is
+ *       // xCRWokenByPost will automatically be set to pdTRUE if a co - outine
+ *       // is woken by the post - ensuring that only a single co - outine is
  *       // woken no matter how many times we go around this loop.
- *       if( crQUEUE_RECEIVE_FROM_ISR( pxQueue, &cCharToTx, &xCRWokenByPost ) )
+ *       if ( crQUEUE_RECEIVE_FROM_ISR( pxQueue, &cCharToTx, &xCRWokenByPost ) )
  *       {
  *           SEND_CHARACTER( cCharToTx );
  *       }
@@ -724,12 +729,12 @@ void vCoRoutineSchedule( void );
     xQueueCRReceiveFromISR( ( pxQueue ), ( pvBuffer ), ( pxCoRoutineWoken ) )
 
 /*
- * This function is intended for internal use by the co-routine macros only.
- * The macro nature of the co-routine implementation requires that the
+ * This function is intended for internal use by the co - outine macros only.
+ * The macro nature of the co - outine implementation requires that the
  * prototype appears here.  The function should not be used by application
  * writers.
  *
- * Removes the current co-routine from its ready list and places it in the
+ * Removes the current co - outine from its ready list and places it in the
  * appropriate delayed list.
  */
 void vCoRoutineAddToDelayedList( TickType_t xTicksToDelay,
@@ -739,15 +744,15 @@ void vCoRoutineAddToDelayedList( TickType_t xTicksToDelay,
  * This function is intended for internal use by the queue implementation only.
  * The function should not be used by application writers.
  *
- * Removes the highest priority co-routine from the event list and places it in
+ * Removes the highest priority co - outine from the event list and places it in
  * the pending ready list.
  */
 BaseType_t xCoRoutineRemoveFromEventList( const List_t * pxEventList );
 
-/* *INDENT-OFF* */
+/* *INDENT - FF* */
 #ifdef __cplusplus
     }
 #endif
-/* *INDENT-ON* */
+/* *INDENT - N* */
 
 #endif /* CO_ROUTINE_H */

@@ -1,3 +1,10 @@
+/**
+ * @file main.c
+ * @brief 主程序入口文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /* 头文件声明区域 */
 #include <STC15F2K60S2.H>
 #include <Led.h>
@@ -7,35 +14,35 @@
 #include <ds1302.h>//时钟驱动专用头文件
 
 /* 定义变量区 */
-unsigned char Key_Val,Key_Down,Key_Up,Key_Old;
-unsigned char ucLed[8] = {0,0,0,0,0,0,0,0};
+unsigned char Key_Val, Key_Down, Key_Up, Key_Old;
+unsigned char ucLed[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 unsigned char Seg_Pos;
-unsigned char Seg_Buf[8] = {10,10,10,10,10,10,10,10};
-unsigned char Seg_Point[8] = {0,0,0,0,0,0,0,0};
+unsigned char Seg_Buf[8] = {10, 10, 10, 10, 10, 10, 10, 10};
+unsigned char Seg_Point[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 unsigned char Key_Slow_Down;
 unsigned int Seg_Slow_Down;
-unsigned char ucRtc[3] = {0x23,0x59,0x55};//时钟数据存放数组 默认时间23：59：55
+unsigned char ucRtc[3] = {0x23, 0x59, 0x55};//时钟数据存放数组 默认时间23：59：55
 
 /* 按键处理函数 */
 void Key_Proc()
 {
-	if(Key_Slow_Down) return;
-	Key_Slow_Down=1;
+	if ( Key_Slow_Down ) return;
+	Key_Slow_Down = ;
 	
 	Key_Val = Key_Read();//读取键码值
-	Key_Down = Key_Val & (Key_Val ^ Key_Old);//检测下降沿
-	Key_Up = ~Key_Val & (Key_Val ^ Key_Old);//检测下降沿
+	Key_Down = Key_Val & ( Key_Val ^ Key_Old );//检测下降沿
+	Key_Up = ~Key_Val & ( Key_Val ^ Key_Old );//检测下降沿
 	Key_Old = Key_Val;//扫描辅助变量
 }
 
 /* 信息处理函数 */
 void Seg_Proc()
 {
-	if(Seg_Slow_Down) return;
-	Seg_Slow_Down=1;
+	if ( Seg_Slow_Down ) return;
+	Seg_Slow_Down = ;
 	
 	/* 信息读取区域 */
-	Read_Rtc(ucRtc);//实时读取时钟数据
+	Read_Rtc( ucRtc );//实时读取时钟数据
 	
 	/* 数据处理区域 */
 	Seg_Buf[0]=ucRtc[0] / 16;//十六进制取十位
@@ -55,7 +62,7 @@ void Led_proc()
 }
 
 /*定时器0初始化函数区*/
-void Timer0_Init(void)		//1毫秒@12.000MHz
+void Timer0_Init( void )		//1毫秒@12.000MHz
 {
 	AUXR &= 0x7F;			//定时器时钟12T模式
 	TMOD &= 0xF0;			//设置定时器模式
@@ -70,11 +77,11 @@ void Timer0_Init(void)		//1毫秒@12.000MHz
 /*定时器0中断服务函数区*/
 void Timer0Server() interrupt 1
 {
-    if(++Key_Slow_Down == 10) Key_Slow_Down = 0;
-    if(++Seg_Slow_Down == 100) Seg_Slow_Down = 0;
-		if(++Seg_Pos==8) Seg_Pos=0;
-		Seg_Disp(Seg_Pos,Seg_Buf[Seg_Pos],Seg_Point[Seg_Pos]);
-	  Led_Disp(Seg_Pos,ucLed[Seg_Pos]);
+    if (++Key_Slow_Down == 10 ) Key_Slow_Down = 0;
+    if (++Seg_Slow_Down == 100 ) Seg_Slow_Down = 0;
+		if (++Seg_Pos == ) Seg_Pos = ;
+		Seg_Disp( Seg_Pos, Seg_Buf[Seg_Pos], Seg_Point[Seg_Pos]);
+	  Led_Disp( Seg_Pos, ucLed[Seg_Pos]);
 
 }
 
@@ -83,8 +90,8 @@ void main()
 {
 	System_Init();
 	Timer0_Init();
-	Set_Rtc(ucRtc);//上电时设置时间
-	while(1)
+	Set_Rtc( ucRtc );//上电时设置时间
+	while (1 )
 	{
 		Key_Proc();
 		Seg_Proc();

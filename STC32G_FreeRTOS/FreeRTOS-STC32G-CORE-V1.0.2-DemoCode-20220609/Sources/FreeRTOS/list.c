@@ -1,13 +1,20 @@
+/**
+ * @file list.c
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*
  * FreeRTOS Kernel V10.4.6
- * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
+ * Copyright ( C ) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
- * SPDX-License-Identifier: MIT
+ * SPDX - icense - dentifier: MIT
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
+ * this software and associated documentation files ( the "Software"), to deal in
  * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * use, copy, modify, merge, publish, distribute, sublicense, and / r sell copies of
  * the Software, and to permit persons to whom the Software is furnished to do so,
  * subject to the following conditions:
  *
@@ -22,10 +29,9 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * https://www.FreeRTOS.org
- * https://github.com/FreeRTOS
+ * https://github.com / reeRTOS
  *
  */
-
 
 #include <stdlib.h>
 
@@ -130,11 +136,11 @@ void vListInsert( List_t * const pxList,
      *
      * If the list already contains a list item with the same item value then the
      * new list item should be placed after it.  This ensures that TCBs which are
-     * stored in ready lists (all of which have the same xItemValue value) get a
+     * stored in ready lists ( all of which have the same xItemValue value ) get a
      * share of the CPU.  However, if the xItemValue is the same as the back marker
      * the iteration loop below will not end.  Therefore the value is checked
      * first, and the algorithm slightly modified if necessary. */
-    if( xValueOfInsertion == portMAX_DELAY )
+    if ( xValueOfInsertion == portMAX_DELAY )
     {
         pxIterator = pxList->xListEnd.pxPrevious;
     }
@@ -142,30 +148,30 @@ void vListInsert( List_t * const pxList,
     {
         /* *** NOTE ***********************************************************
         *  If you find your application is crashing here then likely causes are
-        *  listed below.  In addition see https://www.FreeRTOS.org/FAQHelp.html for
+        *  listed below.  In addition see https://www.FreeRTOS.org / AQHelp.html for
         *  more tips, and ensure configASSERT() is defined!
-        *  https://www.FreeRTOS.org/a00110.html#configASSERT
+        *  https://www.FreeRTOS.org / 00110.html#configASSERT
         *
-        *   1) Stack overflow -
-        *      see https://www.FreeRTOS.org/Stacks-and-stack-overflow-checking.html
-        *   2) Incorrect interrupt priority assignment, especially on Cortex-M
+        *   1 ) Stack overflow -
+        *      see https://www.FreeRTOS.org / tacks - nd - tack - verflow - hecking.html
+        *   2 ) Incorrect interrupt priority assignment, especially on Cortex - 
         *      parts where numerically high priority values denote low actual
         *      interrupt priorities, which can seem counter intuitive.  See
-        *      https://www.FreeRTOS.org/RTOS-Cortex-M3-M4.html and the definition
+        *      https://www.FreeRTOS.org / TOS - ortex - 3 - 4.html and the definition
         *      of configMAX_SYSCALL_INTERRUPT_PRIORITY on
-        *      https://www.FreeRTOS.org/a00110.html
-        *   3) Calling an API function from within a critical section or when
+        *      https://www.FreeRTOS.org / 00110.html
+        *   3 ) Calling an API function from within a critical section or when
         *      the scheduler is suspended, or calling an API function that does
         *      not end in "FromISR" from an interrupt.
-        *   4) Using a queue or semaphore before it has been initialised or
-        *      before the scheduler has been started (are interrupts firing
+        *   4 ) Using a queue or semaphore before it has been initialised or
+        *      before the scheduler has been started ( are interrupts firing
         *      before vTaskStartScheduler() has been called?).
-        *   5) If the FreeRTOS port supports interrupt nesting then ensure that
+        *   5 ) If the FreeRTOS port supports interrupt nesting then ensure that
         *      the priority of the tick interrupt is at or below
         *      configMAX_SYSCALL_INTERRUPT_PRIORITY.
         **********************************************************************/
 
-        for( pxIterator = ( ListItem_t * ) &( pxList->xListEnd ); pxIterator->pxNext->xItemValue <= xValueOfInsertion; pxIterator = pxIterator->pxNext ) /*lint !e826 !e740 !e9087 The mini list structure is used as the list end to save RAM.  This is checked and valid. *//*lint !e440 The iterator moves to a different value, not xValueOfInsertion. */
+        for ( pxIterator = ( ListItem_t * ) &( pxList->xListEnd ); pxIterator->pxNext->xItemValue <= xValueOfInsertion; pxIterator = pxIterator->pxNext ) /*lint !e826 !e740 !e9087 The mini list structure is used as the list end to save RAM.  This is checked and valid. *//*lint !e440 The iterator moves to a different value, not xValueOfInsertion. */
         {
             /* There is nothing to do here, just iterating to the wanted
              * insertion position. */
@@ -198,7 +204,7 @@ UBaseType_t uxListRemove( ListItem_t * const pxItemToRemove )
     mtCOVERAGE_TEST_DELAY();
 
     /* Make sure the index is left pointing to a valid item. */
-    if( pxList->pxIndex == pxItemToRemove )
+    if ( pxList->pxIndex == pxItemToRemove )
     {
         pxList->pxIndex = pxItemToRemove->pxPrevious;
     }

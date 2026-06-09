@@ -1,14 +1,21 @@
+/**
+ * @file STC32G_RTC.h
+ * @brief Êú™ÊåáÂÆöÊèèËø∞
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCAI.com ---------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* »Áπ˚“™‘⁄≥Ã–Ú÷– π”√¥À¥˙¬Î,«Î‘⁄≥Ã–Ú÷–◊¢√˜ π”√¡ÀSTCµƒ◊ ¡œº∞≥Ã–Ú            */
+/* “™⁄≥ π√¥À¥,⁄≥◊¢ πSTCœº            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_RTC_H
@@ -17,40 +24,40 @@
 #include	"config.h"
 
 //========================================================================
-//                              ∂®“Â…˘√˜
+//                              
 //========================================================================
 
-#define RTC_IRC32KCR		0		//RTC ±÷”‘¥ π”√ƒ⁄≤ø32K ±÷”
-#define RTC_X32KCR			1		//RTC ±÷”‘¥ π”√Õ‚≤ø32Kæß’Ò
+#define RTC_IRC32KCR		0		//RTC ±‘¥ π⁄≤32K ±
+#define RTC_X32KCR			1		//RTC ±‘¥ π‚≤ø32K
 
-//÷–∂œ πƒ‹, 0x80:ƒ÷÷”÷–∂œ, 0x40:»’÷–∂œ, 0x20:–° ±÷–∂œ, 0x10:∑÷÷”÷–∂œ, 0x08:√Î÷–∂œ, 0x04:1/2√Î÷–∂œ, 0x02:1/8√Î÷–∂œ, 0x01:1/32√Î÷–∂œ
-#define RTC_ALARM_INT		0x80		//RTC ƒ÷÷”÷–∂œ
-#define RTC_DAY_INT			0x40		//RTC »’÷–∂œ
-#define RTC_HOUR_INT		0x20		//RTC –° ±÷–∂œ
-#define RTC_MIN_INT			0x10		//RTC ∑÷÷”÷–∂œ
-#define RTC_SEC_INT			0x08		//RTC √Î÷–∂œ
-#define RTC_SEC2_INT		0x04		//RTC 1/2√Î÷–∂œ
-#define RTC_SEC8_INT		0x02		//RTC 1/8√Î÷–∂œ
-#define RTC_SEC32_INT		0x01		//RTC 1/32√Î÷–∂œ
+//–∂ π, 0x80:–∂, 0x40:–∂, 0x20:–° ±–∂, 0x10:–∂, 0x08:–∂, 0x04:1 / –∂, 0x02:1 / –∂, 0x01:1 / 2–∂
+#define RTC_ALARM_INT		0x80		//RTC –∂
+#define RTC_DAY_INT			0x40		//RTC –∂
+#define RTC_HOUR_INT		0x20		//RTC –° ±–∂
+#define RTC_MIN_INT			0x10		//RTC –∂
+#define RTC_SEC_INT			0x08		//RTC –∂
+#define RTC_SEC2_INT		0x04		//RTC 1 / –∂
+#define RTC_SEC8_INT		0x02		//RTC 1 / –∂
+#define RTC_SEC32_INT		0x01		//RTC 1 / 2–∂
 
 typedef struct
 {
-	u8	RTC_Enable;		//RTC  πƒ‹, ENABLE, DISABLE
-	u8	RTC_Clock;		//RTC  ±÷”, RTC_IRC32KCR, RTC_X32KCR
-	u8	RTC_Year;			//RTC ƒÍ, 00~99, ∂‘”¶2000~2099ƒÍ
-	u8	RTC_Month;		//RTC ‘¬, 01~12
-	u8	RTC_Day;			//RTC »’, 01~31
+	u8	RTC_Enable;		//RTC  π, ENABLE, DISABLE
+	u8	RTC_Clock;		//RTC  ±, RTC_IRC32KCR, RTC_X32KCR
+	u8	RTC_Year;			//RTC , 00~99, ”¶2000~2099
+	u8	RTC_Month;		//RTC , 01~12
+	u8	RTC_Day;			//RTC , 01~31
 	u8	RTC_Hour;			//RTC  ±, 00~23
-	u8	RTC_Min;			//RTC ∑÷, 00~59
-	u8	RTC_Sec;			//RTC √Î, 00~59
-	u8	RTC_Ssec;			//RTC 1/128√Î, 00~127
+	u8	RTC_Min;			//RTC , 00~59
+	u8	RTC_Sec;			//RTC , 00~59
+	u8	RTC_Ssec;			//RTC 1 / 28, 00~127
 
-	u8	RTC_ALAHour;	//RTC ƒ÷÷” ±, 00~23
-	u8	RTC_ALAMin;		//RTC ƒ÷÷”∑÷, 00~59
-	u8	RTC_ALASec;		//RTC ƒ÷÷”√Î, 00~59
-	u8	RTC_ALASsec;	//RTC ƒ÷÷”1/128√Î, 00~127
+	u8	RTC_ALAHour;	//RTC  ±, 00~23
+	u8	RTC_ALAMin;		//RTC ”∑, 00~59
+	u8	RTC_ALASec;		//RTC , 00~59
+	u8	RTC_ALASsec;	//RTC 1 / 28, 00~127
 } RTC_InitTypeDef;
 
-u8	RTC_Inilize(RTC_InitTypeDef *RTCx);
+u8	RTC_Inilize( RTC_InitTypeDef *RTCx );
 
 #endif

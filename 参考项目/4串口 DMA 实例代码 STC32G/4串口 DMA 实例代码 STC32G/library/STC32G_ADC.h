@@ -1,14 +1,21 @@
+/**
+ * @file STC32G_ADC.h
+ * @brief Êú™ÊåáÂÆöÊèèËø∞
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCAI.com ---------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* »Áπ˚“™‘⁄≥Ã–Ú÷– π”√¥À¥˙¬Î,«Î‘⁄≥Ã–Ú÷–◊¢√˜ π”√¡ÀSTCµƒ◊ ¡œº∞≥Ã–Ú            */
+/* “™⁄≥ π√¥À¥,⁄≥◊¢ πSTCœº            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_ADC_H
@@ -17,25 +24,25 @@
 #include	"config.h"
 
 //========================================================================
-//                              ADC…Ë÷√
+//                              ADC
 //========================================================================
 
-#define 	ADC_PowerOn(n)			(n==0?(ADC_POWER = 0):(ADC_POWER = 1))	/* ADCµÁ‘¥ø™πÿ */
-#define 	ADC_Justify(n)			(n==0?(RESFMT = 0):(RESFMT = 1))				/* ADC◊™ªªΩ·π˚∏Ò Ωøÿ÷∆, ◊Û∂‘∆Î/”“∂‘∆Î */
+#define 	ADC_PowerOn( n )			( n == ?( ADC_POWER = 0 ):( ADC_POWER = 1 ))	/* ADC‘¥ */
+#define 	ADC_Justify( n )			( n == ?( RESFMT = 0 ):( RESFMT = 1 ))				/* ADC◊™ Ω, /“∂ */
 
 //========================================================================
-//                              ∂®“Â…˘√˜
+//                              
 //========================================================================
 
-#define	ADC_P10		0x01	//IO“˝Ω≈ Px.0
-#define	ADC_P11		0x02	//IO“˝Ω≈ Px.1
-#define	ADC_P12		0x04	//IO“˝Ω≈ Px.2
-#define	ADC_P13		0x08	//IO“˝Ω≈ Px.3
-#define	ADC_P14		0x10	//IO“˝Ω≈ Px.4
-#define	ADC_P15		0x20	//IO“˝Ω≈ Px.5
-#define	ADC_P16		0x40	//IO“˝Ω≈ Px.6
-#define	ADC_P17		0x80	//IO“˝Ω≈ Px.7
-#define	ADC_P1_All	0xFF	//IOÀ˘”–“˝Ω≈
+#define	ADC_P10		0x01	//IO Px.0
+#define	ADC_P11		0x02	//IO Px.1
+#define	ADC_P12		0x04	//IO Px.2
+#define	ADC_P13		0x08	//IO Px.3
+#define	ADC_P14		0x10	//IO Px.4
+#define	ADC_P15		0x20	//IO Px.5
+#define	ADC_P16		0x40	//IO Px.6
+#define	ADC_P17		0x80	//IO Px.7
+#define	ADC_P1_All	0xFF	//IO
 
 #define ADC_CH0		0
 #define ADC_CH1		1
@@ -54,38 +61,37 @@
 #define ADC_CH14	14
 #define ADC_CH15	15
 
-#define ADC_SPEED_2X1T		0			//SYSclk/2/1
-#define ADC_SPEED_2X2T		1			//SYSclk/2/2
-#define ADC_SPEED_2X3T		2			//SYSclk/2/3
-#define ADC_SPEED_2X4T		3			//SYSclk/2/4
-#define ADC_SPEED_2X5T		4			//SYSclk/2/5
-#define ADC_SPEED_2X6T		5			//SYSclk/2/6
-#define ADC_SPEED_2X7T		6			//SYSclk/2/7
-#define ADC_SPEED_2X8T		7			//SYSclk/2/8
-#define ADC_SPEED_2X9T		8			//SYSclk/2/9
-#define ADC_SPEED_2X10T		9			//SYSclk/2/10
-#define ADC_SPEED_2X11T		10		//SYSclk/2/11
-#define ADC_SPEED_2X12T		11		//SYSclk/2/12
-#define ADC_SPEED_2X13T		12		//SYSclk/2/13
-#define ADC_SPEED_2X14T		13		//SYSclk/2/14
-#define ADC_SPEED_2X15T		14		//SYSclk/2/15
-#define ADC_SPEED_2X16T		15		//SYSclk/2/16
+#define ADC_SPEED_2X1T		0			//SYSclk / /1
+#define ADC_SPEED_2X2T		1			//SYSclk / /2
+#define ADC_SPEED_2X3T		2			//SYSclk / /3
+#define ADC_SPEED_2X4T		3			//SYSclk / /4
+#define ADC_SPEED_2X5T		4			//SYSclk / /5
+#define ADC_SPEED_2X6T		5			//SYSclk / /6
+#define ADC_SPEED_2X7T		6			//SYSclk / /7
+#define ADC_SPEED_2X8T		7			//SYSclk / /8
+#define ADC_SPEED_2X9T		8			//SYSclk / /9
+#define ADC_SPEED_2X10T		9			//SYSclk / /10
+#define ADC_SPEED_2X11T		10		//SYSclk / /11
+#define ADC_SPEED_2X12T		11		//SYSclk / /12
+#define ADC_SPEED_2X13T		12		//SYSclk / /13
+#define ADC_SPEED_2X14T		13		//SYSclk / /14
+#define ADC_SPEED_2X15T		14		//SYSclk / /15
+#define ADC_SPEED_2X16T		15		//SYSclk / /16
 
-#define ADC_LEFT_JUSTIFIED		0		//ADC Result left-justified
-#define ADC_RIGHT_JUSTIFIED		1		//ADC Result right-justified
-
+#define ADC_LEFT_JUSTIFIED		0		//ADC Result left - ustified
+#define ADC_RIGHT_JUSTIFIED		1		//ADC Result right - ustified
 
 typedef struct
 {
-	u8	ADC_SMPduty;		//ADC ƒ£ƒ‚–≈∫≈≤…—˘ ±º‰øÿ÷∆, 0~31£®◊¢“‚£∫ SMPDUTY “ª∂®≤ªƒ‹…Ë÷√–°”⁄ 10£©
-	u8	ADC_Speed;			//…Ë÷√ ADC π§◊˜ ±÷”∆µ¬ 	ADC_SPEED_2X1T~ADC_SPEED_2X16T
-	u8	ADC_AdjResult;	//ADCΩ·π˚µ˜’˚,	ADC_LEFT_JUSTIFIED,ADC_RIGHT_JUSTIFIED
-	u8	ADC_CsSetup;		//ADC Õ®µ¿—°‘Ò ±º‰øÿ÷∆ 0(ƒ¨»œ),1
-	u8	ADC_CsHold;			//ADC Õ®µ¿—°‘Ò±£≥÷ ±º‰øÿ÷∆ 0,1(ƒ¨»œ),2,3
+	u8	ADC_SMPduty;		//ADC ƒ£≈∫≈≤ ±, 0~31◊¢‚£∫ SMPDUTY “ª–° 10
+	u8	ADC_Speed;			// ADC  ±∆µ	ADC_SPEED_2X1T~ADC_SPEED_2X16T
+	u8	ADC_AdjResult;	//ADC,	ADC_LEFT_JUSTIFIED, ADC_RIGHT_JUSTIFIED
+	u8	ADC_CsSetup;		//ADC Õ®—° ± 0(ƒ¨), 1
+	u8	ADC_CsHold;			//ADC Õ®—°Ò±£≥ ± 0, 1(ƒ¨), 2, 3
 } ADC_InitTypeDef;
 
-u8		ADC_Inilize(ADC_InitTypeDef *ADCx);
-void	ADC_PowerControl(u8 pwr);
-u16		Get_ADCResult(u8 channel);	//channel = 0~15
+u8		ADC_Inilize( ADC_InitTypeDef *ADCx );
+void	ADC_PowerControl( u8 pwr );
+u16		Get_ADCResult( u8 channel );	//channel = 0~15
 
 #endif

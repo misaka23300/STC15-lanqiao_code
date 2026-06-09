@@ -1,3 +1,10 @@
+/**
+ * @file sys.c
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "sys.h"
 
 void Sys_Init(){
@@ -7,24 +14,23 @@ void Sys_Init(){
 	P0 = 0xff;Y7;Y0;
 }
 
-void Delay(u16 xms)		//@12.000MHz
+void Delay( u16 xms )		//@12.000MHz
 {
 	unsigned char i, j;
-	while(xms--){
+	while ( xms--){
 		i = 12;
 		j = 169;
 		do
 		{
-			while (--j);
-		} while (--i);	
+			while (--j );
+		} while (--i );	
 	}
 	
 }
 
 	
 
-
-void Timer0Init(void)		//1毫秒@12.000MHz
+void Timer0Init( void )		//1毫秒@12.000MHz
 {
 	AUXR &= 0x7F;		//定时器时钟12T模式
 	TMOD &= 0xF0;		//设置定时器模式

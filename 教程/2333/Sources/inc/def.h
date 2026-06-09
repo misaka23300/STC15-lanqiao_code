@@ -1,3 +1,10 @@
+/**
+ * @file def.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #ifndef __DEF_H__
 #define __DEF_H__
 
@@ -70,60 +77,60 @@ typedef signed   long           s32;
 /////////////////////////////////////////////////
 
 #ifndef min
-#define min(a, b)               ((a) < (b) ? (a) : (b))
+#define min( a, b )               (( a ) < ( b ) ? ( a ) : ( b ))
 #endif
 
 #ifndef max
-#define max(a, b)               ((a) > (b) ? (a) : (b))
+#define max( a, b )               (( a ) > ( b ) ? ( a ) : ( b ))
                                 
 #endif
 
 #ifndef LOBYTE
-#define LOBYTE(n)               ((BYTE)(n))
+#define LOBYTE( n )               (( BYTE )( n ))
 #endif
 
 #ifndef HIBYTE
-#define HIBYTE(n)               ((BYTE)(((WORD)(n) >> 8) & 0xff))
+#define HIBYTE( n )               (( BYTE )((( WORD )( n ) >> 8 ) & 0xff ))
 #endif
 
 #ifndef LOWORD
-#define LOWORD(n)               ((WORD)(n))
+#define LOWORD( n )               (( WORD )( n ))
 #endif
 
 #ifndef HIWORD
-#define HIWORD(n)               ((WORD)(((DWORD)(n) >> 16) & 0xffff))
+#define HIWORD( n )               (( WORD )((( DWORD )( n ) >> 16 ) & 0xffff ))
 #endif
 
 #ifndef MAKEWORD
-#define MAKEWORD(l, h)          ((WORD)(((BYTE)(l)) | ((WORD)((BYTE)(h))) << 8))
+#define MAKEWORD( l, h )          (( WORD )((( BYTE )( l )) | (( WORD )(( BYTE )( h ))) << 8 ))
 #endif
 
 #ifndef MAKELONG
-#define MAKELONG(l, h)          ((DWORD)(((WORD)(l)) | ((DWORD)((WORD)(h))) << 16))
+#define MAKELONG( l, h )          (( DWORD )((( WORD )( l )) | (( DWORD )(( WORD )( h ))) << 16 ))
 #endif
 
 #ifndef BYTE0
-#define BYTE0(n)                LOBYTE(n)
+#define BYTE0( n )                LOBYTE( n )
 #endif
 
 #ifndef BYTE1
-#define BYTE1(n)                HIBYTE(n)
+#define BYTE1( n )                HIBYTE( n )
 #endif
 
 #ifndef BYTE2
-#define BYTE2(n)                LOBYTE(HIWORD(n))
+#define BYTE2( n )                LOBYTE( HIWORD( n ))
 #endif
 
 #ifndef BYTE3
-#define BYTE3(n)                HIBYTE(HIWORD(n))
+#define BYTE3( n )                HIBYTE( HIWORD( n ))
 #endif
 
 #ifndef WORD0
-#define WORD0(n)                LOWORD(n)
+#define WORD0( n )                LOWORD( n )
 #endif
 
 #ifndef WORD2
-#define WORD2(n)                HIWORD(n)
+#define WORD2( n )                HIWORD( n )
 #endif
 
 /////////////////////////////////////////////////
@@ -136,7 +143,7 @@ typedef signed   long           s32;
 #define BIT5                    0x20
 #define BIT6                    0x40
 #define BIT7                    0x80
-#define BIT(b)                  (BIT##b)
+#define BIT( b )                  ( BIT##b )
 
 #define BIT_LN                  0x0f
 #define BIT_HN                  0xf0
@@ -155,18 +162,17 @@ typedef signed   long           s32;
 
 /////////////////////////////////////////////////
 
-#define CLR_REG_BIT(r, b)       ((r) &= ~(b))
-#define SET_REG_BIT(r, b)       ((r) |= (b))
-#define CPL_REG_BIT(r, b)       ((r) ^= (b))
-#define READ_REG_BIT(r, b)      ((r) & (b))
+#define CLR_REG_BIT( r, b )       (( r ) &= ~( b ))
+#define SET_REG_BIT( r, b )       (( r ) |= ( b ))
+#define CPL_REG_BIT( r, b )       (( r ) ^= ( b ))
+#define READ_REG_BIT( r, b )      (( r ) & ( b ))
 
-#define READ_REG(r)             (r)
-#define WRITE_REG(r, v)         ((r) = (v))
-#define CLR_REG(r)              ((r) = 0)
-#define MODIFY_REG(r, clr, set) ((r) = (((r) & ~(clr)) | ((set) & (clr))))
+#define READ_REG( r )             ( r )
+#define WRITE_REG( r, v )         (( r ) = ( v ))
+#define CLR_REG( r )              (( r ) = 0 )
+#define MODIFY_REG( r, clr, set ) (( r ) = ((( r ) & ~( clr )) | (( set ) & ( clr ))))
 
 /////////////////////////////////////////////////
 
 #endif
-
 

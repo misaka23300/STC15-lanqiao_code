@@ -1,16 +1,17 @@
-#include "timer.h"
+/**
+ * @file timer.c
+ * @brief 定时器驱动文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
 
+#include "timer.h"
 
 // timer0 -> freq
 // timer1 -> 1ms
 // timer2 -> uart
 
-
-
-
-
-
-void Timer0Init(void)		//100微秒@12.000MHz
+void Timer0Init( void )		//100微秒@12.000MHz
 {
 	//AUXR &= 0x7F;		//��ʱ��ʱ��12Tģʽ
 	TMOD = 0x05;		//���ö�ʱ��T0Ϊ������ģʽ
@@ -21,7 +22,7 @@ void Timer0Init(void)		//100微秒@12.000MHz
 	ET0 = 1;		//����Ҫ�ж�
 }
 
-void Timer1Init(void)		//1毫秒@12.000MHz
+void Timer1Init( void )		//1毫秒@12.000MHz
 {
 	AUXR |= 0x40;		//定时器时钟1T模式
 	TMOD &= 0x0F;		//设置定时器模式
@@ -31,8 +32,6 @@ void Timer1Init(void)		//1毫秒@12.000MHz
 	TR1 = 1;		//定时器1开始计时
     ET1 = 1;
 }
-
-
 
 void timer()
 {

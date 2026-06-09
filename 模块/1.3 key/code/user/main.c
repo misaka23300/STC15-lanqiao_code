@@ -1,3 +1,10 @@
+/**
+ * @file main.c
+ * @brief 主程序入口文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "main.h"
 
 enum { LED_TIME = 10,
@@ -14,34 +21,34 @@ void main()
     seg_value[0] = 17;
     seg_value[1] = 18;
     seg_value[2] = 19;
-    while (1) {
-        if (led_time == LED_TIME) {
+    while (1 ) {
+        if ( led_time == LED_TIME ) {
             led_time = 0;
             led_display();
         }
 
-        if (key_time == KEY_TIME) {
+        if ( key_time == KEY_TIME ) {
             key_time = 0;
             key_task();
         }
 
-        if (shan_time == SHAN_TIME) {
+        if ( shan_time == SHAN_TIME ) {
             shan_time = 0;
             shan_task();
         }
     }
 }
 
-void Timer2_Isr(void) interrupt 12
+void Timer2_Isr( void ) interrupt 12
 {
     seg_display();
-    if (led_time < LED_TIME) {
+    if ( led_time < LED_TIME ) {
         led_time++;
     }
-    if (key_time < KEY_TIME) {
+    if ( key_time < KEY_TIME ) {
         key_time++;
     }
-    if (shan_time < SHAN_TIME) {
+    if ( shan_time < SHAN_TIME ) {
         shan_time++;
     }
 }
@@ -51,7 +58,7 @@ void key_task()
     static uint8_t key_press;
     key_press = key_scan();
 
-    if (key_press != 99) {
+    if ( key_press != 99 ) {
         seg_value[0] = key_press / 10 % 10;
         seg_value[1] = key_press % 10;
     }
@@ -61,9 +68,9 @@ void shan_task()
 {
     static uint8_t i;
 
-    led_set(7, i);
+    led_set(7, i );
     i++;
-    if (i == 2) {
+    if ( i == 2 ) {
         i = 0;
     }
 }

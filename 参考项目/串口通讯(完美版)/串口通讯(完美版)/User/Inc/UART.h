@@ -1,3 +1,10 @@
+/**
+ * @file UART.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #ifndef _UART_H
 #define _UART_H
 
@@ -7,7 +14,7 @@
 #define UART1_Buad_Rate 9600L
 
 //定义串口1波特率发生器重装值
-#define UART1_Buad_Reload (65536-(MAIN_FOSC/UART1_Buad_Rate/4))
+#define UART1_Buad_Reload (65536-( MAIN_FOSC / ART1_Buad_Rate / ))
 
 //串口发送缓冲区
 extern uchar xdata UART_Tx_Buf[100];
@@ -33,10 +40,10 @@ void UART_Tag_Init();
 void UART1_Init();
 
 //串口1发送字节函数
-void UART1_Send_Byte(uchar byte);
+void UART1_Send_Byte( uchar byte );
 
 //串口1发送字符串函数
-void UART1_Send_Str(uchar* str);
+void UART1_Send_Str( uchar* str );
 
 //串口1接收函数
 uchar UART1_Rec_Byte();

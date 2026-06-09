@@ -1,8 +1,14 @@
+/**
+ * @file main.c
+ * @brief 主程序入口文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "main.h"
 
 extern uchar led[8];
 extern uchar seg[8];
-
 
 // ds1302   -> date
 struct {
@@ -11,7 +17,6 @@ struct {
     uchar init_time[3];
 } date;
 
-
 // 数码管显示数据 -> state
 struct {
     uint time;
@@ -19,13 +24,11 @@ struct {
     uchar only;
 } state;
 
-
 // 数据界面 -> ADC数据
 struct {
     uint light_value;
     uint RB2_value;
 } adc;
-
 
 // 查询界面 -> 数组
 struct {
@@ -33,13 +36,11 @@ struct {
     uchar index;
 } search;
 
-
 // 键盘 -> press time
 struct {
     uchar press;
     uint time;
 } key;
-
 
 enum {
     DATE_TIME = 100,
@@ -58,14 +59,14 @@ void main()
     date.init_time[1] = 59;
     date.init_time[2] = 23;
 
-    write_datetime(date.init_time);
+    write_datetime( date.init_time );
 
     //state_proc();
 
-    while (1)
+    while (1 )
     {
        led[7] = 1;
-        if (date.time == DATE_TIME)
+        if ( date.time == DATE_TIME )
         {
 <<<<<<< HEAD
             //led[2]= 0;
@@ -75,13 +76,13 @@ void main()
             date.time = 0;
         }
 
-        if (state.time == STATE_TIME)
+        if ( state.time == STATE_TIME )
         {
             state_proc();
             state.time = 0;
         }
 
-        if (key.time == KEY_TIME)
+        if ( key.time == KEY_TIME )
         {
             key_proc();
             key.time = 0;
@@ -95,32 +96,29 @@ void Timer1_Isr() interrupt 12
     seg_display();
     led_display();
 
-    if (date.time < DATE_TIME) { date.time++; }
+    if ( date.time < DATE_TIME ) { date.time++; }
 
-    if (state.time < STATE_TIME) { state.time++; }
+    if ( state.time < STATE_TIME ) { state.time++; }
 
-    if (key.time < KEY_TIME) { key.time++; }
-
+    if ( key.time < KEY_TIME ) { key.time++; }
 
 }
-
-
 
 void ds1302_proc()
 {
     led[1] = 1;
-    read_datatime(date.now_time);
+    read_datatime( date.now_time );
     led[1] = 0;
 }
 
 void state_proc()
 {
-    switch (state.mode1)
+    switch ( state.mode1 )
     {
         case 0: 
         {
             // 时间界面
-            if (state.only != 0)
+            if ( state.only != 0 )
             {
                 state.only = 0;
                 seg[2] = 17; seg[5] = 17; 
@@ -140,25 +138,25 @@ void state_proc()
         // 数据界面 P g. g g  U v. v v     g -> 光敏电阻   v -> 旋钮电压 
         /* case 1:
         {
-            if (state.only != 2)
+            if ( state.only != 2 )
             {
                 state.only = 2;
                 seg[0] = 24; seg[4] = 25;
             }
 
             seg[1] = adc.light_value / 100 % 10;
-            seg[2] = (adc.light_value / 10 % 10) + 32;
+            seg[2] = ( adc.light_value / 10 % 10 ) + 32;
             seg[3] = adc.light_value % 10;
             
             seg[5] = adc.RB2_value / 100 % 10;
-            seg[6] = (adc.RB2_value / 10 % 10) + 32;
+            seg[6] = ( adc.RB2_value / 10 % 10 ) + 32;
             seg[7] = adc.RB2_value % 10;
         }
         break;
 
         case 2:
         {
-            if (state.only != 2)
+            if ( state.only != 2 )
             {
                 state.only = 2;
                 seg[0] = 42;
@@ -173,10 +171,9 @@ void state_proc()
 
 void ADC_proc()
 {
-    adc.light_value = ( ADC(0x01) / 255)* 500;
-    adc.RB2_value = ( ADC(0x03) / 255)* 500;
+    adc.light_value = ( ADC(0x01 ) / 255 )* 500;
+    adc.RB2_value = ( ADC(0x03 ) / 255 )* 500;
 }
-
 
 void search_proc()
 {
@@ -187,11 +184,11 @@ void key_proc()
 {
     key.press = key_scan();
 
-    switch (key.press)
+    switch ( key.press )
     {
         case 4:
         {                                      
-            //state.mode1 = (state.mode1 + 1) % 3;
+            //state.mode1 = ( state.mode1 + 1 ) % 3;
         }
         break;
     }

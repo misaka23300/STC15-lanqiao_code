@@ -1,9 +1,16 @@
+/**
+ * @file STC32G_NVIC.c
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCMCU.com --------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
@@ -17,44 +24,44 @@
 //========================================================================
 // 函数: NVIC_Timer0_Init
 // 描述: Timer0嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2020 - 9 - 9
 //========================================================================
-uint8_t NVIC_Timer0_Init(uint8_t State, uint8_t Priority)
+uint8_t NVIC_Timer0_Init( uint8_t State, uint8_t Priority )
 {
-	if(State <= ENABLE) Timer0_Interrupt(State); else  return FAIL;
-	if(Priority <= Priority_3) Timer0_Priority(Priority); else  return FAIL;
+	if ( State <= ENABLE ) Timer0_Interrupt( State ); else  return FAIL;
+	if ( Priority <= Priority_3 ) Timer0_Priority( Priority ); else  return FAIL;
 	return SUCCESS;
 }
 
 //========================================================================
 // 函数: NVIC_Timer1_Init
 // 描述: Timer1嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2020 - 9 - 9
 //========================================================================
-uint8_t NVIC_Timer1_Init(uint8_t State, uint8_t Priority)
+uint8_t NVIC_Timer1_Init( uint8_t State, uint8_t Priority )
 {
-	if(State <= ENABLE) Timer1_Interrupt(State); else  return FAIL;
-	if(Priority <= Priority_3) Timer1_Priority(Priority); else  return FAIL;
+	if ( State <= ENABLE ) Timer1_Interrupt( State ); else  return FAIL;
+	if ( Priority <= Priority_3 ) Timer1_Priority( Priority ); else  return FAIL;
 	return SUCCESS;
 }
 
 //========================================================================
 // 函数: NVIC_Timer2_Init
 // 描述: Timer2嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
 // 参数: Priority: 中断优先级, 0.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2020 - 9 - 9
 //========================================================================
-uint8_t NVIC_Timer2_Init(uint8_t State, uint8_t Priority)
+uint8_t NVIC_Timer2_Init( uint8_t State, uint8_t Priority )
 {
-	if(State <= ENABLE) Timer2_Interrupt(State); else  return FAIL;
+	if ( State <= ENABLE ) Timer2_Interrupt( State ); else  return FAIL;
 	Priority = 0;
 	return SUCCESS;
 }
@@ -62,14 +69,14 @@ uint8_t NVIC_Timer2_Init(uint8_t State, uint8_t Priority)
 //========================================================================
 // 函数: NVIC_Timer3_Init
 // 描述: Timer3嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
 // 参数: Priority: 中断优先级, 0.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2020 - 9 - 9
 //========================================================================
-uint8_t NVIC_Timer3_Init(uint8_t State, uint8_t Priority)
+uint8_t NVIC_Timer3_Init( uint8_t State, uint8_t Priority )
 {
-	if(State <= ENABLE) Timer3_Interrupt(State); else  return FAIL;
+	if ( State <= ENABLE ) Timer3_Interrupt( State ); else  return FAIL;
 	Priority = 0;
 	return SUCCESS;
 }
@@ -77,14 +84,14 @@ uint8_t NVIC_Timer3_Init(uint8_t State, uint8_t Priority)
 //========================================================================
 // 函数: NVIC_Timer4_Init
 // 描述: Timer4嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
 // 参数: Priority: 中断优先级, NULL.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2020 - 9 - 9
 //========================================================================
-uint8_t NVIC_Timer4_Init(uint8_t State, uint8_t Priority)
+uint8_t NVIC_Timer4_Init( uint8_t State, uint8_t Priority )
 {
-	if(State <= ENABLE) Timer4_Interrupt(State); else  return FAIL;
+	if ( State <= ENABLE ) Timer4_Interrupt( State ); else  return FAIL;
 	Priority = 0;
 	return SUCCESS;
 }
@@ -92,44 +99,44 @@ uint8_t NVIC_Timer4_Init(uint8_t State, uint8_t Priority)
 //========================================================================
 // 函数: NVIC_INT0_Init
 // 描述: INT0嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2020 - 9 - 9
 //========================================================================
-uint8_t NVIC_INT0_Init(uint8_t State, uint8_t Priority)
+uint8_t NVIC_INT0_Init( uint8_t State, uint8_t Priority )
 {
-	if(State <= ENABLE) INT0_Interrupt(State); else  return FAIL;
-	if(Priority <= Priority_3) INT0_Priority(Priority); else  return FAIL;
+	if ( State <= ENABLE ) INT0_Interrupt( State ); else  return FAIL;
+	if ( Priority <= Priority_3 ) INT0_Priority( Priority ); else  return FAIL;
 	return SUCCESS;
 }
 
 //========================================================================
 // 函数: NVIC_INT1_Init
 // 描述: INT1嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2020 - 9 - 9
 //========================================================================
-uint8_t NVIC_INT1_Init(uint8_t State, uint8_t Priority)
+uint8_t NVIC_INT1_Init( uint8_t State, uint8_t Priority )
 {
-	if(State <= ENABLE) INT1_Interrupt(State); else  return FAIL;
-	if(Priority <= Priority_3) INT1_Priority(Priority); else  return FAIL;
+	if ( State <= ENABLE ) INT1_Interrupt( State ); else  return FAIL;
+	if ( Priority <= Priority_3 ) INT1_Priority( Priority ); else  return FAIL;
 	return SUCCESS;
 }
 
 //========================================================================
 // 函数: NVIC_INT2_Init
 // 描述: INT2嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
 // 参数: Priority: 中断优先级, 0.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2020 - 9 - 9
 //========================================================================
-uint8_t NVIC_INT2_Init(uint8_t State, uint8_t Priority)
+uint8_t NVIC_INT2_Init( uint8_t State, uint8_t Priority )
 {
-	if(State <= ENABLE) INT2_Interrupt(State); else  return FAIL;
+	if ( State <= ENABLE ) INT2_Interrupt( State ); else  return FAIL;
 	Priority = 0;
 	return SUCCESS;
 }
@@ -137,14 +144,14 @@ uint8_t NVIC_INT2_Init(uint8_t State, uint8_t Priority)
 //========================================================================
 // 函数: NVIC_INT3_Init
 // 描述: INT3嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
 // 参数: Priority: 中断优先级, 0.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2020 - 9 - 9
 //========================================================================
-uint8_t NVIC_INT3_Init(uint8_t State, uint8_t Priority)
+uint8_t NVIC_INT3_Init( uint8_t State, uint8_t Priority )
 {
-	if(State <= ENABLE) INT3_Interrupt(State); else  return FAIL;
+	if ( State <= ENABLE ) INT3_Interrupt( State ); else  return FAIL;
 	Priority = 0;
 	return SUCCESS;
 }
@@ -152,14 +159,14 @@ uint8_t NVIC_INT3_Init(uint8_t State, uint8_t Priority)
 //========================================================================
 // 函数: NVIC_INT4_Init
 // 描述: INT4嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
 // 参数: Priority: 中断优先级, 0.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2020 - 9 - 9
 //========================================================================
-uint8_t NVIC_INT4_Init(uint8_t State, uint8_t Priority)
+uint8_t NVIC_INT4_Init( uint8_t State, uint8_t Priority )
 {
-	if(State <= ENABLE) INT4_Interrupt(State); else  return FAIL;
+	if ( State <= ENABLE ) INT4_Interrupt( State ); else  return FAIL;
 	Priority = 0;
 	return SUCCESS;
 }
@@ -167,174 +174,174 @@ uint8_t NVIC_INT4_Init(uint8_t State, uint8_t Priority)
 //========================================================================
 // 函数: NVIC_ADC_Init
 // 描述: ADC嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2020 - 9 - 9
 //========================================================================
-uint8_t NVIC_ADC_Init(uint8_t State, uint8_t Priority)
+uint8_t NVIC_ADC_Init( uint8_t State, uint8_t Priority )
 {
-	if(State <= ENABLE) ADC_Interrupt(State); else  return FAIL;
-	if(Priority <= Priority_3) ADC_Priority(Priority); else  return FAIL;
+	if ( State <= ENABLE ) ADC_Interrupt( State ); else  return FAIL;
+	if ( Priority <= Priority_3 ) ADC_Priority( Priority ); else  return FAIL;
 	return SUCCESS;
 }
 
 //========================================================================
 // 函数: NVIC_CMP_Init
 // 描述: 比较器嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, RISING_EDGE/FALLING_EDGE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 参数: State:    中断使能状态, RISING_EDGE / ALLING_EDGE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2020 - 9 - 9
 //========================================================================
-uint8_t NVIC_CMP_Init(uint8_t State, uint8_t Priority)
+uint8_t NVIC_CMP_Init( uint8_t State, uint8_t Priority )
 {
-	if(State & RISING_EDGE)	PIE = 1;			//允许上升沿中断
+	if ( State & RISING_EDGE )	PIE = 1;			//允许上升沿中断
 	else	PIE = 0;			//禁止上升沿中断
-	if(State & FALLING_EDGE)	NIE = 1;		//允许下降沿中断
+	if ( State & FALLING_EDGE )	NIE = 1;		//允许下降沿中断
 	else	NIE = 0;			//禁止上升沿中断
-	if(Priority <= Priority_3) CMP_Priority(Priority); else  return FAIL;
+	if ( Priority <= Priority_3 ) CMP_Priority( Priority ); else  return FAIL;
 	return SUCCESS;
 }
 
 //========================================================================
 // 函数: NVIC_I2C_Init
 // 描述: I2C嵌套向量中断控制器初始化.
-// 参数: Mode:     模式, I2C_Mode_Master/I2C_Mode_Slave.
-// 参数: State:    中断使能状态, I2C_Mode_Master: ENABLE/DISABLE.
-//                              I2C_Mode_Slave: I2C_ESTAI/I2C_ERXI/I2C_ETXI/I2C_ESTOI/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 参数: Mode:     模式, I2C_Mode_Master / 2C_Mode_Slave.
+// 参数: State:    中断使能状态, I2C_Mode_Master: ENABLE / ISABLE.
+//                              I2C_Mode_Slave: I2C_ESTAI / 2C_ERXI / 2C_ETXI / 2C_ESTOI / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2020 - 9 - 9
 //========================================================================
-uint8_t NVIC_I2C_Init(uint8_t Mode, uint8_t State, uint8_t Priority)
+uint8_t NVIC_I2C_Init( uint8_t Mode, uint8_t State, uint8_t Priority )
 {
-	if(Mode > 1) return FAIL;
-	if(Mode == 1)	//I2C_Mode_Master
+	if ( Mode > 1 ) return FAIL;
+	if ( Mode == 1 )	//I2C_Mode_Master
 	{
-		I2C_Master_Inturrupt(State);
+		I2C_Master_Inturrupt( State );
 	}
-	else if(Mode == 0)	//I2C_Mode_Slave
+	else if ( Mode == 0 )	//I2C_Mode_Slave
 	{
-		I2CSLCR = (I2CSLCR & ~0x78) | State;
+		I2CSLCR = ( I2CSLCR & ~0x78 ) | State;
 	}
-	if(Priority <= Priority_3) CMP_Priority(Priority); else  return FAIL;
+	if ( Priority <= Priority_3 ) CMP_Priority( Priority ); else  return FAIL;
 	return SUCCESS;
 }
 
 //========================================================================
 // 函数: NVIC_UART1_Init
 // 描述: UART1嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2020 - 9 - 9
 //========================================================================
-uint8_t NVIC_UART1_Init(uint8_t State, uint8_t Priority)
+uint8_t NVIC_UART1_Init( uint8_t State, uint8_t Priority )
 {
-	if(State <= ENABLE) UART1_Interrupt(State); else  return FAIL;
-	if(Priority <= Priority_3) UART1_Priority(Priority); else  return FAIL;
+	if ( State <= ENABLE ) UART1_Interrupt( State ); else  return FAIL;
+	if ( Priority <= Priority_3 ) UART1_Priority( Priority ); else  return FAIL;
 	return SUCCESS;
 }
 
 //========================================================================
 // 函数: NVIC_UART2_Init
 // 描述: UART2嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2020 - 9 - 9
 //========================================================================
-uint8_t NVIC_UART2_Init(uint8_t State, uint8_t Priority)
+uint8_t NVIC_UART2_Init( uint8_t State, uint8_t Priority )
 {
-	if(State <= ENABLE) UART2_Interrupt(State); else  return FAIL;
-	if(Priority <= Priority_3) UART2_Priority(Priority); else  return FAIL;
+	if ( State <= ENABLE ) UART2_Interrupt( State ); else  return FAIL;
+	if ( Priority <= Priority_3 ) UART2_Priority( Priority ); else  return FAIL;
 	return SUCCESS;
 }
 
 //========================================================================
 // 函数: NVIC_UART3_Init
 // 描述: UART3嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2020 - 9 - 9
 //========================================================================
-uint8_t NVIC_UART3_Init(uint8_t State, uint8_t Priority)
+uint8_t NVIC_UART3_Init( uint8_t State, uint8_t Priority )
 {
-	if(State <= ENABLE) UART3_Interrupt(State); else  return FAIL;
-	if(Priority <= Priority_3) UART3_Priority(Priority); else  return FAIL;
+	if ( State <= ENABLE ) UART3_Interrupt( State ); else  return FAIL;
+	if ( Priority <= Priority_3 ) UART3_Priority( Priority ); else  return FAIL;
 	return SUCCESS;
 }
 
 //========================================================================
 // 函数: NVIC_UART4_Init
 // 描述: UART4嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2020 - 9 - 9
 //========================================================================
-uint8_t NVIC_UART4_Init(uint8_t State, uint8_t Priority)
+uint8_t NVIC_UART4_Init( uint8_t State, uint8_t Priority )
 {
-	if(State <= ENABLE) UART4_Interrupt(State); else  return FAIL;
-	if(Priority <= Priority_3) UART4_Priority(Priority); else  return FAIL;
+	if ( State <= ENABLE ) UART4_Interrupt( State ); else  return FAIL;
+	if ( Priority <= Priority_3 ) UART4_Priority( Priority ); else  return FAIL;
 	return SUCCESS;
 }
 
 //========================================================================
 // 函数: NVIC_SPI_Init
 // 描述: SPI嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2020 - 9 - 9
 //========================================================================
-uint8_t NVIC_SPI_Init(uint8_t State, uint8_t Priority)
+uint8_t NVIC_SPI_Init( uint8_t State, uint8_t Priority )
 {
-	if(State <= ENABLE) SPI_Interrupt(State); else  return FAIL;
-	if(Priority <= Priority_3) SPI_Priority(Priority); else  return FAIL;
+	if ( State <= ENABLE ) SPI_Interrupt( State ); else  return FAIL;
+	if ( Priority <= Priority_3 ) SPI_Priority( Priority ); else  return FAIL;
 	return SUCCESS;
 }
 
 //========================================================================
 // 函数: NVIC_RTC_Init
 // 描述: SPI嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, 中断使能, 0x80:闹钟中断, 0x40:日中断, 0x20:小时中断, 0x10:分钟中断, 0x08:秒中断, 0x04:1/2秒中断, 0x02:1/8秒中断, 0x01:1/32秒中断 /DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 参数: State:    中断使能状态, 中断使能, 0x80:闹钟中断, 0x40:日中断, 0x20:小时中断, 0x10:分钟中断, 0x08:秒中断, 0x04:1 / 秒中断, 0x02:1 / 秒中断, 0x01:1 / 2秒中断 /DISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2020 - 9 - 9
 //========================================================================
-uint8_t NVIC_RTC_Init(uint8_t State, uint8_t Priority)
+uint8_t NVIC_RTC_Init( uint8_t State, uint8_t Priority )
 {
-	if(Priority <= Priority_3) RTC_Priority(Priority); else  return FAIL;
-	RTC_Interrupt(State); 
+	if ( Priority <= Priority_3 ) RTC_Priority( Priority ); else  return FAIL;
+	RTC_Interrupt( State ); 
 	return SUCCESS;
 }
 
 //========================================================================
 // 函数: NVIC_PWM_Init
 // 描述: PWM嵌套向量中断控制器初始化.
-// 参数: Channel:  通道, PWMA/PWMB.
-// 参数: State:    中断使能状态, PWM_BIE/PWM_TIE/PWM_COMIE/PWM_CC8IE~PWM_CC1IE/PWM_UIE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 参数: Channel:  通道, PWMA / WMB.
+// 参数: State:    中断使能状态, PWM_BIE / WM_TIE / WM_COMIE / WM_CC8IE~PWM_CC1IE / WM_UIE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2020 - 9 - 9
 //========================================================================
-uint8_t NVIC_PWM_Init(uint8_t Channel, uint8_t State, uint8_t Priority)
+uint8_t NVIC_PWM_Init( uint8_t Channel, uint8_t State, uint8_t Priority )
 {
-	if(Channel > PWMB) return FAIL;
-	if(Priority > Priority_3) return FAIL;
-	switch(Channel)
+	if ( Channel > PWMB ) return FAIL;
+	if ( Priority > Priority_3 ) return FAIL;
+	switch( Channel )
 	{
 		case PWMA:
 			PWMA_IER = State;
-			PWMA_Priority(Priority);
+			PWMA_Priority( Priority );
 		break;
 
 		case PWMB:
 			PWMB_IER = State;
-			PWMB_Priority(Priority);
+			PWMB_Priority( Priority );
 		break;
 
 		default:
@@ -348,18 +355,18 @@ uint8_t NVIC_PWM_Init(uint8_t Channel, uint8_t State, uint8_t Priority)
 //========================================================================
 // 函数: NVIC_DMA_ADC_Init
 // 描述: DMA ADC嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2021-05-21
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 参数: Bus_Priority: 数据总线访问优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2021 - 5 - 1
 //========================================================================
-uint8_t NVIC_DMA_ADC_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Priority)
+uint8_t NVIC_DMA_ADC_Init( uint8_t State, uint8_t Priority, uint8_t Bus_Priority )
 {
 	DMA_ADC_CFG &= ~0x0f;
-	if(Priority <= Priority_3) DMA_ADC_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_ADC_CFG |= Bus_Priority;	//数据总线访问优先级
-	if(State == ENABLE)
+	if ( Priority <= Priority_3 ) DMA_ADC_CFG |= Priority << 2;
+	if ( Bus_Priority <= Priority_3 ) DMA_ADC_CFG |= Bus_Priority;	//数据总线访问优先级
+	if ( State == ENABLE )
 		DMA_ADC_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
 		DMA_ADC_CFG &= ~0x80;		//bit7 0:Disable Interrupt
@@ -369,18 +376,18 @@ uint8_t NVIC_DMA_ADC_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Priority)
 //========================================================================
 // 函数: NVIC_DMA_M2M_Init
 // 描述: DMA M2M嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2021-05-21
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 参数: Bus_Priority: 数据总线访问优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2021 - 5 - 1
 //========================================================================
-uint8_t NVIC_DMA_M2M_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Priority)
+uint8_t NVIC_DMA_M2M_Init( uint8_t State, uint8_t Priority, uint8_t Bus_Priority )
 {
 	DMA_M2M_CFG &= ~0x0f;
-	if(Priority <= Priority_3) DMA_M2M_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_M2M_CFG |= Bus_Priority;	//数据总线访问优先级
-	if(State == ENABLE)
+	if ( Priority <= Priority_3 ) DMA_M2M_CFG |= Priority << 2;
+	if ( Bus_Priority <= Priority_3 ) DMA_M2M_CFG |= Bus_Priority;	//数据总线访问优先级
+	if ( State == ENABLE )
 		DMA_M2M_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
 		DMA_M2M_CFG &= ~0x80;		//bit7 0:Disable Interrupt
@@ -390,18 +397,18 @@ uint8_t NVIC_DMA_M2M_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Priority)
 //========================================================================
 // 函数: NVIC_DMA_SPI_Init
 // 描述: DMA SPI嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2021-05-27
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 参数: Bus_Priority: 数据总线访问优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2021 - 5 - 7
 //========================================================================
-uint8_t NVIC_DMA_SPI_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Priority)
+uint8_t NVIC_DMA_SPI_Init( uint8_t State, uint8_t Priority, uint8_t Bus_Priority )
 {
 	DMA_SPI_CFG &= ~0x0f;
-	if(Priority <= Priority_3) DMA_SPI_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_SPI_CFG |= Bus_Priority;	//数据总线访问优先级
-	if(State == ENABLE)
+	if ( Priority <= Priority_3 ) DMA_SPI_CFG |= Priority << 2;
+	if ( Bus_Priority <= Priority_3 ) DMA_SPI_CFG |= Bus_Priority;	//数据总线访问优先级
+	if ( State == ENABLE )
 		DMA_SPI_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
 		DMA_SPI_CFG &= ~0x80;		//bit7 0:Disable Interrupt
@@ -411,18 +418,18 @@ uint8_t NVIC_DMA_SPI_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Priority)
 //========================================================================
 // 函数: NVIC_DMA_UART1_Tx_Init
 // 描述: DMA UART1 Tx嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2021-05-21
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 参数: Bus_Priority: 数据总线访问优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2021 - 5 - 1
 //========================================================================
-uint8_t NVIC_DMA_UART1_Tx_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Priority)
+uint8_t NVIC_DMA_UART1_Tx_Init( uint8_t State, uint8_t Priority, uint8_t Bus_Priority )
 {
 	DMA_UR1T_CFG &= ~0x0f;
-	if(Priority <= Priority_3) DMA_UR1T_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_UR1T_CFG |= Bus_Priority;	//数据总线访问优先级
-	if(State == ENABLE)
+	if ( Priority <= Priority_3 ) DMA_UR1T_CFG |= Priority << 2;
+	if ( Bus_Priority <= Priority_3 ) DMA_UR1T_CFG |= Bus_Priority;	//数据总线访问优先级
+	if ( State == ENABLE )
 		DMA_UR1T_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
 		DMA_UR1T_CFG &= ~0x80;	//bit7 0:Disable Interrupt
@@ -432,18 +439,18 @@ uint8_t NVIC_DMA_UART1_Tx_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Prio
 //========================================================================
 // 函数: NVIC_DMA_UART1_Rx_Init
 // 描述: DMA UART1 Rx嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2021-05-21
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 参数: Bus_Priority: 数据总线访问优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2021 - 5 - 1
 //========================================================================
-uint8_t NVIC_DMA_UART1_Rx_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Priority)
+uint8_t NVIC_DMA_UART1_Rx_Init( uint8_t State, uint8_t Priority, uint8_t Bus_Priority )
 {
 	DMA_UR1R_CFG &= ~0x0f;
-	if(Priority <= Priority_3) DMA_UR1R_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_UR1R_CFG |= Bus_Priority;	//数据总线访问优先级
-	if(State == ENABLE)
+	if ( Priority <= Priority_3 ) DMA_UR1R_CFG |= Priority << 2;
+	if ( Bus_Priority <= Priority_3 ) DMA_UR1R_CFG |= Bus_Priority;	//数据总线访问优先级
+	if ( State == ENABLE )
 		DMA_UR1R_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
 		DMA_UR1R_CFG &= ~0x80;	//bit7 0:Disable Interrupt
@@ -453,18 +460,18 @@ uint8_t NVIC_DMA_UART1_Rx_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Prio
 //========================================================================
 // 函数: NVIC_DMA_UART2_Tx_Init
 // 描述: DMA UART2 Tx嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2021-05-21
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 参数: Bus_Priority: 数据总线访问优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2021 - 5 - 1
 //========================================================================
-uint8_t NVIC_DMA_UART2_Tx_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Priority)
+uint8_t NVIC_DMA_UART2_Tx_Init( uint8_t State, uint8_t Priority, uint8_t Bus_Priority )
 {
 	DMA_UR2T_CFG &= ~0x0f;
-	if(Priority <= Priority_3) DMA_UR2T_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_UR2T_CFG |= Bus_Priority;	//数据总线访问优先级
-	if(State == ENABLE)
+	if ( Priority <= Priority_3 ) DMA_UR2T_CFG |= Priority << 2;
+	if ( Bus_Priority <= Priority_3 ) DMA_UR2T_CFG |= Bus_Priority;	//数据总线访问优先级
+	if ( State == ENABLE )
 		DMA_UR2T_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
 		DMA_UR2T_CFG &= ~0x80;	//bit7 0:Disable Interrupt
@@ -474,18 +481,18 @@ uint8_t NVIC_DMA_UART2_Tx_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Prio
 //========================================================================
 // 函数: NVIC_DMA_UART2_Rx_Init
 // 描述: DMA UART2 Rx嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2021-05-21
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 参数: Bus_Priority: 数据总线访问优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2021 - 5 - 1
 //========================================================================
-uint8_t NVIC_DMA_UART2_Rx_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Priority)
+uint8_t NVIC_DMA_UART2_Rx_Init( uint8_t State, uint8_t Priority, uint8_t Bus_Priority )
 {
 	DMA_UR2R_CFG &= ~0x0f;
-	if(Priority <= Priority_3) DMA_UR2R_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_UR2R_CFG |= Bus_Priority;	//数据总线访问优先级
-	if(State == ENABLE)
+	if ( Priority <= Priority_3 ) DMA_UR2R_CFG |= Priority << 2;
+	if ( Bus_Priority <= Priority_3 ) DMA_UR2R_CFG |= Bus_Priority;	//数据总线访问优先级
+	if ( State == ENABLE )
 		DMA_UR2R_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
 		DMA_UR2R_CFG &= ~0x80;	//bit7 0:Disable Interrupt
@@ -495,18 +502,18 @@ uint8_t NVIC_DMA_UART2_Rx_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Prio
 //========================================================================
 // 函数: NVIC_DMA_UART3_Tx_Init
 // 描述: DMA UART3 Tx嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2021-05-21
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 参数: Bus_Priority: 数据总线访问优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2021 - 5 - 1
 //========================================================================
-uint8_t NVIC_DMA_UART3_Tx_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Priority)
+uint8_t NVIC_DMA_UART3_Tx_Init( uint8_t State, uint8_t Priority, uint8_t Bus_Priority )
 {
 	DMA_UR3T_CFG &= ~0x0f;
-	if(Priority <= Priority_3) DMA_UR3T_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_UR3T_CFG |= Bus_Priority;	//数据总线访问优先级
-	if(State == ENABLE)
+	if ( Priority <= Priority_3 ) DMA_UR3T_CFG |= Priority << 2;
+	if ( Bus_Priority <= Priority_3 ) DMA_UR3T_CFG |= Bus_Priority;	//数据总线访问优先级
+	if ( State == ENABLE )
 		DMA_UR3T_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
 		DMA_UR3T_CFG &= ~0x80;	//bit7 0:Disable Interrupt
@@ -516,18 +523,18 @@ uint8_t NVIC_DMA_UART3_Tx_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Prio
 //========================================================================
 // 函数: NVIC_DMA_UART3_Rx_Init
 // 描述: DMA UART3 Rx嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2021-05-21
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 参数: Bus_Priority: 数据总线访问优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2021 - 5 - 1
 //========================================================================
-uint8_t NVIC_DMA_UART3_Rx_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Priority)
+uint8_t NVIC_DMA_UART3_Rx_Init( uint8_t State, uint8_t Priority, uint8_t Bus_Priority )
 {
 	DMA_UR3R_CFG &= ~0x0f;
-	if(Priority <= Priority_3) DMA_UR3R_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_UR3R_CFG |= Bus_Priority;	//数据总线访问优先级
-	if(State == ENABLE)
+	if ( Priority <= Priority_3 ) DMA_UR3R_CFG |= Priority << 2;
+	if ( Bus_Priority <= Priority_3 ) DMA_UR3R_CFG |= Bus_Priority;	//数据总线访问优先级
+	if ( State == ENABLE )
 		DMA_UR3R_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
 		DMA_UR3R_CFG &= ~0x80;	//bit7 0:Disable Interrupt
@@ -537,18 +544,18 @@ uint8_t NVIC_DMA_UART3_Rx_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Prio
 //========================================================================
 // 函数: NVIC_DMA_UART4_Tx_Init
 // 描述: DMA UART4 Tx嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2021-05-21
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 参数: Bus_Priority: 数据总线访问优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2021 - 5 - 1
 //========================================================================
-uint8_t NVIC_DMA_UART4_Tx_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Priority)
+uint8_t NVIC_DMA_UART4_Tx_Init( uint8_t State, uint8_t Priority, uint8_t Bus_Priority )
 {
 	DMA_UR4T_CFG &= ~0x0f;
-	if(Priority <= Priority_3) DMA_UR4T_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_UR4T_CFG |= Bus_Priority;	//数据总线访问优先级
-	if(State == ENABLE)
+	if ( Priority <= Priority_3 ) DMA_UR4T_CFG |= Priority << 2;
+	if ( Bus_Priority <= Priority_3 ) DMA_UR4T_CFG |= Bus_Priority;	//数据总线访问优先级
+	if ( State == ENABLE )
 		DMA_UR4T_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
 		DMA_UR4T_CFG &= ~0x80;	//bit7 0:Disable Interrupt
@@ -558,18 +565,18 @@ uint8_t NVIC_DMA_UART4_Tx_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Prio
 //========================================================================
 // 函数: NVIC_DMA_UART4_Rx_Init
 // 描述: DMA UART4 Rx嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2021-05-21
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 参数: Bus_Priority: 数据总线访问优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2021 - 5 - 1
 //========================================================================
-uint8_t NVIC_DMA_UART4_Rx_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Priority)
+uint8_t NVIC_DMA_UART4_Rx_Init( uint8_t State, uint8_t Priority, uint8_t Bus_Priority )
 {
 	DMA_UR4R_CFG &= ~0x0f;
-	if(Priority <= Priority_3) DMA_UR4R_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_UR4R_CFG |= Bus_Priority;	//数据总线访问优先级
-	if(State == ENABLE)
+	if ( Priority <= Priority_3 ) DMA_UR4R_CFG |= Priority << 2;
+	if ( Bus_Priority <= Priority_3 ) DMA_UR4R_CFG |= Bus_Priority;	//数据总线访问优先级
+	if ( State == ENABLE )
 		DMA_UR4R_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
 		DMA_UR4R_CFG &= ~0x80;	//bit7 0:Disable Interrupt
@@ -579,18 +586,18 @@ uint8_t NVIC_DMA_UART4_Rx_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Prio
 //========================================================================
 // 函数: NVIC_DMA_LCM_Init
 // 描述: DMA LCM嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2021-05-21
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 参数: Bus_Priority: 数据总线访问优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2021 - 5 - 1
 //========================================================================
-uint8_t NVIC_DMA_LCM_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Priority)
+uint8_t NVIC_DMA_LCM_Init( uint8_t State, uint8_t Priority, uint8_t Bus_Priority )
 {
 	DMA_LCM_CFG &= ~0x0f;
-	if(Priority <= Priority_3) DMA_LCM_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_LCM_CFG |= Bus_Priority;	//数据总线访问优先级
-	if(State == ENABLE)
+	if ( Priority <= Priority_3 ) DMA_LCM_CFG |= Priority << 2;
+	if ( Bus_Priority <= Priority_3 ) DMA_LCM_CFG |= Bus_Priority;	//数据总线访问优先级
+	if ( State == ENABLE )
 		DMA_LCM_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
 		DMA_LCM_CFG &= ~0x80;		//bit7 0:Disable Interrupt
@@ -600,16 +607,16 @@ uint8_t NVIC_DMA_LCM_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Priority)
 //========================================================================
 // 函数: NVIC_LCM_Init
 // 描述: LCM嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2021-05-21
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2021 - 5 - 1
 //========================================================================
-uint8_t NVIC_LCM_Init(uint8_t State, uint8_t Priority)
+uint8_t NVIC_LCM_Init( uint8_t State, uint8_t Priority )
 {
 	LCMIFCFG &= ~0x30;
-	if(Priority <= Priority_3) LCMIFCFG |= Priority << 4;
-	if(State == ENABLE)
+	if ( Priority <= Priority_3 ) LCMIFCFG |= Priority << 4;
+	if ( State == ENABLE )
 		LCMIFCFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
 		LCMIFCFG &= ~0x80;		//bit7 0:Disable Interrupt
@@ -619,18 +626,18 @@ uint8_t NVIC_LCM_Init(uint8_t State, uint8_t Priority)
 //========================================================================
 // 函数: NVIC_DMA_I2CT_Init
 // 描述: DMA I2C Tx嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2022-03-25
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 参数: Bus_Priority: 数据总线访问优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2022 - 3 - 5
 //========================================================================
-uint8_t NVIC_DMA_I2CT_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Priority)
+uint8_t NVIC_DMA_I2CT_Init( uint8_t State, uint8_t Priority, uint8_t Bus_Priority )
 {
 	DMA_I2CT_CFG &= ~0x0f;
-	if(Priority <= Priority_3) DMA_I2CT_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_I2CT_CFG |= Bus_Priority;	//数据总线访问优先级
-	if(State == ENABLE)
+	if ( Priority <= Priority_3 ) DMA_I2CT_CFG |= Priority << 2;
+	if ( Bus_Priority <= Priority_3 ) DMA_I2CT_CFG |= Bus_Priority;	//数据总线访问优先级
+	if ( State == ENABLE )
 		DMA_I2CT_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
 		DMA_I2CT_CFG &= ~0x80;	//bit7 0:Disable Interrupt
@@ -640,18 +647,18 @@ uint8_t NVIC_DMA_I2CT_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Priority
 //========================================================================
 // 函数: NVIC_DMA_I2CR_Init
 // 描述: DMA I2C Rx嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2022-03-25
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 参数: Bus_Priority: 数据总线访问优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2022 - 3 - 5
 //========================================================================
-uint8_t NVIC_DMA_I2CR_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Priority)
+uint8_t NVIC_DMA_I2CR_Init( uint8_t State, uint8_t Priority, uint8_t Bus_Priority )
 {
 	DMA_I2CR_CFG &= ~0x0f;
-	if(Priority <= Priority_3) DMA_I2CR_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_I2CR_CFG |= Bus_Priority;	//数据总线访问优先级
-	if(State == ENABLE)
+	if ( Priority <= Priority_3 ) DMA_I2CR_CFG |= Priority << 2;
+	if ( Bus_Priority <= Priority_3 ) DMA_I2CR_CFG |= Bus_Priority;	//数据总线访问优先级
+	if ( State == ENABLE )
 		DMA_I2CR_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
 		DMA_I2CR_CFG &= ~0x80;	//bit7 0:Disable Interrupt
@@ -661,32 +668,32 @@ uint8_t NVIC_DMA_I2CR_Init(uint8_t State, uint8_t Priority, uint8_t Bus_Priority
 //========================================================================
 // 函数: NVIC_CAN_Init
 // 描述: CAN嵌套向量中断控制器初始化.
-// 参数: Channel:  通道, CAN1/CAN2.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2023-03-27
+// 参数: Channel:  通道, CAN1 / AN2.
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2023 - 3 - 7
 //========================================================================
-uint8_t NVIC_CAN_Init(uint8_t Channel, uint8_t State, uint8_t Priority)
+uint8_t NVIC_CAN_Init( uint8_t Channel, uint8_t State, uint8_t Priority )
 {
-	if(Channel > CAN2) return FAIL;
-	if(Priority > Priority_3) return FAIL;
-	switch(Channel)
+	if ( Channel > CAN2 ) return FAIL;
+	if ( Priority > Priority_3 ) return FAIL;
+	switch( Channel )
 	{
 		case CAN1:
-			if(State == ENABLE)
+			if ( State == ENABLE )
 				CANIE = 1;		//bit7 1:Enable Interrupt
 			else
 				CANIE = 0;		//bit7 0:Disable Interrupt
-			CAN1_Priority(Priority);
+			CAN1_Priority( Priority );
 		break;
 
 		case CAN2:
-			if(State == ENABLE)
+			if ( State == ENABLE )
 				CAN2IE = 1;		//bit7 1:Enable Interrupt
 			else
 				CAN2IE = 0;		//bit7 0:Disable Interrupt
-			CAN2_Priority(Priority);
+			CAN2_Priority( Priority );
 		break;
 
 		default:
@@ -699,15 +706,15 @@ uint8_t NVIC_CAN_Init(uint8_t Channel, uint8_t State, uint8_t Priority)
 //========================================================================
 // 函数: NVIC_LIN_Init
 // 描述: LIN嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 参数: State:    中断使能状态, ENABLE / ISABLE.
+// 参数: Priority: 中断优先级, Priority_0, Priority_1, Priority_2, Priority_3.
+// 返回: 执行结果 SUCCESS / AIL.
+// 版本: V1.0, 2020 - 9 - 9
 //========================================================================
-uint8_t NVIC_LIN_Init(uint8_t State, uint8_t Priority)
+uint8_t NVIC_LIN_Init( uint8_t State, uint8_t Priority )
 {
-	if(State <= ENABLE) LIN_Interrupt(State); else  return FAIL;
-	if(Priority <= Priority_3) LIN_Priority(Priority); else  return FAIL;
+	if ( State <= ENABLE ) LIN_Interrupt( State ); else  return FAIL;
+	if ( Priority <= Priority_3 ) LIN_Priority( Priority ); else  return FAIL;
 	return SUCCESS;
 }
 

@@ -1,28 +1,35 @@
+/**
+ * @file STC32G_LIN.c
+ * @brief æœªæŒ‡å®šæè¿°
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCAI.com ---------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* Èç¹ûÒªÔÚ³ÌĞòÖĞÊ¹ÓÃ´Ë´úÂë,ÇëÔÚ³ÌĞòÖĞ×¢Ã÷Ê¹ÓÃÁËSTCµÄ×ÊÁÏ¼°³ÌĞò            */
+/* ÒªÚ³Ê¹Ã´Ë´,Ú³×¢Ê¹STCÏ¼            */
 /*---------------------------------------------------------------------*/
 
 #include "STC32G_LIN.h"
 
 //========================================================================
-// º¯Êı: u8 ReadReg(u8 addr)
-// ÃèÊö: Lin¹¦ÄÜ¼Ä´æÆ÷¶ÁÈ¡º¯Êı¡£
-// ²ÎÊı: Lin¹¦ÄÜ¼Ä´æÆ÷µØÖ·.
-// ·µ»Ø: Lin¹¦ÄÜ¼Ä´æÆ÷Êı¾İ.
-// °æ±¾: VER1.0
-// ÈÕÆÚ: 2021-01-05
-// ±¸×¢: 
+// : u8 ReadReg( u8 addr )
+// : LinÜ¼Ä´È¡
+// : LinÜ¼Ä´Ö·.
+// : LinÜ¼Ä´.
+// æ±¾: VER1.0
+// : 2021 - 1 - 5
+// ×¢: 
 //========================================================================
-u8 LinReadReg(u8 addr)
+u8 LinReadReg( u8 addr )
 {
 	u8 dat;
 	LINAR = addr;
@@ -31,316 +38,316 @@ u8 LinReadReg(u8 addr)
 }
 
 //========================================================================
-// º¯Êı: void WriteReg(u8 addr, u8 dat)
-// ÃèÊö: Lin¹¦ÄÜ¼Ä´æÆ÷ÅäÖÃº¯Êı¡£
-// ²ÎÊı: Lin¹¦ÄÜ¼Ä´æÆ÷µØÖ·, Lin¹¦ÄÜ¼Ä´æÆ÷Êı¾İ.
-// ·µ»Ø: none.
-// °æ±¾: VER1.0
-// ÈÕÆÚ: 2021-01-05
-// ±¸×¢: 
+// : void WriteReg( u8 addr, u8 dat )
+// : LinÜ¼Ä´Ãº
+// : LinÜ¼Ä´Ö·, LinÜ¼Ä´.
+// : none.
+// æ±¾: VER1.0
+// : 2021 - 1 - 5
+// ×¢: 
 //========================================================================
-void LinWriteReg(u8 addr, u8 dat)
+void LinWriteReg( u8 addr, u8 dat )
 {
 	LINAR = addr;
 	LINDR = dat;
 }
 
 //========================================================================
-// º¯Êı: void LinReadMsg(u8 *pdat)
-// ÃèÊö: Lin¶ÁÈ¡Êı¾İº¯Êı¡£
-// ²ÎÊı: *pdat: ½ÓÊÕÊı¾İ»º³åÇø.
-// ·µ»Ø: none.
-// °æ±¾: VER1.0
-// ÈÕÆÚ: 2021-01-05
-// ±¸×¢: 
+// : void LinReadMsg( u8 *pdat )
+// : LinÈ¡İº
+// : *pdat: İ».
+// : none.
+// æ±¾: VER1.0
+// : 2021 - 1 - 5
+// ×¢: 
 //========================================================================
-void LinReadMsg(u8 *pdat)
+void LinReadMsg( u8 *pdat )
 {
 	u8 i;
 
-	LinWriteReg(LSEL,0x80);	//µØÖ·×ÔÔö£¬´Ó0¿ªÊ¼
-	for(i=0;i<FRAME_LEN;i++)
+	LinWriteReg( LSEL, 0x80 );	//Ö·0Ê¼
+	for ( i = ;i < RAME_LEN;i++)
 	{
-		pdat[i] = LinReadReg(LBUF);
+		pdat[i] = LinReadReg( LBUF );
 	}
 }
 
 //========================================================================
-// º¯Êı: void LinSendMsg(u8 *pdat)
-// ÃèÊö: LinÉèÖÃÊı¾İº¯Êı¡£
-// ²ÎÊı: *pdat: ÉèÖÃÊı¾İ»º³åÇø.
-// ·µ»Ø: Lin ID.
-// °æ±¾: VER1.0
-// ÈÕÆÚ: 2021-01-05
-// ±¸×¢: 
+// : void LinSendMsg( u8 *pdat )
+// : Linİº
+// : *pdat: İ».
+// : Lin ID.
+// æ±¾: VER1.0
+// : 2021 - 1 - 5
+// ×¢: 
 //========================================================================
-void LinSendMsg(u8 *pdat)
+void LinSendMsg( u8 *pdat )
 {
 	u8 i;
 
-	LinWriteReg(LSEL,0x80);		//µØÖ·×ÔÔö£¬´Ó0¿ªÊ¼
-	for(i=0;i<FRAME_LEN;i++)
+	LinWriteReg( LSEL, 0x80 );		//Ö·0Ê¼
+	for ( i = ;i < RAME_LEN;i++)
 	{
-		LinWriteReg(LBUF,pdat[i]);
+		LinWriteReg( LBUF, pdat[i]);
 	}
 }
 
 //========================================================================
-// º¯Êı: void LinSetID(u8 lid)
-// ÃèÊö: ÉèÖÃLIN IDº¯Êı¡£
-// ²ÎÊı: none.
-// ·µ»Ø: none.
-// °æ±¾: VER1.0
-// ÈÕÆÚ: 2021-01-05
-// ±¸×¢: 
+// : void LinSetID( u8 lid )
+// : LIN ID
+// : none.
+// : none.
+// æ±¾: VER1.0
+// : 2021 - 1 - 5
+// ×¢: 
 //========================================================================
-void LinSetID(u8 lid)
+void LinSetID( u8 lid )
 {
-	LinWriteReg(LID,lid);			//ÉèÖÃ×ÜÏßID
+	LinWriteReg( LID, lid );			//ID
 }
 
 //========================================================================
-// º¯Êı: u8 GetLinError(void)
-// ÃèÊö: »ñÈ¡LIN×ÜÏß´íÎó¼Ä´æÆ÷×´Ì¬¡£
-// ²ÎÊı: none.
-// ·µ»Ø: ´íÎó¼Ä´æÆ÷×´Ì¬.
-// °æ±¾: VER1.0
-// ÈÕÆÚ: 2021-01-05
-// ±¸×¢: 
+// : u8 GetLinError( void )
+// : È¡LINß´Ä´×´Ì¬
+// : none.
+// : Ä´×´Ì¬.
+// æ±¾: VER1.0
+// : 2021 - 1 - 5
+// ×¢: 
 //========================================================================
-u8 GetLinError(void)
+u8 GetLinError( void )
 {
 	u8 sta;
-	sta = LinReadReg(LER);		//¶ÁÈ¡Çå³ı´íÎó¼Ä´æÆ÷
+	sta = LinReadReg( LER );		//È¡Ä´
 	return sta;
 }
 
 //========================================================================
-// º¯Êı: u8 WaitLinReady(void)
-// ÃèÊö: µÈ´ıLIN×ÜÏß¾ÍĞ÷¡£
-// ²ÎÊı: none.
-// ·µ»Ø: LIN×ÜÏß×´Ì¬.
-// °æ±¾: VER1.0
-// ÈÕÆÚ: 2021-01-05
-// ±¸×¢: 
+// : u8 WaitLinReady( void )
+// : È´LINß¾
+// : none.
+// : LIN×´Ì¬.
+// æ±¾: VER1.0
+// : 2021 - 1 - 5
+// ×¢: 
 //========================================================================
-u8 WaitLinReady(void)
+u8 WaitLinReady( void )
 {
 	u8 lsr;
 	do{
-		lsr = LinReadReg(LSR);
-	}while(!(lsr & 0x02));		//ÅĞ¶Ïready×´Ì¬
+		lsr = LinReadReg( LSR );
+	}while (!( lsr & 0x02 ));		//Ğ¶ready×´Ì¬
 	return lsr;
 }
 
 //========================================================================
-// º¯Êı: void SendAbortCmd(void)
-// ÃèÊö: Ö÷Ä£Ê½·¢ËÍLin×ÜÏßAbortº¯Êı¡£
-// ²ÎÊı: none.
-// ·µ»Ø: none.
-// °æ±¾: VER1.0
-// ÈÕÆÚ: 2021-01-05
-// ±¸×¢: 
+// : void SendAbortCmd( void )
+// : Ä£Ê½LinAbort
+// : none.
+// : none.
+// æ±¾: VER1.0
+// : 2021 - 1 - 5
+// ×¢: 
 //========================================================================
-void SendAbortCmd(void)
+void SendAbortCmd( void )
 {
-	LinWriteReg(LCR,0x80);		//Ö÷Ä£Ê½ Send Abort
+	LinWriteReg( LCR, 0x80 );		//Ä£Ê½ Send Abort
 }
 
 //========================================================================
-// º¯Êı: void SendHeadCmd(void)
-// ÃèÊö: Ö÷Ä£Ê½·¢ËÍLin×ÜÏßHeaderº¯Êı¡£
-// ²ÎÊı: none.
-// ·µ»Ø: none.
-// °æ±¾: VER1.0
-// ÈÕÆÚ: 2021-01-05
-// ±¸×¢: 
+// : void SendHeadCmd( void )
+// : Ä£Ê½LinHeader
+// : none.
+// : none.
+// æ±¾: VER1.0
+// : 2021 - 1 - 5
+// ×¢: 
 //========================================================================
-void SendHeadCmd(void)
+void SendHeadCmd( void )
 {
-	LinWriteReg(LCR,0x81);		//Ö÷Ä£Ê½ Send Header
+	LinWriteReg( LCR, 0x81 );		//Ä£Ê½ Send Header
 }
 
 //========================================================================
-// º¯Êı: void SendDatCmd(void)
-// ÃèÊö: Ö÷Ä£Ê½·¢ËÍLin×ÜÏßÊı¾İº¯Êı¡£
-// ²ÎÊı: none.
-// ·µ»Ø: none.
-// °æ±¾: VER1.0
-// ÈÕÆÚ: 2021-01-05
-// ±¸×¢: 
+// : void SendDatCmd( void )
+// : Ä£Ê½Linİº
+// : none.
+// : none.
+// æ±¾: VER1.0
+// : 2021 - 1 - 5
+// ×¢: 
 //========================================================================
-void SendDatCmd(void)
+void SendDatCmd( void )
 {
 	u8 lcr_val;
-	lcr_val = 0x82+(LIN_MODE<<6)+(FRAME_LEN<<2);
-	LinWriteReg(LCR,lcr_val);
+	lcr_val = 0x82+( LIN_MODE<<6 )+( FRAME_LEN<<2 );
+	LinWriteReg( LCR, lcr_val );
 }
 
 //========================================================================
-// º¯Êı: void ResponseTxCmd(void)
-// ÃèÊö: ´ÓÄ£Ê½·¢ËÍLin×ÜÏßTx Responseº¯Êı¡£
-// ²ÎÊı: none.
-// ·µ»Ø: none.
-// °æ±¾: VER1.0
-// ÈÕÆÚ: 2021-01-05
-// ±¸×¢: 
+// : void ResponseTxCmd( void )
+// : Ä£Ê½LinTx Response
+// : none.
+// : none.
+// æ±¾: VER1.0
+// : 2021 - 1 - 5
+// ×¢: 
 //========================================================================
-void ResponseTxCmd(void)
+void ResponseTxCmd( void )
 {
 	u8 lcr_val;
-	lcr_val = 0x02+(LIN_MODE<<6)+(FRAME_LEN<<2);
-	LinWriteReg(LCR,lcr_val);
+	lcr_val = 0x02+( LIN_MODE<<6 )+( FRAME_LEN<<2 );
+	LinWriteReg( LCR, lcr_val );
 }
 
 //========================================================================
-// º¯Êı: void ResponseRxCmd(void)
-// ÃèÊö: ´ÓÄ£Ê½·¢ËÍLin×ÜÏßRx Responseº¯Êı¡£
-// ²ÎÊı: none.
-// ·µ»Ø: none.
-// °æ±¾: VER1.0
-// ÈÕÆÚ: 2021-01-05
-// ±¸×¢: 
+// : void ResponseRxCmd( void )
+// : Ä£Ê½LinRx Response
+// : none.
+// : none.
+// æ±¾: VER1.0
+// : 2021 - 1 - 5
+// ×¢: 
 //========================================================================
-void ResponseRxCmd(void)
+void ResponseRxCmd( void )
 {
 	u8 lcr_val;
-	lcr_val = 0x03+(LIN_MODE<<6)+(FRAME_LEN<<2);
-	LinWriteReg(LCR,lcr_val);
+	lcr_val = 0x03+( LIN_MODE<<6 )+( FRAME_LEN<<2 );
+	LinWriteReg( LCR, lcr_val );
 }
 
 //========================================================================
-// º¯Êı: void LinTxResponse(u8 *pdat)
-// ÃèÊö: Lin´Ó»ú·¢ËÍÓ¦´ğÊı¾İ£¬¸úÖ÷»ú·¢ËÍµÄHeaderÆ´³ÉÒ»¸öÍêÕûµÄÖ¡¡£
-// ²ÎÊı: *pdat: ·¢ËÍÊı¾İ»º³åÇø.
-// ·µ»Ø: none.
-// °æ±¾: VER1.0
-// ÈÕÆÚ: 2021-01-05
-// ±¸×¢: 
+// : void LinTxResponse( u8 *pdat )
+// : LinÓ»Ó¦İ£ÍµHeaderÆ´Ò»Ö¡
+// : *pdat: İ».
+// : none.
+// æ±¾: VER1.0
+// : 2021 - 1 - 5
+// ×¢: 
 //========================================================================
-void LinTxResponse(u8 *pdat)
+void LinTxResponse( u8 *pdat )
 {
-	LinSendMsg(pdat);
+	LinSendMsg( pdat );
 	ResponseTxCmd();					//TX response
-	WaitLinReady();						//µÈ´ıready×´Ì¬
-	GetLinError();						//¶ÁÈ¡Çå³ı´íÎó¼Ä´æÆ÷
+	WaitLinReady();						//È´ready×´Ì¬
+	GetLinError();						//È¡Ä´
 }
 
 //========================================================================
-// º¯Êı: void LinReadFrame(u8 *pdat)
-// ÃèÊö: Lin´Ó»ú½ÓÊÕÊı¾İÖ¡º¯Êı¡£
-// ²ÎÊı: *pdat: ½ÓÊÕÊı¾İ»º³åÇø.
-// ·µ»Ø: none.
-// °æ±¾: VER1.0
-// ÈÕÆÚ: 2021-01-05
-// ±¸×¢: 
+// : void LinReadFrame( u8 *pdat )
+// : LinÓ»Ö¡
+// : *pdat: İ».
+// : none.
+// æ±¾: VER1.0
+// : 2021 - 1 - 5
+// ×¢: 
 //========================================================================
-void LinReadFrame(u8 *pdat)
+void LinReadFrame( u8 *pdat )
 {
 	ResponseRxCmd();					//RX response
-	WaitLinReady();						//µÈ´ıready×´Ì¬
-	GetLinError();						//¶ÁÈ¡Çå³ı´íÎó¼Ä´æÆ÷
+	WaitLinReady();						//È´ready×´Ì¬
+	GetLinError();						//È¡Ä´
 
-	LinReadMsg(pdat);					//½ÓÊÕLin×ÜÏßÊı¾İ
+	LinReadMsg( pdat );					//Lin
 }
 
 //========================================================================
-// º¯Êı: void LinSendFrame(u8 lid, u8 *pdat)
-// ÃèÊö: LinÖ÷»ú·¢ËÍÍêÕûÖ¡º¯Êı¡£
-// ²ÎÊı: lid: Lin ID; *pdat: ·¢ËÍÊı¾İ»º³åÇø.
-// ·µ»Ø: none.
-// °æ±¾: VER1.0
-// ÈÕÆÚ: 2021-01-05
-// ±¸×¢: 
+// : void LinSendFrame( u8 lid, u8 *pdat )
+// : LinÖ¡
+// : lid: Lin ID; *pdat: İ».
+// : none.
+// æ±¾: VER1.0
+// : 2021 - 1 - 5
+// ×¢: 
 //========================================================================
-void LinSendFrame(u8 lid, u8 *pdat)
+void LinSendFrame( u8 lid, u8 *pdat )
 {
-	LinSetID(lid);						//ÉèÖÃ×ÜÏßID
-	LinSendMsg(pdat);
+	LinSetID( lid );						//ID
+	LinSendMsg( pdat );
 
-	SendHeadCmd();						//Ö÷Ä£Ê½ Send Seader
-	WaitLinReady();						//µÈ´ıready×´Ì¬
-	GetLinError();						//¶ÁÈ¡Çå³ı´íÎó¼Ä´æÆ÷
+	SendHeadCmd();						//Ä£Ê½ Send Seader
+	WaitLinReady();						//È´ready×´Ì¬
+	GetLinError();						//È¡Ä´
 
 	SendDatCmd();							//Send Data
-	WaitLinReady();						//µÈ´ıready×´Ì¬
-	GetLinError();						//¶ÁÈ¡Çå³ı´íÎó¼Ä´æÆ÷
+	WaitLinReady();						//È´ready×´Ì¬
+	GetLinError();						//È¡Ä´
 }
 
 //========================================================================
-// º¯Êı: void LinSendHeaderRead(u8 lid, u8 *pdat)
-// ÃèÊö: LinÖ÷»ú·¢ËÍHeader£¬ÓÉ´Ó»ú·¢ËÍÓ¦´ğÊı¾İ£¬Æ´³ÉÒ»¸öÍêÕûµÄÖ¡¡£
-// ²ÎÊı: lid: ·¢ËÍÓ¦´ğ´Ó»úµÄ×ÜÏßID; *pdat: ½ÓÊÕÊı¾İ»º³åÇø.
-// ·µ»Ø: none.
-// °æ±¾: VER1.0
-// ÈÕÆÚ: 2021-01-05
-// ±¸×¢: 
+// : void LinSendHeaderRead( u8 lid, u8 *pdat )
+// : LinHeaderÉ´Ó»Ó¦İ£Æ´Ò»Ö¡
+// : lid: Ó¦Ó»ID; *pdat: İ».
+// : none.
+// æ±¾: VER1.0
+// : 2021 - 1 - 5
+// ×¢: 
 //========================================================================
-void LinSendHeaderRead(u8 lid, u8 *pdat)
+void LinSendHeaderRead( u8 lid, u8 *pdat )
 {
-	LinSetID(lid);						//ÉèÖÃ·¢ËÍResponse´Ó»ú×ÜÏßID
+	LinSetID( lid );						//Ã·ResponseÓ»ID
 
-	SendHeadCmd();						//Ö÷Ä£Ê½ send header
-	WaitLinReady();						//µÈ´ıready×´Ì¬
-	GetLinError();						//¶ÁÈ¡Çå³ı´íÎó¼Ä´æÆ÷
+	SendHeadCmd();						//Ä£Ê½ send header
+	WaitLinReady();						//È´ready×´Ì¬
+	GetLinError();						//È¡Ä´
 	
 	ResponseRxCmd();					//RX response
-	WaitLinReady();						//µÈ´ıready×´Ì¬
-	GetLinError();						//¶ÁÈ¡Çå³ı´íÎó¼Ä´æÆ÷
+	WaitLinReady();						//È´ready×´Ì¬
+	GetLinError();						//È¡Ä´
 
-	LinReadMsg(pdat);				//½ÓÊÕLin×ÜÏß´Ó»ú·¢ËÍµÄÓ¦´ğÊı¾İ
+	LinReadMsg( pdat );				//Linß´Ó»ÍµÓ¦
 }
 
 //========================================================================
-// º¯Êı: void LinSetBaudrate(u16 brt)
-// ÃèÊö: Lin×ÜÏß²¨ÌØÂÊÉèÖÃº¯Êı¡£
-// ²ÎÊı: brt: ²¨ÌØÂÊ.
-// ·µ»Ø: none.
-// °æ±¾: VER1.0
-// ÈÕÆÚ: 2021-01-05
-// ±¸×¢: 
+// : void LinSetBaudrate( u16 brt )
+// : Linß²Ãº
+// : brt: .
+// : none.
+// æ±¾: VER1.0
+// : 2021 - 1 - 5
+// ×¢: 
 //========================================================================
-void LinSetBaudrate(u16 brt)
+void LinSetBaudrate( u16 brt )
 {
 	u16 tmp;
-	tmp = (MAIN_Fosc >> 4) / brt;
-	LinWriteReg(DLH,(u8)(tmp>>8));
-	LinWriteReg(DLL,(u8)tmp);
+	tmp = ( MAIN_Fosc >> 4 ) / brt;
+	LinWriteReg( DLH,( u8 )( tmp>>8 ));
+	LinWriteReg( DLL,( u8 )tmp );
 }
 
 //========================================================================
-// º¯Êı: void LinSetHeadDelay(u8 base_ms, u8 prescaler)
-// ÃèÊö: Lin×ÜÏßÉèÖÃÖ¡Í·ÑÓÊ±º¯Êı¡£
-// ²ÎÊı: base_ms:ÑÓÊ±¼ÆÊı, prescaler:ÑÓÊ±·ÖÆµ.
-// ·µ»Ø: none.
-// °æ±¾: VER1.0
-// ÈÕÆÚ: 2021-01-05
-// ±¸×¢: 
+// : void LinSetHeadDelay( u8 base_ms, u8 prescaler )
+// : LinÖ¡Í·Ê±
+// : base_ms:Ê±, prescaler:Ê±Æµ.
+// : none.
+// æ±¾: VER1.0
+// : 2021 - 1 - 5
+// ×¢: 
 //========================================================================
-void LinSetHeadDelay(u8 base_ms, u8 prescaler)
+void LinSetHeadDelay( u8 base_ms, u8 prescaler )
 {
 	u16 tmp;
-	tmp = (MAIN_Fosc * base_ms) / 1000;
-	LinWriteReg(HDRH,(u8)(tmp>>8));
-	LinWriteReg(HDRL,(u8)tmp);		//ÉèÖÃÖ¡Í·ÑÓÊ±¼ÆÊı
+	tmp = ( MAIN_Fosc * base_ms ) / 1000;
+	LinWriteReg( HDRH,( u8 )( tmp>>8 ));
+	LinWriteReg( HDRL,( u8 )tmp );		//Ö¡Í·Ê±
 
-	LinWriteReg(HDP,prescaler);		//ÉèÖÃÖ¡Í·ÑÓÊ±·ÖÆµ
+	LinWriteReg( HDP, prescaler );		//Ö¡Í·Ê±Æµ
 }
 
 //========================================================================
-// º¯Êı: void LIN_Inilize(LIN_InitTypeDef *LIN)
-// ÃèÊö: LIN ³õÊ¼»¯³ÌĞò.
-// ²ÎÊı: LIN: ½á¹¹²ÎÊı,Çë²Î¿¼LIN.hÀïµÄ¶¨Òå.
-// ·µ»Ø: none.
-// °æ±¾: V1.0, 2021-06-02
+// : void LIN_Inilize( LIN_InitTypeDef *LIN )
+// : LIN Ê¼.
+// : LIN: á¹¹,Î¿LIN.hÄ¶.
+// : none.
+// æ±¾: V1.0, 2021 - 6 - 2
 //========================================================================
-void LIN_Inilize(LIN_InitTypeDef *LIN)
+void LIN_Inilize( LIN_InitTypeDef *LIN )
 {
-	if(LIN->LIN_Enable == ENABLE)	LINEN = 1;		//Ê¹ÄÜLINÄ£¿é
-	else								LINEN = 0;		//¹Ø±ÕLINÄ£¿é
+	if ( LIN->LIN_Enable == ENABLE )	LINEN = 1;		//Ê¹LINÄ£
+	else								LINEN = 0;		//Ø±LINÄ£
 
-	GetLinError();						//¶ÁÈ¡Çå³ı´íÎó¼Ä´æÆ÷
-	LinWriteReg(LIE,LIN->LIN_IE);		//LIEÖĞ¶ÏÊ¹ÄÜ¼Ä´æÆ÷
-	LinSetBaudrate(LIN->LIN_Baudrate);	//ÉèÖÃ²¨ÌØÂÊ
-	LinSetHeadDelay(LIN->LIN_HeadDelay,LIN->LIN_HeadPrescaler);	//ÉèÖÃÖ¡Í·ÑÓÊ±
+	GetLinError();						//È¡Ä´
+	LinWriteReg( LIE, LIN->LIN_IE );		//LIEĞ¶Ê¹Ü¼Ä´
+	LinSetBaudrate( LIN->LIN_Baudrate );	//Ã²
+	LinSetHeadDelay( LIN->LIN_HeadDelay, LIN->LIN_HeadPrescaler );	//Ö¡Í·Ê±
 }

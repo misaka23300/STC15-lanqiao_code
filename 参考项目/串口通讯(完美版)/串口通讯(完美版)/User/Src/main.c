@@ -1,3 +1,10 @@
+/**
+ * @file main.c
+ * @brief 主程序入口文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "./Timer.h"//硬件定时器库
 #include "./SMG.h"//数码管库
 #include "./UART.h"//硬件串口库
@@ -11,7 +18,7 @@
 void main()
 {
 	Sys_Init();//系统初始化函数
-	while(1)
+	while (1 )
 	{
 		
 	}

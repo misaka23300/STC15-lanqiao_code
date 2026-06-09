@@ -1,3 +1,10 @@
+/**
+ * @file boot.c
+ * @brief 系统启动初始化文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "boot.h"
 
 void boot_init() {
@@ -19,22 +26,22 @@ void boot_init() {
   P7M0 = 0;
 
   P0 = 0xFF;
-  latch(4);
-  latch(7);
-  latch(0);
+  latch(4 );
+  latch(7 );
+  latch(0 );
 
   P0 = 0xAF;
-  latch(5);
+  latch(5 );
 
   P0 = 0x00;
-  latch(6);
+  latch(6 );
 
   Timer2_Init();
   Uart1_Init();
   EA = 1;
 }
 
-void Timer2_Init(void)  // 1毫秒@12.000MHz
+void Timer2_Init( void )  // 1毫秒@12.000MHz
 {
   AUXR |= 0x04;  // 定时器时钟1T模式
   T2L = 0x20;    // 设置定时初始值
@@ -43,7 +50,7 @@ void Timer2_Init(void)  // 1毫秒@12.000MHz
   IE2 |= 0x04;   // 使能定时器2中断
 }
 
-void Uart1_Init(void)  // 9600bps@12.000MHz
+void Uart1_Init( void )  // 9600bps@12.000MHz
 {
   SCON = 0x50;   // 8位数据,可变波特率
   AUXR |= 0x40;  // 定时器时钟1T模式
@@ -57,37 +64,37 @@ void Uart1_Init(void)  // 9600bps@12.000MHz
   PS = 1;
 }
 
-void latch(uint8_t i) {
-  switch (i) {
+void latch( uint8_t i ) {
+  switch ( i ) {
     case 0: {
       P2 = P2 & 0x1F;
       break;
     }
     case 4: {
-      P2 = (P2 & 0x1F) | 0x80;
+      P2 = ( P2 & 0x1F ) | 0x80;
       break;
     }
     case 5: {
-      P2 = (P2 & 0x1F) | 0xA0;
+      P2 = ( P2 & 0x1F ) | 0xA0;
       break;
     }
     case 6: {
-      P2 = (P2 & 0x1F) | 0xC0;
+      P2 = ( P2 & 0x1F ) | 0xC0;
       break;
     }
     case 7: {
-      P2 = (P2 & 0x1F) | 0xE0;
+      P2 = ( P2 & 0x1F ) | 0xE0;
       break;
     }
   }
 }
 
-void Delay14us(void)  //@12.000MHz
+void Delay14us( void )  //@12.000MHz
 {
   uint8_t i;
 
   _nop_();
   _nop_();
   i = 39;
-  while (--i);
+  while (--i );
 }

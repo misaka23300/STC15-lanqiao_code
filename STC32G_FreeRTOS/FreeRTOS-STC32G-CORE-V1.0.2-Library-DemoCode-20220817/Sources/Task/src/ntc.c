@@ -1,9 +1,16 @@
+/**
+ * @file ntc.c
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCMCU.com --------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
@@ -30,7 +37,7 @@
 #include "display.h"
 
 static void prvNetEvent( void );
-static uint16_t prvGet_Temperature(uint16_t adc);
+static uint16_t prvGet_Temperature( uint16_t adc );
 
 /* NTCﺫﺳﺳﮦﭦﺁﮌﮮ */
 portTASK_FUNCTION( vNtcTask, pvParameters )
@@ -39,42 +46,40 @@ portTASK_FUNCTION( vNtcTask, pvParameters )
     UNUSED( pvParameters );
     
 //    P1M1 |= 0x08;   P1M0 &= ~0x08;   //ﺭﻟﻅﺣ P1.3 ﺳ۹ ADC ﮌﻛﺫﻣﺟﻌ
-    while(1)
+    while (1 )
     {
         prvNetEvent();
 
-        vTaskDelay(300);
+        vTaskDelay(300 );
     }
     
-    vTaskDelete(NULL);
+    vTaskDelete( NULL );
 }   
-
 
 static void prvNetEvent( void )
 {
     uint8_t  i;
     uint16_t j;
-    j = Get_ADCResult(3);  //ﺎﺳﮌﮮ0~15,ﺎﻠﺹﺁﺓﺛﮌﺛﻉﺉﺻﭨﺑﺳADC, ﺓﭖﭨﻊﻅﭖﺝﺱﮌﮄﺛﻕﺗﻳ, == 4096 ﺳ۹ﺑﻥﺳﮩ
+    j = Get_ADCResult(3 );  //ﺎﺳﮌﮮ0~15,ﺎﻠﺹﺁﺓﺛﮌﺛﻉﺉﺻﭨﺑﺳADC, ﺓﭖﭨﻊﻅﭖﺝﺱﮌﮄﺛﻕﺗﻳ, == 4096 ﺳ۹ﺑﻥﺳﮩ
 
-    if(j < 4096)
+    if ( j < 4096 )
     {
-        j = prvGet_Temperature(j); //ﺙﺩﺯﻙﺳﺡﭘﺫﻅﭖ
+        j = prvGet_Temperature( j ); //ﺙﺩﺯﻙﺳﺡﭘﺫﻅﭖ
 
-        if(j >= 400)    F0 = 0, j -= 400;       //ﺳﺡﭘﺫ >= 0ﭘﺫ
+        if ( j >= 400 )    F0 = 0, j -= 400;       //ﺳﺡﭘﺫ >= 0ﭘﺫ
         else            F0 = 1, j  = 400 - j;   //ﺳﺡﭘﺫ <  0ﭘﺫ
         pucLEDBuffer[4] = j / 1000;     //ﺵﺿﮌﺝﺳﺡﭘﺫﻅﭖ
-        pucLEDBuffer[5] = (j % 1000) / 100;
-        pucLEDBuffer[6] = (j % 100) / 10 + DIS_DOT;
+        pucLEDBuffer[5] = ( j % 1000 ) / 100;
+        pucLEDBuffer[6] = ( j % 100 ) / 10 + DIS_DOT;
         pucLEDBuffer[7] = j % 10;
-        if(pucLEDBuffer[4] == 0)    pucLEDBuffer[4] = DIS_BLACK;
-        if(F0)  pucLEDBuffer[4] = DIS_;     //ﺵﺿﮌﺝ-
+        if ( pucLEDBuffer[4] == 0 )    pucLEDBuffer[4] = DIS_BLACK;
+        if ( F0 )  pucLEDBuffer[4] = DIS_;     //ﺵﺿﮌﺝ-
     }
     else    //ﺑﻥﺳﮩ
     {
-        for(i=0; i<8; i++)  pucLEDBuffer[i] = DIS_;
+        for ( i = ; i < ; i++)  pucLEDBuffer[i] = DIS_;
     }
 }
-
 
 //  MF52E 10K at 25, B = 3950, ADC = 12 bits
 uint16_t code temp_table[]={
@@ -248,39 +253,39 @@ uint16_t code temp_table[]={
 /**********************************************/
 
 #define     D_SCALE     10      //ﺛﻕﺗﻳﺓﺧﺑﮩﺎﭘﮌﮮ, ﺓﺧﺑﮩ10ﺎﭘﺝﺱﮌﮄﺎ۲ﭼﮪﺻﭨﺳﭨﺷ۰ﮌﮮ
-static uint16_t prvGet_Temperature(uint16_t adc)
+static uint16_t prvGet_Temperature( uint16_t adc )
 {
     uint16_t code *p;
     uint16_t i;
-    uint8_t  j,k,min,max;
+    uint8_t  j, k, min, max;
     
     adc = 4096 - adc;   //Rtﺛﺽﭖﻊ
     p = temp_table;
-    if(adc < p[0])      return (0xfffe);
-    if(adc > p[160])    return (0xffff);
+    if ( adc < p[0])      return (0xfffe );
+    if ( adc > p[160])    return (0xffff );
     
     min = 0;        //-40ﭘﺫ
     max = 160;      //120ﭘﺫ
 
-    for(j=0; j<5; j++)  //ﭘﺿﺓﻅﺎﻠﺎﻥ
+    for ( j = ; j < ; j++)  //ﭘﺿﺓﻅﺎﻠﺎﻥ
     {
         k = min / 2 + max / 2;
-        if(adc <= p[k]) max = k;
+        if ( adc <= p[k]) max = k;
         else            min = k;
     }
-         if(adc == p[min])  i = min * D_SCALE;
-    else if(adc == p[max])  i = max * D_SCALE;
+         if ( adc == p[min])  i = min * D_SCALE;
+    else if ( adc == p[max])  i = max * D_SCALE;
     else    // min < temp < max
     {
-        while(min <= max)
+        while ( min <= max )
         {
             min++;
-            if(adc == p[min])   {i = min * D_SCALE; break;}
-            else if(adc < p[min])
+            if ( adc == p[min])   {i = min * D_SCALE; break;}
+            else if ( adc < p[min])
             {
                 min--;
                 i = p[min]; //min
-                j = (adc - i) * D_SCALE / (p[min+1] - i);
+                j = ( adc - i ) * D_SCALE / ( p[min + ] - i );
                 i = min;
                 i *= D_SCALE;
                 i += j;

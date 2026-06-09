@@ -1,3 +1,10 @@
+/**
+ * @file seg.c
+ * @brief 数码管驱动文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "seg.h"
 
 uchar code duan[] = {
@@ -10,7 +17,7 @@ uchar code duan[] = {
 
 uchar dsp[] = {16, 16, 16, 16, 16, 16, 16, 16};
 
-void setdsp(uchar c1, uchar c2, uchar c3, uchar c4, uchar c5, uchar c6, uchar c7, uchar c8) {
+void setdsp( uchar c1, uchar c2, uchar c3, uchar c4, uchar c5, uchar c6, uchar c7, uchar c8 ) {
     dsp[0] = c1;
     dsp[1] = c2;
     dsp[2] = c3;

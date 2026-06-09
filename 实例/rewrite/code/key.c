@@ -1,3 +1,10 @@
+/**
+ * @file key.c
+ * @brief 按键驱动文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "key.h"
 
 typedef enum {
@@ -6,7 +13,6 @@ typedef enum {
     short_press,
     long_press
 } press_task;
-
 
 uint8_t key_scan()
 {
@@ -20,11 +26,11 @@ uint8_t key_scan()
     P42 = 0; P44 = 0;
     P36 = P42; P37 = P44;
 
-    switch (state)
+    switch ( state )
     {
         case wait_press:
         {
-            if (press != 0x0F)
+            if ( press != 0x0F )
             {
                 state = eliminate;
             }
@@ -33,7 +39,7 @@ uint8_t key_scan()
 
         case eliminate:
         {
-            if (press == 0x0F)
+            if ( press == 0x0F )
             {
                 state = wait_press;
             }
@@ -45,7 +51,7 @@ uint8_t key_scan()
 
                 press = P3;
                 state = short_press;
-                switch (press)
+                switch ( press )
                 {
                     case 0x77: { value = 4; break; }
                     default: state = wait_press;
@@ -56,10 +62,10 @@ uint8_t key_scan()
 
         case short_press:
         {
-            if (press != 0x0F)
+            if ( press != 0x0F )
             {
                 i++;
-                if (i > 100)
+                if ( i > 100 )
                 {
                     i = 0;
                     state = long_press;
@@ -77,7 +83,7 @@ uint8_t key_scan()
 
         case long_press:
         {
-            if (press == 0x0F)
+            if ( press == 0x0F )
             {
                 temp = value;
                 value = 0;

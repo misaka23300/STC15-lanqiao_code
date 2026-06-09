@@ -1,3 +1,10 @@
+/**
+ * @file main.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
  #ifndef __MAIN_H__
 #define __MAIN_H__
 
@@ -6,7 +13,6 @@
 #include "uart.h"
 #include "key.h"
 #include "sonic.h"
-
 
 #include <stdio.h>
 
@@ -19,6 +25,5 @@ void display_task();
 void uart_task();
 void calculator_task();
 void sonic_task();
-
 
 #endif

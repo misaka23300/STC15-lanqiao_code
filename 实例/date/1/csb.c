@@ -1,8 +1,15 @@
+/**
+ * @file csb.c
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "csb.h"
 #include "intrins.h"
 
-sbit Trig=P1^0;
-sbit Echo=P1^1;
+sbit Trig = 1^0;
+sbit Echo = 1^1;
 
 void Delay10us()	//@12.000MHz
 {
@@ -11,7 +18,7 @@ void Delay10us()	//@12.000MHz
 	_nop_();
 	_nop_();
 	i = 27;
-	while (--i);
+	while (--i );
 }
 
 void csb_Init()		//100??@12.000MHz
@@ -26,35 +33,35 @@ void csb_Init()		//100??@12.000MHz
 void csb_Start()
 {
   uchar i;
-	for(i=0;i<10;i++)
+	for ( i = ;i < 0;i++)
 	{
-	 	Trig=1;
+	 	Trig = ;
 	 	Delay10us();
-		Trig=0;
+		Trig = ;
 	 	Delay10us();
 	}
 }
 
 uint csb_CJ()
 {
- 	int dis,t=0;
+ 	int dis, t = ;
 	csb_Start();
-	while(!Echo);
-	TR1=1;
-	while(Echo && !TF1);
-	TR1=0;
+	while (!Echo );
+	TR1 = ;
+	while ( Echo && !TF1 );
+	TR1 = ;
 	
-	if(TF1==1)
+	if ( TF1 == )
 	{
-	 dis=999;
+	 dis = 99;
 	}
 	else
 	{
-	 	t=TH1<<8|TL1;
-		dis=(int)(t*0.017);
+	 	t = H1<<8|TL1;
+		dis=( int )( t * .017 );
 	}
-	TH1=0; TL1=0;
-	TF1=0; t=0;
+	TH1 = ; TL1 = ;
+	TF1 = ; t = ;
 	return dis;
 }
 

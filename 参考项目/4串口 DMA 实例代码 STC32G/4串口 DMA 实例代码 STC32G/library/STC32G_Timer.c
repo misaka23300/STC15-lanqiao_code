@@ -1,86 +1,93 @@
+/**
+ * @file STC32G_Timer.c
+ * @brief å®šæ—¶å™¨é©±åŠ¨æ–‡ä»¶
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCAI.com ---------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* Èç¹ûÒªÔÚ³ÌÐòÖÐÊ¹ÓÃ´Ë´úÂë,ÇëÔÚ³ÌÐòÖÐ×¢Ã÷Ê¹ÓÃÁËSTCµÄ×ÊÁÏ¼°³ÌÐò            */
+/* ÒªÚ³Ê¹Ã´Ë´,Ú³×¢Ê¹STCÏ¼            */
 /*---------------------------------------------------------------------*/
 
 #include	"STC32G_Timer.h"
 
 //========================================================================
-// º¯Êý: u8	Timer_Inilize(u8 TIM, TIM_InitTypeDef *TIMx)
-// ÃèÊö: ¶¨Ê±Æ÷³õÊ¼»¯³ÌÐò.
-// ²ÎÊý: TIMx: ½á¹¹²ÎÊý,Çë²Î¿¼timer.hÀïµÄ¶¨Òå.
-// ·µ»Ø: ³É¹¦·µ»Ø SUCCESS, ´íÎó·µ»Ø FAIL.
-// °æ±¾: V1.0, 2012-10-22
+// : u8	Timer_Inilize( u8 TIM, TIM_InitTypeDef *TIMx )
+// : Ê±Ê¼.
+// : TIMx: á¹¹,Î¿timer.hÄ¶.
+// : É¹ SUCCESS, ó·µ» FAIL.
+// æ±¾: V1.0, 2012 - 0 - 2
 //========================================================================
-u8	Timer_Inilize(u8 TIM, TIM_InitTypeDef *TIMx)
+u8	Timer_Inilize( u8 TIM, TIM_InitTypeDef *TIMx )
 {
-	if(TIM == Timer0)
+	if ( TIM == Timer0 )
 	{
-		Timer0_Stop();		//Í£Ö¹¼ÆÊý
-		if(TIMx->TIM_Mode >= TIM_16BitAutoReloadNoMask)	return FAIL;	//´íÎó
-		TMOD = (TMOD & ~0x03) | TIMx->TIM_Mode;	//¹¤×÷Ä£Ê½,0: 16Î»×Ô¶¯ÖØ×°, 1: 16Î»¶¨Ê±/¼ÆÊý, 2: 8Î»×Ô¶¯ÖØ×°, 3: ²»¿ÉÆÁ±Î16Î»×Ô¶¯ÖØ×°
-		if(TIMx->TIM_ClkSource >  TIM_CLOCK_Ext)	return FAIL;
-		Timer0_CLK_Select(TIMx->TIM_ClkSource);	//¶ÔÍâ¼ÆÊý»ò·ÖÆµ, ¶¨Ê±12T/1T
-		Timer0_CLK_Output(TIMx->TIM_ClkOut);		//Êä³öÊ±ÖÓÊ¹ÄÜ
-		T0_Load(TIMx->TIM_Value);
-		Timer0_Run(TIMx->TIM_Run);
-		return	SUCCESS;		//³É¹¦
+		Timer0_Stop();		//Í£Ö¹
+		if ( TIMx->TIM_Mode >= TIM_16BitAutoReloadNoMask )	return FAIL;	//
+		TMOD = ( TMOD & ~0x03 ) | TIMx->TIM_Mode;	//Ä£Ê½, 0: 16Î»Ô¶×°, 1: 16Î»Ê±/, 2: 8Î»Ô¶×°, 3: 16Î»Ô¶×°
+		if ( TIMx->TIM_ClkSource >  TIM_CLOCK_Ext )	return FAIL;
+		Timer0_CLK_Select( TIMx->TIM_ClkSource );	//Æµ, Ê±12T / T
+		Timer0_CLK_Output( TIMx->TIM_ClkOut );		//Ê±Ê¹
+		T0_Load( TIMx->TIM_Value );
+		Timer0_Run( TIMx->TIM_Run );
+		return	SUCCESS;		//É¹
 	}
 
-	if(TIM == Timer1)
+	if ( TIM == Timer1 )
 	{
-		Timer1_Stop();		//Í£Ö¹¼ÆÊý
-		if(TIMx->TIM_Mode >= TIM_16BitAutoReloadNoMask)	return FAIL;	//´íÎó
-		TMOD = (TMOD & ~0x30) | (TIMx->TIM_Mode << 4);	//¹¤×÷Ä£Ê½,0: 16Î»×Ô¶¯ÖØ×°, 1: 16Î»¶¨Ê±/¼ÆÊý, 2: 8Î»×Ô¶¯ÖØ×°, 3: Í£Ö¹¹¤×÷
-		if(TIMx->TIM_ClkSource >  TIM_CLOCK_Ext)	return FAIL;
-		Timer1_CLK_Select(TIMx->TIM_ClkSource);	//¶ÔÍâ¼ÆÊý»ò·ÖÆµ, ¶¨Ê±12T/1T
-		Timer1_CLK_Output(TIMx->TIM_ClkOut);		//Êä³öÊ±ÖÓÊ¹ÄÜ
-		T1_Load(TIMx->TIM_Value);
-		Timer1_Run(TIMx->TIM_Run);
-		return	SUCCESS;		//³É¹¦
+		Timer1_Stop();		//Í£Ö¹
+		if ( TIMx->TIM_Mode >= TIM_16BitAutoReloadNoMask )	return FAIL;	//
+		TMOD = ( TMOD & ~0x30 ) | ( TIMx->TIM_Mode << 4 );	//Ä£Ê½, 0: 16Î»Ô¶×°, 1: 16Î»Ê±/, 2: 8Î»Ô¶×°, 3: Í£Ö¹
+		if ( TIMx->TIM_ClkSource >  TIM_CLOCK_Ext )	return FAIL;
+		Timer1_CLK_Select( TIMx->TIM_ClkSource );	//Æµ, Ê±12T / T
+		Timer1_CLK_Output( TIMx->TIM_ClkOut );		//Ê±Ê¹
+		T1_Load( TIMx->TIM_Value );
+		Timer1_Run( TIMx->TIM_Run );
+		return	SUCCESS;		//É¹
 	}
 
-	if(TIM == Timer2)		//Timer2,¹Ì¶¨Îª16Î»×Ô¶¯ÖØ×°, ÖÐ¶ÏÎÞÓÅÏÈ¼¶
+	if ( TIM == Timer2 )		//Timer2,Ì¶Îª16Î»Ô¶×°, Ð¶È¼
 	{
-		Timer2_Stop();	//Í£Ö¹¼ÆÊý
-		Timer2_CLK_Select(TIMx->TIM_ClkSource);	//¶ÔÍâ¼ÆÊý»ò·ÖÆµ, ¶¨Ê±12T/1T
-		Timer2_CLK_Output(TIMx->TIM_ClkOut);		//Êä³öÊ±ÖÓÊ¹ÄÜ
+		Timer2_Stop();	//Í£Ö¹
+		Timer2_CLK_Select( TIMx->TIM_ClkSource );	//Æµ, Ê±12T / T
+		Timer2_CLK_Output( TIMx->TIM_ClkOut );		//Ê±Ê¹
 
-		T2_Load(TIMx->TIM_Value);
-		Timer2_Run(TIMx->TIM_Run);
-		return	SUCCESS;		//³É¹¦
+		T2_Load( TIMx->TIM_Value );
+		Timer2_Run( TIMx->TIM_Run );
+		return	SUCCESS;		//É¹
 	}
 
-	if(TIM == Timer3)		//Timer3,¹Ì¶¨Îª16Î»×Ô¶¯ÖØ×°, ÖÐ¶ÏÎÞÓÅÏÈ¼¶
+	if ( TIM == Timer3 )		//Timer3,Ì¶Îª16Î»Ô¶×°, Ð¶È¼
 	{
-		Timer3_Stop();	//Í£Ö¹¼ÆÊý
-		if(TIMx->TIM_ClkSource >  TIM_CLOCK_Ext)	return FAIL;
-		Timer3_CLK_Select(TIMx->TIM_ClkSource);	//¶ÔÍâ¼ÆÊý»ò·ÖÆµ, ¶¨Ê±12T/1T
-		Timer3_CLK_Output(TIMx->TIM_ClkOut);		//Êä³öÊ±ÖÓÊ¹ÄÜ
+		Timer3_Stop();	//Í£Ö¹
+		if ( TIMx->TIM_ClkSource >  TIM_CLOCK_Ext )	return FAIL;
+		Timer3_CLK_Select( TIMx->TIM_ClkSource );	//Æµ, Ê±12T / T
+		Timer3_CLK_Output( TIMx->TIM_ClkOut );		//Ê±Ê¹
 
-		T3_Load(TIMx->TIM_Value);
-		Timer3_Run(TIMx->TIM_Run);
-		return	SUCCESS;		//³É¹¦
+		T3_Load( TIMx->TIM_Value );
+		Timer3_Run( TIMx->TIM_Run );
+		return	SUCCESS;		//É¹
 	}
 
-	if(TIM == Timer4)		//Timer3,¹Ì¶¨Îª16Î»×Ô¶¯ÖØ×°, ÖÐ¶ÏÎÞÓÅÏÈ¼¶
+	if ( TIM == Timer4 )		//Timer3,Ì¶Îª16Î»Ô¶×°, Ð¶È¼
 	{
-		Timer4_Stop();	//Í£Ö¹¼ÆÊý
-		if(TIMx->TIM_ClkSource >  TIM_CLOCK_Ext)	return FAIL;
-		Timer4_CLK_Select(TIMx->TIM_ClkSource);	//¶ÔÍâ¼ÆÊý»ò·ÖÆµ, ¶¨Ê±12T/1T
-		Timer4_CLK_Output(TIMx->TIM_ClkOut);		//Êä³öÊ±ÖÓÊ¹ÄÜ
+		Timer4_Stop();	//Í£Ö¹
+		if ( TIMx->TIM_ClkSource >  TIM_CLOCK_Ext )	return FAIL;
+		Timer4_CLK_Select( TIMx->TIM_ClkSource );	//Æµ, Ê±12T / T
+		Timer4_CLK_Output( TIMx->TIM_ClkOut );		//Ê±Ê¹
 
-		T4_Load(TIMx->TIM_Value);
-		Timer4_Run(TIMx->TIM_Run);
-		return	SUCCESS;		//³É¹¦
+		T4_Load( TIMx->TIM_Value );
+		Timer4_Run( TIMx->TIM_Run );
+		return	SUCCESS;		//É¹
 	}
-	return FAIL;	//´íÎó
+	return FAIL;	//
 }

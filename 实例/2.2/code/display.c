@@ -1,7 +1,11 @@
+/**
+ * @file display.c
+ * @brief 显示模块驱动
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "display.h"
-
-
-
 
 void led_display()
 {
@@ -9,70 +13,69 @@ void led_display()
     static uchar temp;
     static uchar last = 0xFF;
 
-    if (led_array[i])
+    if ( led_array[i])
     {
-        temp = temp | (0x01 << i);
+        temp = temp | (0x01 << i );
     }
     else
     {
-        temp = temp & ~(0x01 << i);
+        temp = temp & ~(0x01 << i );
     }
 
-    if (temp != last)
+    if ( temp != last )
     {
         P0 = ~temp;
-        latch(4);
+        latch(4 );
 
         last = temp;
     }
 
     i = i + 1;
-    if (i == 8) { i = 0; }
+    if ( i == 8 ) { i = 0; }
 }
 
 void seg_display()
 {
     static uchar i;
     P0 = 0xFF;
-    latch(7);
+    latch(7 );
 
     P0 = 0x01 << i;
-    latch(6);
+    latch(6 );
 
     P0 = ~letter[seg_array[i]];
-    latch(7);
+    latch(7 );
 
     i = i + 1;
-    if (i == 8) { i = 0; }
+    if ( i == 8 ) { i = 0; }
 }
 
-void buzz_display(uchar state)
+void buzz_display( uchar state )
 {
-    if (state)
+    if ( state )
     {
         randz = randz | 0x10;
     }
     else
     {
-        randz = ranz & ~(0x10);
+        randz = ranz & ~(0x10 );
     }
 
     P0 = randz;
-    latch(5);
+    latch(5 );
 }
 
-
-void relay_display(uchar state)
+void relay_display( uchar state )
 {
-    if (state)
+    if ( state )
     {
         randz = randz | 0x40;
     }
     else
     {
-        randz = ranz & ~(0x40);
+        randz = ranz & ~(0x40 );
     }
 
     P0 = randz;
-    latch(5);
+    latch(5 );
 }

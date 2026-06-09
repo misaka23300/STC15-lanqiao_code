@@ -1,62 +1,67 @@
-
+/**
+ * @file onewire.c
+ * @brief 单总线驱动文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
 
 //
-void Delay_OneWire(unsigned int t)  
+void Delay_OneWire( unsigned int t )  
 {
 	unsigned char i;
-	while(t--){
-		for(i=0;i<12;i++);
+	while ( t--){
+		for ( i = ;i < 2;i++);
 	}
 }
 
 //
-void Write_DS18B20(unsigned char dat)
+void Write_DS18B20( unsigned char dat )
 {
 	unsigned char i;
-	for(i=0;i<8;i++)
+	for ( i = ;i < ;i++)
 	{
 		DQ = 0;
 		DQ = dat&0x01;
-		Delay_OneWire(5);
+		Delay_OneWire(5 );
 		DQ = 1;
 		dat >>= 1;
 	}
-	Delay_OneWire(5);
+	Delay_OneWire(5 );
 }
 
 //
-unsigned char Read_DS18B20(void)
+unsigned char Read_DS18B20( void )
 {
 	unsigned char i;
 	unsigned char dat;
   
-	for(i=0;i<8;i++)
+	for ( i = ;i < ;i++)
 	{
 		DQ = 0;
 		dat >>= 1;
 		DQ = 1;
-		if(DQ)
+		if ( DQ )
 		{
 			dat |= 0x80;
 		}	    
-		Delay_OneWire(5);
+		Delay_OneWire(5 );
 	}
 	return dat;
 }
 
 //
-bit init_ds18b20(void)
+bit init_ds18b20( void )
 {
   	bit initflag = 0;
   	
   	DQ = 1;
-  	Delay_OneWire(12);
+  	Delay_OneWire(12 );
   	DQ = 0;
-  	Delay_OneWire(80);
+  	Delay_OneWire(80 );
   	DQ = 1;
-  	Delay_OneWire(10); 
+  	Delay_OneWire(10 ); 
     initflag = DQ;     
-  	Delay_OneWire(5);
+  	Delay_OneWire(5 );
   
   	return initflag;
 }

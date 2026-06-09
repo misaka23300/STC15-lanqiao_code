@@ -1,3 +1,10 @@
+/**
+ * @file machine.c
+ * @brief 机器控制模块
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "machine.h"
 
 void clean_display()
@@ -12,31 +19,31 @@ void clean_display()
     P7M0 = 0x00; P7M1 = 0x00;
 
     P0 = 0xFF;
-    latch(4);
+    latch(4 );
 
     P0 = 0xAF;
-    latch(5);
+    latch(5 );
 
     P0 = 0x00;
-    latch(6);
+    latch(6 );
 
     P0 = 0xFF;
-    latch(7);
+    latch(7 );
 }
 
-void latch(uint8_t i)
+void latch( uint8_t i )
 {
-    switch (i)
+    switch ( i )
     {
-        case 4: { P2 = (P2 & 0x1F) | 0x80; break; }
-        case 5: { P2 = (P2 & 0x1F) | 0xA0; break; }
-        case 6: { P2 = (P2 & 0x1F) | 0xC0; break; }
-        case 7: { P2 = (P2 & 0x1F) | 0xE0; break; }
+        case 4: { P2 = ( P2 & 0x1F ) | 0x80; break; }
+        case 5: { P2 = ( P2 & 0x1F ) | 0xA0; break; }
+        case 6: { P2 = ( P2 & 0x1F ) | 0xC0; break; }
+        case 7: { P2 = ( P2 & 0x1F ) | 0xE0; break; }
     }
-    P2 = (P2 & 0x1F);
+    P2 = ( P2 & 0x1F );
 }
 
-void Timer0Init(void)		//100微秒@11.0592MHz
+void Timer0Init( void )		//100微秒@11.0592MHz
 {
 	AUXR &= 0x7F;		//定时器时钟12T模式
 	TMOD &= 0xF0;		//设置定时器模式
@@ -46,8 +53,7 @@ void Timer0Init(void)		//100微秒@11.0592MHz
 	TR0 = 1;		//定时器0开始计时
 }
 
-
-void Timer1_Init(void) // 1毫秒@12.000MHz
+void Timer1_Init( void ) // 1毫秒@12.000MHz
 {
     AUXR |= 0x40;      // 定时器时钟1T模式
     TMOD &= 0x0F;      // 设置定时器模式
@@ -58,7 +64,7 @@ void Timer1_Init(void) // 1毫秒@12.000MHz
     ET1 = 1;           // 使能定时器1中断
 }
 
-void Uart1_Init(void) // 9600bps@12.000MHz
+void Uart1_Init( void ) // 9600bps@12.000MHz
 {
     SCON = 0x50;       // 8位数据,可变波特率
     AUXR |= 0x01;      // 串口1选择定时器2为波特率发生器
@@ -100,16 +106,13 @@ void timer()
     EA = 1;
 }
 
-
-void Delay14us(void)	//@12.000MHz
+void Delay14us( void )	//@12.000MHz
 {
 	unsigned char data i;
 
 	_nop_();
 	_nop_();
 	i = 39;
-	while (--i);
+	while (--i );
 }
-
-
 

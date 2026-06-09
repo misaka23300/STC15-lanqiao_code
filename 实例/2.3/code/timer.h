@@ -1,3 +1,10 @@
+/**
+ * @file timer.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #ifndef __TIMER_H__
 #define __TIMER_H__
 
@@ -6,8 +13,6 @@
 enum {
     UART_LEN = 16
 };
-
-
 
 typedef struct{
     uint8_t receive_data[UART_LEN];
@@ -19,12 +24,10 @@ typedef struct{
 
 extern UART uart;
 
-
-void Timer0Init(void);
-void Timer1Init(void);
-void UartInit(void);
-char putchar(char c);
+void Timer0Init( void );
+void Timer1Init( void );
+void UartInit( void );
+char putchar( char c );
 void timer();
-
 
 #endif

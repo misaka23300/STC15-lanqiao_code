@@ -1,1 +1,0 @@
-"tube.c" OPTIMIZE (8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\tube.lst) OBJECT(.\Objects\tube.obj)

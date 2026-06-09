@@ -1,5 +1,11 @@
-#include "key.h"
+/**
+ * @file key.c
+ * @brief 按键驱动文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
 
+#include "key.h"
 
 uchar key_scan()
 {
@@ -12,11 +18,11 @@ uchar key_scan()
 
     press = P3 & 0x0F;
 
-    switch(state)
+    switch( state )
     {
         case 0:
         {
-            if (press != 0x0F)
+            if ( press != 0x0F )
             {
                 state = 1;
             }
@@ -25,7 +31,7 @@ uchar key_scan()
 
         case 1:
         {
-            if (press == 0x0F)
+            if ( press == 0x0F )
             {
                 state = 0;
             }
@@ -38,7 +44,7 @@ uchar key_scan()
                 press = P3;
                 state = 2;
 
-                switch (press)
+                switch ( press )
                 {
                     case 0xf7: {value = 4; break; }
                     case 0xfb: {value = 5; break; }
@@ -53,10 +59,10 @@ uchar key_scan()
     
         case 2:
         {
-            if (press != 0x0F)
+            if ( press != 0x0F )
             {
-                i = (i + 1) % 255;
-                if (i >= 150)
+                i = ( i + 1 ) % 255;
+                if ( i >= 150 )
                 {
                     i = 0;
                     state = 3;
@@ -76,7 +82,7 @@ uchar key_scan()
 
         case 3:
         {
-            if (press == 0x0F)
+            if ( press == 0x0F )
             {
                 tmp = value + 20;
                 value = 0;

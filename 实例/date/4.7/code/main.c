@@ -1,3 +1,10 @@
+/**
+ * @file main.c
+ * @brief 主程序入口文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "main.h"
 
 extern uchar led[8];
@@ -22,8 +29,6 @@ struct {
     uchar state;
 } flicker;
 
-
-
 // 数码管显示状态
 struct {
     uchar mode1;
@@ -32,7 +37,6 @@ struct {
     uchar only;
 } state;
 
-
 // ds1302   -> date
 struct {
     uchar now_time[3];
@@ -40,22 +44,17 @@ struct {
     uchar init_time[3];
 } date;
 
-
 // 查询界面 -> 数组
 struct {
     uchar value[3];
     uchar index;
 } search;
 
-
 // 数据界面 -> ADC数据
 struct {
     uint light_value;
     uint RB2_value;
 } adc;
-
-
-
 
 void main()
 {
@@ -67,26 +66,26 @@ void main()
 
     read_temp();
 
-    led_proc(0);
-    led_proc(1);
-    led_proc(2);
+    led_proc(0 );
+    led_proc(1 );
+    led_proc(2 );
 
-    while (1)
+    while (1 )
     {
         
-        if (key.time == KEY_TASK) 
+        if ( key.time == KEY_TASK ) 
         {
             key.time = 0;
             key_proc();
         }
 
-        if (flicker.time == FLICKER_TASK)
+        if ( flicker.time == FLICKER_TASK )
         {
             flicker.time = 0;
             flicker.state = !flicker.state;
         }
 
-        if (state.time == STATE_TASK)
+        if ( state.time == STATE_TASK )
         {
             state.time = 0;
             state_proc();
@@ -96,8 +95,7 @@ void main()
     }
 }
 
-
-void Timer0_Isr(void) interrupt 1
+void Timer0_Isr( void ) interrupt 1
 {
     seg_display();
     led_display();
@@ -112,16 +110,15 @@ void Timer0_Isr(void) interrupt 1
     
 }
 
-
 void key_proc()
 {
     key.press = key_scan();
 
-    switch (key.press)
+    switch ( key.press )
     {
         case 4:
         {
-            state.mode1 = (state.mode1 + 1) % 3;
+            state.mode1 = ( state.mode1 + 1 ) % 3;
         }
         break;
     }
@@ -130,7 +127,7 @@ void key_proc()
 void state_proc()
 {
    
-    switch (state.mode1)
+    switch ( state.mode1 )
     {
         case 0: 
         {
@@ -155,25 +152,25 @@ void state_proc()
         // 数据界面 P g. g g  U v. v v     g -> 光敏电阻   v -> 旋钮电压 
         case 1:
         {
-            if (state.only != 2)
+            if ( state.only != 2 )
             {
                 state.only = 2;
                 seg[0] = 24; seg[4] = 25;
             }
 
             seg[1] = adc.light_value / 100 % 10;
-            seg[2] = (adc.light_value / 10 % 10) + 32;
+            seg[2] = ( adc.light_value / 10 % 10 ) + 32;
             seg[3] = adc.light_value % 10;
             
             seg[5] = adc.RB2_value / 100 % 10;
-            seg[6] = (adc.RB2_value / 10 % 10) + 32;
+            seg[6] = ( adc.RB2_value / 10 % 10 ) + 32;
             seg[7] = adc.RB2_value % 10;
         }
         break;
 
         case 2:
         {
-            if (state.only != 2)
+            if ( state.only != 2 )
             {
                 state.only = 2;
                 seg[0] = 42;
@@ -185,19 +182,17 @@ void state_proc()
     }
 }
 
-
-
-void delete_0(uchar *list, uchar n, bit negative)
+void delete_0( uchar *list, uchar n, bit negative )
 {
     uchar i;
-    if (n == 0) { return; }
+    if ( n == 0 ) { return; }
 
-    for (i = 0;i < (n - 1);i++)
+    for ( i = 0;i < ( n - 1 );i++)
     {
-        if (list[i] == 0)
+        if ( list[i] == 0 )
         {
             
-            if (list[i + 1] != 0 && negative == 1)
+            if ( list[i + 1] != 0 && negative == 1 )
             {
                 list[i] = 17;
             }
@@ -212,5 +207,4 @@ void delete_0(uchar *list, uchar n, bit negative)
         }
     }
 }
-
 

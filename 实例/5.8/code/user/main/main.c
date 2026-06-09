@@ -1,3 +1,10 @@
+/**
+ * @file main.c
+ * @brief 主程序入口文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "main.h"
 
 enum {
@@ -8,7 +15,6 @@ enum {
     LED_TIME = 16,
     DELAY_100ms = 100,
 } ;
-
 
 idata uint8_t key_time = 0;
 idata uint16_t seg_time = 0;
@@ -23,42 +29,39 @@ void main()
 {
     boot_init();
     uart_send();
-    while (1) {
-        if (seg_time >= SEG_TIME) {
+    while (1 ) {
+        if ( seg_time >= SEG_TIME ) {
             seg_time = 0;
             //seg_task();
 
         }
 
-        if (display_time >= DISPLAY_TIME) {
+        if ( display_time >= DISPLAY_TIME ) {
             display_time = 0;
             display_task();
         }
 
-        if (key_time >= KEY_TIME) {
+        if ( key_time >= KEY_TIME ) {
             key_time = 0;
             key_task();
         }
 
-        if (sonic_time >= SONIC_TIME) {
+        if ( sonic_time >= SONIC_TIME ) {
             sonic_time = 0;
             sonic_task();
         }
 
-
-        if (led_time >= LED_TIME) {
+        if ( led_time >= LED_TIME ) {
             led_time = 0;
-            led_display(7, !TI);
+            led_display(7, !TI );
         }
 
-        if (work_3s_flag && work_3s_time >= 3000) {
+        if ( work_3s_flag && work_3s_time >= 3000 ) {
             work_3s();
             work_3s_flag = 0;
             work_3s_time = 0;
         }
     }
-
-
 
     
 }
@@ -71,17 +74,16 @@ void main()
 //主循环:标志为1时,判断是否到时间
 void work_3s()
 {
-    if (work_3s_flag == 0) {
+    if ( work_3s_flag == 0 ) {
         work_3s_flag = 1;
-        relay(1);
+        relay(1 );
     }
     else {
-        relay(0);
+        relay(0 );
     }
 }
 
-
-void Timer2_Isr(void) interrupt 12
+void Timer2_Isr( void ) interrupt 12
 {
     seg_display();
     seg_time++;
@@ -90,7 +92,7 @@ void Timer2_Isr(void) interrupt 12
     sonic_time++;
     led_time++;
 
-    if (work_3s_flag) {
+    if ( work_3s_flag ) {
         work_3s_time++;
     }
 }

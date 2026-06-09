@@ -1,3 +1,10 @@
+/**
+ * @file main.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #ifndef __MAIN_H__
 #define __MAIN_H__
 
@@ -13,7 +20,7 @@ void state_machine();
 void temperature_proc();
 void adjust_proc();
 void argument_proc();
-void hex_to_seg(char *output, char input);
-void delete_0(uchar* arrays, uchar j);
+void hex_to_seg( char *output, char input );
+void delete_0( uchar* arrays, uchar j );
 
 #endif

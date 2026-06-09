@@ -1,3 +1,10 @@
+/**
+ * @file boot.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #ifndef __BOOT_H_
 #define __BOOT_H__
 
@@ -17,6 +24,6 @@ void boot_init();
 void latch(uint8_t i);
 void Delay14us(void);
 void Delay1000ms(void);
-void while_plus(uint8_t *num, uint8_t init, uint8_t max);
+void while_plus(uint8_t* num, uint8_t init, uint8_t max);
 
 #endif

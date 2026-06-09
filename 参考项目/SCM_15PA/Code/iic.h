@@ -1,3 +1,10 @@
+/**
+ * @file iic.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #ifndef __IIC_H
 #define __IIC_H
 
@@ -8,9 +15,9 @@ sbit sda = P2^1;
 
 void I2CStop();
 void I2CStart();
-void I2CSendByte(unsigned char byt);
-void I2CSendAck(unsigned char ackbit);
-unsigned char I2CWaitAck(void);
-unsigned char I2CReceiveByte(void);
+void I2CSendByte( unsigned char byt );
+void I2CSendAck( unsigned char ackbit );
+unsigned char I2CWaitAck( void );
+unsigned char I2CReceiveByte( void );
 
 #endif

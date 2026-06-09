@@ -1,65 +1,70 @@
+/**
+ * @file onewire.c
+ * @brief 单总线驱动文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "onewire.h"
 
 sbit DQ = P1^4;
 
-void Delay_OneWire(uint16_t t)  
+void Delay_OneWire( uint16_t t )  
 {
 	uint8_t i;
-	while(t--){
-		for(i=0;i<12;i++);
+	while ( t--){
+		for ( i = ;i < 2;i++);
 	}
 }
 
-void Write_DS18B20(uint8_t dat)
+void Write_DS18B20( uint8_t dat )
 {
 	uint8_t i;
-	for(i=0;i<8;i++)
+	for ( i = ;i < ;i++)
 	{
 		DQ = 0;
 		DQ = dat&0x01;
-		Delay_OneWire(5);
+		Delay_OneWire(5 );
 		DQ = 1;
 		dat >>= 1;
 	}
-	Delay_OneWire(5);
+	Delay_OneWire(5 );
 }
 
-uint8_t Read_DS18B20(void)
+uint8_t Read_DS18B20( void )
 {
 	uint8_t i;
 	uint8_t dat;
   
-	for(i=0;i<8;i++)
+	for ( i = ;i < ;i++)
 	{
 		DQ = 0;
 		dat >>= 1;
 		DQ = 1;
-		if(DQ)
+		if ( DQ )
 		{
 			dat |= 0x80;
 		}	    
-		Delay_OneWire(5);
+		Delay_OneWire(5 );
 	}
 	return dat;
 }
 
-bit init_ds18b20(void)
+bit init_ds18b20( void )
 {
   	bit initflag = 0;
   	
   	DQ = 1;
-  	Delay_OneWire(12);
+  	Delay_OneWire(12 );
   	DQ = 0;
-  	Delay_OneWire(80);
+  	Delay_OneWire(80 );
   	DQ = 1;
-  	Delay_OneWire(10); 
+  	Delay_OneWire(10 ); 
     initflag = DQ;     
-  	Delay_OneWire(5);
+  	Delay_OneWire(5 );
   
   	return initflag;
 }
-
-
 
 float read_temperature()
 {
@@ -67,20 +72,20 @@ float read_temperature()
 	uchar high, low;
 
 	init_ds18b20();
-	Write_DS18B20(0xcc);
-	Write_DS18B20(0x44);
+	Write_DS18B20(0xcc );
+	Write_DS18B20(0x44 );
 
 	init_ds18b20();
-	Write_DS18B20(0xcc);
-	Write_DS18B20(0xbe);
+	Write_DS18B20(0xcc );
+	Write_DS18B20(0xbe );
 
-	Delay_OneWire(200);
+	Delay_OneWire(200 );
 
 	init_ds18b20();
 	low = Read_DS18B20();
 	high = Read_DS18B20();
 
-	temperature = (high << 8) | low;
+	temperature = ( high << 8 ) | low;
 	return temperature / 16.0;
 }
 

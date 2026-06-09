@@ -1,9 +1,16 @@
+/**
+ * @file STC32G_RTC.c
+ * @brief 实时时钟驱动
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCMCU.com --------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
@@ -13,25 +20,25 @@
 #include	"STC32G_RTC.h"
 
 //========================================================================
-// 函数: uint8_t	ADC_Inilize(ADC_InitTypeDef *ADCx)
+// 函数: uint8_t	ADC_Inilize( ADC_InitTypeDef *ADCx )
 // 描述: ADC初始化程序.
 // 参数: ADCx: 结构参数,请参考adc.h里的定义.
 // 返回: none.
-// 版本: V1.0, 2012-10-22
+// 版本: V1.0, 2012 - 0 - 2
 //========================================================================
-uint8_t	RTC_Inilize(RTC_InitTypeDef *RTCx)
+uint8_t	RTC_Inilize( RTC_InitTypeDef *RTCx )
 {
-	if(RTCx->RTC_Year > 99)	return FAIL;	//错误
-	if(RTCx->RTC_Month > 12)	return FAIL;	//错误
-	if(RTCx->RTC_Day > 31)	return FAIL;	//错误
-	if(RTCx->RTC_Hour > 23)	return FAIL;	//错误
-	if(RTCx->RTC_Min > 59)	return FAIL;	//错误
-	if(RTCx->RTC_Sec > 59)	return FAIL;	//错误
-	if(RTCx->RTC_Ssec > 127)	return FAIL;	//错误
-	if(RTCx->RTC_ALAHour > 23)	return FAIL;	//错误
-	if(RTCx->RTC_ALAMin > 59)	return FAIL;	//错误
-	if(RTCx->RTC_ALASec > 59)	return FAIL;	//错误
-	if(RTCx->RTC_ALASsec > 127)	return FAIL;	//错误
+	if ( RTCx->RTC_Year > 99 )	return FAIL;	//错误
+	if ( RTCx->RTC_Month > 12 )	return FAIL;	//错误
+	if ( RTCx->RTC_Day > 31 )	return FAIL;	//错误
+	if ( RTCx->RTC_Hour > 23 )	return FAIL;	//错误
+	if ( RTCx->RTC_Min > 59 )	return FAIL;	//错误
+	if ( RTCx->RTC_Sec > 59 )	return FAIL;	//错误
+	if ( RTCx->RTC_Ssec > 127 )	return FAIL;	//错误
+	if ( RTCx->RTC_ALAHour > 23 )	return FAIL;	//错误
+	if ( RTCx->RTC_ALAMin > 59 )	return FAIL;	//错误
+	if ( RTCx->RTC_ALASec > 59 )	return FAIL;	//错误
+	if ( RTCx->RTC_ALASsec > 127 )	return FAIL;	//错误
 
 	INIYEAR = RTCx->RTC_Year;
 	INIMONTH = RTCx->RTC_Month;
@@ -44,26 +51,26 @@ uint8_t	RTC_Inilize(RTC_InitTypeDef *RTCx)
 	ALAHOUR = RTCx->RTC_ALAHour;	//闹钟小时
 	ALAMIN  = RTCx->RTC_ALAMin;		//闹钟分钟
 	ALASEC  = RTCx->RTC_ALASec;		//闹钟秒
-	ALASSEC = RTCx->RTC_ALASsec;	//闹钟1/128秒
+	ALASSEC = RTCx->RTC_ALASsec;	//闹钟1 / 28秒
 
-	if(RTCx->RTC_Clock == RTC_IRC32KCR)
+	if ( RTCx->RTC_Clock == RTC_IRC32KCR )
 	{
     //STC32G 芯片使用内部32K时钟，休眠无法唤醒
 		IRC32KCR = 0x80;   //启动内部32K晶振.
-		while (!(IRC32KCR & 1));  //等待时钟稳定
+		while (!( IRC32KCR & 1 ));  //等待时钟稳定
 		RTCCFG = 0x03;    //选择内部32K时钟源，触发RTC寄存器初始化
 	}
 	else
 	{
 		X32KCR = 0x80 + 0x40;   //启动外部32K晶振, 低增益+0x00, 高增益+0x40.
-		while (!(X32KCR & 1));  //等待时钟稳定
+		while (!( X32KCR & 1 ));  //等待时钟稳定
 		RTCCFG = 0x01;    //选择外部32K时钟源，触发RTC寄存器初始化
 	}
 
-	if(RTCx->RTC_Enable == ENABLE)
+	if ( RTCx->RTC_Enable == ENABLE )
 	{
 		RTCCR = 0x01;     //RTC使能
-		while(RTCCFG & 0x01);	//等待初始化完成,需要在 "RTC使能" 之后判断. 
+		while ( RTCCFG & 0x01 );	//等待初始化完成,需要在 "RTC使能" 之后判断. 
 		//设置RTC时间需要32768Hz的1个周期时间,大约30.5us. 由于同步, 所以实际等待时间是0~30.5us.
 		//如果不等待设置完成就睡眠, 则RTC会由于设置没完成, 停止计数, 唤醒后才继续完成设置并继续计数.
 	}
@@ -74,5 +81,4 @@ uint8_t	RTC_Inilize(RTC_InitTypeDef *RTCx)
 	
 	return SUCCESS;
 }
-
 

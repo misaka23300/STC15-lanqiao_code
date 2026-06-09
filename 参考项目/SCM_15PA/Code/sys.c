@@ -1,3 +1,10 @@
+/**
+ * @file sys.c
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "sys.h"
 
 //
@@ -5,16 +12,14 @@ unsigned int frq = 0;
 static unsigned int ms[7];
 bdata unsigned char flag = 0;
 
-
-
 //
-void buzOff(void)
+void buzOff( void )
 {
-    LED(0xFF);
-    BUZ(0x00);
+    LED(0xFF );
+    BUZ(0x00 );
 }
 
-void delay10Ms(void)
+void delay10Ms( void )
 {
 	unsigned char i, j;
 
@@ -22,12 +27,12 @@ void delay10Ms(void)
 	j = 145;
 	do
 	{
-		while (--j);
-	} while (--i);
+		while (--j );
+	} while (--i );
 }
 
 //Timer0 as frquency timer
-void initFrqTimer(void)
+void initFrqTimer( void )
 {
 	AUXR &= 0x7F;
 
@@ -38,11 +43,11 @@ void initFrqTimer(void)
 	TF0 = 0;
 }
 
-void calFrq(void)
+void calFrq( void )
 {
 	
 	TR0 = 0;	//暂停计数器
-	frq = ((TH0 << 8) | TL0);
+	frq = (( TH0 << 8 ) | TL0 );
 	frq *= 5;
 
 	TH0 = 0;
@@ -51,7 +56,7 @@ void calFrq(void)
 }
 
 //Timer2 as system tick timer
-void initSysTick(void)
+void initSysTick( void )
 {
     AUXR |= 0x04;
     T2L = 0x20;
@@ -62,33 +67,33 @@ void initSysTick(void)
 }
 
 //
-void isrSysTick(void)    interrupt 12
+void isrSysTick( void )    interrupt 12
 {
 	segDsp();
 
     //KEY
-	if(++ms[0] == 10){
+	if (++ms[0] == 10 ){
 		ms[0] = 0;  flag |= 0x01;	
 	}
     //DSP update
-	if(++ms[1] == 100){
+	if (++ms[1] == 100 ){
 		ms[1] = 0;  flag |= 0x02;
 	}
     //LED update
-	if(++ms[2] == 200){
+	if (++ms[2] == 200 ){
 		ms[2] = 0;  flag |= 0x04;
 	}
     //
-	if(++ms[3] == 200){
+	if (++ms[3] == 200 ){
 		ms[3] = 0;  flag |= 0x08;
 	}
-    //FRQ-CAL
-	if(++ms[4] == 200){
+    //FRQ - AL
+	if (++ms[4] == 200 ){
 		ms[4] = 0;
         calFrq();
 	}
-    //RTC-FRQ Data
-	if(++ms[5] == 200){
+    //RTC - RQ Data
+	if (++ms[5] == 200 ){
 		ms[5] = 0;  flag |= 0x20;
 	}
 }

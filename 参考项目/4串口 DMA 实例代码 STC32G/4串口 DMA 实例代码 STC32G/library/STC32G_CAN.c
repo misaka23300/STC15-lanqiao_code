@@ -1,14 +1,21 @@
+/**
+ * @file STC32G_CAN.c
+ * @brief æœªæŒ‡å®šæè¿°
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCAI.com ---------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* Èç¹ûÒªÔÚ³ÌÐòÖÐÊ¹ÓÃ´Ë´úÂë,ÇëÔÚ³ÌÐòÖÐ×¢Ã÷Ê¹ÓÃÁËSTCµÄ×ÊÁÏ¼°³ÌÐò            */
+/* ÒªÚ³Ê¹Ã´Ë´,Ú³×¢Ê¹STCÏ¼            */
 /*---------------------------------------------------------------------*/
 
 #include "STC32G_CAN.h"
@@ -20,15 +27,15 @@ CAN_DataDef CAN2_Tx;
 CAN_DataDef CAN2_Rx[8];
 
 //========================================================================
-// º¯Êý: u8 ReadReg(u8 addr)
-// ÃèÊö: CAN¹¦ÄÜ¼Ä´æÆ÷¶ÁÈ¡º¯Êý¡£
-// ²ÎÊý: CAN¹¦ÄÜ¼Ä´æÆ÷µØÖ·.
-// ·µ»Ø: CAN¹¦ÄÜ¼Ä´æÆ÷Êý¾Ý.
-// °æ±¾: VER1.0
-// ÈÕÆÚ: 2020-11-16
-// ±¸×¢: 
+// : u8 ReadReg( u8 addr )
+// : CANÜ¼Ä´È¡
+// : CANÜ¼Ä´Ö·.
+// : CANÜ¼Ä´.
+// æ±¾: VER1.0
+// : 2020 - 1 - 6
+// ×¢: 
 //========================================================================
-u8 CanReadReg(u8 addr)
+u8 CanReadReg( u8 addr )
 {
     u8 dat;
     CANAR = addr;
@@ -37,198 +44,198 @@ u8 CanReadReg(u8 addr)
 }
 
 //========================================================================
-// º¯Êý: void WriteReg(u8 addr, u8 dat)
-// ÃèÊö: CAN¹¦ÄÜ¼Ä´æÆ÷ÅäÖÃº¯Êý¡£
-// ²ÎÊý: CAN¹¦ÄÜ¼Ä´æÆ÷µØÖ·, CAN¹¦ÄÜ¼Ä´æÆ÷Êý¾Ý.
-// ·µ»Ø: none.
-// °æ±¾: VER1.0
-// ÈÕÆÚ: 2020-11-16
-// ±¸×¢: 
+// : void WriteReg( u8 addr, u8 dat )
+// : CANÜ¼Ä´Ãº
+// : CANÜ¼Ä´Ö·, CANÜ¼Ä´.
+// : none.
+// æ±¾: VER1.0
+// : 2020 - 1 - 6
+// ×¢: 
 //========================================================================
-void CanWriteReg(u8 addr, u8 dat)
+void CanWriteReg( u8 addr, u8 dat )
 {
     CANAR = addr;
     CANDR = dat;
 }
 
 //========================================================================
-// º¯Êý: void CAN_Inilize(u8 CANx, CAN_InitTypeDef *CAN)
-// ÃèÊö: CAN ³õÊ¼»¯³ÌÐò.
-// ²ÎÊý: CAN: ½á¹¹²ÎÊý,Çë²Î¿¼CAN.hÀïµÄ¶¨Òå.
-// ·µ»Ø: none.
-// °æ±¾: V1.0, 2021-06-02
+// : void CAN_Inilize( u8 CANx, CAN_InitTypeDef *CAN )
+// : CAN Ê¼.
+// : CAN: á¹¹,Î¿CAN.hÄ¶.
+// : none.
+// æ±¾: V1.0, 2021 - 6 - 2
 //========================================================================
-void CAN_Inilize(u8 CANx, CAN_InitTypeDef *CAN)
+void CAN_Inilize( u8 CANx, CAN_InitTypeDef *CAN )
 {
-    if(CANx == CAN1)
+    if ( CANx == CAN1 )
     {
-        CANSEL = CAN1;		//Ñ¡ÔñCAN1Ä£¿é
-        CanWriteReg(MR  ,0x04);		//Ê¹ÄÜ Reset Mode
+        CANSEL = CAN1;		//Ñ¡CAN1Ä£
+        CanWriteReg( MR  , 0x04 );		//Ê¹ Reset Mode
 
-        if(CAN->CAN_Enable == ENABLE)	CANEN = 1;		//Ê¹ÄÜCAN1Ä£¿é
-        else								CANEN = 0;		//¹Ø±ÕCAN1Ä£¿é
+        if ( CAN->CAN_Enable == ENABLE )	CANEN = 1;		//Ê¹CAN1Ä£
+        else								CANEN = 0;		//Ø±CAN1Ä£
         
-        CanWriteReg(BTR0,(u8)((CAN->CAN_SJW << 6) + CAN->CAN_BRP));
-        CanWriteReg(BTR1,(u8)((CAN->CAN_SAM << 7) + (CAN->CAN_TSG2 << 4) + CAN->CAN_TSG1));
+        CanWriteReg( BTR0,( u8 )(( CAN->CAN_SJW << 6 ) + CAN->CAN_BRP ));
+        CanWriteReg( BTR1,( u8 )(( CAN->CAN_SAM << 7 ) + ( CAN->CAN_TSG2 << 4 ) + CAN->CAN_TSG1 ));
 
-        CanWriteReg(ACR0,CAN->CAN_ACR0);		//×ÜÏßÑéÊÕ´úÂë¼Ä´æÆ÷
-        CanWriteReg(ACR1,CAN->CAN_ACR1);
-        CanWriteReg(ACR2,CAN->CAN_ACR2);
-        CanWriteReg(ACR3,CAN->CAN_ACR3);
-        CanWriteReg(AMR0,CAN->CAN_AMR0);		//×ÜÏßÑéÊÕÆÁ±Î¼Ä´æÆ÷
-        CanWriteReg(AMR1,CAN->CAN_AMR1);
-        CanWriteReg(AMR2,CAN->CAN_AMR2);
-        CanWriteReg(AMR3,CAN->CAN_AMR3);
+        CanWriteReg( ACR0, CAN->CAN_ACR0 );		//Õ´Ä´
+        CanWriteReg( ACR1, CAN->CAN_ACR1 );
+        CanWriteReg( ACR2, CAN->CAN_ACR2 );
+        CanWriteReg( ACR3, CAN->CAN_ACR3 );
+        CanWriteReg( AMR0, CAN->CAN_AMR0 );		//Î¼Ä´
+        CanWriteReg( AMR1, CAN->CAN_AMR1 );
+        CanWriteReg( AMR2, CAN->CAN_AMR2 );
+        CanWriteReg( AMR3, CAN->CAN_AMR3 );
 
-        CanWriteReg(ISR ,0xff);		//ÇåÖÐ¶Ï±êÖ¾
-        CanWriteReg(IMR ,CAN->CAN_IMR);			//ÖÐ¶Ï¼Ä´æÆ÷ÉèÖÃ
-        CanWriteReg(MR  ,0x00);		//ÍË³ö Reset Mode
+        CanWriteReg( ISR , 0xff );		//Ð¶Ï±Ö¾
+        CanWriteReg( IMR , CAN->CAN_IMR );			//Ð¶Ï¼Ä´
+        CanWriteReg( MR  , 0x00 );		//Ë³ Reset Mode
     }
-    else if(CANx == CAN2)
+    else if ( CANx == CAN2 )
     {
-        CANSEL = CAN2;		//Ñ¡ÔñCAN2Ä£¿é
+        CANSEL = CAN2;		//Ñ¡CAN2Ä£
         
-        CanWriteReg(MR  ,0x04);		//Ê¹ÄÜ Reset Mode
+        CanWriteReg( MR  , 0x04 );		//Ê¹ Reset Mode
 
-        if(CAN->CAN_Enable == ENABLE)	CAN2EN = 1;		//Ê¹ÄÜCAN2Ä£¿é
-        else								CAN2EN = 0;		//¹Ø±ÕCAN2Ä£¿é
+        if ( CAN->CAN_Enable == ENABLE )	CAN2EN = 1;		//Ê¹CAN2Ä£
+        else								CAN2EN = 0;		//Ø±CAN2Ä£
         
-        CanWriteReg(BTR0,(u8)((CAN->CAN_SJW << 6) + CAN->CAN_BRP));
-        CanWriteReg(BTR1,(u8)((CAN->CAN_SAM << 7) + (CAN->CAN_TSG2 << 4) + CAN->CAN_TSG1));
+        CanWriteReg( BTR0,( u8 )(( CAN->CAN_SJW << 6 ) + CAN->CAN_BRP ));
+        CanWriteReg( BTR1,( u8 )(( CAN->CAN_SAM << 7 ) + ( CAN->CAN_TSG2 << 4 ) + CAN->CAN_TSG1 ));
 
-        CanWriteReg(ACR0,CAN->CAN_ACR0);		//×ÜÏßÑéÊÕ´úÂë¼Ä´æÆ÷
-        CanWriteReg(ACR1,CAN->CAN_ACR1);
-        CanWriteReg(ACR2,CAN->CAN_ACR2);
-        CanWriteReg(ACR3,CAN->CAN_ACR3);
-        CanWriteReg(AMR0,CAN->CAN_AMR0);		//×ÜÏßÑéÊÕÆÁ±Î¼Ä´æÆ÷
-        CanWriteReg(AMR1,CAN->CAN_AMR1);
-        CanWriteReg(AMR2,CAN->CAN_AMR2);
-        CanWriteReg(AMR3,CAN->CAN_AMR3);
+        CanWriteReg( ACR0, CAN->CAN_ACR0 );		//Õ´Ä´
+        CanWriteReg( ACR1, CAN->CAN_ACR1 );
+        CanWriteReg( ACR2, CAN->CAN_ACR2 );
+        CanWriteReg( ACR3, CAN->CAN_ACR3 );
+        CanWriteReg( AMR0, CAN->CAN_AMR0 );		//Î¼Ä´
+        CanWriteReg( AMR1, CAN->CAN_AMR1 );
+        CanWriteReg( AMR2, CAN->CAN_AMR2 );
+        CanWriteReg( AMR3, CAN->CAN_AMR3 );
 
-        CanWriteReg(ISR ,0xff);		//ÇåÖÐ¶Ï±êÖ¾
-        CanWriteReg(IMR ,CAN->CAN_IMR);			//ÖÐ¶Ï¼Ä´æÆ÷ÉèÖÃ
-        CanWriteReg(MR  ,0x00);		//ÍË³ö Reset Mode
+        CanWriteReg( ISR , 0xff );		//Ð¶Ï±Ö¾
+        CanWriteReg( IMR , CAN->CAN_IMR );			//Ð¶Ï¼Ä´
+        CanWriteReg( MR  , 0x00 );		//Ë³ Reset Mode
     }
 }
 
 //========================================================================
-// º¯Êý: void CanReadFifo(CAN_DataDef *CANx)
-// ÃèÊö: ¶ÁÈ¡CAN»º³åÇøÊý¾Ýº¯Êý¡£
-// ²ÎÊý: *CANx: ´æ·ÅCAN×ÜÏß¶ÁÈ¡Êý¾Ý.
-// ·µ»Ø: none.
-// °æ±¾: VER2.0
-// ÈÕÆÚ: 2023-01-31
-// ±¸×¢: 
+// : void CanReadFifo( CAN_DataDef *CANx )
+// : È¡CANÝº
+// : *CANx: CANß¶È¡.
+// : none.
+// æ±¾: VER2.0
+// : 2023 - 1 - 1
+// ×¢: 
 //========================================================================
-void CanReadFifo(CAN_DataDef *CAN)
+void CanReadFifo( CAN_DataDef *CAN )
 {
     u8 i;
     u8 pdat[5];
-    u8 RX_Index=0;
+    u8 RX_Index = ;
 
-    pdat[0] = CanReadReg((u8)(RX_BUF0 + (RX_Index++&3)));
+    pdat[0] = CanReadReg(( u8 )( RX_BUF0 + ( RX_Index++&3 )));
 
-    if(pdat[0] & 0x80)  //ÅÐ¶ÏÊÇ±ê×¼Ö¡»¹ÊÇÀ©Õ¹Ö¡
+    if ( pdat[0] & 0x80 )  //Ð¶Ç±×¼Ö¡Õ¹Ö¡
     {
-        pdat[1] = CanReadReg((u8)(RX_BUF0 + (RX_Index++&3)));   //À©Õ¹Ö¡IDÕ¼4¸ö×Ö½Ú
-        pdat[2] = CanReadReg((u8)(RX_BUF0 + (RX_Index++&3)));
-        pdat[3] = CanReadReg((u8)(RX_BUF0 + (RX_Index++&3)));
-        pdat[4] = CanReadReg((u8)(RX_BUF0 + (RX_Index++&3)));
-        CAN->ID = (((u32)pdat[1] << 24) + ((u32)pdat[2] << 16) + ((u32)pdat[3] << 8) + pdat[4]) >> 3;
+        pdat[1] = CanReadReg(( u8 )( RX_BUF0 + ( RX_Index++&3 )));   //Õ¹Ö¡IDÕ¼4Ö½
+        pdat[2] = CanReadReg(( u8 )( RX_BUF0 + ( RX_Index++&3 )));
+        pdat[3] = CanReadReg(( u8 )( RX_BUF0 + ( RX_Index++&3 )));
+        pdat[4] = CanReadReg(( u8 )( RX_BUF0 + ( RX_Index++&3 )));
+        CAN->ID = ((( u32 )pdat[1] << 24 ) + (( u32 )pdat[2] << 16 ) + (( u32 )pdat[3] << 8 ) + pdat[4]) >> 3;
     }
     else
     {
-        pdat[1] = CanReadReg((u8)(RX_BUF0 + (RX_Index++&3)));   //±ê×¼Ö¡IDÕ¼2¸ö×Ö½Ú
-        pdat[2] = CanReadReg((u8)(RX_BUF0 + (RX_Index++&3)));
-        CAN->ID = ((pdat[1] << 8) + pdat[2]) >> 5;
+        pdat[1] = CanReadReg(( u8 )( RX_BUF0 + ( RX_Index++&3 )));   //×¼Ö¡IDÕ¼2Ö½
+        pdat[2] = CanReadReg(( u8 )( RX_BUF0 + ( RX_Index++&3 )));
+        CAN->ID = (( pdat[1] << 8 ) + pdat[2]) >> 5;
     }
     
-    CAN->FF = pdat[0] >> 7;     //Ö¡¸ñÊ½
-    CAN->RTR = pdat[0] >> 6;    //Ö¡ÀàÐÍ
-    CAN->DLC = pdat[0];         //Êý¾Ý³¤¶È
+    CAN->FF = pdat[0] >> 7;     //Ö¡Ê½
+    CAN->RTR = pdat[0] >> 6;    //Ö¡
+    CAN->DLC = pdat[0];         //Ý³
 
-    for(i=0;((i<CAN->DLC) && (i<8));i++)        //¶ÁÈ¡Êý¾Ý³¤¶ÈÎªlen£¬×î¶à²»³¬¹ý8
+    for ( i = ;(( i < AN->DLC ) && ( i < ));i++)        //È¡Ý³Îªlenà²»8
     {
-        CAN->DataBuffer[i] = CanReadReg((u8)(RX_BUF0 + (RX_Index++&3)));   //¶ÁÈ¡ÓÐÐ§Êý¾Ý
+        CAN->DataBuffer[i] = CanReadReg(( u8 )( RX_BUF0 + ( RX_Index++&3 )));   //È¡Ð§
     }
-    while(RX_Index&3)   //ÅÐ¶ÏÒÑ¶ÁÊý¾Ý³¤¶ÈÊÇ·ñ4µÄÕûÊý±¶
+    while ( RX_Index&3 )   //Ð¶Ñ¶Ý³Ç·4
     {
-        CanReadReg((u8)(RX_BUF0 + (RX_Index++&3)));  //¶ÁÈ¡Ìî³äÊý¾Ý£¬Ò»Ö¡Êý¾ÝÕ¼¾Ý4µÄÕûÊý±¶»º³åÇø¿Õ¼ä£¬²»×ã²¹0
+        CanReadReg(( u8 )( RX_BUF0 + ( RX_Index++&3 )));  //È¡Ý£Ò»Ö¡Õ¼4Õ¼ä£¬ã²¹0
     }
 }
 
 //========================================================================
-// º¯Êý: u8 CanReadMsg(void)
-// ÃèÊö: CAN½ÓÊÕÊý¾Ýº¯Êý¡£
-// ²ÎÊý: *CANx: ´æ·ÅCAN×ÜÏß¶ÁÈ¡Êý¾Ý..
-// ·µ»Ø: Ö¡¸öÊý.
-// °æ±¾: VER2.0
-// ÈÕÆÚ: 2023-01-31
-// ±¸×¢: 
+// : u8 CanReadMsg( void )
+// : CANÝº
+// : *CANx: CANß¶È¡..
+// : Ö¡.
+// æ±¾: VER2.0
+// : 2023 - 1 - 1
+// ×¢: 
 //========================================================================
-u8 CanReadMsg(CAN_DataDef *CAN)
+u8 CanReadMsg( CAN_DataDef *CAN )
 {
     u8 i;
-    u8 n=0;
+    u8 n = ;
 
     do{
-        CanReadFifo(&CAN[n++]);  //¶ÁÈ¡½ÓÊÕ»º³åÇøÊý¾Ý
-        i = CanReadReg(SR);
-    }while(i&0x80);     //ÅÐ¶Ï½ÓÊÕ»º³åÇøÀïÊÇ·ñ»¹ÓÐÊý¾Ý£¬ÓÐµÄ»°¼ÌÐø¶ÁÈ¡
+        CanReadFifo(&CAN[n++]);  //È¡Õ»
+        i = CanReadReg( SR );
+    }while ( i&0x80 );     //Ð¶Ï½Õ»Ç·Ý£ÐµÄ»È¡
 
-    return n;   //·µ»ØÖ¡¸öÊý
+    return n;   //Ö¡
 }
 
 //========================================================================
-// º¯Êý: void CanSendMsg(CAN_DataDef *CAN)
-// ÃèÊö: CAN·¢ËÍ±ê×¼Ö¡º¯Êý¡£
-// ²ÎÊý: *CANx: ´æ·ÅCAN×ÜÏß·¢ËÍÊý¾Ý..
-// ·µ»Ø: none.
-// °æ±¾: VER1.0
-// ÈÕÆÚ: 2020-11-19
-// ±¸×¢: 
+// : void CanSendMsg( CAN_DataDef *CAN )
+// : CANÍ±×¼Ö¡
+// : *CANx: CANß·..
+// : none.
+// æ±¾: VER1.0
+// : 2020 - 1 - 9
+// ×¢: 
 //========================================================================
-void CanSendMsg(CAN_DataDef *CAN)
+void CanSendMsg( CAN_DataDef *CAN )
 {
 	u32 CanID;
-    u8 RX_Index,i;
+    u8 RX_Index, i;
 
-    if(CAN->FF)     //ÅÐ¶ÏÊÇ·ñÀ©Õ¹Ö¡
+    if ( CAN->FF )     //Ð¶Ç·Õ¹Ö¡
     {
         CanID = CAN->ID << 3;
-        CanWriteReg(TX_BUF0,CAN->DLC|((u8)CAN->RTR<<6)|0x80);	//bit7: ±ê×¼Ö¡(0)/À©Õ¹Ö¡(1), bit6: Êý¾ÝÖ¡(0)/Ô¶³ÌÖ¡(1), bit3~bit0: Êý¾Ý³¤¶È(DLC)
-        CanWriteReg(TX_BUF1,(u8)(CanID>>24));
-        CanWriteReg(TX_BUF2,(u8)(CanID>>16));
-        CanWriteReg(TX_BUF3,(u8)(CanID>>8));
+        CanWriteReg( TX_BUF0, CAN->DLC|(( u8 )CAN->RTR<<6 )|0x80 );	//bit7: ×¼Ö¡(0 )/Õ¹Ö¡(1 ), bit6: Ö¡(0 )/Ô¶Ö¡(1 ), bit3~bit0: Ý³( DLC )
+        CanWriteReg( TX_BUF1,( u8 )( CanID>>24 ));
+        CanWriteReg( TX_BUF2,( u8 )( CanID>>16 ));
+        CanWriteReg( TX_BUF3,( u8 )( CanID>>8 ));
 
-        CanWriteReg(TX_BUF0,(u8)CanID);
+        CanWriteReg( TX_BUF0,( u8 )CanID );
 
         RX_Index = 1;
-        for(i=0;((i<CAN->DLC) && (i<8));i++)        //Êý¾Ý³¤¶ÈÎªDLC£¬×î¶à²»³¬¹ý8
+        for ( i = ;(( i < AN->DLC ) && ( i < ));i++)        //Ý³ÎªDLCà²»8
         {
-            CanWriteReg((u8)(TX_BUF0 + (RX_Index++&3)),CAN->DataBuffer[i]);   //Ð´ÈëÓÐÐ§Êý¾Ý
+            CanWriteReg(( u8 )( TX_BUF0 + ( RX_Index++&3 )), CAN->DataBuffer[i]);   //Ð´Ð§
         }
-        while(RX_Index&3)   //ÅÐ¶ÏÒÑ¶ÁÊý¾Ý³¤¶ÈÊÇ·ñ4µÄÕûÊý±¶
+        while ( RX_Index&3 )   //Ð¶Ñ¶Ý³Ç·4
         {
-            CanWriteReg((u8)(TX_BUF0 + (RX_Index++&3)),0x00);  //Ð´ÈëÌî³äÊý¾Ý£¬Ò»Ö¡Êý¾ÝÕ¼¾Ý4µÄÕûÊý±¶»º³åÇø¿Õ¼ä£¬²»×ã²¹0
+            CanWriteReg(( u8 )( TX_BUF0 + ( RX_Index++&3 )), 0x00 );  //Ð´Ý£Ò»Ö¡Õ¼4Õ¼ä£¬ã²¹0
         }
     }
-    else    //·¢ËÍ±ê×¼Ö¡
+    else    //Í±×¼Ö¡
     {
-        CanID = (u16)(CAN->ID << 5);
-        CanWriteReg(TX_BUF0,CAN->DLC|((u8)CAN->RTR<<6));  //bit7: ±ê×¼Ö¡(0)/À©Õ¹Ö¡(1), bit6: Êý¾ÝÖ¡(0)/Ô¶³ÌÖ¡(1), bit3~bit0: Êý¾Ý³¤¶È(DLC)
-        CanWriteReg(TX_BUF1,(u8)(CanID>>8));
-        CanWriteReg(TX_BUF2,(u8)CanID);
+        CanID = ( u16 )( CAN->ID << 5 );
+        CanWriteReg( TX_BUF0, CAN->DLC|(( u8 )CAN->RTR<<6 ));  //bit7: ×¼Ö¡(0 )/Õ¹Ö¡(1 ), bit6: Ö¡(0 )/Ô¶Ö¡(1 ), bit3~bit0: Ý³( DLC )
+        CanWriteReg( TX_BUF1,( u8 )( CanID>>8 ));
+        CanWriteReg( TX_BUF2,( u8 )CanID );
 
         RX_Index = 3;
-        for(i=0;((i<CAN->DLC) && (i<8));i++)        //Êý¾Ý³¤¶ÈÎªDLC£¬×î¶à²»³¬¹ý8
+        for ( i = ;(( i < AN->DLC ) && ( i < ));i++)        //Ý³ÎªDLCà²»8
         {
-            CanWriteReg((u8)(TX_BUF0 + (RX_Index++&3)),CAN->DataBuffer[i]);   //Ð´ÈëÓÐÐ§Êý¾Ý
+            CanWriteReg(( u8 )( TX_BUF0 + ( RX_Index++&3 )), CAN->DataBuffer[i]);   //Ð´Ð§
         }
-        while(RX_Index&3)   //ÅÐ¶ÏÒÑ¶ÁÊý¾Ý³¤¶ÈÊÇ·ñ4µÄÕûÊý±¶
+        while ( RX_Index&3 )   //Ð¶Ñ¶Ý³Ç·4
         {
-            CanWriteReg((u8)(TX_BUF0 + (RX_Index++&3)),0x00);  //Ð´ÈëÌî³äÊý¾Ý£¬Ò»Ö¡Êý¾ÝÕ¼¾Ý4µÄÕûÊý±¶»º³åÇø¿Õ¼ä£¬²»×ã²¹0
+            CanWriteReg(( u8 )( TX_BUF0 + ( RX_Index++&3 )), 0x00 );  //Ð´Ý£Ò»Ö¡Õ¼4Õ¼ä£¬ã²¹0
         }
     }
-	CanWriteReg(CMR ,0x04);		//·¢ÆðÒ»´ÎÖ¡´«Êä
+	CanWriteReg( CMR , 0x04 );		//Ò»Ö¡
 }

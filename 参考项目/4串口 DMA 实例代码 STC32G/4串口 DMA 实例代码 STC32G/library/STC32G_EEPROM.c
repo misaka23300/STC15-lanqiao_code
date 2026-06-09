@@ -1,127 +1,134 @@
+/**
+ * @file STC32G_EEPROM.c
+ * @brief æœªæŒ‡å®šæè¿°
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCAI.com ---------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* Èç¹ûÒªÔÚ³ÌÐòÖÐÊ¹ÓÃ´Ë´úÂë,ÇëÔÚ³ÌÐòÖÐ×¢Ã÷Ê¹ÓÃÁËSTCµÄ×ÊÁÏ¼°³ÌÐò            */
+/* ÒªÚ³Ê¹Ã´Ë´,Ú³×¢Ê¹STCÏ¼            */
 /*---------------------------------------------------------------------*/
 
 #include "STC32G_EEPROM.h"
 
 //========================================================================
-// º¯Êý: void ISP_Disable(void)
-// ÃèÊö: ½ûÖ¹·ÃÎÊISP/IAP.
-// ²ÎÊý: non.
-// ·µ»Ø: non.
-// °æ±¾: V1.0, 2012-10-22
+// : void ISP_Disable( void )
+// : Ö¹ISP / AP.
+// : non.
+// : non.
+// æ±¾: V1.0, 2012 - 0 - 2
 //========================================================================
-void DisableEEPROM(void)
+void DisableEEPROM( void )
 {
-	IAP_CONTR = 0;			//½ûÖ¹IAP²Ù×÷
-	IAP_CMD   = 0;			//È¥³ýIAPÃüÁî
-	IAP_TRIG  = 0;			//·ÀÖ¹IAPÃüÁîÎó´¥·¢
-	IAP_ADDRE = 0xff;   //½«µØÖ·ÉèÖÃµ½·Ç IAP ÇøÓò
-	IAP_ADDRH = 0xff;   //½«µØÖ·ÉèÖÃµ½·Ç IAP ÇøÓò
+	IAP_CONTR = 0;			//Ö¹IAP
+	IAP_CMD   = 0;			//È¥IAP
+	IAP_TRIG  = 0;			//Ö¹IAPó´¥·
+	IAP_ADDRE = 0xff;   //Ö·Ãµ IAP 
+	IAP_ADDRH = 0xff;   //Ö·Ãµ IAP 
 	IAP_ADDRL = 0xff;
 }
 
 //========================================================================
-// º¯Êý: void EEPROM_Trig(void)
-// ÃèÊö: ´¥·¢EEPROM²Ù×÷.
-// ²ÎÊý: none.
-// ·µ»Ø: none.
-// °æ±¾: V1.0, 2014-6-30
+// : void EEPROM_Trig( void )
+// : EEPROM.
+// : none.
+// : none.
+// æ±¾: V1.0, 2014 - -30
 //========================================================================
-void EEPROM_Trig(void)
+void EEPROM_Trig( void )
 {
-	F0 = EA;    //±£´æÈ«¾ÖÖÐ¶Ï
-	EA = 0;     //½ûÖ¹ÖÐ¶Ï, ±ÜÃâ´¥·¢ÃüÁîÎÞÐ§
+	F0 = EA;    //È«Ð¶
+	EA = 0;     //Ö¹Ð¶, â´¥Ð§
 	IAP_TRIG = 0x5A;
-	IAP_TRIG = 0xA5;                    //ÏÈËÍ5AH£¬ÔÙËÍA5Hµ½IAP´¥·¢¼Ä´æÆ÷£¬Ã¿´Î¶¼ÐèÒªÈç´Ë
-																			//ËÍÍêA5Hºó£¬IAPÃüÁîÁ¢¼´±»´¥·¢Æô¶¯
-																			//CPUµÈ´ýIAPÍê³Éºó£¬²Å»á¼ÌÐøÖ´ÐÐ³ÌÐò¡£
-	_nop_();   //ÓÉÓÚSTC32GÊÇ¶à¼¶Á÷Ë®ÏßµÄÖ¸ÁîÏµÍ³£¬´¥·¢ÃüÁîºó½¨Òé¼Ó4¸öNOP£¬±£Ö¤IAP_DATAµÄÊý¾ÝÍê³É×¼±¸
+	IAP_TRIG = 0xA5;                    //5AHA5HIAPÄ´Ã¿Î¶Òª
+																			//A5HIAP
+																			//CPUÈ´IAPÉºó£¬²Å»Ö´Ð³
+	_nop_();   //STC32GÇ¶à¼¶Ë®ßµÖ¸ÏµÍ³4NOPÖ¤IAP_DATA×¼
 	_nop_();
 	_nop_();
 	_nop_();
-	EA = F0;    //»Ö¸´È«¾ÖÖÐ¶Ï
+	EA = F0;    //Ö¸È«Ð¶
 }
 
 //========================================================================
-// º¯Êý: void EEPROM_read_n(u32 EE_address,u8 *DataAddress,u16 number)
-// ÃèÊö: ´ÓÖ¸¶¨EEPROMÊ×µØÖ·¶Á³ön¸ö×Ö½Ú·ÅÖ¸¶¨µÄ»º³å.
-// ²ÎÊý: EE_address:  ¶Á³öEEPROMµÄÊ×µØÖ·.
-//       DataAddress: ¶Á³öÊý¾Ý·Å»º³åµÄÊ×µØÖ·.
-//       number:      ¶Á³öµÄ×Ö½Ú³¤¶È.
-// ·µ»Ø: non.
-// °æ±¾: V1.0, 2012-10-22
+// : void EEPROM_read_n( u32 EE_address, u8 *DataAddress, u16 number )
+// : Ö¸EEPROM×µÖ·nÖ½Ú·Ö¸Ä».
+// : EE_address:  EEPROM×µÖ·.
+//       DataAddress: Ý·Å»×µÖ·.
+//       number:      Ö½Ú³.
+// : non.
+// æ±¾: V1.0, 2012 - 0 - 2
 //========================================================================
-void EEPROM_read_n(u32 EE_address,u8 *DataAddress,u16 number)
+void EEPROM_read_n( u32 EE_address, u8 *DataAddress, u16 number )
 {
-	IAP_ENABLE();                           //ÉèÖÃµÈ´ýÊ±¼ä£¬ÔÊÐíIAP²Ù×÷£¬ËÍÒ»´Î¾Í¹»
-	IAP_READ();                             //ËÍ×Ö½Ú¶ÁÃüÁî£¬ÃüÁî²»Ðè¸Ä±äÊ±£¬²»ÐèÖØÐÂËÍÃüÁî
+	IAP_ENABLE();                           //ÃµÈ´Ê±ä£¬IAPÒ»Î¾Í¹
+	IAP_READ();                             //Ö½Ú¶î£¬î²»Ä±Ê±
 	do
 	{
-		IAP_ADDRE = (u8)(EE_address >> 16); //ËÍµØÖ·¸ß×Ö½Ú£¨µØÖ·ÐèÒª¸Ä±äÊ±²ÅÐèÖØÐÂËÍµØÖ·£©
-		IAP_ADDRH = (u8)(EE_address >> 8);  //ËÍµØÖ·ÖÐ×Ö½Ú£¨µØÖ·ÐèÒª¸Ä±äÊ±²ÅÐèÖØÐÂËÍµØÖ·£©
-		IAP_ADDRL = (u8)EE_address;         //ËÍµØÖ·µÍ×Ö½Ú£¨µØÖ·ÐèÒª¸Ä±äÊ±²ÅÐèÖØÐÂËÍµØÖ·£©
-		EEPROM_Trig();                      //´¥·¢EEPROM²Ù×÷
-		*DataAddress = IAP_DATA;            //¶Á³öµÄÊý¾ÝËÍÍù
+		IAP_ADDRE = ( u8 )( EE_address >> 16 ); //ÍµÖ·Ö½Ú£Ö·ÒªÄ±Ê±ÍµÖ·
+		IAP_ADDRH = ( u8 )( EE_address >> 8 );  //ÍµÖ·Ö½Ú£Ö·ÒªÄ±Ê±ÍµÖ·
+		IAP_ADDRL = ( u8 )EE_address;         //ÍµÖ·Ö½Ú£Ö·ÒªÄ±Ê±ÍµÖ·
+		EEPROM_Trig();                      //EEPROM
+		*DataAddress = IAP_DATA;            //
 		EE_address++;
 		DataAddress++;
-	}while(--number);
+	}while (--number );
 
 	DisableEEPROM();
 }
 
 //========================================================================
-// º¯Êý: void EEPROM_SectorErase(u32 EE_address)
-// ÃèÊö: °ÑÖ¸¶¨µØÖ·µÄEEPROMÉÈÇø²Á³ý.
-// ²ÎÊý: EE_address:  Òª²Á³ýµÄÉÈÇøEEPROMµÄµØÖ·.
-// ·µ»Ø: non.
-// °æ±¾: V1.0, 2013-5-10
+// : void EEPROM_SectorErase( u32 EE_address )
+// : Ö¸Ö·EEPROM.
+// : EE_address:  ÒªEEPROMÄµÖ·.
+// : non.
+// æ±¾: V1.0, 2013 - -10
 //========================================================================
-void EEPROM_SectorErase(u32 EE_address)
+void EEPROM_SectorErase( u32 EE_address )
 {
-	IAP_ENABLE();                       //ÉèÖÃµÈ´ýÊ±¼ä£¬ÔÊÐíIAP²Ù×÷£¬ËÍÒ»´Î¾Í¹»
-	IAP_ERASE();                        //ºêµ÷ÓÃ, ËÍÉÈÇø²Á³ýÃüÁî£¬ÃüÁî²»Ðè¸Ä±äÊ±£¬²»ÐèÖØÐÂËÍÃüÁî
-																			//Ö»ÓÐÉÈÇø²Á³ý£¬Ã»ÓÐ×Ö½Ú²Á³ý£¬512×Ö½Ú/ÉÈÇø¡£
-																			//ÉÈÇøÖÐÈÎÒâÒ»¸ö×Ö½ÚµØÖ·¶¼ÊÇÉÈÇøµØÖ·¡£
-	IAP_ADDRE = (u8)(EE_address >> 16); //ËÍÉÈÇøµØÖ·¸ß×Ö½Ú£¨µØÖ·ÐèÒª¸Ä±äÊ±²ÅÐèÖØÐÂËÍµØÖ·£©
-	IAP_ADDRH = (u8)(EE_address >> 8);  //ËÍÉÈÇøµØÖ·ÖÐ×Ö½Ú£¨µØÖ·ÐèÒª¸Ä±äÊ±²ÅÐèÖØÐÂËÍµØÖ·£©
-	IAP_ADDRL = (u8)EE_address;         //ËÍÉÈÇøµØÖ·µÍ×Ö½Ú£¨µØÖ·ÐèÒª¸Ä±äÊ±²ÅÐèÖØÐÂËÍµØÖ·£©
-	EEPROM_Trig();                      //´¥·¢EEPROM²Ù×÷
-	DisableEEPROM();                    //½ûÖ¹EEPROM²Ù×÷
+	IAP_ENABLE();                       //ÃµÈ´Ê±ä£¬IAPÒ»Î¾Í¹
+	IAP_ERASE();                        //, î£¬î²»Ä±Ê±
+																			//Ö»Ã»Ö½Ú²512Ö½/
+																			//Ò»Ö½ÚµÖ·Ö·
+	IAP_ADDRE = ( u8 )( EE_address >> 16 ); //Ö·Ö½Ú£Ö·ÒªÄ±Ê±ÍµÖ·
+	IAP_ADDRH = ( u8 )( EE_address >> 8 );  //Ö·Ö½Ú£Ö·ÒªÄ±Ê±ÍµÖ·
+	IAP_ADDRL = ( u8 )EE_address;         //Ö·Ö½Ú£Ö·ÒªÄ±Ê±ÍµÖ·
+	EEPROM_Trig();                      //EEPROM
+	DisableEEPROM();                    //Ö¹EEPROM
 }
 
 //========================================================================
-// º¯Êý: void EEPROM_write_n(u32 EE_address,u8 *DataAddress,u16 number)
-// ÃèÊö: °Ñ»º³åµÄn¸ö×Ö½ÚÐ´ÈëÖ¸¶¨Ê×µØÖ·µÄEEPROM.
-// ²ÎÊý: EE_address:  Ð´ÈëEEPROMµÄÊ×µØÖ·.
-//       DataAddress: Ð´ÈëÔ´Êý¾ÝµÄ»º³åµÄÊ×µØÖ·.
-//       number:      Ð´ÈëµÄ×Ö½Ú³¤¶È.
-// ·µ»Ø: non.
-// °æ±¾: V1.0, 2012-10-22
+// : void EEPROM_write_n( u32 EE_address, u8 *DataAddress, u16 number )
+// : Ñ»nÖ½Ð´Ö¸×µÖ·EEPROM.
+// : EE_address:  Ð´EEPROM×µÖ·.
+//       DataAddress: Ð´Ô´ÝµÄ»×µÖ·.
+//       number:      Ð´Ö½Ú³.
+// : non.
+// æ±¾: V1.0, 2012 - 0 - 2
 //========================================================================
-void EEPROM_write_n(u32 EE_address,u8 *DataAddress,u16 number)
+void EEPROM_write_n( u32 EE_address, u8 *DataAddress, u16 number )
 {
-	IAP_ENABLE();                       //ÉèÖÃµÈ´ýÊ±¼ä£¬ÔÊÐíIAP²Ù×÷£¬ËÍÒ»´Î¾Í¹»
-	IAP_WRITE();                        //ºêµ÷ÓÃ, ËÍ×Ö½ÚÐ´ÃüÁî
+	IAP_ENABLE();                       //ÃµÈ´Ê±ä£¬IAPÒ»Î¾Í¹
+	IAP_WRITE();                        //, Ö½Ð´
 	do
 	{
-		IAP_ADDRE = (u8)(EE_address >> 16); //ËÍµØÖ·¸ß×Ö½Ú£¨µØÖ·ÐèÒª¸Ä±äÊ±²ÅÐèÖØÐÂËÍµØÖ·£©
-		IAP_ADDRH = (u8)(EE_address >> 8);  //ËÍµØÖ·ÖÐ×Ö½Ú£¨µØÖ·ÐèÒª¸Ä±äÊ±²ÅÐèÖØÐÂËÍµØÖ·£©
-		IAP_ADDRL = (u8)EE_address;         //ËÍµØÖ·µÍ×Ö½Ú£¨µØÖ·ÐèÒª¸Ä±äÊ±²ÅÐèÖØÐÂËÍµØÖ·£©
-		IAP_DATA  = *DataAddress;         //ËÍÊý¾Ýµ½IAP_DATA£¬Ö»ÓÐÊý¾Ý¸Ä±äÊ±²ÅÐèÖØÐÂËÍ
-		EEPROM_Trig();                    //´¥·¢EEPROM²Ù×÷
-		EE_address++;                     //ÏÂÒ»¸öµØÖ·
-		DataAddress++;                    //ÏÂÒ»¸öÊý¾Ý
-	}while(--number);                   //Ö±µ½½áÊø
+		IAP_ADDRE = ( u8 )( EE_address >> 16 ); //ÍµÖ·Ö½Ú£Ö·ÒªÄ±Ê±ÍµÖ·
+		IAP_ADDRH = ( u8 )( EE_address >> 8 );  //ÍµÖ·Ö½Ú£Ö·ÒªÄ±Ê±ÍµÖ·
+		IAP_ADDRL = ( u8 )EE_address;         //ÍµÖ·Ö½Ú£Ö·ÒªÄ±Ê±ÍµÖ·
+		IAP_DATA  = *DataAddress;         //ÝµIAP_DATAÖ»Ý¸Ä±Ê±
+		EEPROM_Trig();                    //EEPROM
+		EE_address++;                     //Ò»Ö·
+		DataAddress++;                    //Ò»
+	}while (--number );                   //Ö±
 	DisableEEPROM();
 }
 

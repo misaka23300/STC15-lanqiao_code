@@ -1,9 +1,16 @@
+/**
+ * @file STC32G_LCM.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCMCU.com --------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
@@ -29,13 +36,13 @@ sbit LCD_RESET = P4^3;   //ﺕﺑﺳﭨ
 //                              ﭘ۷ﺻﮒﺭﻱﺣﺊ
 //========================================================================
 
-#define LCM_WRITE_CMD()					LCMIFCR = ((LCMIFCR & ~0x07) | 0x84)
-#define LCM_WRITE_DAT()					LCMIFCR = ((LCMIFCR & ~0x07) | 0x85)
-#define LCM_READ_CMD()					LCMIFCR = ((LCMIFCR & ~0x07) | 0x86)
-#define LCM_READ_DAT()					LCMIFCR = ((LCMIFCR & ~0x07) | 0x87)
+#define LCM_WRITE_CMD()					LCMIFCR = (( LCMIFCR & ~0x07 ) | 0x84 )
+#define LCM_WRITE_DAT()					LCMIFCR = (( LCMIFCR & ~0x07 ) | 0x85 )
+#define LCM_READ_CMD()					LCMIFCR = (( LCMIFCR & ~0x07 ) | 0x86 )
+#define LCM_READ_DAT()					LCMIFCR = (( LCMIFCR & ~0x07 ) | 0x87 )
 
-#define SET_LCM_DAT_LOW(n)			LCMIFDATL = (n)
-#define SET_LCM_DAT_HIGH(n)			LCMIFDATH = (n)
+#define SET_LCM_DAT_LOW( n )			LCMIFDATL = ( n )
+#define SET_LCM_DAT_HIGH( n )			LCMIFDATH = ( n )
 
 //========================================================================
 //                              ﺏ۲ﭼﺟﺭﻱﺣﺊ
@@ -53,13 +60,12 @@ sbit LCD_RESET = P4^3;   //ﺕﺑﺳﭨ
 
 typedef struct
 {
-	uint8_t	LCM_Enable;				//LCMﺛﺽﺟﻌﮌﺗﺥﻎ  	ENABLE,DISABLE
-	uint8_t	LCM_Mode;				//LCMﺛﺽﺟﻌﺥ۲ﮌﺛ  	MODE_I8080,MODE_M6800
-	uint8_t	LCM_Bit_Wide;			//LCMﮌﮮﺝﻏﺟﻥﭘﺫ  	BIT_WIDE_8,BIT_WIDE_16
+	uint8_t	LCM_Enable;				//LCMﺛﺽﺟﻌﮌﺗﺥﻎ  	ENABLE, DISABLE
+	uint8_t	LCM_Mode;				//LCMﺛﺽﺟﻌﺥ۲ﮌﺛ  	MODE_I8080, MODE_M6800
+	uint8_t	LCM_Bit_Wide;			//LCMﮌﮮﺝﻏﺟﻥﭘﺫ  	BIT_WIDE_8, BIT_WIDE_16
 	uint8_t	LCM_Setup_Time;			//LCMﺱ۷ﺷﺧﮌﮮﺝﻏﺛ۷ﭼ۱ﮌﺎﺙﻛ  	0~7
 	uint8_t	LCM_Hold_Time;			//LCMﺱ۷ﺷﺧﮌﮮﺝﻏﺎ۲ﺏﻅﮌﺎﺙﻛ  	0~3
 } LCM_InitTypeDef;
-
 
 //========================================================================
 //                              ﺱﻗﺎﺟﺭﻱﺣﺊ
@@ -67,6 +73,6 @@ typedef struct
 extern bit LcmFlag;
 extern uint16_t LCM_Cnt;
 
-void LCM_Inilize(LCM_InitTypeDef *LCM);
+void LCM_Inilize( LCM_InitTypeDef *LCM );
 
 #endif

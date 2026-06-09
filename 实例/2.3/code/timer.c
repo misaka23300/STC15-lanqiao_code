@@ -1,16 +1,19 @@
-#include "timer.h"
+/**
+ * @file timer.c
+ * @brief 定时器驱动文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
 
+#include "timer.h"
 
 // timer0 -> freq
 // timer1 -> 1ms
 // timer2 -> uart
 
-
 UART uart;
 
-
-
-/* void Timer0Init(void)		//100微秒@12.000MHz
+/* void Timer0Init( void )		//100微秒@12.000MHz
 {
 	AUXR &= 0x7F;		//��ʱ��ʱ��12Tģʽ
 	TMOD = 0x05;		//���ö�ʱ��T0Ϊ������ģʽ
@@ -21,8 +24,7 @@ UART uart;
 
 } */
 
-
-void Timer0Init(void)		//100微秒@12.000MHz
+void Timer0Init( void )		//100微秒@12.000MHz
 {
 	AUXR &= 0x7F;			//定时器时钟12T模式
 	//TMOD &= 0xF0;			//设置定时器模式
@@ -34,8 +36,7 @@ void Timer0Init(void)		//100微秒@12.000MHz
 	//ET0 = 1;				//使能定时器0中断
 }
 
-
-void Timer1Init(void)		//1毫秒@12.000MHz
+void Timer1Init( void )		//1毫秒@12.000MHz
 {
 	AUXR |= 0x40;		//定时器时钟1T模式
 	TMOD &= 0x0F;		//设置定时器模式
@@ -46,10 +47,7 @@ void Timer1Init(void)		//1毫秒@12.000MHz
     ET1 = 1;
 }
 
-
-
-
-void UartInit(void)		//9600bps@12.000MHz
+void UartInit( void )		//9600bps@12.000MHz
 {
 	SCON = 0x50;		//8位数据,可变波特率
 	//AUXR |= 0x01;		//串口1选择定时器2为波特率发生器
@@ -60,12 +58,10 @@ void UartInit(void)		//9600bps@12.000MHz
     ES = 1;
 }
 
-
-
 void uart_interrupt() interrupt 4
 {
     uchar Data;
-    if (RI)
+    if ( RI )
     {
         RI = 0;
         Data = SBUF;
@@ -75,17 +71,17 @@ void uart_interrupt() interrupt 4
         uart.receive_data[uart.index] = Data;
         uart.index++;
 
-        if (uart.index == (UART_LEN - 1) )
+        if ( uart.index == ( UART_LEN - 1 ) )
         {
             uart.index = 0;
         }
     }
 }
 
-char putchar(char c)
+char putchar( char c )
 {
     SBUF = c;
-    while (TI == 0);
+    while ( TI == 0 );
     TI = 0;
     return c;
 }

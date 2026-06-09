@@ -1,27 +1,33 @@
+/**
+ * @file led.c
+ * @brief LED驱动文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "led.h"
 
+uchar led_value[8] = {0, 0, 0, 0, 0 , 0 , 0 , 0};
 
-uchar led_value[8] = {0, 0, 0, 0, 0 ,0 ,0 ,0};
-
-void led(uchar i, bit state)
+void led( uchar i, bit state )
 {
     static uchar temp;
     static uchar last = 0xFF;
 
-    if (state)
+    if ( state )
     {
-        temp = temp | (0x01 << i);
+        temp = temp | (0x01 << i );
     }
     else
     {
-        temp = temp & ~(0x01 << i);
+        temp = temp & ~(0x01 << i );
     }
 
-    if (temp != last)
+    if ( temp != last )
     {
         P0 = ~temp;
-        latch(4);
-        latch(0);
+        latch(4 );
+        latch(0 );
 
         last = temp;
     }
@@ -31,6 +37,6 @@ void led_display()
 {
     static uchar i;
 
-    led(i,led_value[i]);
-    i = (i + 1) % 8;
+    led( i, led_value[i]);
+    i = ( i + 1 ) % 8;
 }

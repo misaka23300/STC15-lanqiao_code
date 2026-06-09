@@ -1,34 +1,41 @@
+/**
+ * @file STC32G_Compare.c
+ * @brief æœªæŒ‡å®šæè¿°
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCAI.com ---------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* Èç¹ûÒªÔÚ³ÌÐòÖÐÊ¹ÓÃ´Ë´úÂë,ÇëÔÚ³ÌÐòÖÐ×¢Ã÷Ê¹ÓÃÁËSTCµÄ×ÊÁÏ¼°³ÌÐò            */
+/* ÒªÚ³Ê¹Ã´Ë´,Ú³×¢Ê¹STCÏ¼            */
 /*---------------------------------------------------------------------*/
 
 #include	"STC32G_Compare.h"
 
 //========================================================================
-// º¯Êý:void	CMP_Inilize(CMP_InitDefine *CMPx)
-// ÃèÊö: ±È½ÏÆ÷³õÊ¼»¯³ÌÐò.
-// ²ÎÊý: CMPx: ½á¹¹²ÎÊý,Çë²Î¿¼compare.hÀïµÄ¶¨Òå.
-// ·µ»Ø: none.
-// °æ±¾: V1.0, 2012-10-22
+// :void	CMP_Inilize( CMP_InitDefine *CMPx )
+// : È½Ê¼.
+// : CMPx: á¹¹,Î¿compare.hÄ¶.
+// : none.
+// æ±¾: V1.0, 2012 - 0 - 2
 //========================================================================
-void	CMP_Inilize(CMP_InitDefine *CMPx)
+void	CMP_Inilize( CMP_InitDefine *CMPx )
 {
 	CMPCR1 &= 0x30;
-	CMPCR2 = CMPx->CMP_OutDelayDuty & 0x3f;							//±È½Ï½á¹û±ä»¯ÑÓÊ±ÖÜÆÚÊý, 0~63
-	if(CMPx->CMP_EN == ENABLE)				CMPEN = 1;				//ÔÊÐí±È½ÏÆ÷		ENABLE,DISABLE
-	if(CMPx->CMP_Outpt_En == ENABLE)		CMPOE = 1;			//ÔÊÐí±È½Ï½á¹ûÊä³öµ½P3.4/P4.1,   ENABLE,DISABLE
-	if(CMPx->CMP_InvCMPO     == ENABLE)		INVCMPO = 1;	//±È½ÏÆ÷Êä³öÈ¡·´, 	ENABLE,DISABLE
-	if(CMPx->CMP_100nsFilter == DISABLE)	DISFLT = 1;		//ÄÚ²¿0.1usÂË²¨,  	ENABLE,DISABLE
+	CMPCR2 = CMPx->CMP_OutDelayDuty & 0x3f;							//È½Ï½ä»¯Ê±, 0~63
+	if ( CMPx->CMP_EN == ENABLE )				CMPEN = 1;				//È½		ENABLE, DISABLE
+	if ( CMPx->CMP_Outpt_En == ENABLE )		CMPOE = 1;			//È½Ï½P3.4 / 4.1,   ENABLE, DISABLE
+	if ( CMPx->CMP_InvCMPO     == ENABLE )		INVCMPO = 1;	//È½È¡, 	ENABLE, DISABLE
+	if ( CMPx->CMP_100nsFilter == DISABLE )	DISFLT = 1;		//Ú²0.1usË²,  	ENABLE, DISABLE
 
-	if(CMPx->CMP_P_Select  <= CMP_P_ADC)	CMPEXCFG = (CMPEXCFG & ~0x03) | (CMPx->CMP_P_Select);			//±È½ÏÆ÷ÊäÈëÕý¼«Ñ¡Ôñ, CMP_P_P37/CMP_P_P50/CMP_P_P51, CMP_P_ADC: ÓÉADCÄ£ÄâÊäÈë¶Ë×öÕýÊäÈë.
-	if(CMPx->CMP_N_Select  <= CMP_N_GAP)	CMPEXCFG = (CMPEXCFG & ~0x04) | (CMPx->CMP_N_Select << 2);	//±È½ÏÆ÷ÊäÈë¸º¼«Ñ¡Ôñ, CMP_N_GAP: Ñ¡ÔñÄÚ²¿BandGap¾­¹ýOPºóµÄµçÑ¹×ö¸ºÊäÈë, CMP_N_P36: Ñ¡ÔñP3.6×ö¸ºÊäÈë.
+	if ( CMPx->CMP_P_Select  <= CMP_P_ADC )	CMPEXCFG = ( CMPEXCFG & ~0x03 ) | ( CMPx->CMP_P_Select );			//È½Ñ¡, CMP_P_P37 / MP_P_P50 / MP_P_P51, CMP_P_ADC: ADCÄ£.
+	if ( CMPx->CMP_N_Select  <= CMP_N_GAP )	CMPEXCFG = ( CMPEXCFG & ~0x04 ) | ( CMPx->CMP_N_Select << 2 );	//È½ë¸ºÑ¡, CMP_N_GAP: Ñ¡Ú²BandGapOPÄµÑ¹, CMP_N_P36: Ñ¡P3.6.
 }

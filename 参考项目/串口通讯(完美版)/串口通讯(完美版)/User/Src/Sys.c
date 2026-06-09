@@ -1,3 +1,10 @@
+/**
+ * @file Sys.c
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "./Timer.h"//硬件定时器库
 #include "./SMG.h"//数码管库
 #include "./UART.h"//硬件串口库
@@ -22,9 +29,9 @@ void Delay500ms()
 	{
 		do
 		{
-			while (--k);
-		} while (--j);
-	} while (--i);	
+			while (--k );
+		} while (--j );
+	} while (--i );	
 }
 
 //GPIO口初始化函数
@@ -58,14 +65,14 @@ void Perpherial_Init()
 void Other_Init()
 {
 	/****初始化蜂鸣器和继电器****/
-	Write_HC573(0XA0,0XAF);//关闭蜂鸣器和继电器
+	Write_HC573(0XA0, 0XAF );//关闭蜂鸣器和继电器
 	
 	/*******初始化数码管**********/
-	Write_HC573(0XC0,0XFF);//位选全选中
-	Write_HC573(0XE0,0XFF);//段选全关闭	
+	Write_HC573(0XC0, 0XFF );//位选全选中
+	Write_HC573(0XE0, 0XFF );//段选全关闭	
 	
 	/*******初始化LED灯***********/
-	Write_HC573(0X80,0XFF);//LED灯全部熄灭
+	Write_HC573(0X80, 0XFF );//LED灯全部熄灭
 
 }
 
@@ -76,6 +83,6 @@ void Sys_Init()
 	Tag_Init();//全局变量初始化函数
 	Perpherial_Init();//外设初始化函数	
 	Delay500ms();//延时500ms等待串口硬件稳定
-	sprintf(UART_Tx_Buf,"Welcome to XMF system\r\n");//格式化数组
-	UART1_Send_Str((uchar*)UART_Tx_Buf);//发送欢迎语"Welcome to XMF system"	
+	sprintf( UART_Tx_Buf,"Welcome to XMF system\r\n");//格式化数组
+	UART1_Send_Str(( uchar*)UART_Tx_Buf );//发送欢迎语"Welcome to XMF system"	
 }

@@ -1,3 +1,10 @@
+/**
+ * @file boot.c
+ * @brief 系统启动初始化文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "boot.h"
 
 void boot_init()
@@ -43,9 +50,6 @@ void timer_1()
 	ET1 = 1;	
 }
 
-
-
-
 void Delay14us()
 {
    unsigned char i;
@@ -53,10 +57,6 @@ void Delay14us()
 	_nop_();
 	_nop_();
 	i = 39;
-	while (--i);
+	while (--i );
 }
-
-
-
-
 

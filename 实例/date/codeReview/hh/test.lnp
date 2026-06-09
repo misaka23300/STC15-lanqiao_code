@@ -1,8 +1,0 @@
-"STARTUP.obj",
-"key.obj",
-"led.obj",
-"main.obj",
-"sys.obj",
-"seg.obj" 
-TO "test" 
-RAMSIZE(256) 

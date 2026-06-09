@@ -1,15 +1,21 @@
+/**
+ * @file MatrixKey.c
+ * @brief 按键驱动文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCMCU.com --------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
 /* ﺫﻝﺗﻳﺻ۹ﺿﻌﺏﮊﺷﮨﻅﺷﮌﺗﺽﺣﺑﺯﺑﻲﺡﻣ,ﮄﻣﺿﻌﺏﮊﺷﮨﻅﺷﻉ۱ﺣﺊﮌﺗﺽﺣﭼﺯSTCﭖﺥﻉﮌﭼﺵﺙﺍﺏﮊﺷﮨ            */
 /*---------------------------------------------------------------------*/
-
 
 /*************  ﺗ۵ﺥﻎﺯﭖﺣﺊ    **************
 
@@ -34,7 +40,7 @@ uint8_t cntms;
 uint8_t KeyCode;    //ﺕﺋﺽﺣﭨ۶ﮌﺗﺽﺣﭖﺥﺙﮰﺡﻣ, 1~16ﺽﺷﺷ۶
 uint8_t IO_KeyState, IO_KeyState1, IO_KeyHoldCnt;    //ﺷﺷﭼﺷﺙﮰﺧﮊﺎﻛﭼﺟ
 
-void MatrixKeyScan(void);
+void MatrixKeyScan( void );
 
 /* RTCﺫﺳﺳﮦﭦﺁﮌﮮ */
 portTASK_FUNCTION_PROTO( vMatrixKeyTask, pvParameters )
@@ -43,9 +49,9 @@ portTASK_FUNCTION_PROTO( vMatrixKeyTask, pvParameters )
     
     P5M1 &= ~0x10;   P5M0 |= 0x10;   //ﺭﻟﻅﺣP5.4ﺳ۹ﺱﺩﺱﮞﮌﻛﺏﺉ
     BEEP = 1;  //ﺓﻛﺣﻱﺩﺊﺗﻊﺎﻁ
-    while(1)
+    while (1 )
     {
-        if(cntms > 0)
+        if ( cntms > 0 )
         {
             cntms--;
         }
@@ -55,17 +61,17 @@ portTASK_FUNCTION_PROTO( vMatrixKeyTask, pvParameters )
         }
 
         MatrixKeyScan();
-        if(KeyCode > 0)  //ﺽﺷﺙﮰﺍﺑﺵﺡ
+        if ( KeyCode > 0 )  //ﺽﺷﺙﮰﺍﺑﺵﺡ
         {
             KeyCode = 0;
             BEEP = 0;    //ﺓﻛﺣﻱﺩﺊﺵﮞﺩﻭ
-            cntms = 5;   //ﺏﻅﺷﺋﮌﺎﺙﻛ 5*50ms
+            cntms = 5;   //ﺏﻅﺷﺋﮌﺎﺙﻛ 5 * 0ms
         }
         
-        vTaskDelay(50);
+        vTaskDelay(50 );
     }
     
-    vTaskDelete(NULL);
+    vTaskDelete( NULL );
 }   
 
 /*****************************************************
@@ -85,16 +91,16 @@ P03 ---- K12 ---- K13 ---- K14 ---- K15 ----
           |        |        |        |
 ******************************************************/
 
-uint8_t code T_KeyTable[16] = {0,1,2,0,3,0,0,0,4,0,0,0,0,0,0,0};
+uint8_t code T_KeyTable[16] = {0, 1, 2, 0, 3, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0};
 
-void IO_KeyDelay(void)
+void IO_KeyDelay( void )
 {
     uint8_t i;
     i = 60;
-    while(--i)  ;
+    while (--i )  ;
 }
 
-void MatrixKeyScan(void)    //50ms call
+void MatrixKeyScan( void )    //50ms call
 {
     uint8_t  j;
 
@@ -106,30 +112,30 @@ void MatrixKeyScan(void)    //50ms call
 
     P0 = 0x0f;  //Yﭖﺱ۲؛ﭘﭼX
     IO_KeyDelay();
-    IO_KeyState1 |= (P0 & 0x0f);
+    IO_KeyState1 |= ( P0 & 0x0f );
     IO_KeyState1 ^= 0xff;   //ﺫ۰ﺓﺑ
     
-    if(j == IO_KeyState1)   //ﭼ؛ﺷﺋﭼﺛﺑﺳﭘﭼﺵﻓﭖﺫ
+    if ( j == IO_KeyState1 )   //ﭼ؛ﺷﺋﭼﺛﺑﺳﭘﭼﺵﻓﭖﺫ
     {
         j = IO_KeyState;
         IO_KeyState = IO_KeyState1;
-        if(IO_KeyState != 0)    //ﺽﺷﺙﮰﺍﺑﺵﺡ
+        if ( IO_KeyState != 0 )    //ﺽﺷﺙﮰﺍﺑﺵﺡ
         {
             F0 = 0;
-            if(j == 0)  F0 = 1; //ﭖﻌﺻﭨﺑﺳﺍﺑﺵﺡ
-            else if(j == IO_KeyState)
+            if ( j == 0 )  F0 = 1; //ﭖﻌﺻﭨﺑﺳﺍﺑﺵﺡ
+            else if ( j == IO_KeyState )
             {
-                if(++IO_KeyHoldCnt >= 20)   //1ﺣﻣﭦﮩﻅﻊﺙﮰ
+                if (++IO_KeyHoldCnt >= 20 )   //1ﺣﻣﭦﮩﻅﻊﺙﮰ
                 {
                     IO_KeyHoldCnt = 18;
                     F0 = 1;
                 }
             }
-            if(F0)
+            if ( F0 )
             {
                 j = T_KeyTable[IO_KeyState >> 4];
-                if((j != 0) && (T_KeyTable[IO_KeyState& 0x0f] != 0)) 
-                    KeyCode = (j - 1) * 4 + T_KeyTable[IO_KeyState & 0x0f] + 16;    //ﺙﺩﺯﻙﺙﮰﺡﻣ۲؛17~32
+                if (( j != 0 ) && ( T_KeyTable[IO_KeyState& 0x0f] != 0 )) 
+                    KeyCode = ( j - 1 ) * 4 + T_KeyTable[IO_KeyState & 0x0f] + 16;    //ﺙﺩﺯﻙﺙﮰﺡﻣ۲؛17~32
             }
         }
         else    IO_KeyHoldCnt = 0;

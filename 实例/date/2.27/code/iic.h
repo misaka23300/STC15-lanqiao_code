@@ -1,8 +1,15 @@
+/**
+ * @file iic.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #ifndef __IIC_H__
 #define __IIC_H__
 
 #include "boot.h"
 
-void DAC(uchar value);
+void DAC( uchar value );
 
 #endif

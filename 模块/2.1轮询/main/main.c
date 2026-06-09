@@ -1,3 +1,10 @@
+/**
+ * @file main.c
+ * @brief 主程序入口文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "stdio.h"
 #include "main.h"
 
@@ -5,33 +12,32 @@
 
 int led_time;
 
-
 int main()
 {
-    while (true) {
+    while ( true ) {
 
-        if (led_time == LED_TIME) {
+        if ( led_time == LED_TIME ) {
             led_time = 0;
-            led_display(0xFF);
+            led_display(0xFF );
         }
     }
     return 0;
 }
 void timer_0_interrupt() interrupt 1
 {
-    if (led_time < LED_TIME) {
+    if ( led_time < LED_TIME ) {
         led_time++;
     }
     
 }
 
-uint8_t latch(uint8_t i)
+uint8_t latch( uint8_t i )
 {
-    switch(i) {
-        case 4: {P2 = (P2 & 0x1F) | 0x80; break; }
-        case 5: {P2 = (P2 & 0x1F) | 0xA0; break; }
-        case 6: {P2 = (P2 & 0x1F) | 0xC0; break; }
-        case 7: {P2 = (P2 & 0x1F) | 0xE0; break; }
+    switch( i ) {
+        case 4: {P2 = ( P2 & 0x1F ) | 0x80; break; }
+        case 5: {P2 = ( P2 & 0x1F ) | 0xA0; break; }
+        case 6: {P2 = ( P2 & 0x1F ) | 0xC0; break; }
+        case 7: {P2 = ( P2 & 0x1F ) | 0xE0; break; }
         default: {return 1;}
     }
     P2 = P2 & 0x1F;
@@ -39,14 +45,10 @@ uint8_t latch(uint8_t i)
 
 }
 
-
-uint8_t led_display(uint8_t i)
+uint8_t led_display( uint8_t i )
 {
     P0 = i;
-    latch(4);
+    latch(4 );
     return 0;
 }
-
-
-
 

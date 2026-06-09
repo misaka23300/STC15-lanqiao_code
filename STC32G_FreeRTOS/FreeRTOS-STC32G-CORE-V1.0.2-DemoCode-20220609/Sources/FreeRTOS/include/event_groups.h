@@ -1,13 +1,20 @@
+/**
+ * @file event_groups.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*
  * FreeRTOS Kernel V10.4.6
- * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
+ * Copyright ( C ) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
- * SPDX-License-Identifier: MIT
+ * SPDX - icense - dentifier: MIT
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
+ * this software and associated documentation files ( the "Software"), to deal in
  * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * use, copy, modify, merge, publish, distribute, sublicense, and / r sell copies of
  * the Software, and to permit persons to whom the Software is furnished to do so,
  * subject to the following conditions:
  *
@@ -22,7 +29,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * https://www.FreeRTOS.org
- * https://github.com/FreeRTOS
+ * https://github.com / reeRTOS
  *
  */
 
@@ -36,11 +43,11 @@
 /* FreeRTOS includes. */
 #include "timers.h"
 
-/* *INDENT-OFF* */
+/* *INDENT - FF* */
 #ifdef __cplusplus
     extern "C" {
 #endif
-/* *INDENT-ON* */
+/* *INDENT - N* */
 
 /**
  * An event group is a collection of bits to which an application can assign a
@@ -52,24 +59,22 @@
  * CAN network" etc.  A task can then test the bit values to see which events
  * are active, and optionally enter the Blocked state to wait for a specified
  * bit or a group of specified bits to be active.  To continue the CAN bus
- * example, a CAN controlling task can enter the Blocked state (and therefore
- * not consume any processing time) until either bit 0, bit 1 or bit 2 are
+ * example, a CAN controlling task can enter the Blocked state ( and therefore
+ * not consume any processing time ) until either bit 0, bit 1 or bit 2 are
  * active, at which time the bit that was actually active would inform the task
- * which action it had to take (process a received message, send a message, or
- * send a SYNC).
+ * which action it had to take ( process a received message, send a message, or
+ * send a SYNC ).
  *
  * The event groups implementation contains intelligence to avoid race
  * conditions that would otherwise occur were an application to use a simple
  * variable for the same purpose.  This is particularly important with respect
  * to when a bit within an event group is to be cleared, and when bits have to
  * be set and then tested atomically - as is the case where event groups are
- * used to create a synchronisation point between multiple tasks (a
+ * used to create a synchronisation point between multiple tasks ( a
  * 'rendezvous').
  *
  * \defgroup EventGroup
  */
-
-
 
 /**
  * event_groups.h
@@ -106,7 +111,7 @@ typedef TickType_t               EventBits_t;
  * block of memory, in which the event group's structure is stored.  If an event
  * groups is created using xEventGroupCreate() then the required memory is
  * automatically dynamically allocated inside the xEventGroupCreate() function.
- * (see https://www.FreeRTOS.org/a00111.html).  If an event group is created
+ * ( see https://www.FreeRTOS.org / 00111.html ).  If an event group is created
  * using xEventGroupCreateStatic() then the application writer must instead
  * provide the memory that will get used by the event group.
  * xEventGroupCreateStatic() therefore allows an event group to be created
@@ -115,14 +120,14 @@ typedef TickType_t               EventBits_t;
  * Although event groups are not related to ticks, for internal implementation
  * reasons the number of bits available for use in an event group is dependent
  * on the configUSE_16_BIT_TICKS setting in FreeRTOSConfig.h.  If
- * configUSE_16_BIT_TICKS is 1 then each event group contains 8 usable bits (bit
- * 0 to bit 7).  If configUSE_16_BIT_TICKS is set to 0 then each event group has
- * 24 usable bits (bit 0 to bit 23).  The EventBits_t type is used to store
+ * configUSE_16_BIT_TICKS is 1 then each event group contains 8 usable bits ( bit
+ * 0 to bit 7 ).  If configUSE_16_BIT_TICKS is set to 0 then each event group has
+ * 24 usable bits ( bit 0 to bit 23 ).  The EventBits_t type is used to store
  * event bits within an event group.
  *
  * @return If the event group was created then a handle to the event group is
  * returned.  If there was insufficient FreeRTOS heap available to create the
- * event group then NULL is returned.  See https://www.FreeRTOS.org/a00111.html
+ * event group then NULL is returned.  See https://www.FreeRTOS.org / 00111.html
  *
  * Example usage:
  * @code{c}
@@ -133,7 +138,7 @@ typedef TickType_t               EventBits_t;
  *  xCreatedEventGroup = xEventGroupCreate();
  *
  *  // Was the event group created successfully?
- *  if( xCreatedEventGroup == NULL )
+ *  if ( xCreatedEventGroup == NULL )
  *  {
  *      // The event group was not created because there was insufficient
  *      // FreeRTOS heap available.
@@ -162,7 +167,7 @@ typedef TickType_t               EventBits_t;
  * block of memory, in which the event group's structure is stored.  If an event
  * groups is created using xEventGroupCreate() then the required memory is
  * automatically dynamically allocated inside the xEventGroupCreate() function.
- * (see https://www.FreeRTOS.org/a00111.html).  If an event group is created
+ * ( see https://www.FreeRTOS.org / 00111.html ).  If an event group is created
  * using xEventGroupCreateStatic() then the application writer must instead
  * provide the memory that will get used by the event group.
  * xEventGroupCreateStatic() therefore allows an event group to be created
@@ -171,9 +176,9 @@ typedef TickType_t               EventBits_t;
  * Although event groups are not related to ticks, for internal implementation
  * reasons the number of bits available for use in an event group is dependent
  * on the configUSE_16_BIT_TICKS setting in FreeRTOSConfig.h.  If
- * configUSE_16_BIT_TICKS is 1 then each event group contains 8 usable bits (bit
- * 0 to bit 7).  If configUSE_16_BIT_TICKS is set to 0 then each event group has
- * 24 usable bits (bit 0 to bit 23).  The EventBits_t type is used to store
+ * configUSE_16_BIT_TICKS is 1 then each event group contains 8 usable bits ( bit
+ * 0 to bit 7 ).  If configUSE_16_BIT_TICKS is set to 0 then each event group has
+ * 24 usable bits ( bit 0 to bit 23 ).  The EventBits_t type is used to store
  * event bits within an event group.
  *
  * @param pxEventGroupBuffer pxEventGroupBuffer must point to a variable of type
@@ -188,8 +193,8 @@ typedef TickType_t               EventBits_t;
  *  // StaticEventGroup_t is a publicly accessible structure that has the same
  *  // size and alignment requirements as the real event group structure.  It is
  *  // provided as a mechanism for applications to know the size of the event
- *  // group (which is dependent on the architecture and configuration file
- *  // settings) without breaking the strict data hiding policy by exposing the
+ *  // group ( which is dependent on the architecture and configuration file
+ *  // settings ) without breaking the strict data hiding policy by exposing the
  *  // real event group internals.  This StaticEventGroup_t variable is passed
  *  // into the xSemaphoreCreateEventGroupStatic() function and is used to store
  *  // the event group's data structures
@@ -206,7 +211,7 @@ typedef TickType_t               EventBits_t;
 /**
  * event_groups.h
  * @code{c}
- *  EventBits_t xEventGroupWaitBits(    EventGroupHandle_t xEventGroup,
+ *  EventBits_t xEventGroupWaitBits( EventGroupHandle_t xEventGroup,
  *                                      const EventBits_t uxBitsToWaitFor,
  *                                      const BaseType_t xClearOnExit,
  *                                      const BaseType_t xWaitForAllBits,
@@ -223,14 +228,14 @@ typedef TickType_t               EventBits_t;
  * xEventGroupCreate().
  *
  * @param uxBitsToWaitFor A bitwise value that indicates the bit or bits to test
- * inside the event group.  For example, to wait for bit 0 and/or bit 2 set
- * uxBitsToWaitFor to 0x05.  To wait for bits 0 and/or bit 1 and/or bit 2 set
+ * inside the event group.  For example, to wait for bit 0 and / r bit 2 set
+ * uxBitsToWaitFor to 0x05.  To wait for bits 0 and / r bit 1 and / r bit 2 set
  * uxBitsToWaitFor to 0x07.  Etc.
  *
  * @param xClearOnExit If xClearOnExit is set to pdTRUE then any bits within
  * uxBitsToWaitFor that are set within the event group will be cleared before
- * xEventGroupWaitBits() returns if the wait condition was met (if the function
- * returns for a reason other than a timeout).  If xClearOnExit is set to
+ * xEventGroupWaitBits() returns if the wait condition was met ( if the function
+ * returns for a reason other than a timeout ).  If xClearOnExit is set to
  * pdFALSE then the bits set in the event group are not altered when the call to
  * xEventGroupWaitBits() returns.
  *
@@ -241,8 +246,8 @@ typedef TickType_t               EventBits_t;
  * in uxBitsToWaitFor is set or the specified block time expires.  The block
  * time is specified by the xTicksToWait parameter.
  *
- * @param xTicksToWait The maximum amount of time (specified in 'ticks') to wait
- * for one/all (depending on the xWaitForAllBits value) of the bits specified by
+ * @param xTicksToWait The maximum amount of time ( specified in 'ticks') to wait
+ * for one / ll ( depending on the xWaitForAllBits value ) of the bits specified by
  * uxBitsToWaitFor to become set.
  *
  * @return The value of the event group at the time either the bits being waited
@@ -273,15 +278,15 @@ typedef TickType_t               EventBits_t;
  *                  pdFALSE,        // Don't wait for both bits, either bit will do.
  *                  xTicksToWait ); // Wait a maximum of 100ms for either bit to be set.
  *
- *      if( ( uxBits & ( BIT_0 | BIT_4 ) ) == ( BIT_0 | BIT_4 ) )
+ *      if ( ( uxBits & ( BIT_0 | BIT_4 ) ) == ( BIT_0 | BIT_4 ) )
  *      {
  *          // xEventGroupWaitBits() returned because both bits were set.
  *      }
- *      else if( ( uxBits & BIT_0 ) != 0 )
+ *      else if ( ( uxBits & BIT_0 ) != 0 )
  *      {
  *          // xEventGroupWaitBits() returned because just BIT_0 was set.
  *      }
- *      else if( ( uxBits & BIT_4 ) != 0 )
+ *      else if ( ( uxBits & BIT_4 ) != 0 )
  *      {
  *          // xEventGroupWaitBits() returned because just BIT_4 was set.
  *      }
@@ -332,17 +337,17 @@ EventBits_t xEventGroupWaitBits( EventGroupHandle_t xEventGroup,
  *                              xEventGroup,    // The event group being updated.
  *                              BIT_0 | BIT_4 );// The bits being cleared.
  *
- *      if( ( uxBits & ( BIT_0 | BIT_4 ) ) == ( BIT_0 | BIT_4 ) )
+ *      if ( ( uxBits & ( BIT_0 | BIT_4 ) ) == ( BIT_0 | BIT_4 ) )
  *      {
  *          // Both bit 0 and bit 4 were set before xEventGroupClearBits() was
- *          // called.  Both will now be clear (not set).
+ *          // called.  Both will now be clear ( not set ).
  *      }
- *      else if( ( uxBits & BIT_0 ) != 0 )
+ *      else if ( ( uxBits & BIT_0 ) != 0 )
  *      {
  *          // Bit 0 was set before xEventGroupClearBits() was called.  It will
  *          // now be clear.
  *      }
- *      else if( ( uxBits & BIT_4 ) != 0 )
+ *      else if ( ( uxBits & BIT_4 ) != 0 )
  *      {
  *          // Bit 4 was set before xEventGroupClearBits() was called.  It will
  *          // now be clear.
@@ -403,7 +408,7 @@ EventBits_t xEventGroupClearBits( EventGroupHandle_t xEventGroup,
  *                          xEventGroup,     // The event group being updated.
  *                          BIT_0 | BIT_4 ); // The bits being set.
  *
- *      if( xResult == pdPASS )
+ *      if ( xResult == pdPASS )
  *      {
  *          // The message was posted successfully.
  *      }
@@ -444,8 +449,8 @@ EventBits_t xEventGroupClearBits( EventGroupHandle_t xEventGroup,
  * might have the bits specified by the uxBitsToSet parameter cleared.  First,
  * if setting a bit results in a task that was waiting for the bit leaving the
  * blocked state then it is possible the bit will be cleared automatically
- * (see the xClearBitOnExit parameter of xEventGroupWaitBits()).  Second, any
- * unblocked (or otherwise Ready state) task that has a priority above that of
+ * ( see the xClearBitOnExit parameter of xEventGroupWaitBits()).  Second, any
+ * unblocked ( or otherwise Ready state ) task that has a priority above that of
  * the task that called xEventGroupSetBits() will execute and may change the
  * event group value before the call to xEventGroupSetBits() returns.
  *
@@ -463,18 +468,18 @@ EventBits_t xEventGroupClearBits( EventGroupHandle_t xEventGroup,
  *                          xEventGroup,    // The event group being updated.
  *                          BIT_0 | BIT_4 );// The bits being set.
  *
- *      if( ( uxBits & ( BIT_0 | BIT_4 ) ) == ( BIT_0 | BIT_4 ) )
+ *      if ( ( uxBits & ( BIT_0 | BIT_4 ) ) == ( BIT_0 | BIT_4 ) )
  *      {
  *          // Both bit 0 and bit 4 remained set when the function returned.
  *      }
- *      else if( ( uxBits & BIT_0 ) != 0 )
+ *      else if ( ( uxBits & BIT_0 ) != 0 )
  *      {
  *          // Bit 0 remained set when the function returned, but bit 4 was
  *          // cleared.  It might be that bit 4 was cleared automatically as a
  *          // task that was waiting for bit 4 was removed from the Blocked
  *          // state.
  *      }
- *      else if( ( uxBits & BIT_4 ) != 0 )
+ *      else if ( ( uxBits & BIT_4 ) != 0 )
  *      {
  *          // Bit 4 remained set when the function returned, but bit 0 was
  *          // cleared.  It might be that bit 0 was cleared automatically as a
@@ -520,7 +525,7 @@ EventBits_t xEventGroupSetBits( EventGroupHandle_t xEventGroup,
  * @param pxHigherPriorityTaskWoken As mentioned above, calling this function
  * will result in a message being sent to the timer daemon task.  If the
  * priority of the timer daemon task is higher than the priority of the
- * currently running task (the task the interrupt interrupted) then
+ * currently running task ( the task the interrupt interrupted ) then
  * *pxHigherPriorityTaskWoken will be set to pdTRUE by
  * xEventGroupSetBitsFromISR(), indicating that a context switch should be
  * requested before the interrupt exits.  For that reason
@@ -554,7 +559,7 @@ EventBits_t xEventGroupSetBits( EventGroupHandle_t xEventGroup,
  *                          &xHigherPriorityTaskWoken );
  *
  *      // Was the message posted successfully?
- *      if( xResult == pdPASS )
+ *      if ( xResult == pdPASS )
  *      {
  *          // If xHigherPriorityTaskWoken is now set to pdTRUE then a context
  *          // switch should be requested.  The macro used is port specific and
@@ -579,7 +584,7 @@ EventBits_t xEventGroupSetBits( EventGroupHandle_t xEventGroup,
 /**
  * event_groups.h
  * @code{c}
- *  EventBits_t xEventGroupSync(    EventGroupHandle_t xEventGroup,
+ *  EventBits_t xEventGroupSync( EventGroupHandle_t xEventGroup,
  *                                  const EventBits_t uxBitsToSet,
  *                                  const EventBits_t uxBitsToWaitFor,
  *                                  TickType_t xTicksToWait );
@@ -610,7 +615,7 @@ EventBits_t xEventGroupSetBits( EventGroupHandle_t xEventGroup,
  * uxBitsToWaitFor to 0x05.  To wait for bits 0 and bit 1 and bit 2 set
  * uxBitsToWaitFor to 0x07.  Etc.
  *
- * @param xTicksToWait The maximum amount of time (specified in 'ticks') to wait
+ * @param xTicksToWait The maximum amount of time ( specified in 'ticks') to wait
  * for all of the bits specified by uxBitsToWaitFor to become set.
  *
  * @return The value of the event group at the time either the bits being waited
@@ -639,7 +644,7 @@ EventBits_t xEventGroupSetBits( EventGroupHandle_t xEventGroup,
  * EventBits_t uxReturn;
  * TickType_t xTicksToWait = 100 / portTICK_PERIOD_MS;
  *
- *   for( ;; )
+ *   for ( ;; )
  *   {
  *      // Perform task functionality here.
  *
@@ -650,7 +655,7 @@ EventBits_t xEventGroupSetBits( EventGroupHandle_t xEventGroup,
  *      // for this to happen.
  *      uxReturn = xEventGroupSync( xEventBits, TASK_0_BIT, ALL_SYNC_BITS, xTicksToWait );
  *
- *      if( ( uxReturn & ALL_SYNC_BITS ) == ALL_SYNC_BITS )
+ *      if ( ( uxReturn & ALL_SYNC_BITS ) == ALL_SYNC_BITS )
  *      {
  *          // All three tasks reached the synchronisation point before the call
  *          // to xEventGroupSync() timed out.
@@ -660,7 +665,7 @@ EventBits_t xEventGroupSetBits( EventGroupHandle_t xEventGroup,
  *
  * void vTask1( void *pvParameters )
  * {
- *   for( ;; )
+ *   for ( ;; )
  *   {
  *      // Perform task functionality here.
  *
@@ -679,7 +684,7 @@ EventBits_t xEventGroupSetBits( EventGroupHandle_t xEventGroup,
  *
  * void vTask2( void *pvParameters )
  * {
- *   for( ;; )
+ *   for ( ;; )
  *   {
  *      // Perform task functionality here.
  *
@@ -704,7 +709,6 @@ EventBits_t xEventGroupSync( EventGroupHandle_t xEventGroup,
                              const EventBits_t uxBitsToSet,
                              const EventBits_t uxBitsToWaitFor,
                              TickType_t xTicksToWait ) PRIVILEGED_FUNCTION;
-
 
 /**
  * event_groups.h
@@ -761,17 +765,16 @@ void vEventGroupSetBitsCallback( void * pvEventGroup,
 void vEventGroupClearBitsCallback( void * pvEventGroup,
                                    const uint32_t ulBitsToClear ) PRIVILEGED_FUNCTION;
 
-
 #if ( configUSE_TRACE_FACILITY == 1 )
     UBaseType_t uxEventGroupGetNumber( void * xEventGroup ) PRIVILEGED_FUNCTION;
     void vEventGroupSetNumber( void * xEventGroup,
                                UBaseType_t uxEventGroupNumber ) PRIVILEGED_FUNCTION;
 #endif
 
-/* *INDENT-OFF* */
+/* *INDENT - FF* */
 #ifdef __cplusplus
     }
 #endif
-/* *INDENT-ON* */
+/* *INDENT - N* */
 
 #endif /* EVENT_GROUPS_H */

@@ -1,22 +1,29 @@
+/**
+ * @file 蜂鸣器和继电器.c
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include <STC15F2K60S2.H>
 #include "intrins.h"
 
 //P2 _ _ _ X X X X X
 
-void control(char x,y)
+void control( char x, y )
 {
 	P2 &= 0x1f;   //P2 = P2 & 0x1f;
-	switch(x)
+	switch( x )
 	{
-		case 4:P2=(P2 & 0x1f)|0x80;break;   //Y4CÎȘžß”çÆœ
-		case 5:P2=(P2 & 0x1f)|0xa0;break;
-		case 6:P2=(P2 & 0x1f)|0xc0;break;
-		case 7:P2=(P2 & 0x1f)|0xe0;break;
+		case 4:P2=( P2 & 0x1f )|0x80;break;   //Y4CÎȘžß”çÆœ
+		case 5:P2=( P2 & 0x1f )|0xa0;break;
+		case 6:P2=( P2 & 0x1f )|0xc0;break;
+		case 7:P2=( P2 & 0x1f )|0xe0;break;
 	}
-	P0=y;
+	P0 = ;
 }
 
-void Delay500ms(void)	//@11.0592MHz
+void Delay500ms( void )	//@11.0592MHz
 {
 	unsigned char data i, j, k;
 
@@ -29,28 +36,27 @@ void Delay500ms(void)	//@11.0592MHz
 	{
 		do
 		{
-			while (--k);
-		} while (--j);
-	} while (--i);
+			while (--k );
+		} while (--j );
+	} while (--i );
 }
-
 
 void main()
 {
-	char i=0;
+	char i = ;
 	
-	control(5,0x00);  //čŰ±ŐÎȚčŰÆśŒț
-	while(1)
+	control(5, 0x00 );  //čŰ±ŐÎȚčŰÆśŒț
+	while (1 )
 	{
-		for(i=0;i<=8;i++)
+		for ( i = ;i <= ;i++)
 		{
-			control(4,0xff<<i);
+			control(4, 0xff<<i );
 			Delay500ms();
 		}
-//		control(5,0xaf);
+//		control(5, 0xaf );
 //		Delay500ms();
 		
-		control(5,0xff);
+		control(5, 0xff );
 		Delay500ms();
 	}
 }

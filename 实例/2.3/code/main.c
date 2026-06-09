@@ -1,3 +1,10 @@
+/**
+ * @file main.c
+ * @brief 主程序入口文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "main.h"
 
 enum {
@@ -7,7 +14,6 @@ enum {
     DISPLAY_TASK = 50,
     UART_TASK = 10
 };
-
 
 typedef struct {
     uint8_t time;
@@ -44,7 +50,6 @@ FREQ freq;
 uint8_t display_mode;     // -> 显示状态
 uint8_t display_time;
 
-
 uint16_t x = 2333;
 uint16_t y = 721;
 // ---------------------------------------------------- 任务调度
@@ -55,7 +60,7 @@ void main()
     timer();
 
     test();
-    while (1)
+    while (1 )
     {
         task_loop();
     }
@@ -63,33 +68,33 @@ void main()
 
 void task_loop() 
 {
-    if (key.time == KEY_TASK)
+    if ( key.time == KEY_TASK )
     {
         key.time = 0;
         key.press = key_scan();
         key_task();
     }
-    if (sonic.time == SONIC_TASK)
+    if ( sonic.time == SONIC_TASK )
     {
         sonic.time = 0;
         sonic.distance = sonic_measure();
     }
         
 
-    if (freq.time == FREQ_TASK)
+    if ( freq.time == FREQ_TASK )
     {
         freq.time = 0;
         freq_task();
-        //printf("%u", freq.out_times);
+        //printf("%u", freq.out_times );
     }
 
-    if (display_time == DISPLAY_TASK)
+    if ( display_time == DISPLAY_TASK )
     {
         display_time = 0;
         display_task();
     }
         
-    if (uart.time == UART_TASK)
+    if ( uart.time == UART_TASK )
     {
         uart.time = 0;
         uart_task();
@@ -103,22 +108,20 @@ void timer1_interrupt() interrupt 3
     led_display();
     //display_task();
 
-    if (key.time < KEY_TASK) { key.time++; }
+    if ( key.time < KEY_TASK ) { key.time++; }
 
-    if (sonic.time < SONIC_TASK) {sonic.time++;}
+    if ( sonic.time < SONIC_TASK ) {sonic.time++;}
 
-    if (freq.time < FREQ_TASK) {freq.time++; }
+    if ( freq.time < FREQ_TASK ) {freq.time++; }
 
-    if (display_time < DISPLAY_TASK) { display_time++; }
+    if ( display_time < DISPLAY_TASK ) { display_time++; }
 
-    if (uart.out_time_flag == 1 && uart.out_time < 10) { uart.out_time++; }
+    if ( uart.out_time_flag == 1 && uart.out_time < 10 ) { uart.out_time++; }
 
-    if (uart.time < UART_TASK) { uart.time++; }
+    if ( uart.time < UART_TASK ) { uart.time++; }
 }
 
-
-
-void Timer0_Isr(void) interrupt 1
+void Timer0_Isr( void ) interrupt 1
 {
     /* freq_times++; */
 }
@@ -126,20 +129,18 @@ void Timer0_Isr(void) interrupt 1
 // -----------------------------------------------------------任务函数
 void test()
 {
-    relay(1);
+    relay(1 );
     led_list[0] = 1;
     putchar('c');
 }
 
-
-
 void display_task()
 {
-    switch (display_mode)
+    switch ( display_mode )
     {
         case 0:
         {
-            if (key.press != 99)
+            if ( key.press != 99 )
             {
                 seg_list[1] = key.press % 10;
                 seg_list[0] = key.press / 10 % 10;
@@ -167,30 +168,28 @@ void display_task()
     }
 }
 
-
 void key_task()
 {
-    switch (key.press)
+    switch ( key.press )
     {
         case 4: 
         {
             display_mode++;
-            if (display_mode == 3) { display_mode = 0;}
+            if ( display_mode == 3 ) { display_mode = 0;}
         }
         break;
     }
 }
 
-
 void freq_task()
 {
 
     TR0 = 0;
-    freq.times = (uint16_t)(TH0 << 8) | TL0;
+    freq.times = ( uint16_t )( TH0 << 8 ) | TL0;
     freq.out_times = freq.times;
     freq.times = 0;
 
-    //printf("freq: %u",freq.out_times);
+    //printf("freq: %u", freq.out_times );
     TH0 = 0; TL0 = 0;
     TR0 = 1;
 
@@ -206,14 +205,14 @@ void uart_task()
     uint8_t towards = 0;
     uint8_t i = 4;
     uint8_t j = 5;
-    if (uart.index == 0) { return; }
+    if ( uart.index == 0 ) { return; }
 
-    if (uart.out_time == 10)
+    if ( uart.out_time == 10 )
     {
         uart.out_time = 0;
         uart.out_time_flag = 0;
         uart.index = 0;
-        switch (uart.receive_data[0])
+        switch ( uart.receive_data[0])
         {
             case '#':
             {
@@ -223,13 +222,13 @@ void uart_task()
 
             case '?':
             {
-                printf("%d",x);
+                printf("%d", x );
             }
             break;
 
             case '^':
             {
-               printf("(%d,%d)",x,y);
+               printf("(%d,%d )", x, y );
                
             }
             break;
@@ -237,11 +236,11 @@ void uart_task()
             case '(':
             {
                 x = 0;y = 0;
-                while (uart.receive_data[k] != ')')
+                while ( uart.receive_data[k] != ')')
                 {
-                    if (uart.receive_data[k] >= '0' && uart.receive_data[k] <= '9')
+                    if ( uart.receive_data[k] >= '0' && uart.receive_data[k] <= '9')
                     {
-                        if (towards == 0)
+                        if ( towards == 0 )
                         {
                             x = x * 10 + uart.receive_data[k] - '0';
                         }
@@ -250,7 +249,7 @@ void uart_task()
                             y = y * 10 + uart.receive_data[k] - '0';
                         }
                     }
-                    else if (uart.receive_data[k] == ',')
+                    else if ( uart.receive_data[k] == ',')
                     {
                         towards = 1;
                     }
@@ -258,7 +257,7 @@ void uart_task()
 
                     k++;
                 }
-                printf("(%d,%d)", x, y);
+                printf("(%d,%d )", x, y );
             }
             break;
 

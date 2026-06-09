@@ -1,9 +1,13 @@
+/**
+ * @file display.c
+ * @brief 显示模块驱动
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "display.h"
 
-
 uchar led_array[8] = {0, 0, 0, 0, 0, 0, 0, 0};
-
-
 
 void led_display()
 {
@@ -11,24 +15,23 @@ void led_display()
     static uchar temp;
     static uchar last;
 
-    if (led_array[i])
+    if ( led_array[i])
     {
-        temp = temp | (0x01 << i);
+        temp = temp | (0x01 << i );
     }
     else
     {
-        temp = temp & ~(0x01 << i);
+        temp = temp & ~(0x01 << i );
     }
 
-    if (temp != last)
+    if ( temp != last )
     {
         P0 = ~temp;
-        latch(4);
+        latch(4 );
 
         last = temp;
     }
 
-
     i += 1;
-    if (i == 8) { i = 0;}
+    if ( i == 8 ) { i = 0;}
 }

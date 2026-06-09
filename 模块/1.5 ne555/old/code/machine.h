@@ -1,3 +1,10 @@
+/**
+ * @file machine.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #ifndef __MACHINE_H__
 #define __MACHINE_H__
 
@@ -7,8 +14,7 @@
 
 #include "stdio.h"
 
-void latch(uint8_t i);
+void latch( uint8_t i );
 void clean_display();
-
 
 #endif

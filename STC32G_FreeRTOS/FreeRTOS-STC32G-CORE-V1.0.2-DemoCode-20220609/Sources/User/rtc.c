@@ -1,9 +1,16 @@
+/**
+ * @file rtc.c
+ * @brief 实时时钟驱动
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCMCU.com --------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
@@ -46,15 +53,15 @@ portTASK_FUNCTION_PROTO( vRtcTask, pvParameters )
     UNUSED( pvParameters );
     
     prvRtcInit();
-    while(1)
+    while (1 )
     {
         prvRtcCounter();
         vRtcUpdateDisplay();
 
-        vTaskDelay(500);
+        vTaskDelay(500 );
     }
     
-    vTaskDelete(NULL);
+    vTaskDelete( NULL );
 }   
 
 static void prvRtcInit( void )
@@ -65,7 +72,6 @@ static void prvRtcInit( void )
     ucDotState = 0;
 }
 
-
 /********************** ﺵﺿﮌﺝﮌﺎﻅﺽﭦﺁﮌﮮ ************************/
 void vRtcUpdateDisplay( void )
 {
@@ -74,7 +80,7 @@ void vRtcUpdateDisplay( void )
     pucLEDBuffer[2] = ucMinute / 10;
     pucLEDBuffer[3] = ucMinute % 10;
     
-    if (ucDotState)
+    if ( ucDotState )
         pucLEDBuffer[1] |= DIS_DOT;                     //ﺷ۰ﮌﺎﭦﮩﭖﺥﺷ۰ﮌﮮﭖﻙﻉﺉﺣﻣﺭﭼ
 }
 
@@ -83,15 +89,15 @@ static void prvRtcCounter( void )
 {
     ucDotState = !ucDotState;
     
-    if (!ucDotState) return;
+    if (!ucDotState ) return;
 
-    if(++ucSecond >= 60)
+    if (++ucSecond >= 60 )
     {
         ucSecond = 0;
-        if(++ucMinute >= 60)
+        if (++ucMinute >= 60 )
         {
             ucMinute = 0;
-            if(++ucHour >= 24)
+            if (++ucHour >= 24 )
                 ucHour = 0;
         }
     }

@@ -1,96 +1,102 @@
+/**
+ * @file STC32G_Clock.c
+ * @brief Êó∂ÈíüÈÖçÁΩÆÊ®°Âùó
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCAI.com ---------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* »Áπ˚“™‘⁄≥Ã–Ú÷– π”√¥À¥˙¬Î,«Î‘⁄≥Ã–Ú÷–◊¢√˜ π”√¡ÀSTCµƒ◊ ¡œº∞≥Ã–Ú            */
+/* “™⁄≥ π√¥À¥,⁄≥◊¢ πSTCœº            */
 /*---------------------------------------------------------------------*/
 
 #include	"STC32G_Clock.h"
 #include	"STC32G_Delay.h"
 
 //========================================================================
-// ∫Ø ˝: void HIRCClkConfig(u8 div)
-// √Ë ˆ: ∏ﬂÀŸIRC ±÷”≥ı ºªØ≥Ã–Ú.
-// ≤Œ ˝: div:  ±÷”∑÷∆µœµ ˝.
-// ∑µªÿ: none.
-// ∞Ê±æ: V1.0, 2022-04-03
+// : void HIRCClkConfig( u8 div )
+// : IRC ±”≥ º.
+// : div:  ±”∑∆µœµ.
+// : none.
+// Ê±æ: V1.0, 2022 - 4 - 3
 //========================================================================
-void HIRCClkConfig(u8 div)
+void HIRCClkConfig( u8 div )
 {
-	HIRCCR = 0x80; //∆Ù∂Øƒ⁄≤ø IRC
-	while (!(HIRCCR & 1)); //µ»¥˝ ±÷”Œ»∂®
+	HIRCCR = 0x80; //⁄≤ IRC
+	while (!( HIRCCR & 1 )); //»¥ ±»∂
 	CLKDIV = div;
-	CLKSEL = 0x00; //—°‘Òƒ⁄≤ø IRC ( ƒ¨»œ )
+	CLKSEL = 0x00; //—°⁄≤ IRC ( ƒ¨ )
 }
 
 //========================================================================
-// ∫Ø ˝: void XOSCClkConfig(u8 div)
-// √Ë ˆ: Õ‚≤øæß’Ò ±÷”≥ı ºªØ≥Ã–Ú.
-// ≤Œ ˝: div:  ±÷”∑÷∆µœµ ˝.
-// ∑µªÿ: none.
-// ∞Ê±æ: V1.0, 2022-04-03
+// : void XOSCClkConfig( u8 div )
+// : ‚≤ø ±”≥ º.
+// : div:  ±”∑∆µœµ.
+// : none.
+// Ê±æ: V1.0, 2022 - 4 - 3
 //========================================================================
-void XOSCClkConfig(u8 div)
+void XOSCClkConfig( u8 div )
 {
-	XOSCCR = 0xc0; //∆Ù∂ØÕ‚≤øæß’Ò
-	while (!(XOSCCR & 1)); //µ»¥˝ ±÷”Œ»∂®
-	CLKDIV = div;  // ±÷”∑÷∆µ
-	CLKSEL = 0x01; //—°‘ÒÕ‚≤øæß’Ò
+	XOSCCR = 0xc0; //‚≤ø
+	while (!( XOSCCR & 1 )); //»¥ ±»∂
+	CLKDIV = div;  // ±”∑∆µ
+	CLKSEL = 0x01; //—°‚≤ø
 }
 
 //========================================================================
-// ∫Ø ˝: void IRC32KClkConfig(u8 div)
-// √Ë ˆ: µÕÀŸ32K IRC ±÷”≥ı ºªØ≥Ã–Ú.
-// ≤Œ ˝: div:  ±÷”∑÷∆µœµ ˝.
-// ∑µªÿ: none.
-// ∞Ê±æ: V1.0, 2022-04-03
+// : void IRC32KClkConfig( u8 div )
+// : 32K IRC ±”≥ º.
+// : div:  ±”∑∆µœµ.
+// : none.
+// Ê±æ: V1.0, 2022 - 4 - 3
 //========================================================================
-void IRC32KClkConfig(u8 div)
+void IRC32KClkConfig( u8 div )
 {
-	IRC32KCR = 0x80; //∆Ù∂Øƒ⁄≤ø 32K IRC
-	while (!(IRC32KCR & 1)); //µ»¥˝ ±÷”Œ»∂®
-	CLKDIV = div;  // ±÷”∑÷∆µ
-	CLKSEL = 0x03; //—°‘Òƒ⁄≤ø 32K
+	IRC32KCR = 0x80; //⁄≤ 32K IRC
+	while (!( IRC32KCR & 1 )); //»¥ ±»∂
+	CLKDIV = div;  // ±”∑∆µ
+	CLKSEL = 0x03; //—°⁄≤ 32K
 }
 
 //========================================================================
-// ∫Ø ˝: void HSPllClkConfig(u8 clksrc, u8 pcki, u8 pllsel, u8 div)
-// √Ë ˆ: ∏ﬂÀŸIO ±÷”≥ı ºªØ≥Ã–Ú.
-// ≤Œ ˝: clksrc: œµÕ≥ ±÷”—°‘Ò, MCLKSEL_HIRC/MCLKSEL_XIRC/MCLKSEL_X32K/MCLKSEL_I32K/MCLKSEL_PLL/MCLKSEL_PLL2/MCLKSEL_I48M.
-// ≤Œ ˝: pllsel: PLL ±÷”—°‘Ò, PLL_96M/PLL_144M.
-// ≤Œ ˝: div: ∏ﬂÀŸIO ±÷”∑÷∆µœµ ˝.
-// ∑µªÿ: none.
-// ∞Ê±æ: V1.0, 2022-04-03
+// : void HSPllClkConfig( u8 clksrc, u8 pcki, u8 pllsel, u8 div )
+// : IO ±”≥ º.
+// : clksrc: œµÕ≥ ±—°, MCLKSEL_HIRC / CLKSEL_XIRC / CLKSEL_X32K / CLKSEL_I32K / CLKSEL_PLL / CLKSEL_PLL2 / CLKSEL_I48M.
+// : pllsel: PLL ±—°, PLL_96M / LL_144M.
+// : div: IO ±”∑∆µœµ.
+// : none.
+// Ê±æ: V1.0, 2022 - 4 - 3
 //========================================================================
-void HSPllClkConfig(u8 clksrc, u8 pllsel, u8 div)
+void HSPllClkConfig( u8 clksrc, u8 pllsel, u8 div )
 {
-	MainClockSel(clksrc);			//œµÕ≥ ±÷”—°‘Ò, MCLKSEL_HIRC/MCLKSEL_XIRC/MCLKSEL_X32K/MCLKSEL_I32K/MCLKSEL_PLL/MCLKSEL_PLL2/MCLKSEL_I48M
+	MainClockSel( clksrc );			//œµÕ≥ ±—°, MCLKSEL_HIRC / CLKSEL_XIRC / CLKSEL_X32K / CLKSEL_I32K / CLKSEL_PLL / CLKSEL_PLL2 / CLKSEL_I48M
 
-	//œµÕ≥ ±÷” n ∑÷∆µ◊˜Œ™PLL ±÷”‘¥,»∑±£∑÷∆µ∫ÛŒ™12M
+	//œµÕ≥ ± n ∆µŒ™PLL ±‘¥,»∑∆µŒ™12M
     USBCLK &= ~PCKI_MSK;
-#if (MAIN_Fosc == 12000000UL)
-    USBCLK |= PCKI_D1;          //PLL ‰»Î ±÷”1∑÷∆µ
-#elif (MAIN_Fosc == 24000000UL)
-    USBCLK |= PCKI_D2;          //PLL ‰»Î ±÷”2∑÷∆µ
-#elif (MAIN_Fosc == 48000000UL)
-    USBCLK |= PCKI_D4;          //PLL ‰»Î ±÷”4∑÷∆µ
-#elif (MAIN_Fosc == 96000000UL)
-    USBCLK |= PCKI_D8;          //PLL ‰»Î ±÷”8∑÷∆µ
+#if ( MAIN_Fosc == 12000000UL )
+    USBCLK |= PCKI_D1;          //PLL ±1∆µ
+#elif ( MAIN_Fosc == 24000000UL )
+    USBCLK |= PCKI_D2;          //PLL ±2∆µ
+#elif ( MAIN_Fosc == 48000000UL )
+    USBCLK |= PCKI_D4;          //PLL ±4∆µ
+#elif ( MAIN_Fosc == 96000000UL )
+    USBCLK |= PCKI_D8;          //PLL ±8∆µ
 #else
-    USBCLK |= PCKI_D1;          //ƒ¨»œPLL ‰»Î ±÷”1∑÷∆µ
+    USBCLK |= PCKI_D1;          //ƒ¨PLL ±1∆µ
 #endif
 
-	PLLClockSel(pllsel);			//PLL ±÷”—°‘Ò, PLL_96M/PLL_144M
-	PLLEnable(ENABLE);				//PLL±∂∆µ πƒ‹, ENABLE/DISABLE
-	delay_ms(1);              //µ»¥˝PLLÀ¯∆µ
-	HSIOClockSel(HSCK_PLL);		//∏ﬂÀŸIO ±÷”—°‘Ò, HSCK_MCLK/HSCK_PLL
-	HSClockDiv(div);					//∏ﬂÀŸIO ±÷”∑÷∆µœµ ˝
+	PLLClockSel( pllsel );			//PLL ±—°, PLL_96M / LL_144M
+	PLLEnable( ENABLE );				//PLL∆µ π, ENABLE / ISABLE
+	delay_ms(1 );              //»¥PLL∆µ
+	HSIOClockSel( HSCK_PLL );		//IO ±—°, HSCK_MCLK / SCK_PLL
+	HSClockDiv( div );					//IO ±”∑∆µœµ
 }
-
 

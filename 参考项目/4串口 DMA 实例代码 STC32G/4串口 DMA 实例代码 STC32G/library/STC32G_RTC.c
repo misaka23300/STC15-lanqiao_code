@@ -1,38 +1,45 @@
+/**
+ * @file STC32G_RTC.c
+ * @brief å®žæ—¶æ—¶é’Ÿé©±åŠ¨
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCAI.com ---------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* Èç¹ûÒªÔÚ³ÌÐòÖÐÊ¹ÓÃ´Ë´úÂë,ÇëÔÚ³ÌÐòÖÐ×¢Ã÷Ê¹ÓÃÁËSTCµÄ×ÊÁÏ¼°³ÌÐò            */
+/* ÒªÚ³Ê¹Ã´Ë´,Ú³×¢Ê¹STCÏ¼            */
 /*---------------------------------------------------------------------*/
 
 #include	"STC32G_RTC.h"
 
 //========================================================================
-// º¯Êý: u8	ADC_Inilize(ADC_InitTypeDef *ADCx)
-// ÃèÊö: ADC³õÊ¼»¯³ÌÐò.
-// ²ÎÊý: ADCx: ½á¹¹²ÎÊý,Çë²Î¿¼adc.hÀïµÄ¶¨Òå.
-// ·µ»Ø: none.
-// °æ±¾: V1.0, 2012-10-22
+// : u8	ADC_Inilize( ADC_InitTypeDef *ADCx )
+// : ADCÊ¼.
+// : ADCx: á¹¹,Î¿adc.hÄ¶.
+// : none.
+// æ±¾: V1.0, 2012 - 0 - 2
 //========================================================================
-u8	RTC_Inilize(RTC_InitTypeDef *RTCx)
+u8	RTC_Inilize( RTC_InitTypeDef *RTCx )
 {
-	if(RTCx->RTC_Year > 99)	return FAIL;	//´íÎó
-	if(RTCx->RTC_Month > 12)	return FAIL;	//´íÎó
-	if(RTCx->RTC_Day > 31)	return FAIL;	//´íÎó
-	if(RTCx->RTC_Hour > 23)	return FAIL;	//´íÎó
-	if(RTCx->RTC_Min > 59)	return FAIL;	//´íÎó
-	if(RTCx->RTC_Sec > 59)	return FAIL;	//´íÎó
-	if(RTCx->RTC_Ssec > 127)	return FAIL;	//´íÎó
-	if(RTCx->RTC_ALAHour > 23)	return FAIL;	//´íÎó
-	if(RTCx->RTC_ALAMin > 59)	return FAIL;	//´íÎó
-	if(RTCx->RTC_ALASec > 59)	return FAIL;	//´íÎó
-	if(RTCx->RTC_ALASsec > 127)	return FAIL;	//´íÎó
+	if ( RTCx->RTC_Year > 99 )	return FAIL;	//
+	if ( RTCx->RTC_Month > 12 )	return FAIL;	//
+	if ( RTCx->RTC_Day > 31 )	return FAIL;	//
+	if ( RTCx->RTC_Hour > 23 )	return FAIL;	//
+	if ( RTCx->RTC_Min > 59 )	return FAIL;	//
+	if ( RTCx->RTC_Sec > 59 )	return FAIL;	//
+	if ( RTCx->RTC_Ssec > 127 )	return FAIL;	//
+	if ( RTCx->RTC_ALAHour > 23 )	return FAIL;	//
+	if ( RTCx->RTC_ALAMin > 59 )	return FAIL;	//
+	if ( RTCx->RTC_ALASec > 59 )	return FAIL;	//
+	if ( RTCx->RTC_ALASsec > 127 )	return FAIL;	//
 
 	INIYEAR = RTCx->RTC_Year;
 	INIMONTH = RTCx->RTC_Month;
@@ -42,38 +49,37 @@ u8	RTC_Inilize(RTC_InitTypeDef *RTCx)
 	INISEC = RTCx->RTC_Sec;
 	INISSEC = RTCx->RTC_Ssec;
 
-	ALAHOUR = RTCx->RTC_ALAHour;	//ÄÖÖÓÐ¡Ê±
-	ALAMIN  = RTCx->RTC_ALAMin;		//ÄÖÖÓ·ÖÖÓ
-	ALASEC  = RTCx->RTC_ALASec;		//ÄÖÖÓÃë
-	ALASSEC = RTCx->RTC_ALASsec;	//ÄÖÖÓ1/128Ãë
+	ALAHOUR = RTCx->RTC_ALAHour;	//Ð¡Ê±
+	ALAMIN  = RTCx->RTC_ALAMin;		//Ó·
+	ALASEC  = RTCx->RTC_ALASec;		//
+	ALASSEC = RTCx->RTC_ALASsec;	//1 / 28
 
-	if(RTCx->RTC_Clock == RTC_IRC32KCR)
+	if ( RTCx->RTC_Clock == RTC_IRC32KCR )
 	{
-    //STC32G Ð¾Æ¬Ê¹ÓÃÄÚ²¿32KÊ±ÖÓ£¬ÐÝÃßÎÞ·¨»½ÐÑ
-		IRC32KCR = 0x80;   //Æô¶¯ÄÚ²¿32K¾§Õñ.
-		while (!(IRC32KCR & 1));  //µÈ´ýÊ±ÖÓÎÈ¶¨
-		RTCCFG = 0x03;    //Ñ¡ÔñÄÚ²¿32KÊ±ÖÓÔ´£¬´¥·¢RTC¼Ä´æÆ÷³õÊ¼»¯
+    //STC32G Ð¾Æ¬Ê¹Ú²32KÊ±Ó£Þ·
+		IRC32KCR = 0x80;   //Ú²32K.
+		while (!( IRC32KCR & 1 ));  //È´Ê±È¶
+		RTCCFG = 0x03;    //Ñ¡Ú²32KÊ±Ô´RTCÄ´Ê¼
 	}
 	else
 	{
-		X32KCR = 0x80 + 0x40;   //Æô¶¯Íâ²¿32K¾§Õñ, µÍÔöÒæ+0x00, ¸ßÔöÒæ+0x40.
-		while (!(X32KCR & 1));  //µÈ´ýÊ±ÖÓÎÈ¶¨
-		RTCCFG = 0x01;    //Ñ¡ÔñÍâ²¿32KÊ±ÖÓÔ´£¬´¥·¢RTC¼Ä´æÆ÷³õÊ¼»¯
+		X32KCR = 0x80 + 0x40;   //â²¿32K, +0x00, +0x40.
+		while (!( X32KCR & 1 ));  //È´Ê±È¶
+		RTCCFG = 0x01;    //Ñ¡â²¿32KÊ±Ô´RTCÄ´Ê¼
 	}
 
-	if(RTCx->RTC_Enable == ENABLE)
+	if ( RTCx->RTC_Enable == ENABLE )
 	{
-		RTCCR = 0x01;     //RTCÊ¹ÄÜ
-		while(RTCCFG & 0x01);	//µÈ´ý³õÊ¼»¯Íê³É,ÐèÒªÔÚ "RTCÊ¹ÄÜ" Ö®ºóÅÐ¶Ï. 
-		//ÉèÖÃRTCÊ±¼äÐèÒª32768HzµÄ1¸öÖÜÆÚÊ±¼ä,´óÔ¼30.5us. ÓÉÓÚÍ¬²½, ËùÒÔÊµ¼ÊµÈ´ýÊ±¼äÊÇ0~30.5us.
-		//Èç¹û²»µÈ´ýÉèÖÃÍê³É¾ÍË¯Ãß, ÔòRTC»áÓÉÓÚÉèÖÃÃ»Íê³É, Í£Ö¹¼ÆÊý, »½ÐÑºó²Å¼ÌÐøÍê³ÉÉèÖÃ²¢¼ÌÐø¼ÆÊý.
+		RTCCR = 0x01;     //RTCÊ¹
+		while ( RTCCFG & 0x01 );	//È´Ê¼,Òª "RTCÊ¹" Ö®Ð¶. 
+		//RTCÊ±Òª32768Hz1Ê±,Ô¼30.5us. Í¬, ÊµÊµÈ´Ê±0~30.5us.
+		//È´É¾Ë¯, RTCÃ», Í£Ö¹, ÑºÅ¼Ã².
 	}
 	else
 	{
-		RTCCR = 0x00;     //RTC¹Ø±Õ
+		RTCCR = 0x00;     //RTCØ±
 	}
 	
 	return SUCCESS;
 }
-
 

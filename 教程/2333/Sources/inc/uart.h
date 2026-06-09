@@ -1,3 +1,10 @@
+/**
+ * @file uart.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 //<<AICUBE_USER_HEADER_REMARK_BEGIN>>
 ////////////////////////////////////////
 // 在此添加用户文件头说明信息  
@@ -5,24 +12,19 @@
 ////////////////////////////////////////
 //<<AICUBE_USER_HEADER_REMARK_END>>
 
-
 #ifndef __UART_H__
 #define __UART_H__
-
 
 //<<AICUBE_USER_DEFINE_BEGIN>>
 // 在此添加用户宏定义  
 //<<AICUBE_USER_DEFINE_END>>
 
-
-void UART1_Init(void);
+void UART1_Init( void );
 
 extern BOOL fPrintfBusy;
-
 
 //<<AICUBE_USER_EXTERNAL_DECLARE_BEGIN>>
 // 在此添加用户外部函数和外部变量声明  
 //<<AICUBE_USER_EXTERNAL_DECLARE_END>>
-
 
 #endif

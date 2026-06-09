@@ -1,14 +1,21 @@
+/**
+ * @file STC32G_EEPROM.h
+ * @brief Êú™ÊåáÂÆöÊèèËø∞
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCAI.com ---------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* »Áπ˚“™‘⁄≥Ã–Ú÷– π”√¥À¥˙¬Î,«Î‘⁄≥Ã–Ú÷–◊¢√˜ π”√¡ÀSTCµƒ◊ ¡œº∞≥Ã–Ú            */
+/* “™⁄≥ π√¥À¥,⁄≥◊¢ πSTCœº            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_EEPROM_H
@@ -17,27 +24,24 @@
 #include	"config.h"
 
 //========================================================================
-//                              ∂®“Â…˘√˜
+//                              
 //========================================================================
 
-
 //========================================================================
-//                               IAP…Ë÷√
+//                               IAP
 //========================================================================
 
-#define		IAP_STANDBY()	IAP_CMD = 0		//IAPø’œ–√¸¡Ó£®Ω˚÷π£©
-#define		IAP_READ()		IAP_CMD = 1		//IAP∂¡≥ˆ√¸¡Ó
-#define		IAP_WRITE()		IAP_CMD = 2		//IAP–¥»Î√¸¡Ó
-#define		IAP_ERASE()		IAP_CMD = 3		//IAP≤¡≥˝√¸¡Ó
+#define		IAP_STANDBY()	IAP_CMD = 0		//IAPÓ£®÷π
+#define		IAP_READ()		IAP_CMD = 1		//IAP
+#define		IAP_WRITE()		IAP_CMD = 2		//IAP–¥
+#define		IAP_ERASE()		IAP_CMD = 3		//IAP
 
 #define	IAP_ENABLE()		IAPEN = 1; IAP_TPS = MAIN_Fosc / 1000000
 #define	IAP_DISABLE()		IAP_CONTR = 0; IAP_CMD = 0; IAP_TRIG = 0; IAP_ADDRH = 0xff; IAP_ADDRL = 0xff
 
-
-void	DisableEEPROM(void);
-void 	EEPROM_read_n(u32 EE_address,u8 *DataAddress,u16 number);
-void 	EEPROM_write_n(u32 EE_address,u8 *DataAddress,u16 number);
-void	EEPROM_SectorErase(u32 EE_address);
-
+void	DisableEEPROM( void );
+void 	EEPROM_read_n( u32 EE_address, u8 *DataAddress, u16 number );
+void 	EEPROM_write_n( u32 EE_address, u8 *DataAddress, u16 number );
+void	EEPROM_SectorErase( u32 EE_address );
 
 #endif

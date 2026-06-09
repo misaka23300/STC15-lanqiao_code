@@ -1,3 +1,10 @@
+/**
+ * @file boot.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #ifndef __BOOT_H__
 #define __BOOT_H__
 
@@ -7,11 +14,11 @@
 #define uchar unsigned char
 #define uint unsigned int
 
-void boot_init(void);
-void timer_0(void);
-void timer_1(void);
-void timer_2(void);
-void latch(uchar i);
-void Delay14us(void);
+void boot_init( void );
+void timer_0( void );
+void timer_1( void );
+void timer_2( void );
+void latch( uchar i );
+void Delay14us( void );
 
 #endif

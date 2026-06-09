@@ -1,3 +1,10 @@
+/**
+ * @file ds1302.c
+ * @brief DS1302实时时钟驱动
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "ds1302.h"
 
 sbit SDA = P2^3;
@@ -8,108 +15,104 @@ sbit RST = P2^7;
 uint8_t code write_address[7] = {0x80, 0x82, 0x84, 0x86, 0x88, 0x8A, 0x8C};
 uint8_t code read_address[7] = {0x81, 0x83, 0x85, 0x87, 0x89, 0x8B, 0x8D};
 
-
-
 //
-void Write_Ds1302(unsigned  char temp) 
+void Write_Ds1302( unsigned  char temp ) 
 {
 	unsigned char i;
-	for (i=0;i<8;i++)     	
+	for ( i = ;i < ;i++)     	
 	{ 
 		SCK = 0;
 		SDA = temp&0x01;
 		temp>>=1; 
-		SCK=1;
+		SCK = ;
 	}
 }   
 
 //
-void Write_Ds1302_Byte( unsigned char address,unsigned char dat )     
+void Write_Ds1302_Byte( unsigned char address, unsigned char dat )     
 {
- 	RST=0;	_nop_();
- 	SCK=0;	_nop_();
- 	RST=1; 	_nop_();  
- 	Write_Ds1302(address);	
- 	Write_Ds1302(dat);		
- 	RST=0; 
+ 	RST = ;	_nop_();
+ 	SCK = ;	_nop_();
+ 	RST = ; 	_nop_();  
+ 	Write_Ds1302( address );	
+ 	Write_Ds1302( dat );		
+ 	RST = ; 
 }
 
 //
 unsigned char Read_Ds1302_Byte ( unsigned char address )
 {
- 	unsigned char i,temp=0x00;
- 	RST=0;	_nop_();
- 	SCK=0;	_nop_();
- 	RST=1;	_nop_();
- 	Write_Ds1302(address);
- 	for (i=0;i<8;i++) 	
+ 	unsigned char i, temp = x00;
+ 	RST = ;	_nop_();
+ 	SCK = ;	_nop_();
+ 	RST = ;	_nop_();
+ 	Write_Ds1302( address );
+ 	for ( i = ;i < ;i++) 	
  	{		
-		SCK=0;
+		SCK = ;
 		temp>>=1;	
- 		if(SDA)
+ 		if ( SDA )
  		temp|=0x80;	
- 		SCK=1;
+ 		SCK = ;
 	} 
- 	RST=0;	_nop_();
- 	SCK=0;	_nop_();
-	SCK=1;	_nop_();
-	SDA=0;	_nop_();
-	SDA=1;	_nop_();
-	return (temp);			
+ 	RST = ;	_nop_();
+ 	SCK = ;	_nop_();
+	SCK = ;	_nop_();
+	SDA = ;	_nop_();
+	SDA = ;	_nop_();
+	return ( temp );			
 }
 
 /* 
-uchar hex_to_bcd(uchar HEX)
+uchar hex_to_bcd( uchar HEX )
 {
 	uchar BCD;
-	BCD = (HEX / 10) << 4 | (HEX % 10);
+	BCD = ( HEX / 10 ) << 4 | ( HEX % 10 );
 	return BCD;
 }
 
-uchar bcd_to_hex(uchar BCD)
+uchar bcd_to_hex( uchar BCD )
 {
 	uchar HEX;
-	HEX = (BCD << 4)* 10 | (BCD & 0x0F);
+	HEX = ( BCD << 4 )* 10 | ( BCD & 0x0F );
 	return BCD;
 } 
 */
 
-uint8_t hex_to_bcd(uint8_t hex)
+uint8_t hex_to_bcd( uint8_t hex )
 {
-	return (hex / 10 * 16) + (hex % 10);
+	return ( hex / 10 * 16 ) + ( hex % 10 );
 }
 
-uint8_t bcd_to_hex(uint8_t bcd)
+uint8_t bcd_to_hex( uint8_t bcd )
 {
-	return (bcd / 16 * 10) + (bcd % 16);
+	return ( bcd / 16 * 10 ) + ( bcd % 16 );
 }
 
-
-
-void write_datetime(uint8_t *time_init)
+void write_datetime( uint8_t *time_init )
 {
 	// time -> bcd
 	uint8_t i;
-	Write_Ds1302_Byte(0x8E, 0x00);
+	Write_Ds1302_Byte(0x8E, 0x00 );
 	
-	for (i = 0;i < 7;i++)
+	for ( i = 0;i < 7;i++)
 	{
-		Write_Ds1302_Byte(write_address[i], time_init[i]);
+		Write_Ds1302_Byte( write_address[i], time_init[i]);
 	}
 	
-	Write_Ds1302_Byte(0x8E, 0x80);
+	Write_Ds1302_Byte(0x8E, 0x80 );
 }
 
-void read_datetime(uint8_t *now_time)
+void read_datetime( uint8_t *now_time )
 {
 	uint8_t i;
-	for (i = 0;i < 3;i++)
+	for ( i = 0;i < 3;i++)
 	{
-		now_time[i] = Read_Ds1302_Byte(read_address[i]);
+		now_time[i] = Read_Ds1302_Byte( read_address[i]);
 	}
 
-	for (i = 0;i < 3;i++)
+	for ( i = 0;i < 3;i++)
 	{
-		now_time[i] = bcd_to_hex(now_time[i]);
+		now_time[i] = bcd_to_hex( now_time[i]);
 	}
 }

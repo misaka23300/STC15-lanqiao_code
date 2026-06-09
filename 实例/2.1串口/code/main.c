@@ -1,3 +1,10 @@
+/**
+ * @file main.c
+ * @brief 主程序入口文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "main.h"
 
 extern uint8_t led_array[8];
@@ -34,10 +41,8 @@ void pcaInit()
     //CCON |= 0x40;               // CR = 1;
     PPCA = 1;
 
-
     timer_0 = TIME_CCAP_0;
 }
-
 
 void pcaInit()
 {
@@ -57,7 +62,7 @@ void pcaInit()
 void pcaInterrupt() interrupt 7
 {
     
-    if (CCF0)
+    if ( CCF0 )
     {
         CCF0 = 0;
         
@@ -66,10 +71,9 @@ void pcaInterrupt() interrupt 7
         timer_0 += TIME_CCAP_0;
 
         if ( led.time < LED_TIME ) { led.time++; } 
-        if ( led.waterTime < WATERLED_TIME) { led.waterTime++; }
+        if ( led.waterTime < WATERLED_TIME ) { led.waterTime++; }
     }
 }
-
 
 void waterLed()
 {
@@ -83,7 +87,7 @@ void waterLed()
     led_array[6] = toward;
     led_array[7] = toward;
 
-    if (toward == 1)
+    if ( toward == 1 )
     {
         toward = 0;
     }
@@ -93,16 +97,15 @@ void waterLed()
     }
 }
 
-
 void taskLoop()
 {
-    if (led.time == LED_TIME)
+    if ( led.time == LED_TIME )
     {
         led.time = 0;
         led_display();
     }
 
-    if (led.waterTime == WATERLED_TIME)
+    if ( led.waterTime == WATERLED_TIME )
     {
         led.waterTime = 0;
         waterLed();
@@ -112,11 +115,9 @@ void taskLoop()
 void main()
 {
     pcaInit();
-    while (1)
+    while (1 )
     {
         taskLoop();
     }
 }
-
-
 

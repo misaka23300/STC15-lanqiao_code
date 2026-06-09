@@ -1,13 +1,20 @@
+/**
+ * @file port.c
+ * @brief 端口配置模块
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*
  * FreeRTOS Kernel V10.4.6
- * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
+ * Copyright ( C ) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
- * SPDX-License-Identifier: MIT
+ * SPDX - icense - dentifier: MIT
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
+ * this software and associated documentation files ( the "Software"), to deal in
  * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * use, copy, modify, merge, publish, distribute, sublicense, and / r sell copies of
  * the Software, and to permit persons to whom the Software is furnished to do so,
  * subject to the following conditions:
  *
@@ -22,10 +29,9 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * https://www.FreeRTOS.org
- * https://github.com/FreeRTOS
+ * https://github.com / reeRTOS
  *
  */
-
 
 /* Standard includes. */
 #include <stdlib.h>
@@ -39,18 +45,14 @@
 
 #define portRELOAD_VALUE                    ( 65536 - configCPU_CLOCK_HZ / configTICK_RATE_HZ )
 
-
 static StackType_t data xPCL;
 static StackType_t data xPCH;
 static StackType_t data xPCB;
 
-
 /* Setup the timer to generate the tick interrupts. */
 static void prvPortSetupTimerInterrupt( void );
 
-
 /*-----------------------------------------------------------*/
-
 
 /*
  * See header file for description.
@@ -88,14 +90,14 @@ StackType_t *pxPortInitialiseStack( StackType_t *pxTopOfStack, TaskFunction_t px
 	pxTopOfStack++;
 	*pxTopOfStack = 0;                                      /* R56 */
 	pxTopOfStack++;
-	*pxTopOfStack = 1;                                      /* R57(DPXL) */
+	*pxTopOfStack = 1;                                      /* R57( DPXL ) */
 	pxTopOfStack++;
-	*pxTopOfStack = 0;                                      /* R58(DPH) */
+	*pxTopOfStack = 0;                                      /* R58( DPH ) */
 	pxTopOfStack++;
-	*pxTopOfStack = 0;                                      /* R59(DPL) */
+	*pxTopOfStack = 0;                                      /* R59( DPL ) */
 
 	/* DR28 DR24 DR20 DR16 DR12 DR8 DR4 */
-	for(index = 0; index < 28; index++)
+	for ( index = 0; index < 28; index++)
 	{
 		pxTopOfStack++;
 		*pxTopOfStack = 0;
@@ -183,7 +185,7 @@ void vTimer0ISR( void )
 #if configUSE_PREEMPTION == 1
 
     /* Get the scheduler to update the task states following the tick. */
-    if( xTaskIncrementTick() != pdFALSE )
+    if ( xTaskIncrementTick() != pdFALSE )
     {
         /* Saves the stack pointer for one task into its TCB, calls
         vTaskSwitchContext() to update the TCB being used, then restores the stack
@@ -215,10 +217,10 @@ static void prvPortSetupTimerInterrupt( void )
     /* Timer0 work at 1T mode. */
     AUXR |= 0x80;
 
-    /* Timer0 work at mode0 (16-bit auto reload mode) */
+    /* Timer0 work at mode0 (16 - it auto reload mode ) */
     TMOD &= ~0x0f;
 
-    /* Initial timer0 reload value (1ms per cycle). */
+    /* Initial timer0 reload value (1ms per cycle ). */
     TL0 = ( uint8_t )( portRELOAD_VALUE );
     TH0 = ( uint8_t )( portRELOAD_VALUE >> 8 );
 
@@ -229,7 +231,6 @@ static void prvPortSetupTimerInterrupt( void )
     /* Enable timer0 interrupts. */
     ET0 = 1;
 }
-
 
     __asm   { CSEG    AT  0BH       }
 #if ( configUSE_ROMHUGE == 0 )

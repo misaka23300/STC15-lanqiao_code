@@ -1,5 +1,11 @@
-#include "boot.h"
+/**
+ * @file boot.c
+ * @brief 系统启动初始化文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
 
+#include "boot.h"
 
 void Timer2_Init(void) // 1毫秒@12.000MHz
 {
@@ -19,7 +25,6 @@ void Timer1_Init(void) // 1毫秒@12.000MHz
     TF1 = 0;      // 清除TF1标志
     TR1 = 0;      // 定时器1开始计时
 }
-
 
 void boot_init() {
     P0M1 = 0;
@@ -100,30 +105,21 @@ void Delay14us(void) //@12.000MHz
     while (--i);
 }
 
-void Delay1000ms(void)	//@12.000MHz
+void Delay1000ms(void) //@12.000MHz
 {
-	unsigned char data i, j, k;
+    unsigned char data i, j, k;
 
-	_nop_();
-	_nop_();
-	i = 46;
-	j = 153;
-	k = 245;
-	do
-	{
-		do
-		{
-			while (--k);
-		} while (--j);
-	} while (--i);
+    _nop_();
+    _nop_();
+    i = 46;
+    j = 153;
+    k = 245;
+    do {
+        do { while (--k); } while (--j);
+    } while (--i);
 }
 
-
-
-void while_plus(uint8_t *num, uint8_t init, uint8_t max)
-{
+void while_plus(uint8_t* num, uint8_t init, uint8_t max) {
     (*num)++;
-    if (*num == max + 1) {
-        *num = init;
-    }
+    if (*num == max + 1) { *num = init; }
 }

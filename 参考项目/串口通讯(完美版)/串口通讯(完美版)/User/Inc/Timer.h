@@ -1,10 +1,17 @@
+/**
+ * @file Timer.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #ifndef _TIMER_H
 #define _TIMER_H
 
 #include "./config.h"//包含配置库
 
 //定义定时器2重装载值
-#define Timer2_Reload (65536-(MAIN_FOSC/1000))
+#define Timer2_Reload (65536-( MAIN_FOSC / 000 ))
 
 //定时器延时数据结构体
 typedef struct {

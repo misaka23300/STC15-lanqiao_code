@@ -1,3 +1,10 @@
+/**
+ * @file main.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #ifndef __MAIN_H__
 #define __MAIN_H__
 
@@ -10,6 +17,6 @@
 void key_proc();
 void seg_proc();
 void led_proc();
-//void Timer1_Isr(void) interrupt 1;
+//void Timer1_Isr( void ) interrupt 1;
 
 #endif

@@ -1,10 +1,16 @@
-// https://www.4t.wiki/exercise/7d88509d740668ecceaf34308a093aac
+/**
+ * @file main.c
+ * @brief 主程序入口文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
+// https://www.4t.wiki / xercise / d88509d740668ecceaf34308a093aac
 
 #include "main.h"
 
 extern uchar led_value[8];
 extern uchar seg[8];
-
 
 enum {
     KEY_TIME = 15,
@@ -13,8 +19,6 @@ enum {
     ADC_TIME = 90,
     SHAN_TIME = 100
 };
-
-
 
 // pcf8591
 uchar ADC_value;
@@ -36,7 +40,6 @@ struct {
     uchar one_flag;
 } state;
 
-
 // 参数变量
 struct {
     char low_value;
@@ -44,16 +47,13 @@ struct {
     uchar out_times;
 } argument;
 
-
 // key
 struct {
     uchar time;
     uchar press;
 } key;
 
-
 // 继电器
-
 
 // sonic
 struct {
@@ -68,42 +68,41 @@ void main()
     boot_init();
     led_state();
 
-
     state.one_flag = 99;
     argument.high_value = 60;
     argument.low_value = 10;
    
 
-    while (1)
+    while (1 )
     {
-        if (key.time == KEY_TIME)
+        if ( key.time == KEY_TIME )
         {
             key_proc();
             key.time = 0;
         }
 
-        if (state.time == STATE_TIME)
+        if ( state.time == STATE_TIME )
         {
             state_proc();
             state.time = 0;
         }
 
-        if (sonic.time == SONIC_TIME)
+        if ( sonic.time == SONIC_TIME )
         {
             sonic_proc();
             sonic.time = 0;
         }
 
-        if (ADC_time == ADC_TIME )
+        if ( ADC_time == ADC_TIME )
         {
-            if (state.mode_2 == 1)
+            if ( state.mode_2 == 1 )
                 ADC_proc();
             ADC_time = 0;
         }
 
-        if (shan_time == SHAN_TIME)
+        if ( shan_time == SHAN_TIME )
         {
-            if (shan_flag == 1)
+            if ( shan_flag == 1 )
             {
                 shan_flag = 0;
             }
@@ -116,15 +115,14 @@ void main()
     }
 }
 
-
-void Timer2_Isr(void) interrupt 12
+void Timer2_Isr( void ) interrupt 12
 {
     static uint i;
     i++;
-    if (i > 30000) { i = 0; }
+    if ( i > 30000 ) { i = 0; }
 
     seg_display();
-    if (i % 1 == 0)
+    if ( i % 1 == 0 )
         led_display();
         adjust_out();
 
@@ -144,21 +142,21 @@ void key_proc()
     
     key.press = key_scan();
     
-    switch (key.press)
+    switch ( key.press )
     {
         case 4:
         {
-            state.mode_1 = (state.mode_1 + 1) % 3;
+            state.mode_1 = ( state.mode_1 + 1 ) % 3;
             led_state();
         }
         break;
 
         case 5:
         {
-            if (state.mode_1 == 1)
-                { state.mode_2 = (state.mode_2 + 1) % 2; }
+            if ( state.mode_1 == 1 )
+                { state.mode_2 = ( state.mode_2 + 1 ) % 2; }
                 
-            else if (state.mode_1 == 2)
+            else if ( state.mode_1 == 2 )
             {
                 argument.out_times = 0;
             }
@@ -167,15 +165,15 @@ void key_proc()
 
         case 9:
         {
-            if (state.mode_1 == 1 && state.mode_2 == 0)
+            if ( state.mode_1 == 1 && state.mode_2 == 0 )
             {
                 argument.high_value = argument.high_value + 10;
-                if (argument.high_value > 90)
+                if ( argument.high_value > 90 )
                 {
                     argument.high_value = 50;
                 }
             }
-            else if (state.mode_1 == 1 && state.mode_2 == 1)
+            else if ( state.mode_1 == 1 && state.mode_2 == 1 )
             {
                 led_value[7] = 0;
                 state.check_mode2 = 0;
@@ -186,15 +184,15 @@ void key_proc()
 
         case 8:
         {
-            if (state.mode_1 == 1 && state.mode_2 == 0)
+            if ( state.mode_1 == 1 && state.mode_2 == 0 )
             {
                 argument.low_value = argument.low_value + 10;
-                if (argument.low_value > 40)
+                if ( argument.low_value > 40 )
                 {
                     argument.low_value = 0;
                 }
             }
-            else if (state.mode_1 == 1 && state.mode_2 == 1)
+            else if ( state.mode_1 == 1 && state.mode_2 == 1 )
             {
                 led_value[7] = 1;
                 state.check_mode2 = 1;
@@ -207,12 +205,12 @@ void key_proc()
 
 void state_proc()
 {
-    switch (state.mode_1)
+    switch ( state.mode_1 )
     {
         // 测距
         case 0:
         {
-            if (state.one_flag != 0)
+            if ( state.one_flag != 0 )
             {
                 state.one_flag = 0; 
                 seg[0] = 43; seg[1] = 16; seg[2] = 16; seg[3] = 16; seg[4] = 16;
@@ -227,7 +225,7 @@ void state_proc()
         // 参数
         case 1:
         {
-            if (state.one_flag != 1)
+            if ( state.one_flag != 1 )
             {
                 state.one_flag = 1;
                 seg[0] = 24; seg[2] = 16; seg[5] = 17;
@@ -246,14 +244,14 @@ void state_proc()
         // 记录界面
         case 2:
         {
-            if (state.one_flag != 2)
+            if ( state.one_flag != 2 )
             {
                 state.one_flag = 2; 
                 seg[0] = 14; 
                 seg[1] = 16; seg[2] = 16; seg[3] = 16; 
                 seg[4] = 16; seg[5] = 16; seg[6] = 16;
             }
-            if (argument.out_times > 9)
+            if ( argument.out_times > 9 )
                 seg[7] = 17;
             else
                 seg[7] = argument.out_times;
@@ -261,7 +259,6 @@ void state_proc()
         break;
     }
 }
-
 
 void sonic_proc()
 {
@@ -271,7 +268,7 @@ void sonic_proc()
     sonic.list[1] = sonic.distance / 10 % 10;
     sonic.list[2] = sonic.distance % 10;
 
-    delete_0(sonic.list, 3, 0);
+    delete_0( sonic.list, 3, 0 );
 
     //adjust_out();
 }
@@ -280,42 +277,41 @@ void ADC_proc()
 {
 	uchar value;
 	
-    ADC_value = ADC(0x03);
+    ADC_value = ADC(0x03 );
     //led_value[0] = 1;
 
-    if (ADC_value <= 51)
+    if ( ADC_value <= 51 )
     {
         value = 0; 
     }
-    else if (51 < ADC_value && ADC_value <= 102)
+    else if (51 < ADC_value && ADC_value <= 102 )
     {
         value = 10;
     }
-    else if (102 < ADC_value && ADC_value <= 153)
+    else if (102 < ADC_value && ADC_value <= 153 )
     {
         value = 20;
     }
-    else if (154 < ADC_value && ADC_value <= 205)
+    else if (154 < ADC_value && ADC_value <= 205 )
     {
         value = 30;
     }
-    else if (205 < ADC_value && ADC_value <= 255)
+    else if (205 < ADC_value && ADC_value <= 255 )
     {
         value = 40;
     }
 
-    if (state.check_mode2 == 1)
+    if ( state.check_mode2 == 1 )
     {
         argument.low_value = value + 50;
     }
-    else if (state.check_mode2 == 0)
+    else if ( state.check_mode2 == 0 )
     {
         argument.high_value = value;
     } 
 
     value = 0;
 }
-
 
 void led_state()
 {
@@ -325,11 +321,10 @@ void led_state()
 
     led_value[state.mode_1] = 1;
 
-
     // uchar i;
-    // for (i = 0;i < 3;i++)
+    // for ( i = 0;i < 3;i++)
     // {
-    //     if (i != state.mode_1)
+    //     if ( i != state.mode_1 )
     //     {
     //         led_value[i] = 0;
     //     }
@@ -340,11 +335,10 @@ void led_state()
     // }
 }
 
-
 void adjust_out()
 {
     static uchar adjust;
-    if (argument.low_value <= sonic.distance && sonic.distance <= argument.high_value)
+    if ( argument.low_value <= sonic.distance && sonic.distance <= argument.high_value )
     {
         adjust = 1;
         led_value[7] = 1;
@@ -352,9 +346,9 @@ void adjust_out()
     else 
     {
         led_value[7] = shan_flag;
-        if (adjust == 1)
+        if ( adjust == 1 )
         {
-            if (argument.out_times < 11)
+            if ( argument.out_times < 11 )
                 argument.out_times++;
         
                 

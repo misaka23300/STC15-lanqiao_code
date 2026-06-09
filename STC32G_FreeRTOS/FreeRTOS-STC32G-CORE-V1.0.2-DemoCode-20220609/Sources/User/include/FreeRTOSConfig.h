@@ -1,11 +1,18 @@
+/**
+ * @file FreeRTOSConfig.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*
  * FreeRTOS V202112.00
- * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
+ * Copyright ( C ) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
+ * this software and associated documentation files ( the "Software"), to deal in
  * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * use, copy, modify, merge, publish, distribute, sublicense, and / r sell copies of
  * the Software, and to permit persons to whom the Software is furnished to do so,
  * subject to the following conditions:
  *
@@ -20,7 +27,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * http://www.FreeRTOS.org
- * http://aws.amazon.com/freertos
+ * http://aws.amazon.com / reertos
  *
  * 1 tab == 4 spaces!
  */
@@ -40,26 +47,25 @@
  * THESE PARAMETERS ARE DESCRIBED WITHIN THE 'CONFIGURATION' SECTION OF THE
  * FreeRTOS API DOCUMENTATION AVAILABLE ON THE FreeRTOS.org WEB SITE.
  *
- * See http://www.freertos.org/a00110.html
+ * See http://www.freertos.org / 00110.html
  *----------------------------------------------------------*/
 
 /*-----------------------------------------------------------
  * ﺍﮔﺎﺝﺕﮰﺷﺡﭺﻲﮌﺓ
  *
- * V1.0.2 (2022-4-27)
+ * V1.0.2 (2022 - -27 )
  *     ﺷﻐﻁﮮﺫﺳﺳﮦﺎﺳﮌﮮpvParametersﺏﺀﮌﺙﺹﺗﻁﭨﺑﻥﺳﮩﭖﺥﺳﮌﮊﻗ
- *     (ﻉ۱ﺻﻗpvParametersﺎﺳﮌﮮﺑ،ﭖﻊﻅﺓﭨﮨﻁﻑﭼ۱ﺙﺑﮌﮮﮌﺎﻅﭨﺽﺷﭖﺱ24ﺳﭨﮌﮄﺽﺷﺷ۶ﺳﭨ۲؛ﻉﻧﺕﻑ8ﺳﭨﺎﻓﺻﻣﮌﺎﭨﻕﻉﺿﭘﺁﮊﻧ0)
+ *     (ﻉ۱ﺻﻗpvParametersﺎﺳﮌﮮﺑ،ﭖﻊﻅﺓﭨﮨﻁﻑﭼ۱ﺙﺑﮌﮮﮌﺎﻅﭨﺽﺷﭖﺱ24ﺳﭨﮌﮄﺽﺷﺷ۶ﺳﭨ۲؛ﻉﻧﺕﻑ8ﺳﭨﺎﻓﺻﻣﮌﺎﭨﻕﻉﺿﭘﺁﮊﻧ0 )
  *
- * V1.0.1 (2022-4-26)
+ * V1.0.1 (2022 - -26 )
  *     ﺷﻐﻁﮮﺳﻐﺓ۷ﻁﮮﺏ۲ﮌﺗﺽﺣxdataﭖﺥﺳﮌﮊﻗ
  *
- * V1.0.0 (2022-4-24)
+ * V1.0.0 (2022 - -24 )
  *     ﺻﺩﻅﺎﺏﺭﺗ۵ﺎ۱ﺓ۱ﺎﺙﺏﺀﺍﮔ
  *----------------------------------------------------------*/
 
-
 /***************************************************************************************************************/
-/*                                        STC32-251ﭨﻱﺑ۰ﺧﻛﻅﺣﺧﻛﻅﺣﺹ۰ﺵﻧ                                            */
+/*                                        STC32 - 51ﭨﻱﺑ۰ﺧﻛﻅﺣﺧﻛﻅﺣﺹ۰ﺵﻧ                                            */
 /***************************************************************************************************************/
 #define configPORT_VERSION_NUMBER               "V1.0.2"                //STCﺻﺩﻅﺎﺑﻲﺡﻣﺍﮔﺎﺝ
 
@@ -80,9 +86,8 @@
     #error Missing definition:  configUSE_ROMHUGE must be defined in FreeRTOSConfig.h as either 1 or 0.
 #endif
 
-//#define UNUSED(expr)      (void)(expr)
-#define UNUSED(expr)        if ((expr) == 0)
-
+//#define UNUSED( expr )      ( void )( expr )
+#define UNUSED( expr )        if (( expr ) == 0 )
 
 /***************************************************************************************************************/
 /*                                        FreeRTOSﭨﻱﺑ۰ﺧﻛﻅﺣﺧﻛﻅﺣﺹ۰ﺵﻧ                                             */
@@ -95,17 +100,17 @@
                                                                         //MCUﺣﭨﺽﺷﻁﻗﺷ۸ﺽﺎﺙﹼﻅﺕﭼﻧﭖﺥﭨﺍﺑﺯﭦﻡﺽ۵ﺕﺣﺭﻟﻅﺣﺳ۹0۲۰
 #define configUSE_TICKLESS_IDLE                 0                       //1ﺩﮪﺽﺣﭖﺱﺗ۵ﭦﺥticklessﺥ۲ﮌﺛ
 #define configUSE_QUEUE_SETS                    0                       //ﺳ۹1ﮌﺎﺩﮪﺽﺣﭘﺽﭼﺷ
-#define configCPU_CLOCK_HZ                      (MAIN_Fosc)             //CPUﺩﭖﺡﮌ
-#define configTICK_RATE_HZ                      ((TickType_t)1000)      //ﮌﺎﻅﺽﺛﻌﺧﺥﺩﭖﺡﮌ۲؛ﻁﻗﭺﺅﺭﻟﻅﺣﺳ۹1000,ﻅﻎﺩﻌﺝﺱﮌﮄ1ms
-#define configMAX_PRIORITIES                    (32)                    //ﺟﺭﮌﺗﺽﺣﭖﺥﻉﻧﺑﮩﺽﺧﺵﺫﺙﭘ
-#define configDEFAULT_PRIORITIES                (tskIDLE_PRIORITY + 1)  //ﺫﺳﺳﮦﺥ؛ﺫﺵﺽﺧﺵﺫﺙﭘ
-#define configMINIMAL_STACK_SIZE                ((unsigned short)256)   //ﺟﻁﺵﺷﺫﺳﺳﮦﮌﺗﺽﺣﭖﺥﭘﺹﻁﭨﺑﮩﺷ۰
-#define configDEFAULT_STACK_SIZE                ((unsigned short)128)   //ﺫﺳﺳﮦﺥ؛ﺫﺵﭘﺹﻁﭨﺑﮩﺷ۰
-#define configMAX_TASK_NAME_LEN                 (8)                     //ﺫﺳﺳﮦﺣﻳﻉﻅﻉﻅﺓﻳﺑ؟ﺏ۳ﭘﺫ
-#define configUSE_IDLE_HOOK						0                       //1ﮌﺗﺽﺣﺟﻁﺵﺷﺗﺏﻉﺽ,0ﺎﭨﮌﺗﺽﺣ /*void vApplicationIdleHook( void );*/
-#define configUSE_TICK_HOOK						0                       //1ﮌﺗﺽﺣﮌﺎﺙﻛﺩ؛ﺗﺏﻉﺽ,0ﺎﭨﮌﺗﺽﺣ /*void vApplicationTickHook( void );*/
+#define configCPU_CLOCK_HZ                      ( MAIN_Fosc )             //CPUﺩﭖﺡﮌ
+#define configTICK_RATE_HZ                      (( TickType_t )1000 )      //ﮌﺎﻅﺽﺛﻌﺧﺥﺩﭖﺡﮌ۲؛ﻁﻗﭺﺅﺭﻟﻅﺣﺳ۹1000,ﻅﻎﺩﻌﺝﺱﮌﮄ1ms
+#define configMAX_PRIORITIES                    (32 )                    //ﺟﺭﮌﺗﺽﺣﭖﺥﻉﻧﺑﮩﺽﺧﺵﺫﺙﭘ
+#define configDEFAULT_PRIORITIES                ( tskIDLE_PRIORITY + 1 )  //ﺫﺳﺳﮦﺥ؛ﺫﺵﺽﺧﺵﺫﺙﭘ
+#define configMINIMAL_STACK_SIZE                (( unsigned short )256 )   //ﺟﻁﺵﺷﺫﺳﺳﮦﮌﺗﺽﺣﭖﺥﭘﺹﻁﭨﺑﮩﺷ۰
+#define configDEFAULT_STACK_SIZE                (( unsigned short )128 )   //ﺫﺳﺳﮦﺥ؛ﺫﺵﭘﺹﻁﭨﺑﮩﺷ۰
+#define configMAX_TASK_NAME_LEN                 (8 )                     //ﺫﺳﺳﮦﺣﻳﻉﻅﻉﻅﺓﻳﺑ؟ﺏ۳ﭘﺫ
+#define configUSE_IDLE_HOOK						0                       //1ﮌﺗﺽﺣﺟﻁﺵﺷﺗﺏﻉﺽ, 0ﺎﭨﮌﺗﺽﺣ /*void vApplicationIdleHook( void );*/
+#define configUSE_TICK_HOOK						0                       //1ﮌﺗﺽﺣﮌﺎﺙﻛﺩ؛ﺗﺏﻉﺽ, 0ﺎﭨﮌﺗﺽﺣ /*void vApplicationTickHook( void );*/
 #define configSUPPORT_DYNAMIC_ALLOCATION        1                       //ﻅ۶ﺏﻅﭘﺁﮊ؛ﺥﻌﺑﮔﺭﻡﮄﻣ
-#define configTOTAL_HEAP_SIZE					((size_t)(2*1024))     // ﺵﭖﺱﺏﺯﻱﺽﺷﻉﻎﭖﺥﭘﺹﺑﮩﺷ۰
+#define configTOTAL_HEAP_SIZE					(( size_t )(2 * 024 ))     // ﺵﭖﺱﺏﺯﻱﺽﺷﻉﻎﭖﺥﭘﺹﺑﮩﺷ۰
 
 #define configUSE_16_BIT_TICKS                  0                       //ﺵﭖﺱﺏﺛﻌﺧﺥﺙﺩﮌﮮﺩﺊﺎﻛﭼﺟﮌﮮﺝﻏﭺﻓﺷﺱ۲؛
                                                                         //1ﺎﻥﮌﺝﺳ۹16ﺳﭨﺳﻐﺓﻳﭦﺧﻁﻳﺷﺳ۲؛0ﺎﻥﮌﺝﺳ۹32ﺳﭨﺳﻐﺓﻳﭦﺧﻁﻳﺷﺳ
@@ -125,11 +130,11 @@
 #define configGENERATE_RUN_TIME_STATS	        0                       //ﺳ۹1ﮌﺎﺩﮪﺽﺣﺿﺯﺷﺷﮌﺎﺙﻛﺱﺏﺙﺩﺗ۵ﺥﻎ
 #define configUSE_TRACE_FACILITY				0                       //ﺳ۹1ﺩﮪﺽﺣﺟﺭﮌﺽﭨﺁﺕﻲﻉﻋﭖﺊﮌﺿ
 #define configUSE_STATS_FORMATTING_FUNCTIONS	0                       //ﺽﻣﭦﻡconfigUSE_TRACE_FACILITYﺱ؛ﮌﺎﺳ۹1ﮌﺎﭨﻕﺎﻓﺻﻣﺵﺡﺣﮔ3ﺕﺉﭦﺁﮌﮮ
-                                                                        //prvWriteNameToBuffer(),vTaskList(),
+                                                                        //prvWriteNameToBuffer(), vTaskList(),
                                                                         //vTaskGetRunTimeStats()
-/* Co-routine definitions. */
+/* Co - outine definitions. */
 #define configUSE_CO_ROUTINES 			        0                       //ﺳ۹1ﮌﺎﺩﮪﺽﺣﺷ­ﺏﮊ۲؛ﺩﮪﺽﺣﺷ­ﺏﮊﺻﺿﭦﮩﺎﻊﺷﻣﮊﻥﺙﺽﺳﺥﺙﹼcroutine.c
-#define configMAX_CO_ROUTINE_PRIORITIES         (2)                     //ﺷ­ﺏﮊﭖﺥﺽﺷﺷ۶ﺽﺧﺵﺫﺙﭘﮌﮮﺥﺟ
+#define configMAX_CO_ROUTINE_PRIORITIES         (2 )                     //ﺷ­ﺏﮊﭖﺥﺽﺷﺷ۶ﺽﺧﺵﺫﺙﭘﮌﮮﺥﺟ
 
 /* Set the following definitions to 1 to include the API function, or zero
 to exclude the API function. */
@@ -144,7 +149,5 @@ to exclude the API function. */
 #define INCLUDE_vTaskDelay                      1
 #define INCLUDE_eTaskGetState                   0
 #define INCLUDE_xTimerPendFunctionCall          0
-
-
 
 #endif /* FREERTOS_CONFIG_H */

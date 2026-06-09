@@ -1,9 +1,16 @@
+/**
+ * @file main.c
+ * @brief ‰∏ªÁ®ãÂ∫èÂÖ•Âè£Êñá‰ª∂
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------
 MAIN.C
 
-main ∫Ø ˝—› æ 4∏ˆ¥Æø⁄Õ¨ ± π”√ DMA  ’∑¢ ˝æ›,  ’µΩ ˝æ›∫Û‘≠¬∑∑µªÿ, ≤ªœﬁ ˝æ›≥§∂», ≥÷–¯ ’∑¢.
+main  æ 4Õ¨ ± π DMA ’∑, ’µ›∫‘≠¬∑, ›≥, ’∑.
 
-¿˝≥Ã÷–À˘”–¥Æø⁄9600≤®Ãÿ¬ ,ƒ¨»œ“˝Ω≈,∂® ±∆˜2◊˜Œ™≤®Ãÿ¬ ∑¢…˙∆˜
+–¥9600,ƒ¨, ±2Œ™ ∑
 ----------------------------------------------------------*/
 
 #include "Config.h"
@@ -14,77 +21,76 @@ main ∫Ø ˝—› æ 4∏ˆ¥Æø⁄Õ¨ ± π”√ DMA  ’∑¢ ˝æ›,  ’µΩ ˝æ›∫Û‘≠¬∑∑µªÿ, ≤ªœﬁ ˝æ›≥§∂», ≥÷
 #include "UART4.h"
 
 /*---------------------------------------------------------
-±æµÿ∫Ø ˝…˘√˜
+ÿ∫
 ----------------------------------------------------------*/
-void Timer0_Init(void);
-void XOSCClkConfig(u8 div);
-void GPIO_config(void);
+void Timer0_Init( void );
+void XOSCClkConfig( u8 div );
+void GPIO_config( void );
 void Delay1000ms();
 
-
 /*---------------------------------------------------------
-»´æ÷±‰¡ø
+»´÷±
 ----------------------------------------------------------*/
-u8 ClockSignal=0;
+u8 ClockSignal = ;
 
 /*---------------------------------------------------------
 main
 ----------------------------------------------------------*/
-void main(void)
+void main( void )
 {
-	WTST = 0;		//…Ë÷√≥Ã–Ú÷∏¡Ó—” ±≤Œ ˝£¨∏≥÷µŒ™0ø…Ω´CPU÷¥––÷∏¡ÓµƒÀŸ∂»…Ë÷√Œ™◊ÓøÏ
-	EAXSFR();		//¿©’πSFR(XFR)∑√Œ  πƒ‹ 
-	CKCON = 0;      //Ã·∏ﬂ∑√Œ XRAMÀŸ∂»
+	WTST = 0;		//√≥÷∏ ±÷µŒ™0…ΩCPU÷¥÷∏Ÿ∂Œ™
+	EAXSFR();		//’πSFR( XFR ) π 
+	CKCON = 0;      //ﬂ∑XRAMŸ∂
     
-    GPIO_config();      //GPIO ≥ı ºªØ
+    GPIO_config();      //GPIO  º
     
 #if USE_Extern_Fosc
-    XOSCClkConfig(1);   //«–ªª ±÷”
+    XOSCClkConfig(1 );   //–ª ±
 #endif
     
-    UART1_Init(9600);   //¥Æø⁄1 ≥ı ºªØ
-    UART2_Init(9600);   //¥Æø⁄1 ≥ı ºªØ
-    UART3_Init(9600);   //¥Æø⁄1 ≥ı ºªØ
-    UART4_Init(9600);   //¥Æø⁄1 ≥ı ºªØ
-    Timer0_Init();      //Timer0 ≥ı ºªØ
+    UART1_Init(9600 );   //1  º
+    UART2_Init(9600 );   //1  º
+    UART3_Init(9600 );   //1  º
+    UART4_Init(9600 );   //1  º
+    Timer0_Init();      //Timer0  º
     EA = 1;
     
-    Delay1000ms();      //µ»¥˝1√Î, PC∂Àœ¬‘ÿ¥˙¬Î,1√Î◊‘∂Ø¥Úø™CDC¥Æø⁄
+    Delay1000ms();      //»¥1, PCÿ¥, 1‘∂CDC
     
-    printf("STC32G_UART_DEMO"); //¥Ú”°–≈µΩCDC
+    printf("STC32G_UART_DEMO"); //”°≈µCDC
     
-    while(1)
+    while (1 )
     {
-		if(ClockSignal>0)
+		if ( ClockSignal > )
         {
-            u8 uart_dat[32],len;
+            u8 uart_dat[32], len;
             
             
 			ClockSignal--;
             
-            //¥Æø⁄1Ω” ’,∑¢ÀÕ
+            //1,
             do{
-                len = UART1_Receive(uart_dat,32);   //∂¡¥Æø⁄1 ’µΩµƒ ˝æ›
-                UART1_Send(uart_dat,len);           //¥Æø⁄1∑¢ÀÕ∂¡µΩµƒ ˝æ›
-            }while(len==32);
+                len = UART1_Receive( uart_dat, 32 );   //1’µ
+                UART1_Send( uart_dat, len );           //1Õ∂
+            }while ( len == 2 );
             
-            //¥Æø⁄2Ω” ’,∑¢ÀÕ
+            //2,
             do{
-                len = UART2_Receive(uart_dat,32);   //∂¡¥Æø⁄2 ’µΩµƒ ˝æ›
-                UART2_Send(uart_dat,len);           //¥Æø⁄2∑¢ÀÕ∂¡µΩµƒ ˝æ›
-            }while(len==32);
+                len = UART2_Receive( uart_dat, 32 );   //2’µ
+                UART2_Send( uart_dat, len );           //2Õ∂
+            }while ( len == 2 );
             
-            //¥Æø⁄3Ω” ’,∑¢ÀÕ
+            //3,
             do{
-                len = UART3_Receive(uart_dat,32);   //∂¡¥Æø⁄3 ’µΩµƒ ˝æ›
-                UART3_Send(uart_dat,len);           //¥Æø⁄3∑¢ÀÕ∂¡µΩµƒ ˝æ›
-            }while(len==32);
+                len = UART3_Receive( uart_dat, 32 );   //3’µ
+                UART3_Send( uart_dat, len );           //3Õ∂
+            }while ( len == 2 );
             
-            //¥Æø⁄4Ω” ’,∑¢ÀÕ
+            //4,
             do{
-                len = UART4_Receive(uart_dat,32);   //∂¡¥Æø⁄4 ’µΩµƒ ˝æ›
-                UART4_Send(uart_dat,len);           //¥Æø⁄4∑¢ÀÕ∂¡µΩµƒ ˝æ›
-            }while(len==32);
+                len = UART4_Receive( uart_dat, 32 );   //4’µ
+                UART4_Send( uart_dat, len );           //4Õ∂
+            }while ( len == 2 );
             
 		}
     }
@@ -93,56 +99,55 @@ void main(void)
 /*---------------------------------------------------------
 GPIO_config
 ----------------------------------------------------------*/
-void GPIO_config(void)
+void GPIO_config( void )
 {
-	P0_MODE_IO_PU(GPIO_Pin_All);		//P0 …Ë÷√Œ™◊ºÀ´œÚø⁄
-	P1_MODE_IO_PU(GPIO_Pin_All);		//P1 …Ë÷√Œ™◊ºÀ´œÚø⁄
-	P2_MODE_IO_PU(GPIO_Pin_All);		//P2 …Ë÷√Œ™◊ºÀ´œÚø⁄
-	P3_MODE_IO_PU(GPIO_Pin_All);		//P3 …Ë÷√Œ™◊ºÀ´œÚø⁄
-	P4_MODE_IO_PU(GPIO_Pin_All);		//P4 …Ë÷√Œ™◊ºÀ´œÚø⁄
-	P5_MODE_IO_PU(GPIO_Pin_All);		//P5 …Ë÷√Œ™◊ºÀ´œÚø⁄
-	P6_MODE_IO_PU(GPIO_Pin_All);		//P6 …Ë÷√Œ™◊ºÀ´œÚø⁄
-	P7_MODE_IO_PU(GPIO_Pin_All);		//P7 …Ë÷√Œ™◊ºÀ´œÚø⁄
-	P7_MODE_IO_PU(GPIO_Pin_All);		//P7 …Ë÷√Œ™◊ºÀ´œÚø⁄
+	P0_MODE_IO_PU( GPIO_Pin_All );		//P0 Œ™◊ºÀ´
+	P1_MODE_IO_PU( GPIO_Pin_All );		//P1 Œ™◊ºÀ´
+	P2_MODE_IO_PU( GPIO_Pin_All );		//P2 Œ™◊ºÀ´
+	P3_MODE_IO_PU( GPIO_Pin_All );		//P3 Œ™◊ºÀ´
+	P4_MODE_IO_PU( GPIO_Pin_All );		//P4 Œ™◊ºÀ´
+	P5_MODE_IO_PU( GPIO_Pin_All );		//P5 Œ™◊ºÀ´
+	P6_MODE_IO_PU( GPIO_Pin_All );		//P6 Œ™◊ºÀ´
+	P7_MODE_IO_PU( GPIO_Pin_All );		//P7 Œ™◊ºÀ´
+	P7_MODE_IO_PU( GPIO_Pin_All );		//P7 Œ™◊ºÀ´
 }
 
 /*-----------------------------------------------------------*
 Timer0_Init
 *-----------------------------------------------------------*/
-#define OS_TICKS_PER_SEC    50u  /*÷∏∂®µŒ¥ ±÷”∆µ¬ ,∫Í◊‘∂Øº∆À„◊∞‘ÿ÷µ*/
+#define OS_TICKS_PER_SEC    50u  /*÷∏Œ¥ ±∆µ,‘∂◊∞÷µ*/
 #define TM0PS_VALUE    ( MAIN_Fosc / OS_TICKS_PER_SEC / 65536UL )
-#define RELOAD_VALUE   ( 65536UL - MAIN_Fosc / (TM0PS_VALUE+1U) / OS_TICKS_PER_SEC )
-void Timer0_Init(void)
+#define RELOAD_VALUE   ( 65536UL - MAIN_Fosc / ( TM0PS_VALUE + U ) / OS_TICKS_PER_SEC )
+void Timer0_Init( void )
 {
     AUXR    |=    0x80;                     //1Tƒ£ Ω
     TMOD    &=    0XF0;                     //ƒ£ Ω0
-    TM0PS    =    TM0PS_VALUE;              //∑÷∆µœµ ˝
-    TL0 = ( uint8_t )( RELOAD_VALUE );      //◊∞‘ÿ÷µ
-    TH0 = ( uint8_t )( RELOAD_VALUE >> 8 ); //◊∞‘ÿ÷µ
-    TF0 = 0;                                //«Â≥˝±Í÷æ
-    ET0 = 1;                                // πƒ‹÷–∂œ
-    TR0 = 1;                                //∂® ±∆˜ø™∆Ù
+    TM0PS    =    TM0PS_VALUE;              //∆µœµ
+    TL0 = ( uint8_t )( RELOAD_VALUE );      //◊∞÷µ
+    TH0 = ( uint8_t )( RELOAD_VALUE >> 8 ); //◊∞÷µ
+    TF0 = 0;                                //÷æ
+    ET0 = 1;                                // π–∂
+    TR0 = 1;                                // ±
 }
 
 /*---------------------------------------------------------
-Õ‚≤øæß’Ò ±÷”≥ı ºªØ≥Ã–Ú.  div:  ±÷”∑÷∆µœµ ˝.
+‚≤ø ±”≥ º.  div:  ±”∑∆µœµ.
 ----------------------------------------------------------*/
 #if USE_Extern_Fosc
-void XOSCClkConfig(u8 div)
+void XOSCClkConfig( u8 div )
 {
-    P1_MODE_IN_HIZ(GPIO_Pin_7|GPIO_Pin_6);  //GPIO…Ë÷√
-	XOSCCR = 0xC0;                          //∆Ù∂ØÕ‚≤øæß’Ò
-	while (!(XOSCCR & 1));                  //µ»¥˝ ±÷”Œ»∂®
-	CLKDIV = div;                           // ±÷”∑÷∆µ
-	CLKSEL = 0x01;                          //—°‘ÒÕ‚≤øæß’Ò
+    P1_MODE_IN_HIZ( GPIO_Pin_7|GPIO_Pin_6 );  //GPIO
+	XOSCCR = 0xC0;                          //‚≤ø
+	while (!( XOSCCR & 1 ));                  //»¥ ±»∂
+	CLKDIV = div;                           // ±”∑∆µ
+	CLKSEL = 0x01;                          //—°‚≤ø
 }
 #endif
 
-
 /*---------------------------------------------------------
-Timer0 ÷–∂œ
+Timer0 –∂
 ----------------------------------------------------------*/
-void Timer0_ISR_Handler (void) interrupt TMR0_VECTOR		//Ω¯÷–∂œ ±“—æ≠«Â≥˝±Í÷æ
+void Timer0_ISR_Handler ( void ) interrupt TMR0_VECTOR		//–∂ ±—æ÷æ
 {
     ClockSignal++;
 }
@@ -157,6 +162,6 @@ void Delay1000ms()		//@11.0592MHz
 	_nop_();
 	_nop_();
 	i = 2764798UL;
-	while (i) i--;
+	while ( i ) i--;
 }
 

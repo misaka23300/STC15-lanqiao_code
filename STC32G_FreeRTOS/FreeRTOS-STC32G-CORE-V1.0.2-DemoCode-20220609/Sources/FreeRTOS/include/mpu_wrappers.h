@@ -1,13 +1,20 @@
+/**
+ * @file mpu_wrappers.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*
  * FreeRTOS Kernel V10.4.6
- * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
+ * Copyright ( C ) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
- * SPDX-License-Identifier: MIT
+ * SPDX - icense - dentifier: MIT
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
+ * this software and associated documentation files ( the "Software"), to deal in
  * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * use, copy, modify, merge, publish, distribute, sublicense, and / r sell copies of
  * the Software, and to permit persons to whom the Software is furnished to do so,
  * subject to the following conditions:
  *
@@ -22,7 +29,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * https://www.FreeRTOS.org
- * https://github.com/FreeRTOS
+ * https://github.com / reeRTOS
  *
  */
 
@@ -39,9 +46,9 @@
     #ifndef MPU_WRAPPERS_INCLUDED_FROM_API_FILE
 
 /*
- * Map standard (non MPU) API functions to equivalents that start
+ * Map standard ( non MPU ) API functions to equivalents that start
  * "MPU_".  This will cause the application code to call the MPU_
- * version, which wraps the non-MPU version with privilege promoting
+ * version, which wraps the non - PU version with privilege promoting
  * then demoting code, so the kernel code always runs will full
  * privileges.
  */
@@ -143,7 +150,7 @@
         #define xEventGroupSync                        MPU_xEventGroupSync
         #define vEventGroupDelete                      MPU_vEventGroupDelete
 
-/* Map standard message/stream_buffer.h API functions to the MPU
+/* Map standard message / tream_buffer.h API functions to the MPU
  * equivalents. */
         #define xStreamBufferSend                      MPU_xStreamBufferSend
         #define xStreamBufferReceive                   MPU_xStreamBufferReceive
@@ -158,10 +165,9 @@
         #define xStreamBufferGenericCreate             MPU_xStreamBufferGenericCreate
         #define xStreamBufferGenericCreateStatic       MPU_xStreamBufferGenericCreateStatic
 
-
 /* Remove the privileged function macro, but keep the PRIVILEGED_DATA
  * macro so applications can place data in privileged access sections
- * (useful when using statically allocated objects). */
+ * ( useful when using statically allocated objects ). */
         #define PRIVILEGED_FUNCTION
         #define PRIVILEGED_DATA    __attribute__( ( section( "privileged_data" ) ) )
         #define FREERTOS_SYSTEM_CALL
@@ -185,7 +191,7 @@
             xRunningPrivileged = portIS_PRIVILEGED();                          \
                                                                                \
             /* If the processor is not already privileged, raise privilege. */ \
-            if( xRunningPrivileged == pdFALSE )                                \
+            if ( xRunningPrivileged == pdFALSE )                                \
             {                                                                  \
                 portRAISE_PRIVILEGE();                                         \
             }                                                                  \
@@ -197,7 +203,7 @@
          */
         #define vPortResetPrivilege( xRunningPrivileged )   \
         {                                                   \
-            if( xRunningPrivileged == pdFALSE )             \
+            if ( xRunningPrivileged == pdFALSE )             \
             {                                               \
                 portRESET_PRIVILEGE();                      \
             }                                               \
@@ -212,6 +218,5 @@
     #define FREERTOS_SYSTEM_CALL
 
 #endif /* portUSING_MPU_WRAPPERS */
-
 
 #endif /* MPU_WRAPPERS_H */

@@ -1,9 +1,16 @@
+/**
+ * @file STC32G_DMA.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCMCU.com --------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
@@ -57,22 +64,22 @@
 #define DMA_UR4T_CLR_STA()			DMA_UR4T_STA = 0
 #define DMA_UR4R_CLR_STA()			DMA_UR4R_STA = 0
 
-#define SET_M2M_TX_FIFO(n)			{DMA_M2M_TXAH = (n>>8); DMA_M2M_TXAL = (n);}
-#define SET_M2M_RX_FIFO(n)			{DMA_M2M_RXAH = (n>>8); DMA_M2M_RXAL = (n);}
+#define SET_M2M_TX_FIFO( n )			{DMA_M2M_TXAH = ( n>>8 ); DMA_M2M_TXAL = ( n );}
+#define SET_M2M_RX_FIFO( n )			{DMA_M2M_RXAH = ( n>>8 ); DMA_M2M_RXAL = ( n );}
 
-#define SET_DMA_ADC_CR(n)				DMA_ADC_CR = (n)
-#define SET_DMA_SPI_CR(n)				DMA_SPI_CR = (n)
-#define SET_DMA_M2M_CR(n)				DMA_M2M_CR = (n)
-#define SET_DMA_UR1T_CR(n)			DMA_UR1T_CR = (n)
-#define SET_DMA_UR1R_CR(n)			DMA_UR1R_CR = (n)
-#define SET_DMA_UR2T_CR(n)			DMA_UR2T_CR = (n)
-#define SET_DMA_UR2R_CR(n)			DMA_UR2R_CR = (n)
-#define SET_DMA_UR3T_CR(n)			DMA_UR3T_CR = (n)
-#define SET_DMA_UR3R_CR(n)			DMA_UR3R_CR = (n)
-#define SET_DMA_UR4T_CR(n)			DMA_UR4T_CR = (n)
-#define SET_DMA_UR4R_CR(n)			DMA_UR4R_CR = (n)
+#define SET_DMA_ADC_CR( n )				DMA_ADC_CR = ( n )
+#define SET_DMA_SPI_CR( n )				DMA_SPI_CR = ( n )
+#define SET_DMA_M2M_CR( n )				DMA_M2M_CR = ( n )
+#define SET_DMA_UR1T_CR( n )			DMA_UR1T_CR = ( n )
+#define SET_DMA_UR1R_CR( n )			DMA_UR1R_CR = ( n )
+#define SET_DMA_UR2T_CR( n )			DMA_UR2T_CR = ( n )
+#define SET_DMA_UR2R_CR( n )			DMA_UR2R_CR = ( n )
+#define SET_DMA_UR3T_CR( n )			DMA_UR3T_CR = ( n )
+#define SET_DMA_UR3R_CR( n )			DMA_UR3R_CR = ( n )
+#define SET_DMA_UR4T_CR( n )			DMA_UR4T_CR = ( n )
+#define SET_DMA_UR4R_CR( n )			DMA_UR4R_CR = ( n )
 
-#define SET_LCM_DMA_LEN(n)			{DMA_LCM_AMTH = (n>>8); DMA_LCM_AMT = (n);}
+#define SET_LCM_DMA_LEN( n )			{DMA_LCM_AMTH = ( n>>8 ); DMA_LCM_AMT = ( n );}
 #define DMA_LCM_TRIG_WC()				DMA_LCM_CR |= 0xC0		//触发 LCM_DMA 发命令操作
 #define DMA_LCM_TRIG_WD()				DMA_LCM_CR |= 0xA0		//触发 LCM_DMA 发数据操作
 #define DMA_LCM_TRIG_RC()				DMA_LCM_CR |= 0x90		//触发 LCM_DMA 读命令操作
@@ -81,9 +88,9 @@
 #define DMA_I2CT_TRIG()					DMA_I2CT_CR |= 0x40
 #define DMA_I2CR_TRIG()					DMA_I2CR_CR |= 0x40
 #define DMA_I2CR_CLRFIFO()			DMA_I2CR_CR |= 0x01	//清空 DMA FIFO
-#define SET_I2CT_DMA_LEN(n)			{DMA_I2CT_AMTH = (n>>8); DMA_I2CT_AMT = (n);}
-#define SET_I2CR_DMA_LEN(n)			{DMA_I2CR_AMTH = (n>>8); DMA_I2CR_AMT = (n);}
-#define SET_I2C_DMA_ST(n)				{DMA_I2C_ST2 = (n>>8); DMA_I2C_ST1 = (n);}
+#define SET_I2CT_DMA_LEN( n )			{DMA_I2CT_AMTH = ( n>>8 ); DMA_I2CT_AMT = ( n );}
+#define SET_I2CR_DMA_LEN( n )			{DMA_I2CR_AMTH = ( n>>8 ); DMA_I2CR_AMT = ( n );}
+#define SET_I2C_DMA_ST( n )				{DMA_I2C_ST2 = ( n>>8 ); DMA_I2C_ST1 = ( n );}
 #define I2C_DMA_Enable()				DMA_I2C_CR |= 0x01
 #define I2C_DMA_Disable()				DMA_I2C_CR &= ~0x01
 
@@ -118,68 +125,67 @@
 #define SPI_SS_P74				2
 #define SPI_SS_P35				3
 
-
 //========================================================================
 //                              变量声明
 //========================================================================
 
 typedef struct
 {
-	uint8_t	DMA_Enable;					//DMA使能  	ENABLE,DISABLE
+	uint8_t	DMA_Enable;					//DMA使能  	ENABLE, DISABLE
 	uint16_t	DMA_Channel;				//ADC通道使能寄存器, 1:使能, bit15~bit0 对应 ADC15~ADC0
 	uint16_t	DMA_Buffer;					//ADC转换数据存储地址
-	uint8_t	DMA_Times;					//每个通道转换次数, ADC_1_Times,ADC_2_Times,ADC_4_Times,ADC_8_Times,ADC_16_Times,ADC_32_Times,ADC_64_Times,ADC_128_Times,ADC_256_Times
+	uint8_t	DMA_Times;					//每个通道转换次数, ADC_1_Times, ADC_2_Times, ADC_4_Times, ADC_8_Times, ADC_16_Times, ADC_32_Times, ADC_64_Times, ADC_128_Times, ADC_256_Times
 } DMA_ADC_InitTypeDef;
 
 typedef struct
 {
-	uint8_t	DMA_Enable;					//DMA使能  	ENABLE,DISABLE
+	uint8_t	DMA_Enable;					//DMA使能  	ENABLE, DISABLE
 	uint16_t	DMA_Rx_Buffer;			//接收数据存储地址
 	uint16_t	DMA_Tx_Buffer;			//发送数据存储地址
-	uint16_t	DMA_Length;					//DMA传输总字节数  	(0~65535) + 1, 不要超过芯片 xdata 空间上限
-	uint8_t	DMA_SRC_Dir;				//数据源地址改变方向  	M2M_ADDR_INC,M2M_ADDR_DEC
-	uint8_t	DMA_DEST_Dir;				//数据目标地址改变方向 	M2M_ADDR_INC,M2M_ADDR_DEC
+	uint16_t	DMA_Length;					//DMA传输总字节数  	(0~65535 ) + 1, 不要超过芯片 xdata 空间上限
+	uint8_t	DMA_SRC_Dir;				//数据源地址改变方向  	M2M_ADDR_INC, M2M_ADDR_DEC
+	uint8_t	DMA_DEST_Dir;				//数据目标地址改变方向 	M2M_ADDR_INC, M2M_ADDR_DEC
 } DMA_M2M_InitTypeDef;
 
 typedef struct
 {
-	uint8_t	DMA_TX_Enable;			//DMA使能  	ENABLE,DISABLE
-	uint16_t	DMA_TX_Length;			//DMA传输总字节数  	(0~65535) + 1, 不要超过芯片 xdata 空间上限
+	uint8_t	DMA_TX_Enable;			//DMA使能  	ENABLE, DISABLE
+	uint16_t	DMA_TX_Length;			//DMA传输总字节数  	(0~65535 ) + 1, 不要超过芯片 xdata 空间上限
 	uint16_t	DMA_TX_Buffer;			//发送数据存储地址
 
-	uint8_t	DMA_RX_Enable;			//DMA使能  	ENABLE,DISABLE
-	uint16_t	DMA_RX_Length;			//DMA传输总字节数  	(0~65535) + 1, 不要超过芯片 xdata 空间上限
+	uint8_t	DMA_RX_Enable;			//DMA使能  	ENABLE, DISABLE
+	uint16_t	DMA_RX_Length;			//DMA传输总字节数  	(0~65535 ) + 1, 不要超过芯片 xdata 空间上限
 	uint16_t	DMA_RX_Buffer;			//接收数据存储地址
 } DMA_UART_InitTypeDef;
 
 typedef struct
 {
-	uint8_t	DMA_Enable;					//DMA使能  	ENABLE,DISABLE
-	uint8_t	DMA_Tx_Enable;			//DMA发送数据使能  	ENABLE,DISABLE
-	uint8_t	DMA_Rx_Enable;			//DMA接收数据使能  	ENABLE,DISABLE
+	uint8_t	DMA_Enable;					//DMA使能  	ENABLE, DISABLE
+	uint8_t	DMA_Tx_Enable;			//DMA发送数据使能  	ENABLE, DISABLE
+	uint8_t	DMA_Rx_Enable;			//DMA接收数据使能  	ENABLE, DISABLE
 	uint16_t	DMA_Rx_Buffer;			//接收数据存储地址
 	uint16_t	DMA_Tx_Buffer;			//发送数据存储地址
-	uint16_t	DMA_Length;					//DMA传输总字节数  	(0~65535) + 1, 不要超过芯片 xdata 空间上限
-	uint8_t	DMA_AUTO_SS;				//自动控制SS脚使能  	ENABLE,DISABLE
-	uint8_t	DMA_SS_Sel;					//自动控制SS脚选择 	SPI_SS_P12,SPI_SS_P22,SPI_SS_P74,SPI_SS_P35
+	uint16_t	DMA_Length;					//DMA传输总字节数  	(0~65535 ) + 1, 不要超过芯片 xdata 空间上限
+	uint8_t	DMA_AUTO_SS;				//自动控制SS脚使能  	ENABLE, DISABLE
+	uint8_t	DMA_SS_Sel;					//自动控制SS脚选择 	SPI_SS_P12, SPI_SS_P22, SPI_SS_P74, SPI_SS_P35
 } DMA_SPI_InitTypeDef;
 
 typedef struct
 {
-	uint8_t	DMA_Enable;					//DMA使能  	ENABLE,DISABLE
+	uint8_t	DMA_Enable;					//DMA使能  	ENABLE, DISABLE
 	uint16_t	DMA_Rx_Buffer;			//接收数据存储地址
 	uint16_t	DMA_Tx_Buffer;			//发送数据存储地址
-	uint16_t	DMA_Length;					//DMA传输总字节数  	(0~65535) + 1, 不要超过芯片 xdata 空间上限
+	uint16_t	DMA_Length;					//DMA传输总字节数  	(0~65535 ) + 1, 不要超过芯片 xdata 空间上限
 } DMA_LCM_InitTypeDef;
 
 typedef struct
 {
-	uint8_t	DMA_TX_Enable;			//DMA使能  	ENABLE,DISABLE
-	uint16_t	DMA_TX_Length;			//DMA传输总字节数  	(0~65535) + 1, 不要超过芯片 xdata 空间上限
+	uint8_t	DMA_TX_Enable;			//DMA使能  	ENABLE, DISABLE
+	uint16_t	DMA_TX_Length;			//DMA传输总字节数  	(0~65535 ) + 1, 不要超过芯片 xdata 空间上限
 	uint16_t	DMA_TX_Buffer;			//发送数据存储地址
 
-	uint8_t	DMA_RX_Enable;			//DMA使能  	ENABLE,DISABLE
-	uint16_t	DMA_RX_Length;			//DMA传输总字节数  	(0~65535) + 1, 不要超过芯片 xdata 空间上限
+	uint8_t	DMA_RX_Enable;			//DMA使能  	ENABLE, DISABLE
+	uint16_t	DMA_RX_Length;			//DMA传输总字节数  	(0~65535 ) + 1, 不要超过芯片 xdata 空间上限
 	uint16_t	DMA_RX_Buffer;			//接收数据存储地址
 } DMA_I2C_InitTypeDef;
 
@@ -208,11 +214,11 @@ extern bit DmaLcmFlag;
 extern bit LcmFlag;
 extern uint16_t LCM_Cnt;
 
-void DMA_ADC_Inilize(DMA_ADC_InitTypeDef *DMA);
-void DMA_M2M_Inilize(DMA_M2M_InitTypeDef *DMA);
-void DMA_SPI_Inilize(DMA_SPI_InitTypeDef *DMA);
-void DMA_LCM_Inilize(DMA_LCM_InitTypeDef *DMA);
-void DMA_I2C_Inilize(DMA_I2C_InitTypeDef *DMA);
-void DMA_UART_Inilize(uint8_t UARTx, DMA_UART_InitTypeDef *DMA);
+void DMA_ADC_Inilize( DMA_ADC_InitTypeDef *DMA );
+void DMA_M2M_Inilize( DMA_M2M_InitTypeDef *DMA );
+void DMA_SPI_Inilize( DMA_SPI_InitTypeDef *DMA );
+void DMA_LCM_Inilize( DMA_LCM_InitTypeDef *DMA );
+void DMA_I2C_Inilize( DMA_I2C_InitTypeDef *DMA );
+void DMA_UART_Inilize( uint8_t UARTx, DMA_UART_InitTypeDef *DMA );
 
 #endif

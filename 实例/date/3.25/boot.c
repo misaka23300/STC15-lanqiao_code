@@ -1,24 +1,31 @@
+/**
+ * @file boot.c
+ * @brief 系统启动初始化文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "boot.h"
 
-void boot_init(void)
+void boot_init( void )
 {
     P0M0 = 0x00;
 
     P0 = 0xFF;
-    latch(4);
-    latch(0);
+    latch(4 );
+    latch(0 );
 
     P0 = 0xAF;
-    latch(5);
-    latch(0);
+    latch(5 );
+    latch(0 );
 
     P0 = 0x00;
-    latch(6);
-    latch(0);
+    latch(6 );
+    latch(0 );
 
     P0 = 0xFF;
-    latch(7);
-    latch(0);
+    latch(7 );
+    latch(0 );
 
     timer_0();
     timer_1();
@@ -27,16 +34,15 @@ void boot_init(void)
 }
 
 //ne555
-void timer_0(void)
+void timer_0( void )
 {
     // 计数器 8位自动重装载 
 
     // xxxx 0110
 
-
     // 定时器0 -> 计数器 
     //AUXR |= 0x80;
-    //TMOD = (TMOD & 0xF0) | 0x06;
+    //TMOD = ( TMOD & 0xF0 ) | 0x06;
     TL0 = 0x00; 
     TH0 = 0x00;
 
@@ -46,7 +52,7 @@ void timer_0(void)
 }
 
 // sonic
-void timer_1(void)
+void timer_1( void )
 {
     AUXR |= 0x40;			//定时器时钟1T模式
 	TMOD &= 0x0F;			//设置定时器模式
@@ -58,7 +64,7 @@ void timer_1(void)
 
 }
 
-void timer_2(void)
+void timer_2( void )
 {
     AUXR &= 0xFB;			//定时器时钟12T模式
 	T2L = 0x18;				//设置定时初始值
@@ -68,25 +74,25 @@ void timer_2(void)
 
 }
 
-void latch(uchar i)
+void latch( uchar i )
 {
-    switch (i)
+    switch ( i )
     {
-        case 4: {P2 = (P2 & 0x1F) | 0x80; break;}
-        case 5: {P2 = (P2 & 0x1F) | 0xA0; break;}
-        case 6: {P2 = (P2 & 0x1F) | 0xC0; break;}
-        case 7: {P2 = (P2 & 0x1F) | 0xE0; break;}
-        case 0: {P2 = (P2 & 0x1F); break;}
+        case 4: {P2 = ( P2 & 0x1F ) | 0x80; break;}
+        case 5: {P2 = ( P2 & 0x1F ) | 0xA0; break;}
+        case 6: {P2 = ( P2 & 0x1F ) | 0xC0; break;}
+        case 7: {P2 = ( P2 & 0x1F ) | 0xE0; break;}
+        case 0: {P2 = ( P2 & 0x1F ); break;}
     }
 }
 
-void Delay14us(void)	//@12.000MHz
+void Delay14us( void )	//@12.000MHz
 {
 	unsigned char data i;
 
 	_nop_();
 	_nop_();
 	i = 39;
-	while (--i);
+	while (--i );
 }
 

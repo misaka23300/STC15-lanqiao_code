@@ -1,3 +1,10 @@
+/**
+ * @file uart.c
+ * @brief 串口驱动文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "uart.h"
 
 typedef struct {
@@ -7,8 +14,7 @@ typedef struct {
 
 UART uart;
 
-
-void Uart1_Init(void)	//4800bps@11.0592MHz
+void Uart1_Init( void )	//4800bps@11.0592MHz
 {
 	SCON = 0x50;		//8位数据,可变波特率
 	AUXR |= 0x40;		//定时器时钟1T模式
@@ -21,18 +27,17 @@ void Uart1_Init(void)	//4800bps@11.0592MHz
 	ES = 1;				//使能串口1中断
 }
 
-
 void uart_receive() interrupt 4
 {
 	uchar temp;
 
-	if(RI)
+	if ( RI )
 	{
 		RI = 0;
 		temp = SBUF;
-		if (temp != '\0')
+		if ( temp != '\0')
 		{
-			if (uart.buffIndex < 16)
+			if ( uart.buffIndex < 16 )
 			{
 				uart.buffData[uart.buffIndex] = temp;
 				uart.buffIndex++;
@@ -44,5 +49,4 @@ void uart_receive() interrupt 4
 		}
 	}
 }
-
 

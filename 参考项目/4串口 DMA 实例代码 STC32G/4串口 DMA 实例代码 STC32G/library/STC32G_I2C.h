@@ -1,14 +1,21 @@
+/**
+ * @file STC32G_I2C.h
+ * @brief æœªæŒ‡å®šæè¿°
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCAI.com ---------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* Èç¹ûÒªÔÚ³ÌĞòÖĞÊ¹ÓÃ´Ë´úÂë,ÇëÔÚ³ÌĞòÖĞ×¢Ã÷Ê¹ÓÃÁËSTCµÄ×ÊÁÏ¼°³ÌĞò            */
+/* ÒªÚ³Ê¹Ã´Ë´,Ú³×¢Ê¹STCÏ¼            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_I2C_H
@@ -17,33 +24,33 @@
 #include	"config.h"
 
 //========================================================================
-//                               I2CÉèÖÃ
+//                               I2C
 //========================================================================
 
-#define		I2C_Function(n)	(n==0?(I2CCFG &= ~0x80):(I2CCFG |= 0x80))	//0£º½ûÖ¹ I2C ¹¦ÄÜ£»1£ºÊ¹ÄÜ I2C ¹¦ÄÜ
-#define		I2C_ENABLE()	I2CCFG |= 0x80		/* Ê¹ÄÜ I2C ¹¦ÄÜ */
-#define		I2C_DISABLE()	I2CCFG &= ~0x80		/* ½ûÖ¹ I2C ¹¦ÄÜ */
-#define		I2C_Master()	I2CCFG |=  0x40		/* 1: ÉèÎªÖ÷»ú	*/
-#define		I2C_Slave()		I2CCFG &= ~0x40		/* 0: ÉèÎª´Ó»ú	*/
-#define		I2C_SetSpeed(n)	I2CCFG = (I2CCFG & ~0x3f) | (n & 0x3f)	/* ×ÜÏßËÙ¶È=Fosc/2/(Speed*2+4) */
+#define		I2C_Function( n )	( n == ?( I2CCFG &= ~0x80 ):( I2CCFG |= 0x80 ))	//0Ö¹ I2C Ü£1Ê¹ I2C 
+#define		I2C_ENABLE()	I2CCFG |= 0x80		/* Ê¹ I2C  */
+#define		I2C_DISABLE()	I2CCFG &= ~0x80		/* Ö¹ I2C  */
+#define		I2C_Master()	I2CCFG |=  0x40		/* 1: Îª	*/
+#define		I2C_Slave()		I2CCFG &= ~0x40		/* 0: ÎªÓ»	*/
+#define		I2C_SetSpeed( n )	I2CCFG = ( I2CCFG & ~0x3f ) | ( n & 0x3f )	/* Ù¶=Fosc / /( Speed *  + ) */
 
-#define		I2C_WDTA_EN()		I2CMSAUX |= 0x01		/* Ê¹ÄÜ×Ô¶¯·¢ËÍ */
-#define		I2C_WDTA_DIS()	I2CMSAUX &= ~0x01		/* ½ûÖ¹×Ô¶¯·¢ËÍ */
+#define		I2C_WDTA_EN()		I2CMSAUX |= 0x01		/* Ê¹Ô¶ */
+#define		I2C_WDTA_DIS()	I2CMSAUX &= ~0x01		/* Ö¹Ô¶ */
 
-#define		I2C_Address(n)	I2CSLADR = (I2CSLADR & 0x01) | (n << 1)	/* ´Ó»úµØÖ· */
-#define		I2C_MATCH_EN()	I2CSLADR &= ~0x01	/* Ê¹ÄÜ´Ó»úµØÖ·±È½Ï¹¦ÄÜ£¬Ö»½ÓÊÜÏàÆ¥ÅäµØÖ· */
-#define		I2C_MATCH_DIS()	I2CSLADR |= 0x01	/* ½ûÖ¹´Ó»úµØÖ·±È½Ï¹¦ÄÜ£¬½ÓÊÜËùÓĞÉè±¸µØÖ· */
+#define		I2C_Address( n )	I2CSLADR = ( I2CSLADR & 0x01 ) | ( n << 1 )	/* Ó»Ö· */
+#define		I2C_MATCH_EN()	I2CSLADR &= ~0x01	/* Ê¹Ü´Ó»Ö·È½Ï¹Ü£Ö»Æ¥Ö· */
+#define		I2C_MATCH_DIS()	I2CSLADR |= 0x01	/* Ö¹Ó»Ö·È½Ï¹Ü£è±¸Ö· */
 
-#define		I2C_ESTAI_EN(n)		I2CSLCR = (I2CSLCR & ~0x40) | (n << 6)		/* Ê¹ÄÜ´Ó»ú½ÓÊÕSTARTĞÅºÅÖĞ¶Ï */
-#define		I2C_ERXI_EN(n)		I2CSLCR = (I2CSLCR & ~0x20) | (n << 5)		/* Ê¹ÄÜ´Ó»ú½ÓÊÕ1×Ö½ÚÊı¾İÖĞ¶Ï */
-#define		I2C_ETXI_EN(n)		I2CSLCR = (I2CSLCR & ~0x10) | (n << 4)		/* Ê¹ÄÜ´Ó»ú·¢ËÍ1×Ö½ÚÊı¾İÖĞ¶Ï */
-#define		I2C_ESTOI_EN(n)		I2CSLCR = (I2CSLCR & ~0x08) | (n << 3)		/* Ê¹ÄÜ´Ó»ú½ÓÊÕSTOPĞÅºÅÖĞ¶Ï */
-#define		I2C_SLRET()				I2CSLCR |= 0x01			/* ¸´Î»´Ó»úÄ£Ê½ */
+#define		I2C_ESTAI_EN( n )		I2CSLCR = ( I2CSLCR & ~0x40 ) | ( n << 6 )		/* Ê¹Ü´Ó»STARTÅºĞ¶ */
+#define		I2C_ERXI_EN( n )		I2CSLCR = ( I2CSLCR & ~0x20 ) | ( n << 5 )		/* Ê¹Ü´Ó»1Ö½Ğ¶ */
+#define		I2C_ETXI_EN( n )		I2CSLCR = ( I2CSLCR & ~0x10 ) | ( n << 4 )		/* Ê¹Ü´Ó»1Ö½Ğ¶ */
+#define		I2C_ESTOI_EN( n )		I2CSLCR = ( I2CSLCR & ~0x08 ) | ( n << 3 )		/* Ê¹Ü´Ó»STOPÅºĞ¶ */
+#define		I2C_SLRET()				I2CSLCR |= 0x01			/* Î»Ó»Ä£Ê½ */
 
-#define		I2C_MSCMD(n)		I2CMSCR = (n)		/* Ö÷»úÃüÁî */
+#define		I2C_MSCMD( n )		I2CMSCR = ( n )		/*  */
 
 //========================================================================
-//                              ¶¨ÒåÉùÃ÷
+//                              
 //========================================================================
 
 #define	I2C_CMD_IDLE			0
@@ -60,38 +67,37 @@
 #define	I2C_Mode_Master			1
 #define	I2C_Mode_Slave			0
 
-#define		I2C_ESTAI					0x40		/* ´Ó»ú½ÓÊÕSTARTĞÅºÅÖĞ¶Ï */
-#define		I2C_ERXI					0x20		/* ´Ó»ú½ÓÊÕ1×Ö½ÚÊı¾İÖĞ¶Ï */
-#define		I2C_ETXI					0x10		/* ´Ó»ú·¢ËÍ1×Ö½ÚÊı¾İÖĞ¶Ï */
-#define		I2C_ESTOI					0x08		/* ´Ó»ú½ÓÊÕSTOPĞÅºÅÖĞ¶Ï */
+#define		I2C_ESTAI					0x40		/* Ó»STARTÅºĞ¶ */
+#define		I2C_ERXI					0x20		/* Ó»1Ö½Ğ¶ */
+#define		I2C_ETXI					0x10		/* Ó»1Ö½Ğ¶ */
+#define		I2C_ESTOI					0x08		/* Ó»STOPÅºĞ¶ */
 
 typedef struct
 {
-	u8	I2C_Speed;				//×ÜÏßËÙ¶È=Fosc/2/(Speed*2+4),      0~63
-	u8	I2C_Enable;				//I2C¹¦ÄÜÊ¹ÄÜ,   ENABLE, DISABLE
-	u8	I2C_Mode;					//Ö÷´ÓÄ£Ê½Ñ¡Ôñ,  I2C_Mode_Master,I2C_Mode_Slave
-	u8	I2C_MS_WDTA;				//Ö÷»úÊ¹ÄÜ×Ô¶¯·¢ËÍ,  ENABLE, DISABLE
+	u8	I2C_Speed;				//Ù¶=Fosc / /( Speed *  + ),      0~63
+	u8	I2C_Enable;				//I2CÊ¹,   ENABLE, DISABLE
+	u8	I2C_Mode;					//Ä£Ê½Ñ¡,  I2C_Mode_Master, I2C_Mode_Slave
+	u8	I2C_MS_WDTA;				//Ê¹Ô¶,  ENABLE, DISABLE
 
-	u8	I2C_SL_ADR;				//´Ó»úÉè±¸µØÖ·,  0~127
-	u8	I2C_SL_MA;				//´Ó»úÉè±¸µØÖ·±È½ÏÊ¹ÄÜ,  ENABLE, DISABLE
+	u8	I2C_SL_ADR;				//Ó»è±¸Ö·,  0~127
+	u8	I2C_SL_MA;				//Ó»è±¸Ö·È½Ê¹,  ENABLE, DISABLE
 } I2C_InitTypeDef;
 
 typedef struct
 {
-	u8	isma;				//MEMORY ADDRESS ½ÓÊÕÅĞ¶Ï±êÖ¾
-	u8	isda;				//DEVICE ADDRESS ½ÓÊÕÅĞ¶Ï±êÖ¾
-	u8	addr;				//ADDRESS »º´æ
+	u8	isma;				//MEMORY ADDRESS Ğ¶Ï±Ö¾
+	u8	isda;				//DEVICE ADDRESS Ğ¶Ï±Ö¾
+	u8	addr;				//ADDRESS 
 } I2C_IsrTypeDef;
-
 
 extern u8 I2C_BUF_type I2C_Buffer[I2C_BUF_LENTH];
 extern bit DisplayFlag;
 
-void I2C_Init(I2C_InitTypeDef *I2Cx);
-void I2C_WriteNbyte(u8 dev_addr, u8 mem_addr, u8 *p, u8 number);
-void I2C_ReadNbyte(u8 dev_addr, u8 mem_addr, u8 *p, u8 number);
-u8 Get_MSBusy_Status(void);
-void SendCmdData(u8 cmd, u8 dat);
+void I2C_Init( I2C_InitTypeDef *I2Cx );
+void I2C_WriteNbyte( u8 dev_addr, u8 mem_addr, u8 *p, u8 number );
+void I2C_ReadNbyte( u8 dev_addr, u8 mem_addr, u8 *p, u8 number );
+u8 Get_MSBusy_Status( void );
+void SendCmdData( u8 cmd, u8 dat );
 
 #endif
 

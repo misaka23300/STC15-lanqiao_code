@@ -1,3 +1,10 @@
+/**
+ * @file seg.c
+ * @brief 数码管驱动文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "seg.h"
 
 uint8_t seg_value[8] = {0, 0, 0, 0, 0, 0, 0, 0};
@@ -14,27 +21,26 @@ void seg_display()
     static uint8_t i;
 
     P0 = 0xFF;
-    P2 = (P2 & 0x1F) | 0xE0;
-    P2 = (P2 & 0x1F);
+    P2 = ( P2 & 0x1F ) | 0xE0;
+    P2 = ( P2 & 0x1F );
 
     P0 = 0x01 << i;
-    P2 = (P2 & 0x1F) | 0xC0;
-    P2 = (P2 & 0x1F);
+    P2 = ( P2 & 0x1F ) | 0xC0;
+    P2 = ( P2 & 0x1F );
 
     P0 = ~letter[seg_value[i]];
-    P2 = (P2 & 0x1F) | 0xE0;
-    P2 = (P2 & 0x1F);
+    P2 = ( P2 & 0x1F ) | 0xE0;
+    P2 = ( P2 & 0x1F );
 
     i++;
-    if (i == 8) {
+    if ( i == 8 ) {
         i = 0;
     }
 }
 
-
-void set_seg(uint8_t i, uint8_t state)
+void set_seg( uint8_t i, uint8_t state )
 {
-    if (i < 8) {
+    if ( i < 8 ) {
         seg_value[i] = state;
     }
 }

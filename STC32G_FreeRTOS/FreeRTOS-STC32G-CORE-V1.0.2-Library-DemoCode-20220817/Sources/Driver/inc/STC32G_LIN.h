@@ -1,9 +1,16 @@
+/**
+ * @file STC32G_LIN.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCMCU.com --------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
@@ -38,23 +45,22 @@
 
 typedef struct
 {
-	uint8_t	LIN_Enable;			//LINﺗ۵ﺥﻎﮌﺗﺥﻎ  	ENABLE,DISABLE
+	uint8_t	LIN_Enable;			//LINﺗ۵ﺥﻎﮌﺗﺥﻎ  	ENABLE, DISABLE
 	uint16_t LIN_Baudrate;		//LINﺎ۷ﮊﻊﺡﮌ
-	uint8_t	LIN_IE;				//LINﻅﺷﭘﺵﮌﺗﺥﻎ  	LIN_LIDE/LIN_RDYE/LIN_ERRE/LIN_ABORTE/LIN_ALLIE,DISABLE
-	uint8_t	LIN_HeadDelay;		//ﻅ۰ﺱﺓﺹﺽﮌﺎﺙﺩﮌﮮ  	0~(65535*1000)/MAIN_Fosc
+	uint8_t	LIN_IE;				//LINﻅﺷﭘﺵﮌﺗﺥﻎ  	LIN_LIDE / IN_RDYE / IN_ERRE / IN_ABORTE / IN_ALLIE, DISABLE
+	uint8_t	LIN_HeadDelay;		//ﻅ۰ﺱﺓﺹﺽﮌﺎﺙﺩﮌﮮ  	0~(65535 * 000 )/MAIN_Fosc
 	uint8_t	LIN_HeadPrescaler;	//ﻅ۰ﺱﺓﺹﺽﮌﺎﺓﻅﺩﭖ  	0~63
 } LIN_InitTypeDef;
-
 
 //========================================================================
 //                              ﺱﻗﺎﺟﺭﻱﺣﺊ
 //========================================================================
 
-void LIN_Inilize(LIN_InitTypeDef *LIN);
-uint8_t LinReadReg(uint8_t addr);
-void LinReadFrame(uint8_t *pdat);
-void LinSendFrame(uint8_t lid, uint8_t *pdat);
-void LinSendHeaderRead(uint8_t lid, uint8_t *pdat);
-void LinTxResponse(uint8_t *pdat);
+void LIN_Inilize( LIN_InitTypeDef *LIN );
+uint8_t LinReadReg( uint8_t addr );
+void LinReadFrame( uint8_t *pdat );
+void LinSendFrame( uint8_t lid, uint8_t *pdat );
+void LinSendHeaderRead( uint8_t lid, uint8_t *pdat );
+void LinTxResponse( uint8_t *pdat );
 
 #endif

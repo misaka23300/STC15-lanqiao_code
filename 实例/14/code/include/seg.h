@@ -1,3 +1,10 @@
+/**
+ * @file seg.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #ifndef __SEG_H__
 #define __SEG_H__
 
@@ -5,8 +12,7 @@
 
 extern uint8_t seg_value[8];
 
-
 void seg_display();
-void set_seg(uint8_t i, uint8_t state);
+void set_seg( uint8_t i, uint8_t state );
 
 #endif

@@ -1,3 +1,10 @@
+/**
+ * @file boot.c
+ * @brief 系统启动初始化文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "boot.h"
 
 void boot_init()
@@ -12,36 +19,34 @@ void boot_init()
     P7M0 = 0x00; P7M1 = 0x00; 
 
     P0 = 0x00;
-    latch(4);
-    latch(0);
+    latch(4 );
+    latch(0 );
 
     P0 = 0xFF;
-    latch(7);
-    latch(0);
+    latch(7 );
+    latch(0 );
 
-    latch(6);
-    latch(0);
+    latch(6 );
+    latch(0 );
     
     P0 = 0xAF;
-    latch(5);
-    latch(0);
+    latch(5 );
+    latch(0 );
 	Timer1_Init();
     EA = 1;
 }
 
-void latch(uchar i)
+void latch( uchar i )
 {
-    switch (i)
+    switch ( i )
     {
-        case 4: P2 = (P2 & 0x1F) | 0x80; break;
-        case 5: P2 = (P2 & 0x1F) | 0xA0; break;
-        case 6: P2 = (P2 & 0x1F) | 0xC0; break;
-        case 7: P2 = (P2 & 0x1F) | 0xE0; break;
-        case 0: P2 = (P2 & 0x1F); break;
+        case 4: P2 = ( P2 & 0x1F ) | 0x80; break;
+        case 5: P2 = ( P2 & 0x1F ) | 0xA0; break;
+        case 6: P2 = ( P2 & 0x1F ) | 0xC0; break;
+        case 7: P2 = ( P2 & 0x1F ) | 0xE0; break;
+        case 0: P2 = ( P2 & 0x1F ); break;
     }
 }
-
-
 
 void Timer1_Init()		//1??@12.000MHz
 {

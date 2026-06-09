@@ -1,10 +1,15 @@
-#include "uart.h"
+/**
+ * @file uart.c
+ * @brief 串口驱动文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
 
+#include "uart.h"
 
 enum {
     UART_MAX_LEN = 8
 };
-
 
 typedef struct {
     uint8_t receiveData[UART_MAX_LEN];
@@ -14,17 +19,17 @@ typedef struct {
 
 UART uart;
 
-void Uart1_Isr(void) interrupt 4
+void Uart1_Isr( void ) interrupt 4
 {
     uint8_t Data;
 
-	if (RI)				//检测串口1接收中断
+	if ( RI )				//检测串口1接收中断
 	{
         RI = 0;			//清除串口1接收中断请求位
 
         Data = SBUF;
 
-        if (uart.Data != '\0' && uart.index < (UART_MAX_LEN - 1) )
+        if ( uart.Data != '\0' && uart.index < ( UART_MAX_LEN - 1 ) )
         {
             uart.receiveData[index] = uart.Data;
             uart.index++;
@@ -37,7 +42,7 @@ void Uart1_Isr(void) interrupt 4
 	}
 }
 
-void Uart1_Init(void)	//9600bps@12.000MHz
+void Uart1_Init( void )	//9600bps@12.000MHz
 {
 	SCON = 0x50;		//8位数据,可变波特率
 	AUXR |= 0x01;		//串口1选择定时器2为波特率发生器
@@ -48,13 +53,12 @@ void Uart1_Init(void)	//9600bps@12.000MHz
 	ES = 1;				//使能串口1中断
 }
 
-
-void uartSend(uchar *str)
+void uartSend( uchar *str )
 {
     while (*str != '\0')
     {
         SBUF = *str;
-        while (TI == 0);
+        while ( TI == 0 );
         TI = 0;
         str++;
     }

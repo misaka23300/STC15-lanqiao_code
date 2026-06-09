@@ -1,9 +1,16 @@
+/**
+ * @file STC32G_I2C_Isr.c
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCMCU.com --------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
@@ -23,13 +30,12 @@ bit I2C_DisplayFlag;
 //                            ﺱﻗﺎﺟﭦﺁﮌﮮﭦﺱﺎﻛﭼﺟﺭﻱﺣﺊ
 //========================================================================
 
-
 //========================================================================
 // ﭦﺁﮌﮮ: I2C_ISR_Handler
 // ﺣﻟﮌﺉ: I2Cﻅﺷﭘﺵﭦﺁﮌﮮ.
 // ﺎﺳﮌﮮ: none.
 // ﺓﭖﭨﻊ: none.
-// ﺍﮔﺎﺝ: V1.0, 2020-09-23
+// ﺍﮔﺎﺝ: V1.0, 2020 - 9 - 3
 //========================================================================
 void I2C_ISR_Handler() interrupt I2C_VECTOR
 {
@@ -38,24 +44,24 @@ void I2C_ISR_Handler() interrupt I2C_VECTOR
 	// ﻅﺊﭨﻲﺥ۲ﮌﺛ
 	I2CMSST &= ~0x40;       //I2Cﻅﺕﭼﻧﺓ۱ﺯﺱﺱﻡﺏﺭﻉﺑﮊ؛ﮄﮒﺏﮮ
 
-	if(DMA_I2C_CR & 0x04)   //ACKERR
+	if ( DMA_I2C_CR & 0x04 )   //ACKERR
 	{
 		DMA_I2C_CR &= ~0x04;  //ﺓ۱ﮌﮮﺝﻏﭦﮩﮌﻁﭖﺛNAK
 	}
 
 	// ﺑﺽﭨﻲﺥ۲ﮌﺛ
-	if (I2CSLST & 0x40)
+	if ( I2CSLST & 0x40 )
 	{
 		I2CSLST &= ~0x40;                       //ﺑ۵ﭺﻥSTARTﮌﺡﺙﹼ
 	}
-	else if (I2CSLST & 0x20)
+	else if ( I2CSLST & 0x20 )
 	{
 		I2CSLST &= ~0x20;                       //ﺑ۵ﭺﻥRECVﮌﺡﺙﹼ۲؛SLACKOﺭﻟﻅﺣﺳ۹0
-		if (I2CIsr.isda)
+		if ( I2CIsr.isda )
 		{
 			I2CIsr.isda = 0;                           //ﺑ۵ﭺﻥRECVﮌﺡﺙﹼ۲۷RECV DEVICE ADDR۲۸
 		}
-		else if (I2CIsr.isma)
+		else if ( I2CIsr.isma )
 		{
 			I2CIsr.isma = 0;                           //ﺑ۵ﭺﻥRECVﮌﺡﺙﹼ۲۷RECV MEMORY ADDR۲۸
 			I2CIsr.addr = I2CRXD;
@@ -66,10 +72,10 @@ void I2C_ISR_Handler() interrupt I2C_VECTOR
 			I2C_Buffer[I2CIsr.addr++] = I2CRXD;            //ﺑ۵ﭺﻥRECVﮌﺡﺙﹼ۲۷RECV DATA۲۸
 		}
 	}
-	else if (I2CSLST & 0x10)
+	else if ( I2CSLST & 0x10 )
 	{
 		I2CSLST &= ~0x10;                       //ﺑ۵ﭺﻥSENDﮌﺡﺙﹼ
-		if (I2CSLST & 0x02)
+		if ( I2CSLST & 0x02 )
 		{
 			I2CTXD = 0xff;
 		}
@@ -78,7 +84,7 @@ void I2C_ISR_Handler() interrupt I2C_VECTOR
 			I2CTXD = I2C_Buffer[++I2CIsr.addr];
 		}
 	}
-	else if (I2CSLST & 0x08)
+	else if ( I2CSLST & 0x08 )
 	{
 		I2CSLST &= ~0x08;                       //ﺑ۵ﭺﻥSTOPﮌﺡﺙﹼ
 		I2CIsr.isda = 1;

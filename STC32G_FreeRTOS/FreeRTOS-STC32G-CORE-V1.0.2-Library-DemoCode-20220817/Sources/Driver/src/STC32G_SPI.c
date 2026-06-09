@@ -1,9 +1,16 @@
+/**
+ * @file STC32G_SPI.c
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCMCU.com --------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
@@ -16,39 +23,38 @@ uint8_t 	SPI_RxTimerOut;
 uint8_t 	SPI_BUF_type SPI_RxBuffer[SPI_BUF_LENTH];
 bit B_SPI_Busy; //发送忙标志
 
-
 //========================================================================
-// 函数: void	SPI_Init(SPI_InitTypeDef *SPIx)
+// 函数: void	SPI_Init( SPI_InitTypeDef *SPIx )
 // 描述: SPI初始化程序.
 // 参数: SPIx: 结构参数,请参考spi.h里的定义.
 // 返回: none.
-// 版本: V1.0, 2012-11-22
+// 版本: V1.0, 2012 - 1 - 2
 //========================================================================
-void	SPI_Init(SPI_InitTypeDef *SPIx)
+void	SPI_Init( SPI_InitTypeDef *SPIx )
 {
-	if(SPIx->SPI_SSIG == ENABLE)			SSIG = 0; 	//enable SS, conform Master or Slave by SS pin.
+	if ( SPIx->SPI_SSIG == ENABLE )			SSIG = 0; 	//enable SS, conform Master or Slave by SS pin.
 	else									SSIG = 1; 	//disable SS, conform Master or Slave by SPI_Mode
-	SPI_Start(SPIx->SPI_Enable);
-	SPI_FirstBit_Set(SPIx->SPI_FirstBit);
-	SPI_Mode_Set(SPIx->SPI_Mode);
-	SPI_CPOL_Set(SPIx->SPI_CPOL);
-	SPI_CPHA_Set(SPIx->SPI_CPHA);
-	SPI_Clock_Select(SPIx->SPI_Speed);
+	SPI_Start( SPIx->SPI_Enable );
+	SPI_FirstBit_Set( SPIx->SPI_FirstBit );
+	SPI_Mode_Set( SPIx->SPI_Mode );
+	SPI_CPOL_Set( SPIx->SPI_CPOL );
+	SPI_CPHA_Set( SPIx->SPI_CPHA );
+	SPI_Clock_Select( SPIx->SPI_Speed );
 	
 	SPI_RxTimerOut = 0;
 	B_SPI_Busy = 0;
 }
 
 //========================================================================
-// 函数: void SPI_SetMode(uint8_t mode)
+// 函数: void SPI_SetMode( uint8_t mode )
 // 描述: SPI设置主从模式函数.
 // 参数: mode: 指定模式, 取值 SPI_Mode_Master 或 SPI_Mode_Slave.
 // 返回: none.
-// 版本: V1.0, 2012-11-22
+// 版本: V1.0, 2012 - 1 - 2
 //========================================================================
-void SPI_SetMode(uint8_t mode)
+void SPI_SetMode( uint8_t mode )
 {
-	if(mode == SPI_Mode_Slave)
+	if ( mode == SPI_Mode_Slave )
 	{
 		MSTR = 0; 	//重新设置为从机待机
 		SSIG = 0; 	//SS引脚确定主从
@@ -61,39 +67,39 @@ void SPI_SetMode(uint8_t mode)
 }
 
 //========================================================================
-// 函数: void SPI_WriteByte(uint8_t dat)
+// 函数: void SPI_WriteByte( uint8_t dat )
 // 描述: SPI发送一个字节数据.
 // 参数: dat: 要发送的数据.
 // 返回: none.
-// 版本: V1.0, 2020-09-14
+// 版本: V1.0, 2020 - 9 - 4
 //========================================================================
-void SPI_WriteByte(uint8_t dat)		//SPI发送一个字节数据
+void SPI_WriteByte( uint8_t dat )		//SPI发送一个字节数据
 {
-	if(ESPI)
+	if ( ESPI )
 	{
 		B_SPI_Busy = 1;
 		SPDAT = dat;
-		while(B_SPI_Busy);  //中断模式
+		while ( B_SPI_Busy );  //中断模式
 	}
 	else
 	{
 		SPDAT = dat;
-		while(SPIF == 0); //查询模式
+		while ( SPIF == 0 ); //查询模式
 		SPI_ClearFlag();   //清除SPIF和WCOL标志
 	}
 }
 
 //========================================================================
-// 函数: void SPI_ReadByte(uint8_t dat)
+// 函数: void SPI_ReadByte( uint8_t dat )
 // 描述: SPI查询模式读取一个字节数据.
 // 参数: none.
 // 返回: 读取的数据.
-// 版本: V1.0, 2020-09-14
+// 版本: V1.0, 2020 - 9 - 4
 //========================================================================
-uint8_t SPI_ReadByte(void)
+uint8_t SPI_ReadByte( void )
 {
 	SPDAT = 0xff;
-	while(SPIF == 0) ;
+	while ( SPIF == 0 ) ;
 	SPI_ClearFlag();   //清0 SPIF和WCOL标志
-	return (SPDAT);
+	return ( SPDAT );
 }

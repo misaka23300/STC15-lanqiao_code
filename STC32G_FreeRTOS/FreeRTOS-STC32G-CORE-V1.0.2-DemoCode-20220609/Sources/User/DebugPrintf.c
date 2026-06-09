@@ -1,15 +1,21 @@
+/**
+ * @file DebugPrintf.c
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCMCU.com --------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
 /* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
 /*---------------------------------------------------------------------*/
-
 
 /*************  功能说明    **************
 
@@ -21,14 +27,14 @@
 #include "DebugPrintf.h"
 
 #define Baudrate      115200L
-#define TM            (65536 -(MAIN_Fosc/Baudrate/4))
+#define TM            (65536 -( MAIN_Fosc / audrate / ))
 #define PrintUart     1        //1:printf 使用 UART1; 2:printf 使用 UART2
 
 /******************** 串口打印函数 ********************/
-void DebugPrintfInit(void)
+void DebugPrintfInit( void )
 {
-#if(PrintUart == 1)
-	SCON = (SCON & 0x3f) | 0x40; 
+#if ( PrintUart == 1 )
+	SCON = ( SCON & 0x3f ) | 0x40; 
 	AUXR |= 0x40;		//定时器时钟1T模式
 	AUXR &= 0xFE;		//串口1选择定时器1为波特率发生器
 	TL1  = TM;
@@ -36,30 +42,30 @@ void DebugPrintfInit(void)
 	TR1 = 1;				//定时器1开始计时
 //	REN = 1;        //允许接收
 
-//	SCON = (SCON & 0x3f) | 0x40; 
+//	SCON = ( SCON & 0x3f ) | 0x40; 
 //	T2L  = TM;
 //	T2H  = TM>>8;
 //	AUXR |= 0x15;   //串口1选择定时器2为波特率发生器
 //	REN = 1;        //允许接收
 #else
 	P_SW2 |= 1;         //UART2 switch to: 0: P1.0 P1.1,  1: P4.6 P4.7
-	S2CON = (S2CON & 0x3f) | 0x40;
+	S2CON = ( S2CON & 0x3f ) | 0x40;
 	T2L  = TM;
 	T2H  = TM>>8;
 	AUXR |= 0x14;	      //定时器2时钟1T模式,开始计时
-//	S2CON |= (1<<4);    //允许接收
+//	S2CON |= (1<<4 );    //允许接收
 #endif
 }
 
-void UartPutc(unsigned char dat)
+void UartPutc( unsigned char dat )
 {
-#if(PrintUart == 1)
+#if ( PrintUart == 1 )
 	SBUF = dat; 
-	while(TI==0);
+	while ( TI == );
 	TI = 0;
 #else
 	S2BUF  = dat; 
-	while((S2CON & 2) == 0);
+	while (( S2CON & 2 ) == 0 );
 	S2CON &= ~2;    //Clear Tx flag
 #endif
 }

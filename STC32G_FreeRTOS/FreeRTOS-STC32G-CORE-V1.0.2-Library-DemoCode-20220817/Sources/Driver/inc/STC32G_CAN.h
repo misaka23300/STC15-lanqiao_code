@@ -1,9 +1,16 @@
+/**
+ * @file STC32G_CAN.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCMCU.com --------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
@@ -41,13 +48,13 @@
 
 typedef struct
 {
-	uint8_t	CAN_Enable;					//CANﺗ۵ﺥﻎﮌﺗﺥﻎ  	ENABLE,DISABLE
-	uint8_t	CAN_IMR;						//CANﻅﺷﭘﺵﺙﺥﺑﮔﺩﺊ 	CAN_DOIM,CAN_BEIM,CAN_TIM,CAN_RIM,CAN_EPIM,CAN_EWIM,CAN_ALIM,CAN_ALLIM,DISABLE
+	uint8_t	CAN_Enable;					//CANﺗ۵ﺥﻎﮌﺗﺥﻎ  	ENABLE, DISABLE
+	uint8_t	CAN_IMR;						//CANﻅﺷﭘﺵﺙﺥﺑﮔﺩﺊ 	CAN_DOIM, CAN_BEIM, CAN_TIM, CAN_RIM, CAN_EPIM, CAN_EWIM, CAN_ALIM, CAN_ALLIM, DISABLE
 	uint8_t	CAN_SJW;						//ﻅﻊﺷﺡﺱ؛ﺎﺛﮊﺋﺿﺝﺟﻥﭘﺫ  0~3
 	uint8_t	CAN_BRP;						//ﺎ۷ﮊﻊﺡﮌﺓﻅﺩﭖﺵﭖﮌﮮ    0~63
 	uint8_t	CAN_SAM;						//ﻉﻎﺵﻑﭖﻝﺩﺛﺎﺭﺹﻱﺑﺳﮌﮮ  0:ﺎﺭﺹﻱ1ﺑﺳ; 1:ﺎﺭﺹﻱ3ﺑﺳ
 	uint8_t	CAN_TSG1;						//ﺱ؛ﺎﺛﺎﺭﺹﻱﭘﺳ1       0~15
-	uint8_t	CAN_TSG2;						//ﺱ؛ﺎﺛﺎﺭﺹﻱﭘﺳ2       1~7 (TSG2 ﺎﭨﺥﻎﺭﻟﻅﺣﺳ۹0)
+	uint8_t	CAN_TSG2;						//ﺱ؛ﺎﺛﺎﺭﺹﻱﭘﺳ2       1~7 ( TSG2 ﺎﭨﺥﻎﺭﻟﻅﺣﺳ۹0 )
 
 	uint8_t	CAN_ACR0;						//ﻉﻎﺵﻑﺹﻠﮌﻁﺑﻲﺡﻣﺙﺥﺑﮔﺩﺊ 0~0xFF
 	uint8_t	CAN_ACR1;						//ﻉﻎﺵﻑﺹﻠﮌﻁﺑﻲﺡﻣﺙﺥﺑﮔﺩﺊ 0~0xFF
@@ -59,17 +66,16 @@ typedef struct
 	uint8_t	CAN_AMR3;						//ﻉﻎﺵﻑﺹﻠﮌﻁﺩﭼﺎﺳﺙﺥﺑﮔﺩﺊ 0~0xFF
 } CAN_InitTypeDef;
 
-
 //========================================================================
 //                              ﺱﻗﺎﺟﺭﻱﺣﺊ
 //========================================================================
 
-uint8_t CanReadReg(uint8_t addr);
-void CanReadFifo(uint8_t *pdat);
-void CAN_Inilize(uint8_t CANx, CAN_InitTypeDef *CAN);
-uint16_t CanReadStandardFrame(uint8_t *pdat);
-uint32_t CanReadExtendedFrame(uint8_t *pdat);
-void CanSendStandardFrame(uint16_t canid, uint8_t *pdat);
-void CanSendExtendedFrame(uint32_t canid, uint8_t *pdat);
+uint8_t CanReadReg( uint8_t addr );
+void CanReadFifo( uint8_t *pdat );
+void CAN_Inilize( uint8_t CANx, CAN_InitTypeDef *CAN );
+uint16_t CanReadStandardFrame( uint8_t *pdat );
+uint32_t CanReadExtendedFrame( uint8_t *pdat );
+void CanSendStandardFrame( uint16_t canid, uint8_t *pdat );
+void CanSendExtendedFrame( uint32_t canid, uint8_t *pdat );
 
 #endif

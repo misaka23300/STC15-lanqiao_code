@@ -1,37 +1,44 @@
+/**
+ * @file STC32G_LCM.c
+ * @brief æœªæŒ‡å®šæè¿°
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCAI.com ---------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* Èç¹ûÒªÔÚ³ÌÐòÖÐÊ¹ÓÃ´Ë´úÂë,ÇëÔÚ³ÌÐòÖÐ×¢Ã÷Ê¹ÓÃÁËSTCµÄ×ÊÁÏ¼°³ÌÐò            */
+/* ÒªÚ³Ê¹Ã´Ë´,Ú³×¢Ê¹STCÏ¼            */
 /*---------------------------------------------------------------------*/
 
 #include "STC32G_LCM.h"
 
 //========================================================================
-// º¯Êý: void LCM_Inilize(LCM_InitTypeDef *LCM)
-// ÃèÊö: LCM ³õÊ¼»¯³ÌÐò.
-// ²ÎÊý: LCM: ½á¹¹²ÎÊý,Çë²Î¿¼LCM.hÀïµÄ¶¨Òå.
-// ·µ»Ø: none.
-// °æ±¾: V1.0, 2021-06-02
+// : void LCM_Inilize( LCM_InitTypeDef *LCM )
+// : LCM Ê¼.
+// : LCM: á¹¹,Î¿LCM.hÄ¶.
+// : none.
+// æ±¾: V1.0, 2021 - 6 - 2
 //========================================================================
-void LCM_Inilize(LCM_InitTypeDef *LCM)
+void LCM_Inilize( LCM_InitTypeDef *LCM )
 {
 	LCMIFSTA = 0x00;
-	if(LCM->LCM_Mode == MODE_M6800)		LCMIFCFG |= MODE_M6800;	//LCM½Ó¿ÚÄ£Ê½£ºM6800
-	else LCMIFCFG &= ~MODE_M6800;	//LCM½Ó¿ÚÄ£Ê½£ºI8080
+	if ( LCM->LCM_Mode == MODE_M6800 )		LCMIFCFG |= MODE_M6800;	//LCMÓ¿Ä£Ê½M6800
+	else LCMIFCFG &= ~MODE_M6800;	//LCMÓ¿Ä£Ê½I8080
 	
-	if(LCM->LCM_Bit_Wide == BIT_WIDE_16)		LCMIFCFG |= BIT_WIDE_16;	//LCMÊý¾Ý¿í¶È£º16Î»
-	else LCMIFCFG &= ~BIT_WIDE_16;	//LCMÊý¾Ý¿í¶È£º8Î»
+	if ( LCM->LCM_Bit_Wide == BIT_WIDE_16 )		LCMIFCFG |= BIT_WIDE_16;	//LCMÝ¿È£16Î»
+	else LCMIFCFG &= ~BIT_WIDE_16;	//LCMÝ¿È£8Î»
 	
-	if(LCM->LCM_Setup_Time <= 7) LCMIFCFG2 = (LCMIFCFG2 & ~0x1c) | (LCM->LCM_Setup_Time << 2);	//LCMÍ¨ÐÅÊý¾Ý½¨Á¢Ê±¼ä£º0~7
-	if(LCM->LCM_Hold_Time <= 3) LCMIFCFG2 = (LCMIFCFG2 & ~0x03) | LCM->LCM_Hold_Time;	//LCMÍ¨ÐÅÊý¾Ý½¨Á¢Ê±¼ä£º0~7
+	if ( LCM->LCM_Setup_Time <= 7 ) LCMIFCFG2 = ( LCMIFCFG2 & ~0x1c ) | ( LCM->LCM_Setup_Time << 2 );	//LCMÍ¨Ý½Ê±ä£º0~7
+	if ( LCM->LCM_Hold_Time <= 3 ) LCMIFCFG2 = ( LCMIFCFG2 & ~0x03 ) | LCM->LCM_Hold_Time;	//LCMÍ¨Ý½Ê±ä£º0~7
 	
-	if(LCM->LCM_Enable == ENABLE)		LCMIFCR |= 0x80;	//Ê¹ÄÜLCM½Ó¿Ú¹¦ÄÜ
-	else LCMIFCR &= ~0x80;	//½ûÖ¹LCM½Ó¿Ú¹¦ÄÜ
+	if ( LCM->LCM_Enable == ENABLE )		LCMIFCR |= 0x80;	//Ê¹LCMÓ¿Ú¹
+	else LCMIFCR &= ~0x80;	//Ö¹LCMÓ¿Ú¹
 }

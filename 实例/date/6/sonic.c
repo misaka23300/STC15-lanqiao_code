@@ -1,3 +1,10 @@
+/**
+ * @file sonic.c
+ * @brief 超声波传感器驱动
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "sonic.h"
 
 sbit rx = P3 ^ 0;
@@ -6,7 +13,7 @@ sbit tx = P3 ^ 1;
 void sonic_send()
 {
     uchar i;
-    for (i = 0;i < 14;i++)
+    for ( i = 0;i < 14;i++)
     {
         tx = 1;
         Delay14us();
@@ -24,20 +31,20 @@ uint sonic_measure()
     
     sonic_send();
 
-    while (rx == 0);
+    while ( rx == 0 );
     TR0 = 1;
 
-    while (rx == 1 && TF0 == 0);
+    while ( rx == 1 && TF0 == 0 );
     TR0 = 0;
 
-    if (TF0 == 1)
+    if ( TF0 == 1 )
     {
         TF0 = 0;
         distance = 999;
     }
     else
     {
-        distance = (TH0 << 8 | TL0)* 0.017;
+        distance = ( TH0 << 8 | TL0 )* 0.017;
     }
 
     return distance;

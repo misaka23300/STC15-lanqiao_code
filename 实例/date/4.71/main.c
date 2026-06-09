@@ -1,3 +1,10 @@
+/**
+ * @file main.c
+ * @brief 主程序入口文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "main.h"
 
 extern uchar led[8];
@@ -11,16 +18,13 @@ struct {
     uint time;
 } state;
 
-
-
-
 void main()
 {
     boot_init();
     
-    while (1)
+    while (1 )
     {
-        if (state.time == STATE_TIME)
+        if ( state.time == STATE_TIME )
         {
             state.time = 0;
             state_proc();
@@ -29,20 +33,19 @@ void main()
 
 }
 
-void Timer0_Isr(void) interrupt 1
+void Timer0_Isr( void ) interrupt 1
 {
     seg_display();
     led_display();
     
-    if (state.time < STATE_TIME) { state.time++; }
+    if ( state.time < STATE_TIME ) { state.time++; }
 
     
 }
-
 
 void state_proc()
 {
     static uchar i;
     seg[0] = i;
-    i = (i + 1) % 8;
+    i = ( i + 1 ) % 8;
 }

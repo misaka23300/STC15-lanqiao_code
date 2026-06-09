@@ -1,3 +1,10 @@
+/**
+ * @file main.c
+ * @brief 主程序入口文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "main.h"
 
 const uint8_t SONIC_TIME = 500; 
@@ -21,37 +28,37 @@ uint8_t factory_state;
 void main()
 {
     boot_init();
-    while (1)
+    while (1 )
     {
-        if (sonic_flag)
+        if ( sonic_flag )
         {
             sonic_flag = 0;
             distance = sonic_measure();
         }
 
-        if (key_flag)
+        if ( key_flag )
         {
             uint8_t press;
 
             key_flag = 0;
             press = key_scan();
-            key_proc(press);
+            key_proc( press );
         }
 
-        if (led_flag)
+        if ( led_flag )
         {
             led_flag = 0;
             led_display();
         }
 
-        if (seg_flag)
+        if ( seg_flag )
         {
             seg_flag = 0;
             seg_display();
             state_proc();
         }
 
-        if (temp_flag)
+        if ( temp_flag )
         {
             temp_flag = 0;
             temp_proc();
@@ -62,56 +69,56 @@ void main()
 void timer_1_1ms() interrupt 3
 {
     static uint16_t i;
-    i = (i + 1) % 30000;
+    i = ( i + 1 ) % 30000;
 
    
-    if (i % SEG_TIME == 0)
+    if ( i % SEG_TIME == 0 )
     {
         seg_flag = 1;
     }
     
-    if (i % LED_TIME == 0)
+    if ( i % LED_TIME == 0 )
     {
         led_flag = 1;
     }
 
-    if (i % SONIC_TIME == 0)
+    if ( i % SONIC_TIME == 0 )
     {
         sonic_flag = 1;
     }
 
-    if (i % KEY_TIME == 0)
+    if ( i % KEY_TIME == 0 )
     {
         key_flag = 1;
     }
 
-    if (i % TEMPERATURE_TIME == 0)
+    if ( i % TEMPERATURE_TIME == 0 )
     {
         temp_flag = 1;
     }
 }
 
-void key_proc(uchar press)
+void key_proc( uchar press )
 {
-    switch (press)
+    switch ( press )
     {
         case 0:
         {
-            state = (state + 1) % 3;
+            state = ( state + 1 ) % 3;
         }
     }
 }
 
 void state_proc()
 {
-    uchar argument[8] = {0, 0, 0, 0 ,0 ,0 ,0, 0};
+    uchar argument[8] = {0, 0, 0, 0 , 0 , 0 , 0, 0};
     uchar i;
-    switch (state)
+    switch ( state )
     {
         // 测距
         case 0:
         {
-            if (sonic_units == 0)
+            if ( sonic_units == 0 )
             {
                 // cm
                 argument[5] = 0;
@@ -119,7 +126,7 @@ void state_proc()
                 argument[7] = distance % 10;
 
                 // 清零
-                if (argument[6] == 0)
+                if ( argument[6] == 0 )
                 {
                     argument[6] = 16;
                 }
@@ -132,7 +139,7 @@ void state_proc()
                 argument[7] = distance % 10;
             }
             
-            set_seg(temperature / 1000 % 10,
+            set_seg( temperature / 1000 % 10,
                     temperature / 100 % 10,
                     temperature / 10 % 10,
                     17,
@@ -148,12 +155,12 @@ void state_proc()
         case 1:
         {
             
-            if (argument_state == 1)
+            if ( argument_state == 1 )
             {
                 argument[6] = argument_distance / 10 % 10;
                 argument[7] = argument_distance % 10;
             }
-            else if (argument_state = 2)
+            else if ( argument_state = 2 )
             {
                 argument[6] = argument_temp / 10 % 10;
                 argument[7] = argument_temp % 10;
@@ -177,11 +184,11 @@ void state_proc()
             argument[3] = 16;
             argument[4] = 16;
 
-            switch (factory_state)
+            switch ( factory_state )
             {
                 case 1: 
                 {
-                    if (f1_value < 0)
+                    if ( f1_value < 0 )
                     {
                         argument[5] = 17;
                     }
@@ -197,7 +204,6 @@ void state_proc()
             }
         }
         break;
-
 
         
     }

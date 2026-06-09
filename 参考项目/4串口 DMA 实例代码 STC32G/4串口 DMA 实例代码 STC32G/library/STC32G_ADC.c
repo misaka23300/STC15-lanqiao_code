@@ -1,88 +1,94 @@
+/**
+ * @file STC32G_ADC.c
+ * @brief ADCæ¨¡æ•°è½¬æ¢é©±åŠ¨
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCAI.com ---------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* Èç¹ûÒªÔÚ³ÌÐòÖÐÊ¹ÓÃ´Ë´úÂë,ÇëÔÚ³ÌÐòÖÐ×¢Ã÷Ê¹ÓÃÁËSTCµÄ×ÊÁÏ¼°³ÌÐò            */
+/* ÒªÚ³Ê¹Ã´Ë´,Ú³×¢Ê¹STCÏ¼            */
 /*---------------------------------------------------------------------*/
 
 #include	"STC32G_ADC.h"
 
 //========================================================================
-// º¯Êý: u8	ADC_Inilize(ADC_InitTypeDef *ADCx)
-// ÃèÊö: ADC³õÊ¼»¯³ÌÐò.
-// ²ÎÊý: ADCx: ½á¹¹²ÎÊý,Çë²Î¿¼adc.hÀïµÄ¶¨Òå.
-// ·µ»Ø: none.
-// °æ±¾: V1.0, 2012-10-22
+// : u8	ADC_Inilize( ADC_InitTypeDef *ADCx )
+// : ADCÊ¼.
+// : ADCx: á¹¹,Î¿adc.hÄ¶.
+// : none.
+// æ±¾: V1.0, 2012 - 0 - 2
 //========================================================================
-u8	ADC_Inilize(ADC_InitTypeDef *ADCx)
+u8	ADC_Inilize( ADC_InitTypeDef *ADCx )
 {
-	ADCCFG = (ADCCFG & ~ADC_SPEED_2X16T) | ADCx->ADC_Speed;	//ÉèÖÃADC¹¤×÷Ê±ÖÓÆµÂÊ
-	ADC_Justify(ADCx->ADC_AdjResult);		//AD×ª»»½á¹û¶ÔÆë·½Ê½
+	ADCCFG = ( ADCCFG & ~ADC_SPEED_2X16T ) | ADCx->ADC_Speed;	//ADCÊ±Æµ
+	ADC_Justify( ADCx->ADC_AdjResult );		//AD×ªë·½Ê½
 
-	if(ADCx->ADC_SMPduty > 31)	return FAIL;	//´íÎó
-	if(ADCx->ADC_CsSetup > 1)	return FAIL;	//´íÎó
-	if(ADCx->ADC_CsHold > 3)	return FAIL;	//´íÎó
+	if ( ADCx->ADC_SMPduty > 31 )	return FAIL;	//
+	if ( ADCx->ADC_CsSetup > 1 )	return FAIL;	//
+	if ( ADCx->ADC_CsHold > 3 )	return FAIL;	//
 
-	ADCTIM = (ADCx->ADC_CsSetup << 7) | (ADCx->ADC_CsHold << 5) | ADCx->ADC_SMPduty ;		//ÉèÖÃ ADC ÄÚ²¿Ê±Ðò£¬ADC²ÉÑùÊ±¼ä½¨ÒéÉè×î´óÖµ
+	ADCTIM = ( ADCx->ADC_CsSetup << 7 ) | ( ADCx->ADC_CsHold << 5 ) | ADCx->ADC_SMPduty ;		// ADC Ú²Ê±ADCÊ±ä½¨Öµ
 	return SUCCESS;
 }
 
-
 //========================================================================
-// º¯Êý: void	ADC_PowerControl(u8 pwr)
-// ÃèÊö: ADCµçÔ´¿ØÖÆ³ÌÐò.
-// ²ÎÊý: pwr: µçÔ´¿ØÖÆ,ENABLE»òDISABLE.
-// ·µ»Ø: none.
-// °æ±¾: V1.0, 2012-10-22
+// : void	ADC_PowerControl( u8 pwr )
+// : ADCÔ´Æ³.
+// : pwr: Ô´, ENABLEDISABLE.
+// : none.
+// æ±¾: V1.0, 2012 - 0 - 2
 //========================================================================
-void	ADC_PowerControl(u8 pwr)
+void	ADC_PowerControl( u8 pwr )
 {
-	if(pwr == ENABLE)	ADC_POWER = 1;
+	if ( pwr == ENABLE )	ADC_POWER = 1;
 	else				ADC_POWER = 0;
 }
 
 //========================================================================
-// º¯Êý: u16	Get_ADCResult(u8 channel)
-// ÃèÊö: ²éÑ¯·¨¶ÁÒ»´ÎADC×ª»»½á¹û.
-// ²ÎÊý: channel: Ñ¡ÔñÒª×ª»»µÄADCÍ¨µÀ.
-// ·µ»Ø: ADC×ª»»½á¹û.
-// °æ±¾: V1.0, 2012-10-22
+// : u16	Get_ADCResult( u8 channel )
+// : Ñ¯Ò»ADC×ª.
+// : channel: Ñ¡Òª×ªADCÍ¨.
+// : ADC×ª.
+// æ±¾: V1.0, 2012 - 0 - 2
 //========================================================================
-u16	Get_ADCResult(u8 channel)	//channel = 0~15
+u16	Get_ADCResult( u8 channel )	//channel = 0~15
 {
 	u16	adc;
 	u8	i;
 
-	if(channel > ADC_CH15)	return	4096;	//´íÎó,·µ»Ø4096,µ÷ÓÃµÄ³ÌÐòÅÐ¶Ï	
+	if ( channel > ADC_CH15 )	return	4096;	//, 4096,ÃµÄ³Ð¶	
 	ADC_RES = 0;
 	ADC_RESL = 0;
 
-	ADC_CONTR = (ADC_CONTR & 0xf0) | channel; //ÉèÖÃADC×ª»»Í¨µÀ
-	ADC_START = 1;//Æô¶¯ADC×ª»»
-	NOP(10);			//¶ÔADC_CONTR²Ù×÷ºóÒª4TÖ®ºó²ÅÄÜ·ÃÎÊ
+	ADC_CONTR = ( ADC_CONTR & 0xf0 ) | channel; //ADC×ªÍ¨
+	ADC_START = 1;//ADC×ª
+	NOP(10 );			//ADC_CONTRÒª4TÖ®Ü·
 
-	for(i=0; i<250; i++)		//³¬Ê±·µ»Ø£¬Õý³£iµÈÓÚ10ÒÔÄÚ¾Í¿ÉÒÔ×ª»»Íê³É
+	for ( i = ; i < 50; i++)		//Ê±Ø£i10Ú¾Í¿×ª
 	{
-		if(ADC_FLAG)
+		if ( ADC_FLAG )
 		{
-			ADC_FLAG = 0;	//Çå³ýADC×ª»»½áÊø±êÖ¾
-			if(RESFMT)		//×ª»»½á¹ûÓÒ¶ÔÆë¡£ 
+			ADC_FLAG = 0;	//ADC×ªÖ¾
+			if ( RESFMT )		//×ªÒ¶ë¡£ 
 			{
-				adc = ((u16)ADC_RES << 8) | ADC_RESL;
+				adc = (( u16 )ADC_RES << 8 ) | ADC_RESL;
 			}
-			else		//×ª»»½á¹û×ó¶ÔÆë¡£ 
+			else		//×ªë¡£ 
 			{
-				adc = (u16)ADC_RES;
-				adc = (adc << 4) | ((ADC_RESL >> 4) & 0x0f);
+				adc = ( u16 )ADC_RES;
+				adc = ( adc << 4 ) | (( ADC_RESL >> 4 ) & 0x0f );
 			}
 			return	adc;
 		}
 	}
-	return	4096;	//´íÎó,·µ»Ø4096,µ÷ÓÃµÄ³ÌÐòÅÐ¶Ï
+	return	4096;	//, 4096,ÃµÄ³Ð¶
 }

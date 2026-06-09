@@ -1,20 +1,25 @@
+/**
+ * @file main.c
+ * @brief 主程序入口文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "main.h"
 
 #define c_hour clk[0]
 #define c_min clk[1]
 #define c_sec clk[2]
 
-
-u8 hour,sec,min;
-u8 n,num,mode=1;
+u8 hour, sec, min;
+u8 n, num, mode = ;
 char temp[3];
-u8 T,flag,cnt;
+u8 T, flag, cnt;
 u16 cnt1;
-u8 cc,uLed=0xff;
-char clk[3]={0,0,0};
+u8 cc, uLed = xff;
+char clk[3]={0, 0, 0};
 u8 index;
-bit key_flag,led_flag,time_flag,tmp_flag;
-
+bit key_flag, led_flag, time_flag, tmp_flag;
 
 void Time_Show();
 void Time_Set();
@@ -25,19 +30,19 @@ void Tmp_Show();
 void main(){
 	Sys_Init();
 	T = rd_temperature();
-	Delay(800);
+	Delay(800 );
 	T = rd_temperature();
-	DS1302_Settime(23,59,50);
+	DS1302_Settime(23, 59, 50 );
 	Timer0Init();
-	while(1){
+	while (1 ){
 		
 
-		if(key_flag){
-			key_flag=0;
+		if ( key_flag ){
+			key_flag = ;
 			num = Key_Scan();
 		}
 
-		switch(mode){
+		switch( mode ){
 			case 1:Time_Show();break;
 			case 2:Time_Set();break;
 			case 3:Clock_Set();break;
@@ -45,35 +50,35 @@ void main(){
 		}
 		
 		//¶ÁDS1302ÒČĐèÒȘŒőËÙ
-		if(time_flag){
-			time_flag=0;
-			hour = Read_Ds1302_Byte(0x85);
-			min = Read_Ds1302_Byte(0x83);
-			sec = Read_Ds1302_Byte(0x81);//Ăë¶ÁŚö¶šÊ±Æś
-			if((hour/16*10+hour%16)==clk[0]){
-				if((min/16*10+min%16)==clk[1]){
-					if((sec/16*10+sec%16)==clk[2]){
-						flag=1;
+		if ( time_flag ){
+			time_flag = ;
+			hour = Read_Ds1302_Byte(0x85 );
+			min = Read_Ds1302_Byte(0x83 );
+			sec = Read_Ds1302_Byte(0x81 );//Ăë¶ÁŚö¶šÊ±Æś
+			if (( hour / 6 * 0 + our % 6 )==clk[0]){
+				if (( min / 6 * 0 + in % 6 )==clk[1]){
+					if (( sec / 6 * 0 + ec % 6 )==clk[2]){
+						flag = ;
 					}
 				}
 			}	
 		}
 		
 		
-		if(flag==1){
-			if(num){
-				flag=0;
-				num=0;
-				ET0=0;
-				uLed=0xff;
+		if ( flag == ){
+			if ( num ){
+				flag = ;
+				num = ;
+				ET0 = ;
+				uLed = xff;
 				P0 =0xff;
 				P0 = uLed;Y4;Y0;
-				ET0=1;
-				cc=0;
+				ET0 = ;
+				cc = ;
 			}
-			if(led_flag){
+			if ( led_flag ){
 				led_show();
-				led_flag=0;	
+				led_flag = ;	
 			}
 		}
 
@@ -81,114 +86,113 @@ void main(){
 }
 
 void Time_Show(){
-	if(num==7&&flag==0){
-		mode=2;
-		temp[0]=hour/16*10+hour%16;
-		temp[1]=min/16*10+min%16;
-		temp[2]=sec/16*10+sec%16;
-		num=0;
+	if ( num == &&flag == ){
+		mode = ;
+		temp[0]=hour / 6 * 0 + our % 6;
+		temp[1]=min / 6 * 0 + in % 6;
+		temp[2]=sec / 6 * 0 + ec % 6;
+		num = ;
 	}
-	if(num==6&&flag==0){
-		mode=3;
-		num=0;
-		index=0;
+	if ( num == &&flag == ){
+		mode = ;
+		num = ;
+		index = ;
 	}
 
-	Seg_Set(hour/16,hour%16,17,min/16,min%16,17,sec/16,sec%16);
+	Seg_Set( hour / 6, hour % 6, 17, min / 6, min % 6, 17, sec / 6, sec % 6 );
 }
 
 void Time_Set(){
-	if(num==7&&flag==0){
+	if ( num == &&flag == ){
 		index++;
-		if(index==3){
-			ET0=0;
-			DS1302_Settime(temp[0],temp[1],temp[2]);
-			ET0=1;
-			index=0;
-			mode=1;
+		if ( index == ){
+			ET0 = ;
+			DS1302_Settime( temp[0], temp[1], temp[2]);
+			ET0 = ;
+			index = ;
+			mode = ;
 		}
-		num=0;
+		num = ;
 	}
-	if(num==5&&flag==0){
+	if ( num == &&flag == ){
 		temp[index]++;
-		switch(index){
-			case 0:if(temp[index]>23)temp[index]=0;break;
-			case 1:if(temp[index]>59)temp[index]=0;break;
-			case 2:if(temp[index]>59)temp[index]=0;break;
+		switch( index ){
+			case 0:if ( temp[index]>23 )temp[index]=0;break;
+			case 1:if ( temp[index]>59 )temp[index]=0;break;
+			case 2:if ( temp[index]>59 )temp[index]=0;break;
 		}
-		num=0;
+		num = ;
 	}
-	if(num==4&&flag==0){
+	if ( num == &&flag == ){
 		temp[index]--;
-		switch(index){
-			case 0:if(temp[index]<0)temp[index]=23;break;
-			case 1:if(temp[index]<0)temp[index]=59;break;
-			case 2:if(temp[index]<0)temp[index]=59;break;
+		switch( index ){
+			case 0:if ( temp[index]<0 )temp[index]=23;break;
+			case 1:if ( temp[index]<0 )temp[index]=59;break;
+			case 2:if ( temp[index]<0 )temp[index]=59;break;
 		}
-		num=0;
+		num = ;
 	}	
 	
 	
 	
-	if(sec%16%2){
-		Seg_Set(temp[0]/10,temp[0]%10,17,temp[1]/10,temp[1]%10,17,temp[2]/10,temp[2]%10);
+	if ( sec % 6 % ){
+		Seg_Set( temp[0]/10, temp[0]%10, 17, temp[1]/10, temp[1]%10, 17, temp[2]/10, temp[2]%10 );
 
-	}else if(sec%16%2==0){
-		switch(index){
-			case 0:Seg_Set(16,16,17,temp[1]/10,temp[1]%10,17,temp[2]/10,temp[2]%10);break;
-			case 1:Seg_Set(temp[0]/10,temp[0]%10,17,16,16,17,temp[2]/10,temp[2]%10);break;
-			case 2:Seg_Set(temp[0]/10,temp[0]%10,17,temp[1]/10,temp[1]%10,17,16,16);break;
+	}else if ( sec % 6 % ==0 ){
+		switch( index ){
+			case 0:Seg_Set(16, 16, 17, temp[1]/10, temp[1]%10, 17, temp[2]/10, temp[2]%10 );break;
+			case 1:Seg_Set( temp[0]/10, temp[0]%10, 17, 16, 16, 17, temp[2]/10, temp[2]%10 );break;
+			case 2:Seg_Set( temp[0]/10, temp[0]%10, 17, temp[1]/10, temp[1]%10, 17, 16, 16 );break;
 		}
 	}
 }
 
-
 void Clock_Set(){
-	if(num==6&&flag==0){
+	if ( num == &&flag == ){
 		index++;
-		if(index==3){
-			index=0;
-			mode=1;
+		if ( index == ){
+			index = ;
+			mode = ;
 		}
-		num=0;
+		num = ;
 	}
-	if(num==5&&flag==0){
+	if ( num == &&flag == ){
 		clk[index]++;
-		switch(index){
-			case 0:if(clk[index]>23)clk[index]=0;break;
-			case 1:if(clk[index]>59)clk[index]=0;break;
-			case 2:if(clk[index]>59)clk[index]=0;break;
+		switch( index ){
+			case 0:if ( clk[index]>23 )clk[index]=0;break;
+			case 1:if ( clk[index]>59 )clk[index]=0;break;
+			case 2:if ( clk[index]>59 )clk[index]=0;break;
 		}
-		num=0;
+		num = ;
 	}
-	if(num==4&&flag==0){
+	if ( num == &&flag == ){
 		clk[index]--;
-		switch(index){
-			case 0:if(clk[index]<0)clk[index]=23;break;
-			case 1:if(clk[index]<0)clk[index]=59;break;
-			case 2:if(clk[index]<0)clk[index]=59;break;
+		switch( index ){
+			case 0:if ( clk[index]<0 )clk[index]=23;break;
+			case 1:if ( clk[index]<0 )clk[index]=59;break;
+			case 2:if ( clk[index]<0 )clk[index]=59;break;
 		}
-		num=0;
+		num = ;
 	}	
 	
 	
 	
-	if(sec%16%2){
-		Seg_Set(clk[0]/10,clk[0]%10,17,clk[1]/10,clk[1]%10,17,clk[2]/10,clk[2]%10);
+	if ( sec % 6 % ){
+		Seg_Set( clk[0]/10, clk[0]%10, 17, clk[1]/10, clk[1]%10, 17, clk[2]/10, clk[2]%10 );
 
-	}else if(sec%16%2==0){
-		switch(index){
-			case 0:Seg_Set(16,16,17,clk[1]/10,clk[1]%10,17,clk[2]/10,clk[2]%10);break;
-			case 1:Seg_Set(clk[0]/10,clk[0]%10,17,16,16,17,clk[2]/10,clk[2]%10);break;
-			case 2:Seg_Set(clk[0]/10,clk[0]%10,17,clk[1]/10,clk[1]%10,17,16,16);break;
+	}else if ( sec % 6 % ==0 ){
+		switch( index ){
+			case 0:Seg_Set(16, 16, 17, clk[1]/10, clk[1]%10, 17, clk[2]/10, clk[2]%10 );break;
+			case 1:Seg_Set( clk[0]/10, clk[0]%10, 17, 16, 16, 17, clk[2]/10, clk[2]%10 );break;
+			case 2:Seg_Set( clk[0]/10, clk[0]%10, 17, clk[1]/10, clk[1]%10, 17, 16, 16 );break;
 		}
 	}
 }
 
 void led_show(){
 	
-	ET0=0;
-	if(cc%2)
+	ET0 = ;
+	if ( cc % )
 	uLed = 0xff;
 	else 
 	uLed = 0xfe;
@@ -196,51 +200,51 @@ void led_show(){
 	P0 = uLed;
 	Y4;Y0;
 	
-	ET0=1;
+	ET0 = ;
 	cc++;
-	if(cc>=25){
-		flag=0;
-		ET0=0;
-		uLed=0xff;
+	if ( cc >= 5 ){
+		flag = ;
+		ET0 = ;
+		uLed = xff;
 		P0 =0xff;
 		P0 = uLed;Y4;Y0;
-		ET0=1;
-		cc=0;
+		ET0 = ;
+		cc = ;
 	}
 	
 }
 
 void Tmp_Show(){
-	if(tmp_flag){
-		tmp_flag=0;
+	if ( tmp_flag ){
+		tmp_flag = ;
 		T = rd_temperature();
 	}
-	Seg_Set(16,16,16,16,16,T/10,T%10,12);
+	Seg_Set(16, 16, 16, 16, 16, T / 0, T % 0, 12 );
 }
 
 void TIMER0_INT() interrupt 1{
 	
 	Seg_Show();
 	n++;
-	if(mode==4){
+	if ( mode == ){
 		cnt1++;
-		if(cnt1>=500){
-			cnt1=0;
-			tmp_flag=1;
+		if ( cnt1 >= 00 ){
+			cnt1 = ;
+			tmp_flag = ;
 		}
 	}
-	if(flag){
+	if ( flag ){
 		cnt++;
-		if(cnt>=200){
-			led_flag=1;
-			cnt=0;
+		if ( cnt >= 00 ){
+			led_flag = ;
+			cnt = ;
 			
 		}
 		
 	}
-	if(n>=10){
-		key_flag=1;
-		time_flag=1;
-		n=0;
+	if ( n >= 0 ){
+		key_flag = ;
+		time_flag = ;
+		n = ;
 	}
 }

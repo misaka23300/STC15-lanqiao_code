@@ -1,5 +1,11 @@
-#include "key.h"
+/**
+ * @file key.c
+ * @brief 按键驱动文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
 
+#include "key.h"
 
 uint8_t key_scan()
 {
@@ -20,18 +26,17 @@ uint8_t key_scan()
 
     P36 = P42; P37 = P44;
 
-
     press = P3 & 0x0F;
 
-    switch (state) {
+    switch ( state ) {
         case 0:
-            if (press != 0x0F) {
+            if ( press != 0x0F ) {
                 state = 1;
             }
         break;
 
         case 1:
-            if (press == 0x0F) {
+            if ( press == 0x0F ) {
                 state = 0;
             }
             else {
@@ -46,7 +51,7 @@ uint8_t key_scan()
                 P36 = P42; P37 = P44;
                 //press = P3 | 0x10;
                 press = P3;
-                switch (press) {
+                switch ( press ) {
                     case 0x77: value = 4; break;
                     case 0x7b: value = 5; break;
                     case 0x7d: value = 6; break;
@@ -72,9 +77,9 @@ uint8_t key_scan()
         break;
 
         case 2:
-            if (press != 0x0F) {
+            if ( press != 0x0F ) {
                 i++;
-                if (i > 300) {
+                if ( i > 300 ) {
                     i = 0;
                     state = 3;
                 }
@@ -94,7 +99,7 @@ uint8_t key_scan()
         break;
         
         case 4:
-            if (press == 0x0f) {
+            if ( press == 0x0f ) {
                 state = 0;
             }
         break;

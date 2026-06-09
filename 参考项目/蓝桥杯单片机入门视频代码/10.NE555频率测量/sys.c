@@ -1,25 +1,32 @@
+/**
+ * @file sys.c
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "sys.h"
 void Sys_Init(){
-	P0=0xff;Y4;Y0;
-	P0=0xaf;Y5;Y0;
-	P0=0xff;Y6;Y0;
-	P0=0xff;Y7;Y0;
+	P0 = xff;Y4;Y0;
+	P0 = xaf;Y5;Y0;
+	P0 = xff;Y6;Y0;
+	P0 = xff;Y7;Y0;
 }
-void Delay(u16 xms)		//@12.000MHz
+void Delay( u16 xms )		//@12.000MHz
 {
 	unsigned char i, j;
-	while(xms--){
+	while ( xms--){
 		i = 12;
 		j = 169;
 		do
 		{
-			while (--j);
-		} while (--i);	
+			while (--j );
+		} while (--i );	
 	}
 	
 }
 
-void NE555_Init(void)		//NE555初始化
+void NE555_Init( void )		//NE555初始化
 {
 	AUXR &= 0x7F;		//定时器时钟12T模式
 	TMOD = 0x05;		//设置定时器T0为计数器模式
@@ -31,7 +38,7 @@ void NE555_Init(void)		//NE555初始化
 }
 
 //定时器1作为系统进程管理定时器
-void Timer1Init(void)		//1毫秒@12.000MHz
+void Timer1Init( void )		//1毫秒@12.000MHz
 {
 	AUXR &= 0xBF;		//定时器时钟12T模式
 	TMOD &= 0x0F;		//设置定时器模式

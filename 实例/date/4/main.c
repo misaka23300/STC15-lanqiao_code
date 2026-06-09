@@ -1,3 +1,10 @@
+/**
+ * @file main.c
+ * @brief 主程序入口文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "main.h"
 
 #define KEY_TIME 15
@@ -30,20 +37,20 @@ void main()
     argument_proc();
     adjust_proc();
     // 初始化led
-    s4_state(state);
+    s4_state( state );
 
     led_value[4] = show_state;
     led_value[5] = ~show_state;
 
-    while (1)
+    while (1 )
     {
-        if (key_flag)
+        if ( key_flag )
         {
             key_flag = 0;
             key_proc();
         }
 
-        if (temperature_flag)
+        if ( temperature_flag )
         {
             temperature_flag = 0;
             temperature_proc();
@@ -56,17 +63,17 @@ void main()
 void timer_1() interrupt 3
 {
     static uint i;
-    i = (i + 1) % 30000;
+    i = ( i + 1 ) % 30000;
 
     seg_display();
     led_display();
 
-    if (i % KEY_TIME == 0)
+    if ( i % KEY_TIME == 0 )
     {
         key_flag = 1;
     }
 
-    if (i % TEMP_TIME == 0)
+    if ( i % TEMP_TIME == 0 )
     {
         temperature_flag = 1;
     }
@@ -77,12 +84,12 @@ void key_proc()
     uchar press;
     press = key_scan();
 
-    switch (press)
+    switch ( press )
     {
         case 4:
         {
-            state = (state + 1) % 3;
-            s4_state(state);
+            state = ( state + 1 ) % 3;
+            s4_state( state );
         }
         break;
 
@@ -99,14 +106,14 @@ void key_proc()
 
         case 8:
         {   
-            if (state == 1)
+            if ( state == 1 )
             {
-                adjust = (adjust + 1) % 100;
+                adjust = ( adjust + 1 ) % 100;
                 adjust_proc();
             }
-            else if (state == 2)
+            else if ( state == 2 )
             {
-                argument = (argument + 1) % 100;
+                argument = ( argument + 1 ) % 100;
                 argument_proc();
             }
         }
@@ -114,17 +121,17 @@ void key_proc()
 
         case 9:
         {
-            if (state == 1)
+            if ( state == 1 )
             {
                 adjust--;
-                if (adjust == -99)
+                if ( adjust == -99 )
                     adjust = 0;
                 adjust_proc();
             }
-            else if (state == 2)
+            else if ( state == 2 )
             {
                 argument--;
-                if (argument == -99)
+                if ( argument == -99 )
                     argument = 0;
                 argument_proc();
             }
@@ -137,7 +144,7 @@ void state_machine()
 {
     // 数码管显示
     
-    switch (state)
+    switch ( state )
     {
         case 0:
         {
@@ -167,13 +174,13 @@ void temperature_proc()
     //uchar i;
     int temperature;
 		uchar temp_check;
-    temperature = (int) ( (read_temperature() + adjust)* 100) ;
+    temperature = ( int ) ( ( read_temperature() + adjust )* 100 ) ;
     // 25 44 + adjust
     
-	temp_check = (uchar)(temperature / 100);
-    if (show_state)
+	temp_check = ( uchar )( temperature / 100 );
+    if ( show_state )
     {
-        if (temp_check > argument)
+        if ( temp_check > argument )
         {
             led_value[7] = 1; 
         }
@@ -184,7 +191,7 @@ void temperature_proc()
     }
     else
     {
-        if (temp_check < argument)
+        if ( temp_check < argument )
         {
             led_value[7] = 1; 
         }
@@ -195,34 +202,34 @@ void temperature_proc()
     }
     
     
-    temp_value[0] = (uchar) (temperature / 1000 % 10);
-    temp_value[1] = (uchar) (temperature / 100 % 10);
-    temp_value[2] = (uchar) (temperature / 10 % 10) ;
+    temp_value[0] = ( uchar ) ( temperature / 1000 % 10 );
+    temp_value[1] = ( uchar ) ( temperature / 100 % 10 );
+    temp_value[2] = ( uchar ) ( temperature / 10 % 10 ) ;
 
-    delete_0(temp_value, 3);
+    delete_0( temp_value, 3 );
 }
 
 void adjust_proc()
 {
-    hex_to_seg(adjust_value, adjust);
+    hex_to_seg( adjust_value, adjust );
 }
 
 void argument_proc()
 {
-    hex_to_seg(argument_value, argument);
+    hex_to_seg( argument_value, argument );
 }
 
 // 0 符号  1 十位数  2 个位数
-void hex_to_seg(char *output, char input)
+void hex_to_seg( char *output, char input )
 {
-    if (input < 0)
+    if ( input < 0 )
     {
         input = -input;
         output[1] = input / 10 % 10;
         output[2] = input % 10;
 
         // 删0加负号
-        if (output[1] == 0)
+        if ( output[1] == 0 )
         {
             output[1] = 17;
             output[0] = 16;
@@ -237,17 +244,17 @@ void hex_to_seg(char *output, char input)
         output[1] = input / 10 % 10;
         output[2] = input % 10;
 
-        if (output[1] == 0)
+        if ( output[1] == 0 )
             output[1] = 16;
     }
 }
 
-void delete_0(uchar* arrays, uchar j)
+void delete_0( uchar* arrays, uchar j )
 {
 	uchar i;
-    for (i = 0;i < (j - 1); i++)
+    for ( i = 0;i < ( j - 1 ); i++)
     {
-        if (arrays[i] == 0)
+        if ( arrays[i] == 0 )
         {
             arrays[i] = 16;
         }

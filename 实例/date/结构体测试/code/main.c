@@ -1,3 +1,10 @@
+/**
+ * @file main.c
+ * @brief 主程序入口文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "main.h"
 
 struct fonction_list
@@ -16,15 +23,15 @@ void main()
 {
     boot_init();
 
-    while (1)
+    while (1 )
     {
-        if (sonic.flag)
+        if ( sonic.flag )
         {
             sonic.flag = 0;
             sonic.value = sonic_measure();
         }
 
-        if (state.flag)
+        if ( state.flag )
         {
             state.flag = 0; // Corrected from sonic.flag = 0
             state_proc();
@@ -36,19 +43,19 @@ void timer_2_1ms() interrupt 12
 {
     static uint i = 0;
     i++;
-    if (i > 30000)
+    if ( i > 30000 )
     {
         i = 0;
     }
 
     seg_display();
 
-    if (i % sonic.time == 0)
+    if ( i % sonic.time == 0 )
     {
         sonic.flag = 1;
     }
 
-    if (i % state.time == 0) // Corrected from state.flag to state.time
+    if ( i % state.time == 0 ) // Corrected from state.flag to state.time
     {
         state.flag = 1;
     }
@@ -57,7 +64,7 @@ void timer_2_1ms() interrupt 12
 void state_proc()
 {
     seg[0] = sonic.value / 100 % 10;
-    seg[1] = (sonic.value / 10) % 10; // Added %10 for clarity
+    seg[1] = ( sonic.value / 10 ) % 10; // Added %10 for clarity
     seg[2] = sonic.value % 10;
     seg[7] = 3;
 }
@@ -78,15 +85,15 @@ void main()
 {
     boot_init();
 
-    while (1)
+    while (1 )
     {
-        if (sonic.flag)
+        if ( sonic.flag )
         {
             sonic.flag = 0;
             sonic.value = sonic_measure();
         }
 
-        if (state.flag)
+        if ( state.flag )
         {
             state.flag = 0; // Corrected from sonic.flag = 0
             state_proc();
@@ -98,19 +105,19 @@ void timer_2_1ms() interrupt 12
 {
     static uint i = 0;
     i++;
-    if (i > 30000)
+    if ( i > 30000 )
     {
         i = 0;
     }
 
     seg_display();
 
-    if (i % sonic.time == 0)
+    if ( i % sonic.time == 0 )
     {
         sonic.flag = 1;
     }
 
-    if (i % state.time == 0) // Corrected from state.flag to state.time
+    if ( i % state.time == 0 ) // Corrected from state.flag to state.time
     {
         state.flag = 1;
     }
@@ -119,7 +126,7 @@ void timer_2_1ms() interrupt 12
 void state_proc()
 {
     seg[0] = sonic.value / 100 % 10;
-    seg[1] = (sonic.value / 10) % 10; // Added %10 for clarity
+    seg[1] = ( sonic.value / 10 ) % 10; // Added %10 for clarity
     seg[2] = sonic.value % 10;
     seg[7] = 3;
 }

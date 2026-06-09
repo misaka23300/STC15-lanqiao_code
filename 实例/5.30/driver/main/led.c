@@ -1,28 +1,33 @@
+/**
+ * @file led.c
+ * @brief LED驱动文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "led.h"
 
-
 uint8_t randz = 0;
-void led_display(uint8_t i, uint8_t state) 
+void led_display( uint8_t i, uint8_t state ) 
 {
     static uint8_t temp = 0; 
 	static uint8_t last = 0xff;
-    if (state) {
-        temp = temp | (0x01 << i);
+    if ( state ) {
+        temp = temp | (0x01 << i );
     }
     else {
-        temp = temp & ~(0x01 << i);
+        temp = temp & ~(0x01 << i );
     }
 
-    if (temp != last) {
+    if ( temp != last ) {
         P0 = ~temp;
         last = temp;
     }
 }
 
-
-void buzz(uint8_t state)
+void buzz( uint8_t state )
 {
-    if (state) {
+    if ( state ) {
         randz = randz | 0x10;
     }
     else {
@@ -30,12 +35,12 @@ void buzz(uint8_t state)
     }
 
     P0 = randz;
-    latch(5);
+    latch(5 );
 }
 
-void relay(uint8_t state)
+void relay( uint8_t state )
 {
-    if (state) {
+    if ( state ) {
         randz = randz | 0x40;
     }
     else {
@@ -43,5 +48,5 @@ void relay(uint8_t state)
     }
 
     P0 = randz;
-    latch(5);
+    latch(5 );
 }

@@ -1,9 +1,9 @@
 /**
  * @file boot.c
  * @brief 引导与定时器初始化模块
- * @details 初始化端口模式、锁存线(latch)和定时器1，以及提供短延时函数。
+ * @details 初始化端口模式、锁存线( latch )和定时器1，以及提供短延时函数。
  * @author
- * @date 2025-12-09
+ * @date 2025 - 2 - 9
  */
 
 #include "boot.h"
@@ -16,41 +16,40 @@
  *
  * @note 调用此函数后，定时器1中断被使能（ET1 = 1），全局中断使能（EA = 1）。
  */
-void boot_init()
-{
-    P0M0 = 0x00;
-    P0M1 = 0x00;
-    P1M0 = 0x00;
-    P1M1 = 0x00;
-    P2M0 = 0x00;
-    P2M1 = 0x00;
-    P3M0 = 0x00;
-    P3M1 = 0x00;
-    P4M0 = 0x00;
-    P4M1 = 0x00;
-    P5M0 = 0x00;
-    P5M1 = 0x00;
-    P6M0 = 0x00;
-    P6M1 = 0x00;
-    P7M0 = 0x00;
-    P7M1 = 0x00;
+void boot_init() {
+	P0M0 = 0x00;
+	P0M1 = 0x00;
+	P1M0 = 0x00;
+	P1M1 = 0x00;
+	P2M0 = 0x00;
+	P2M1 = 0x00;
+	P3M0 = 0x00;
+	P3M1 = 0x00;
+	P4M0 = 0x00;
+	P4M1 = 0x00;
+	P5M0 = 0x00;
+	P5M1 = 0x00;
+	P6M0 = 0x00;
+	P6M1 = 0x00;
+	P7M0 = 0x00;
+	P7M1 = 0x00;
 
-    P0 = 0xFF;
-    latch(4);
+	P0 = 0xFF;
+	latch(4);
 
-    P0 = 0xAF;
-    latch(5);
+	P0 = 0xAF;
+	latch(5);
 
-    P0 = 0x00;
-    latch(6);
+	P0 = 0x00;
+	latch(6);
 
-    P0 = 0xFF;
-    latch(7);
+	P0 = 0xFF;
+	latch(7);
 
-    latch(0);
+	latch(0);
 
-    Timer1_Init();
-    EA = 1;
+	Timer1_Init();
+	EA = 1;
 }
 
 /**
@@ -63,32 +62,31 @@ void boot_init()
  * - 7 => 设置为 0xE0
  * - 0 => 清除高三位（恢复 0）
  *
- * @param i latch 索引（0,4,5,6,7）
+ * @param i latch 索引（0, 4, 5, 6, 7）
  */
-void latch(uint8_t i)
-{
-    switch (i) {
-        case 4: {
-            P2 = (P2 & 0x1F) | 0x80;
-            break;
-        }
-        case 5: {
-            P2 = (P2 & 0x1F) | 0xA0;
-            break;
-        }
-        case 6: {
-            P2 = (P2 & 0x1F) | 0xC0;
-            break;
-        }
-        case 7: {
-            P2 = (P2 & 0x1F) | 0xE0;
-            break;
-        }
-        case 0: {
-            P2 = P2 & 0x1F;
-            break;
-        }
-    }
+void latch(uint8_t i) {
+	switch (i) {
+	case 4: {
+		P2 = (P2 & 0x1F) | 0x80;
+		break;
+	}
+	case 5: {
+		P2 = (P2 & 0x1F) | 0xA0;
+		break;
+	}
+	case 6: {
+		P2 = (P2 & 0x1F) | 0xC0;
+		break;
+	}
+	case 7: {
+		P2 = (P2 & 0x1F) | 0xE0;
+		break;
+	}
+	case 0: {
+		P2 = P2 & 0x1F;
+		break;
+	}
+	}
 }
 
 /**
@@ -98,13 +96,13 @@ void latch(uint8_t i)
  */
 void Timer1_Init(void) // 1毫秒@12.000MHz
 {
-    AUXR &= 0xBF; // 定时器时钟12T模式
-    TMOD &= 0x0F; // 设置定时器模式
-    TL1 = 0x18;   // 设置定时初始值
-    TH1 = 0xFC;   // 设置定时初始值
-    TF1 = 0;      // 清除TF1标志
-    TR1 = 1;      // 定时器1开始计时
-    ET1 = 1;      // 使能定时器1中断
+	AUXR &= 0xBF; // 定时器时钟12T模式
+	TMOD &= 0x0F; // 设置定时器模式
+	TL1 = 0x18;	  // 设置定时初始值
+	TH1 = 0xFC;	  // 设置定时初始值
+	TF1 = 0;	  // 清除TF1标志
+	TR1 = 1;	  // 定时器1开始计时
+	ET1 = 1;	  // 使能定时器1中断
 }
 
 /**
@@ -114,19 +112,16 @@ void Timer1_Init(void) // 1毫秒@12.000MHz
  */
 void Delay14us(void) //@12.000MHz
 {
-    unsigned char data i;
+	unsigned char data i;
 
-    _nop_();
-    _nop_();
-    i = 39;
-    while (--i);
+	_nop_();
+	_nop_();
+	i = 39;
+	while (--i)
+		;
 }
 
-
-void loop_0to8(uint8_t *i)
-{
-    *i = (*i + 1) & 0x07;
-}
+void loop_0to8(uint8_t* i) { *i = (*i + 1) & 0x07; }
 
 /*
  * 以下为备用/注释掉的定时器配置函数，保留原注释并添加文档说明以便未来使用或文档生成。
@@ -136,22 +131,22 @@ void loop_0to8(uint8_t *i)
  */
 /* void timer_0_sonic()
 {
-    AUXR &= 0x7F;			//定时器时钟12T模式
-    TMOD &= 0xF0;			//设置定时器模式
-    TL0 = 0x00;				//设置定时初始值
-    TH0 = 0x00;				//设置定时初始值
-    TF0 = 0;				//清除TF0标志
-    TR0 = 0;				//定时器0开始计时
-    ET0 = 0;				//使能定时器0中断
+	AUXR &= 0x7F;			//定时器时钟12T模式
+	TMOD &= 0xF0;			//设置定时器模式
+	TL0 = 0x00;				//设置定时初始值
+	TH0 = 0x00;				//设置定时初始值
+	TF0 = 0;				//清除TF0标志
+	TR0 = 0;				//定时器0开始计时
+	ET0 = 0;				//使能定时器0中断
 }
 
 void timer_0_ne555()
 {
-    //TMOD -> 0000 0110
-    // AUXR -> 0xxx xxxx
-    TMOD = (TMOD & 0xF0) | 0x06;
-    TL0 = 0xFF;
-    TH0 = 0xFF;
-    ET0 = 1;
+	//TMOD -> 0000 0110
+	// AUXR -> 0xxx xxxx
+	TMOD = ( TMOD & 0xF0 ) | 0x06;
+	TL0 = 0xFF;
+	TH0 = 0xFF;
+	ET0 = 1;
 }
  */

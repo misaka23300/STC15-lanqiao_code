@@ -1,9 +1,16 @@
+/**
+ * @file STC32G_Compare.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCMCU.com --------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
@@ -31,15 +38,15 @@
 
 typedef struct
 { 
-	uint8_t	CMP_EN;					//比较器允许或禁止, 			ENABLE,DISABLE
+	uint8_t	CMP_EN;					//比较器允许或禁止, 			ENABLE, DISABLE
 	uint8_t	CMP_P_Select;		//比较器输入正极选择, CMP_P_P37: 选择P3.7做正输入, CMP_P_ADC: 由ADC模拟输入端做正输入.
 	uint8_t	CMP_N_Select;		//比较器输入负极选择, CMP_N_GAP: 选择内部BandGap经过OP后的电压做负输入, CMP_N_P36: 选择P3.6做负输入.
-	uint8_t	CMP_Outpt_En;		//允许比较结果输出,   ENABLE,DISABLE
-	uint8_t	CMP_InvCMPO;		//比较器输出取反, ENABLE,DISABLE
-	uint8_t	CMP_100nsFilter;	//内部0.1uF滤波,  ENABLE,DISABLE
+	uint8_t	CMP_Outpt_En;		//允许比较结果输出,   ENABLE, DISABLE
+	uint8_t	CMP_InvCMPO;		//比较器输出取反, ENABLE, DISABLE
+	uint8_t	CMP_100nsFilter;	//内部0.1uF滤波,  ENABLE, DISABLE
 	uint8_t	CMP_OutDelayDuty;	//0~63, 比较结果变化延时周期数
 } CMP_InitDefine; 
 
-void	CMP_Inilize(CMP_InitDefine *CMPx);
+void	CMP_Inilize( CMP_InitDefine *CMPx );
 
 #endif

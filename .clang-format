@@ -1,0 +1,34 @@
+---
+# Clang-Format 配置文件
+# 适用于 STC15-lanqiao_code 项目
+
+BasedOnStyle: LLVM
+
+# 缩进配置
+IndentWidth: 4
+UseTab: Never
+TabWidth: 4
+ContinuationIndentWidth: 4
+
+# 大括号配置
+BreakBeforeBraces: Attach
+
+# 空格配置
+SpaceAfterCast: true
+SpaceBeforeParens: ControlStatements
+SpaceInParentheses: false
+SpaceAfterLogicalNot: false
+
+# 换行配置
+ColumnLimit: 80
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: Never
+AllowShortBlocksOnASingleLine: Never
+
+# 指针配置
+PointerAlignment: Right
+
+# 排序配置
+SortIncludes: true
+IncludeBlocks: Regroup
+---

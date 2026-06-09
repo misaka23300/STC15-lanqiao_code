@@ -1,14 +1,21 @@
+/**
+ * @file STC32G_USART_LIN.h
+ * @brief Êú™ÊåáÂÆöÊèèËø∞
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCAI.com ---------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* »Áπ˚“™‘⁄≥Ã–Ú÷– π”√¥À¥˙¬Î,«Î‘⁄≥Ã–Ú÷–◊¢√˜ π”√¡ÀSTCµƒ◊ ¡œº∞≥Ã–Ú            */
+/* “™⁄≥ π√¥À¥,⁄≥◊¢ πSTCœº            */
 /*---------------------------------------------------------------------*/
 
 #ifndef __STC32G_USART_LIN_H
@@ -17,43 +24,42 @@
 #include	"config.h"
 
 //========================================================================
-//                              ∂®“Â…˘√˜
+//                              
 //========================================================================
 
 #define	USART1	1
 #define	USART2	2
 
-#define FRAME_LEN       8    // ˝æ›≥§∂»: 8 ◊÷Ω⁄
+#define FRAME_LEN       8    //›≥: 8 ÷Ω
 
 #define	LinMasterMode		0
 #define	LinSlaveMode		1
 
 //========================================================================
-//                              USART…Ë÷√
+//                              USART
 //========================================================================
 
-
 //========================================================================
-//                              ±‰¡ø…˘√˜
+//                              
 //========================================================================
 
 typedef struct
 { 
-	u8	LIN_Enable;				//LIN◊‹œﬂ πƒ‹  	ENABLE,DISABLE
-	u8	LIN_Mode;				//LIN◊‹œﬂƒ£ Ω  	LinMasterMode,LinSlaveMode
-	u8	LIN_AutoSync;			//◊‘∂ØÕ¨≤Ω πƒ‹  	ENABLE,DISABLE
-	u16	LIN_Baudrate;			//LIN≤®Ãÿ¬ 
+	u8	LIN_Enable;				//LIN π  	ENABLE, DISABLE
+	u8	LIN_Mode;				//LINƒ£ Ω  	LinMasterMode, LinSlaveMode
+	u8	LIN_AutoSync;			//‘∂Õ¨ π  	ENABLE, DISABLE
+	u16	LIN_Baudrate;			//LIN
 } USARTx_LIN_InitDefine; 
 
 //========================================================================
-//                              Õ‚≤ø…˘√˜
+//                              ‚≤ø
 //========================================================================
 
-u8 UASRT_LIN_Configuration(u8 USARTx, USARTx_LIN_InitDefine *USART);
-void UsartLinSendChecksum(u8 USARTx, u8 *dat, u8 len);
-void UsartLinSendData(u8 USARTx, u8 *pdat, u8 len);
-void UsartLinSendFrame(u8 USARTx, u8 lid, u8 *pdat, u8 len);
-void UsartLinSendHeader(u8 USARTx, u8 lid);
+u8 UASRT_LIN_Configuration( u8 USARTx, USARTx_LIN_InitDefine *USART );
+void UsartLinSendChecksum( u8 USARTx, u8 *dat, u8 len );
+void UsartLinSendData( u8 USARTx, u8 *pdat, u8 len );
+void UsartLinSendFrame( u8 USARTx, u8 lid, u8 *pdat, u8 len );
+void UsartLinSendHeader( u8 USARTx, u8 lid );
 
 #endif
 

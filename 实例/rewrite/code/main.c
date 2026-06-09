@@ -1,5 +1,11 @@
-#include "main.h"
+/**
+ * @file main.c
+ * @brief 主程序入口文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
 
+#include "main.h"
 
 enum {
     LED_TIME = 20,
@@ -9,17 +15,14 @@ enum {
     RTC_TIME = 1000
 };
 
-
 typedef struct {
     uint8_t time;
 } LED;
-
 
 typedef struct {
     uint8_t time;
     uint8_t press;
 } KEY;
-
 
 typedef struct {
     uint8_t rtc_time;
@@ -28,12 +31,10 @@ typedef struct {
     uint16_t time;
 } RTC;
 
-
 typedef struct {
     uint8_t time;
     uint8_t mode_0;
 } STATE;
-
 
 LED led;
 KEY key;
@@ -44,15 +45,12 @@ RTC rtc = {
 };
 STATE state;
 
-
-
-
 void main()
 {
     
     boot_init();
     
-    while (1)
+    while (1 )
     {
         task_loop();
     }
@@ -65,30 +63,30 @@ void boot_init()
     Timer1_Init();
     EA = 1;
 
-    write_datetime(rtc.init_time);
+    write_datetime( rtc.init_time );
 }
 
 void task_loop()
 {
-    if (led.time == LED_TIME)
+    if ( led.time == LED_TIME )
     {
         led_task();
         led.time = 0;
     }
 
-    if (key.time == KEY_TIME)
+    if ( key.time == KEY_TIME )
     {
         key_task();
         key.time = 0;
     }
 
-    if (rtc.time == TRC_TIME)
+    if ( rtc.time == TRC_TIME )
     {
-        read_datetime(rtc.now_time);
+        read_datetime( rtc.now_time );
         rtc.time = 0;
     }
 
-    if (state.time == STATE_TIME)
+    if ( state.time == STATE_TIME )
     {
         display_task();
         state.time = 0;
@@ -97,28 +95,26 @@ void task_loop()
 
 void timer_1_interrupt() interrupt 3
 {
-    if (led.time < LED_TIME) { led.time++; }
+    if ( led.time < LED_TIME ) { led.time++; }
 
-    if (key.time < KEY_TIME) { key.time++; }
+    if ( key.time < KEY_TIME ) { key.time++; }
 
-    if (rtc.time < RTC_TIME) { rtc.time++; }
+    if ( rtc.time < RTC_TIME ) { rtc.time++; }
 
-    if (state.time < STATE_TIME) {state.time++; }
+    if ( state.time < STATE_TIME ) {state.time++; }
 
 }
-
 
 void led_task()
 {
     led_display();
 }
 
-
 void key_task()
 {
     key.press = key_scan();
 
-    switch (key.press)
+    switch ( key.press )
     {
         case 4:
         {
@@ -131,11 +127,11 @@ void key_task()
 
 void display_task()
 {
-    switch (state.mode_0)
+    switch ( state.mode_0 )
     {
         case 0:
         {
-            set_seg_value(2, 3, 0, 0 ,0 ,0, 0, 0);
+            set_seg_value(2, 3, 0, 0 , 0 , 0, 0, 0 );
         }
         break;
 
@@ -146,15 +142,11 @@ void display_task()
     }
 }
 
-
-
 void write_start_times()
 {
     uchar times;
-    times = AT24C02_read(0x00);
+    times = AT24C02_read(0x00 );
     times = times + 1;
-    AT24C02_write(0x00, times);
+    AT24C02_write(0x00, times );
 }
-
-
 

@@ -1,13 +1,20 @@
+/**
+ * @file STC32G_DMA_Isr.c
+ * @brief Êú™ÊåáÂÆöÊèèËø∞
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCMCU.com --------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* »Áπ˚“™‘⁄≥Ã–Ú÷– π”√¥À¥˙¬Î,«Î‘⁄≥Ã–Ú÷–◊¢√˜ π”√¡ÀSTCµƒ◊ ¡œº∞≥Ã–Ú            */
+/* “™⁄≥ π√¥À¥,⁄≥◊¢ πSTCœº            */
 /*---------------------------------------------------------------------*/
 
 #include "STC32G_DMA.h"
@@ -28,8 +35,8 @@ bit DmaLcmFlag;
 
 bit DmaADCFlag = 0;
 bit DmaM2MFlag = 0;
-bit	DmaI2CTFlag=0;
-bit	DmaI2CRFlag=0;
+bit	DmaI2CTFlag = ;
+bit	DmaI2CRFlag = ;
 
 bit	SpiTxFlag;
 bit	SpiRxFlag;
@@ -41,42 +48,42 @@ bit	SpiSendFlag;
 bit	UartSendFlag;
 
 //========================================================================
-// ∫Ø ˝: DMA_ADC_ISR_Handler
-// √Ë ˆ: DMA ADC ÷–∂œ∫Ø ˝.
-// ≤Œ ˝: none.
-// ∑µªÿ: none.
-// ∞Ê±æ: V1.0, 2022-03-23
+// : DMA_ADC_ISR_Handler
+// : DMA ADC –∂œ∫.
+// : none.
+// : none.
+// Ê±æ: V1.0, 2022 - 3 - 3
 //========================================================================
-void DMA_ADC_ISR_Handler (void) interrupt DMA_ADC_VECTOR
+void DMA_ADC_ISR_Handler ( void ) interrupt DMA_ADC_VECTOR
 {
-	// TODO: ‘⁄¥À¥¶ÃÌº””√ªß¥˙¬Î
-	if(DMA_ADC_STA & 0x01)	//AD◊™ªªÕÍ≥…
+	// TODO: ⁄¥À¥√ª
+	if ( DMA_ADC_STA & 0x01 )	//AD◊™
 	{
-		DMA_ADC_STA &= ~0x01;	//«Â±Í÷æŒª
+		DMA_ADC_STA &= ~0x01;	//÷æŒª
 		DmaADCFlag = 1;
 	}
 }
 
 //========================================================================
-// ∫Ø ˝: DMA_M2M_ISR_Handler
-// √Ë ˆ: DMA M2M ÷–∂œ∫Ø ˝.
-// ≤Œ ˝: none.
-// ∑µªÿ: none.
-// ∞Ê±æ: V1.0, 2022-03-23
+// : DMA_M2M_ISR_Handler
+// : DMA M2M –∂œ∫.
+// : none.
+// : none.
+// Ê±æ: V1.0, 2022 - 3 - 3
 //========================================================================
-void DMA_M2M_ISR_Handler (void) interrupt DMA_M2M_VECTOR
+void DMA_M2M_ISR_Handler ( void ) interrupt DMA_M2M_VECTOR
 {
-	// TODO: ‘⁄¥À¥¶ÃÌº””√ªß¥˙¬Î
-	if(DMA_M2M_STA & 0x01)	//M2M¥´ ‰ÕÍ≥…
+	// TODO: ⁄¥À¥√ª
+	if ( DMA_M2M_STA & 0x01 )	//M2M
 	{
-		DMA_M2M_STA &= ~0x01;	//«Â±Í÷æŒª
+		DMA_M2M_STA &= ~0x01;	//÷æŒª
 		DmaM2MFlag = 1;
-		if(u2sFlag)
+		if ( u2sFlag )
 		{
 			u2sFlag = 0;
 			SpiSendFlag = 1;
 		}
-		if(s2uFlag)
+		if ( s2uFlag )
 		{
 			s2uFlag = 0;
 			UartSendFlag = 1;
@@ -85,273 +92,273 @@ void DMA_M2M_ISR_Handler (void) interrupt DMA_M2M_VECTOR
 }
 
 //========================================================================
-// ∫Ø ˝: DMA_UART1TX_ISR_Handler
-// √Ë ˆ: DMA UART1 TX ÷–∂œ∫Ø ˝.
-// ≤Œ ˝: none.
-// ∑µªÿ: none.
-// ∞Ê±æ: V1.0, 2022-03-23
+// : DMA_UART1TX_ISR_Handler
+// : DMA UART1 TX –∂œ∫.
+// : none.
+// : none.
+// Ê±æ: V1.0, 2022 - 3 - 3
 //========================================================================
-void DMA_UART1TX_ISR_Handler (void) interrupt DMA_UR1T_VECTOR
+void DMA_UART1TX_ISR_Handler ( void ) interrupt DMA_UR1T_VECTOR
 {
-	// TODO: ‘⁄¥À¥¶ÃÌº””√ªß¥˙¬Î
-	if (DMA_UR1T_STA & 0x01)	//∑¢ÀÕÕÍ≥…
+	// TODO: ⁄¥À¥√ª
+	if ( DMA_UR1T_STA & 0x01 )	//
 	{
-		DMA_UR1T_STA &= ~0x01;	//«Â±Í÷æŒª
+		DMA_UR1T_STA &= ~0x01;	//÷æŒª
 		DmaTx1Flag = 1;
 	}
-	if (DMA_UR1T_STA & 0x04)	// ˝æ›∏≤∏«
+	if ( DMA_UR1T_STA & 0x04 )	//›∏
 	{
-		DMA_UR1T_STA &= ~0x04;	//«Â±Í÷æŒª
+		DMA_UR1T_STA &= ~0x04;	//÷æŒª
 	}
 }
 
 //========================================================================
-// ∫Ø ˝: DMA_UART1RX_ISR_Handler
-// √Ë ˆ: DMA UART1 RX ÷–∂œ∫Ø ˝.
-// ≤Œ ˝: none.
-// ∑µªÿ: none.
-// ∞Ê±æ: V1.0, 2022-03-23
+// : DMA_UART1RX_ISR_Handler
+// : DMA UART1 RX –∂œ∫.
+// : none.
+// : none.
+// Ê±æ: V1.0, 2022 - 3 - 3
 //========================================================================
-void DMA_UART1RX_ISR_Handler (void) interrupt DMA_UR1R_VECTOR
+void DMA_UART1RX_ISR_Handler ( void ) interrupt DMA_UR1R_VECTOR
 {
-	// TODO: ‘⁄¥À¥¶ÃÌº””√ªß¥˙¬Î
-	if (DMA_UR1R_STA & 0x01)	//Ω” ’ÕÍ≥…
+	// TODO: ⁄¥À¥√ª
+	if ( DMA_UR1R_STA & 0x01 )	//
 	{
-		DMA_UR1R_STA &= ~0x01;	//«Â±Í÷æŒª
+		DMA_UR1R_STA &= ~0x01;	//÷æŒª
 		DmaRx1Flag = 1;
 
-//		DMA_UR1T_TRIG();	//÷ÿ–¬¥•∑¢UART1∑¢ÀÕπ¶ƒ‹
-//		DMA_UR1R_TRIG();	//÷ÿ–¬¥•∑¢UART1Ω” ’π¶ƒ‹
+//		DMA_UR1T_TRIG();	//¬¥UART1Õπ
+//		DMA_UR1R_TRIG();	//¬¥UART1’π
 	}
-	if (DMA_UR1R_STA & 0x02)	// ˝æ›∂™∆˙
+	if ( DMA_UR1R_STA & 0x02 )	//›∂
 	{
-		DMA_UR1R_STA &= ~0x02;	//«Â±Í÷æŒª
+		DMA_UR1R_STA &= ~0x02;	//÷æŒª
 	}
 }
 
 //========================================================================
-// ∫Ø ˝: DMA_UART2TX_ISR_Handler
-// √Ë ˆ: DMA UART2 TX ÷–∂œ∫Ø ˝.
-// ≤Œ ˝: none.
-// ∑µªÿ: none.
-// ∞Ê±æ: V1.0, 2022-03-23
+// : DMA_UART2TX_ISR_Handler
+// : DMA UART2 TX –∂œ∫.
+// : none.
+// : none.
+// Ê±æ: V1.0, 2022 - 3 - 3
 //========================================================================
-void DMA_UART2TX_ISR_Handler (void) interrupt DMA_UR2T_VECTOR
+void DMA_UART2TX_ISR_Handler ( void ) interrupt DMA_UR2T_VECTOR
 {
-	// TODO: ‘⁄¥À¥¶ÃÌº””√ªß¥˙¬Î
-	if (DMA_UR2T_STA & 0x01)	//∑¢ÀÕÕÍ≥…
+	// TODO: ⁄¥À¥√ª
+	if ( DMA_UR2T_STA & 0x01 )	//
 	{
-		DMA_UR2T_STA &= ~0x01;	//«Â±Í÷æŒª
+		DMA_UR2T_STA &= ~0x01;	//÷æŒª
 		DmaTx2Flag = 1;
 	}
-	if (DMA_UR2T_STA & 0x04)	// ˝æ›∏≤∏«
+	if ( DMA_UR2T_STA & 0x04 )	//›∏
 	{
-		DMA_UR2T_STA &= ~0x04;	//«Â±Í÷æŒª
+		DMA_UR2T_STA &= ~0x04;	//÷æŒª
 	}
 }
 
 //========================================================================
-// ∫Ø ˝: DMA_UART2RX_ISR_Handler
-// √Ë ˆ: DMA UART2 RX ÷–∂œ∫Ø ˝.
-// ≤Œ ˝: none.
-// ∑µªÿ: none.
-// ∞Ê±æ: V1.0, 2022-03-23
+// : DMA_UART2RX_ISR_Handler
+// : DMA UART2 RX –∂œ∫.
+// : none.
+// : none.
+// Ê±æ: V1.0, 2022 - 3 - 3
 //========================================================================
-void DMA_UART2RX_ISR_Handler (void) interrupt DMA_UR2R_VECTOR
+void DMA_UART2RX_ISR_Handler ( void ) interrupt DMA_UR2R_VECTOR
 {
-	// TODO: ‘⁄¥À¥¶ÃÌº””√ªß¥˙¬Î
-	if (DMA_UR2R_STA & 0x01)	//Ω” ’ÕÍ≥…
+	// TODO: ⁄¥À¥√ª
+	if ( DMA_UR2R_STA & 0x01 )	//
 	{
-		DMA_UR2R_STA &= ~0x01;	//«Â±Í÷æŒª
+		DMA_UR2R_STA &= ~0x01;	//÷æŒª
 		DmaRx2Flag = 1;
 
-//		DMA_UR2T_TRIG();	//÷ÿ–¬¥•∑¢UART2∑¢ÀÕπ¶ƒ‹
-//		DMA_UR2R_TRIG();	//÷ÿ–¬¥•∑¢UART2Ω” ’π¶ƒ‹
+//		DMA_UR2T_TRIG();	//¬¥UART2Õπ
+//		DMA_UR2R_TRIG();	//¬¥UART2’π
 	}
-	if (DMA_UR2R_STA & 0x02)	// ˝æ›∂™∆˙
+	if ( DMA_UR2R_STA & 0x02 )	//›∂
 	{
-		DMA_UR2R_STA &= ~0x02;	//«Â±Í÷æŒª
+		DMA_UR2R_STA &= ~0x02;	//÷æŒª
 	}
 }
 
 //========================================================================
-// ∫Ø ˝: DMA_UART3TX_ISR_Handler
-// √Ë ˆ: DMA UART3 TX ÷–∂œ∫Ø ˝.
-// ≤Œ ˝: none.
-// ∑µªÿ: none.
-// ∞Ê±æ: V1.0, 2022-03-23
+// : DMA_UART3TX_ISR_Handler
+// : DMA UART3 TX –∂œ∫.
+// : none.
+// : none.
+// Ê±æ: V1.0, 2022 - 3 - 3
 //========================================================================
-void DMA_UART3TX_ISR_Handler (void) interrupt DMA_UR3T_VECTOR
+void DMA_UART3TX_ISR_Handler ( void ) interrupt DMA_UR3T_VECTOR
 {
-	// TODO: ‘⁄¥À¥¶ÃÌº””√ªß¥˙¬Î
-	if (DMA_UR3T_STA & 0x01)	//∑¢ÀÕÕÍ≥…
+	// TODO: ⁄¥À¥√ª
+	if ( DMA_UR3T_STA & 0x01 )	//
 	{
-		DMA_UR3T_STA &= ~0x01;	//«Â±Í÷æŒª
+		DMA_UR3T_STA &= ~0x01;	//÷æŒª
 		DmaTx3Flag = 1;
 	}
-	if (DMA_UR3T_STA & 0x04)	// ˝æ›∏≤∏«
+	if ( DMA_UR3T_STA & 0x04 )	//›∏
 	{
-		DMA_UR3T_STA &= ~0x04;	//«Â±Í÷æŒª
+		DMA_UR3T_STA &= ~0x04;	//÷æŒª
 	}
 }
 
 //========================================================================
-// ∫Ø ˝: DMA_UART3RX_ISR_Handler
-// √Ë ˆ: DMA UART3 RX ÷–∂œ∫Ø ˝.
-// ≤Œ ˝: none.
-// ∑µªÿ: none.
-// ∞Ê±æ: V1.0, 2022-03-23
+// : DMA_UART3RX_ISR_Handler
+// : DMA UART3 RX –∂œ∫.
+// : none.
+// : none.
+// Ê±æ: V1.0, 2022 - 3 - 3
 //========================================================================
-void DMA_UART3RX_ISR_Handler (void) interrupt DMA_UR3R_VECTOR
+void DMA_UART3RX_ISR_Handler ( void ) interrupt DMA_UR3R_VECTOR
 {
-	// TODO: ‘⁄¥À¥¶ÃÌº””√ªß¥˙¬Î
-	if (DMA_UR3R_STA & 0x01)	//Ω” ’ÕÍ≥…
+	// TODO: ⁄¥À¥√ª
+	if ( DMA_UR3R_STA & 0x01 )	//
 	{
-		DMA_UR3R_STA &= ~0x01;	//«Â±Í÷æŒª
+		DMA_UR3R_STA &= ~0x01;	//÷æŒª
 		DmaRx3Flag = 1;
 
-//		DMA_UR3T_TRIG();	//÷ÿ–¬¥•∑¢UART3∑¢ÀÕπ¶ƒ‹
-//		DMA_UR3R_TRIG();	//÷ÿ–¬¥•∑¢UART3Ω” ’π¶ƒ‹
+//		DMA_UR3T_TRIG();	//¬¥UART3Õπ
+//		DMA_UR3R_TRIG();	//¬¥UART3’π
 	}
-	if (DMA_UR3R_STA & 0x02)	// ˝æ›∂™∆˙
+	if ( DMA_UR3R_STA & 0x02 )	//›∂
 	{
-		DMA_UR3R_STA &= ~0x02;	//«Â±Í÷æŒª
+		DMA_UR3R_STA &= ~0x02;	//÷æŒª
 	}
 }
 
 //========================================================================
-// ∫Ø ˝: DMA_UART4TX_ISR_Handler
-// √Ë ˆ: DMA UART4 TX ÷–∂œ∫Ø ˝.
-// ≤Œ ˝: none.
-// ∑µªÿ: none.
-// ∞Ê±æ: V1.0, 2022-03-23
+// : DMA_UART4TX_ISR_Handler
+// : DMA UART4 TX –∂œ∫.
+// : none.
+// : none.
+// Ê±æ: V1.0, 2022 - 3 - 3
 //========================================================================
-void DMA_UART4TX_ISR_Handler (void) interrupt DMA_UR4T_VECTOR
+void DMA_UART4TX_ISR_Handler ( void ) interrupt DMA_UR4T_VECTOR
 {
-	// TODO: ‘⁄¥À¥¶ÃÌº””√ªß¥˙¬Î
-	if (DMA_UR4T_STA & 0x01)	//∑¢ÀÕÕÍ≥…
+	// TODO: ⁄¥À¥√ª
+	if ( DMA_UR4T_STA & 0x01 )	//
 	{
-		DMA_UR4T_STA &= ~0x01;	//«Â±Í÷æŒª
+		DMA_UR4T_STA &= ~0x01;	//÷æŒª
 		DmaTx4Flag = 1;
 	}
-	if (DMA_UR4T_STA & 0x04)	// ˝æ›∏≤∏«
+	if ( DMA_UR4T_STA & 0x04 )	//›∏
 	{
-		DMA_UR4T_STA &= ~0x04;	//«Â±Í÷æŒª
+		DMA_UR4T_STA &= ~0x04;	//÷æŒª
 	}
 }
 
 //========================================================================
-// ∫Ø ˝: DMA_UART4RX_ISR_Handler
-// √Ë ˆ: DMA UART4 RX ÷–∂œ∫Ø ˝.
-// ≤Œ ˝: none.
-// ∑µªÿ: none.
-// ∞Ê±æ: V1.0, 2022-03-23
+// : DMA_UART4RX_ISR_Handler
+// : DMA UART4 RX –∂œ∫.
+// : none.
+// : none.
+// Ê±æ: V1.0, 2022 - 3 - 3
 //========================================================================
-void DMA_UART4RX_ISR_Handler (void) interrupt DMA_UR4R_VECTOR
+void DMA_UART4RX_ISR_Handler ( void ) interrupt DMA_UR4R_VECTOR
 {
-	// TODO: ‘⁄¥À¥¶ÃÌº””√ªß¥˙¬Î
-	if (DMA_UR4R_STA & 0x01)	//Ω” ’ÕÍ≥…
+	// TODO: ⁄¥À¥√ª
+	if ( DMA_UR4R_STA & 0x01 )	//
 	{
-		DMA_UR4R_STA &= ~0x01;	//«Â±Í÷æŒª
+		DMA_UR4R_STA &= ~0x01;	//÷æŒª
 		DmaRx4Flag = 1;
 
-//		DMA_UR4T_TRIG();	//÷ÿ–¬¥•∑¢UART4∑¢ÀÕπ¶ƒ‹
-//		DMA_UR4R_TRIG();	//÷ÿ–¬¥•∑¢UART4Ω” ’π¶ƒ‹
+//		DMA_UR4T_TRIG();	//¬¥UART4Õπ
+//		DMA_UR4R_TRIG();	//¬¥UART4’π
 	}
-	if (DMA_UR4R_STA & 0x02)	// ˝æ›∂™∆˙
+	if ( DMA_UR4R_STA & 0x02 )	//›∂
 	{
-		DMA_UR4R_STA &= ~0x02;	//«Â±Í÷æŒª
+		DMA_UR4R_STA &= ~0x02;	//÷æŒª
 	}
 }
 
 //========================================================================
-// ∫Ø ˝: DMA_SPI_ISR_Handler
-// √Ë ˆ: DMA SPI ÷–∂œ∫Ø ˝.
-// ≤Œ ˝: none.
-// ∑µªÿ: none.
-// ∞Ê±æ: V1.0, 2022-03-23
+// : DMA_SPI_ISR_Handler
+// : DMA SPI –∂œ∫.
+// : none.
+// : none.
+// Ê±æ: V1.0, 2022 - 3 - 3
 //========================================================================
-void DMA_SPI_ISR_Handler (void) interrupt DMA_SPI_VECTOR
+void DMA_SPI_ISR_Handler ( void ) interrupt DMA_SPI_VECTOR
 {
-	// TODO: ‘⁄¥À¥¶ÃÌº””√ªß¥˙¬Î
-	if(DMA_SPI_STA & 0x01)	//Õ®–≈ÕÍ≥…
+	// TODO: ⁄¥À¥√ª
+	if ( DMA_SPI_STA & 0x01 )	//Õ®
 	{
-		DMA_SPI_STA &= ~0x01;	//«Â±Í÷æŒª
-		if(MSTR) 
-		{ //÷˜ª˙ƒ£ Ω
+		DMA_SPI_STA &= ~0x01;	//÷æŒª
+		if ( MSTR ) 
+		{ //ƒ£ Ω
 			SpiTxFlag = 1;
 			SPI_SS_2 = 1;
 		}
 		else 
-		{ //¥”ª˙ƒ£ Ω
+		{ //”ªƒ£ Ω
 			SpiRxFlag = 1;
 		}
 	}
-	if(DMA_SPI_STA & 0x02)	// ˝æ›∂™∆˙
+	if ( DMA_SPI_STA & 0x02 )	//›∂
 	{
-		DMA_SPI_STA &= ~0x02;	//«Â±Í÷æŒª
+		DMA_SPI_STA &= ~0x02;	//÷æŒª
 	}
-	if(DMA_SPI_STA & 0x04)	// ˝æ›∏≤∏«
+	if ( DMA_SPI_STA & 0x04 )	//›∏
 	{
-		DMA_SPI_STA &= ~0x04;	//«Â±Í÷æŒª
+		DMA_SPI_STA &= ~0x04;	//÷æŒª
 	}
 }
 
 //========================================================================
-// ∫Ø ˝: DMA_I2C_ISR_Handler
-// √Ë ˆ: DMA I2C ∑¢ÀÕ÷–∂œ∫Ø ˝.
-// ≤Œ ˝: none.
-// ∑µªÿ: none.
-// ∞Ê±æ: V1.0, 2022-03-25
+// : DMA_I2C_ISR_Handler
+// : DMA I2C –∂œ∫.
+// : none.
+// : none.
+// Ê±æ: V1.0, 2022 - 3 - 5
 //========================================================================
-void DMA_I2CT_ISR_Handler (void) interrupt DMA_I2CT_VECTOR
+void DMA_I2CT_ISR_Handler ( void ) interrupt DMA_I2CT_VECTOR
 {
-	// TODO: ‘⁄¥À¥¶ÃÌº””√ªß¥˙¬Î
-	if(DMA_I2CT_STA & 0x01)   //∑¢ÀÕÕÍ≥…
+	// TODO: ⁄¥À¥√ª
+	if ( DMA_I2CT_STA & 0x01 )   //
 	{
-		DMA_I2CT_STA &= ~0x01;  //«Â≥˝±Í÷æŒª
+		DMA_I2CT_STA &= ~0x01;  //÷æŒª
 		DmaI2CTFlag = 0;
 	}
-	if(DMA_I2CT_STA & 0x04)   // ˝æ›∏≤∏«
+	if ( DMA_I2CT_STA & 0x04 )   //›∏
 	{
-		DMA_I2CT_STA &= ~0x04;  //«Â≥˝±Í÷æŒª
+		DMA_I2CT_STA &= ~0x04;  //÷æŒª
 	}
 }
 
 //========================================================================
-// ∫Ø ˝: DMA_I2CR_ISR_Handler
-// √Ë ˆ: DMA I2C Ω” ’÷–∂œ∫Ø ˝.
-// ≤Œ ˝: none.
-// ∑µªÿ: none.
-// ∞Ê±æ: V1.0, 2022-03-25
+// : DMA_I2CR_ISR_Handler
+// : DMA I2C –∂œ∫.
+// : none.
+// : none.
+// Ê±æ: V1.0, 2022 - 3 - 5
 //========================================================================
-void DMA_I2CR_ISR_Handler (void) interrupt DMA_I2CR_VECTOR
+void DMA_I2CR_ISR_Handler ( void ) interrupt DMA_I2CR_VECTOR
 {
-	// TODO: ‘⁄¥À¥¶ÃÌº””√ªß¥˙¬Î
-	if(DMA_I2CR_STA & 0x01)   //Ω” ’ÕÍ≥…
+	// TODO: ⁄¥À¥√ª
+	if ( DMA_I2CR_STA & 0x01 )   //
 	{
-		DMA_I2CR_STA &= ~0x01;  //«Â≥˝±Í÷æŒª
+		DMA_I2CR_STA &= ~0x01;  //÷æŒª
 		DmaI2CRFlag = 0;
 	}
-	if(DMA_I2CR_STA & 0x02)   // ˝æ›∂™∆˙
+	if ( DMA_I2CR_STA & 0x02 )   //›∂
 	{
-		DMA_I2CR_STA &= ~0x02;  //«Â≥˝±Í÷æŒª
+		DMA_I2CR_STA &= ~0x02;  //÷æŒª
 	}
 }
 
 //========================================================================
-// ∫Ø ˝: DMA_LCM_ISR_Handler
-// √Ë ˆ: DMA LCM ÷–∂œ∫Ø ˝.
-// ≤Œ ˝: none.
-// ∑µªÿ: none.
-// ∞Ê±æ: V1.0, 2022-03-23
+// : DMA_LCM_ISR_Handler
+// : DMA LCM –∂œ∫.
+// : none.
+// : none.
+// Ê±æ: V1.0, 2022 - 3 - 3
 //========================================================================
-void DMA_LCM_ISR_Handler (void) interrupt DMA_LCM_VECTOR
+void DMA_LCM_ISR_Handler ( void ) interrupt DMA_LCM_VECTOR
 {
-	// TODO: ‘⁄¥À¥¶ÃÌº””√ªß¥˙¬Î
-	if(DMA_LCM_STA & 0x01)
+	// TODO: ⁄¥À¥√ª
+	if ( DMA_LCM_STA & 0x01 )
 	{
-		if(DmaLcmFlag)
+		if ( DmaLcmFlag )
 		{
 			DmaLcmFlag = 0;
 			DMA_LCM_CR = 0;
@@ -359,49 +366,49 @@ void DMA_LCM_ISR_Handler (void) interrupt DMA_LCM_VECTOR
 		else
 		{
 			LCM_Cnt--;
-			if(LCM_Cnt == 0)
+			if ( LCM_Cnt == 0 )
 			{
 				DMA_LCM_CR = 0;
-				LCD_CS=1;
+				LCD_CS = ;
 			}
 			else
 			{
 				DMA_LCM_CR = 0xa0;	//Write dat
 			}
 		}
-		DMA_LCM_STA = 0;		//«Â±Í÷æŒª
+		DMA_LCM_STA = 0;		//÷æŒª
 	}
 }
 
 //========================================================================
-// ∫Ø ˝: DMA_ISR_Handler
-// √Ë ˆ: DMA÷–∂œ∫Ø ˝.
-// ≤Œ ˝: none.
-// ∑µªÿ: none.
-// ∞Ê±æ: V1.0, 2021-05-25
+// : DMA_ISR_Handler
+// : DMA–∂œ∫.
+// : none.
+// : none.
+// Ê±æ: V1.0, 2021 - 5 - 5
 //========================================================================
-void DMA_ISR_Handler (void) interrupt 13
+void DMA_ISR_Handler ( void ) interrupt 13
 {
-	// TODO: ‘⁄¥À¥¶ÃÌº””√ªß¥˙¬Î
+	// TODO: ⁄¥À¥√ª
 	
 	//----------- DMA ADC --------------
-	if(DMA_ADC_STA & 0x01)	//AD◊™ªªÕÍ≥…
+	if ( DMA_ADC_STA & 0x01 )	//AD◊™
 	{
-		DMA_ADC_STA &= ~0x01;	//«Â±Í÷æŒª
+		DMA_ADC_STA &= ~0x01;	//÷æŒª
 		DmaADCFlag = 1;
 	}
 
 	//----------- DMA M2M --------------
-	if(DMA_M2M_STA & 0x01)	//M2M¥´ ‰ÕÍ≥…
+	if ( DMA_M2M_STA & 0x01 )	//M2M
 	{
-		DMA_M2M_STA &= ~0x01;	//«Â±Í÷æŒª
+		DMA_M2M_STA &= ~0x01;	//÷æŒª
 		DmaM2MFlag = 1;
-		if(u2sFlag)
+		if ( u2sFlag )
 		{
 			u2sFlag = 0;
 			SpiSendFlag = 1;
 		}
-		if(s2uFlag)
+		if ( s2uFlag )
 		{
 			s2uFlag = 0;
 			UartSendFlag = 1;
@@ -409,120 +416,120 @@ void DMA_ISR_Handler (void) interrupt 13
 	}
 
 	//---------- DMA UART1 -------------
-	if (DMA_UR1T_STA & 0x01)	//∑¢ÀÕÕÍ≥…
+	if ( DMA_UR1T_STA & 0x01 )	//
 	{
-		DMA_UR1T_STA &= ~0x01;	//«Â±Í÷æŒª
+		DMA_UR1T_STA &= ~0x01;	//÷æŒª
 		DmaTx1Flag = 1;
 	}
-	if (DMA_UR1T_STA & 0x04)	// ˝æ›∏≤∏«
+	if ( DMA_UR1T_STA & 0x04 )	//›∏
 	{
-		DMA_UR1T_STA &= ~0x04;	//«Â±Í÷æŒª
+		DMA_UR1T_STA &= ~0x04;	//÷æŒª
 	}
 	
-	if (DMA_UR1R_STA & 0x01)	//Ω” ’ÕÍ≥…
+	if ( DMA_UR1R_STA & 0x01 )	//
 	{
-		DMA_UR1R_STA &= ~0x01;	//«Â±Í÷æŒª
+		DMA_UR1R_STA &= ~0x01;	//÷æŒª
 		DmaRx1Flag = 1;
 	}
-	if (DMA_UR1R_STA & 0x02)	// ˝æ›∂™∆˙
+	if ( DMA_UR1R_STA & 0x02 )	//›∂
 	{
-		DMA_UR1R_STA &= ~0x02;	//«Â±Í÷æŒª
+		DMA_UR1R_STA &= ~0x02;	//÷æŒª
 	}
 	//---------- DMA UART2 -------------
-	if (DMA_UR2T_STA & 0x01)	//∑¢ÀÕÕÍ≥…
+	if ( DMA_UR2T_STA & 0x01 )	//
 	{
-		DMA_UR2T_STA &= ~0x01;	//«Â±Í÷æŒª
+		DMA_UR2T_STA &= ~0x01;	//÷æŒª
 		DmaTx2Flag = 1;
 	}
-	if (DMA_UR2T_STA & 0x04)	// ˝æ›∏≤∏«
+	if ( DMA_UR2T_STA & 0x04 )	//›∏
 	{
-		DMA_UR2T_STA &= ~0x04;	//«Â±Í÷æŒª
+		DMA_UR2T_STA &= ~0x04;	//÷æŒª
 	}
 	
-	if (DMA_UR2R_STA & 0x01)	//Ω” ’ÕÍ≥…
+	if ( DMA_UR2R_STA & 0x01 )	//
 	{
-		DMA_UR2R_STA &= ~0x01;	//«Â±Í÷æŒª
+		DMA_UR2R_STA &= ~0x01;	//÷æŒª
 		DmaRx2Flag = 1;
 	}
-	if (DMA_UR2R_STA & 0x02)	// ˝æ›∂™∆˙
+	if ( DMA_UR2R_STA & 0x02 )	//›∂
 	{
-		DMA_UR2R_STA &= ~0x02;	//«Â±Í÷æŒª
+		DMA_UR2R_STA &= ~0x02;	//÷æŒª
 	}
 	//---------- DMA UART3 -------------
-	if (DMA_UR3T_STA & 0x01)	//∑¢ÀÕÕÍ≥…
+	if ( DMA_UR3T_STA & 0x01 )	//
 	{
-		DMA_UR3T_STA &= ~0x01;	//«Â±Í÷æŒª
+		DMA_UR3T_STA &= ~0x01;	//÷æŒª
 		DmaTx3Flag = 1;
 	}
-	if (DMA_UR3T_STA & 0x04)	// ˝æ›∏≤∏«
+	if ( DMA_UR3T_STA & 0x04 )	//›∏
 	{
-		DMA_UR3T_STA &= ~0x04;	//«Â±Í÷æŒª
+		DMA_UR3T_STA &= ~0x04;	//÷æŒª
 	}
 	
-	if (DMA_UR3R_STA & 0x01)	//Ω” ’ÕÍ≥…
+	if ( DMA_UR3R_STA & 0x01 )	//
 	{
-		DMA_UR3R_STA &= ~0x01;	//«Â±Í÷æŒª
+		DMA_UR3R_STA &= ~0x01;	//÷æŒª
 		DmaRx3Flag = 1;
 	}
-	if (DMA_UR3R_STA & 0x02)	// ˝æ›∂™∆˙
+	if ( DMA_UR3R_STA & 0x02 )	//›∂
 	{
-		DMA_UR3R_STA &= ~0x02;	//«Â±Í÷æŒª
+		DMA_UR3R_STA &= ~0x02;	//÷æŒª
 	}
 	//---------- DMA UART4 -------------
-	if (DMA_UR4T_STA & 0x01)	//∑¢ÀÕÕÍ≥…
+	if ( DMA_UR4T_STA & 0x01 )	//
 	{
-		DMA_UR4T_STA &= ~0x01;	//«Â±Í÷æŒª
+		DMA_UR4T_STA &= ~0x01;	//÷æŒª
 		DmaTx4Flag = 1;
 	}
-	if (DMA_UR4T_STA & 0x04)	// ˝æ›∏≤∏«
+	if ( DMA_UR4T_STA & 0x04 )	//›∏
 	{
-		DMA_UR4T_STA &= ~0x04;	//«Â±Í÷æŒª
+		DMA_UR4T_STA &= ~0x04;	//÷æŒª
 	}
 	
-	if (DMA_UR4R_STA & 0x01)	//Ω” ’ÕÍ≥…
+	if ( DMA_UR4R_STA & 0x01 )	//
 	{
-		DMA_UR4R_STA &= ~0x01;	//«Â±Í÷æŒª
+		DMA_UR4R_STA &= ~0x01;	//÷æŒª
 		DmaRx4Flag = 1;
 	}
-	if (DMA_UR4R_STA & 0x02)	// ˝æ›∂™∆˙
+	if ( DMA_UR4R_STA & 0x02 )	//›∂
 	{
-		DMA_UR4R_STA &= ~0x02;	//«Â±Í÷æŒª
+		DMA_UR4R_STA &= ~0x02;	//÷æŒª
 	}
 
 	//---------- DMA SPI -------------
-	if(DMA_SPI_STA & 0x01)	//Õ®–≈ÕÍ≥…
+	if ( DMA_SPI_STA & 0x01 )	//Õ®
 	{
-		DMA_SPI_STA &= ~0x01;	//«Â±Í÷æŒª
-		if(MSTR) 
-		{ //÷˜ª˙ƒ£ Ω
+		DMA_SPI_STA &= ~0x01;	//÷æŒª
+		if ( MSTR ) 
+		{ //ƒ£ Ω
 			SpiTxFlag = 1;
 			SPI_SS_2 = 1;
 		}
 		else 
-		{ //¥”ª˙ƒ£ Ω
+		{ //”ªƒ£ Ω
 			SpiRxFlag = 1;
 		}
 	}
-	if(DMA_SPI_STA & 0x02)	// ˝æ›∂™∆˙
+	if ( DMA_SPI_STA & 0x02 )	//›∂
 	{
-		DMA_SPI_STA &= ~0x02;	//«Â±Í÷æŒª
+		DMA_SPI_STA &= ~0x02;	//÷æŒª
 	}
-	if(DMA_SPI_STA & 0x04)	// ˝æ›∏≤∏«
+	if ( DMA_SPI_STA & 0x04 )	//›∏
 	{
-		DMA_SPI_STA &= ~0x04;	//«Â±Í÷æŒª
+		DMA_SPI_STA &= ~0x04;	//÷æŒª
 	}
 
 	//------------- LCM --------------
-	if(LCMIFSTA & 0x01)
+	if ( LCMIFSTA & 0x01 )
 	{
 		LCMIFSTA = 0x00;
 		LcmFlag = 0;
 	}
 	
 	//---------- DMA LCM -------------
-	if(DMA_LCM_STA & 0x01)
+	if ( DMA_LCM_STA & 0x01 )
 	{
-		if(DmaLcmFlag)
+		if ( DmaLcmFlag )
 		{
 			DmaLcmFlag = 0;
 			DMA_LCM_CR = 0;
@@ -530,16 +537,16 @@ void DMA_ISR_Handler (void) interrupt 13
 		else
 		{
 			LCM_Cnt--;
-			if(LCM_Cnt == 0)
+			if ( LCM_Cnt == 0 )
 			{
 				DMA_LCM_CR = 0;
-				LCD_CS=1;
+				LCD_CS = ;
 			}
 			else
 			{
 				DMA_LCM_CR = 0xa0;	//Write dat
 			}
 		}
-		DMA_LCM_STA = 0;		//«Â±Í÷æŒª
+		DMA_LCM_STA = 0;		//÷æŒª
 	}
 }

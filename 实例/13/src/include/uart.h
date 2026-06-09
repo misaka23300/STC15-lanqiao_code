@@ -1,3 +1,10 @@
+/**
+ * @file uart.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #ifndef __UART_H__
 #define __UART_H__
 
@@ -13,9 +20,9 @@ extern uint8_t xdata uart_rx_buf[100];
 
 void uart_tag_init();
 
-void uart_send_byte(uint8_t byte);
-void uart_send_str(uint8_t* str);
-int8_t putchar(int8_t chars);
+void uart_send_byte( uint8_t byte );
+void uart_send_str( uint8_t* str );
+int8_t putchar( int8_t chars );
 
 uint8_t uart_receive_byte();
 void uart_receive_str();

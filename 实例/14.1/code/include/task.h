@@ -1,3 +1,10 @@
+/**
+ * @file task.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #ifndef __TASK_H__
 #define __TASK_H__
 
@@ -7,11 +14,9 @@
 #include "led.h"
 #include "key.h"
 
-
 #include "uart.h"
 #include "ds1302.h"
 #include "iic.h"
-
 
 void start_task();
 void display_task();

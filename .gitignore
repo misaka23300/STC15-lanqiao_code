@@ -1,4 +1,57 @@
+# 编译产物
+*.o
+*.obj
+*.lst
+*.map
+*.crf
+*.hex
+*.lnp
+*.plg
+*.M51
+*.__i
+*.SRC
+*.OBJ
+*.ia
+*.htm
+*.html
+*.pdf
+*.zip
+*.rar
+*.7z
+*.bak
+
+# Keil uVision 项目文件
+*.uvgui.*
+*.uvopt
+*.uvproj
+*.code-workspace
+
+# Visual Studio
 .vs/
+.vscode/
+
+# 编译目录
 Listings/
 Objects/
-.vscode
+Output/
+
+# 文档
+*.txt
+*.md
+!README.md
+!*.md
+
+# 日志文件
+*.log
+debug.log
+
+# 可执行文件
+*.exe
+*.out
+
+# 备份文件
+*~
+*.bak
+
+# STC 相关
+Nu_Link_8051_Driver.ini

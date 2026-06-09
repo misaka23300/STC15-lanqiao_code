@@ -1,3 +1,10 @@
+/**
+ * @file main.c
+ * @brief 主程序入口文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "main.h"
 
 uchar state;
@@ -11,9 +18,9 @@ enum
 void main()
 {
     boot_init();
-    while (1)
+    while (1 )
     {
-        if (sonic_flag)
+        if ( sonic_flag )
         {
             sonic_flag = 0;
             sonic_proc();
@@ -21,16 +28,16 @@ void main()
     }
 }
 
-void timer_0_ne555(void) interrupt 1
+void timer_0_ne555( void ) interrupt 1
 {
     //freq++;
 }
 
-void timer_2_1ms(void) interrupt 12
+void timer_2_1ms( void ) interrupt 12
 {
     static uint i;
     i++;
-    if (i > 30000)
+    if ( i > 30000 )
     {
         i = 0;
     }
@@ -38,20 +45,19 @@ void timer_2_1ms(void) interrupt 12
     seg_display();
     state_proc();
     
-    if (i % SONIC_TIME == 0)
+    if ( i % SONIC_TIME == 0 )
     {
         sonic_flag = 1;
     }
 }
 
-
 void state_proc()
 {
-    switch (state)
+    switch ( state )
     {
         case 0:
         {
-            set_seg(distance / 10, distance % 10, 0, 0, 0, 0 ,0, 0);
+            set_seg( distance / 10, distance % 10, 0, 0, 0, 0 , 0, 0 );
         }
         break;
     }

@@ -1,10 +1,17 @@
+/**
+ * @file 外部中断.c
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include <STC15F2K60S2.H>
 #include "intrins.h"
 
 #define uchar unsigned char
 #define uint unsigned int
 
-void Delay500ms(void)	//@12.000MHz
+void Delay500ms( void )	//@12.000MHz
 {
 	unsigned char data i, j, k;
 
@@ -17,20 +24,19 @@ void Delay500ms(void)	//@12.000MHz
 	{
 		do
 		{
-			while (--k);
-		} while (--j);
-	} while (--i);
+			while (--k );
+		} while (--j );
+	} while (--i );
 }
 
-
-void control(uchar x,y)
+void control( uchar x, y )
 {
-	switch(x)
+	switch( x )
 	{
-		case 4:P2=(P2 & 0x1f)|0x80;break;
-		case 5:P2=(P2 & 0x1f)|0xa0;break;
-		case 6:P2=(P2 & 0x1f)|0xc0;break;
-		case 7:P2=(P2 & 0x1f)|0xe0;break;
+		case 4:P2=( P2 & 0x1f )|0x80;break;
+		case 5:P2=( P2 & 0x1f )|0xa0;break;
+		case 6:P2=( P2 & 0x1f )|0xc0;break;
+		case 7:P2=( P2 & 0x1f )|0xe0;break;
 	}
 	P0 = y;
 	P2 &= 0x1f;
@@ -38,43 +44,43 @@ void control(uchar x,y)
 
 void INT0_Reset()
 {
-	INT0=1;  INT1=1;
-	EX0=1;   EX1=1;
-	EA=1;  
+	INT0 = ;  INT1 = ;
+	EX0 = ;   EX1 = ;
+	EA = ;  
 }
 
 void INT0_Server() interrupt 0
 {
-	uchar j=0;
-	for(j=0;j<3;j++)
+	uchar j = ;
+	for ( j = ;j < ;j++)
 	{
-		control(4,0xfe);         //P00 = 0;óðù«ü´ûÞ 1111 1110
+		control(4, 0xfe );         //P00 = 0;óðù«ü´ûÞ 1111 1110
 		Delay500ms();
-		control(4,0xff);
+		control(4, 0xff );
 		Delay500ms();
 	}
 }
 
 void INT1_Server() interrupt 2
 {
-	uchar j=0;
-	for(j=0;j<3;j++)
+	uchar j = ;
+	for ( j = ;j < ;j++)
 	{
-		control(4,0x7f);         //P00 = 0;óðù«ü´ûÞ 0111 1111
+		control(4, 0x7f );         //P00 = 0;óðù«ü´ûÞ 0111 1111
 		Delay500ms();
-		control(4,0xff);
+		control(4, 0xff );
 		Delay500ms();
 	}
 }
 
 void main()
 {
-	uchar i=0;
+	uchar i = ;
 	INT0_Reset();
-	while(1)
+	while (1 )
 	{
-		for(i=0;i<=8;i++)
-		control(4,0xff<<i),
+		for ( i = ;i <= ;i++)
+		control(4, 0xff<<i ),
 		Delay500ms();
 	}
 }

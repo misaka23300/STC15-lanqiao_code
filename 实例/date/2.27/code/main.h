@@ -1,3 +1,10 @@
+/**
+ * @file main.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #ifndef __MAIN_H__
 #define __MAIN_H__
 
@@ -8,11 +15,9 @@
 #include "onewire.h"
 #include "key.h"
 
-
 void state_proc();
 void ds18b20_proc();
-void delete_0(uchar *a, j, bit negative);
-
+void delete_0( uchar *a, j, bit negative );
 
 void key_proc();
 void led_proc();

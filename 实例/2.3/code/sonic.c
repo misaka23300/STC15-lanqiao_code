@@ -1,9 +1,14 @@
+/**
+ * @file sonic.c
+ * @brief 超声波传感器驱动
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "sonic.h"
 
 sbit tx = P1^0;
 sbit rx = P1^1; 
-
-
 
 void Delay14us()		//@12.000MHz
 {
@@ -12,9 +17,8 @@ void Delay14us()		//@12.000MHz
 	_nop_();
 	_nop_();
 	i = 39;
-	while (--i);
+	while (--i );
 }
-
 
 void pca_init()
 {
@@ -27,7 +31,7 @@ void pca_init()
 void sonic_send()
 {
     uint8_t i;
-    for (i = 0;i < 10;i++)
+    for ( i = 0;i < 10;i++)
     {
         tx = 1;
         Delay14us();
@@ -35,7 +39,6 @@ void sonic_send()
         Delay14us();
     }
 }
-
 
 uint8_t sonic_measure()
 {
@@ -47,18 +50,18 @@ uint8_t sonic_measure()
     sonic_send();
 
     CR = 1;
-    while (rx == 1 && CF == 0);
+    while ( rx == 1 && CF == 0 );
     CR = 0;
 
-    if (CF == 1)
+    if ( CF == 1 )
     {
         distance = 255;
     }
     else
     {
         temp = CH << 8 | CL;
-        distance = (uint8_t) (temp * 0.017 + 1);
-        //distance = (uchar) (temp + 29) / 58;
+        distance = ( uint8_t ) ( temp * 0.017 + 1 );
+        //distance = ( uchar ) ( temp + 29 ) / 58;
     }
     return distance;
 }

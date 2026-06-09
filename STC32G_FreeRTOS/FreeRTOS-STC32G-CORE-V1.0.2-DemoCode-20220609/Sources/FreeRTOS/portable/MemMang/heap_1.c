@@ -1,13 +1,20 @@
+/**
+ * @file heap_1.c
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*
  * FreeRTOS Kernel V10.4.6
- * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
+ * Copyright ( C ) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
- * SPDX-License-Identifier: MIT
+ * SPDX - icense - dentifier: MIT
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
+ * this software and associated documentation files ( the "Software"), to deal in
  * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * use, copy, modify, merge, publish, distribute, sublicense, and / r sell copies of
  * the Software, and to permit persons to whom the Software is furnished to do so,
  * subject to the following conditions:
  *
@@ -22,10 +29,9 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * https://www.FreeRTOS.org
- * https://github.com/FreeRTOS
+ * https://github.com / reeRTOS
  *
  */
-
 
 /*
  * The simplest possible implementation of pvPortMalloc().  Note that this
@@ -76,10 +82,10 @@ void * pvPortMalloc( size_t xWantedSize )
     /* Ensure that blocks are always aligned. */
     #if ( portBYTE_ALIGNMENT != 1 )
         {
-            if( xWantedSize & portBYTE_ALIGNMENT_MASK )
+            if ( xWantedSize & portBYTE_ALIGNMENT_MASK )
             {
                 /* Byte alignment required. Check for overflow. */
-                if ( (xWantedSize + ( portBYTE_ALIGNMENT - ( xWantedSize & portBYTE_ALIGNMENT_MASK ) )) > xWantedSize )
+                if ( ( xWantedSize + ( portBYTE_ALIGNMENT - ( xWantedSize & portBYTE_ALIGNMENT_MASK ) )) > xWantedSize )
                 {
                     xWantedSize += ( portBYTE_ALIGNMENT - ( xWantedSize & portBYTE_ALIGNMENT_MASK ) );
                 }
@@ -93,14 +99,14 @@ void * pvPortMalloc( size_t xWantedSize )
 
     vTaskSuspendAll();
     {
-        if( pucAlignedHeap == NULL )
+        if ( pucAlignedHeap == NULL )
         {
             /* Ensure the heap starts on a correctly aligned boundary. */
             pucAlignedHeap = ( uint8_t * ) ( ( ( portPOINTER_SIZE_TYPE ) & ucHeap[ portBYTE_ALIGNMENT - 1 ] ) & ( ~( ( portPOINTER_SIZE_TYPE ) portBYTE_ALIGNMENT_MASK ) ) );
         }
 
         /* Check there is enough room left for the allocation and. */
-        if( ( xWantedSize > 0 ) && /* valid size */
+        if ( ( xWantedSize > 0 ) && /* valid size */
             ( ( xNextFreeByte + xWantedSize ) < configADJUSTED_HEAP_SIZE ) &&
             ( ( xNextFreeByte + xWantedSize ) > xNextFreeByte ) ) /* Check for overflow. */
         {
@@ -116,7 +122,7 @@ void * pvPortMalloc( size_t xWantedSize )
 
     #if ( configUSE_MALLOC_FAILED_HOOK == 1 )
         {
-            if( pvReturn == NULL )
+            if ( pvReturn == NULL )
             {
                 extern void vApplicationMallocFailedHook( void );
                 vApplicationMallocFailedHook();

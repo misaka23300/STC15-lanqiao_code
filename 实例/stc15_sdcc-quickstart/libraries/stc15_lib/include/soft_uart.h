@@ -1,3 +1,10 @@
+/**
+ * @file soft_uart.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #ifndef __SOFT_UART_H
 #define __SOFT_UART_H
 
@@ -13,7 +20,7 @@ void print(char *);
 
 #ifdef DEBUG
 #define LOG(str) \
-    print(str); \
+    print(str);  \
     print("\r\n")
 #else
 #define LOG(str)

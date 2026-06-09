@@ -1,13 +1,20 @@
+/**
+ * @file portasm.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*
  * FreeRTOS Kernel V10.4.6
- * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
+ * Copyright ( C ) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
- * SPDX-License-Identifier: MIT
+ * SPDX - icense - dentifier: MIT
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
+ * this software and associated documentation files ( the "Software"), to deal in
  * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * use, copy, modify, merge, publish, distribute, sublicense, and / r sell copies of
  * the Software, and to permit persons to whom the Software is furnished to do so,
  * subject to the following conditions:
  *
@@ -22,13 +29,12 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * https://www.FreeRTOS.org
- * https://github.com/FreeRTOS
+ * https://github.com / reeRTOS
  *
  */
 
 #ifndef PORT_ASM_H
 #define PORT_ASM_H
-
 
 /* We require the address of the pxCurrentTCB variable, 
 but don't want to know any details of its type. */
@@ -42,23 +48,22 @@ extern volatile TCB_t * pxCurrentTCB;
  */
 //void portEND_SWITCHING_ISR( void );
 
-
 /* Saves the stack pointer for one task into its TCB. */
 #define portSAVE_SPX()                      \
 {                                           \
-    __asm   { MOV   DR0,DR60    }           \
-    __asm   { MOV   DR4,pxCurrentTCB    }   \
-    __asm   { MOV   @WR6+0x2,WR2        }   \
+    __asm   { MOV   DR0, DR60    }           \
+    __asm   { MOV   DR4, pxCurrentTCB    }   \
+    __asm   { MOV   @WR6 + x2, WR2        }   \
 }
 
 /* Restores the stack from the new TCB read to 
 run the task. */
 #define portRESTORE_SPX()                   \
 {                                           \
-    __asm   { MOV   DR4,pxCurrentTCB    }   \
-    __asm   { MOV   WR2,@WR6+0x2        }   \
-    __asm   { XRL   WR0,WR0     }           \
-    __asm   { MOV   DR60,DR0    }           \
+    __asm   { MOV   DR4, pxCurrentTCB    }   \
+    __asm   { MOV   WR2,@WR6 + x2        }   \
+    __asm   { XRL   WR0, WR0     }           \
+    __asm   { MOV   DR60, DR0    }           \
 }
 
 /* Saves the stack pointer for one task into its TCB, calls
@@ -66,7 +71,7 @@ vTaskSwitchContext() to update the TCB being used, then restores the stack
 from the new TCB read to run the task. */
 #define portEND_SWITCHING_ISR()             \
 {                                           \
-extern void vTaskSwitchContext(void);       \
+extern void vTaskSwitchContext( void );       \
                                             \
     portSAVE_SPX();                         \
     vTaskSwitchContext();                   \
@@ -146,9 +151,9 @@ while keeping the stack data unchanged */
 {                                           \
     __asm   { CLR   EA      }               \
     __asm   { PUSH  PSW1    }               \
-    __asm   { PUSH  #BYTE2 ($+10)   }       \
-    __asm   { PUSH  #BYTE0 ($+7)    }       \
-    __asm   { PUSH  #BYTE1 ($+4)    }       \
+    __asm   { PUSH  #BYTE2 ($+10 )   }       \
+    __asm   { PUSH  #BYTE0 ($+7 )    }       \
+    __asm   { PUSH  #BYTE1 ($+4 )    }       \
     __asm   { RETI          }               \
 }
 
@@ -160,7 +165,6 @@ using ERET consistently. */
     __asm   { SETB  EA      }               \
     __asm   { DB    0AAH    }   /* ERET */  \
 }
-
 
 #endif
 

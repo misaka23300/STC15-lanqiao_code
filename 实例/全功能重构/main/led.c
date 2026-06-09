@@ -2,7 +2,7 @@
  * @file led.c
  * @brief LED 位图缓冲与显示刷新模块
  * @details 提供 8 位 LED 显示缓冲（led[]）和逐位刷新函数 led_display()。
- * @date 2025-12-09
+ * @date 2025 - 2 - 9
  */
 
 #include "led.h"
@@ -23,36 +23,32 @@ uint8_t led_value[8] = {0, 0, 0, 0, 0, 0, 0, 0};
  *
  *          每次调用会处理一位的显示，建议由周期性中断或主循环频繁调用以维持稳定显示。
  *
- * @note 输出到 P0 之前对 temp 取反（~temp）以匹配硬件驱动极性；随后通过 latch(4)/latch(0) 完成锁存。
+ * @note 输出到 P0 之前对 temp 取反（~temp）以匹配硬件驱动极性；随后通过 latch(4
+ * )/latch(0 ) 完成锁存。
  * @return void
  */
-void led_display()
-{
-    static uint8_t i;
-    static uint8_t temp;
-    static uint8_t last = 0xFF;
+void led_display() {
+	static uint8_t i;
+	static uint8_t temp;
+	static uint8_t last = 0xFF;
 
-    if (led_value[i]) {
-        temp = temp | (0x01 << i);
-    } else {
-        temp = temp & ~(0x01 << i);
-    }
+	if (led_value[i]) {
+		temp = temp | (0x01 << i);
+	} else {
+		temp = temp & ~(0x01 << i);
+	}
 
-    if (last != temp) {
-        P0 = ~temp;
-        latch(4);
-        latch(0);
-        last = temp;
-    }
+	if (last != temp) {
+		P0 = ~temp;
+		latch(4);
+		latch(0);
+		last = temp;
+	}
 
-    i++;
-    if (i == 8) {
-        i = 0;
-    }
+	i++;
+	if (i == 8) {
+		i = 0;
+	}
 }
 
-
-void led_set(uint8_t position, bit value)
-{
-    led_value[position] = value;
-}
+void led_set(uint8_t position, bit value) { led_value[position] = value; }

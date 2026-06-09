@@ -1,13 +1,20 @@
+/**
+ * @file atomic.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*
  * FreeRTOS Kernel V10.4.6
- * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
+ * Copyright ( C ) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
- * SPDX-License-Identifier: MIT
+ * SPDX - icense - dentifier: MIT
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
+ * this software and associated documentation files ( the "Software"), to deal in
  * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * use, copy, modify, merge, publish, distribute, sublicense, and / r sell copies of
  * the Software, and to permit persons to whom the Software is furnished to do so,
  * subject to the following conditions:
  *
@@ -22,7 +29,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * https://www.FreeRTOS.org
- * https://github.com/FreeRTOS
+ * https://github.com / reeRTOS
  *
  */
 
@@ -45,15 +52,15 @@
 /* Standard includes. */
 #include <stdint.h>
 
-/* *INDENT-OFF* */
+/* *INDENT - FF* */
 #ifdef __cplusplus
     extern "C" {
 #endif
-/* *INDENT-ON* */
+/* *INDENT - N* */
 
 /*
- * Port specific definitions -- entering/exiting critical section.
- * Refer template -- ./lib/FreeRTOS/portable/Compiler/Arch/portmacro.h
+ * Port specific definitions -- entering / xiting critical section.
+ * Refer template -- ./lib / reeRTOS / ortable / ompiler / rch / ortmacro.h
  *
  * Every call to ATOMIC_EXIT_CRITICAL() must be closely paired with
  * ATOMIC_ENTER_CRITICAL().
@@ -93,9 +100,9 @@
 /*----------------------------- Swap && CAS ------------------------------*/
 
 /**
- * Atomic compare-and-swap
+ * Atomic compare - nd - wap
  *
- * @brief Performs an atomic compare-and-swap operation on the specified values.
+ * @brief Performs an atomic compare - nd - wap operation on the specified values.
  *
  * @param[in, out] pulDestination  Pointer to memory location from where value is
  *                               to be loaded and checked.
@@ -115,7 +122,7 @@ static portFORCE_INLINE uint32_t Atomic_CompareAndSwap_u32( uint32_t volatile * 
 
     ATOMIC_ENTER_CRITICAL();
     {
-        if( *pulDestination == ulComparand )
+        if ( *pulDestination == ulComparand )
         {
             *pulDestination = ulExchange;
             ulReturnValue = ATOMIC_COMPARE_AND_SWAP_SUCCESS;
@@ -132,7 +139,7 @@ static portFORCE_INLINE uint32_t Atomic_CompareAndSwap_u32( uint32_t volatile * 
 /*-----------------------------------------------------------*/
 
 /**
- * Atomic swap (pointers)
+ * Atomic swap ( pointers )
  *
  * @brief Atomically sets the address pointed to by *ppvDestination to the value
  *        of *pvExchange.
@@ -160,9 +167,9 @@ static portFORCE_INLINE void * Atomic_SwapPointers_p32( void * volatile * ppvDes
 /*-----------------------------------------------------------*/
 
 /**
- * Atomic compare-and-swap (pointers)
+ * Atomic compare - nd - wap ( pointers )
  *
- * @brief Performs an atomic compare-and-swap operation on the specified pointer
+ * @brief Performs an atomic compare - nd - wap operation on the specified pointer
  *        values.
  *
  * @param[in, out] ppvDestination  Pointer to memory location from where a pointer
@@ -183,7 +190,7 @@ static portFORCE_INLINE uint32_t Atomic_CompareAndSwapPointers_p32( void * volat
 
     ATOMIC_ENTER_CRITICAL();
     {
-        if( *ppvDestination == pvComparand )
+        if ( *ppvDestination == pvComparand )
         {
             *ppvDestination = pvExchange;
             ulReturnValue = ATOMIC_COMPARE_AND_SWAP_SUCCESS;
@@ -194,7 +201,6 @@ static portFORCE_INLINE uint32_t Atomic_CompareAndSwapPointers_p32( void * volat
     return ulReturnValue;
 }
 
-
 /*----------------------------- Arithmetic ------------------------------*/
 
 /**
@@ -202,7 +208,7 @@ static portFORCE_INLINE uint32_t Atomic_CompareAndSwapPointers_p32( void * volat
  *
  * @brief Atomically adds count to the value of the specified pointer points to.
  *
- * @param[in,out] pulAddend  Pointer to memory location from where value is to be
+ * @param[in, out] pulAddend  Pointer to memory location from where value is to be
  *                         loaded and written back to.
  * @param[in] ulCount      Value to be added to *pulAddend.
  *
@@ -230,7 +236,7 @@ static portFORCE_INLINE uint32_t Atomic_Add_u32( uint32_t volatile * pulAddend,
  * @brief Atomically subtracts count from the value of the specified pointer
  *        pointers to.
  *
- * @param[in,out] pulAddend  Pointer to memory location from where value is to be
+ * @param[in, out] pulAddend  Pointer to memory location from where value is to be
  *                         loaded and written back to.
  * @param[in] ulCount      Value to be subtract from *pulAddend.
  *
@@ -257,7 +263,7 @@ static portFORCE_INLINE uint32_t Atomic_Subtract_u32( uint32_t volatile * pulAdd
  *
  * @brief Atomically increments the value of the specified pointer points to.
  *
- * @param[in,out] pulAddend  Pointer to memory location from where value is to be
+ * @param[in, out] pulAddend  Pointer to memory location from where value is to be
  *                         loaded and written back to.
  *
  * @return *pulAddend value before increment.
@@ -282,7 +288,7 @@ static portFORCE_INLINE uint32_t Atomic_Increment_u32( uint32_t volatile * pulAd
  *
  * @brief Atomically decrements the value of the specified pointer points to
  *
- * @param[in,out] pulAddend  Pointer to memory location from where value is to be
+ * @param[in, out] pulAddend  Pointer to memory location from where value is to be
  *                         loaded and written back to.
  *
  * @return *pulAddend value before decrement.
@@ -410,10 +416,10 @@ static portFORCE_INLINE uint32_t Atomic_XOR_u32( uint32_t volatile * pulDestinat
     return ulCurrent;
 }
 
-/* *INDENT-OFF* */
+/* *INDENT - FF* */
 #ifdef __cplusplus
     }
 #endif
-/* *INDENT-ON* */
+/* *INDENT - N* */
 
 #endif /* ATOMIC_H */

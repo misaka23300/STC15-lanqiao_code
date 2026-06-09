@@ -1,10 +1,16 @@
+/**
+ * @file main.c
+ * @brief 主程序入口文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
 
 /*
  * FreeRTOS STC port V1.0.2
  * 
  * STC32G12K128ﺗ۵ﺥﻎﺙﮨﺛﻠ۲ﭦ
  *    2ﻉﻠ CAN, 3ﻉﻠLin, USB, 32ﺳﭨ 8051, RMB5,
- *    ﺕﻑﺝ،ﻉﺙ12ﺳﭨADC, DMA ﻅ۶ﺏﻅ(TFTﺎﮌﺩﭼ, ADC, 4ﻉﻠﺑ؟ﺟﻌ, SPI, I2C )
+ *    ﺕﻑﺝ،ﻉﺙ12ﺳﭨADC, DMA ﻅ۶ﺏﻅ( TFTﺎﮌﺩﭼ, ADC, 4ﻉﻠﺑ؟ﺟﻌ, SPI, I2C )
  *  
  *  ﺕﺊﺳﭨﺽﺣﭨ۶ﺿﻌﭦﮩﺷﺋﭖﺥﮌﺗﺽﺣﺗﮮﺏﮊﻅﺷ۲؛ﺫﻝﺗﻳﺓ۱ﺵﻅﺽﺷﺎﭨﻁﮮﺫﺓﭖﺥﭖﻊﺓﺛﭨﮨﻁﻑ
  *  ﺽﺷﺟﺭﺕﺥﺭﺩﭖﺥﭖﻊﺓﺛ۲؛ﮄﻣﭦﺱSTCﭼ۹ﺵﭖ۲؛ﺽﺭSTCﺗﻋﺓﺛﺛﺋﺷﺷﺱﺏﺻﭨﺷﻐﺕﺥﺎ۱ﺕﮰﺷﺡﺍﮔﺎﺝ
@@ -32,55 +38,55 @@ void main( void )
     vSystemInit();
 
 	/* ﺑﺑﺛ۷ﺫﺳﺳﮦ */
-    xTaskCreate((TaskFunction_t )vDisplayTask,
-                (const char*    )"DISPLAY",
-                (uint16_t       )configDEFAULT_STACK_SIZE,
-                (void*          )NULL,
-                (UBaseType_t    )(configDEFAULT_PRIORITIES + 1),
-                (TaskHandle_t*  )NULL);
-    xTaskCreate((TaskFunction_t )vRtcTask,
-                (const char*    )"RTC",
-                (uint16_t       )configDEFAULT_STACK_SIZE,
-                (void*          )NULL,
-                (UBaseType_t    )(configDEFAULT_PRIORITIES + 1),
-                (TaskHandle_t*  )NULL);
-    xTaskCreate((TaskFunction_t )vAdcKeyTask,
-                (const char*    )"ADCKEY",
-                (uint16_t       )configDEFAULT_STACK_SIZE,
-                (void*          )NULL,
-                (UBaseType_t    )(configDEFAULT_PRIORITIES),
-                (TaskHandle_t*  )NULL);
-    xTaskCreate((TaskFunction_t )vNtcTask,
-                (const char*    )"NTC",
-                (uint16_t       )configDEFAULT_STACK_SIZE,
-                (void*          )NULL,
-                (UBaseType_t    )(configDEFAULT_PRIORITIES),
-                (TaskHandle_t*  )NULL);
-    xTaskCreate((TaskFunction_t )vUart2_3Task,
-                (const char*    )"UART2_3",
-                (uint16_t       )configDEFAULT_STACK_SIZE,
-                (void*          )1000,  //ﻉ۱ﺻﻗpvParametersﺎﺳﮌﮮﺑ،ﭖﻊﻅﺓﭨﮨﻁﻑﭼ۱ﺙﺑﮌﮮﮌﺎﻅﭨﺽﺷﭖﺱ24ﺳﭨﮌﮄﺽﺷﺷ۶ﺳﭨ۲؛ﻉﻧﺕﻑ8ﺳﭨﺎﻓﺻﻣﮌﺎﭨﻕﻉﺿﭘﺁﮊﻧ0. ﺟﺭﺱ۷ﺗﮮﺎﻛﭼﺟﭨﮨﻁﻑﺏ۲ﭼﺟﺑ،ﺯﺱ32ﻉﻅﺛﻌﮌﮮﺝﻏ.
-                (UBaseType_t    )(configDEFAULT_PRIORITIES),
-                (TaskHandle_t*  )NULL);
-    xTaskCreate((TaskFunction_t )vMatrixKeyTask,
-                (const char*    )"MatrixKey",
-                (uint16_t       )configDEFAULT_STACK_SIZE,
-                (void*          )NULL,
-                (UBaseType_t    )(configDEFAULT_PRIORITIES),
-                (TaskHandle_t*  )NULL);
+    xTaskCreate(( TaskFunction_t )vDisplayTask,
+                ( const char*    )"DISPLAY",
+                ( uint16_t )configDEFAULT_STACK_SIZE,
+                ( void*          )NULL,
+                ( UBaseType_t )( configDEFAULT_PRIORITIES + 1 ),
+                ( TaskHandle_t*  )NULL );
+    xTaskCreate(( TaskFunction_t )vRtcTask,
+                ( const char*    )"RTC",
+                ( uint16_t )configDEFAULT_STACK_SIZE,
+                ( void*          )NULL,
+                ( UBaseType_t )( configDEFAULT_PRIORITIES + 1 ),
+                ( TaskHandle_t*  )NULL );
+    xTaskCreate(( TaskFunction_t )vAdcKeyTask,
+                ( const char*    )"ADCKEY",
+                ( uint16_t )configDEFAULT_STACK_SIZE,
+                ( void*          )NULL,
+                ( UBaseType_t )( configDEFAULT_PRIORITIES ),
+                ( TaskHandle_t*  )NULL );
+    xTaskCreate(( TaskFunction_t )vNtcTask,
+                ( const char*    )"NTC",
+                ( uint16_t )configDEFAULT_STACK_SIZE,
+                ( void*          )NULL,
+                ( UBaseType_t )( configDEFAULT_PRIORITIES ),
+                ( TaskHandle_t*  )NULL );
+    xTaskCreate(( TaskFunction_t )vUart2_3Task,
+                ( const char*    )"UART2_3",
+                ( uint16_t )configDEFAULT_STACK_SIZE,
+                ( void*          )1000,  //ﻉ۱ﺻﻗpvParametersﺎﺳﮌﮮﺑ،ﭖﻊﻅﺓﭨﮨﻁﻑﭼ۱ﺙﺑﮌﮮﮌﺎﻅﭨﺽﺷﭖﺱ24ﺳﭨﮌﮄﺽﺷﺷ۶ﺳﭨ۲؛ﻉﻧﺕﻑ8ﺳﭨﺎﻓﺻﻣﮌﺎﭨﻕﻉﺿﭘﺁﮊﻧ0. ﺟﺭﺱ۷ﺗﮮﺎﻛﭼﺟﭨﮨﻁﻑﺏ۲ﭼﺟﺑ،ﺯﺱ32ﻉﻅﺛﻌﮌﮮﺝﻏ.
+                ( UBaseType_t )( configDEFAULT_PRIORITIES ),
+                ( TaskHandle_t*  )NULL );
+    xTaskCreate(( TaskFunction_t )vMatrixKeyTask,
+                ( const char*    )"MatrixKey",
+                ( uint16_t )configDEFAULT_STACK_SIZE,
+                ( void*          )NULL,
+                ( UBaseType_t )( configDEFAULT_PRIORITIES ),
+                ( TaskHandle_t*  )NULL );
 
     /* ﺩﮪﭘﺁﺫﺳﺳﮦﭖﺊﭘﺫﺩﺊﺟ۹ﮌﺙﺫﺳﺳﮦﭖﺊﭘﺫ */
     vTaskStartScheduler();
 
     /* ﻁﮮﺏ۲ﮄﻠﺟﺉﺵﺡﺎﭨﭨﻕﺿﺯﺷﺷﭖﺛﺑﺯﺑ۵ */
-    while (1);
+    while (1 );
 }
 
 /* ﺵﭖﺱﺏﺏﺀﮌﺙﭨﺁﺑﻲﺡﻣ */
 void vSystemInit( void )
 {
     WTST = 0;     //ﺭﻟﻅﺣﺏﮊﺷﮨﻅﺕﭼﻧﺹﺽﮌﺎﺎﺳﮌﮮ۲؛ﺕﺏﻅﭖﺳ۹0ﺟﺭﺛ،CPUﻅﺑﺷﺷﻅﺕﭼﻧﭖﺥﺯﻋﭘﺫﺭﻟﻅﺣﺳ۹ﻉﻧﺟﮞ
-    EAXFR = 1;    //ﭺ۸ﻁﺗﺙﺥﺑﮔﺩﺊ(XFR)ﺓﺣﺳﮌﮌﺗﺥﻎ
+    EAXFR = 1;    //ﭺ۸ﻁﺗﺙﺥﺑﮔﺩﺊ( XFR )ﺓﺣﺳﮌﮌﺗﺥﻎ
     CKCON = 0;    //ﮊﻕﺕﻑﺓﺣﺳﮌXRAMﺯﻋﭘﺫ
 
     P0M1 = 0x00;   P0M0 = 0x00;     //ﺭﻟﻅﺣﺳ۹ﻉﺙﺯ،ﺵﮨﺟﻌ

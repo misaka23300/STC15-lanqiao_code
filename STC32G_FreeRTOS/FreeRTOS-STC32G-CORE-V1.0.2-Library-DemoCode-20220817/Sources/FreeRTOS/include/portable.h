@@ -1,13 +1,20 @@
+/**
+ * @file portable.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*
  * FreeRTOS Kernel V10.4.6
- * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
+ * Copyright ( C ) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
- * SPDX-License-Identifier: MIT
+ * SPDX - icense - dentifier: MIT
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
+ * this software and associated documentation files ( the "Software"), to deal in
  * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * use, copy, modify, merge, publish, distribute, sublicense, and / r sell copies of
  * the Software, and to permit persons to whom the Software is furnished to do so,
  * subject to the following conditions:
  *
@@ -22,7 +29,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * https://www.FreeRTOS.org
- * https://github.com/FreeRTOS
+ * https://github.com / reeRTOS
  *
  */
 
@@ -34,7 +41,7 @@
 #define PORTABLE_H
 
 /* Each FreeRTOS port has a unique portmacro.h header file.  Originally a
- * pre-processor definition was used to ensure the pre-processor found the correct
+ * pre - rocessor definition was used to ensure the pre - rocessor found the correct
  * portmacro.h file for the port being used.  That scheme was deprecated in favour
  * of setting the compiler's include path such that it found the correct
  * portmacro.h file - removing the need for the constant and allowing the
@@ -90,11 +97,11 @@
     #define configSTACK_ALLOCATION_FROM_SEPARATE_HEAP    0
 #endif
 
-/* *INDENT-OFF* */
+/* *INDENT - FF* */
 #ifdef __cplusplus
     extern "C" {
 #endif
-/* *INDENT-ON* */
+/* *INDENT - N* */
 
 #include "mpu_wrappers.h"
 
@@ -145,7 +152,7 @@ typedef struct xHeapStats
     size_t xSizeOfLargestFreeBlockInBytes;  /* The maximum size, in bytes, of all the free blocks within the heap at the time vPortGetHeapStats() is called. */
     size_t xSizeOfSmallestFreeBlockInBytes; /* The minimum size, in bytes, of all the free blocks within the heap at the time vPortGetHeapStats() is called. */
     size_t xNumberOfFreeBlocks;             /* The number of free memory blocks within the heap at the time vPortGetHeapStats() is called. */
-    size_t xMinimumEverFreeBytesRemaining;  /* The minimum amount of total free memory (sum of all free blocks) there has been in the heap since the system booted. */
+    size_t xMinimumEverFreeBytesRemaining;  /* The minimum amount of total free memory ( sum of all free blocks ) there has been in the heap since the system booted. */
     size_t xNumberOfSuccessfulAllocations;  /* The number of calls to pvPortMalloc() that have returned a valid memory block. */
     size_t xNumberOfSuccessfulFrees;        /* The number of calls to vPortFree() that has successfully freed a block of memory. */
 } HeapStats_t;
@@ -193,7 +200,7 @@ size_t xPortGetMinimumEverFreeHeapSize( void ) PRIVILEGED_FUNCTION;
 BaseType_t xPortStartScheduler( void ) PRIVILEGED_FUNCTION;
 
 /*
- * Undo any hardware/ISR setup that was performed by xPortStartScheduler() so
+ * Undo any hardware / SR setup that was performed by xPortStartScheduler() so
  * the hardware is left in its original condition after the scheduler stops
  * executing.
  */
@@ -214,10 +221,10 @@ void vPortEndScheduler( void ) PRIVILEGED_FUNCTION;
                                     uint32_t ulStackDepth ) PRIVILEGED_FUNCTION;
 #endif
 
-/* *INDENT-OFF* */
+/* *INDENT - FF* */
 #ifdef __cplusplus
     }
 #endif
-/* *INDENT-ON* */
+/* *INDENT - N* */
 
 #endif /* PORTABLE_H */

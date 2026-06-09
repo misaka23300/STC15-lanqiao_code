@@ -1,3 +1,10 @@
+/**
+ * @file main.c
+ * @brief 主程序入口文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "main.h"
 
 void main()
@@ -6,7 +13,7 @@ void main()
 
     read_temperature();
 
-    while (1)
+    while (1 )
     {
 
     }
@@ -24,16 +31,16 @@ timer_1_1ms() interrupt 12
 {
     static uint i;
     i++;
-    if (i > 30000)
+    if ( i > 30000 )
     {
         i = 0;
     }
 
-    if (i % 1 == 0) {
+    if ( i % 1 == 0 ) {
         seg.flag = 1;
     }
         
-    if (i % 15 == 0) {
+    if ( i % 15 == 0 ) {
         key.flag = 1;
     }
         

@@ -1,26 +1,31 @@
+/**
+ * @file led.c
+ * @brief LED驱动文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "led.h"
 
 uint8_t temp;
 
-void led(uint8_t i,uint8_t state)
+void led( uint8_t i, uint8_t state )
 {
     
     static uint8_t last = 0xFF;
 
-    if (state) {
-        temp = temp | (0x01 << i);
+    if ( state ) {
+        temp = temp | (0x01 << i );
     } else {
-        temp = temp & ~(0x01 << i);
+        temp = temp & ~(0x01 << i );
     }
 
-    if (temp != last) {
+    if ( temp != last ) {
         P0 = ~temp;
-        latch(4);
-        latch(0);
+        latch(4 );
+        latch(0 );
 
         last = temp;
     }
 }
-
-
 

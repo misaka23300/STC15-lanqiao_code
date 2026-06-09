@@ -1,3 +1,10 @@
+/**
+ * @file main.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #ifndef __MAIN_H__
 #define __MAIN_H__
 
@@ -21,14 +28,12 @@ enum {
     SONIC_TIME = 1000
 };
 
-
 typedef struct {
     uint16_t time;
     long times;
     long times_out;
 } FREQ;
 idata FREQ freq;
-
 
 typedef sturct {
     uchar mode;     // 0 -> 空闲    1 -> 运行   2 -> 等待
@@ -60,15 +65,12 @@ typedef struct {
 
 xdata PCF8591 adc;
 
-
 typedef struct 
 {
     uint8_t state;
 } DISPLAY;
 
 xdata DISPLAY display;
-
-
 
 typedef struct
 {
@@ -79,7 +81,6 @@ typedef struct
 
 idata SONIC sonic;
 
-
 typedef struct {
     uint8_t time;
     uint8_t press;
@@ -87,9 +88,6 @@ typedef struct {
 } KEY;
 
 idata KEY key;
-
-
-
 
 void time_1ms();
 void task_loop();
@@ -103,11 +101,6 @@ void display_task();
 void speed_task();
 void sonic_task();
 
-
-void number_display(uint16_t i);
-
-
-
-
+void number_display( uint16_t i );
 
 #endif

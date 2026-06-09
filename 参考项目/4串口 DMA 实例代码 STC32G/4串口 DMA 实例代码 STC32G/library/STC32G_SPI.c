@@ -1,100 +1,106 @@
+/**
+ * @file STC32G_SPI.c
+ * @brief æœªæŒ‡å®šæè¿°
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCAI.com ---------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* Èç¹ûÒªÔÚ³ÌÐòÖÐÊ¹ÓÃ´Ë´úÂë,ÇëÔÚ³ÌÐòÖÐ×¢Ã÷Ê¹ÓÃÁËSTCµÄ×ÊÁÏ¼°³ÌÐò            */
+/* ÒªÚ³Ê¹Ã´Ë´,Ú³×¢Ê¹STCÏ¼            */
 /*---------------------------------------------------------------------*/
 
 #include	"STC32G_SPI.h"
 
 u8 	SPI_RxTimerOut;
 u8 	SPI_BUF_type SPI_RxBuffer[SPI_BUF_LENTH];
-bit B_SPI_Busy; //·¢ËÍÃ¦±êÖ¾
-
+bit B_SPI_Busy; //Ã¦Ö¾
 
 //========================================================================
-// º¯Êý: void	SPI_Init(SPI_InitTypeDef *SPIx)
-// ÃèÊö: SPI³õÊ¼»¯³ÌÐò.
-// ²ÎÊý: SPIx: ½á¹¹²ÎÊý,Çë²Î¿¼spi.hÀïµÄ¶¨Òå.
-// ·µ»Ø: none.
-// °æ±¾: V1.0, 2012-11-22
+// : void	SPI_Init( SPI_InitTypeDef *SPIx )
+// : SPIÊ¼.
+// : SPIx: á¹¹,Î¿spi.hÄ¶.
+// : none.
+// æ±¾: V1.0, 2012 - 1 - 2
 //========================================================================
-void	SPI_Init(SPI_InitTypeDef *SPIx)
+void	SPI_Init( SPI_InitTypeDef *SPIx )
 {
-	if(SPIx->SPI_SSIG == ENABLE)			SSIG = 0; 	//enable SS, conform Master or Slave by SS pin.
+	if ( SPIx->SPI_SSIG == ENABLE )			SSIG = 0; 	//enable SS, conform Master or Slave by SS pin.
 	else									SSIG = 1; 	//disable SS, conform Master or Slave by SPI_Mode
-	SPI_Start(SPIx->SPI_Enable);
-	SPI_FirstBit_Set(SPIx->SPI_FirstBit);
-	SPI_Mode_Set(SPIx->SPI_Mode);
-	SPI_CPOL_Set(SPIx->SPI_CPOL);
-	SPI_CPHA_Set(SPIx->SPI_CPHA);
-	SPI_Clock_Select(SPIx->SPI_Speed);
+	SPI_Start( SPIx->SPI_Enable );
+	SPI_FirstBit_Set( SPIx->SPI_FirstBit );
+	SPI_Mode_Set( SPIx->SPI_Mode );
+	SPI_CPOL_Set( SPIx->SPI_CPOL );
+	SPI_CPHA_Set( SPIx->SPI_CPHA );
+	SPI_Clock_Select( SPIx->SPI_Speed );
 	
 	SPI_RxTimerOut = 0;
 	B_SPI_Busy = 0;
 }
 
 //========================================================================
-// º¯Êý: void SPI_SetMode(u8 mode)
-// ÃèÊö: SPIÉèÖÃÖ÷´ÓÄ£Ê½º¯Êý.
-// ²ÎÊý: mode: Ö¸¶¨Ä£Ê½, È¡Öµ SPI_Mode_Master »ò SPI_Mode_Slave.
-// ·µ»Ø: none.
-// °æ±¾: V1.0, 2012-11-22
+// : void SPI_SetMode( u8 mode )
+// : SPIÄ£Ê½.
+// : mode: Ö¸Ä£Ê½, È¡Öµ SPI_Mode_Master  SPI_Mode_Slave.
+// : none.
+// æ±¾: V1.0, 2012 - 1 - 2
 //========================================================================
-void SPI_SetMode(u8 mode)
+void SPI_SetMode( u8 mode )
 {
-	if(mode == SPI_Mode_Slave)
+	if ( mode == SPI_Mode_Slave )
 	{
-		MSTR = 0; 	//ÖØÐÂÉèÖÃÎª´Ó»ú´ý»ú
-		SSIG = 0; 	//SSÒý½ÅÈ·¶¨Ö÷´Ó
+		MSTR = 0; 	//ÎªÓ»
+		SSIG = 0; 	//SSÈ·
 	}
 	else
 	{
-		MSTR = 1; 	//Ê¹ÄÜ SPI Ö÷»úÄ£Ê½
-		SSIG = 1; 	//ºöÂÔSSÒý½Å¹¦ÄÜ
+		MSTR = 1; 	//Ê¹ SPI Ä£Ê½
+		SSIG = 1; 	//SSÅ¹
 	}
 }
 
 //========================================================================
-// º¯Êý: void SPI_WriteByte(u8 dat)
-// ÃèÊö: SPI·¢ËÍÒ»¸ö×Ö½ÚÊý¾Ý.
-// ²ÎÊý: dat: Òª·¢ËÍµÄÊý¾Ý.
-// ·µ»Ø: none.
-// °æ±¾: V1.0, 2020-09-14
+// : void SPI_WriteByte( u8 dat )
+// : SPIÒ»Ö½.
+// : dat: ÒªÍµ.
+// : none.
+// æ±¾: V1.0, 2020 - 9 - 4
 //========================================================================
-void SPI_WriteByte(u8 dat)		//SPI·¢ËÍÒ»¸ö×Ö½ÚÊý¾Ý
+void SPI_WriteByte( u8 dat )		//SPIÒ»Ö½
 {
-	if(ESPI)
+	if ( ESPI )
 	{
 		B_SPI_Busy = 1;
 		SPDAT = dat;
-		while(B_SPI_Busy);  //ÖÐ¶ÏÄ£Ê½
+		while ( B_SPI_Busy );  //Ð¶Ä£Ê½
 	}
 	else
 	{
 		SPDAT = dat;
-		while(SPIF == 0); //²éÑ¯Ä£Ê½
-		SPI_ClearFlag();   //Çå³ýSPIFºÍWCOL±êÖ¾
+		while ( SPIF == 0 ); //Ñ¯Ä£Ê½
+		SPI_ClearFlag();   //SPIFWCOLÖ¾
 	}
 }
 
 //========================================================================
-// º¯Êý: void SPI_ReadByte(u8 dat)
-// ÃèÊö: SPI²éÑ¯Ä£Ê½¶ÁÈ¡Ò»¸ö×Ö½ÚÊý¾Ý.
-// ²ÎÊý: none.
-// ·µ»Ø: ¶ÁÈ¡µÄÊý¾Ý.
-// °æ±¾: V1.0, 2020-09-14
+// : void SPI_ReadByte( u8 dat )
+// : SPIÑ¯Ä£Ê½È¡Ò»Ö½.
+// : none.
+// : È¡.
+// æ±¾: V1.0, 2020 - 9 - 4
 //========================================================================
-u8 SPI_ReadByte(void)
+u8 SPI_ReadByte( void )
 {
 	SPDAT = 0xff;
-	while(SPIF == 0) ;
-	SPI_ClearFlag();   //Çå0 SPIFºÍWCOL±êÖ¾
-	return (SPDAT);
+	while ( SPIF == 0 ) ;
+	SPI_ClearFlag();   //0 SPIFWCOLÖ¾
+	return ( SPDAT );
 }

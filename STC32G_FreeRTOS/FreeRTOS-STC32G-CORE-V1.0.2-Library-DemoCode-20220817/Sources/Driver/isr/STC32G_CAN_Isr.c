@@ -1,9 +1,16 @@
+/**
+ * @file STC32G_CAN_Isr.c
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCMCU.com --------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
@@ -22,9 +29,9 @@ bit B_Can2Send;     //CAN2 发生数据标志
 // 描述: CAN1中断函数.
 // 参数: none.
 // 返回: none.
-// 版本: V1.0, 2022-03-27
+// 版本: V1.0, 2022 - 3 - 7
 //========================================================================
-void CAN1_ISR_Handler (void) interrupt CAN1_VECTOR
+void CAN1_ISR_Handler ( void ) interrupt CAN1_VECTOR
 {
 	uint8_t isr;
 	uint8_t store;
@@ -34,18 +41,18 @@ void CAN1_ISR_Handler (void) interrupt CAN1_VECTOR
 	store = AUXR2;      //后AUXR2现场保存
 	
 	AUXR2 &= ~0x08;		//选择CAN1模块
-	isr = CanReadReg(ISR);
+	isr = CanReadReg( ISR );
 	CANAR = ISR;
 	CANDR = isr;     //写1清除标志位
 
-	if((isr & 0x04) == 0x04)  //TI
+	if (( isr & 0x04 ) == 0x04 )  //TI
 	{
 //		CANAR = ISR;
 //		CANDR |= 0x04;    //CLR FLAG
 		
 		B_Can1Send = 0;
   }	
-	if((isr & 0x08) == 0x08)  //RI
+	if (( isr & 0x08 ) == 0x08 )  //RI
 	{
 //		CANAR = ISR;
 //		CANDR |= 0x08;    //CLR FLAG
@@ -53,34 +60,34 @@ void CAN1_ISR_Handler (void) interrupt CAN1_VECTOR
 		B_Can1Read = 1;
 	}
 
-	if((isr & 0x40) == 0x40)  //ALI
+	if (( isr & 0x40 ) == 0x40 )  //ALI
 	{
 //		CANAR = ISR;
 //		CANDR |= 0x40;    //CLR FLAG
 	}	
 
-	if((isr & 0x20) == 0x20)  //EWI
+	if (( isr & 0x20 ) == 0x20 )  //EWI
 	{
 		CANAR = MR;
-		CANDR &= ~0x04;  //清除 Reset Mode, 从BUS-OFF状态退出
+		CANDR &= ~0x04;  //清除 Reset Mode, 从BUS - FF状态退出
 		
 //		CANAR = ISR;
 //		CANDR |= 0x20;    //CLR FLAG
 	}	
 
-	if((isr & 0x10) == 0x10)  //EPI
+	if (( isr & 0x10 ) == 0x10 )  //EPI
 	{
 //		CANAR = ISR;
 //		CANDR |= 0x10;    //CLR FLAG
 	}	
 
-	if((isr & 0x02) == 0x02)  //BEI
+	if (( isr & 0x02 ) == 0x02 )  //BEI
 	{
 //		CANAR = ISR;
 //		CANDR |= 0x02;    //CLR FLAG
 	}	
 
-	if((isr & 0x01) == 0x01)  //DOI
+	if (( isr & 0x01 ) == 0x01 )  //DOI
 	{
 //		CANAR = ISR;
 //		CANDR |= 0x01;    //CLR FLAG
@@ -95,9 +102,9 @@ void CAN1_ISR_Handler (void) interrupt CAN1_VECTOR
 // 描述: CAN2中断函数.
 // 参数: none.
 // 返回: none.
-// 版本: V1.0, 2022-03-27
+// 版本: V1.0, 2022 - 3 - 7
 //========================================================================
-void CAN2_ISR_Handler (void) interrupt CAN2_VECTOR
+void CAN2_ISR_Handler ( void ) interrupt CAN2_VECTOR
 {
 	uint8_t isr;
 	uint8_t store;
@@ -107,18 +114,18 @@ void CAN2_ISR_Handler (void) interrupt CAN2_VECTOR
 	store = AUXR2;      //后AUXR2现场保存
 	
 	AUXR2 |= 0x08;		//选择CAN2模块
-	isr = CanReadReg(ISR);
+	isr = CanReadReg( ISR );
 	CANAR = ISR;
 	CANDR = isr;     //写1清除标志位
 
-	if((isr & 0x04) == 0x04)  //TI
+	if (( isr & 0x04 ) == 0x04 )  //TI
 	{
 //		CANAR = ISR;
 //		CANDR |= 0x04;    //CLR FLAG
 		
 		B_Can2Send = 0;
   }	
-	if((isr & 0x08) == 0x08)  //RI
+	if (( isr & 0x08 ) == 0x08 )  //RI
 	{
 //		CANAR = ISR;
 //		CANDR |= 0x08;    //CLR FLAG
@@ -126,34 +133,34 @@ void CAN2_ISR_Handler (void) interrupt CAN2_VECTOR
 		B_Can2Read = 1;
 	}
 
-	if((isr & 0x40) == 0x40)  //ALI
+	if (( isr & 0x40 ) == 0x40 )  //ALI
 	{
 //		CANAR = ISR;
 //		CANDR |= 0x40;    //CLR FLAG
 	}	
 
-	if((isr & 0x20) == 0x20)  //EWI
+	if (( isr & 0x20 ) == 0x20 )  //EWI
 	{
 		CANAR = MR;
-		CANDR &= ~0x04;  //清除 Reset Mode, 从BUS-OFF状态退出
+		CANDR &= ~0x04;  //清除 Reset Mode, 从BUS - FF状态退出
 		
 //		CANAR = ISR;
 //		CANDR |= 0x20;    //CLR FLAG
 	}	
 
-	if((isr & 0x10) == 0x10)  //EPI
+	if (( isr & 0x10 ) == 0x10 )  //EPI
 	{
 //		CANAR = ISR;
 //		CANDR |= 0x10;    //CLR FLAG
 	}	
 
-	if((isr & 0x02) == 0x02)  //BEI
+	if (( isr & 0x02 ) == 0x02 )  //BEI
 	{
 //		CANAR = ISR;
 //		CANDR |= 0x02;    //CLR FLAG
 	}	
 
-	if((isr & 0x01) == 0x01)  //DOI
+	if (( isr & 0x01 ) == 0x01 )  //DOI
 	{
 //		CANAR = ISR;
 //		CANDR |= 0x01;    //CLR FLAG
@@ -162,5 +169,4 @@ void CAN2_ISR_Handler (void) interrupt CAN2_VECTOR
 	AUXR2 = store;     //先AUXR2现场恢复
 	CANAR = arTemp;    //后CANAR现场恢复
 }
-
 

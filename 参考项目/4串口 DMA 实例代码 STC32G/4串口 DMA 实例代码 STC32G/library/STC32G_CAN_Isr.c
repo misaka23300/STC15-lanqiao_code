@@ -1,46 +1,53 @@
+/**
+ * @file STC32G_CAN_Isr.c
+ * @brief Êú™ÊåáÂÆöÊèèËø∞
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCAI.com ---------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* »Áπ˚“™‘⁄≥Ã–Ú÷– π”√¥À¥˙¬Î,«Î‘⁄≥Ã–Ú÷–◊¢√˜ π”√¡ÀSTCµƒ◊ ¡œº∞≥Ã–Ú            */
+/* “™⁄≥ π√¥À¥,⁄≥◊¢ πSTCœº            */
 /*---------------------------------------------------------------------*/
 
 #include	"STC32G_CAN.h"
 
-bit B_Can1Read;     //CAN1  ’µΩ ˝æ›±Í÷æ
-bit B_Can2Read;     //CAN2  ’µΩ ˝æ›±Í÷æ
+bit B_Can1Read;     //CAN1 ’µ›±÷æ
+bit B_Can2Read;     //CAN2 ’µ›±÷æ
 
 //========================================================================
-// ∫Ø ˝: CAN1_ISR_Handler
-// √Ë ˆ: CAN1÷–∂œ∫Ø ˝.
-// ≤Œ ˝: none.
-// ∑µªÿ: none.
-// ∞Ê±æ: V1.0, 2022-03-27
+// : CAN1_ISR_Handler
+// : CAN1–∂œ∫.
+// : none.
+// : none.
+// Ê±æ: V1.0, 2022 - 3 - 7
 //========================================================================
-void CAN1_ISR_Handler (void) interrupt CAN1_VECTOR
+void CAN1_ISR_Handler ( void ) interrupt CAN1_VECTOR
 {
 	u8 isr;
 	u8 store;
 	u8 arTemp;
 
-	arTemp = CANAR;     //œ»CANARœ÷≥°±£¥Ê£¨±‹√‚÷˜—≠ª∑¿Ô–¥ÕÍ CANAR ∫Û≤˙…˙÷–∂œ£¨‘⁄÷–∂œ¿Ô–ﬁ∏ƒ¡À CANAR ƒ⁄»›
-	store = AUXR2;      //∫ÛAUXR2œ÷≥°±£¥Ê
+	arTemp = CANAR;     //CANAR÷≥Ê£¨—≠–¥ CANAR –∂œ£–∂ﬁ∏ CANAR 
+	store = AUXR2;      //AUXR2÷≥
 	
-	AUXR2 &= ~0x08;		//—°‘ÒCAN1ƒ£øÈ
-	isr = CanReadReg(ISR);
+	AUXR2 &= ~0x08;		//—°CAN1ƒ£
+	isr = CanReadReg( ISR );
 
-	if((isr & 0x04) == 0x04)  //TI
+	if (( isr & 0x04 ) == 0x04 )  //TI
 	{
 		CANAR = ISR;
 		CANDR = 0x04;    //CLR FLAG
   }	
-	if((isr & 0x08) == 0x08)  //RI
+	if (( isr & 0x08 ) == 0x08 )  //RI
 	{
 		CANAR = ISR;
 		CANDR = 0x08;    //CLR FLAG
@@ -48,68 +55,68 @@ void CAN1_ISR_Handler (void) interrupt CAN1_VECTOR
 		B_Can1Read = 1;
 	}
 
-	if((isr & 0x40) == 0x40)  //ALI
+	if (( isr & 0x40 ) == 0x40 )  //ALI
 	{
 		CANAR = ISR;
 		CANDR = 0x40;    //CLR FLAG
 	}	
 
-	if((isr & 0x20) == 0x20)  //EWI
+	if (( isr & 0x20 ) == 0x20 )  //EWI
 	{
 		CANAR = MR;
-		CANDR &= ~0x04;  //«Â≥˝ Reset Mode, ¥”BUS-OFF◊¥Ã¨ÕÀ≥ˆ
+		CANDR &= ~0x04;  // Reset Mode, BUS - FF◊¥Ã¨À≥
 		
 		CANAR = ISR;
 		CANDR = 0x20;    //CLR FLAG
 	}	
 
-	if((isr & 0x10) == 0x10)  //EPI
+	if (( isr & 0x10 ) == 0x10 )  //EPI
 	{
 		CANAR = ISR;
 		CANDR = 0x10;    //CLR FLAG
 	}	
 
-	if((isr & 0x02) == 0x02)  //BEI
+	if (( isr & 0x02 ) == 0x02 )  //BEI
 	{
 		CANAR = ISR;
 		CANDR = 0x02;    //CLR FLAG
 	}	
 
-	if((isr & 0x01) == 0x01)  //DOI
+	if (( isr & 0x01 ) == 0x01 )  //DOI
 	{
 		CANAR = ISR;
 		CANDR = 0x01;    //CLR FLAG
 	}	
 
-	AUXR2 = store;     //œ»AUXR2œ÷≥°ª÷∏¥
-	CANAR = arTemp;    //∫ÛCANARœ÷≥°ª÷∏¥
+	AUXR2 = store;     //AUXR2÷≥÷∏
+	CANAR = arTemp;    //CANAR÷≥÷∏
 }
 
 //========================================================================
-// ∫Ø ˝: CAN2_ISR_Handler
-// √Ë ˆ: CAN2÷–∂œ∫Ø ˝.
-// ≤Œ ˝: none.
-// ∑µªÿ: none.
-// ∞Ê±æ: V1.0, 2022-03-27
+// : CAN2_ISR_Handler
+// : CAN2–∂œ∫.
+// : none.
+// : none.
+// Ê±æ: V1.0, 2022 - 3 - 7
 //========================================================================
-void CAN2_ISR_Handler (void) interrupt CAN2_VECTOR
+void CAN2_ISR_Handler ( void ) interrupt CAN2_VECTOR
 {
 	u8 isr;
 	u8 store;
 	u8 arTemp;
 
-	arTemp = CANAR;     //œ»CANARœ÷≥°±£¥Ê£¨±‹√‚÷˜—≠ª∑¿Ô–¥ÕÍ CANAR ∫Û≤˙…˙÷–∂œ£¨‘⁄÷–∂œ¿Ô–ﬁ∏ƒ¡À CANAR ƒ⁄»›
-	store = AUXR2;      //∫ÛAUXR2œ÷≥°±£¥Ê
+	arTemp = CANAR;     //CANAR÷≥Ê£¨—≠–¥ CANAR –∂œ£–∂ﬁ∏ CANAR 
+	store = AUXR2;      //AUXR2÷≥
 	
-	AUXR2 |= 0x08;		//—°‘ÒCAN2ƒ£øÈ
-	isr = CanReadReg(ISR);
+	AUXR2 |= 0x08;		//—°CAN2ƒ£
+	isr = CanReadReg( ISR );
 
-	if((isr & 0x04) == 0x04)  //TI
+	if (( isr & 0x04 ) == 0x04 )  //TI
 	{
 		CANAR = ISR;
 		CANDR = 0x04;    //CLR FLAG
   }	
-	if((isr & 0x08) == 0x08)  //RI
+	if (( isr & 0x08 ) == 0x08 )  //RI
 	{
 		CANAR = ISR;
 		CANDR = 0x08;    //CLR FLAG
@@ -117,41 +124,40 @@ void CAN2_ISR_Handler (void) interrupt CAN2_VECTOR
 		B_Can2Read = 1;
 	}
 
-	if((isr & 0x40) == 0x40)  //ALI
+	if (( isr & 0x40 ) == 0x40 )  //ALI
 	{
 		CANAR = ISR;
 		CANDR = 0x40;    //CLR FLAG
 	}	
 
-	if((isr & 0x20) == 0x20)  //EWI
+	if (( isr & 0x20 ) == 0x20 )  //EWI
 	{
 		CANAR = MR;
-		CANDR &= ~0x04;  //«Â≥˝ Reset Mode, ¥”BUS-OFF◊¥Ã¨ÕÀ≥ˆ
+		CANDR &= ~0x04;  // Reset Mode, BUS - FF◊¥Ã¨À≥
 		
 		CANAR = ISR;
 		CANDR = 0x20;    //CLR FLAG
 	}	
 
-	if((isr & 0x10) == 0x10)  //EPI
+	if (( isr & 0x10 ) == 0x10 )  //EPI
 	{
 		CANAR = ISR;
 		CANDR = 0x10;    //CLR FLAG
 	}	
 
-	if((isr & 0x02) == 0x02)  //BEI
+	if (( isr & 0x02 ) == 0x02 )  //BEI
 	{
 		CANAR = ISR;
 		CANDR = 0x02;    //CLR FLAG
 	}	
 
-	if((isr & 0x01) == 0x01)  //DOI
+	if (( isr & 0x01 ) == 0x01 )  //DOI
 	{
 		CANAR = ISR;
 		CANDR = 0x01;    //CLR FLAG
 	}	
 
-	AUXR2 = store;     //œ»AUXR2œ÷≥°ª÷∏¥
-	CANAR = arTemp;    //∫ÛCANARœ÷≥°ª÷∏¥
+	AUXR2 = store;     //AUXR2÷≥÷∏
+	CANAR = arTemp;    //CANAR÷≥÷∏
 }
-
 

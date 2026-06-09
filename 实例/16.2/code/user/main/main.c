@@ -1,3 +1,10 @@
+/**
+ * @file main.c
+ * @brief 主程序入口文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "main.h"
 
 enum {
@@ -18,25 +25,25 @@ void main()
 {
     boot_init();
 
-    while (1) {
+    while (1 ) {
 
-        if (key_time >= KEY_TIME) {
+        if ( key_time >= KEY_TIME ) {
             key_time = 0; 
             key_task();
         }
-        if (ds1302_time >= DS1302_TIME) {
+        if ( ds1302_time >= DS1302_TIME ) {
             ds1302_time = 0; 
             ds1302_task();
         }
-        if (pcf8591_time >= PCF8591_TIME) {
+        if ( pcf8591_time >= PCF8591_TIME ) {
             pcf8591_time = 0; 
             pcf8591_task();
         }
-        if (ds18b20_time >= DS18B20_TIME) {
+        if ( ds18b20_time >= DS18B20_TIME ) {
             ds18b20_time = 0; 
             ds18b20_task(); 
         }
-        if (display_time >= DISPLAY_TIME) {
+        if ( display_time >= DISPLAY_TIME ) {
             display_time = 0; 
             display_task(); 
         }
@@ -44,7 +51,7 @@ void main()
     }
 }
 
-void Timer2_Isr(void) interrupt 12
+void Timer2_Isr( void ) interrupt 12
 {
     seg_display();
     key_time++;
@@ -53,6 +60,4 @@ void Timer2_Isr(void) interrupt 12
     ds18b20_time++;
     display_time++;
 }
-
-
 

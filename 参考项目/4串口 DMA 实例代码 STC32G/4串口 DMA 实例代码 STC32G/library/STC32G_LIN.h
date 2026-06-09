@@ -1,14 +1,21 @@
+/**
+ * @file STC32G_LIN.h
+ * @brief Êú™ÊåáÂÆöÊèèËø∞
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCAI.com ---------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* »Áπ˚“™‘⁄≥Ã–Ú÷– π”√¥À¥˙¬Î,«Î‘⁄≥Ã–Ú÷–◊¢√˜ π”√¡ÀSTCµƒ◊ ¡œº∞≥Ã–Ú            */
+/* “™⁄≥ π√¥À¥,⁄≥◊¢ πSTCœº            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_LIN_H
@@ -17,46 +24,45 @@
 #include	"config.h"
 
 //========================================================================
-//                              ∂®“Â…˘√˜
+//                              
 //========================================================================
 
-#define LIN_MODE        1    //0: LIN2.1(‘ˆ«ø–£—È);  1: LIN1.3
-#define FRAME_LEN       8    // ˝æ›≥§∂»: 8 ◊÷Ω⁄
+#define LIN_MODE        1    //0: LIN2.1(«ø–£);  1: LIN1.3
+#define FRAME_LEN       8    //›≥: 8 ÷Ω
 
 //========================================================================
-//                              ≥£¡ø…˘√˜
+//                              
 //========================================================================
 
-#define LIN_LIDE     0x01  //Head÷–∂œ
-#define LIN_RDYE     0x02  //Ready÷–∂œ
-#define LIN_ERRE     0x04  //¥ÌŒÛ÷–∂œ
-#define LIN_ABORTE   0x08  //÷’÷π÷–∂œ
-#define LIN_ALLIE    0x0F  //À˘”–÷–∂œ
+#define LIN_LIDE     0x01  //Head–∂
+#define LIN_RDYE     0x02  //Ready–∂
+#define LIN_ERRE     0x04  //–∂
+#define LIN_ABORTE   0x08  //÷π–∂
+#define LIN_ALLIE    0x0F  //–∂
 
 //========================================================================
-//                              ±‰¡ø…˘√˜
+//                              
 //========================================================================
 
 typedef struct
 {
-	u8	LIN_Enable;         //LINπ¶ƒ‹ πƒ‹  	ENABLE,DISABLE
-	u16	LIN_Baudrate;       //LIN≤®Ãÿ¬ 
-	u8	LIN_IE;             //LIN÷–∂œ πƒ‹  	LIN_LIDE/LIN_RDYE/LIN_ERRE/LIN_ABORTE/LIN_ALLIE,DISABLE
-	u8	LIN_HeadDelay;      //÷°Õ∑—” ±º∆ ˝  	0~(65535*1000)/MAIN_Fosc
-	u8	LIN_HeadPrescaler;  //÷°Õ∑—” ±∑÷∆µ  	0~63
+	u8	LIN_Enable;         //LIN π  	ENABLE, DISABLE
+	u16	LIN_Baudrate;       //LIN
+	u8	LIN_IE;             //LIN–∂ π  	LIN_LIDE / IN_RDYE / IN_ERRE / IN_ABORTE / IN_ALLIE, DISABLE
+	u8	LIN_HeadDelay;      //÷°Õ∑ ±  	0~(65535 * 000 )/MAIN_Fosc
+	u8	LIN_HeadPrescaler;  //÷°Õ∑ ±∆µ  	0~63
 } LIN_InitTypeDef;
 
-
 //========================================================================
-//                              Õ‚≤ø…˘√˜
+//                              ‚≤ø
 //========================================================================
 
-void LIN_Inilize(LIN_InitTypeDef *LIN);
-u8 LinReadReg(u8 addr);
-void LinReadFrame(u8 *pdat);
-void LinSendFrame(u8 lid, u8 *pdat);
-void LinSendHeaderRead(u8 lid, u8 *pdat);
-void LinTxResponse(u8 *pdat);
-void LinSetBaudrate(u16 brt);
+void LIN_Inilize( LIN_InitTypeDef *LIN );
+u8 LinReadReg( u8 addr );
+void LinReadFrame( u8 *pdat );
+void LinSendFrame( u8 lid, u8 *pdat );
+void LinSendHeaderRead( u8 lid, u8 *pdat );
+void LinTxResponse( u8 *pdat );
+void LinSetBaudrate( u16 brt );
 
 #endif

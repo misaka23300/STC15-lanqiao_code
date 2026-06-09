@@ -1,3 +1,10 @@
+/**
+ * @file config.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #ifndef __CONFIG_H
 #define __CONFIG_H
 
@@ -14,17 +21,17 @@ typedef signed long int32_t;
 #define compact
 #define small __near
 #define large __far
-#define data __data
+#define data  __data
 #define bdata
 #define idata __idata
 #define pdata __pdata
 #define xdata __xdata
-#define code __code
+#define code  __code
 
 /* redefine keywords */
 #define interrupt(x) __interrupt(x)
-#define using(x) __using(x)
-#define at(x) __at(x)
+#define using(x)     __using(x)
+#define at(x)        __at(x)
 #define _priority_
 #define _task_
 
@@ -37,10 +44,10 @@ typedef __sfr32 sfr32;
 
 /* 定义主时钟频率 */
 #ifndef MAIN_Fosc
-//#define MAIN_Fosc 11059200L
-//#define MAIN_Fosc 12000000L
-//#define MAIN_Fosc 22118400L
-//#define MAIN_Fosc 24000000L
+// #define MAIN_Fosc 11059200L
+// #define MAIN_Fosc 12000000L
+// #define MAIN_Fosc 22118400L
+// #define MAIN_Fosc 24000000L
 #define MAIN_Fosc 12000000L // 主时钟默认 16MHz
 #endif
 

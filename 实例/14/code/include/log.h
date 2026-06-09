@@ -1,3 +1,10 @@
+/**
+ * @file log.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #ifndef __LOG_H__
 #define __LOG_H__
 
@@ -16,15 +23,15 @@ typedef enum {
 extern LogLevel g_log_level;
 
 // 日志初始化
-void log_init(LogLevel level);
+void log_init( LogLevel level );
 
 // 日志输出函数
-void log_error(const char* format, ...);
-void log_warn(const char* format, ...);
-void log_info(const char* format, ...);
-void log_debug(const char* format, ...);
+void log_error( const char* format, ...);
+void log_warn( const char* format, ...);
+void log_info( const char* format, ...);
+void log_debug( const char* format, ...);
 
 // 日志级别设置
-void log_set_level(LogLevel level);
+void log_set_level( LogLevel level );
 
 #endif

@@ -1,10 +1,14 @@
+/**
+ * @file sonic.c
+ * @brief 超声波传感器驱动
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "sonic.h"
 
 sbit tx = P3 ^ 0;
 sbit rx = P3 ^ 1;
-
-
-
 
 void sendSonic()
 {
@@ -13,8 +17,6 @@ void sendSonic()
     tx = 1;
     Delay14us();
 }
-
-
 
 // 使用定时器1
 
@@ -39,18 +41,18 @@ uint8_t measureTimer1()
 
     sendSonic();
 
-    while (rx == 0);
+    while ( rx == 0 );
     TR1 = 1;
-    while (rx == 1 && TF1 != 0);
+    while ( rx == 1 && TF1 != 0 );
     TR1 = 0;
 
-    if (TF1)
+    if ( TF1 )
     {
         distance = 255;
     }
     else
     {
-        distance = (uint8_t)(TH1 << 8 | TL1)* 0.017;
+        distance = ( uint8_t )( TH1 << 8 | TL1 )* 0.017;
 
     }
 
@@ -68,8 +70,6 @@ void pcaInit()
     CF = 0;
 }
 
-
-
 uint16_t measurePCA()
  {
     uint16_t distance;
@@ -79,21 +79,21 @@ uint16_t measurePCA()
 
     sendSonic();
 
-    while (rx == 0);
+    while ( rx == 0 );
 
     CR = 1;
 
-    while (rx == 1 && CF == 0);
+    while ( rx == 1 && CF == 0 );
 
     CR = 0;
 
-    if (CF)
+    if ( CF )
     {
         distance = 999;
     }
     else
     {
-        distance = (uint16_t) (CH << 8 | CL)* 17 / 1000;
+        distance = ( uint16_t ) ( CH << 8 | CL )* 17 / 1000;
     }
 
     return distance;

@@ -1,8 +1,14 @@
+/**
+ * @file uart.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #ifndef __UART_H__
 #define __UART_H__
 
 #include "machine.h"
-
 
 enum {
     RECEIVE_LEN = 16
@@ -26,9 +32,9 @@ typedef struct {
 
 extern INPUT input;
 
-//void uart_send(uchar *str);
+//void uart_send( uchar *str );
 //void uart_receive() interrupt 4;
 void get_position(); // uart.receive_data -> input.x input.y
 
-char putchar(char c);
+char putchar( char c );
 #endif

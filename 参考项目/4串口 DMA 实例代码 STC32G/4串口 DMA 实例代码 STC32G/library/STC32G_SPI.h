@@ -1,14 +1,21 @@
+/**
+ * @file STC32G_SPI.h
+ * @brief Êú™ÊåáÂÆöÊèèËø∞
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCAI.com ---------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* »Áπ˚“™‘⁄≥Ã–Ú÷– π”√¥À¥˙¬Î,«Î‘⁄≥Ã–Ú÷–◊¢√˜ π”√¡ÀSTCµƒ◊ ¡œº∞≥Ã–Ú            */
+/* “™⁄≥ π√¥À¥,⁄≥◊¢ πSTCœº            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_SPI_H
@@ -17,24 +24,24 @@
 #include	"config.h"
 
 //========================================================================
-//                               SPI…Ë÷√
+//                               SPI
 //========================================================================
 
-#define		SPI_SSIG_Set(n)					SSIG = n		/* SS“˝Ω≈π¶ƒ‹øÿ÷∆ */
-#define		SPI_Start(n)						SPEN = n		/* SPI πƒ‹øÿ÷∆Œª */
-#define		SPI_FirstBit_Set(n)			DORD = n		/*  ˝æ›∑¢ÀÕ/Ω” ’À≥–Ú MSB/LSB */
-#define		SPI_Mode_Set(n)					MSTR = n		/* SPI÷˜¥”ƒ£ Ω…Ë÷√ */
-#define		SPI_CPOL_Set(n)					CPOL = n		/* SPI ±÷”º´–‘øÿ÷∆ */
-#define		SPI_CPHA_Set(n)					CPHA = n		/* SPI ±÷”œ‡Œªøÿ÷∆ */
-#define		SPI_Clock_Select(n)			SPCTL = (SPCTL & ~0x03) | (n)					/* SPI ±÷”∆µ¬ —°‘Ò */
+#define		SPI_SSIG_Set( n )					SSIG = n		/* SS≈π‹ø */
+#define		SPI_Start( n )						SPEN = n		/* SPI π‹øŒª */
+#define		SPI_FirstBit_Set( n )			DORD = n		/* ›∑/À≥ MSB / SB */
+#define		SPI_Mode_Set( n )					MSTR = n		/* SPIƒ£ Ω */
+#define		SPI_CPOL_Set( n )					CPOL = n		/* SPI ±”º‘ø */
+#define		SPI_CPHA_Set( n )					CPHA = n		/* SPI ±Œª */
+#define		SPI_Clock_Select( n )			SPCTL = ( SPCTL & ~0x03 ) | ( n )					/* SPI ±∆µ—° */
 
-#define		SPI_ClearFlag()					{SPIF = 1; WCOL = 1;}		/* –¥ 1 «Â≥˝ SPIF∫ÕWCOL ±Í÷æ */
+#define		SPI_ClearFlag()					{SPIF = 1; WCOL = 1;}		/* –¥ 1  SPIFWCOL ÷æ */
 
-#define		HSSPI_Enable(n)					HSSPI_CFG2 |= 0x20       // πƒ‹SPI∏ﬂÀŸƒ£ Ω
-#define		HSSPI_Disable(n)				HSSPI_CFG2 &= ~0x20      //πÿ±’SPI∏ﬂÀŸƒ£ Ω
+#define		HSSPI_Enable( n )					HSSPI_CFG2 |= 0x20       // πSPIƒ£ Ω
+#define		HSSPI_Disable( n )				HSSPI_CFG2 &= ~0x20      //ÿ±SPIƒ£ Ω
 
 //========================================================================
-//                              ∂®“Â…˘√˜
+//                              
 //========================================================================
 
 #define	SPI_BUF_LENTH	128
@@ -76,26 +83,24 @@ sbit  SPI_SCLK_4  = P3^2;
 
 typedef struct
 {
-	u8	SPI_Enable;		//SPI∆Ù∂Ø, ENABLE,DISABLE
-	u8	SPI_SSIG;			//∆¨—°Œª, ENABLE(SS»∑∂®÷˜ª˙¥”ª˙), DISABLE(∫ˆ¬‘SS“˝Ω≈π¶ƒ‹)
+	u8	SPI_Enable;		//SPI, ENABLE, DISABLE
+	u8	SPI_SSIG;			//∆¨—°Œª, ENABLE( SS»∑”ª), DISABLE( SS≈π)
 	u8	SPI_FirstBit;	//SPI_MSB, SPI_LSB
 	u8	SPI_Mode;			//SPI_Mode_Master, SPI_Mode_Slave
 	u8	SPI_CPOL;			//SPI_CPOL_High,   SPI_CPOL_Low
 	u8	SPI_CPHA;			//SPI_CPHA_1Edge,  SPI_CPHA_2Edge
-	u8	SPI_Speed;		//SPI_Speed_4,SPI_Speed_16,SPI_Speed_64,SPI_Speed_128
+	u8	SPI_Speed;		//SPI_Speed_4, SPI_Speed_16, SPI_Speed_64, SPI_Speed_128
 } SPI_InitTypeDef;
 
-
-extern	bit B_SPI_Busy; //∑¢ÀÕ√¶±Í÷æ
+extern	bit B_SPI_Busy; //√¶÷æ
 extern	u8 	SPI_RxCnt;
 extern	u8 	SPI_RxTimerOut;
 extern	u8 	SPI_BUF_type SPI_RxBuffer[SPI_BUF_LENTH];
 
-
-void	SPI_Init(SPI_InitTypeDef *SPIx);
-void	SPI_SetMode(u8 mode);
-void	SPI_WriteByte(u8 dat);
-u8 SPI_ReadByte(void);
+void	SPI_Init( SPI_InitTypeDef *SPIx );
+void	SPI_SetMode( u8 mode );
+void	SPI_WriteByte( u8 dat );
+u8 SPI_ReadByte( void );
 
 #endif
 

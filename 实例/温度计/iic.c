@@ -1,46 +1,60 @@
+/**
+ * @file iic.c
+ * @brief I2C总线驱动文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "iic.h"
 
 sbit scl = P2 ^ 0;
 sbit sda = P2 ^ 1;
 
-
 //
-#define DELAY_TIME	5
+#define DELAY_TIME 5
 
 //
 static void I2C_Delay(unsigned char n)
 {
-    do
-    {
-        _nop_();_nop_();_nop_();_nop_();_nop_();
-        _nop_();_nop_();_nop_();_nop_();_nop_();
-        _nop_();_nop_();_nop_();_nop_();_nop_();		
-    }
-    while(n--);      	
+    do {
+        _nop_();
+        _nop_();
+        _nop_();
+        _nop_();
+        _nop_();
+        _nop_();
+        _nop_();
+        _nop_();
+        _nop_();
+        _nop_();
+        _nop_();
+        _nop_();
+        _nop_();
+        _nop_();
+        _nop_();
+    } while (n--);
 }
 
-void Delay15ms()	//@12.000MHz
+void Delay15ms() //@12.000MHz
 {
-	unsigned char data i, j;
+    unsigned char data i, j;
 
-	i = 176;
-	j = 21;
-	do
-	{
-		while (--j);
-	} while (--i);
+    i = 176;
+    j = 21;
+    do {
+        while (--j);
+    } while (--i);
 }
-
 
 //
 void I2CStart(void)
 {
     sda = 1;
     scl = 1;
-	I2C_Delay(DELAY_TIME);
+    I2C_Delay(DELAY_TIME);
     sda = 0;
-	I2C_Delay(DELAY_TIME);
-    scl = 0;    
+    I2C_Delay(DELAY_TIME);
+    scl = 0;
 }
 
 //
@@ -48,80 +62,76 @@ void I2CStop(void)
 {
     sda = 0;
     scl = 1;
-	I2C_Delay(DELAY_TIME);
+    I2C_Delay(DELAY_TIME);
     sda = 1;
-	I2C_Delay(DELAY_TIME);
+    I2C_Delay(DELAY_TIME);
 }
 
 //
 void I2CSendByte(unsigned char byt)
 {
     unsigned char i;
-	
-    for(i=0; i<8; i++){
+
+    for (i = ; i < ; i++) {
         scl = 0;
-		I2C_Delay(DELAY_TIME);
-        if(byt & 0x80){
+        I2C_Delay(DELAY_TIME);
+        if (byt & 0x80) {
             sda = 1;
-        }
-        else{
+        } else {
             sda = 0;
         }
-		I2C_Delay(DELAY_TIME);
+        I2C_Delay(DELAY_TIME);
         scl = 1;
         byt <<= 1;
-		I2C_Delay(DELAY_TIME);
+        I2C_Delay(DELAY_TIME);
     }
-	
-    scl = 0;  
+
+    scl = 0;
 }
 
 //
 unsigned char I2CReceiveByte(void)
 {
-	unsigned char da;
-	unsigned char i;
-	for(i=0;i<8;i++){   
-		scl = 1;
-		I2C_Delay(DELAY_TIME);
-		da <<= 1;
-		if(sda) 
-			da |= 0x01;
-		scl = 0;
-		I2C_Delay(DELAY_TIME);
-	}
-	return da;    
+    unsigned char da;
+    unsigned char i;
+    for (i = ; i < ; i++) {
+        scl = 1;
+        I2C_Delay(DELAY_TIME);
+        da <<= 1;
+        if (sda)
+            da |= 0x01;
+        scl = 0;
+        I2C_Delay(DELAY_TIME);
+    }
+    return da;
 }
 
 //
 unsigned char I2CWaitAck(void)
 {
-	unsigned char ackbit;
-	
+    unsigned char ackbit;
+
     scl = 1;
-	I2C_Delay(DELAY_TIME);
-    ackbit = sda; 
-    scl = 0;
-	I2C_Delay(DELAY_TIME);
-	
-	return ackbit;
+    I2C_Delay(DELAY_TIME);
+    ackbit = sda;
+    scl    = 0;
+    I2C_Delay(DELAY_TIME);
+
+    return ackbit;
 }
 
 //
 void I2CSendAck(unsigned char ackbit)
 {
     scl = 0;
-    sda = ackbit; 
-	I2C_Delay(DELAY_TIME);
+    sda = ackbit;
+    I2C_Delay(DELAY_TIME);
     scl = 1;
-	I2C_Delay(DELAY_TIME);
-    scl = 0; 
-	sda = 1;
-	I2C_Delay(DELAY_TIME);
+    I2C_Delay(DELAY_TIME);
+    scl = 0;
+    sda = 1;
+    I2C_Delay(DELAY_TIME);
 }
-
-
-
 
 uchar at2402_read(uchar address)
 {
@@ -149,7 +159,7 @@ uchar at2402_read(uchar address)
     return Data;
 }
 
-void at2402_write(uchar address,uchar Data)
+void at2402_write(uchar address, uchar Data)
 {
     I2CStart();
 
@@ -167,49 +177,49 @@ void at2402_write(uchar address,uchar Data)
 }
 
 /*
-//0-255 0x00 0xff
-void AT24C02_Write(uchar *dat,uchar addr,uchar num)    //1.数据 2.地址 3.多少个数据
+//0 - 55 0x00 0xff
+void AT24C02_Write( uchar *dat, uchar addr, uchar num )    //1.数据 2.地址 3.多少个数据
 {
-	I2CStart();
+    I2CStart();
 
-	I2CSendByte(0xa0);
-	I2CWaitAck();
+    I2CSendByte(0xa0 );
+    I2CWaitAck();
 
-	I2CSendByte(addr);
-	I2CWaitAck();
+    I2CSendByte( addr );
+    I2CWaitAck();
 
-	while(num--)
-	{
-		I2CSendByte(*dat++);
-		I2CWaitAck();
+    while ( num--)
+    {
+        I2CSendByte(*dat++);
+        I2CWaitAck();
 
-		I2C_Delay(200);Delay15ms();
+        I2C_Delay(200 );Delay15ms();
 }
 
-void AT24C02_Read(uchar *dat,uchar addr,uchar num)
+void AT24C02_Read( uchar *dat, uchar addr, uchar num )
 {
-	I2CStart();
+    I2CStart();
 
-	I2CSendByte(0xa0);
-	I2CWaitAck();
+    I2CSendByte(0xa0 );
+    I2CWaitAck();
 
-	I2CSendByte(addr);
-	I2CWaitAck();
-	
-	I2CStart();
+    I2CSendByte( addr );
+    I2CWaitAck();
 
-	I2CSendByte(0xa1);
-	I2CWaitAck();
+    I2CStart();
 
-	while(num--)
-	{
-		*dat++=I2CReceiveByte();
-		if(num)
-            I2CSendAck(0);
-		else 
-            I2CSendAck(1);
-	}
-	I2CStop();
+    I2CSendByte(0xa1 );
+    I2CWaitAck();
+
+    while ( num--)
+    {
+        *dat++=I2CReceiveByte();
+        if ( num )
+            I2CSendAck(0 );
+        else
+            I2CSendAck(1 );
+    }
+    I2CStop();
 }
 */
 uchar pcf8591_ADC(uchar channel)
@@ -251,5 +261,4 @@ void pcf8591_DA(uchar v)
     I2CWaitAck();
 
     I2CStop();
-
 }

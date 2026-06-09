@@ -1,20 +1,26 @@
+/**
+ * @file uart.c
+ * @brief 串口驱动文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "uart.h"
 
-
-void Uart1_Isr(void) interrupt 4
+void Uart1_Isr( void ) interrupt 4
 {
-	if (TI)				//检测串口1发送中断
+	if ( TI )				//检测串口1发送中断
 	{
 		TI = 0;			//清除串口1发送中断请求位
 	}
-	if (RI)				//检测串口1接收中断
+	if ( RI )				//检测串口1接收中断
 	{
 		RI = 0;			//清除串口1接收中断请求位
 	}
 }
 
 // 定时器2
-void Uart1_Init(void)	//4800bps@12.000MHz
+void Uart1_Init( void )	//4800bps@12.000MHz
 {
 	SCON = 0x50;		//8位数据,可变波特率
 	AUXR |= 0x01;		//串口1选择定时器2为波特率发生器
@@ -25,14 +31,13 @@ void Uart1_Init(void)	//4800bps@12.000MHz
 	ES = 1;				//使能串口1中断
 }
 
-
-void uart_send(uint8_t *Data)
+void uart_send( uint8_t *Data )
 {
     while ( *Data != '\0' )
     {
         SBUF = *Data;
 
-        while (TI == 0);
+        while ( TI == 0 );
 
         TI = 0; 
 

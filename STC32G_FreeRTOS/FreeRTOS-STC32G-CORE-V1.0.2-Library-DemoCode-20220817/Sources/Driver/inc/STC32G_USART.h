@@ -1,9 +1,16 @@
+/**
+ * @file STC32G_USART.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCMCU.com --------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
@@ -31,16 +38,15 @@
 //                              USARTﺓﻭﺿﺃ
 //========================================================================
 
-
 //========================================================================
 //                              ١ﻟﺀ؟ﺓﻵﺃﻐ
 //========================================================================
 
 typedef struct
 { 
-	uint8_t	LIN_Enable;				//LINﻁ¬ﺩﻉﺗ٩ﺅ¬  	ENABLE,DISABLE
-	uint8_t	LIN_Mode;					//LINﻁ¬ﺩﻉﺅ£ﺗﺵ  	LinMasterMode,LinSlaveMode
-	uint8_t	LIN_AutoSync;			//ﻁﺷ٦ﺥﺣ،٢ﺵﺗ٩ﺅ¬  	ENABLE,DISABLE
+	uint8_t	LIN_Enable;				//LINﻁ¬ﺩﻉﺗ٩ﺅ¬  	ENABLE, DISABLE
+	uint8_t	LIN_Mode;					//LINﻁ¬ﺩﻉﺅ£ﺗﺵ  	LinMasterMode, LinSlaveMode
+	uint8_t	LIN_AutoSync;			//ﻁﺷ٦ﺥﺣ،٢ﺵﺗ٩ﺅ¬  	ENABLE, DISABLE
 	uint16_t	LIN_Baudrate;			//LIN٢ﺎﺟﻅﺁﺗ
 } USARTx_LIN_InitDefine; 
 
@@ -48,11 +54,11 @@ typedef struct
 //                              ﺣﻗ٢؟ﺓﻵﺃﻐ
 //========================================================================
 
-uint8_t UASRT_LIN_Configuration(uint8_t USARTx, USARTx_LIN_InitDefine *USART);
-void UsartLinSendChecksum(uint8_t USARTx, uint8_t *dat);
-void UsartLinSendData(uint8_t USARTx, uint8_t *pdat);
-void UsartLinSendFrame(uint8_t USARTx, uint8_t lid, uint8_t *pdat);
-void UsartLinSendHeader(uint8_t USARTx, uint8_t lid);
+uint8_t UASRT_LIN_Configuration( uint8_t USARTx, USARTx_LIN_InitDefine *USART );
+void UsartLinSendChecksum( uint8_t USARTx, uint8_t *dat );
+void UsartLinSendData( uint8_t USARTx, uint8_t *pdat );
+void UsartLinSendFrame( uint8_t USARTx, uint8_t lid, uint8_t *pdat );
+void UsartLinSendHeader( uint8_t USARTx, uint8_t lid );
 
 #endif
 

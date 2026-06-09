@@ -1,9 +1,14 @@
+/**
+ * @file sonic.c
+ * @brief 超声波传感器驱动
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "sonic.h"
 
 sbit tx = ;
 sbit rx = ;
-
-
 
 void sonic_send()
 {
@@ -22,13 +27,13 @@ uint8_t sonic_measure()
 
     sonic_send();
 
-    while(rx == 0);
+    while ( rx == 0 );
     CR = 1;
 
-    while(rx == 1&& CF == 0);
+    while ( rx == 1&& CF == 0 );
     CR = 0;
 
-    if (CH > 0x40) {
+    if ( CH > 0x40 ) {
         return 255;   
     }
     else {
@@ -36,7 +41,5 @@ uint8_t sonic_measure()
     }
 
     return distance;
-
-
 
 }

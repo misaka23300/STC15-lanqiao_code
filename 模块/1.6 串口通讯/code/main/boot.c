@@ -1,3 +1,10 @@
+/**
+ * @file boot.c
+ * @brief 系统启动初始化文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "boot.h"
 
 void boot_init()
@@ -24,7 +31,7 @@ void boot_init()
     EA = 1;
 }
 
-void Timer2_Init(void) // 1毫秒@12.000MHz
+void Timer2_Init( void ) // 1毫秒@12.000MHz
 {
     AUXR |= 0x04; // 定时器时钟1T模式
     T2L = 0x20; // 设置定时初始值
@@ -33,7 +40,7 @@ void Timer2_Init(void) // 1毫秒@12.000MHz
     IE2 |= 0x04; // 使能定时器2中断
 }
 
-void Uart1_Init(void) // 9600bps@12.000MHz
+void Uart1_Init( void ) // 9600bps@12.000MHz
 {
     SCON = 0x50; // 8位数据,可变波特率
     AUXR |= 0x40; // 定时器时钟1T模式

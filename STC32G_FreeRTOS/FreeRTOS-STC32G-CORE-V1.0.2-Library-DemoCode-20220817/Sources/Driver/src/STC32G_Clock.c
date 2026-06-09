@@ -1,9 +1,16 @@
+/**
+ * @file STC32G_Clock.c
+ * @brief 时钟配置模块
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCMCU.com --------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
@@ -14,82 +21,81 @@
 #include	"STC32G_Delay.h"
 
 //========================================================================
-// 函数: void HIRCClkConfig(uint8_t div)
+// 函数: void HIRCClkConfig( uint8_t div )
 // 描述: 高速IRC时钟初始化程序.
 // 参数: div: 时钟分频系数.
 // 返回: none.
-// 版本: V1.0, 2022-04-03
+// 版本: V1.0, 2022 - 4 - 3
 //========================================================================
-void HIRCClkConfig(uint8_t div)
+void HIRCClkConfig( uint8_t div )
 {
 	HIRCCR = 0x80; //启动内部 IRC
-	while (!(HIRCCR & 1)); //等待时钟稳定
+	while (!( HIRCCR & 1 )); //等待时钟稳定
 	CLKDIV = div;
 	CLKSEL = 0x00; //选择内部 IRC ( 默认 )
 }
 
 //========================================================================
-// 函数: void XOSCClkConfig(uint8_t div)
+// 函数: void XOSCClkConfig( uint8_t div )
 // 描述: 外部晶振时钟初始化程序.
 // 参数: div: 时钟分频系数.
 // 返回: none.
-// 版本: V1.0, 2022-04-03
+// 版本: V1.0, 2022 - 4 - 3
 //========================================================================
-void XOSCClkConfig(uint8_t div)
+void XOSCClkConfig( uint8_t div )
 {
 	XOSCCR = 0xc0; //启动外部晶振
-	while (!(XOSCCR & 1)); //等待时钟稳定
+	while (!( XOSCCR & 1 )); //等待时钟稳定
 	CLKDIV = div;  //时钟分频
 	CLKSEL = 0x01; //选择外部晶振
 }
 
 //========================================================================
-// 函数: void IRC32KClkConfig(uint8_t div)
+// 函数: void IRC32KClkConfig( uint8_t div )
 // 描述: 低速32K IRC时钟初始化程序.
 // 参数: div: 时钟分频系数.
 // 返回: none.
-// 版本: V1.0, 2022-04-03
+// 版本: V1.0, 2022 - 4 - 3
 //========================================================================
-void IRC32KClkConfig(uint8_t div)
+void IRC32KClkConfig( uint8_t div )
 {
 	IRC32KCR = 0x80; //启动内部 32K IRC
-	while (!(IRC32KCR & 1)); //等待时钟稳定
+	while (!( IRC32KCR & 1 )); //等待时钟稳定
 	CLKDIV = div;  //时钟分频
 	CLKSEL = 0x03; //选择内部 32K
 }
 
 //========================================================================
-// 函数: void HSPllClkConfig(uint8_t clksrc, uint8_t pcki, uint8_t pllsel, uint8_t div)
+// 函数: void HSPllClkConfig( uint8_t clksrc, uint8_t pcki, uint8_t pllsel, uint8_t div )
 // 描述: 高速IO时钟初始化程序.
-// 参数: clksrc: 系统时钟选择, MCLKSEL_HIRC/MCLKSEL_XIRC/MCLKSEL_X32K/MCLKSEL_I32K/MCLKSEL_PLL/MCLKSEL_PLL2/MCLKSEL_I48M.
-// 参数: pllsel: PLL时钟选择, PLL_96M/PLL_144M.
+// 参数: clksrc: 系统时钟选择, MCLKSEL_HIRC / CLKSEL_XIRC / CLKSEL_X32K / CLKSEL_I32K / CLKSEL_PLL / CLKSEL_PLL2 / CLKSEL_I48M.
+// 参数: pllsel: PLL时钟选择, PLL_96M / LL_144M.
 // 参数: div: 高速IO时钟分频系数.
 // 返回: none.
-// 版本: V1.0, 2022-04-03
+// 版本: V1.0, 2022 - 4 - 3
 //========================================================================
-void HSPllClkConfig(uint8_t clksrc, uint8_t pllsel, uint8_t div)
+void HSPllClkConfig( uint8_t clksrc, uint8_t pllsel, uint8_t div )
 {
-	MainClockSel(clksrc);			//系统时钟选择, MCLKSEL_HIRC/MCLKSEL_XIRC/MCLKSEL_X32K/MCLKSEL_I32K/MCLKSEL_PLL/MCLKSEL_PLL2/MCLKSEL_I48M
+	MainClockSel( clksrc );			//系统时钟选择, MCLKSEL_HIRC / CLKSEL_XIRC / CLKSEL_X32K / CLKSEL_I32K / CLKSEL_PLL / CLKSEL_PLL2 / CLKSEL_I48M
 
 	//系统时钟 n 分频作为PLL时钟源,确保分频后为12M
     USBCLK &= ~PCKI_MSK;
-#if (MAIN_Fosc == 12000000UL)
+#if ( MAIN_Fosc == 12000000UL )
     USBCLK |= PCKI_D1;          //PLL输入时钟1分频
-#elif (MAIN_Fosc == 24000000UL)
+#elif ( MAIN_Fosc == 24000000UL )
     USBCLK |= PCKI_D2;          //PLL输入时钟2分频
-#elif (MAIN_Fosc == 48000000UL)
+#elif ( MAIN_Fosc == 48000000UL )
     USBCLK |= PCKI_D4;          //PLL输入时钟4分频
-#elif (MAIN_Fosc == 96000000UL)
+#elif ( MAIN_Fosc == 96000000UL )
     USBCLK |= PCKI_D8;          //PLL输入时钟8分频
 #else
     USBCLK |= PCKI_D1;          //默认PLL输入时钟1分频
 #endif
 
-	PLLClockSel(pllsel);			//PLL时钟选择, PLL_96M/PLL_144M
-	PLLEnable(ENABLE);				//PLL倍频使能, ENABLE/DISABLE
-	delay_ms(1);              //等待PLL锁频
-	HSIOClockSel(HSCK_PLL);		//高速IO时钟选择, HSCK_MCLK/HSCK_PLL
-	HSClockDiv(div);					//高速IO时钟分频系数
+	PLLClockSel( pllsel );			//PLL时钟选择, PLL_96M / LL_144M
+	PLLEnable( ENABLE );				//PLL倍频使能, ENABLE / ISABLE
+	delay_ms(1 );              //等待PLL锁频
+	HSIOClockSel( HSCK_PLL );		//高速IO时钟选择, HSCK_MCLK / SCK_PLL
+	HSClockDiv( div );					//高速IO时钟分频系数
 }
-
 

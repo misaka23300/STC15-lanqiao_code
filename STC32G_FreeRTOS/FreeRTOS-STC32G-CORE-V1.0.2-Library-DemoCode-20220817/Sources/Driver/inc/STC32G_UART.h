@@ -1,9 +1,16 @@
+/**
+ * @file STC32G_UART.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCMCU.com --------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
@@ -46,10 +53,9 @@
 #endif
 
 #define	UART_ShiftRight	0		//同步移位输出
-#define	UART_8bit_BRTx	(1<<6)	//8位数据,可变波特率
-#define	UART_9bit				(2<<6)	//9位数据,固定波特率
-#define	UART_9bit_BRTx	(3<<6)	//9位数据,可变波特率
-
+#define	UART_8bit_BRTx	(1<<6 )	//8位数据,可变波特率
+#define	UART_9bit				(2<<6 )	//9位数据,固定波特率
+#define	UART_9bit_BRTx	(3<<6 )	//9位数据,可变波特率
 
 #define	TimeOutSet1		5
 #define	TimeOutSet2		5
@@ -65,11 +71,10 @@
 //                              UART设置
 //========================================================================
 
-#define		UART1_RxEnable(n)		(n==0?(REN = 0):(REN = 1))				/* UART1接收使能 */
-#define		UART2_RxEnable(n)		(n==0?(S2REN = 0):(S2REN = 1))		/* UART2接收使能 */
-#define		UART3_RxEnable(n)		(n==0?(S3REN = 0):(S3REN = 1))		/* UART3接收使能 */
-#define		UART4_RxEnable(n)		(n==0?(S4REN = 0):(S4REN = 1))		/* UART4接收使能 */
-
+#define		UART1_RxEnable( n )		( n == ?( REN = 0 ):( REN = 1 ))				/* UART1接收使能 */
+#define		UART2_RxEnable( n )		( n == ?( S2REN = 0 ):( S2REN = 1 ))		/* UART2接收使能 */
+#define		UART3_RxEnable( n )		( n == ?( S3REN = 0 ):( S3REN = 1 ))		/* UART3接收使能 */
+#define		UART4_RxEnable( n )		( n == ?( S4REN = 0 ):( S4REN = 1 ))		/* UART4接收使能 */
 
 #define		CLR_TI2()			S2TI = 0			/* 清除TI2											 */
 #define		CLR_RI2()			S2RI = 0			/* 清除RI2											 */
@@ -107,12 +112,12 @@ typedef struct
 
 typedef struct
 { 
-	uint8_t	UART_Mode;			//模式,         UART_ShiftRight,UART_8bit_BRTx,UART_9bit,UART_9bit_BRTx
-	uint8_t	UART_BRT_Use;		//使用波特率,   BRT_Timer1,BRT_Timer2,BRT_Timer3,BRT_Timer4
+	uint8_t	UART_Mode;			//模式,         UART_ShiftRight, UART_8bit_BRTx, UART_9bit, UART_9bit_BRTx
+	uint8_t	UART_BRT_Use;		//使用波特率,   BRT_Timer1, BRT_Timer2, BRT_Timer3, BRT_Timer4
 	uint32_t UART_BaudRate;		//波特率, 	   一般 110 ~ 115200
-	uint8_t	Morecommunicate;	//多机通讯允许, ENABLE,DISABLE
-	uint8_t	UART_RxEnable;		//允许接收,   ENABLE,DISABLE
-	uint8_t	BaudRateDouble;		//波特率加倍, ENABLE,DISABLE
+	uint8_t	Morecommunicate;	//多机通讯允许, ENABLE, DISABLE
+	uint8_t	UART_RxEnable;		//允许接收,   ENABLE, DISABLE
+	uint8_t	BaudRateDouble;		//波特率加倍, ENABLE, DISABLE
 } COMx_InitDefine; 
 
 #ifdef UART1
@@ -136,26 +141,26 @@ extern	uint8_t	UART_BUF_type TX4_Buffer[COM_TX4_Lenth];	//发送缓冲
 extern	uint8_t 	UART_BUF_type RX4_Buffer[COM_RX4_Lenth];	//接收缓冲
 #endif
 
-uint8_t	UART_Configuration(uint8_t UARTx, COMx_InitDefine *COMx);
+uint8_t	UART_Configuration( uint8_t UARTx, COMx_InitDefine *COMx );
 #ifdef UART1
-//void TX1_write2buff(uint8_t dat);
-void PrintString1(uint8_t *puts);
+//void TX1_write2buff( uint8_t dat );
+void PrintString1( uint8_t *puts );
 #endif
 #ifdef UART2
-//void TX2_write2buff(uint8_t dat);
-void PrintString2(uint8_t *puts);
+//void TX2_write2buff( uint8_t dat );
+void PrintString2( uint8_t *puts );
 #endif
 #ifdef UART3
-//void TX3_write2buff(uint8_t dat);
-void PrintString3(uint8_t *puts);
+//void TX3_write2buff( uint8_t dat );
+void PrintString3( uint8_t *puts );
 #endif
 #ifdef UART4
-//void TX4_write2buff(uint8_t dat);
-void PrintString4(uint8_t *puts);
+//void TX4_write2buff( uint8_t dat );
+void PrintString4( uint8_t *puts );
 #endif
 
-//void COMx_write2buff(COMx_Define *COMx, uint8_t dat);
-//void PrintString(COMx_Define *COMx, uint8_t *puts);
+//void COMx_write2buff( COMx_Define *COMx, uint8_t dat );
+//void PrintString( COMx_Define *COMx, uint8_t *puts );
 
 #endif
 

@@ -1,5 +1,11 @@
-#include "main.h"
+/**
+ * @file main.c
+ * @brief 主程序入口文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
 
+#include "main.h"
 
 // 显示状态
 typedef struct {
@@ -53,30 +59,28 @@ enum {
     SONIC_TIME = 100
 };
 
-
-
 void task_loop()
 {
     
-    if (state.time == STATE_TIME)
+    if ( state.time == STATE_TIME )
     {
         display_task();
         state.time = 0;
     }
 
-    if (uart.time == UART_TIME)
+    if ( uart.time == UART_TIME )
     {
         uart_task();
         uart.time = 0;
     }
 
-    if (key.time == KEY_TIME)
+    if ( key.time == KEY_TIME )
     {
         key_task();
         key.time = 0;
     }
 
-    if (sonic.time == SONIC_TIME)
+    if ( sonic.time == SONIC_TIME )
     {
         sonic_task();
         sonic.time = 0;
@@ -93,33 +97,28 @@ void timer_1_interrupt() interrupt 3
 
     if ( key.time < KEY_TIME ) { key.time++; }
 
-    if (sonic.time < SONIC_TIME) {sonic.time++; }
+    if ( sonic.time < SONIC_TIME ) {sonic.time++; }
     
     seg_display();
 }
 
-
-
-
 void display_task()
 {
-    switch (state.mode_0)
+    switch ( state.mode_0 )
     {
         case 0:
         {
-            set_seg_value(sonic.distance / 10, sonic.distance % 10, 0, 0, 0, 0, 0, 0);
+            set_seg_value( sonic.distance / 10, sonic.distance % 10, 0, 0, 0, 0, 0, 0 );
         }
         break;
-
 
     }
 }
 
 void uart_task()
 {
-    //uart_send(str);
+    //uart_send( str );
 }
-
 
 void key_task()
 {
@@ -131,7 +130,6 @@ void sonic_task()
     sonic.distance = measurePCA();
 }
 
-
 void main()
 {
     
@@ -140,10 +138,10 @@ void main()
     boot_init();
     uart_send("设备完成了初始化");
 
-    sprintf(buf, "%.2f\r\n", number);
-    uart_send(buf);
+    sprintf( buf, "%.2f\r\n", number );
+    uart_send( buf );
 
-    while (1)
+    while (1 )
     {
         task_loop();
     }
@@ -161,7 +159,6 @@ void boot_init()
     
 }
 
-
 void pcaInit()
 {
     CMOD = 0x00;    // 配置时钟源 12分频
@@ -171,7 +168,7 @@ void pcaInit()
     CH = 0x00;
 
     CCAP0L = 1000 & 0xFF;
-    CCAP0H = (1000 >> 8) & 0xFF;
+    CCAP0H = (1000 >> 8 ) & 0xFF;
 
     EA = 1;     // 开启使能总中断
     ECF = 1;    // 开启PCA中断

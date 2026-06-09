@@ -1,13 +1,20 @@
+/**
+ * @file FreeRTOS.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*
  * FreeRTOS Kernel V10.4.6
- * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
+ * Copyright ( C ) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
- * SPDX-License-Identifier: MIT
+ * SPDX - icense - dentifier: MIT
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
+ * this software and associated documentation files ( the "Software"), to deal in
  * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * use, copy, modify, merge, publish, distribute, sublicense, and / r sell copies of
  * the Software, and to permit persons to whom the Software is furnished to do so,
  * subject to the following conditions:
  *
@@ -22,7 +29,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * https://www.FreeRTOS.org
- * https://github.com/FreeRTOS
+ * https://github.com / reeRTOS
  *
  */
 
@@ -40,21 +47,21 @@
  *   + Ensure the project's include path includes the directory in which your
  *     compiler stores stdint.h.
  *   + Set any compiler options necessary for it to support C99, as technically
- *     stdint.h is only mandatory with C99 (FreeRTOS does not require C99 in any
- *     other way).
+ *     stdint.h is only mandatory with C99 ( FreeRTOS does not require C99 in any
+ *     other way ).
  *   + The FreeRTOS download includes a simple stdint.h definition that can be
  *     used in cases where none is provided by the compiler.  The files only
  *     contains the typedefs required to build FreeRTOS.  Read the instructions
- *     in FreeRTOS/source/stdint.readme for more information.
+ *     in FreeRTOS / ource / tdint.readme for more information.
  */
 #include <stdint.h> /* READ COMMENT ABOVE. */
 #include <stdio.h>
 
-/* *INDENT-OFF* */
+/* *INDENT - FF* */
 #ifdef __cplusplus
     extern "C" {
 #endif
-/* *INDENT-ON* */
+/* *INDENT - N* */
 
 /* Application specific configuration options. */
 #include "FreeRTOSConfig.h"
@@ -77,12 +84,12 @@
 
 /*
  * Check all the required application specific macros have been defined.
- * These macros are application specific and (as downloaded) are defined
+ * These macros are application specific and ( as downloaded ) are defined
  * within FreeRTOSConfig.h.
  */
 
 #ifndef configMINIMAL_STACK_SIZE
-    #error Missing definition:  configMINIMAL_STACK_SIZE must be defined in FreeRTOSConfig.h.  configMINIMAL_STACK_SIZE defines the size (in words) of the stack allocated to the idle task.  Refer to the demo project provided for your port for a suitable value.
+    #error Missing definition:  configMINIMAL_STACK_SIZE must be defined in FreeRTOSConfig.h.  configMINIMAL_STACK_SIZE defines the size ( in words ) of the stack allocated to the idle task.  Refer to the demo project provided for your port for a suitable value.
 #endif
 
 #ifndef configMAX_PRIORITIES
@@ -143,7 +150,7 @@
     #ifdef INCLUDE_vTaskDelayUntil
 
 /* If INCLUDE_vTaskDelayUntil is set but INCLUDE_xTaskDelayUntil is not then
- * the project's FreeRTOSConfig.h probably pre-dates the introduction of
+ * the project's FreeRTOSConfig.h probably pre - ates the introduction of
  * xTaskDelayUntil and setting INCLUDE_xTaskDelayUntil to whatever
  * INCLUDE_vTaskDelayUntil is set to will ensure backward compatibility.
  */
@@ -390,7 +397,7 @@
 /* Called when a task attempts to take a mutex that is already held by a
  * lower priority task.  pxTCBOfMutexHolder is a pointer to the TCB of the task
  * that holds the mutex.  uxInheritedPriority is the priority the mutex holder
- * will inherit (the priority of the task that is attempting to obtain the
+ * will inherit ( the priority of the task that is attempting to obtain the
  * muted. */
     #define traceTASK_PRIORITY_INHERIT( pxTCBOfMutexHolder, uxInheritedPriority )
 #endif
@@ -400,14 +407,14 @@
 /* Called when a task releases a mutex, the holding of which had resulted in
  * the task inheriting the priority of a higher priority task.
  * pxTCBOfMutexHolder is a pointer to the TCB of the task that is releasing the
- * mutex.  uxOriginalPriority is the task's configured (base) priority. */
+ * mutex.  uxOriginalPriority is the task's configured ( base ) priority. */
     #define traceTASK_PRIORITY_DISINHERIT( pxTCBOfMutexHolder, uxOriginalPriority )
 #endif
 
 #ifndef traceBLOCKING_ON_QUEUE_RECEIVE
 
 /* Task is about to block because it cannot read from a
- * queue/mutex/semaphore.  pxQueue is a pointer to the queue/mutex/semaphore
+ * queue / utex / emaphore.  pxQueue is a pointer to the queue / utex / emaphore
  * upon which the read was attempted.  pxCurrentTCB points to the TCB of the
  * task that attempted the read. */
     #define traceBLOCKING_ON_QUEUE_RECEIVE( pxQueue )
@@ -416,7 +423,7 @@
 #ifndef traceBLOCKING_ON_QUEUE_PEEK
 
 /* Task is about to block because it cannot read from a
- * queue/mutex/semaphore.  pxQueue is a pointer to the queue/mutex/semaphore
+ * queue / utex / emaphore.  pxQueue is a pointer to the queue / utex / emaphore
  * upon which the read was attempted.  pxCurrentTCB points to the TCB of the
  * task that attempted the read. */
     #define traceBLOCKING_ON_QUEUE_PEEK( pxQueue )
@@ -425,7 +432,7 @@
 #ifndef traceBLOCKING_ON_QUEUE_SEND
 
 /* Task is about to block because it cannot write to a
- * queue/mutex/semaphore.  pxQueue is a pointer to the queue/mutex/semaphore
+ * queue / utex / emaphore.  pxQueue is a pointer to the queue / utex / emaphore
  * upon which the write was attempted.  pxCurrentTCB points to the TCB of the
  * task that attempted the write. */
     #define traceBLOCKING_ON_QUEUE_SEND( pxQueue )
@@ -760,7 +767,7 @@
 #if ( configGENERATE_RUN_TIME_STATS == 1 )
 
     #ifndef portCONFIGURE_TIMER_FOR_RUN_TIME_STATS
-        #error If configGENERATE_RUN_TIME_STATS is defined then portCONFIGURE_TIMER_FOR_RUN_TIME_STATS must also be defined.  portCONFIGURE_TIMER_FOR_RUN_TIME_STATS should call a port layer function to setup a peripheral timer/counter that can then be used as the run time counter time base.
+        #error If configGENERATE_RUN_TIME_STATS is defined then portCONFIGURE_TIMER_FOR_RUN_TIME_STATS must also be defined.  portCONFIGURE_TIMER_FOR_RUN_TIME_STATS should call a port layer function to setup a peripheral timer / ounter that can then be used as the run time counter time base.
     #endif /* portCONFIGURE_TIMER_FOR_RUN_TIME_STATS */
 
     #ifndef portGET_RUN_TIME_COUNTER_VALUE
@@ -971,15 +978,15 @@
 #ifndef configPRINTF
 
 /* configPRINTF() was not defined, so define it away to nothing.  To use
- * configPRINTF() then define it as follows (where MyPrintFunction() is
- * provided by the application writer):
+ * configPRINTF() then define it as follows ( where MyPrintFunction() is
+ * provided by the application writer ):
  *
- * void MyPrintFunction(const char *pcFormat, ... );
+ * void MyPrintFunction( const char *pcFormat, ... );
  #define configPRINTF( X )   MyPrintFunction X
  *
  * Then call like a standard printf() function, but placing brackets around
  * all parameters so they are passed as a single parameter.  For example:
- * configPRINTF( ("Value = %d", MyVariable) ); */
+ * configPRINTF( ("Value = %d", MyVariable ) ); */
     #define configPRINTF( X )
 #endif
 
@@ -1027,7 +1034,7 @@
     #define xList                         List_t
 
 /* For libraries that break the list data hiding, and access list structure
- * members directly (which is not supposed to be done). */
+ * members directly ( which is not supposed to be done ). */
     #define pxContainer                   pvContainer
 #endif /* configENABLE_BACKWARD_COMPATIBILITY */
 
@@ -1071,7 +1078,6 @@
     #define configRUN_ADDITIONAL_TESTS    0
 #endif
 
-
 /* Sometimes the FreeRTOSConfig.h settings only allow a task to be created using
  * dynamically allocated RAM, in which case when any task is deleted it is known
  * that both the task's stack and TCB need to be freed.  Sometimes the
@@ -1080,7 +1086,7 @@
  * the task's stack or TCB should be freed.  Sometimes the FreeRTOSConfig.h
  * settings allow a task to be created using either statically or dynamically
  * allocated RAM, in which case a member of the TCB is used to record whether the
- * stack and/or TCB were allocated statically or dynamically, so when a task is
+ * stack and / r TCB were allocated statically or dynamically, so when a task is
  * deleted the RAM that was allocated dynamically is freed again and no attempt is
  * made to free the RAM that was allocated statically.
  * tskSTATIC_AND_DYNAMIC_ALLOCATION_POSSIBLE is only true if it is possible for a
@@ -1354,10 +1360,10 @@ typedef struct xSTATIC_STREAM_BUFFER
 /* Message buffers are built on stream buffers. */
 typedef StaticStreamBuffer_t StaticMessageBuffer_t;
 
-/* *INDENT-OFF* */
+/* *INDENT - FF* */
 #ifdef __cplusplus
     }
 #endif
-/* *INDENT-ON* */
+/* *INDENT - N* */
 
 #endif /* INC_FREERTOS_H */

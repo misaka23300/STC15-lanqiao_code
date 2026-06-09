@@ -1,3 +1,10 @@
+/**
+ * @file sonic.c
+ * @brief 超声波传感器驱动
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "sonic.h"
 
 sbit tx = P1 ^ 0;
@@ -32,7 +39,7 @@ uint8_t sonic_measure_mode1() {
     if (TF1 == 1) {
         distance = 255;
     } else {
-        distance = (uint8_t)(((TH1 << 8) | TL1) * 0.017);
+        distance = (uint8_t) (((TH1 << 8) | TL1) * 0.017);
     }
 
     return distance;
@@ -61,7 +68,7 @@ uint8_t sonic_measure_mode2() {
     if (TF1 == 1) {
         distance = 255;
     } else {
-        distance = (uint8_t)(((TH1 << 8) | TL1) * 0.017);
+        distance = (uint8_t) (((TH1 << 8) | TL1) * 0.017);
     }
 
     return distance;
@@ -79,7 +86,7 @@ uint8_t sonic_measure_mode3() {
     tx = 0;
     Delay14us();
 
-    while(rx == 0);
+    while (rx == 0);
     CR = 1;
     while ((rx == 1) && (CH > 0x40));
     CR = 0;
@@ -88,6 +95,6 @@ uint8_t sonic_measure_mode3() {
         return 0;
     } else {
         time_Dis = (CH << 8) | CL;
-        return (uint8_t)((time_Dis * 0.0172) - 2);
+        return (uint8_t) ((time_Dis * 0.0172) - 2);
     }
 }

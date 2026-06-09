@@ -1,14 +1,21 @@
+/**
+ * @file STC32G_Switch.h
+ * @brief Êú™ÊåáÂÆöÊèèËø∞
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCAI.com ---------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* »Áπ˚“™‘⁄≥Ã–Ú÷– π”√¥À¥˙¬Î,«Î‘⁄≥Ã–Ú÷–◊¢√˜ π”√¡ÀSTCµƒ◊ ¡œº∞≥Ã–Ú            */
+/* “™⁄≥ π√¥À¥,⁄≥◊¢ πSTCœº            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_SWITCH_H
@@ -17,28 +24,28 @@
 #include	"config.h"
 
 //========================================================================
-//                            π¶ƒ‹Ω≈«–ªª…Ë÷√
+//                            ‹Ω–ª
 //========================================================================
 
-#define  UART1_SW(Pin)				P_SW1 = (P_SW1 & 0x3F) | (Pin << 6)
-#define  CAN1_SW(Pin)				P_SW1 = (P_SW1 & 0xCF) | (Pin << 4)
-#define  CAN2_SW(Pin)				P_SW3 = (P_SW3 & 0xFC) | (Pin)
-#define  LIN_SW(Pin)				P_SW1 = (P_SW1 & 0xFC) | (Pin)
-#define  SPI_SW(Pin)				P_SW1 = (P_SW1 & 0xF3) | (Pin << 2)
-#define  I2C_SW(Pin)				P_SW2 = (P_SW2 & 0xCF) | (Pin << 4)
-#define  COMP_SW(Pin)				P_SW2 = (P_SW2 & 0xF7) | (Pin << 3)
-#define  UART4_SW(Pin)				P_SW2 = (P_SW2 & 0xFB) | (Pin << 2)
-#define  UART3_SW(Pin)				P_SW2 = (P_SW2 & 0xFD) | (Pin << 1)
-#define  UART2_SW(Pin)				P_SW2 = (P_SW2 & 0xFE) | (Pin)
+#define  UART1_SW( Pin )				P_SW1 = ( P_SW1 & 0x3F ) | ( Pin << 6 )
+#define  CAN1_SW( Pin )				P_SW1 = ( P_SW1 & 0xCF ) | ( Pin << 4 )
+#define  CAN2_SW( Pin )				P_SW3 = ( P_SW3 & 0xFC ) | ( Pin )
+#define  LIN_SW( Pin )				P_SW1 = ( P_SW1 & 0xFC ) | ( Pin )
+#define  SPI_SW( Pin )				P_SW1 = ( P_SW1 & 0xF3 ) | ( Pin << 2 )
+#define  I2C_SW( Pin )				P_SW2 = ( P_SW2 & 0xCF ) | ( Pin << 4 )
+#define  COMP_SW( Pin )				P_SW2 = ( P_SW2 & 0xF7 ) | ( Pin << 3 )
+#define  UART4_SW( Pin )				P_SW2 = ( P_SW2 & 0xFB ) | ( Pin << 2 )
+#define  UART3_SW( Pin )				P_SW2 = ( P_SW2 & 0xFD ) | ( Pin << 1 )
+#define  UART2_SW( Pin )				P_SW2 = ( P_SW2 & 0xFE ) | ( Pin )
 
-#define  MCLKO_SW(Pin)				MCLKOCR = (MCLKOCR & 0x7F) | (Pin << 7)
-#define  T3T4SEL_SW(Pin)			T3T4PIN = (T3T4PIN & 0xFE) | (Pin)
+#define  MCLKO_SW( Pin )				MCLKOCR = ( MCLKOCR & 0x7F ) | ( Pin << 7 )
+#define  T3T4SEL_SW( Pin )			T3T4PIN = ( T3T4PIN & 0xFE ) | ( Pin )
 
-#define  LCM_CTRL_SW(Pin)			LCMIFCFG2 = (LCMIFCFG2 & ~0x60) | (Pin << 5)
-#define  LCM_DATA_SW(Pin)			LCMIFCFG = (LCMIFCFG & ~0x0C) | (Pin << 2)
+#define  LCM_CTRL_SW( Pin )			LCMIFCFG2 = ( LCMIFCFG2 & ~0x60 ) | ( Pin << 5 )
+#define  LCM_DATA_SW( Pin )			LCMIFCFG = ( LCMIFCFG & ~0x0C ) | ( Pin << 2 )
 
 //========================================================================
-//                              ∂®“Â…˘√˜
+//                              
 //========================================================================
 
 #define	LCM_CTRL_P45_P44_P42	0

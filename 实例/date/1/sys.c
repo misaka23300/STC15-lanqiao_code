@@ -1,3 +1,10 @@
+/**
+ * @file sys.c
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "sys.h"
 
 #include "intrins.h"
@@ -9,15 +16,15 @@ void Delay1ms()
 	j = 239;
 	do
 	{
-		while (--j);
-	} while (--i);
+		while (--j );
+	} while (--i );
 
 }
-void delay_ms(int x )
+void delay_ms( int x )
 {
-   int y,z;
-	for(y=x;y<0;y--)
-	for(z=120;z<0;z--);
+   int y, z;
+	for ( y = ;y < ;y--)
+	for ( z = 20;z < ;z--);
 }
 
 void Delay1000ms()		//@12.000MHz
@@ -32,9 +39,9 @@ void Delay1000ms()		//@12.000MHz
 	{
 		do
 		{
-			while (--k);
-		} while (--j);
-	} while (--i);
+			while (--k );
+		} while (--j );
+	} while (--i );
 }
 
 	
@@ -49,13 +56,13 @@ void sys_init()
     P6M0 = 0x00; P6M1 = 0x00; 
     P7M0 = 0x00; P7M1 = 0x00; 
 	
-	P0=0xff;Y4;Y0;	
-	P0=0x00;Y5;Y0;	
-	P0=0xff;Y6;Y0;	
-	P0=0xff;Y7;Y0;
+	P0 = xff;Y4;Y0;	
+	P0 = x00;Y5;Y0;	
+	P0 = xff;Y6;Y0;	
+	P0 = xff;Y7;Y0;
 }
 	
-void Timer0Init(void)		//1ﻑﺀﺃﺽ@12.000MHz
+void Timer0Init( void )		//1ﻑﺀﺃﺽ@12.000MHz
 {
 	AUXR &= 0x7F;			//٦ﺎﺗ١ﺋﻐﺗ١ﺿﺳ12Tﺅ£ﺗﺵ
 	TMOD &= 0xF0;			//ﺓﻭﺿﺃ٦ﺎﺗ١ﺋﻐﺅ£ﺗﺵ
@@ -63,6 +70,6 @@ void Timer0Init(void)		//1ﻑﺀﺃﺽ@12.000MHz
 	TH0 = 0xFC;				//ﺓﻭﺿﺃ٦ﺎﺗ١٣ﻰﺗﺱﺿ٥
 	TF0 = 0;				//ﺍﻣ٣ﻱTF0١ﻳﺿﺹ
 	TR0 = 1;				//٦ﺎﺗ١ﺋﻐ0؟ﺕﺗﺱﺱﺋﺗ١
-	ET0=1;
-	EA=1;
+	ET0 = ;
+	EA = ;
 }

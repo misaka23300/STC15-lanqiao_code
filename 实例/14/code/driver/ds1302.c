@@ -1,3 +1,10 @@
+/**
+ * @file ds1302.c
+ * @brief DS1302实时时钟驱动
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "ds1302.h"
 #include "log.h"
 
@@ -12,9 +19,9 @@ uint8_t set_time[7] = {0x50, 0x59, 0x23, 0x01, 0x01, 0x01, 0x26};
 uint8_t now_time[3];
 
 //
-void Write_Ds1302(unsigned char temp) {
+void Write_Ds1302( unsigned char temp ) {
   unsigned char i;
-  for (i = 0; i < 8; i++) {
+  for ( i = 0; i < 8; i++) {
     SCK = 0;
     SDA = temp & 0x01;
     temp >>= 1;
@@ -23,20 +30,20 @@ void Write_Ds1302(unsigned char temp) {
 }
 
 //
-void Write_Ds1302_Byte(unsigned char address, unsigned char dat) {
+void Write_Ds1302_Byte( unsigned char address, unsigned char dat ) {
   RST = 0;
   _nop_();
   SCK = 0;
   _nop_();
   RST = 1;
   _nop_();
-  Write_Ds1302(address);
-  Write_Ds1302(dat);
+  Write_Ds1302( address );
+  Write_Ds1302( dat );
   RST = 0;
 }
 
 //
-unsigned char Read_Ds1302_Byte(unsigned char address) {
+unsigned char Read_Ds1302_Byte( unsigned char address ) {
   unsigned char i, temp = 0x00;
   RST = 0;
   _nop_();
@@ -44,11 +51,11 @@ unsigned char Read_Ds1302_Byte(unsigned char address) {
   _nop_();
   RST = 1;
   _nop_();
-  Write_Ds1302(address);
-  for (i = 0; i < 8; i++) {
+  Write_Ds1302( address );
+  for ( i = 0; i < 8; i++) {
     SCK = 0;
     temp >>= 1;
-    if (SDA)
+    if ( SDA )
       temp |= 0x80;
     SCK = 1;
   }
@@ -62,31 +69,31 @@ unsigned char Read_Ds1302_Byte(unsigned char address) {
   _nop_();
   SDA = 1;
   _nop_();
-  return (temp);
+  return ( temp );
 }
 
-uint8_t bcd_to_hex(uint8_t bcd) { return bcd / 16 * 10 + bcd % 16; }
+uint8_t bcd_to_hex( uint8_t bcd ) { return bcd / 16 * 10 + bcd % 16; }
 
 void ds1302_write() {
   uint8_t i;
-  Write_Ds1302_Byte(0x8e, 0x00);
-  for (i = 0; i < 7; i++) {
-    Write_Ds1302_Byte(write_address[i], set_time[i]);
+  Write_Ds1302_Byte(0x8e, 0x00 );
+  for ( i = 0; i < 7; i++) {
+    Write_Ds1302_Byte( write_address[i], set_time[i]);
   }
-  Write_Ds1302_Byte(0x8e, 0x80);
+  Write_Ds1302_Byte(0x8e, 0x80 );
 }
 
 // 检查BCD值是否有效
-bit is_valid_bcd(uint8_t bcd, uint8_t max_value) {
+bit is_valid_bcd( uint8_t bcd, uint8_t max_value ) {
   uint8_t high = bcd >> 4;
   uint8_t low = bcd & 0x0F;
 
-  if (high > 9 || low > 9) {
+  if ( high > 9 || low > 9 ) {
     return 0; // BCD格式无效
   }
 
   uint8_t decimal = high * 10 + low;
-  return (decimal <= max_value);
+  return ( decimal <= max_value );
 }
 
 void ds1302_read()
@@ -98,28 +105,28 @@ void ds1302_read()
 	log_debug("Reading RTC time...");
 	
 	// 读取原始BCD数据
-	for (i = 0; i < 3; i++) {
-		temp_time[i] = Read_Ds1302_Byte(read_address[i]);
+	for ( i = 0; i < 3; i++) {
+		temp_time[i] = Read_Ds1302_Byte( read_address[i]);
 	}
 	
 	// 检查数据有效性
-	if (!is_valid_bcd(temp_time[0], 59)) { // 秒
+	if (!is_valid_bcd( temp_time[0], 59 )) { // 秒
 		valid = 0;
-		log_error("Invalid RTC second value: 0x%02X", temp_time[0]);
+		log_error("Invalid RTC second value: 0x % 2X", temp_time[0]);
 	}
-	if (!is_valid_bcd(temp_time[1], 59)) { // 分
+	if (!is_valid_bcd( temp_time[1], 59 )) { // 分
 		valid = 0;
-		log_error("Invalid RTC minute value: 0x%02X", temp_time[1]);
+		log_error("Invalid RTC minute value: 0x % 2X", temp_time[1]);
 	}
-	if (!is_valid_bcd(temp_time[2], 23)) { // 时
+	if (!is_valid_bcd( temp_time[2], 23 )) { // 时
 		valid = 0;
-		log_error("Invalid RTC hour value: 0x%02X", temp_time[2]);
+		log_error("Invalid RTC hour value: 0x % 2X", temp_time[2]);
 	}
 	
 	// 如果数据有效，转换并保存
-	if (valid) {
-		for (i = 0; i < 3; i++) {
-			now_time[i] = bcd_to_hex(temp_time[i]);
+	if ( valid ) {
+		for ( i = 0; i < 3; i++) {
+			now_time[i] = bcd_to_hex( temp_time[i]);
 		}
 		log_debug("RTC time read successful: %02d:%02d:%02d", 
 				now_time[2], now_time[1], now_time[0]);

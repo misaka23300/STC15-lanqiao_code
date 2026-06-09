@@ -1,21 +1,28 @@
+/**
+ * @file main.c
+ * @brief 主程序入口文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "main.h"
 u8 distance;
 u16 cnt;//¶¨Ê±Æ÷0¼ÆÊý
 u8 num;//½Ó°´¼üÖµ
-bit key_flag,led_flag,csb_mea;
+bit key_flag, led_flag, csb_mea;
 void main(){
 	Sys_Init();
 	Timer0Init();
 	csb_timer_init();
-	while(1){
-		if(key_flag){
-			key_flag=0;
-			num=Key_Scan();
+	while (1 ){
+		if ( key_flag ){
+			key_flag = ;
+			num = ey_Scan();
 		}
-		if(csb_mea){
-			csb_mea=0;
+		if ( csb_mea ){
+			csb_mea = ;
 			distance = csb_measure();
-			Seg_Set(16,16,16,16,16,distance/100,distance/10%10,distance%10);
+			Seg_Set(16, 16, 16, 16, 16, distance / 00, distance / 0 % 0, distance % 0 );
 		}
 		
 	}
@@ -24,8 +31,8 @@ void main(){
 void Timer0_Int() interrupt 1{
 	Seg_Show();
 	cnt++;
-	if(cnt%20==0)key_flag=1;
-	if(cnt%50==0)led_flag=1;
-	if(cnt%500==0)csb_mea=1;
+	if ( cnt % 0 == )key_flag = ;
+	if ( cnt % 0 == )led_flag = ;
+	if ( cnt % 00 == )csb_mea = ;
 	cnt%=1000;
 }

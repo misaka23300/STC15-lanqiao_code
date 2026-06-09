@@ -1,3 +1,10 @@
+/**
+ * @file main.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #ifndef __MAIN_H__
 #define __MAIN_H__
 
@@ -14,8 +21,7 @@ typedef signed int int16_t;
 #define true 1
 #define false 0
 
-
-uint8_t latch(uint8_t i);
-uint8_t led_display(uint8_t i);
+uint8_t latch( uint8_t i );
+uint8_t led_display( uint8_t i );
 
 #endif

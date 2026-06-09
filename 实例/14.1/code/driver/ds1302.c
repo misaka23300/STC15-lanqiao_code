@@ -1,3 +1,10 @@
+/**
+ * @file ds1302.c
+ * @brief DS1302实时时钟驱动
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*	# 	DS1302代码片段说明
 	1. 	本文件夹中提供的驱动代码供参赛选手完成程序设计参考。
 	2. 	参赛选手可以自行编写相关代码或以该代码为基础，根据所选单片机类型、运行速度和试题
@@ -14,59 +21,57 @@ uint8_t code  read_address[7] = {0x81, 0x83, 0x85, 0x87, 0x89, 0x8B, 0x8D};
 uint8_t xdata     now_time[3] = {0, 0, 0};
 uint8_t code    write_time[7] = {0x09, 0x28, 0x23, 0x01, 0x04, 0x04, 0x25};
 
-
 //
-void Write_Ds1302(unsigned  char temp) 
+void Write_Ds1302( unsigned  char temp ) 
 {
 	unsigned char i;
-	for (i=0;i<8;i++)     	
+	for ( i = ;i < ;i++)     	
 	{ 
 		SCK = 0;
 		SDA = temp&0x01;
 		temp>>=1; 
-		SCK=1;
+		SCK = ;
 	}
 }   
 
 //
-void Write_Ds1302_Byte( unsigned char address,unsigned char dat )     
+void Write_Ds1302_Byte( unsigned char address, unsigned char dat )     
 {
- 	RST=0;	_nop_();
- 	SCK=0;	_nop_();
- 	RST=1; 	_nop_();  
- 	Write_Ds1302(address);	
- 	Write_Ds1302(dat);		
- 	RST=0; 
+ 	RST = ;	_nop_();
+ 	SCK = ;	_nop_();
+ 	RST = ; 	_nop_();  
+ 	Write_Ds1302( address );	
+ 	Write_Ds1302( dat );		
+ 	RST = ; 
 }
 
 //
 unsigned char Read_Ds1302_Byte ( unsigned char address )
 {
- 	unsigned char i,temp=0x00;
- 	RST=0;	_nop_();
- 	SCK=0;	_nop_();
- 	RST=1;	_nop_();
- 	Write_Ds1302(address);
- 	for (i=0;i<8;i++) 	
+ 	unsigned char i, temp = x00;
+ 	RST = ;	_nop_();
+ 	SCK = ;	_nop_();
+ 	RST = ;	_nop_();
+ 	Write_Ds1302( address );
+ 	for ( i = ;i < ;i++) 	
  	{		
-		SCK=0;
+		SCK = ;
 		temp>>=1;	
- 		if(SDA)
+ 		if ( SDA )
  		temp|=0x80;	
- 		SCK=1;
+ 		SCK = ;
 	} 
- 	RST=0;	_nop_();
- 	SCK=0;	_nop_();
-	SCK=1;	_nop_();
-	SDA=0;	_nop_();
-	SDA=1;	_nop_();
-	return (temp);			
+ 	RST = ;	_nop_();
+ 	SCK = ;	_nop_();
+	SCK = ;	_nop_();
+	SDA = ;	_nop_();
+	SDA = ;	_nop_();
+	return ( temp );			
 }
-
 
 //
 
-uint8_t bcd_to_hex(uint8_t bcd)
+uint8_t bcd_to_hex( uint8_t bcd )
 {
 	return bcd / 16 * 10 + bcd % 10;
 }
@@ -74,21 +79,21 @@ uint8_t bcd_to_hex(uint8_t bcd)
 void ds1302_write()
 {
 	uint8_t i = 0;
-	Write_Ds1302_Byte(0x8E,0x00);
+	Write_Ds1302_Byte(0x8E, 0x00 );
 
-	for (i = 0; i < 7;i++) {
-		Write_Ds1302_Byte(write_address[i], write_time[i]);
+	for ( i = 0; i < 7;i++) {
+		Write_Ds1302_Byte( write_address[i], write_time[i]);
 	}
 
-	Write_Ds1302_Byte(0x8E, 0x80);
+	Write_Ds1302_Byte(0x8E, 0x80 );
 }
 
 void ds1302_read()
 {
 	uint8_t i = 0;
-	//uint8_t idata temp[3] = {0, 0 ,0};
-	for (i = 0; i < 3;i++) {
-		now_time[i] = bcd_to_hex(Read_Ds1302_Byte(read_address[i]));
+	//uint8_t idata temp[3] = {0, 0 , 0};
+	for ( i = 0; i < 3;i++) {
+		now_time[i] = bcd_to_hex( Read_Ds1302_Byte( read_address[i]));
 	}
 }
 

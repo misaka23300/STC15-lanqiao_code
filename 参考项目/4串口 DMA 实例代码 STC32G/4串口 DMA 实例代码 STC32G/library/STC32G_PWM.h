@@ -1,14 +1,21 @@
+/**
+ * @file STC32G_PWM.h
+ * @brief Êú™ÊåáÂÆöÊèèËø∞
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
-/* --- Mobile: (86)13922805190 ----------------------------------------*/
-/* --- Fax: 86-0513-55012956,55012947,55012969 ------------------------*/
-/* --- Tel: 86-0513-55012928,55012929,55012966 ------------------------*/
+/* --- Mobile: (86 )13922805190 ----------------------------------------*/
+/* --- Fax: 86 - 513 - 5012956, 55012947, 55012969 ------------------------*/
+/* --- Tel: 86 - 513 - 5012928, 55012929, 55012966 ------------------------*/
 /* --- Web: www.STCAI.com ---------------------------------------------*/
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* »Áπ˚“™‘⁄≥Ã–Ú÷– π”√¥À¥˙¬Î,«Î‘⁄≥Ã–Ú÷–◊¢√˜ π”√¡ÀSTCµƒ◊ ¡œº∞≥Ã–Ú            */
+/* “™⁄≥ π√¥À¥,⁄≥◊¢ πSTCœº            */
 /*---------------------------------------------------------------------*/
 
 #ifndef __STC32G_PWM_H
@@ -17,173 +24,170 @@
 #include  "config.h"
 
 //========================================================================
-//                               PWM…Ë÷√
+//                               PWM
 //========================================================================
 
 //                           7     6     5     4     3     2     1     0    Reset Value
-//sfr PWMA_ENO = 0xFEB1H;  ENO4N ENO4P ENO3N ENO3P ENO2N ENO2P ENO1N ENO1P  0000,0000  /*  ‰≥ˆ πƒ‹ºƒ¥Ê∆˜ */ 
-//sfr PWMB_ENO = 0xFEB5H;    -   ENO8P   -   ENO7P   -   ENO6P   -   ENO5P  0000,0000  /*  ‰≥ˆ πƒ‹ºƒ¥Ê∆˜ */ 
-#define    PWM1P_OUT_EN()  PWMA_ENO |= 0x01  /*  πƒ‹ PWM1P  ‰≥ˆ */
-#define    PWM1P_OUT_DIS()  PWMA_ENO &= ~0x01  /* Ω˚÷π PWM1P  ‰≥ˆ */
-#define    PWM1N_OUT_EN()  PWMA_ENO |= 0x02  /*  πƒ‹ PWM1N  ‰≥ˆ */
-#define    PWM1N_OUT_DIS()  PWMA_ENO &= ~0x02  /* Ω˚÷π PWM1N  ‰≥ˆ */
-#define    PWM2P_OUT_EN()  PWMA_ENO |= 0x04  /*  πƒ‹ PWM2P  ‰≥ˆ */
-#define    PWM2P_OUT_DIS()  PWMA_ENO &= ~0x04  /* Ω˚÷π PWM2P  ‰≥ˆ */
-#define    PWM2N_OUT_EN()  PWMA_ENO |= 0x08  /*  πƒ‹ PWM2N  ‰≥ˆ */
-#define    PWM2N_OUT_DIS()  PWMA_ENO &= ~0x08  /* Ω˚÷π PWM2N  ‰≥ˆ */
-#define    PWM3P_OUT_EN()  PWMA_ENO |= 0x10  /*  πƒ‹ PWM3P  ‰≥ˆ */
-#define    PWM3P_OUT_DIS()  PWMA_ENO &= ~0x10  /* Ω˚÷π PWM3P  ‰≥ˆ */
-#define    PWM3N_OUT_EN()  PWMA_ENO |= 0x20  /*  πƒ‹ PWM3N  ‰≥ˆ */
-#define    PWM3N_OUT_DIS()  PWMA_ENO &= ~0x20  /* Ω˚÷π PWM3N  ‰≥ˆ */
-#define    PWM4P_OUT_EN()  PWMA_ENO |= 0x40  /*  πƒ‹ PWM3P  ‰≥ˆ */
-#define    PWM4P_OUT_DIS()  PWMA_ENO &= ~0x40  /* Ω˚÷π PWM3P  ‰≥ˆ */
-#define    PWM4N_OUT_EN()  PWMA_ENO |= 0x80  /*  πƒ‹ PWM3N  ‰≥ˆ */
-#define    PWM4N_OUT_DIS()  PWMA_ENO &= ~0x80  /* Ω˚÷π PWM3N  ‰≥ˆ */
+//sfr PWMA_ENO = 0xFEB1H;  ENO4N ENO4P ENO3N ENO3P ENO2N ENO2P ENO1N ENO1P  0000, 0000  /*  π‹ºƒ¥ */ 
+//sfr PWMB_ENO = 0xFEB5H;    -   ENO8P   -   ENO7P   -   ENO6P   -   ENO5P  0000, 0000  /*  π‹ºƒ¥ */ 
+#define    PWM1P_OUT_EN()  PWMA_ENO |= 0x01  /*  π PWM1P  */
+#define    PWM1P_OUT_DIS()  PWMA_ENO &= ~0x01  /* ÷π PWM1P  */
+#define    PWM1N_OUT_EN()  PWMA_ENO |= 0x02  /*  π PWM1N  */
+#define    PWM1N_OUT_DIS()  PWMA_ENO &= ~0x02  /* ÷π PWM1N  */
+#define    PWM2P_OUT_EN()  PWMA_ENO |= 0x04  /*  π PWM2P  */
+#define    PWM2P_OUT_DIS()  PWMA_ENO &= ~0x04  /* ÷π PWM2P  */
+#define    PWM2N_OUT_EN()  PWMA_ENO |= 0x08  /*  π PWM2N  */
+#define    PWM2N_OUT_DIS()  PWMA_ENO &= ~0x08  /* ÷π PWM2N  */
+#define    PWM3P_OUT_EN()  PWMA_ENO |= 0x10  /*  π PWM3P  */
+#define    PWM3P_OUT_DIS()  PWMA_ENO &= ~0x10  /* ÷π PWM3P  */
+#define    PWM3N_OUT_EN()  PWMA_ENO |= 0x20  /*  π PWM3N  */
+#define    PWM3N_OUT_DIS()  PWMA_ENO &= ~0x20  /* ÷π PWM3N  */
+#define    PWM4P_OUT_EN()  PWMA_ENO |= 0x40  /*  π PWM3P  */
+#define    PWM4P_OUT_DIS()  PWMA_ENO &= ~0x40  /* ÷π PWM3P  */
+#define    PWM4N_OUT_EN()  PWMA_ENO |= 0x80  /*  π PWM3N  */
+#define    PWM4N_OUT_DIS()  PWMA_ENO &= ~0x80  /* ÷π PWM3N  */
 
-#define    PWM5P_OUT_EN()  PWMB_ENO |= 0x01  /*  πƒ‹ PWM5P  ‰≥ˆ */
-#define    PWM5P_OUT_DIS()  PWMB_ENO &= ~0x01  /* Ω˚÷π PWM5P  ‰≥ˆ */
-#define    PWM6P_OUT_EN()  PWMB_ENO |= 0x04  /*  πƒ‹ PWM6P  ‰≥ˆ */
-#define    PWM6P_OUT_DIS()  PWMB_ENO &= ~0x04  /* Ω˚÷π PWM6P  ‰≥ˆ */
-#define    PWM7P_OUT_EN()  PWMB_ENO |= 0x10  /*  πƒ‹ PWM7P  ‰≥ˆ */
-#define    PWM7P_OUT_DIS()  PWMB_ENO &= ~0x10  /* Ω˚÷π PWM7P  ‰≥ˆ */
-#define    PWM8P_OUT_EN()  PWMB_ENO |= 0x40  /*  πƒ‹ PWM8P  ‰≥ˆ */
-#define    PWM8P_OUT_DIS()  PWMB_ENO &= ~0x40  /* Ω˚÷π PWM8P  ‰≥ˆ */
+#define    PWM5P_OUT_EN()  PWMB_ENO |= 0x01  /*  π PWM5P  */
+#define    PWM5P_OUT_DIS()  PWMB_ENO &= ~0x01  /* ÷π PWM5P  */
+#define    PWM6P_OUT_EN()  PWMB_ENO |= 0x04  /*  π PWM6P  */
+#define    PWM6P_OUT_DIS()  PWMB_ENO &= ~0x04  /* ÷π PWM6P  */
+#define    PWM7P_OUT_EN()  PWMB_ENO |= 0x10  /*  π PWM7P  */
+#define    PWM7P_OUT_DIS()  PWMB_ENO &= ~0x10  /* ÷π PWM7P  */
+#define    PWM8P_OUT_EN()  PWMB_ENO |= 0x40  /*  π PWM8P  */
+#define    PWM8P_OUT_DIS()  PWMB_ENO &= ~0x40  /* ÷π PWM8P  */
 
-#define    PWMA_OutChannelSel(n)    PWMA_ENO = n  //—°‘Ò ‰≥ˆÕ®µ¿
-#define    PWMB_OutChannelSel(n)    PWMB_ENO = n  //—°‘Ò ‰≥ˆÕ®µ¿
+#define    PWMA_OutChannelSel( n )    PWMA_ENO = n  //—°Õ®
+#define    PWMB_OutChannelSel( n )    PWMB_ENO = n  //—°Õ®
 
 //                          7     6     5     4     3     2     1     0    Reset Value
-//sfr PWMA_PS = 0xFEB2H;  C4PS1 C4PS0 C3PS1 C3PS0 C2PS1 C2PS0 C1PS1 C1PS0  0000,0000  /*  ‰≥ˆ πƒ‹ºƒ¥Ê∆˜ */ 
-//sfr PWMB_PS = 0xFEB6H;  C8PS1 C8PS0 C7PS1 C7PS0 C6PS1 C6PS0 C5PS1 C5PS0  0000,0000  /*  ‰≥ˆ πƒ‹ºƒ¥Ê∆˜ */ 
+//sfr PWMA_PS = 0xFEB2H;  C4PS1 C4PS0 C3PS1 C3PS0 C2PS1 C2PS0 C1PS1 C1PS0  0000, 0000  /*  π‹ºƒ¥ */ 
+//sfr PWMB_PS = 0xFEB6H;  C8PS1 C8PS0 C7PS1 C7PS0 C6PS1 C6PS0 C5PS1 C5PS0  0000, 0000  /*  π‹ºƒ¥ */ 
 
-#define    PWM1_USE_P10P11()    PWMA_PS = (PWMA_PS & ~0x03)        /* PWM Õ®µ¿ 1  ‰≥ˆΩ≈«–ªªµΩP10(PWM1P) P11(PWM1N) */ 
-#define    PWM1_USE_P20P21()    PWMA_PS = (PWMA_PS & ~0x03) | 0x01  /* PWM Õ®µ¿ 1  ‰≥ˆΩ≈«–ªªµΩP20(PWM1P) P21(PWM1N) */ 
-#define    PWM1_USE_P60P61()    PWMA_PS = (PWMA_PS & ~0x03) | 0x02  /* PWM Õ®µ¿ 1  ‰≥ˆΩ≈«–ªªµΩP60(PWM1P) P61(PWM1N) */ 
+#define    PWM1_USE_P10P11()    PWMA_PS = ( PWMA_PS & ~0x03 )        /* PWM Õ® 1 –ªP10( PWM1P ) P11( PWM1N ) */ 
+#define    PWM1_USE_P20P21()    PWMA_PS = ( PWMA_PS & ~0x03 ) | 0x01  /* PWM Õ® 1 –ªP20( PWM1P ) P21( PWM1N ) */ 
+#define    PWM1_USE_P60P61()    PWMA_PS = ( PWMA_PS & ~0x03 ) | 0x02  /* PWM Õ® 1 –ªP60( PWM1P ) P61( PWM1N ) */ 
 
-#define    PWM2_USE_P12P13()    PWMA_PS = (PWMA_PS & ~0x0C)          /* PWM Õ®µ¿ 2  ‰≥ˆΩ≈«–ªªµΩP12/P54(PWM2P) P13(PWM2N) */ 
-#define    PWM2_USE_P22P23()    PWMA_PS = (PWMA_PS & ~0x0C) | 0x04  /* PWM Õ®µ¿ 2  ‰≥ˆΩ≈«–ªªµΩP22(PWM2P) P23(PWM2N) */ 
-#define    PWM2_USE_P62P63()    PWMA_PS = (PWMA_PS & ~0x0C) | 0x08  /* PWM Õ®µ¿ 2  ‰≥ˆΩ≈«–ªªµΩP62(PWM2P) P63(PWM2N) */ 
+#define    PWM2_USE_P12P13()    PWMA_PS = ( PWMA_PS & ~0x0C )          /* PWM Õ® 2 –ªP12 / 54( PWM2P ) P13( PWM2N ) */ 
+#define    PWM2_USE_P22P23()    PWMA_PS = ( PWMA_PS & ~0x0C ) | 0x04  /* PWM Õ® 2 –ªP22( PWM2P ) P23( PWM2N ) */ 
+#define    PWM2_USE_P62P63()    PWMA_PS = ( PWMA_PS & ~0x0C ) | 0x08  /* PWM Õ® 2 –ªP62( PWM2P ) P63( PWM2N ) */ 
 
-#define    PWM3_USE_P14P15()    PWMA_PS = (PWMA_PS & ~0x30)          /* PWM Õ®µ¿ 3  ‰≥ˆΩ≈«–ªªµΩP14(PWM3P) P15(PWM3N) */ 
-#define    PWM3_USE_P24P25()    PWMA_PS = (PWMA_PS & ~0x30) | 0x10  /* PWM Õ®µ¿ 3  ‰≥ˆΩ≈«–ªªµΩP24(PWM3P) P25(PWM3N) */ 
-#define    PWM3_USE_P64P65()    PWMA_PS = (PWMA_PS & ~0x30) | 0x20  /* PWM Õ®µ¿ 3  ‰≥ˆΩ≈«–ªªµΩP64(PWM3P) P65(PWM3N) */ 
+#define    PWM3_USE_P14P15()    PWMA_PS = ( PWMA_PS & ~0x30 )          /* PWM Õ® 3 –ªP14( PWM3P ) P15( PWM3N ) */ 
+#define    PWM3_USE_P24P25()    PWMA_PS = ( PWMA_PS & ~0x30 ) | 0x10  /* PWM Õ® 3 –ªP24( PWM3P ) P25( PWM3N ) */ 
+#define    PWM3_USE_P64P65()    PWMA_PS = ( PWMA_PS & ~0x30 ) | 0x20  /* PWM Õ® 3 –ªP64( PWM3P ) P65( PWM3N ) */ 
 
-#define    PWM4_USE_P16P17()    PWMA_PS = (PWMA_PS & ~0xC0)          /* PWM Õ®µ¿ 4  ‰≥ˆΩ≈«–ªªµΩP16(PWM4P) P17(PWM4N) */ 
-#define    PWM4_USE_P26P27()    PWMA_PS = (PWMA_PS & ~0xC0) | 0x40  /* PWM Õ®µ¿ 4  ‰≥ˆΩ≈«–ªªµΩP26(PWM4P) P27(PWM4N) */ 
-#define    PWM4_USE_P66P67()    PWMA_PS = (PWMA_PS & ~0xC0) | 0x80  /* PWM Õ®µ¿ 4  ‰≥ˆΩ≈«–ªªµΩP66(PWM4P) P67(PWM4N) */ 
-#define    PWM4_USE_P34P33()    PWMA_PS = (PWMA_PS | 0xC0)          /* PWM Õ®µ¿ 4  ‰≥ˆΩ≈«–ªªµΩP34(PWM4P) P33(PWM4N) */ 
+#define    PWM4_USE_P16P17()    PWMA_PS = ( PWMA_PS & ~0xC0 )          /* PWM Õ® 4 –ªP16( PWM4P ) P17( PWM4N ) */ 
+#define    PWM4_USE_P26P27()    PWMA_PS = ( PWMA_PS & ~0xC0 ) | 0x40  /* PWM Õ® 4 –ªP26( PWM4P ) P27( PWM4N ) */ 
+#define    PWM4_USE_P66P67()    PWMA_PS = ( PWMA_PS & ~0xC0 ) | 0x80  /* PWM Õ® 4 –ªP66( PWM4P ) P67( PWM4N ) */ 
+#define    PWM4_USE_P34P33()    PWMA_PS = ( PWMA_PS | 0xC0 )          /* PWM Õ® 4 –ªP34( PWM4P ) P33( PWM4N ) */ 
 
-#define    PWM5_USE_P20()      PWMB_PS = (PWMB_PS & ~0x03)          /* PWM Õ®µ¿ 5  ‰≥ˆΩ≈«–ªªµΩP20(PWM5) */ 
-#define    PWM5_USE_P17()      PWMB_PS = (PWMB_PS & ~0x03) | 0x01  /* PWM Õ®µ¿ 5  ‰≥ˆΩ≈«–ªªµΩP17(PWM5) */ 
-#define    PWM5_USE_P00()      PWMB_PS = (PWMB_PS & ~0x03) | 0x02  /* PWM Õ®µ¿ 5  ‰≥ˆΩ≈«–ªªµΩP00(PWM5) */ 
-#define    PWM5_USE_P74()      PWMB_PS = (PWMB_PS | 0x03)          /* PWM Õ®µ¿ 5  ‰≥ˆΩ≈«–ªªµΩP74(PWM5) */ 
+#define    PWM5_USE_P20()      PWMB_PS = ( PWMB_PS & ~0x03 )          /* PWM Õ® 5 –ªP20( PWM5 ) */ 
+#define    PWM5_USE_P17()      PWMB_PS = ( PWMB_PS & ~0x03 ) | 0x01  /* PWM Õ® 5 –ªP17( PWM5 ) */ 
+#define    PWM5_USE_P00()      PWMB_PS = ( PWMB_PS & ~0x03 ) | 0x02  /* PWM Õ® 5 –ªP00( PWM5 ) */ 
+#define    PWM5_USE_P74()      PWMB_PS = ( PWMB_PS | 0x03 )          /* PWM Õ® 5 –ªP74( PWM5 ) */ 
 
-#define    PWM6_USE_P21()      PWMB_PS = (PWMB_PS & ~0x0C)          /* PWM Õ®µ¿ 6  ‰≥ˆΩ≈«–ªªµΩP21(PWM6) */ 
-#define    PWM6_USE_P54()      PWMB_PS = (PWMB_PS & ~0x0C) | 0x04  /* PWM Õ®µ¿ 6  ‰≥ˆΩ≈«–ªªµΩP54(PWM6) */ 
-#define    PWM6_USE_P01()      PWMB_PS = (PWMB_PS & ~0x0C) | 0x08  /* PWM Õ®µ¿ 6  ‰≥ˆΩ≈«–ªªµΩP01(PWM6) */ 
-#define    PWM6_USE_P75()      PWMB_PS = (PWMB_PS | 0x0C)          /* PWM Õ®µ¿ 6  ‰≥ˆΩ≈«–ªªµΩP75(PWM6) */ 
+#define    PWM6_USE_P21()      PWMB_PS = ( PWMB_PS & ~0x0C )          /* PWM Õ® 6 –ªP21( PWM6 ) */ 
+#define    PWM6_USE_P54()      PWMB_PS = ( PWMB_PS & ~0x0C ) | 0x04  /* PWM Õ® 6 –ªP54( PWM6 ) */ 
+#define    PWM6_USE_P01()      PWMB_PS = ( PWMB_PS & ~0x0C ) | 0x08  /* PWM Õ® 6 –ªP01( PWM6 ) */ 
+#define    PWM6_USE_P75()      PWMB_PS = ( PWMB_PS | 0x0C )          /* PWM Õ® 6 –ªP75( PWM6 ) */ 
 
-#define    PWM7_USE_P22()      PWMB_PS = (PWMB_PS & ~0x30)          /* PWM Õ®µ¿ 7  ‰≥ˆΩ≈«–ªªµΩP22(PWM7) */ 
-#define    PWM7_USE_P33()      PWMB_PS = (PWMB_PS & ~0x30) | 0x10  /* PWM Õ®µ¿ 7  ‰≥ˆΩ≈«–ªªµΩP33(PWM7) */ 
-#define    PWM7_USE_P02()      PWMB_PS = (PWMB_PS & ~0x30) | 0x20  /* PWM Õ®µ¿ 7  ‰≥ˆΩ≈«–ªªµΩP02(PWM7) */ 
-#define    PWM7_USE_P76()      PWMB_PS = (PWMB_PS | 0x30)          /* PWM Õ®µ¿ 7  ‰≥ˆΩ≈«–ªªµΩP76(PWM7) */ 
+#define    PWM7_USE_P22()      PWMB_PS = ( PWMB_PS & ~0x30 )          /* PWM Õ® 7 –ªP22( PWM7 ) */ 
+#define    PWM7_USE_P33()      PWMB_PS = ( PWMB_PS & ~0x30 ) | 0x10  /* PWM Õ® 7 –ªP33( PWM7 ) */ 
+#define    PWM7_USE_P02()      PWMB_PS = ( PWMB_PS & ~0x30 ) | 0x20  /* PWM Õ® 7 –ªP02( PWM7 ) */ 
+#define    PWM7_USE_P76()      PWMB_PS = ( PWMB_PS | 0x30 )          /* PWM Õ® 7 –ªP76( PWM7 ) */ 
 
-#define    PWM8_USE_P23()      PWMB_PS = (PWMB_PS & ~0xC0)          /* PWM Õ®µ¿ 8  ‰≥ˆΩ≈«–ªªµΩP23(PWM8) */ 
-#define    PWM8_USE_P34()      PWMB_PS = (PWMB_PS & ~0xC0) | 0x40  /* PWM Õ®µ¿ 8  ‰≥ˆΩ≈«–ªªµΩP34(PWM8) */ 
-#define    PWM8_USE_P03()      PWMB_PS = (PWMB_PS & ~0xC0) | 0x80  /* PWM Õ®µ¿ 8  ‰≥ˆΩ≈«–ªªµΩP03(PWM8) */ 
-#define    PWM8_USE_P77()      PWMB_PS = (PWMB_PS | 0xC0)          /* PWM Õ®µ¿ 8  ‰≥ˆΩ≈«–ªªµΩP77(PWM8) */ 
+#define    PWM8_USE_P23()      PWMB_PS = ( PWMB_PS & ~0xC0 )          /* PWM Õ® 8 –ªP23( PWM8 ) */ 
+#define    PWM8_USE_P34()      PWMB_PS = ( PWMB_PS & ~0xC0 ) | 0x40  /* PWM Õ® 8 –ªP34( PWM8 ) */ 
+#define    PWM8_USE_P03()      PWMB_PS = ( PWMB_PS & ~0xC0 ) | 0x80  /* PWM Õ® 8 –ªP03( PWM8 ) */ 
+#define    PWM8_USE_P77()      PWMB_PS = ( PWMB_PS | 0xC0 )          /* PWM Õ® 8 –ªP77( PWM8 ) */ 
 
 //                             7     6     5     4     3     2     1     0    Reset Value
-//sfr PWMA_IOAUX = 0xFEB3H;  AUX4N AUX4P AUX3N AUX3P AUX2N AUX2P AUX1N AUX1P  0000,0000  /*  ‰≥ˆ∏Ωº” πƒ‹ºƒ¥Ê∆˜ */ 
-//sfr PWMB_IOAUX = 0xFEB7H;    -   AUX8P   -   AUX7P   -   AUX6P   -   AUX5P  0000,0000  /*  ‰≥ˆ∏Ωº” πƒ‹ºƒ¥Ê∆˜ */ 
-#define AUX4N      (1<<7)
-#define AUX4P      (1<<6)
-#define AUX3N      (1<<5)
-#define AUX3P      (1<<4)
-#define AUX2N      (1<<3)
-#define AUX2P      (1<<2)
-#define AUX1N      (1<<1)
-#define AUX1P      (1)
+//sfr PWMA_IOAUX = 0xFEB3H;  AUX4N AUX4P AUX3N AUX3P AUX2N AUX2P AUX1N AUX1P  0000, 0000  /*  π‹ºƒ¥ */ 
+//sfr PWMB_IOAUX = 0xFEB7H;    -   AUX8P   -   AUX7P   -   AUX6P   -   AUX5P  0000, 0000  /*  π‹ºƒ¥ */ 
+#define AUX4N      (1<<7 )
+#define AUX4P      (1<<6 )
+#define AUX3N      (1<<5 )
+#define AUX3P      (1<<4 )
+#define AUX2N      (1<<3 )
+#define AUX2P      (1<<2 )
+#define AUX1N      (1<<1 )
+#define AUX1P      (1 )
 
-#define AUX8P      (1<<6)
-#define AUX7P      (1<<4)
-#define AUX6P      (1<<2)
-#define AUX5P      (1)
-
+#define AUX8P      (1<<6 )
+#define AUX7P      (1<<4 )
+#define AUX6P      (1<<2 )
+#define AUX5P      (1 )
 
 //                           7     6     5    4    3    2    1     0    Reset Value
-//sfr PWMA_CR1 = 0xFEC0H;  ARPEA CMSA1 CMSA0 DIRA OPMA URSA UDISA CENA  0000,0000  /* øÿ÷∆ºƒ¥Ê∆˜ 1 */ 
-//sfr PWMB_CR1 = 0xFEE0H;  ARPEB CMSB1 CMSB0 DIRB OPMB URSB UDISB CENB  0000,0000  /* øÿ÷∆ºƒ¥Ê∆˜ 1 */ 
-#define ARPE1      (1<<7)
-#define ARPE2      (1<<7)
-#define PWMA_AlignMode_Edge()      PWMA_CR1 = (PWMA_CR1 & ~0x60)
-#define PWMA_AlignMode_Mid1()      PWMA_CR1 = (PWMA_CR1 & ~0x60) | 0x20
-#define PWMA_AlignMode_Mid2()      PWMA_CR1 = (PWMA_CR1 & ~0x60) | 0x40
-#define PWMA_AlignMode_Mid3()      PWMA_CR1 = (PWMA_CR1 | 0x60)
+//sfr PWMA_CR1 = 0xFEC0H;  ARPEA CMSA1 CMSA0 DIRA OPMA URSA UDISA CENA  0000, 0000  /* ∆ºƒ¥ 1 */ 
+//sfr PWMB_CR1 = 0xFEE0H;  ARPEB CMSB1 CMSB0 DIRB OPMB URSB UDISB CENB  0000, 0000  /* ∆ºƒ¥ 1 */ 
+#define ARPE1      (1<<7 )
+#define ARPE2      (1<<7 )
+#define PWMA_AlignMode_Edge()      PWMA_CR1 = ( PWMA_CR1 & ~0x60 )
+#define PWMA_AlignMode_Mid1()      PWMA_CR1 = ( PWMA_CR1 & ~0x60 ) | 0x20
+#define PWMA_AlignMode_Mid2()      PWMA_CR1 = ( PWMA_CR1 & ~0x60 ) | 0x40
+#define PWMA_AlignMode_Mid3()      PWMA_CR1 = ( PWMA_CR1 | 0x60 )
 #define PWMA_DIR_UP()              PWMA_CR1 &= ~0x10
 #define PWMA_DIR_DN()              PWMA_CR1 |= 0x10
-#define PWMA_OPMA(n)              (n==1?(PWMA_CR1 |= 0x08):(PWMA_CR1 &= ~0x08))  //µ•¬ˆ≥Âƒ£ Ω 0£∫‘⁄∑¢…˙∏¸–¬ ¬º˛ ±£¨º∆ ˝∆˜≤ªÕ£÷π£ª1£∫‘⁄∑¢…˙œ¬“ª¥Œ∏¸–¬ ¬º˛ ±£¨«Â≥˝ CEN Œª£¨º∆ ˝∆˜Õ£÷π
-#define PWMA_URSA(n)              (n==1?(PWMA_CR1 |= 0x04):(PWMA_CR1 &= ~0x04))  //∏¸–¬«Î«Û‘¥
-#define PWMA_UDISA(n)              (n==1?(PWMA_CR1 |= 0x02):(PWMA_CR1 &= ~0x02))  //Ω˚÷π∏¸–¬ 0£∫≤˙…˙∏¸–¬£®UEV£© ¬º˛£ª1£∫≤ª≤˙…˙∏¸–¬ ¬º˛
-//#define PWMA_CEN_Enable()          PWMA_CR1 |= 0x01    //1£∫ πƒ‹º∆ ˝∆˜
-#define PWMA_CEN_Disable()        PWMA_CR1 &= ~0x01    //0£∫Ω˚÷πº∆ ˝∆˜
-#define PWMA_CEN_Enable(n)        (n==1?(PWMA_CR1 |= 0x01):(PWMA_CR1 &= ~0x01))    //1£∫ πƒ‹º∆ ˝∆˜
+#define PWMA_OPMA( n )              ( n == ?( PWMA_CR1 |= 0x08 ):( PWMA_CR1 &= ~0x08 ))  //ƒ£ Ω 0⁄∑¬º ±Õ£÷π1⁄∑“ªŒ∏¬º ± CEN ŒªÕ£÷π
+#define PWMA_URSA( n )              ( n == ?( PWMA_CR1 |= 0x04 ):( PWMA_CR1 &= ~0x04 ))  //‘¥
+#define PWMA_UDISA( n )              ( n == ?( PWMA_CR1 |= 0x02 ):( PWMA_CR1 &= ~0x02 ))  //÷π 0¬£UEV¬º1¬º
+//#define PWMA_CEN_Enable()          PWMA_CR1 |= 0x01    //1 π‹º
+#define PWMA_CEN_Disable()        PWMA_CR1 &= ~0x01    //0÷π
+#define PWMA_CEN_Enable( n )        ( n == ?( PWMA_CR1 |= 0x01 ):( PWMA_CR1 &= ~0x01 ))    //1 π‹º
 
-#define PWMB_AlignMode_Edge()      PWMB_CR1 = (PWMB_CR1 & ~0x60)
-#define PWMB_AlignMode_Mid1()      PWMB_CR1 = (PWMB_CR1 & ~0x60) | 0x20
-#define PWMB_AlignMode_Mid2()      PWMB_CR1 = (PWMB_CR1 & ~0x60) | 0x40
-#define PWMB_AlignMode_Mid3()      PWMB_CR1 = (PWMB_CR1 | 0x60)
+#define PWMB_AlignMode_Edge()      PWMB_CR1 = ( PWMB_CR1 & ~0x60 )
+#define PWMB_AlignMode_Mid1()      PWMB_CR1 = ( PWMB_CR1 & ~0x60 ) | 0x20
+#define PWMB_AlignMode_Mid2()      PWMB_CR1 = ( PWMB_CR1 & ~0x60 ) | 0x40
+#define PWMB_AlignMode_Mid3()      PWMB_CR1 = ( PWMB_CR1 | 0x60 )
 #define PWMB_DIR_UP()              PWMB_CR1 &= ~0x10
 #define PWMB_DIR_DN()              PWMB_CR1 |= 0x10
-#define PWMB_OPMB(n)              (n==1?(PWMB_CR1 |= 0x08):(PWMB_CR1 &= ~0x08))  //µ•¬ˆ≥Âƒ£ Ω 0£∫‘⁄∑¢…˙∏¸–¬ ¬º˛ ±£¨º∆ ˝∆˜≤ªÕ£÷π£ª1£∫‘⁄∑¢…˙œ¬“ª¥Œ∏¸–¬ ¬º˛ ±£¨«Â≥˝ CEN Œª£¨º∆ ˝∆˜Õ£÷π
-#define PWMB_URSB(n)              (n==1?(PWMB_CR1 |= 0x04):(PWMB_CR1 &= ~0x04))  //∏¸–¬«Î«Û‘¥
-#define PWMB_UDISB(n)              (n==1?(PWMB_CR1 |= 0x02):(PWMB_CR1 &= ~0x02))  //Ω˚÷π∏¸–¬ 0£∫≤˙…˙∏¸–¬£®UEV£© ¬º˛£ª1£∫≤ª≤˙…˙∏¸–¬ ¬º˛
-//#define PWMB_CEN_Enable()          PWMB_CR1 |= 0x01    //1£∫ πƒ‹º∆ ˝∆˜
-#define PWMB_CEN_Disable()        PWMB_CR1 &= ~0x01    //0£∫Ω˚÷πº∆ ˝∆˜
-#define PWMB_CEN_Enable(n)        (n==1?(PWMB_CR1 |= 0x01):(PWMB_CR1 &= ~0x01))    //1£∫ πƒ‹º∆ ˝∆˜
-
+#define PWMB_OPMB( n )              ( n == ?( PWMB_CR1 |= 0x08 ):( PWMB_CR1 &= ~0x08 ))  //ƒ£ Ω 0⁄∑¬º ±Õ£÷π1⁄∑“ªŒ∏¬º ± CEN ŒªÕ£÷π
+#define PWMB_URSB( n )              ( n == ?( PWMB_CR1 |= 0x04 ):( PWMB_CR1 &= ~0x04 ))  //‘¥
+#define PWMB_UDISB( n )              ( n == ?( PWMB_CR1 |= 0x02 ):( PWMB_CR1 &= ~0x02 ))  //÷π 0¬£UEV¬º1¬º
+//#define PWMB_CEN_Enable()          PWMB_CR1 |= 0x01    //1 π‹º
+#define PWMB_CEN_Disable()        PWMB_CR1 &= ~0x01    //0÷π
+#define PWMB_CEN_Enable( n )        ( n == ?( PWMB_CR1 |= 0x01 ):( PWMB_CR1 &= ~0x01 ))    //1 π‹º
 
 //                           7     6     5    4    3    2    1    0    Reset Value
-//sfr PWMA_CR2 = 0xFEC1H;  TI1S MMSA2 MMSA1 MMSA0  -  COMSA  -  CCPCA  0000,x0x0  /* øÿ÷∆ºƒ¥Ê∆˜ 2 */ 
-//sfr PWMB_CR2 = 0xFEE1H;  TI5S MMSB2 MMSB1 MMSB0  -  COMSB  -  CCPCB  0000,x0xx  /* øÿ÷∆ºƒ¥Ê∆˜ 2 */ 
+//sfr PWMA_CR2 = 0xFEC1H;  TI1S MMSA2 MMSA1 MMSA0  -  COMSA  -  CCPCA  0000, x0x0  /* ∆ºƒ¥ 2 */ 
+//sfr PWMB_CR2 = 0xFEE1H;  TI5S MMSB2 MMSB1 MMSB0  -  COMSB  -  CCPCB  0000, x0xx  /* ∆ºƒ¥ 2 */ 
 #define PWM1P_TI1()              PWMA_CR2 &= ~0x80
 #define PWM1P2P3P_XOR_TI1()      PWMA_CR2 |= 0x80
 #define PWM5P_TI2()              PWMB_CR2 &= ~0x80
 #define PWM5P6P7P_XOR_TI2()      PWMB_CR2 |= 0x80
 
-#define MMSn_RESET          0    //∏¥Œª
-#define MMSn_ENABLE          1    // πƒ‹
-#define MMSn_UPDATE          2    //∏¸–¬
-#define MMSn_COMP_TRGO      3    //±»Ωœ¬ˆ≥Â
-#define MMSn_OC1REF_TRGO    4    //±»Ωœ
-#define MMSn_OC2REF_TRGO    5    //±»Ωœ
-#define MMSn_OC3REF_TRGO    6    //±»Ωœ
-#define MMSn_OC4REF_TRGO    7    //±»Ωœ
+#define MMSn_RESET          0    //Œª
+#define MMSn_ENABLE          1    // π
+#define MMSn_UPDATE          2    //
+#define MMSn_COMP_TRGO      3    //»Ω
+#define MMSn_OC1REF_TRGO    4    //»Ω
+#define MMSn_OC2REF_TRGO    5    //»Ω
+#define MMSn_OC3REF_TRGO    6    //»Ω
+#define MMSn_OC4REF_TRGO    7    //»Ω
 
-#define PWMA_MainModeSel(n)    PWMA_CR2 = (PWMA_CR2 & ~0x70) | (n<<4)  //÷˜ƒ£ Ω—°‘Ò
-#define PWMB_MainModeSel(n)    PWMB_CR2 = (PWMB_CR2 & ~0x70) | (n<<4)  //÷˜ƒ£ Ω—°‘Ò
+#define PWMA_MainModeSel( n )    PWMA_CR2 = ( PWMA_CR2 & ~0x70 ) | ( n<<4 )  //ƒ£ Ω—°
+#define PWMB_MainModeSel( n )    PWMB_CR2 = ( PWMB_CR2 & ~0x70 ) | ( n<<4 )  //ƒ£ Ω—°
 
-//0£∫µ± CCPC=1  ±£¨÷ª”–‘⁄ COMG Œª÷√ 1 µƒ ±∫Ú’‚–©øÿ÷∆Œª≤≈±ª∏¸–¬
-//1£∫µ± CCPC=1  ±£¨÷ª”–‘⁄ COMG Œª÷√ 1 ªÚ TRGI ∑¢…˙…œ…˝—ÿµƒ ±∫Ú’‚–©øÿ÷∆Œª≤≈±ª∏¸–¬
-#define PWMA_COMSUpdateCtrl(n)    PWMA_CR2 = (n==1?(PWMA_CR2 |= 0x04):(PWMA_CR2 &= ~0x04))  //≤∂ªÒ/±»Ωœøÿ÷∆Œªµƒ∏¸–¬øÿ÷∆—°‘Ò
-#define PWMB_COMSUpdateCtrl(n)    PWMB_CR2 = (n==1?(PWMB_CR2 |= 0x04):(PWMB_CR2 &= ~0x04))  //≤∂ªÒ/±»Ωœøÿ÷∆Œªµƒ∏¸–¬øÿ÷∆—°‘Ò
-//0£∫ CCIE£¨ CCINE£¨ CCiP£¨ CCiNP ∫Õ OCIM Œª≤ª «‘§◊∞‘ÿµƒ
-//1£∫ CCIE£¨ CCINE£¨ CCiP£¨ CCiNP ∫Õ OCIM Œª «‘§◊∞‘ÿµƒ£ª…Ë÷√∏√Œª∫Û£¨À¸√«÷ª‘⁄…Ë÷√¡À COMGŒª∫Û±ª∏¸–¬°£
-#define PWMA_CCPCAPreloaded(n)    PWMA_CR2 = (n==1?(PWMA_CR2 |= 0x01):(PWMA_CR2 &= ~0x01))  //≤∂ªÒ/±»Ωœ‘§◊∞‘ÿøÿ÷∆Œª(∏√Œª÷ª∂‘æﬂ”–ª•≤π ‰≥ˆµƒÕ®µ¿∆◊˜”√)
-#define PWMB_CCPCBPreloaded(n)    PWMA_CR2 = (n==1?(PWMA_CR2 |= 0x01):(PWMA_CR2 &= ~0x01))  //≤∂ªÒ/±»Ωœ‘§◊∞‘ÿøÿ÷∆Œª(∏√Œª÷ª∂‘æﬂ”–ª•≤π ‰≥ˆµƒÕ®µ¿∆◊˜”√)
-
+//0 CCPC =   ±÷ª COMG Œª 1  ±–©Œª≈±
+//1 CCPC =   ±÷ª COMG Œª 1  TRGI ÿµ ±–©Œª≈±
+#define PWMA_COMSUpdateCtrl( n )    PWMA_CR2 = ( n == ?( PWMA_CR2 |= 0x04 ):( PWMA_CR2 &= ~0x04 ))  ///»ΩœøŒªƒ∏¬ø—°
+#define PWMB_COMSUpdateCtrl( n )    PWMB_CR2 = ( n == ?( PWMB_CR2 |= 0x04 ):( PWMB_CR2 &= ~0x04 ))  ///»ΩœøŒªƒ∏¬ø—°
+//0 CCIE CCINE CCiP CCiNP  OCIM Œª‘§◊∞ÿµ
+//1 CCIE CCINE CCiP CCiNP  OCIM Œª‘§◊∞ÿµƒ£√∏Œª÷ª COMGŒªÛ±ª∏¬°
+#define PWMA_CCPCAPreloaded( n )    PWMA_CR2 = ( n == ?( PWMA_CR2 |= 0x01 ):( PWMA_CR2 &= ~0x01 ))  ///»Ω‘§◊∞ÿøŒª(Œª÷ª‘æ–ªÕ®)
+#define PWMB_CCPCBPreloaded( n )    PWMA_CR2 = ( n == ?( PWMA_CR2 |= 0x01 ):( PWMA_CR2 &= ~0x01 ))  ///»Ω‘§◊∞ÿøŒª(Œª÷ª‘æ–ªÕ®)
 
 //                           7    6    5    4    3    2     1     0    Reset Value
-//sfr PWMA_SMCR = 0xFEC2H;  MSMA TSA2 TSA1 TSA0  -  SMSA2 SMSA1 SMSA0  0000,x000  /* ¥”ƒ£ Ωøÿ÷∆ºƒ¥Ê∆˜ */ 
-//sfr PWMB_SMCR = 0xFEE2H;  MSMB TSB2 TSB1 TSB0  -  SMSB2 SMSB1 SMSB0  0000,x000  /* ¥”ƒ£ Ωøÿ÷∆ºƒ¥Ê∆˜ */ 
+//sfr PWMA_SMCR = 0xFEC2H;  MSMA TSA2 TSA1 TSA0  -  SMSA2 SMSA1 SMSA0  0000, x000  /* ƒ£ Ω∆ºƒ¥ */ 
+//sfr PWMB_SMCR = 0xFEE2H;  MSMB TSB2 TSB1 TSB0  -  SMSB2 SMSB1 SMSB0  0000, x000  /* ƒ£ Ω∆ºƒ¥ */ 
 #define SMCR_TSn_ITR2        2
 #define SMCR_TSn_EDGE        4
 #define SMCR_TSn_TIMER1      5
 #define SMCR_TSn_TIMER2      6
 #define SMCR_TSn_ETRF        7
 
-#define PWMA_SMCR_Source(n)    PWMA_SMCR = (PWMA_SMCR & ~0x70) | (n<<4)  //¥•∑¢‘¥—°‘Ò
-#define PWMB_SMCR_Source(n)    PWMB_SMCR = (PWMB_SMCR & ~0x70) | (n<<4)  //¥•∑¢‘¥—°‘Ò
+#define PWMA_SMCR_Source( n )    PWMA_SMCR = ( PWMA_SMCR & ~0x70 ) | ( n<<4 )  //‘¥—°
+#define PWMB_SMCR_Source( n )    PWMB_SMCR = ( PWMB_SMCR & ~0x70 ) | ( n<<4 )  //‘¥—°
 
 #define SMCR_SMSA_INSIDE_CLK      0
 #define SMCR_SMSA_ENCODER_M1      1
@@ -194,108 +198,108 @@
 #define SMCR_SMSA_TRIG            6
 #define SMCR_SMSA_EXT_CLK          7
 
-#define PWMA_SMCR_SMS(n)    PWMA_SMCR = (PWMA_SMCR & ~0x07) | (n & 7)  // ±÷”/¥•∑¢/¥”ƒ£ Ω—°‘Ò
-#define PWMB_SMCR_SMS(n)    PWMB_SMCR = (PWMB_SMCR & ~0x07) | (n & 7)  // ±÷”/¥•∑¢/¥”ƒ£ Ω—°‘Ò
+#define PWMA_SMCR_SMS( n )    PWMA_SMCR = ( PWMA_SMCR & ~0x07 ) | ( n & 7 )  // ±//ƒ£ Ω—°
+#define PWMB_SMCR_SMS( n )    PWMB_SMCR = ( PWMB_SMCR & ~0x07 ) | ( n & 7 )  // ±//ƒ£ Ω—°
 
 //                           7    6    5      4     3     2     1     0     Reset Value
-//sfr PWMA_ETR = 0xFEC3H;  ETP1 ECE1 ETPS11 ETPS10 ETF13 ETF12 ETF11 ETF10  0000,0000  /* Õ‚≤ø¥•∑¢ºƒ¥Ê∆˜ */ 
-//sfr PWMB_ETR = 0xFEE3H;  ETP2 ECE2 ETPS21 ETPS20 ETF23 ETF22 ETF21 ETF20  0000,0000  /* Õ‚≤ø¥•∑¢ºƒ¥Ê∆˜ */ 
+//sfr PWMA_ETR = 0xFEC3H;  ETP1 ECE1 ETPS11 ETPS10 ETF13 ETF12 ETF11 ETF10  0000, 0000  /* ‚≤øƒ¥ */ 
+//sfr PWMB_ETR = 0xFEE3H;  ETP2 ECE2 ETPS21 ETPS20 ETF23 ETF22 ETF21 ETF20  0000, 0000  /* ‚≤øƒ¥ */ 
 
 //                           7    6    5      4     3     2     1    0    Reset Value
-//sfr PWMA_IER = 0xFEC4H;  BIEA TIEA COMIEA CC4IE CC3IE CC2IE CC1IE UIEA  0000,0000  /* ÷–∂œ πƒ‹ºƒ¥Ê∆˜ */ 
-//sfr PWMB_IER = 0xFEE4H;  BIEB TIEB COMIEB CC8IE CC7IE CC6IE CC5IE UIEB  0000,0000  /* ÷–∂œ πƒ‹ºƒ¥Ê∆˜ */ 
-#define PWMA_UIEA_Enable()    PWMA_IER |= 0x01    //1£∫‘ –Ì∏¸–¬÷–∂œ
-#define PWMA_UIEA_Disable()    PWMA_IER &= ~0x01    //0£∫Ω˚÷π∏¸–¬÷–∂œ
-#define PWMA_CC1IE_Enable()    PWMA_IER |= 0x02    //1£∫‘ –Ì≤∂ªÒ/±»Ωœ÷–∂œ
-#define PWMA_CC1IE_Disable()  PWMA_IER &= ~0x02    //0£∫Ω˚÷π≤∂ªÒ/±»Ωœ÷–∂œ
-#define PWMA_CC2IE_Enable()    PWMA_IER |= 0x04    //1£∫‘ –Ì≤∂ªÒ/±»Ωœ÷–∂œ
-#define PWMA_CC2IE_Disable()  PWMA_IER &= ~0x04    //0£∫Ω˚÷π≤∂ªÒ/±»Ωœ÷–∂œ
-#define PWMA_CC3IE_Enable()    PWMA_IER |= 0x08    //1£∫‘ –Ì≤∂ªÒ/±»Ωœ÷–∂œ
-#define PWMA_CC3IE_Disable()  PWMA_IER &= ~0x08    //0£∫Ω˚÷π≤∂ªÒ/±»Ωœ÷–∂œ
-#define PWMA_CC4IE_Enable()    PWMA_IER |= 0x10    //1£∫‘ –Ì≤∂ªÒ/±»Ωœ÷–∂œ
-#define PWMA_CC4IE_Disable()  PWMA_IER &= ~0x10    //0£∫Ω˚÷π≤∂ªÒ/±»Ωœ÷–∂œ
-#define PWMA_COMIEA_Enable()  PWMA_IER |= 0x20    //1£∫‘ –ÌCOM÷–∂œ
-#define PWMA_COMIEA_Disable()  PWMA_IER &= ~0x20    //0£∫Ω˚÷πCOM÷–∂œ
-#define PWMA_TIEA_Enable()    PWMA_IER |= 0x40    //1£∫‘ –Ì¥•∑¢÷–∂œ
-#define PWMA_TIEA_Disable()    PWMA_IER &= ~0x40    //0£∫Ω˚÷π¥•∑¢÷–∂œ
-#define PWMA_BIEA_Enable()    PWMA_IER |= 0x80    //1£∫‘ –Ì…≤≥µ÷–∂œ
-#define PWMA_BIEA_Disable()    PWMA_IER &= ~0x80    //0£∫Ω˚÷π…≤≥µ÷–∂œ
+//sfr PWMA_IER = 0xFEC4H;  BIEA TIEA COMIEA CC4IE CC3IE CC2IE CC1IE UIEA  0000, 0000  /* –∂ π‹ºƒ¥ */ 
+//sfr PWMB_IER = 0xFEE4H;  BIEB TIEB COMIEB CC8IE CC7IE CC6IE CC5IE UIEB  0000, 0000  /* –∂ π‹ºƒ¥ */ 
+#define PWMA_UIEA_Enable()    PWMA_IER |= 0x01    //1–∂
+#define PWMA_UIEA_Disable()    PWMA_IER &= ~0x01    //0÷π–∂
+#define PWMA_CC1IE_Enable()    PWMA_IER |= 0x02    //1/»Ω–∂
+#define PWMA_CC1IE_Disable()  PWMA_IER &= ~0x02    //0÷π/»Ω–∂
+#define PWMA_CC2IE_Enable()    PWMA_IER |= 0x04    //1/»Ω–∂
+#define PWMA_CC2IE_Disable()  PWMA_IER &= ~0x04    //0÷π/»Ω–∂
+#define PWMA_CC3IE_Enable()    PWMA_IER |= 0x08    //1/»Ω–∂
+#define PWMA_CC3IE_Disable()  PWMA_IER &= ~0x08    //0÷π/»Ω–∂
+#define PWMA_CC4IE_Enable()    PWMA_IER |= 0x10    //1/»Ω–∂
+#define PWMA_CC4IE_Disable()  PWMA_IER &= ~0x10    //0÷π/»Ω–∂
+#define PWMA_COMIEA_Enable()  PWMA_IER |= 0x20    //1COM–∂
+#define PWMA_COMIEA_Disable()  PWMA_IER &= ~0x20    //0÷πCOM–∂
+#define PWMA_TIEA_Enable()    PWMA_IER |= 0x40    //1–∂
+#define PWMA_TIEA_Disable()    PWMA_IER &= ~0x40    //0÷π–∂
+#define PWMA_BIEA_Enable()    PWMA_IER |= 0x80    //1…≤–∂
+#define PWMA_BIEA_Disable()    PWMA_IER &= ~0x80    //0÷π…≤–∂
 
 //                           7    6    5      4     3     2     1    0    Reset Value
-//sfr PWMA_SR1 = 0xFEC5H;  BIF1 TIF1 COMIF1 CC4IF CC3IF CC2IF CC1IF UIF1  0000,0000  /* ◊¥Ã¨ºƒ¥Ê∆˜ 1 */ 
-//sfr PWMB_SR1 = 0xFEE5H;  BIF2 TIF2 COMIF2 CC8IF CC7IF CC6IF CC5IF UIF2  0000,0000  /* ◊¥Ã¨ºƒ¥Ê∆˜ 1 */ 
+//sfr PWMA_SR1 = 0xFEC5H;  BIF1 TIF1 COMIF1 CC4IF CC3IF CC2IF CC1IF UIF1  0000, 0000  /* ◊¥Ã¨ƒ¥ 1 */ 
+//sfr PWMB_SR1 = 0xFEE5H;  BIF2 TIF2 COMIF2 CC8IF CC7IF CC6IF CC5IF UIF2  0000, 0000  /* ◊¥Ã¨ƒ¥ 1 */ 
 #define UIF1      1
-#define CC1IF      (1<<1)
-#define CC2IF      (1<<2)
-#define CC3IF      (1<<3)
-#define CC4IF      (1<<4)
-#define COMIF1    (1<<5)
-#define TIF1      (1<<6)
-#define BIF1      (1<<7)
+#define CC1IF      (1<<1 )
+#define CC2IF      (1<<2 )
+#define CC3IF      (1<<3 )
+#define CC4IF      (1<<4 )
+#define COMIF1    (1<<5 )
+#define TIF1      (1<<6 )
+#define BIF1      (1<<7 )
 
 #define UIF2      1
-#define CC5IF      (1<<1)
-#define CC6IF      (1<<2)
-#define CC7IF      (1<<3)
-#define CC8IF      (1<<4)
-#define COMIF2    (1<<5)
-#define TIF2      (1<<6)
-#define BIF2      (1<<7)
+#define CC5IF      (1<<1 )
+#define CC6IF      (1<<2 )
+#define CC7IF      (1<<3 )
+#define CC8IF      (1<<4 )
+#define COMIF2    (1<<5 )
+#define TIF2      (1<<6 )
+#define BIF2      (1<<7 )
 
 //                          7   6   5    4     3     2     1    0   Reset Value
-//sfr PWMA_SR2 = 0xFEC6H;   -   -   -  CC4OF CC3OF CC2OF CC1OF  -   xxx0,000x  /* ◊¥Ã¨ºƒ¥Ê∆˜ 2 */ 
-//sfr PWMB_SR2 = 0xFEE6H;   -   -   -  CC8OF CC7OF CC6OF CC5OF  -   xxx0,000x  /* ◊¥Ã¨ºƒ¥Ê∆˜ 2 */ 
+//sfr PWMA_SR2 = 0xFEC6H;   -   -   -  CC4OF CC3OF CC2OF CC1OF  -   xxx0, 000x  /* ◊¥Ã¨ƒ¥ 2 */ 
+//sfr PWMB_SR2 = 0xFEE6H;   -   -   -  CC8OF CC7OF CC6OF CC5OF  -   xxx0, 000x  /* ◊¥Ã¨ƒ¥ 2 */ 
 
 //                          7   6    5    4    3    2    1    0   Reset Value
-//sfr PWMA_EGR = 0xFEC7H;  BG1 TG1 COMG1 CC4G CC3G CC2G CC1G UG1  0000,0000  /*  ¬º˛≤˙…˙ºƒ¥Ê∆˜ */ 
-//sfr PWMB_EGR = 0xFEE7H;  BG2 TG2 COMG2 CC8G CC7G CC6G CC5G UG2  0000,0000  /*  ¬º˛≤˙…˙ºƒ¥Ê∆˜ */ 
+//sfr PWMA_EGR = 0xFEC7H;  BG1 TG1 COMG1 CC4G CC3G CC2G CC1G UG1  0000, 0000  /* ¬ºƒ¥ */ 
+//sfr PWMB_EGR = 0xFEE7H;  BG2 TG2 COMG2 CC8G CC7G CC6G CC5G UG2  0000, 0000  /* ¬ºƒ¥ */ 
 
 //                             7     6     5     4     3     2     1     0    Reset Value
-//sfr PWMA_CCMR1 = 0xFEC8H;  OC1CE OC1M2 OC1M1 OC1M0 OC1PE OC1FE CC1S1 CC1S0  0000,0000  /* ≤∂ªÒ/±»Ωœƒ£ Ωºƒ¥Ê∆˜ 1 - Õ®µ¿≈‰÷√Œ™±»Ωœ ‰≥ˆƒ£ Ω */ 
-//sfr PWMB_CCMR1 = 0xFEE8H;  OC5CE OC5M2 OC5M1 OC5M0 OC5PE OC5FE CC5S1 CC5S0  0000,0000  /* ≤∂ªÒ/±»Ωœƒ£ Ωºƒ¥Ê∆˜ 1 - Õ®µ¿≈‰÷√Œ™±»Ωœ ‰≥ˆƒ£ Ω */ 
-#define OCnCE      (1<<7)
+//sfr PWMA_CCMR1 = 0xFEC8H;  OC1CE OC1M2 OC1M1 OC1M0 OC1PE OC1FE CC1S1 CC1S0  0000, 0000  /* /»Ωƒ£ Ωƒ¥ 1 - Õ®Œ™»Ωƒ£ Ω */ 
+//sfr PWMB_CCMR1 = 0xFEE8H;  OC5CE OC5M2 OC5M1 OC5M0 OC5PE OC5FE CC5S1 CC5S0  0000, 0000  /* /»Ωƒ£ Ωƒ¥ 1 - Õ®Œ™»Ωƒ£ Ω */ 
+#define OCnCE      (1<<7 )
 
-#define CCMRn_FREEZE              0x00    //∂≥Ω·
-#define CCMRn_MATCH_VALID          0x10    //∆•≈‰ ±…Ë÷√Õ®µ¿ n µƒ ‰≥ˆŒ™”––ßµÁ∆Ω
-#define CCMRn_MATCH_INVALID        0x20    //∆•≈‰ ±…Ë÷√Õ®µ¿ n µƒ ‰≥ˆŒ™Œﬁ–ßµÁ∆Ω
-#define CCMRn_ROLLOVER            0x30    //∑≠◊™
-#define CCMRn_FORCE_INVALID        0x40    //«ø÷∆Œ™Œﬁ–ßµÁ∆Ω
-#define CCMRn_FORCE_VALID          0x50    //«ø÷∆Œ™”––ßµÁ∆Ω
+#define CCMRn_FREEZE              0x00    //
+#define CCMRn_MATCH_VALID          0x10    //∆• ±Õ® n Œ™–ß∆Ω
+#define CCMRn_MATCH_INVALID        0x20    //∆• ±Õ® n Œ™–ß∆Ω
+#define CCMRn_ROLLOVER            0x30    //◊™
+#define CCMRn_FORCE_INVALID        0x40    //«øŒ™–ß∆Ω
+#define CCMRn_FORCE_VALID          0x50    //«øŒ™–ß∆Ω
 #define CCMRn_PWM_MODE1            0x60    //PWM ƒ£ Ω 1
 #define CCMRn_PWM_MODE2            0x70    //PWM ƒ£ Ω 2
 
-#define PWMA_OC1ModeSet(n)        PWMA_CCMR1 = (PWMA_CCMR1 & ~0x70) | (n)    // ‰≥ˆ±»Ωœƒ£ Ω…Ë÷√
-#define PWMB_OC5ModeSet(n)        PWMB_CCMR1 = (PWMB_CCMR1 & ~0x70) | (n)    // ‰≥ˆ±»Ωœƒ£ Ω…Ë÷√
+#define PWMA_OC1ModeSet( n )        PWMA_CCMR1 = ( PWMA_CCMR1 & ~0x70 ) | ( n )    //»Ωƒ£ Ω
+#define PWMB_OC5ModeSet( n )        PWMB_CCMR1 = ( PWMB_CCMR1 & ~0x70 ) | ( n )    //»Ωƒ£ Ω
 
-#define PWMA_OC1_ReloadEnable(n)  (n==1?(PWMA_CCMR1 |= 0x08):(PWMA_CCMR1 &= ~0x08))    //ø™∆Ù OC1PE  ‰≥ˆ±»Ωœµƒ‘§◊∞‘ÿπ¶ƒ‹
-#define PWMB_OC5_ReloadEnable(n)  (n==1?(PWMB_CCMR1 |= 0x08):(PWMB_CCMR1 &= ~0x08))    //ø™∆Ù OC5PE  ‰≥ˆ±»Ωœµƒ‘§◊∞‘ÿπ¶ƒ‹
-//#define PWMA_OC1_ReloadEnable()    PWMA_CCMR1 |= 0x08    //1£∫ø™∆Ù OC1PE  ‰≥ˆ±»Ωœµƒ‘§◊∞‘ÿπ¶ƒ‹
-//#define PWMA_OC1_RelosdDisable()  PWMA_CCMR1 &= ~0x08    //0£∫Ω˚÷π OC1PE  ‰≥ˆ±»Ωœµƒ‘§◊∞‘ÿπ¶ƒ‹
-//#define PWMB_OC5_ReloadEnable()    PWMB_CCMR1 |= 0x08    //1£∫ø™∆Ù OC5PE  ‰≥ˆ±»Ωœµƒ‘§◊∞‘ÿπ¶ƒ‹
-//#define PWMB_OC5_RelosdDisable()  PWMB_CCMR1 &= ~0x08    //0£∫Ω˚÷π OC5PE  ‰≥ˆ±»Ωœµƒ‘§◊∞‘ÿπ¶ƒ‹
+#define PWMA_OC1_ReloadEnable( n )  ( n == ?( PWMA_CCMR1 |= 0x08 ):( PWMA_CCMR1 &= ~0x08 ))    // OC1PE »Ωœµ‘§◊∞ÿπ
+#define PWMB_OC5_ReloadEnable( n )  ( n == ?( PWMB_CCMR1 |= 0x08 ):( PWMB_CCMR1 &= ~0x08 ))    // OC5PE »Ωœµ‘§◊∞ÿπ
+//#define PWMA_OC1_ReloadEnable()    PWMA_CCMR1 |= 0x08    //1 OC1PE »Ωœµ‘§◊∞ÿπ
+//#define PWMA_OC1_RelosdDisable()  PWMA_CCMR1 &= ~0x08    //0÷π OC1PE »Ωœµ‘§◊∞ÿπ
+//#define PWMB_OC5_ReloadEnable()    PWMB_CCMR1 |= 0x08    //1 OC5PE »Ωœµ‘§◊∞ÿπ
+//#define PWMB_OC5_RelosdDisable()  PWMB_CCMR1 &= ~0x08    //0÷π OC5PE »Ωœµ‘§◊∞ÿπ
 
-#define PWMA_OC1_FastEnable(n)    (n==1?(PWMA_CCMR1 |= 0x04):(PWMA_CCMR1 &= ~0x04))    //1£∫ø™∆Ù OC1FE  ‰≥ˆ±»ΩœøÏÀŸπ¶ƒ‹
-#define PWMB_OC5_FastEnable(n)    (n==1?(PWMB_CCMR1 |= 0x04):(PWMB_CCMR1 &= ~0x04))    //1£∫ø™∆Ù OC5FE  ‰≥ˆ±»ΩœøÏÀŸπ¶ƒ‹
-//#define PWMA_OC1_FastEnable()      PWMA_CCMR1 |= 0x04    //1£∫ø™∆Ù OC1FE  ‰≥ˆ±»ΩœøÏÀŸπ¶ƒ‹
-//#define PWMA_OC1_FastDisable()    PWMA_CCMR1 &= ~0x04    //0£∫Ω˚÷π OC1FE  ‰≥ˆ±»ΩœøÏÀŸπ¶ƒ‹
-//#define PWMB_OC5_FastEnable()      PWMB_CCMR1 |= 0x04    //1£∫ø™∆Ù OC5FE  ‰≥ˆ±»ΩœøÏÀŸπ¶ƒ‹
-//#define PWMB_OC5_FastDisable()    PWMB_CCMR1 &= ~0x04    //0£∫Ω˚÷π OC5FE  ‰≥ˆ±»ΩœøÏÀŸπ¶ƒ‹
+#define PWMA_OC1_FastEnable( n )    ( n == ?( PWMA_CCMR1 |= 0x04 ):( PWMA_CCMR1 &= ~0x04 ))    //1 OC1FE »ΩœøŸπ
+#define PWMB_OC5_FastEnable( n )    ( n == ?( PWMB_CCMR1 |= 0x04 ):( PWMB_CCMR1 &= ~0x04 ))    //1 OC5FE »ΩœøŸπ
+//#define PWMA_OC1_FastEnable()      PWMA_CCMR1 |= 0x04    //1 OC1FE »ΩœøŸπ
+//#define PWMA_OC1_FastDisable()    PWMA_CCMR1 &= ~0x04    //0÷π OC1FE »ΩœøŸπ
+//#define PWMB_OC5_FastEnable()      PWMB_CCMR1 |= 0x04    //1 OC5FE »ΩœøŸπ
+//#define PWMB_OC5_FastDisable()    PWMB_CCMR1 &= ~0x04    //0÷π OC5FE »ΩœøŸπ
 
-#define CCAS_OUTPUT            0x00    // ‰≥ˆ
-#define CCAS_IUTPUT_TI1FP1    0x01    // ‰»Î£¨IC1/IC2/IC3/IC4 ”≥…‰‘⁄ TI1FP1 …œ
-#define CCAS_IUTPUT_TI2FP1    0x02    // ‰»Î£¨IC1/IC2/IC3/IC4 ”≥…‰‘⁄ TI2FP1 …œ
-#define CCAS_IUTPUT_TRC        0x03    // ‰»Î£¨IC1/IC2/IC3/IC4 ”≥…‰‘⁄ TRC …œ
-#define CCBS_OUTPUT            0x00    // ‰≥ˆ
-#define CCBS_IUTPUT_TI5FP5    0x01    // ‰»Î£¨IC5/IC6/IC7/IC8 ”≥…‰‘⁄ TI5FP5 …œ
-#define CCBS_IUTPUT_TI6FP5    0x02    // ‰»Î£¨IC5/IC6/IC7/IC8 ”≥…‰‘⁄ TI6FP5 …œ
-#define CCBS_IUTPUT_TRC        0x03    // ‰»Î£¨IC5/IC6/IC7/IC8 ”≥…‰‘⁄ TRC …œ
+#define CCAS_OUTPUT            0x00    //
+#define CCAS_IUTPUT_TI1FP1    0x01    //Î£¨IC1 / C2 / C3 / C4 ”≥ TI1FP1 
+#define CCAS_IUTPUT_TI2FP1    0x02    //Î£¨IC1 / C2 / C3 / C4 ”≥ TI2FP1 
+#define CCAS_IUTPUT_TRC        0x03    //Î£¨IC1 / C2 / C3 / C4 ”≥ TRC 
+#define CCBS_OUTPUT            0x00    //
+#define CCBS_IUTPUT_TI5FP5    0x01    //Î£¨IC5 / C6 / C7 / C8 ”≥ TI5FP5 
+#define CCBS_IUTPUT_TI6FP5    0x02    //Î£¨IC5 / C6 / C7 / C8 ”≥ TI6FP5 
+#define CCBS_IUTPUT_TRC        0x03    //Î£¨IC5 / C6 / C7 / C8 ”≥ TRC 
 
-#define PWMA_CC1S_Direction(n)    PWMA_CCMR1 = (PWMA_CCMR1 & ~0x03) | (n)    //≤∂ªÒ/±»Ωœ 1 —°‘Ò°£’‚¡ΩŒª∂®“ÂÕ®µ¿µƒ∑ΩœÚ£® ‰»Î/ ‰≥ˆ£©£¨º∞ ‰»ÎΩ≈µƒ—°‘Ò
-#define PWMB_CC5S_Direction(n)    PWMB_CCMR1 = (PWMB_CCMR1 & ~0x03) | (n)    //≤∂ªÒ/±»Ωœ 5 —°‘Ò°£’‚¡ΩŒª∂®“ÂÕ®µ¿µƒ∑ΩœÚ£® ‰»Î/ ‰≥ˆ£©£¨º∞ ‰»ÎΩ≈µƒ—°‘Ò
+#define PWMA_CC1S_Direction( n )    PWMA_CCMR1 = ( PWMA_CCMR1 & ~0x03 ) | ( n )    ///»Ω 1 —°ŒªÕ®ƒ∑/≈µ—°
+#define PWMB_CC5S_Direction( n )    PWMB_CCMR1 = ( PWMB_CCMR1 & ~0x03 ) | ( n )    ///»Ω 5 —°ŒªÕ®ƒ∑/≈µ—°
 
 //                             7     6     5     4      3       2      1     0    Reset Value
-//sfr PWMA_CCMR1 = 0xFEC8H;  IC1F3 IC1F2 IC1F1 IC1F0 IC1PSC1 IC1PSC0 CC1S1 CC1S0  0000,0000  /* ≤∂ªÒ/±»Ωœƒ£ Ωºƒ¥Ê∆˜ 1 - Õ®µ¿≈‰÷√Œ™≤∂ªÒ ‰»Îƒ£ Ω */ 
-//sfr PWMB_CCMR1 = 0xFEE8H;  IC5F3 IC5F2 IC5F1 IC5F0 IC5PSC1 IC5PSC0 CC5S1 CC5S0  0000,0000  /* ≤∂ªÒ/±»Ωœƒ£ Ωºƒ¥Ê∆˜ 1 - Õ®µ¿≈‰÷√Œ™≤∂ªÒ ‰»Îƒ£ Ω */ 
+//sfr PWMA_CCMR1 = 0xFEC8H;  IC1F3 IC1F2 IC1F1 IC1F0 IC1PSC1 IC1PSC0 CC1S1 CC1S0  0000, 0000  /* /»Ωƒ£ Ωƒ¥ 1 - Õ®Œ™ƒ£ Ω */ 
+//sfr PWMB_CCMR1 = 0xFEE8H;  IC5F3 IC5F2 IC5F1 IC5F0 IC5PSC1 IC5PSC0 CC5S1 CC5S0  0000, 0000  /* /»Ωƒ£ Ωƒ¥ 1 - Õ®Œ™ƒ£ Ω */ 
 
 #define ICnF_01_Clock      0
 #define ICnF_02_Clock      1
@@ -314,350 +318,350 @@
 #define ICnF_192_Clock    14
 #define ICnF_256_Clock    15
 
-#define PWMA_IC1F_FilterClock(n)  PWMA_CCMR1 = (PWMA_CCMR1 & 0x0F) | (n<<4)    // ‰»Î≤∂ªÒ 1 ¬À≤®∆˜—°‘Ò£¨∏√Œª”Ú∂®“Â¡À TIn µƒ≤…—˘∆µ¬ º∞ ˝◊÷¬À≤®∆˜≥§∂»
-#define PWMB_IC5F_FilterClock(n)  PWMB_CCMR1 = (PWMB_CCMR1 & 0x0F) | (n<<4)    // ‰»Î≤∂ªÒ 5 ¬À≤®∆˜—°‘Ò£¨∏√Œª”Ú∂®“Â¡À TIn µƒ≤…—˘∆µ¬ º∞ ˝◊÷¬À≤®∆˜≥§∂»
+#define PWMA_IC1F_FilterClock( n )  PWMA_CCMR1 = ( PWMA_CCMR1 & 0x0F ) | ( n<<4 )    //Î≤∂ 1 À≤—°Ò£¨∏Œª TIn ƒ≤∆µ ºÀ≤
+#define PWMB_IC5F_FilterClock( n )  PWMB_CCMR1 = ( PWMB_CCMR1 & 0x0F ) | ( n<<4 )    //Î≤∂ 5 À≤—°Ò£¨∏Œª TIn ƒ≤∆µ ºÀ≤
 
-#define PWMA_IC1PSC_PrescalerSet(n)    PWMA_CCMR1 = (PWMA_CCMR1 & 0xF3) | ((n&3)<<2)    // ‰»Î/≤∂ªÒ 1 ‘§∑÷∆µ∆˜£¨0~3
-#define PWMB_IC5PSC_PrescalerSet(n)    PWMB_CCMR1 = (PWMB_CCMR1 & 0xF3) | ((n&3)<<2)    // ‰»Î/≤∂ªÒ 5 ‘§∑÷∆µ∆˜£¨0~3
-
-//                             7     6     5     4     3     2     1     0    Reset Value
-//sfr PWMA_CCMR2 = 0xFEC9H;  OC2CE OC2M2 OC2M1 OC2M0 OC2PE OC2FE CC2S1 CC2S0  0000,0000  /* ≤∂ªÒ/±»Ωœƒ£ Ωºƒ¥Ê∆˜ 2 - Õ®µ¿≈‰÷√Œ™±»Ωœ ‰≥ˆƒ£ Ω */ 
-//sfr PWMB_CCMR2 = 0xFEE9H;  OC6CE OC6M2 OC6M1 OC6M0 OC6PE OC6FE CC6S1 CC6S0  0000,0000  /* ≤∂ªÒ/±»Ωœƒ£ Ωºƒ¥Ê∆˜ 2 - Õ®µ¿≈‰÷√Œ™±»Ωœ ‰≥ˆƒ£ Ω */ 
-
-#define PWMA_OC2ModeSet(n)        PWMA_CCMR2 = (PWMA_CCMR2 & ~0x70) | (n)    // ‰≥ˆ±»Ωœƒ£ Ω…Ë÷√
-#define PWMB_OC6ModeSet(n)        PWMB_CCMR2 = (PWMB_CCMR2 & ~0x70) | (n)    // ‰≥ˆ±»Ωœƒ£ Ω…Ë÷√
-
-#define PWMA_OC2_ReloadEnable()    PWMA_CCMR2 |= 0x08    //1£∫ø™∆Ù OC2PE  ‰≥ˆ±»Ωœµƒ‘§◊∞‘ÿπ¶ƒ‹
-#define PWMA_OC2_RelosdDisable()  PWMA_CCMR2 &= ~0x08    //0£∫Ω˚÷π OC2PE  ‰≥ˆ±»Ωœµƒ‘§◊∞‘ÿπ¶ƒ‹
-#define PWMB_OC6_ReloadEnable()    PWMB_CCMR2 |= 0x08    //1£∫ø™∆Ù OC6PE  ‰≥ˆ±»Ωœµƒ‘§◊∞‘ÿπ¶ƒ‹
-#define PWMB_OC6_RelosdDisable()  PWMB_CCMR2 &= ~0x08    //0£∫Ω˚÷π OC6PE  ‰≥ˆ±»Ωœµƒ‘§◊∞‘ÿπ¶ƒ‹
-
-#define PWMA_OC2_FastEnable()      PWMA_CCMR2 |= 0x04    //1£∫ø™∆Ù OC2FE  ‰≥ˆ±»ΩœøÏÀŸπ¶ƒ‹
-#define PWMA_OC2_FastDisable()    PWMA_CCMR2 &= ~0x04    //0£∫Ω˚÷π OC2FE  ‰≥ˆ±»ΩœøÏÀŸπ¶ƒ‹
-#define PWMB_OC6_FastEnable()      PWMB_CCMR2 |= 0x04    //1£∫ø™∆Ù OC6FE  ‰≥ˆ±»ΩœøÏÀŸπ¶ƒ‹
-#define PWMB_OC6_FastDisable()    PWMB_CCMR2 &= ~0x04    //0£∫Ω˚÷π OC6FE  ‰≥ˆ±»ΩœøÏÀŸπ¶ƒ‹
-
-#define PWMA_CC2S_Direction(n)    PWMA_CCMR2 = (PWMA_CCMR2 & ~0x03) | (n)    //≤∂ªÒ/±»Ωœ 2 —°‘Ò°£’‚¡ΩŒª∂®“ÂÕ®µ¿µƒ∑ΩœÚ£® ‰»Î/ ‰≥ˆ£©£¨º∞ ‰»ÎΩ≈µƒ—°‘Ò
-#define PWMB_CC6S_Direction(n)    PWMB_CCMR2 = (PWMB_CCMR2 & ~0x03) | (n)    //≤∂ªÒ/±»Ωœ 6 —°‘Ò°£’‚¡ΩŒª∂®“ÂÕ®µ¿µƒ∑ΩœÚ£® ‰»Î/ ‰≥ˆ£©£¨º∞ ‰»ÎΩ≈µƒ—°‘Ò
-
-//                             7     6     5     4      3       2      1     0    Reset Value
-//sfr PWMA_CCMR2 = 0xFEC9H;  IC2F3 IC2F2 IC2F1 IC2F0 IC2PSC1 IC2PSC0 CC2S1 CC2S0  0000,0000  /* ≤∂ªÒ/±»Ωœƒ£ Ωºƒ¥Ê∆˜ 2 - Õ®µ¿≈‰÷√Œ™≤∂ªÒ ‰»Îƒ£ Ω */ 
-//sfr PWMB_CCMR2 = 0xFEE9H;  IC6F3 IC6F2 IC6F1 IC6F0 IC6PSC1 IC6PSC0 CC6S1 CC6S0  0000,0000  /* ≤∂ªÒ/±»Ωœƒ£ Ωºƒ¥Ê∆˜ 2 - Õ®µ¿≈‰÷√Œ™≤∂ªÒ ‰»Îƒ£ Ω */ 
-
-#define PWMA_IC2F_FilterClock(n)  PWMA_CCMR2 = (PWMA_CCMR2 & 0x0F) | (n<<4)    // ‰»Î≤∂ªÒ 2 ¬À≤®∆˜—°‘Ò£¨∏√Œª”Ú∂®“Â¡À TIn µƒ≤…—˘∆µ¬ º∞ ˝◊÷¬À≤®∆˜≥§∂»
-#define PWMB_IC6F_FilterClock(n)  PWMB_CCMR2 = (PWMB_CCMR2 & 0x0F) | (n<<4)    // ‰»Î≤∂ªÒ 6 ¬À≤®∆˜—°‘Ò£¨∏√Œª”Ú∂®“Â¡À TIn µƒ≤…—˘∆µ¬ º∞ ˝◊÷¬À≤®∆˜≥§∂»
-
-#define PWMA_IC2PSC_PrescalerSet(n)    PWMA_CCMR2 = (PWMA_CCMR2 & 0xF3) | ((n&3)<<2)    // ‰»Î/≤∂ªÒ 2 ‘§∑÷∆µ∆˜£¨0~3
-#define PWMB_IC6PSC_PrescalerSet(n)    PWMB_CCMR2 = (PWMB_CCMR2 & 0xF3) | ((n&3)<<2)    // ‰»Î/≤∂ªÒ 6 ‘§∑÷∆µ∆˜£¨0~3
+#define PWMA_IC1PSC_PrescalerSet( n )    PWMA_CCMR1 = ( PWMA_CCMR1 & 0xF3 ) | (( n&3 )<<2 )    /// 1 ‘§∆µ0~3
+#define PWMB_IC5PSC_PrescalerSet( n )    PWMB_CCMR1 = ( PWMB_CCMR1 & 0xF3 ) | (( n&3 )<<2 )    /// 5 ‘§∆µ0~3
 
 //                             7     6     5     4     3     2     1     0    Reset Value
-//sfr PWMA_CCMR3 = 0xFECAH;  OC3CE OC3M2 OC3M1 OC3M0 OC3PE OC3FE CC3S1 CC3S0  0000,0000  /* ≤∂ªÒ/±»Ωœƒ£ Ωºƒ¥Ê∆˜ 3 - Õ®µ¿≈‰÷√Œ™±»Ωœ ‰≥ˆƒ£ Ω */ 
-//sfr PWMB_CCMR3 = 0xFEEAH;  OC7CE OC7M2 OC7M1 OC7M0 OC7PE OC7FE CC7S1 CC7S0  0000,0000  /* ≤∂ªÒ/±»Ωœƒ£ Ωºƒ¥Ê∆˜ 3 - Õ®µ¿≈‰÷√Œ™±»Ωœ ‰≥ˆƒ£ Ω */ 
+//sfr PWMA_CCMR2 = 0xFEC9H;  OC2CE OC2M2 OC2M1 OC2M0 OC2PE OC2FE CC2S1 CC2S0  0000, 0000  /* /»Ωƒ£ Ωƒ¥ 2 - Õ®Œ™»Ωƒ£ Ω */ 
+//sfr PWMB_CCMR2 = 0xFEE9H;  OC6CE OC6M2 OC6M1 OC6M0 OC6PE OC6FE CC6S1 CC6S0  0000, 0000  /* /»Ωƒ£ Ωƒ¥ 2 - Õ®Œ™»Ωƒ£ Ω */ 
 
-#define PWMA_OC3ModeSet(n)        PWMA_CCMR3 = (PWMA_CCMR3 & ~0x70) | (n)    // ‰≥ˆ±»Ωœƒ£ Ω…Ë÷√
-#define PWMB_OC7ModeSet(n)        PWMB_CCMR3 = (PWMB_CCMR3 & ~0x70) | (n)    // ‰≥ˆ±»Ωœƒ£ Ω…Ë÷√
+#define PWMA_OC2ModeSet( n )        PWMA_CCMR2 = ( PWMA_CCMR2 & ~0x70 ) | ( n )    //»Ωƒ£ Ω
+#define PWMB_OC6ModeSet( n )        PWMB_CCMR2 = ( PWMB_CCMR2 & ~0x70 ) | ( n )    //»Ωƒ£ Ω
 
-#define PWMA_OC3_ReloadEnable()    PWMA_CCMR3 |= 0x08    //1£∫ø™∆Ù OC3PE  ‰≥ˆ±»Ωœµƒ‘§◊∞‘ÿπ¶ƒ‹
-#define PWMA_OC3_RelosdDisable()  PWMA_CCMR3 &= ~0x08    //0£∫Ω˚÷π OC3PE  ‰≥ˆ±»Ωœµƒ‘§◊∞‘ÿπ¶ƒ‹
-#define PWMB_OC7_ReloadEnable()    PWMB_CCMR3 |= 0x08    //1£∫ø™∆Ù OC7PE  ‰≥ˆ±»Ωœµƒ‘§◊∞‘ÿπ¶ƒ‹
-#define PWMB_OC7_RelosdDisable()  PWMB_CCMR3 &= ~0x08    //0£∫Ω˚÷π OC7PE  ‰≥ˆ±»Ωœµƒ‘§◊∞‘ÿπ¶ƒ‹
+#define PWMA_OC2_ReloadEnable()    PWMA_CCMR2 |= 0x08    //1 OC2PE »Ωœµ‘§◊∞ÿπ
+#define PWMA_OC2_RelosdDisable()  PWMA_CCMR2 &= ~0x08    //0÷π OC2PE »Ωœµ‘§◊∞ÿπ
+#define PWMB_OC6_ReloadEnable()    PWMB_CCMR2 |= 0x08    //1 OC6PE »Ωœµ‘§◊∞ÿπ
+#define PWMB_OC6_RelosdDisable()  PWMB_CCMR2 &= ~0x08    //0÷π OC6PE »Ωœµ‘§◊∞ÿπ
 
-#define PWMA_OC3_FastEnable()      PWMA_CCMR3 |= 0x04    //1£∫ø™∆Ù OC3FE  ‰≥ˆ±»ΩœøÏÀŸπ¶ƒ‹
-#define PWMA_OC3_FastDisable()    PWMA_CCMR3 &= ~0x04    //0£∫Ω˚÷π OC3FE  ‰≥ˆ±»ΩœøÏÀŸπ¶ƒ‹
-#define PWMB_OC7_FastEnable()      PWMB_CCMR3 |= 0x04    //1£∫ø™∆Ù OC7FE  ‰≥ˆ±»ΩœøÏÀŸπ¶ƒ‹
-#define PWMB_OC7_FastDisable()    PWMB_CCMR3 &= ~0x04    //0£∫Ω˚÷π OC7FE  ‰≥ˆ±»ΩœøÏÀŸπ¶ƒ‹
+#define PWMA_OC2_FastEnable()      PWMA_CCMR2 |= 0x04    //1 OC2FE »ΩœøŸπ
+#define PWMA_OC2_FastDisable()    PWMA_CCMR2 &= ~0x04    //0÷π OC2FE »ΩœøŸπ
+#define PWMB_OC6_FastEnable()      PWMB_CCMR2 |= 0x04    //1 OC6FE »ΩœøŸπ
+#define PWMB_OC6_FastDisable()    PWMB_CCMR2 &= ~0x04    //0÷π OC6FE »ΩœøŸπ
 
-#define PWMA_CC3S_Direction(n)    PWMA_CCMR3 = (PWMA_CCMR3 & ~0x03) | (n)    //≤∂ªÒ/±»Ωœ 3 —°‘Ò°£’‚¡ΩŒª∂®“ÂÕ®µ¿µƒ∑ΩœÚ£® ‰»Î/ ‰≥ˆ£©£¨º∞ ‰»ÎΩ≈µƒ—°‘Ò
-#define PWMB_CC7S_Direction(n)    PWMB_CCMR3 = (PWMB_CCMR3 & ~0x03) | (n)    //≤∂ªÒ/±»Ωœ 7 —°‘Ò°£’‚¡ΩŒª∂®“ÂÕ®µ¿µƒ∑ΩœÚ£® ‰»Î/ ‰≥ˆ£©£¨º∞ ‰»ÎΩ≈µƒ—°‘Ò
+#define PWMA_CC2S_Direction( n )    PWMA_CCMR2 = ( PWMA_CCMR2 & ~0x03 ) | ( n )    ///»Ω 2 —°ŒªÕ®ƒ∑/≈µ—°
+#define PWMB_CC6S_Direction( n )    PWMB_CCMR2 = ( PWMB_CCMR2 & ~0x03 ) | ( n )    ///»Ω 6 —°ŒªÕ®ƒ∑/≈µ—°
 
 //                             7     6     5     4      3       2      1     0    Reset Value
-//sfr PWMA_CCMR3 = 0xFECAH;  IC3F3 IC3F2 IC3F1 IC3F0 IC3PSC1 IC3PSC0 CC3S1 CC3S0  0000,0000  /* ≤∂ªÒ/±»Ωœƒ£ Ωºƒ¥Ê∆˜ 3 - Õ®µ¿≈‰÷√Œ™≤∂ªÒ ‰»Îƒ£ Ω */ 
-//sfr PWMB_CCMR3 = 0xFEEAH;  IC7F3 IC7F2 IC7F1 IC7F0 IC7PSC1 IC7PSC0 CC7S1 CC7S0  0000,0000  /* ≤∂ªÒ/±»Ωœƒ£ Ωºƒ¥Ê∆˜ 3 - Õ®µ¿≈‰÷√Œ™≤∂ªÒ ‰»Îƒ£ Ω */ 
+//sfr PWMA_CCMR2 = 0xFEC9H;  IC2F3 IC2F2 IC2F1 IC2F0 IC2PSC1 IC2PSC0 CC2S1 CC2S0  0000, 0000  /* /»Ωƒ£ Ωƒ¥ 2 - Õ®Œ™ƒ£ Ω */ 
+//sfr PWMB_CCMR2 = 0xFEE9H;  IC6F3 IC6F2 IC6F1 IC6F0 IC6PSC1 IC6PSC0 CC6S1 CC6S0  0000, 0000  /* /»Ωƒ£ Ωƒ¥ 2 - Õ®Œ™ƒ£ Ω */ 
 
-#define PWMA_IC3F_FilterClock(n)  PWMA_CCMR3 = (PWMA_CCMR3 & 0x0F) | (n<<4)    // ‰»Î≤∂ªÒ 3 ¬À≤®∆˜—°‘Ò£¨∏√Œª”Ú∂®“Â¡À TIn µƒ≤…—˘∆µ¬ º∞ ˝◊÷¬À≤®∆˜≥§∂»
-#define PWMB_IC7F_FilterClock(n)  PWMB_CCMR3 = (PWMB_CCMR3 & 0x0F) | (n<<4)    // ‰»Î≤∂ªÒ 7 ¬À≤®∆˜—°‘Ò£¨∏√Œª”Ú∂®“Â¡À TIn µƒ≤…—˘∆µ¬ º∞ ˝◊÷¬À≤®∆˜≥§∂»
+#define PWMA_IC2F_FilterClock( n )  PWMA_CCMR2 = ( PWMA_CCMR2 & 0x0F ) | ( n<<4 )    //Î≤∂ 2 À≤—°Ò£¨∏Œª TIn ƒ≤∆µ ºÀ≤
+#define PWMB_IC6F_FilterClock( n )  PWMB_CCMR2 = ( PWMB_CCMR2 & 0x0F ) | ( n<<4 )    //Î≤∂ 6 À≤—°Ò£¨∏Œª TIn ƒ≤∆µ ºÀ≤
 
-#define PWMA_IC3PSC_PrescalerSet(n)    PWMA_CCMR3 = (PWMA_CCMR3 & 0xF3) | ((n&3)<<2)    // ‰»Î/≤∂ªÒ 3 ‘§∑÷∆µ∆˜£¨0~3
-#define PWMB_IC7PSC_PrescalerSet(n)    PWMB_CCMR3 = (PWMB_CCMR3 & 0xF3) | ((n&3)<<2)    // ‰»Î/≤∂ªÒ 7 ‘§∑÷∆µ∆˜£¨0~3
+#define PWMA_IC2PSC_PrescalerSet( n )    PWMA_CCMR2 = ( PWMA_CCMR2 & 0xF3 ) | (( n&3 )<<2 )    /// 2 ‘§∆µ0~3
+#define PWMB_IC6PSC_PrescalerSet( n )    PWMB_CCMR2 = ( PWMB_CCMR2 & 0xF3 ) | (( n&3 )<<2 )    /// 6 ‘§∆µ0~3
 
 //                             7     6     5     4     3     2     1     0    Reset Value
-//sfr PWMA_CCMR4 = 0xFECBH;  OC4CE OC4M2 OC4M1 OC4M0 OC4PE OC4FE CC4S1 CC4S0  0000,0000  /* ≤∂ªÒ/±»Ωœƒ£ Ωºƒ¥Ê∆˜ 4 - Õ®µ¿≈‰÷√Œ™±»Ωœ ‰≥ˆƒ£ Ω */ 
-//sfr PWMB_CCMR4 = 0xFEEBH;  OC8CE OC8M2 OC8M1 OC8M0 OC8PE OC8FE CC8S1 CC8S0  0000,0000  /* ≤∂ªÒ/±»Ωœƒ£ Ωºƒ¥Ê∆˜ 4 - Õ®µ¿≈‰÷√Œ™±»Ωœ ‰≥ˆƒ£ Ω */ 
+//sfr PWMA_CCMR3 = 0xFECAH;  OC3CE OC3M2 OC3M1 OC3M0 OC3PE OC3FE CC3S1 CC3S0  0000, 0000  /* /»Ωƒ£ Ωƒ¥ 3 - Õ®Œ™»Ωƒ£ Ω */ 
+//sfr PWMB_CCMR3 = 0xFEEAH;  OC7CE OC7M2 OC7M1 OC7M0 OC7PE OC7FE CC7S1 CC7S0  0000, 0000  /* /»Ωƒ£ Ωƒ¥ 3 - Õ®Œ™»Ωƒ£ Ω */ 
 
-#define PWMA_OC4ModeSet(n)        PWMA_CCMR4 = (PWMA_CCMR4 & ~0x70) | (n)    // ‰≥ˆ±»Ωœƒ£ Ω…Ë÷√
-#define PWMB_OC8ModeSet(n)        PWMB_CCMR4 = (PWMB_CCMR4 & ~0x70) | (n)    // ‰≥ˆ±»Ωœƒ£ Ω…Ë÷√
+#define PWMA_OC3ModeSet( n )        PWMA_CCMR3 = ( PWMA_CCMR3 & ~0x70 ) | ( n )    //»Ωƒ£ Ω
+#define PWMB_OC7ModeSet( n )        PWMB_CCMR3 = ( PWMB_CCMR3 & ~0x70 ) | ( n )    //»Ωƒ£ Ω
 
-#define PWMA_OC4_ReloadEnable()    PWMA_CCMR4 |= 0x08    //1£∫ø™∆Ù OC4PE  ‰≥ˆ±»Ωœµƒ‘§◊∞‘ÿπ¶ƒ‹
-#define PWMA_OC4_RelosdDisable()  PWMA_CCMR4 &= ~0x08    //0£∫Ω˚÷π OC4PE  ‰≥ˆ±»Ωœµƒ‘§◊∞‘ÿπ¶ƒ‹
-#define PWMB_OC8_ReloadEnable()    PWMB_CCMR4 |= 0x08    //1£∫ø™∆Ù OC8PE  ‰≥ˆ±»Ωœµƒ‘§◊∞‘ÿπ¶ƒ‹
-#define PWMB_OC8_RelosdDisable()  PWMB_CCMR4 &= ~0x08    //0£∫Ω˚÷π OC8PE  ‰≥ˆ±»Ωœµƒ‘§◊∞‘ÿπ¶ƒ‹
+#define PWMA_OC3_ReloadEnable()    PWMA_CCMR3 |= 0x08    //1 OC3PE »Ωœµ‘§◊∞ÿπ
+#define PWMA_OC3_RelosdDisable()  PWMA_CCMR3 &= ~0x08    //0÷π OC3PE »Ωœµ‘§◊∞ÿπ
+#define PWMB_OC7_ReloadEnable()    PWMB_CCMR3 |= 0x08    //1 OC7PE »Ωœµ‘§◊∞ÿπ
+#define PWMB_OC7_RelosdDisable()  PWMB_CCMR3 &= ~0x08    //0÷π OC7PE »Ωœµ‘§◊∞ÿπ
 
-#define PWMA_OC4_FastEnable()      PWMA_CCMR4 |= 0x04    //1£∫ø™∆Ù OC4FE  ‰≥ˆ±»ΩœøÏÀŸπ¶ƒ‹
-#define PWMA_OC4_FastDisable()    PWMA_CCMR4 &= ~0x04    //0£∫Ω˚÷π OC4FE  ‰≥ˆ±»ΩœøÏÀŸπ¶ƒ‹
-#define PWMB_OC8_FastEnable()      PWMB_CCMR4 |= 0x04    //1£∫ø™∆Ù OC8FE  ‰≥ˆ±»ΩœøÏÀŸπ¶ƒ‹
-#define PWMB_OC8_FastDisable()    PWMB_CCMR4 &= ~0x04    //0£∫Ω˚÷π OC8FE  ‰≥ˆ±»ΩœøÏÀŸπ¶ƒ‹
+#define PWMA_OC3_FastEnable()      PWMA_CCMR3 |= 0x04    //1 OC3FE »ΩœøŸπ
+#define PWMA_OC3_FastDisable()    PWMA_CCMR3 &= ~0x04    //0÷π OC3FE »ΩœøŸπ
+#define PWMB_OC7_FastEnable()      PWMB_CCMR3 |= 0x04    //1 OC7FE »ΩœøŸπ
+#define PWMB_OC7_FastDisable()    PWMB_CCMR3 &= ~0x04    //0÷π OC7FE »ΩœøŸπ
 
-#define PWMA_CC4S_Direction(n)    PWMA_CCMR4 = (PWMA_CCMR4 & ~0x03) | (n)    //≤∂ªÒ/±»Ωœ 4 —°‘Ò°£’‚¡ΩŒª∂®“ÂÕ®µ¿µƒ∑ΩœÚ£® ‰»Î/ ‰≥ˆ£©£¨º∞ ‰»ÎΩ≈µƒ—°‘Ò
-#define PWMB_CC8S_Direction(n)    PWMB_CCMR4 = (PWMB_CCMR4 & ~0x03) | (n)    //≤∂ªÒ/±»Ωœ 8 —°‘Ò°£’‚¡ΩŒª∂®“ÂÕ®µ¿µƒ∑ΩœÚ£® ‰»Î/ ‰≥ˆ£©£¨º∞ ‰»ÎΩ≈µƒ—°‘Ò
+#define PWMA_CC3S_Direction( n )    PWMA_CCMR3 = ( PWMA_CCMR3 & ~0x03 ) | ( n )    ///»Ω 3 —°ŒªÕ®ƒ∑/≈µ—°
+#define PWMB_CC7S_Direction( n )    PWMB_CCMR3 = ( PWMB_CCMR3 & ~0x03 ) | ( n )    ///»Ω 7 —°ŒªÕ®ƒ∑/≈µ—°
 
 //                             7     6     5     4      3       2      1     0    Reset Value
-//sfr PWMA_CCMR4 = 0xFECBH;  IC4F3 IC4F2 IC4F1 IC4F0 IC4PSC1 IC4PSC0 CC4S1 CC4S0  0000,0000  /* ≤∂ªÒ/±»Ωœƒ£ Ωºƒ¥Ê∆˜ 4 - Õ®µ¿≈‰÷√Œ™≤∂ªÒ ‰»Îƒ£ Ω */ 
-//sfr PWMB_CCMR4 = 0xFEEBH;  IC8F3 IC8F2 IC8F1 IC8F0 IC8PSC1 IC8PSC0 CC8S1 CC8S0  0000,0000  /* ≤∂ªÒ/±»Ωœƒ£ Ωºƒ¥Ê∆˜ 4 - Õ®µ¿≈‰÷√Œ™≤∂ªÒ ‰»Îƒ£ Ω */ 
+//sfr PWMA_CCMR3 = 0xFECAH;  IC3F3 IC3F2 IC3F1 IC3F0 IC3PSC1 IC3PSC0 CC3S1 CC3S0  0000, 0000  /* /»Ωƒ£ Ωƒ¥ 3 - Õ®Œ™ƒ£ Ω */ 
+//sfr PWMB_CCMR3 = 0xFEEAH;  IC7F3 IC7F2 IC7F1 IC7F0 IC7PSC1 IC7PSC0 CC7S1 CC7S0  0000, 0000  /* /»Ωƒ£ Ωƒ¥ 3 - Õ®Œ™ƒ£ Ω */ 
 
-#define PWMA_IC4F_FilterClock(n)  PWMA_CCMR4 = (PWMA_CCMR4 & 0x0F) | (n<<4)    // ‰»Î≤∂ªÒ 4 ¬À≤®∆˜—°‘Ò£¨∏√Œª”Ú∂®“Â¡À TIn µƒ≤…—˘∆µ¬ º∞ ˝◊÷¬À≤®∆˜≥§∂»
-#define PWMB_IC8F_FilterClock(n)  PWMB_CCMR4 = (PWMB_CCMR4 & 0x0F) | (n<<4)    // ‰»Î≤∂ªÒ 8 ¬À≤®∆˜—°‘Ò£¨∏√Œª”Ú∂®“Â¡À TIn µƒ≤…—˘∆µ¬ º∞ ˝◊÷¬À≤®∆˜≥§∂»
+#define PWMA_IC3F_FilterClock( n )  PWMA_CCMR3 = ( PWMA_CCMR3 & 0x0F ) | ( n<<4 )    //Î≤∂ 3 À≤—°Ò£¨∏Œª TIn ƒ≤∆µ ºÀ≤
+#define PWMB_IC7F_FilterClock( n )  PWMB_CCMR3 = ( PWMB_CCMR3 & 0x0F ) | ( n<<4 )    //Î≤∂ 7 À≤—°Ò£¨∏Œª TIn ƒ≤∆µ ºÀ≤
 
-#define PWMA_IC4PSC_PrescalerSet(n)    PWMA_CCMR4 = (PWMA_CCMR4 & 0xF3) | ((n&3)<<2)    // ‰»Î/≤∂ªÒ 4 ‘§∑÷∆µ∆˜£¨0~3
-#define PWMB_IC8PSC_PrescalerSet(n)    PWMB_CCMR4 = (PWMB_CCMR4 & 0xF3) | ((n&3)<<2)    // ‰»Î/≤∂ªÒ 8 ‘§∑÷∆µ∆˜£¨0~3
+#define PWMA_IC3PSC_PrescalerSet( n )    PWMA_CCMR3 = ( PWMA_CCMR3 & 0xF3 ) | (( n&3 )<<2 )    /// 3 ‘§∆µ0~3
+#define PWMB_IC7PSC_PrescalerSet( n )    PWMB_CCMR3 = ( PWMB_CCMR3 & 0xF3 ) | (( n&3 )<<2 )    /// 7 ‘§∆µ0~3
 
-//                             7     6     5    4    3     2    1    0    Reset Value
-//sfr PWMA_CCER1 = 0xFECCH;  CC2NP CC2NE CC2P CC2E CC1NP CC1NE CC1P CC1E  0000,0000  /* ≤∂ªÒ/±»Ωœ πƒ‹ºƒ¥Ê∆˜ 1 */ 
-//sfr PWMB_CCER1 = 0xFEECH;    -     -   CC6P CC6E   -     -   CC5P CC5E  0000,0000  /* ≤∂ªÒ/±»Ωœ πƒ‹ºƒ¥Ê∆˜ 1 */ 
+//                             7     6     5     4     3     2     1     0    Reset Value
+//sfr PWMA_CCMR4 = 0xFECBH;  OC4CE OC4M2 OC4M1 OC4M0 OC4PE OC4FE CC4S1 CC4S0  0000, 0000  /* /»Ωƒ£ Ωƒ¥ 4 - Õ®Œ™»Ωƒ£ Ω */ 
+//sfr PWMB_CCMR4 = 0xFEEBH;  OC8CE OC8M2 OC8M1 OC8M0 OC8PE OC8FE CC8S1 CC8S0  0000, 0000  /* /»Ωƒ£ Ωƒ¥ 4 - Õ®Œ™»Ωƒ£ Ω */ 
 
-//#define PWMA_CC1E_Enable(n)        PWMA_CCER1 = (PWMA_CCER1 & ~0x01) | (n)        //ø™∆Ù ‰»Î≤∂ªÒ/±»Ωœ ‰≥ˆ
-//#define PWMA_CC1NE_Enable(n)      PWMA_CCER1 = (PWMA_CCER1 & ~0x04) | (n << 2)  //ø™∆Ù±»Ωœ ‰≥ˆ
+#define PWMA_OC4ModeSet( n )        PWMA_CCMR4 = ( PWMA_CCMR4 & ~0x70 ) | ( n )    //»Ωƒ£ Ω
+#define PWMB_OC8ModeSet( n )        PWMB_CCMR4 = ( PWMB_CCMR4 & ~0x70 ) | ( n )    //»Ωƒ£ Ω
 
-#define PWMA_CCER1_Disable()      PWMA_CCER1 = 0x00      //πÿ±’À˘”– ‰»Î≤∂ªÒ/±»Ωœ ‰≥ˆ
-#define PWMA_CC1E_Enable()        PWMA_CCER1 |= 0x01    //1£∫ø™∆Ù ‰»Î≤∂ªÒ/±»Ωœ ‰≥ˆ
-#define PWMA_CC1E_Disable()        PWMA_CCER1 &= ~0x01    //0£∫πÿ±’ ‰»Î≤∂ªÒ/±»Ωœ ‰≥ˆ
-#define PWMA_CC1P_LowValid()      PWMA_CCER1 |= 0x02    //1£∫µÕµÁ∆Ω”––ß
-#define PWMA_CC1P_HighValid()      PWMA_CCER1 &= ~0x02    //0£∫∏ﬂµÁ∆Ω”––ß
-#define PWMA_CC1P_CaptureRise()    PWMA_CCER1 |= 0x02    //1£∫≤∂ªÒ∑¢…˙‘⁄ TI1F ªÚ TI2F µƒœ¬Ωµ—ÿ
-#define PWMA_CC1P_CaptureFall()    PWMA_CCER1 &= ~0x02    //0£∫≤∂ªÒ∑¢…˙‘⁄ TI1F ªÚ TI2F µƒ…œ…˝—ÿ
-#define PWMA_CC1NE_Enable()        PWMA_CCER1 |= 0x04    //1£∫ø™∆Ù±»Ωœ ‰≥ˆ
-#define PWMA_CC1NE_Disable()      PWMA_CCER1 &= ~0x04    //0£∫πÿ±’±»Ωœ ‰≥ˆ
-#define PWMA_CC1NP_LowValid()      PWMA_CCER1 |= 0x08    //1£∫µÕµÁ∆Ω”––ß
-#define PWMA_CC1NP_HighValid()    PWMA_CCER1 &= ~0x08    //0£∫∏ﬂµÁ∆Ω”––ß
+#define PWMA_OC4_ReloadEnable()    PWMA_CCMR4 |= 0x08    //1 OC4PE »Ωœµ‘§◊∞ÿπ
+#define PWMA_OC4_RelosdDisable()  PWMA_CCMR4 &= ~0x08    //0÷π OC4PE »Ωœµ‘§◊∞ÿπ
+#define PWMB_OC8_ReloadEnable()    PWMB_CCMR4 |= 0x08    //1 OC8PE »Ωœµ‘§◊∞ÿπ
+#define PWMB_OC8_RelosdDisable()  PWMB_CCMR4 &= ~0x08    //0÷π OC8PE »Ωœµ‘§◊∞ÿπ
 
-#define PWMA_CC2E_Enable()        PWMA_CCER1 |= 0x10    //1£∫ø™∆Ù ‰»Î≤∂ªÒ/±»Ωœ ‰≥ˆ
-#define PWMA_CC2E_Disable()        PWMA_CCER1 &= ~0x10    //0£∫πÿ±’ ‰»Î≤∂ªÒ/±»Ωœ ‰≥ˆ
-#define PWMA_CC2P_LowValid()      PWMA_CCER1 |= 0x20    //1£∫µÕµÁ∆Ω”––ß
-#define PWMA_CC2P_HighValid()      PWMA_CCER1 &= ~0x20    //0£∫∏ﬂµÁ∆Ω”––ß
-#define PWMA_CC2P_CaptureRise()    PWMA_CCER1 |= 0x20    //1£∫≤∂ªÒ∑¢…˙‘⁄ TI1F ªÚ TI2F µƒœ¬Ωµ—ÿ
-#define PWMA_CC2P_CaptureFall()    PWMA_CCER1 &= ~0x20    //0£∫≤∂ªÒ∑¢…˙‘⁄ TI1F ªÚ TI2F µƒ…œ…˝—ÿ
-#define PWMA_CC2NE_Enable()        PWMA_CCER1 |= 0x40    //1£∫ø™∆Ù±»Ωœ ‰≥ˆ
-#define PWMA_CC2NE_Disable()      PWMA_CCER1 &= ~0x40    //0£∫πÿ±’±»Ωœ ‰≥ˆ
-#define PWMA_CC2NP_LowValid()      PWMA_CCER1 |= 0x80    //1£∫µÕµÁ∆Ω”––ß
-#define PWMA_CC2NP_HighValid()    PWMA_CCER1 &= ~0x80    //0£∫∏ﬂµÁ∆Ω”––ß
+#define PWMA_OC4_FastEnable()      PWMA_CCMR4 |= 0x04    //1 OC4FE »ΩœøŸπ
+#define PWMA_OC4_FastDisable()    PWMA_CCMR4 &= ~0x04    //0÷π OC4FE »ΩœøŸπ
+#define PWMB_OC8_FastEnable()      PWMB_CCMR4 |= 0x04    //1 OC8FE »ΩœøŸπ
+#define PWMB_OC8_FastDisable()    PWMB_CCMR4 &= ~0x04    //0÷π OC8FE »ΩœøŸπ
 
-#define PWMB_CCER1_Disable()      PWMB_CCER1 = 0x00      //πÿ±’À˘”– ‰»Î≤∂ªÒ/±»Ωœ ‰≥ˆ
-#define PWMB_CC5E_Enable()        PWMB_CCER1 |= 0x01    //1£∫ø™∆Ù ‰»Î≤∂ªÒ/±»Ωœ ‰≥ˆ
-#define PWMB_CC5E_Disable()        PWMB_CCER1 &= ~0x01    //0£∫πÿ±’ ‰»Î≤∂ªÒ/±»Ωœ ‰≥ˆ
-#define PWMB_CC5P_LowValid()      PWMB_CCER1 |= 0x02    //1£∫µÕµÁ∆Ω”––ß
-#define PWMB_CC5P_HighValid()      PWMB_CCER1 &= ~0x02    //0£∫∏ﬂµÁ∆Ω”––ß
-#define PWMB_CC5P_CaptureRise()    PWMB_CCER1 |= 0x02    //1£∫≤∂ªÒ∑¢…˙‘⁄ TI1F ªÚ TI2F µƒœ¬Ωµ—ÿ
-#define PWMB_CC5P_CaptureFall()    PWMB_CCER1 &= ~0x02    //0£∫≤∂ªÒ∑¢…˙‘⁄ TI1F ªÚ TI2F µƒ…œ…˝—ÿ
+#define PWMA_CC4S_Direction( n )    PWMA_CCMR4 = ( PWMA_CCMR4 & ~0x03 ) | ( n )    ///»Ω 4 —°ŒªÕ®ƒ∑/≈µ—°
+#define PWMB_CC8S_Direction( n )    PWMB_CCMR4 = ( PWMB_CCMR4 & ~0x03 ) | ( n )    ///»Ω 8 —°ŒªÕ®ƒ∑/≈µ—°
 
-#define PWMB_CC6E_Enable()        PWMB_CCER1 |= 0x10    //1£∫ø™∆Ù ‰»Î≤∂ªÒ/±»Ωœ ‰≥ˆ
-#define PWMB_CC6E_Disable()        PWMB_CCER1 &= ~0x10    //0£∫πÿ±’ ‰»Î≤∂ªÒ/±»Ωœ ‰≥ˆ
-#define PWMB_CC6P_LowValid()      PWMB_CCER1 |= 0x20    //1£∫µÕµÁ∆Ω”––ß
-#define PWMB_CC6P_HighValid()      PWMB_CCER1 &= ~0x20    //0£∫∏ﬂµÁ∆Ω”––ß
-#define PWMB_CC6P_CaptureRise()    PWMB_CCER1 |= 0x20    //1£∫≤∂ªÒ∑¢…˙‘⁄ TI1F ªÚ TI2F µƒœ¬Ωµ—ÿ
-#define PWMB_CC6P_CaptureFall()    PWMB_CCER1 &= ~0x20    //0£∫≤∂ªÒ∑¢…˙‘⁄ TI1F ªÚ TI2F µƒ…œ…˝—ÿ
+//                             7     6     5     4      3       2      1     0    Reset Value
+//sfr PWMA_CCMR4 = 0xFECBH;  IC4F3 IC4F2 IC4F1 IC4F0 IC4PSC1 IC4PSC0 CC4S1 CC4S0  0000, 0000  /* /»Ωƒ£ Ωƒ¥ 4 - Õ®Œ™ƒ£ Ω */ 
+//sfr PWMB_CCMR4 = 0xFEEBH;  IC8F3 IC8F2 IC8F1 IC8F0 IC8PSC1 IC8PSC0 CC8S1 CC8S0  0000, 0000  /* /»Ωƒ£ Ωƒ¥ 4 - Õ®Œ™ƒ£ Ω */ 
+
+#define PWMA_IC4F_FilterClock( n )  PWMA_CCMR4 = ( PWMA_CCMR4 & 0x0F ) | ( n<<4 )    //Î≤∂ 4 À≤—°Ò£¨∏Œª TIn ƒ≤∆µ ºÀ≤
+#define PWMB_IC8F_FilterClock( n )  PWMB_CCMR4 = ( PWMB_CCMR4 & 0x0F ) | ( n<<4 )    //Î≤∂ 8 À≤—°Ò£¨∏Œª TIn ƒ≤∆µ ºÀ≤
+
+#define PWMA_IC4PSC_PrescalerSet( n )    PWMA_CCMR4 = ( PWMA_CCMR4 & 0xF3 ) | (( n&3 )<<2 )    /// 4 ‘§∆µ0~3
+#define PWMB_IC8PSC_PrescalerSet( n )    PWMB_CCMR4 = ( PWMB_CCMR4 & 0xF3 ) | (( n&3 )<<2 )    /// 8 ‘§∆µ0~3
 
 //                             7     6     5    4    3     2    1    0    Reset Value
-//sfr PWMA_CCER2 = 0xFECDH;  CC4NP CC4NE CC4P CC4E CC3NP CC3NE CC3P CC3E  0000,0000  /* ≤∂ªÒ/±»Ωœ πƒ‹ºƒ¥Ê∆˜ 2 */ 
-//sfr PWMB_CCER2 = 0xFEEDH;    -     -   CC8P CC8E   -     -   CC7P CC7E  0000,0000  /* ≤∂ªÒ/±»Ωœ πƒ‹ºƒ¥Ê∆˜ 2 */ 
+//sfr PWMA_CCER1 = 0xFECCH;  CC2NP CC2NE CC2P CC2E CC1NP CC1NE CC1P CC1E  0000, 0000  /* /»Ω π‹ºƒ¥ 1 */ 
+//sfr PWMB_CCER1 = 0xFEECH;    -     -   CC6P CC6E   -     -   CC5P CC5E  0000, 0000  /* /»Ω π‹ºƒ¥ 1 */ 
 
-#define PWMA_CCER2_Disable()      PWMA_CCER2 = 0x00      //πÿ±’À˘”– ‰»Î≤∂ªÒ/±»Ωœ ‰≥ˆ
-#define PWMA_CC3E_Enable()        PWMA_CCER2 |= 0x01    //1£∫ø™∆Ù ‰»Î≤∂ªÒ/±»Ωœ ‰≥ˆ
-#define PWMA_CC3E_Disable()        PWMA_CCER2 &= ~0x01    //0£∫πÿ±’ ‰»Î≤∂ªÒ/±»Ωœ ‰≥ˆ
-#define PWMA_CC3P_LowValid()      PWMA_CCER2 |= 0x02    //1£∫µÕµÁ∆Ω”––ß
-#define PWMA_CC3P_HighValid()      PWMA_CCER2 &= ~0x02    //0£∫∏ﬂµÁ∆Ω”––ß
-#define PWMA_CC3P_CaptureRise()    PWMA_CCER2 |= 0x02    //1£∫≤∂ªÒ∑¢…˙‘⁄ TI1F ªÚ TI2F µƒœ¬Ωµ—ÿ
-#define PWMA_CC3P_CaptureFall()    PWMA_CCER2 &= ~0x02    //0£∫≤∂ªÒ∑¢…˙‘⁄ TI1F ªÚ TI2F µƒ…œ…˝—ÿ
-#define PWMA_CC3NE_Enable()        PWMA_CCER2 |= 0x04    //1£∫ø™∆Ù±»Ωœ ‰≥ˆ
-#define PWMA_CC3NE_Disable()      PWMA_CCER2 &= ~0x04    //0£∫πÿ±’±»Ωœ ‰≥ˆ
-#define PWMA_CC3NP_LowValid()      PWMA_CCER2 |= 0x08    //1£∫µÕµÁ∆Ω”––ß
-#define PWMA_CC3NP_HighValid()    PWMA_CCER2 &= ~0x08    //0£∫∏ﬂµÁ∆Ω”––ß
+//#define PWMA_CC1E_Enable( n )        PWMA_CCER1 = ( PWMA_CCER1 & ~0x01 ) | ( n )        //Î≤∂/»Ω
+//#define PWMA_CC1NE_Enable( n )      PWMA_CCER1 = ( PWMA_CCER1 & ~0x04 ) | ( n << 2 )  //»Ω
 
-#define PWMA_CC4E_Enable()        PWMA_CCER2 |= 0x10    //1£∫ø™∆Ù ‰»Î≤∂ªÒ/±»Ωœ ‰≥ˆ
-#define PWMA_CC4E_Disable()        PWMA_CCER2 &= ~0x10    //0£∫πÿ±’ ‰»Î≤∂ªÒ/±»Ωœ ‰≥ˆ
-#define PWMA_CC4P_LowValid()      PWMA_CCER2 |= 0x20    //1£∫µÕµÁ∆Ω”––ß
-#define PWMA_CC4P_HighValid()      PWMA_CCER2 &= ~0x20    //0£∫∏ﬂµÁ∆Ω”––ß
-#define PWMA_CC4P_CaptureRise()    PWMA_CCER2 |= 0x20    //1£∫≤∂ªÒ∑¢…˙‘⁄ TI1F ªÚ TI2F µƒœ¬Ωµ—ÿ
-#define PWMA_CC4P_CaptureFall()    PWMA_CCER2 &= ~0x20    //0£∫≤∂ªÒ∑¢…˙‘⁄ TI1F ªÚ TI2F µƒ…œ…˝—ÿ
-#define PWMA_CC4NE_Enable()        PWMA_CCER2 |= 0x40    //1£∫ø™∆Ù±»Ωœ ‰≥ˆ
-#define PWMA_CC4NE_Disable()      PWMA_CCER2 &= ~0x40    //0£∫πÿ±’±»Ωœ ‰≥ˆ
-#define PWMA_CC4NP_LowValid()      PWMA_CCER2 |= 0x80    //1£∫µÕµÁ∆Ω”––ß
-#define PWMA_CC4NP_HighValid()    PWMA_CCER2 &= ~0x80    //0£∫∏ﬂµÁ∆Ω”––ß
+#define PWMA_CCER1_Disable()      PWMA_CCER1 = 0x00      //ÿ±Î≤∂/»Ω
+#define PWMA_CC1E_Enable()        PWMA_CCER1 |= 0x01    //1Î≤∂/»Ω
+#define PWMA_CC1E_Disable()        PWMA_CCER1 &= ~0x01    //0ÿ±Î≤∂/»Ω
+#define PWMA_CC1P_LowValid()      PWMA_CCER1 |= 0x02    //1Õµ∆Ω–ß
+#define PWMA_CC1P_HighValid()      PWMA_CCER1 &= ~0x02    //0ﬂµ∆Ω–ß
+#define PWMA_CC1P_CaptureRise()    PWMA_CCER1 |= 0x02    //1 TI1F  TI2F ¬Ω
+#define PWMA_CC1P_CaptureFall()    PWMA_CCER1 &= ~0x02    //0 TI1F  TI2F 
+#define PWMA_CC1NE_Enable()        PWMA_CCER1 |= 0x04    //1»Ω
+#define PWMA_CC1NE_Disable()      PWMA_CCER1 &= ~0x04    //0ÿ±’±»Ω
+#define PWMA_CC1NP_LowValid()      PWMA_CCER1 |= 0x08    //1Õµ∆Ω–ß
+#define PWMA_CC1NP_HighValid()    PWMA_CCER1 &= ~0x08    //0ﬂµ∆Ω–ß
 
-#define PWMB_CCER2_Disable()      PWMB_CCER2 = 0x00      //πÿ±’À˘”– ‰»Î≤∂ªÒ/±»Ωœ ‰≥ˆ
-#define PWMB_CC7E_Enable()        PWMB_CCER2 |= 0x01    //1£∫ø™∆Ù ‰»Î≤∂ªÒ/±»Ωœ ‰≥ˆ
-#define PWMB_CC7E_Disable()        PWMB_CCER2 &= ~0x01    //0£∫πÿ±’ ‰»Î≤∂ªÒ/±»Ωœ ‰≥ˆ
-#define PWMB_CC7P_LowValid()      PWMB_CCER2 |= 0x02    //1£∫µÕµÁ∆Ω”––ß
-#define PWMB_CC7P_HighValid()      PWMB_CCER2 &= ~0x02    //0£∫∏ﬂµÁ∆Ω”––ß
-#define PWMB_CC7P_CaptureRise()    PWMB_CCER2 |= 0x02    //1£∫≤∂ªÒ∑¢…˙‘⁄ TI1F ªÚ TI2F µƒœ¬Ωµ—ÿ
-#define PWMB_CC7P_CaptureFall()    PWMB_CCER2 &= ~0x02    //0£∫≤∂ªÒ∑¢…˙‘⁄ TI1F ªÚ TI2F µƒ…œ…˝—ÿ
+#define PWMA_CC2E_Enable()        PWMA_CCER1 |= 0x10    //1Î≤∂/»Ω
+#define PWMA_CC2E_Disable()        PWMA_CCER1 &= ~0x10    //0ÿ±Î≤∂/»Ω
+#define PWMA_CC2P_LowValid()      PWMA_CCER1 |= 0x20    //1Õµ∆Ω–ß
+#define PWMA_CC2P_HighValid()      PWMA_CCER1 &= ~0x20    //0ﬂµ∆Ω–ß
+#define PWMA_CC2P_CaptureRise()    PWMA_CCER1 |= 0x20    //1 TI1F  TI2F ¬Ω
+#define PWMA_CC2P_CaptureFall()    PWMA_CCER1 &= ~0x20    //0 TI1F  TI2F 
+#define PWMA_CC2NE_Enable()        PWMA_CCER1 |= 0x40    //1»Ω
+#define PWMA_CC2NE_Disable()      PWMA_CCER1 &= ~0x40    //0ÿ±’±»Ω
+#define PWMA_CC2NP_LowValid()      PWMA_CCER1 |= 0x80    //1Õµ∆Ω–ß
+#define PWMA_CC2NP_HighValid()    PWMA_CCER1 &= ~0x80    //0ﬂµ∆Ω–ß
 
-#define PWMB_CC8E_Enable()        PWMB_CCER2 |= 0x10    //1£∫ø™∆Ù ‰»Î≤∂ªÒ/±»Ωœ ‰≥ˆ
-#define PWMB_CC8E_Disable()        PWMB_CCER2 &= ~0x10    //0£∫πÿ±’ ‰»Î≤∂ªÒ/±»Ωœ ‰≥ˆ
-#define PWMB_CC8P_LowValid()      PWMB_CCER2 |= 0x20    //1£∫µÕµÁ∆Ω”––ß
-#define PWMB_CC8P_HighValid()      PWMB_CCER2 &= ~0x20    //0£∫∏ﬂµÁ∆Ω”––ß
-#define PWMB_CC8P_CaptureRise()    PWMB_CCER2 |= 0x20    //1£∫≤∂ªÒ∑¢…˙‘⁄ TI1F ªÚ TI2F µƒœ¬Ωµ—ÿ
-#define PWMB_CC8P_CaptureFall()    PWMB_CCER2 &= ~0x20    //0£∫≤∂ªÒ∑¢…˙‘⁄ TI1F ªÚ TI2F µƒ…œ…˝—ÿ
+#define PWMB_CCER1_Disable()      PWMB_CCER1 = 0x00      //ÿ±Î≤∂/»Ω
+#define PWMB_CC5E_Enable()        PWMB_CCER1 |= 0x01    //1Î≤∂/»Ω
+#define PWMB_CC5E_Disable()        PWMB_CCER1 &= ~0x01    //0ÿ±Î≤∂/»Ω
+#define PWMB_CC5P_LowValid()      PWMB_CCER1 |= 0x02    //1Õµ∆Ω–ß
+#define PWMB_CC5P_HighValid()      PWMB_CCER1 &= ~0x02    //0ﬂµ∆Ω–ß
+#define PWMB_CC5P_CaptureRise()    PWMB_CCER1 |= 0x02    //1 TI1F  TI2F ¬Ω
+#define PWMB_CC5P_CaptureFall()    PWMB_CCER1 &= ~0x02    //0 TI1F  TI2F 
 
-//                             7     6     5    4    3     2    1    0    Reset Value
-//sfr PWMA_CNTRH = 0xFECEH;                   CNT1[15:8]                  0000,0000  /* º∆ ˝∆˜∏ﬂ 8 Œª */ 
-//sfr PWMB_CNTRH = 0xFEEEH;                   CNT2[15:8]                  0000,0000  /* º∆ ˝∆˜∏ﬂ 8 Œª */ 
-//sfr PWMA_CNTRL = 0xFECFH;                   CNT1[7:0]                   0000,0000  /* º∆ ˝∆˜µÕ 8 Œª */ 
-//sfr PWMB_CNTRL = 0xFEEFH;                   CNT2[7:0]                   0000,0000  /* º∆ ˝∆˜µÕ 8 Œª */ 
-
-#define PWMA_Counter(n)            PWMA_CNTR = n    //º∆ ˝∆˜…Ë÷√
-#define PWMB_Counter(n)            PWMB_CNTR = n    //º∆ ˝∆˜…Ë÷√
+#define PWMB_CC6E_Enable()        PWMB_CCER1 |= 0x10    //1Î≤∂/»Ω
+#define PWMB_CC6E_Disable()        PWMB_CCER1 &= ~0x10    //0ÿ±Î≤∂/»Ω
+#define PWMB_CC6P_LowValid()      PWMB_CCER1 |= 0x20    //1Õµ∆Ω–ß
+#define PWMB_CC6P_HighValid()      PWMB_CCER1 &= ~0x20    //0ﬂµ∆Ω–ß
+#define PWMB_CC6P_CaptureRise()    PWMB_CCER1 |= 0x20    //1 TI1F  TI2F ¬Ω
+#define PWMB_CC6P_CaptureFall()    PWMB_CCER1 &= ~0x20    //0 TI1F  TI2F 
 
 //                             7     6     5    4    3     2    1    0    Reset Value
-//sfr PWMA_PSCRH = 0xFED0H;                   PSC1[15:8]                  0000,0000  /* ‘§∑÷∆µ∆˜∏ﬂ 8 Œª */ 
-//sfr PWMB_PSCRH = 0xFEF0H;                   PSC2[15:8]                  0000,0000  /* ‘§∑÷∆µ∆˜∏ﬂ 8 Œª */ 
-//sfr PWMA_PSCRL = 0xFED1H;                   PSC1[7:0]                   0000,0000  /* ‘§∑÷∆µ∆˜µÕ 8 Œª */ 
-//sfr PWMB_PSCRL = 0xFEF1H;                   PSC2[7:0]                   0000,0000  /* ‘§∑÷∆µ∆˜µÕ 8 Œª */ 
+//sfr PWMA_CCER2 = 0xFECDH;  CC4NP CC4NE CC4P CC4E CC3NP CC3NE CC3P CC3E  0000, 0000  /* /»Ω π‹ºƒ¥ 2 */ 
+//sfr PWMB_CCER2 = 0xFEEDH;    -     -   CC8P CC8E   -     -   CC7P CC7E  0000, 0000  /* /»Ω π‹ºƒ¥ 2 */ 
 
-#define PWMA_Prescaler(n)          PWMA_PSCR = n    //‘§∑÷∆µ∆˜…Ë÷√
-#define PWMB_Prescaler(n)          PWMB_PSCR = n    //‘§∑÷∆µ∆˜…Ë÷√
+#define PWMA_CCER2_Disable()      PWMA_CCER2 = 0x00      //ÿ±Î≤∂/»Ω
+#define PWMA_CC3E_Enable()        PWMA_CCER2 |= 0x01    //1Î≤∂/»Ω
+#define PWMA_CC3E_Disable()        PWMA_CCER2 &= ~0x01    //0ÿ±Î≤∂/»Ω
+#define PWMA_CC3P_LowValid()      PWMA_CCER2 |= 0x02    //1Õµ∆Ω–ß
+#define PWMA_CC3P_HighValid()      PWMA_CCER2 &= ~0x02    //0ﬂµ∆Ω–ß
+#define PWMA_CC3P_CaptureRise()    PWMA_CCER2 |= 0x02    //1 TI1F  TI2F ¬Ω
+#define PWMA_CC3P_CaptureFall()    PWMA_CCER2 &= ~0x02    //0 TI1F  TI2F 
+#define PWMA_CC3NE_Enable()        PWMA_CCER2 |= 0x04    //1»Ω
+#define PWMA_CC3NE_Disable()      PWMA_CCER2 &= ~0x04    //0ÿ±’±»Ω
+#define PWMA_CC3NP_LowValid()      PWMA_CCER2 |= 0x08    //1Õµ∆Ω–ß
+#define PWMA_CC3NP_HighValid()    PWMA_CCER2 &= ~0x08    //0ﬂµ∆Ω–ß
 
-//                             7     6     5    4    3     2    1    0    Reset Value
-//sfr PWMA_ARRH = 0xFED2H;                    ARR1[15:8]                  0000,0000  /* ◊‘∂Ø÷ÿ◊∞‘ÿºƒ¥Ê∆˜∏ﬂ 8 Œª */ 
-//sfr PWMB_ARRH = 0xFEF2H;                    ARR2[15:8]                  0000,0000  /* ◊‘∂Ø÷ÿ◊∞‘ÿºƒ¥Ê∆˜∏ﬂ 8 Œª */ 
-//sfr PWMA_ARRL = 0xFED3H;                    ARR1[7:0]                   0000,0000  /* ◊‘∂Ø÷ÿ◊∞‘ÿºƒ¥Ê∆˜µÕ 8 Œª */ 
-//sfr PWMB_ARRL = 0xFEF3H;                    ARR2[7:0]                   0000,0000  /* ◊‘∂Ø÷ÿ◊∞‘ÿºƒ¥Ê∆˜µÕ 8 Œª */ 
+#define PWMA_CC4E_Enable()        PWMA_CCER2 |= 0x10    //1Î≤∂/»Ω
+#define PWMA_CC4E_Disable()        PWMA_CCER2 &= ~0x10    //0ÿ±Î≤∂/»Ω
+#define PWMA_CC4P_LowValid()      PWMA_CCER2 |= 0x20    //1Õµ∆Ω–ß
+#define PWMA_CC4P_HighValid()      PWMA_CCER2 &= ~0x20    //0ﬂµ∆Ω–ß
+#define PWMA_CC4P_CaptureRise()    PWMA_CCER2 |= 0x20    //1 TI1F  TI2F ¬Ω
+#define PWMA_CC4P_CaptureFall()    PWMA_CCER2 &= ~0x20    //0 TI1F  TI2F 
+#define PWMA_CC4NE_Enable()        PWMA_CCER2 |= 0x40    //1»Ω
+#define PWMA_CC4NE_Disable()      PWMA_CCER2 &= ~0x40    //0ÿ±’±»Ω
+#define PWMA_CC4NP_LowValid()      PWMA_CCER2 |= 0x80    //1Õµ∆Ω–ß
+#define PWMA_CC4NP_HighValid()    PWMA_CCER2 &= ~0x80    //0ﬂµ∆Ω–ß
 
-#define PWMA_AutoReload(n)        {PWMA_ARRH = (n>>8); PWMA_ARRL = (n);}    //◊‘∂Ø÷ÿ◊∞‘ÿºƒ¥Ê∆˜…Ë÷√
-#define PWMB_AutoReload(n)        {PWMB_ARRH = (n>>8); PWMB_ARRL = (n);}    //◊‘∂Ø÷ÿ◊∞‘ÿºƒ¥Ê∆˜…Ë÷√
+#define PWMB_CCER2_Disable()      PWMB_CCER2 = 0x00      //ÿ±Î≤∂/»Ω
+#define PWMB_CC7E_Enable()        PWMB_CCER2 |= 0x01    //1Î≤∂/»Ω
+#define PWMB_CC7E_Disable()        PWMB_CCER2 &= ~0x01    //0ÿ±Î≤∂/»Ω
+#define PWMB_CC7P_LowValid()      PWMB_CCER2 |= 0x02    //1Õµ∆Ω–ß
+#define PWMB_CC7P_HighValid()      PWMB_CCER2 &= ~0x02    //0ﬂµ∆Ω–ß
+#define PWMB_CC7P_CaptureRise()    PWMB_CCER2 |= 0x02    //1 TI1F  TI2F ¬Ω
+#define PWMB_CC7P_CaptureFall()    PWMB_CCER2 &= ~0x02    //0 TI1F  TI2F 
 
-//                             7     6     5    4    3     2    1    0    Reset Value
-//sfr PWMA_RCR = 0xFED4H;                     REP1[7:0]                   0000,0000  /* ÷ÿ∏¥º∆ ˝∆˜ºƒ¥Ê∆˜ */ 
-//sfr PWMB_RCR = 0xFEF4H;                     REP2[7:0]                   0000,0000  /* ÷ÿ∏¥º∆ ˝∆˜ºƒ¥Ê∆˜ */ 
-
-#define PWMA_ReCounter(n)          PWMA_RCR = n    //÷ÿ∏¥º∆ ˝∆˜ºƒ¥Ê∆˜…Ë÷√
-#define PWMB_ReCounter(n)          PWMB_RCR = n    //÷ÿ∏¥º∆ ˝∆˜ºƒ¥Ê∆˜…Ë÷√
-
-//                             7     6     5    4    3     2    1    0    Reset Value
-//sfr PWMA_CCR1H = 0xFED5H;                   CCR1[15:8]                  0000,0000  /* ≤∂ªÒ/±»Ωœºƒ¥Ê∆˜ 1 ∏ﬂ 8 Œª */ 
-//sfr PWMB_CCR5H = 0xFEF5H;                   CCR5[15:8]                  0000,0000  /* ≤∂ªÒ/±»Ωœºƒ¥Ê∆˜ 1 ∏ﬂ 8 Œª */ 
-//sfr PWMA_CCR1L = 0xFED6H;                   CCR1[7:0]                   0000,0000  /* ≤∂ªÒ/±»Ωœºƒ¥Ê∆˜ 1 µÕ 8 Œª */ 
-//sfr PWMB_CCR5L = 0xFEF6H;                   CCR5[7:0]                   0000,0000  /* ≤∂ªÒ/±»Ωœºƒ¥Ê∆˜ 1 µÕ 8 Œª */ 
-
-#define PWMA_Duty1(n)              {PWMA_CCR1H = (n>>8); PWMA_CCR1L = (n);}    //≤∂ªÒ/±»Ωœºƒ¥Ê∆˜ 1 …Ë÷√
-#define PWMB_Duty5(n)              {PWMB_CCR5H = (n>>8); PWMB_CCR5L = (n);}    //≤∂ªÒ/±»Ωœºƒ¥Ê∆˜ 1 …Ë÷√
-
-//                             7     6     5    4    3     2    1    0    Reset Value
-//sfr PWMA_CCR2H = 0xFED7H;                   CCR2[15:8]                  0000,0000  /* ≤∂ªÒ/±»Ωœºƒ¥Ê∆˜ 2 ∏ﬂ 8 Œª */ 
-//sfr PWMB_CCR6H = 0xFEF7H;                   CCR6[15:8]                  0000,0000  /* ≤∂ªÒ/±»Ωœºƒ¥Ê∆˜ 2 ∏ﬂ 8 Œª */ 
-//sfr PWMA_CCR2L = 0xFED8H;                   CCR2[7:0]                   0000,0000  /* ≤∂ªÒ/±»Ωœºƒ¥Ê∆˜ 2 µÕ 8 Œª */ 
-//sfr PWMB_CCR6L = 0xFEF8H;                   CCR6[7:0]                   0000,0000  /* ≤∂ªÒ/±»Ωœºƒ¥Ê∆˜ 2 µÕ 8 Œª */ 
-
-#define PWMA_Duty2(n)              {PWMA_CCR2H = (n>>8); PWMA_CCR2L = (n);}    //≤∂ªÒ/±»Ωœºƒ¥Ê∆˜ 2 …Ë÷√
-#define PWMB_Duty6(n)              {PWMB_CCR6H = (n>>8); PWMB_CCR6L = (n);}    //≤∂ªÒ/±»Ωœºƒ¥Ê∆˜ 2 …Ë÷√
-
-//                             7     6     5    4    3     2    1    0    Reset Value
-//sfr PWMA_CCR3H = 0xFED9H;                   CCR3[15:8]                  0000,0000  /* ≤∂ªÒ/±»Ωœºƒ¥Ê∆˜ 3 ∏ﬂ 8 Œª */ 
-//sfr PWMB_CCR7H = 0xFEF9H;                   CCR7[15:8]                  0000,0000  /* ≤∂ªÒ/±»Ωœºƒ¥Ê∆˜ 3 ∏ﬂ 8 Œª */ 
-//sfr PWMA_CCR3L = 0xFEDAH;                   CCR3[7:0]                   0000,0000  /* ≤∂ªÒ/±»Ωœºƒ¥Ê∆˜ 3 µÕ 8 Œª */ 
-//sfr PWMB_CCR7L = 0xFEFAH;                   CCR7[7:0]                   0000,0000  /* ≤∂ªÒ/±»Ωœºƒ¥Ê∆˜ 3 µÕ 8 Œª */ 
-
-#define PWMA_Duty3(n)              {PWMA_CCR3H = (n>>8); PWMA_CCR3L = (n);}    //≤∂ªÒ/±»Ωœºƒ¥Ê∆˜ 3 …Ë÷√
-#define PWMB_Duty7(n)              {PWMB_CCR7H = (n>>8); PWMB_CCR7L = (n);}    //≤∂ªÒ/±»Ωœºƒ¥Ê∆˜ 3 …Ë÷√
+#define PWMB_CC8E_Enable()        PWMB_CCER2 |= 0x10    //1Î≤∂/»Ω
+#define PWMB_CC8E_Disable()        PWMB_CCER2 &= ~0x10    //0ÿ±Î≤∂/»Ω
+#define PWMB_CC8P_LowValid()      PWMB_CCER2 |= 0x20    //1Õµ∆Ω–ß
+#define PWMB_CC8P_HighValid()      PWMB_CCER2 &= ~0x20    //0ﬂµ∆Ω–ß
+#define PWMB_CC8P_CaptureRise()    PWMB_CCER2 |= 0x20    //1 TI1F  TI2F ¬Ω
+#define PWMB_CC8P_CaptureFall()    PWMB_CCER2 &= ~0x20    //0 TI1F  TI2F 
 
 //                             7     6     5    4    3     2    1    0    Reset Value
-//sfr PWMA_CCR4H = 0xFEDBH;                   CCR4[15:8]                  0000,0000  /* ≤∂ªÒ/±»Ωœºƒ¥Ê∆˜ 4 ∏ﬂ 8 Œª */ 
-//sfr PWMB_CCR8H = 0xFEFBH;                   CCR8[15:8]                  0000,0000  /* ≤∂ªÒ/±»Ωœºƒ¥Ê∆˜ 4 ∏ﬂ 8 Œª */ 
-//sfr PWMA_CCR4L = 0xFEDCH;                   CCR4[7:0]                   0000,0000  /* ≤∂ªÒ/±»Ωœºƒ¥Ê∆˜ 4 µÕ 8 Œª */ 
-//sfr PWMB_CCR8L = 0xFEFCH;                   CCR8[7:0]                   0000,0000  /* ≤∂ªÒ/±»Ωœºƒ¥Ê∆˜ 4 µÕ 8 Œª */ 
+//sfr PWMA_CNTRH = 0xFECEH;                   CNT1[15:8]                  0000, 0000  /*  8 Œª */ 
+//sfr PWMB_CNTRH = 0xFEEEH;                   CNT2[15:8]                  0000, 0000  /*  8 Œª */ 
+//sfr PWMA_CNTRL = 0xFECFH;                   CNT1[7:0]                   0000, 0000  /*  8 Œª */ 
+//sfr PWMB_CNTRL = 0xFEEFH;                   CNT2[7:0]                   0000, 0000  /*  8 Œª */ 
 
-#define PWMA_Duty4(n)              {PWMA_CCR4H = (n>>8); PWMA_CCR4L = (n);}    //≤∂ªÒ/±»Ωœºƒ¥Ê∆˜ 4 …Ë÷√
-#define PWMB_Duty8(n)              {PWMB_CCR8H = (n>>8); PWMB_CCR8L = (n);}    //≤∂ªÒ/±»Ωœºƒ¥Ê∆˜ 4 …Ë÷√
+#define PWMA_Counter( n )            PWMA_CNTR = n    //
+#define PWMB_Counter( n )            PWMB_CNTR = n    //
+
+//                             7     6     5    4    3     2    1    0    Reset Value
+//sfr PWMA_PSCRH = 0xFED0H;                   PSC1[15:8]                  0000, 0000  /* ‘§∆µ 8 Œª */ 
+//sfr PWMB_PSCRH = 0xFEF0H;                   PSC2[15:8]                  0000, 0000  /* ‘§∆µ 8 Œª */ 
+//sfr PWMA_PSCRL = 0xFED1H;                   PSC1[7:0]                   0000, 0000  /* ‘§∆µ 8 Œª */ 
+//sfr PWMB_PSCRL = 0xFEF1H;                   PSC2[7:0]                   0000, 0000  /* ‘§∆µ 8 Œª */ 
+
+#define PWMA_Prescaler( n )          PWMA_PSCR = n    //‘§∆µ
+#define PWMB_Prescaler( n )          PWMB_PSCR = n    //‘§∆µ
+
+//                             7     6     5    4    3     2    1    0    Reset Value
+//sfr PWMA_ARRH = 0xFED2H;                    ARR1[15:8]                  0000, 0000  /* ‘∂◊∞ÿºƒ¥ 8 Œª */ 
+//sfr PWMB_ARRH = 0xFEF2H;                    ARR2[15:8]                  0000, 0000  /* ‘∂◊∞ÿºƒ¥ 8 Œª */ 
+//sfr PWMA_ARRL = 0xFED3H;                    ARR1[7:0]                   0000, 0000  /* ‘∂◊∞ÿºƒ¥ 8 Œª */ 
+//sfr PWMB_ARRL = 0xFEF3H;                    ARR2[7:0]                   0000, 0000  /* ‘∂◊∞ÿºƒ¥ 8 Œª */ 
+
+#define PWMA_AutoReload( n )        {PWMA_ARRH = ( n>>8 ); PWMA_ARRL = ( n );}    //‘∂◊∞ÿºƒ¥
+#define PWMB_AutoReload( n )        {PWMB_ARRH = ( n>>8 ); PWMB_ARRL = ( n );}    //‘∂◊∞ÿºƒ¥
+
+//                             7     6     5    4    3     2    1    0    Reset Value
+//sfr PWMA_RCR = 0xFED4H;                     REP1[7:0]                   0000, 0000  /* ÿ∏ƒ¥ */ 
+//sfr PWMB_RCR = 0xFEF4H;                     REP2[7:0]                   0000, 0000  /* ÿ∏ƒ¥ */ 
+
+#define PWMA_ReCounter( n )          PWMA_RCR = n    //ÿ∏ƒ¥
+#define PWMB_ReCounter( n )          PWMB_RCR = n    //ÿ∏ƒ¥
+
+//                             7     6     5    4    3     2    1    0    Reset Value
+//sfr PWMA_CCR1H = 0xFED5H;                   CCR1[15:8]                  0000, 0000  /* /»Ωœºƒ¥ 1  8 Œª */ 
+//sfr PWMB_CCR5H = 0xFEF5H;                   CCR5[15:8]                  0000, 0000  /* /»Ωœºƒ¥ 1  8 Œª */ 
+//sfr PWMA_CCR1L = 0xFED6H;                   CCR1[7:0]                   0000, 0000  /* /»Ωœºƒ¥ 1  8 Œª */ 
+//sfr PWMB_CCR5L = 0xFEF6H;                   CCR5[7:0]                   0000, 0000  /* /»Ωœºƒ¥ 1  8 Œª */ 
+
+#define PWMA_Duty1( n )              {PWMA_CCR1H = ( n>>8 ); PWMA_CCR1L = ( n );}    ///»Ωœºƒ¥ 1 
+#define PWMB_Duty5( n )              {PWMB_CCR5H = ( n>>8 ); PWMB_CCR5L = ( n );}    ///»Ωœºƒ¥ 1 
+
+//                             7     6     5    4    3     2    1    0    Reset Value
+//sfr PWMA_CCR2H = 0xFED7H;                   CCR2[15:8]                  0000, 0000  /* /»Ωœºƒ¥ 2  8 Œª */ 
+//sfr PWMB_CCR6H = 0xFEF7H;                   CCR6[15:8]                  0000, 0000  /* /»Ωœºƒ¥ 2  8 Œª */ 
+//sfr PWMA_CCR2L = 0xFED8H;                   CCR2[7:0]                   0000, 0000  /* /»Ωœºƒ¥ 2  8 Œª */ 
+//sfr PWMB_CCR6L = 0xFEF8H;                   CCR6[7:0]                   0000, 0000  /* /»Ωœºƒ¥ 2  8 Œª */ 
+
+#define PWMA_Duty2( n )              {PWMA_CCR2H = ( n>>8 ); PWMA_CCR2L = ( n );}    ///»Ωœºƒ¥ 2 
+#define PWMB_Duty6( n )              {PWMB_CCR6H = ( n>>8 ); PWMB_CCR6L = ( n );}    ///»Ωœºƒ¥ 2 
+
+//                             7     6     5    4    3     2    1    0    Reset Value
+//sfr PWMA_CCR3H = 0xFED9H;                   CCR3[15:8]                  0000, 0000  /* /»Ωœºƒ¥ 3  8 Œª */ 
+//sfr PWMB_CCR7H = 0xFEF9H;                   CCR7[15:8]                  0000, 0000  /* /»Ωœºƒ¥ 3  8 Œª */ 
+//sfr PWMA_CCR3L = 0xFEDAH;                   CCR3[7:0]                   0000, 0000  /* /»Ωœºƒ¥ 3  8 Œª */ 
+//sfr PWMB_CCR7L = 0xFEFAH;                   CCR7[7:0]                   0000, 0000  /* /»Ωœºƒ¥ 3  8 Œª */ 
+
+#define PWMA_Duty3( n )              {PWMA_CCR3H = ( n>>8 ); PWMA_CCR3L = ( n );}    ///»Ωœºƒ¥ 3 
+#define PWMB_Duty7( n )              {PWMB_CCR7H = ( n>>8 ); PWMB_CCR7L = ( n );}    ///»Ωœºƒ¥ 3 
+
+//                             7     6     5    4    3     2    1    0    Reset Value
+//sfr PWMA_CCR4H = 0xFEDBH;                   CCR4[15:8]                  0000, 0000  /* /»Ωœºƒ¥ 4  8 Œª */ 
+//sfr PWMB_CCR8H = 0xFEFBH;                   CCR8[15:8]                  0000, 0000  /* /»Ωœºƒ¥ 4  8 Œª */ 
+//sfr PWMA_CCR4L = 0xFEDCH;                   CCR4[7:0]                   0000, 0000  /* /»Ωœºƒ¥ 4  8 Œª */ 
+//sfr PWMB_CCR8L = 0xFEFCH;                   CCR8[7:0]                   0000, 0000  /* /»Ωœºƒ¥ 4  8 Œª */ 
+
+#define PWMA_Duty4( n )              {PWMA_CCR4H = ( n>>8 ); PWMA_CCR4L = ( n );}    ///»Ωœºƒ¥ 4 
+#define PWMB_Duty8( n )              {PWMB_CCR8H = ( n>>8 ); PWMB_CCR8L = ( n );}    ///»Ωœºƒ¥ 4 
 
 //                          7    6    5    4     3     2     1      0     Reset Value
-//sfr PWMA_BKR = 0xFEDDH;  MOE1 AOE1 BKP1 BKE1 OSSR1 OSSI1 LOCK11 LOCK10  0000,0000  /* …≤≥µºƒ¥Ê∆˜ */ 
-//sfr PWMB_BKR = 0xFEFDH;  MOE2 AOE2 BKP2 BKE2 OSSR2 OSSI2 LOCK21 LOCK20  0000,0000  /* …≤≥µºƒ¥Ê∆˜ */ 
+//sfr PWMA_BKR = 0xFEDDH;  MOE1 AOE1 BKP1 BKE1 OSSR1 OSSI1 LOCK11 LOCK10  0000, 0000  /* …≤ƒ¥ */ 
+//sfr PWMB_BKR = 0xFEFDH;  MOE2 AOE2 BKP2 BKE2 OSSR2 OSSI2 LOCK21 LOCK20  0000, 0000  /* …≤ƒ¥ */ 
 
-#define PWMA_BrakeOutputEnable(n)        (n==1?(PWMA_BKR |= 0x80):(PWMA_BKR &= ~0x80))    //1£∫÷˜ ‰≥ˆ πƒ‹
-#define PWMB_BrakeOutputEnable(n)        (n==1?(PWMB_BKR |= 0x80):(PWMB_BKR &= ~0x80))    //1£∫÷˜ ‰≥ˆ πƒ‹
-//#define PWMA_BrakeOutputEnable()        PWMA_BKR |= 0x80    //1£∫÷˜ ‰≥ˆ πƒ‹
-#define PWMA_BrakeOutputDisable()        PWMA_BKR &= ~0x80    //0£∫÷˜ ‰≥ˆΩ˚÷π
-//#define PWMB_BrakeOutputEnable()        PWMB_BKR |= 0x80    //1£∫÷˜ ‰≥ˆ πƒ‹
-#define PWMB_BrakeOutputDisable()        PWMB_BKR &= ~0x80    //0£∫÷˜ ‰≥ˆΩ˚÷π
+#define PWMA_BrakeOutputEnable( n )        ( n == ?( PWMA_BKR |= 0x80 ):( PWMA_BKR &= ~0x80 ))    //1 π
+#define PWMB_BrakeOutputEnable( n )        ( n == ?( PWMB_BKR |= 0x80 ):( PWMB_BKR &= ~0x80 ))    //1 π
+//#define PWMA_BrakeOutputEnable()        PWMA_BKR |= 0x80    //1 π
+#define PWMA_BrakeOutputDisable()        PWMA_BKR &= ~0x80    //0÷π
+//#define PWMB_BrakeOutputEnable()        PWMB_BKR |= 0x80    //1 π
+#define PWMB_BrakeOutputDisable()        PWMB_BKR &= ~0x80    //0÷π
 
-#define PWMA_BrakeAutoOutputEnable()    PWMA_BKR |= 0x40    //1£∫◊‘∂Ø ‰≥ˆ πƒ‹
-#define PWMA_BrakeAutoOutputDisable()    PWMA_BKR &= ~0x40    //0£∫◊‘∂Ø ‰≥ˆΩ˚÷π
-#define PWMB_BrakeAutoOutputEnable()    PWMB_BKR |= 0x40    //1£∫◊‘∂Ø ‰≥ˆ πƒ‹
-#define PWMB_BrakeAutoOutputDisable()    PWMB_BKR &= ~0x40    //0£∫◊‘∂Ø ‰≥ˆΩ˚÷π
+#define PWMA_BrakeAutoOutputEnable()    PWMA_BKR |= 0x40    //1‘∂ π
+#define PWMA_BrakeAutoOutputDisable()    PWMA_BKR &= ~0x40    //0‘∂÷π
+#define PWMB_BrakeAutoOutputEnable()    PWMB_BKR |= 0x40    //1‘∂ π
+#define PWMB_BrakeAutoOutputDisable()    PWMB_BKR &= ~0x40    //0‘∂÷π
 
-#define PWMA_BrakeHighValid()            PWMA_BKR |= 0x20    //1£∫…≤≥µ ‰»Î∏ﬂµÁ∆Ω”––ß
-#define PWMA_BrakeLowValid()            PWMA_BKR &= ~0x20    //0£∫…≤≥µ ‰»ÎµÕµÁ∆Ω”––ß
-#define PWMB_BrakeHighValid()            PWMB_BKR |= 0x20    //1£∫…≤≥µ ‰»Î∏ﬂµÁ∆Ω”––ß
-#define PWMB_BrakeLowValid()            PWMB_BKR &= ~0x20    //0£∫…≤≥µ ‰»ÎµÕµÁ∆Ω”––ß
+#define PWMA_BrakeHighValid()            PWMA_BKR |= 0x20    //1…≤ﬂµ∆Ω–ß
+#define PWMA_BrakeLowValid()            PWMA_BKR &= ~0x20    //0…≤Õµ∆Ω–ß
+#define PWMB_BrakeHighValid()            PWMB_BKR |= 0x20    //1…≤ﬂµ∆Ω–ß
+#define PWMB_BrakeLowValid()            PWMB_BKR &= ~0x20    //0…≤Õµ∆Ω–ß
 
-#define PWMA_BrakeEnable(n)              (n==1?(PWMA_BKR |= 0x10):(PWMA_BKR &= ~0x10))    //1£∫ø™∆Ù…≤≥µ ‰»Î
-#define PWMB_BrakeEnable(n)              (n==1?(PWMB_BKR |= 0x10):(PWMB_BKR &= ~0x10))    //1£∫ø™∆Ù…≤≥µ ‰»Î
-//#define PWMA_BrakeEnable()              PWMA_BKR |= 0x10    //1£∫ø™∆Ù…≤≥µ ‰»Î
-#define PWMA_BrakeDisable()              PWMA_BKR &= ~0x10    //0£∫Ω˚÷π…≤≥µ ‰»Î
-//#define PWMB_BrakeEnable()              PWMB_BKR |= 0x10    //1£∫ø™∆Ù…≤≥µ ‰»Î
-#define PWMB_BrakeDisable()              PWMB_BKR &= ~0x10    //0£∫Ω˚÷π…≤≥µ ‰»Î
+#define PWMA_BrakeEnable( n )              ( n == ?( PWMA_BKR |= 0x10 ):( PWMA_BKR &= ~0x10 ))    //1…≤
+#define PWMB_BrakeEnable( n )              ( n == ?( PWMB_BKR |= 0x10 ):( PWMB_BKR &= ~0x10 ))    //1…≤
+//#define PWMA_BrakeEnable()              PWMA_BKR |= 0x10    //1…≤
+#define PWMA_BrakeDisable()              PWMA_BKR &= ~0x10    //0÷π…≤
+//#define PWMB_BrakeEnable()              PWMB_BKR |= 0x10    //1…≤
+#define PWMB_BrakeDisable()              PWMB_BKR &= ~0x10    //0÷π…≤
 
-//‘À––ƒ£ Ωœ¬°∞πÿ±’◊¥Ã¨°±—°‘Ò
-#define PWMA_OSSRnEnable()              PWMA_BKR |= 0x08    //1£∫µ± PWM ≤ªπ§◊˜ ±£¨“ªµ© CCiE=1 ªÚ CCiNE=1£¨ ◊œ»ø™∆Ù OC/OCN ≤¢ ‰≥ˆŒﬁ–ßµÁ∆Ω£¨»ª∫Û÷√OC/OCN  πƒ‹ ‰≥ˆ–≈∫≈=1
-#define PWMA_OSSRnDisable()              PWMA_BKR &= ~0x08    //0£∫µ± PWM ≤ªπ§◊˜ ±£¨Ω˚÷π OC/OCN  ‰≥ˆ£®OC/OCN  πƒ‹ ‰≥ˆ–≈∫≈=0£©
-#define PWMB_OSSRnEnable()              PWMB_BKR |= 0x08    //1£∫µ± PWM ≤ªπ§◊˜ ±£¨“ªµ© CCiE=1 ªÚ CCiNE=1£¨ ◊œ»ø™∆Ù OC/OCN ≤¢ ‰≥ˆŒﬁ–ßµÁ∆Ω£¨»ª∫Û÷√OC/OCN  πƒ‹ ‰≥ˆ–≈∫≈=1
-#define PWMB_OSSRnDisable()              PWMB_BKR &= ~0x08    //0£∫µ± PWM ≤ªπ§◊˜ ±£¨Ω˚÷π OC/OCN  ‰≥ˆ£®OC/OCN  πƒ‹ ‰≥ˆ–≈∫≈=0£©
-//ø’œ–ƒ£ Ωœ¬°∞πÿ±’◊¥Ã¨°±—°‘Ò
-#define PWMA_OSSInEnable()              PWMA_BKR |= 0x04    //1£∫µ± PWM ≤ªπ§◊˜ ±£¨“ªµ© CCiE=1 ªÚ CCiNE=1£¨OC/OCN  ◊œ» ‰≥ˆ∆‰ø’œ–µÁ∆Ω£¨»ª∫Û OC/OCN πƒ‹ ‰≥ˆ–≈∫≈=1
-#define PWMA_OSSInDisable()              PWMA_BKR &= ~0x04    //0£∫µ± PWM ≤ªπ§◊˜ ±£¨Ω˚÷π OC/OCN  ‰≥ˆ£®OC/OCN  πƒ‹ ‰≥ˆ–≈∫≈=0£©
-#define PWMB_OSSInEnable()              PWMB_BKR |= 0x04    //1£∫µ± PWM ≤ªπ§◊˜ ±£¨“ªµ© CCiE=1 ªÚ CCiNE=1£¨OC/OCN  ◊œ» ‰≥ˆ∆‰ø’œ–µÁ∆Ω£¨»ª∫Û OC/OCN πƒ‹ ‰≥ˆ–≈∫≈=1
-#define PWMB_OSSInDisable()              PWMB_BKR &= ~0x04    //0£∫µ± PWM ≤ªπ§◊˜ ±£¨Ω˚÷π OC/OCN  ‰≥ˆ£®OC/OCN  πƒ‹ ‰≥ˆ–≈∫≈=0£©
+//ƒ£ Ω¬°ÿ±◊¥Ã¨—°
+#define PWMA_OSSRnEnable()              PWMA_BKR |= 0x08    //1 PWM  ±“ª CCiE =   CCiNE = »ø OC / CN –ß∆Ω»ªOC / CN  π≈∫=1
+#define PWMA_OSSRnDisable()              PWMA_BKR &= ~0x08    //0 PWM  ±÷π OC / CN OC / CN  π≈∫=0
+#define PWMB_OSSRnEnable()              PWMB_BKR |= 0x08    //1 PWM  ±“ª CCiE =   CCiNE = »ø OC / CN –ß∆Ω»ªOC / CN  π≈∫=1
+#define PWMB_OSSRnDisable()              PWMB_BKR &= ~0x08    //0 PWM  ±÷π OC / CN OC / CN  π≈∫=0
+//ƒ£ Ω¬°ÿ±◊¥Ã¨—°
+#define PWMA_OSSInEnable()              PWMA_BKR |= 0x04    //1 PWM  ±“ª CCiE =   CCiNE = OC / CN –µ∆Ω»ª OC / CN π≈∫=1
+#define PWMA_OSSInDisable()              PWMA_BKR &= ~0x04    //0 PWM  ±÷π OC / CN OC / CN  π≈∫=0
+#define PWMB_OSSInEnable()              PWMB_BKR |= 0x04    //1 PWM  ±“ª CCiE =   CCiNE = OC / CN –µ∆Ω»ª OC / CN π≈∫=1
+#define PWMB_OSSInDisable()              PWMB_BKR &= ~0x04    //0 PWM  ±÷π OC / CN OC / CN  π≈∫=0
 
-#define PWMn_lock_L0      0    //ºƒ¥Ê∆˜Œﬁ–¥±£ª§
-#define PWMn_lock_L1      1    //À¯∂®º∂± 1£∫≤ªƒ‹–¥»Î PWMn_BKR ºƒ¥Ê∆˜µƒ BKE°¢BKP°¢AOE Œª∫ÕPWMn_OISR ºƒ¥Ê∆˜µƒ OISI Œª
-#define PWMn_lock_L2      2    //À¯∂®º∂± 2£∫≤ªƒ‹–¥»ÎÀ¯∂®º∂± 1 ÷–µƒ∏˜Œª£¨“≤≤ªƒ‹–¥»Î CC º´–‘Œª“‘º∞ OSSR/OSSI Œª
-#define PWMn_lock_L3      3    //À¯∂®º∂± 3£∫≤ªƒ‹–¥»ÎÀ¯∂®º∂± 2 ÷–µƒ∏˜Œª£¨“≤≤ªƒ‹–¥»Î CC øÿ÷∆Œª
+#define PWMn_lock_L0      0    //ƒ¥–¥
+#define PWMn_lock_L1      1    // 1–¥ PWMn_BKR ƒ¥ BKEBKPAOE ŒªPWMn_OISR ƒ¥ OISI Œª
+#define PWMn_lock_L2      2    // 2–¥ 1 –µƒ∏Œª“≤–¥ CC Œª‘º OSSR / SSI Œª
+#define PWMn_lock_L3      3    // 3–¥ 2 –µƒ∏Œª“≤–¥ CC Œª
 
-#define PWMA_LockLevelSet(n)            PWMA_BKR = (PWMA_BKR & ~0x03) | (n&3)    //À¯∂®…Ë÷√°£∏√ŒªŒ™∑¿÷π»Ìº˛¥ÌŒÛ∂¯Ã·π©µƒ–¥±£ª§¥Î ©
-#define PWMB_LockLevelSet(n)            PWMB_BKR = (PWMB_BKR & ~0x03) | (n&3)    //À¯∂®…Ë÷√°£∏√ŒªŒ™∑¿÷π»Ìº˛¥ÌŒÛ∂¯Ã·π©µƒ–¥±£ª§¥Î ©
+#define PWMA_LockLevelSet( n )            PWMA_BKR = ( PWMA_BKR & ~0x03 ) | ( n&3 )    //√°ŒªŒ™÷π·π©–¥ ©
+#define PWMB_LockLevelSet( n )            PWMB_BKR = ( PWMB_BKR & ~0x03 ) | ( n&3 )    //√°ŒªŒ™÷π·π©–¥ ©
 
 //                             7     6     5    4    3     2    1    0    Reset Value
-//sfr PWMA_DTR = 0xFEDEH;                     DTG1[7:0]                   0000,0000  /* À¿«¯ºƒ¥Ê∆˜ */ 
-//sfr PWMB_DTR = 0xFEFEH;                     DTG2[7:0]                   0000,0000  /* À¿«¯ºƒ¥Ê∆˜ */ 
+//sfr PWMA_DTR = 0xFEDEH;                     DTG1[7:0]                   0000, 0000  /* ƒ¥ */ 
+//sfr PWMB_DTR = 0xFEFEH;                     DTG2[7:0]                   0000, 0000  /* ƒ¥ */ 
 
-//DTGn[7:5] = 000~011: À¿«¯ ±º‰ = DTGn[7:0] * tCK_PSC
-//DTGn[7:5] = 100~101: À¿«¯ ±º‰ = (64 + DTGn[6:0]) * 2 * tCK_PSC
-//DTGn[7:5] = 110:     À¿«¯ ±º‰ = (32 + DTGn[5:0]) * 8 * tCK_PSC
-//DTGn[7:5] = 111:     À¿«¯ ±º‰ = (32 + DTGn[4:0]) * 16 * tCK_PSC
+//DTGn[7:5] = 000~011:  ± = DTGn[7:0] * tCK_PSC
+//DTGn[7:5] = 100~101:  ± = (64 + DTGn[6:0]) * 2 * tCK_PSC
+//DTGn[7:5] = 110:      ± = (32 + DTGn[5:0]) * 8 * tCK_PSC
+//DTGn[7:5] = 111:      ± = (32 + DTGn[4:0]) * 16 * tCK_PSC
 
-#define PWMA_DeadTime(n)          PWMA_DTR = n    //À¿«¯∑¢…˙∆˜…Ë÷√
-#define PWMB_DeadTime(n)          PWMB_DTR = n    //À¿«¯∑¢…˙∆˜…Ë÷√
+#define PWMA_DeadTime( n )          PWMA_DTR = n    //
+#define PWMB_DeadTime( n )          PWMB_DTR = n    //
 
 //                            7    6     5    4     3    2     1    0    Reset Value
-//sfr PWMA_OISR = 0xFEDFH;  OIS4N OIS4 OIS3N OIS3 OIS2N OIS2 OIS1N OIS1  0000,0000  /*  ‰≥ˆø’œ–◊¥Ã¨ºƒ¥Ê∆˜ */ 
-//sfr PWMB_OISR = 0xFEFFH;    -   OIS8   -   OIS7   -   OIS6   -   OIS5  x0x0,x0x0  /*  ‰≥ˆø’œ–◊¥Ã¨ºƒ¥Ê∆˜ */ 
+//sfr PWMA_OISR = 0xFEDFH;  OIS4N OIS4 OIS3N OIS3 OIS2N OIS2 OIS1N OIS1  0000, 0000  /* ◊¥Ã¨ƒ¥ */ 
+//sfr PWMB_OISR = 0xFEFFH;    -   OIS8   -   OIS7   -   OIS6   -   OIS5  x0x0, x0x0  /* ◊¥Ã¨ƒ¥ */ 
 
-#define PWMA_OC1_OUT_0()          PWMA_OISR &= ~0x01  /* µ± MOE=0  ±£¨»Áπ˚ OC1N  πƒ‹£¨‘Ú‘⁄“ª∏ˆÀ¿«¯∫Û£¨OC1=0 */
-#define PWMA_OC1_OUT_1()          PWMA_OISR |= 0x01    /* µ± MOE=0  ±£¨»Áπ˚ OC1N  πƒ‹£¨‘Ú‘⁄“ª∏ˆÀ¿«¯∫Û£¨OC1=1 */
-#define PWMA_OC1N_OUT_0()          PWMA_OISR &= ~0x02  /* µ± MOE=0  ±£¨‘Ú‘⁄“ª∏ˆÀ¿«¯∫Û£¨OC1N=0 */
-#define PWMA_OC1N_OUT_1()          PWMA_OISR |= 0x02    /* µ± MOE=0  ±£¨‘Ú‘⁄“ª∏ˆÀ¿«¯∫Û£¨OC1N=1 */
-#define PWMA_OC2_OUT_0()          PWMA_OISR &= ~0x04  /* µ± MOE=0  ±£¨»Áπ˚ OC2N  πƒ‹£¨‘Ú‘⁄“ª∏ˆÀ¿«¯∫Û£¨OC2=0 */
-#define PWMA_OC2_OUT_1()          PWMA_OISR |= 0x04    /* µ± MOE=0  ±£¨»Áπ˚ OC2N  πƒ‹£¨‘Ú‘⁄“ª∏ˆÀ¿«¯∫Û£¨OC2=1 */
-#define PWMA_OC2N_OUT_0()          PWMA_OISR &= ~0x08  /* µ± MOE=0  ±£¨‘Ú‘⁄“ª∏ˆÀ¿«¯∫Û£¨OC2N=0 */
-#define PWMA_OC2N_OUT_1()          PWMA_OISR |= 0x08    /* µ± MOE=0  ±£¨‘Ú‘⁄“ª∏ˆÀ¿«¯∫Û£¨OC2N=1 */
-#define PWMA_OC3_OUT_0()          PWMA_OISR &= ~0x10  /* µ± MOE=0  ±£¨»Áπ˚ OC3N  πƒ‹£¨‘Ú‘⁄“ª∏ˆÀ¿«¯∫Û£¨OC3=0 */
-#define PWMA_OC3_OUT_1()          PWMA_OISR |= 0x10    /* µ± MOE=0  ±£¨»Áπ˚ OC3N  πƒ‹£¨‘Ú‘⁄“ª∏ˆÀ¿«¯∫Û£¨OC3=1 */
-#define PWMA_OC3N_OUT_0()          PWMA_OISR &= ~0x20  /* µ± MOE=0  ±£¨‘Ú‘⁄“ª∏ˆÀ¿«¯∫Û£¨OC3N=0 */
-#define PWMA_OC3N_OUT_1()          PWMA_OISR |= 0x20    /* µ± MOE=0  ±£¨‘Ú‘⁄“ª∏ˆÀ¿«¯∫Û£¨OC3N=1 */
-#define PWMA_OC4_OUT_0()          PWMA_OISR &= ~0x40  /* µ± MOE=0  ±£¨»Áπ˚ OC4N  πƒ‹£¨‘Ú‘⁄“ª∏ˆÀ¿«¯∫Û£¨OC4=0 */
-#define PWMA_OC4_OUT_1()          PWMA_OISR |= 0x40    /* µ± MOE=0  ±£¨»Áπ˚ OC4N  πƒ‹£¨‘Ú‘⁄“ª∏ˆÀ¿«¯∫Û£¨OC4=1 */
-#define PWMA_OC4N_OUT_0()          PWMA_OISR &= ~0x80  /* µ± MOE=0  ±£¨‘Ú‘⁄“ª∏ˆÀ¿«¯∫Û£¨OC4N=0 */
-#define PWMA_OC4N_OUT_1()          PWMA_OISR |= 0x80    /* µ± MOE=0  ±£¨‘Ú‘⁄“ª∏ˆÀ¿«¯∫Û£¨OC4N=1 */
+#define PWMA_OC1_OUT_0()          PWMA_OISR &= ~0x01  /*  MOE =   ± OC1N  π‹£“ªOC1 =  */
+#define PWMA_OC1_OUT_1()          PWMA_OISR |= 0x01    /*  MOE =   ± OC1N  π‹£“ªOC1 =  */
+#define PWMA_OC1N_OUT_0()          PWMA_OISR &= ~0x02  /*  MOE =   ±“ªOC1N =  */
+#define PWMA_OC1N_OUT_1()          PWMA_OISR |= 0x02    /*  MOE =   ±“ªOC1N =  */
+#define PWMA_OC2_OUT_0()          PWMA_OISR &= ~0x04  /*  MOE =   ± OC2N  π‹£“ªOC2 =  */
+#define PWMA_OC2_OUT_1()          PWMA_OISR |= 0x04    /*  MOE =   ± OC2N  π‹£“ªOC2 =  */
+#define PWMA_OC2N_OUT_0()          PWMA_OISR &= ~0x08  /*  MOE =   ±“ªOC2N =  */
+#define PWMA_OC2N_OUT_1()          PWMA_OISR |= 0x08    /*  MOE =   ±“ªOC2N =  */
+#define PWMA_OC3_OUT_0()          PWMA_OISR &= ~0x10  /*  MOE =   ± OC3N  π‹£“ªOC3 =  */
+#define PWMA_OC3_OUT_1()          PWMA_OISR |= 0x10    /*  MOE =   ± OC3N  π‹£“ªOC3 =  */
+#define PWMA_OC3N_OUT_0()          PWMA_OISR &= ~0x20  /*  MOE =   ±“ªOC3N =  */
+#define PWMA_OC3N_OUT_1()          PWMA_OISR |= 0x20    /*  MOE =   ±“ªOC3N =  */
+#define PWMA_OC4_OUT_0()          PWMA_OISR &= ~0x40  /*  MOE =   ± OC4N  π‹£“ªOC4 =  */
+#define PWMA_OC4_OUT_1()          PWMA_OISR |= 0x40    /*  MOE =   ± OC4N  π‹£“ªOC4 =  */
+#define PWMA_OC4N_OUT_0()          PWMA_OISR &= ~0x80  /*  MOE =   ±“ªOC4N =  */
+#define PWMA_OC4N_OUT_1()          PWMA_OISR |= 0x80    /*  MOE =   ±“ªOC4N =  */
 
-#define PWMB_OC5_OUT_0()          PWMB_OISR &= ~0x01  /* µ± MOE=0  ±£¨‘Ú‘⁄“ª∏ˆÀ¿«¯∫Û£¨OC5=0 */
-#define PWMB_OC5_OUT_1()          PWMB_OISR |= 0x01    /* µ± MOE=0  ±£¨‘Ú‘⁄“ª∏ˆÀ¿«¯∫Û£¨OC5=1 */
-#define PWMB_OC6_OUT_0()          PWMB_OISR &= ~0x04  /* µ± MOE=0  ±£¨‘Ú‘⁄“ª∏ˆÀ¿«¯∫Û£¨OC6=0 */
-#define PWMB_OC6_OUT_1()          PWMB_OISR |= 0x04    /* µ± MOE=0  ±£¨‘Ú‘⁄“ª∏ˆÀ¿«¯∫Û£¨OC6=1 */
-#define PWMB_OC7_OUT_0()          PWMB_OISR &= ~0x10  /* µ± MOE=0  ±£¨‘Ú‘⁄“ª∏ˆÀ¿«¯∫Û£¨OC7=0 */
-#define PWMB_OC7_OUT_1()          PWMB_OISR |= 0x10    /* µ± MOE=0  ±£¨‘Ú‘⁄“ª∏ˆÀ¿«¯∫Û£¨OC7=1 */
-#define PWMB_OC8_OUT_0()          PWMB_OISR &= ~0x40  /* µ± MOE=0  ±£¨‘Ú‘⁄“ª∏ˆÀ¿«¯∫Û£¨OC8=0 */
-#define PWMB_OC8_OUT_1()          PWMB_OISR |= 0x40    /* µ± MOE=0  ±£¨‘Ú‘⁄“ª∏ˆÀ¿«¯∫Û£¨OC8=1 */
+#define PWMB_OC5_OUT_0()          PWMB_OISR &= ~0x01  /*  MOE =   ±“ªOC5 =  */
+#define PWMB_OC5_OUT_1()          PWMB_OISR |= 0x01    /*  MOE =   ±“ªOC5 =  */
+#define PWMB_OC6_OUT_0()          PWMB_OISR &= ~0x04  /*  MOE =   ±“ªOC6 =  */
+#define PWMB_OC6_OUT_1()          PWMB_OISR |= 0x04    /*  MOE =   ±“ªOC6 =  */
+#define PWMB_OC7_OUT_0()          PWMB_OISR &= ~0x10  /*  MOE =   ±“ªOC7 =  */
+#define PWMB_OC7_OUT_1()          PWMB_OISR |= 0x10    /*  MOE =   ±“ªOC7 =  */
+#define PWMB_OC8_OUT_0()          PWMB_OISR &= ~0x40  /*  MOE =   ±“ªOC8 =  */
+#define PWMB_OC8_OUT_1()          PWMB_OISR |= 0x40    /*  MOE =   ±“ªOC8 =  */
 
 //========================================================================
-//                              ∂®“Â…˘√˜
+//                              
 //========================================================================
 
 #define ENO1P       0x01
@@ -701,47 +705,46 @@
 
 typedef struct
 { 
-  u8  PWM_Mode;      //ƒ£ Ω,   CCMRn_FREEZE,CCMRn_MATCH_VALID,CCMRn_MATCH_INVALID,CCMRn_ROLLOVER,CCMRn_FORCE_INVALID,CCMRn_FORCE_VALID,CCMRn_PWM_MODE1,CCMRn_PWM_MODE2
-  u16  PWM_Period;    //÷‹∆⁄ ±º‰,   0~65535
-  u16  PWM_Duty;      //’ºø’±» ±º‰, 0~Period
-  u8  PWM_DeadTime;  //À¿«¯∑¢…˙∆˜…Ë÷√, 0~255
-//  u8  PWM_Reload;        // ‰≥ˆ±»Ωœµƒ‘§◊∞‘ÿ πƒ‹,   ENABLE,DISABLE
-//  u8  PWM_Fast;          // ‰≥ˆ±»ΩœøÏÀŸπ¶ƒ‹ πƒ‹,   ENABLE,DISABLE
-//  u8  PWM_PreLoad;      //‘§◊∞‘ÿ,     ENABLE,DISABLE
-//  u8  PWM_BrakeEnable;  //…≤≥µ ‰»Î πƒ‹,  ENABLE,DISABLE
-  u8  PWM_EnoSelect;    // ‰≥ˆÕ®µ¿—°‘Ò,  ENO1P,ENO1N,ENO2P,ENO2N,ENO3P,ENO3N,ENO4P,ENO4N / ENO5P,ENO6P,ENO7P,ENO8P
-  u8  PWM_CEN_Enable;    // πƒ‹º∆ ˝∆˜, ENABLE,DISABLE
-  u8  PWM_MainOutEnable;//÷˜ ‰≥ˆ πƒ‹,  ENABLE,DISABLE
+  u8  PWM_Mode;      //ƒ£ Ω,   CCMRn_FREEZE, CCMRn_MATCH_VALID, CCMRn_MATCH_INVALID, CCMRn_ROLLOVER, CCMRn_FORCE_INVALID, CCMRn_FORCE_VALID, CCMRn_PWM_MODE1, CCMRn_PWM_MODE2
+  u16  PWM_Period;    // ±,   0~65535
+  u16  PWM_Duty;      //’º’± ±, 0~Period
+  u8  PWM_DeadTime;  //, 0~255
+//  u8  PWM_Reload;        //»Ωœµ‘§◊∞ π,   ENABLE, DISABLE
+//  u8  PWM_Fast;          //»ΩœøŸπ π,   ENABLE, DISABLE
+//  u8  PWM_PreLoad;      //‘§◊∞,     ENABLE, DISABLE
+//  u8  PWM_BrakeEnable;  //…≤ π,  ENABLE, DISABLE
+  u8  PWM_EnoSelect;    //Õ®—°,  ENO1P, ENO1N, ENO2P, ENO2N, ENO3P, ENO3N, ENO4P, ENO4N / ENO5P, ENO6P, ENO7P, ENO8P
+  u8  PWM_CEN_Enable;    // π‹º, ENABLE, DISABLE
+  u8  PWM_MainOutEnable;// π,  ENABLE, DISABLE
 } PWMx_InitDefine; 
 
 typedef struct
 { 
-  u16  PWM1_Duty;      //PWM1’ºø’±» ±º‰, 0~Period
-  u16  PWM2_Duty;      //PWM2’ºø’±» ±º‰, 0~Period
-  u16  PWM3_Duty;      //PWM3’ºø’±» ±º‰, 0~Period
-  u16  PWM4_Duty;      //PWM4’ºø’±» ±º‰, 0~Period
-  u16  PWM5_Duty;      //PWM5’ºø’±» ±º‰, 0~Period
-  u16  PWM6_Duty;      //PWM6’ºø’±» ±º‰, 0~Period
-  u16  PWM7_Duty;      //PWM7’ºø’±» ±º‰, 0~Period
-  u16  PWM8_Duty;      //PWM8’ºø’±» ±º‰, 0~Period
+  u16  PWM1_Duty;      //PWM1’º’± ±, 0~Period
+  u16  PWM2_Duty;      //PWM2’º’± ±, 0~Period
+  u16  PWM3_Duty;      //PWM3’º’± ±, 0~Period
+  u16  PWM4_Duty;      //PWM4’º’± ±, 0~Period
+  u16  PWM5_Duty;      //PWM5’º’± ±, 0~Period
+  u16  PWM6_Duty;      //PWM6’º’± ±, 0~Period
+  u16  PWM7_Duty;      //PWM7’º’± ±, 0~Period
+  u16  PWM8_Duty;      //PWM8’º’± ±, 0~Period
 } PWMx_Duty; 
 
 typedef struct
 { 
-//  u8  PWM_Mode;      //ƒ£ Ω,   CCMRn_FREEZE,CCMRn_MATCH_VALID,CCMRn_MATCH_INVALID,CCMRn_ROLLOVER,CCMRn_FORCE_INVALID,CCMRn_FORCE_VALID,CCMRn_PWM_MODE1,CCMRn_PWM_MODE2
-  u16  PWM_Period;    //÷‹∆⁄ ±º‰,   0~65535
-  u8  PWM_DeadTime;  //À¿«¯∑¢…˙∆˜…Ë÷√, 0~255
-  u8  PWM_EnoSelect;    // ‰≥ˆÕ®µ¿—°‘Ò,  ENO1P,ENO1N,ENO2P,ENO2N,ENO3P,ENO3N,ENO4P,ENO4N / ENO5P,ENO6P,ENO7P,ENO8P
-  u8  PWM_CEN_Enable;    // πƒ‹º∆ ˝∆˜, ENABLE,DISABLE
-  u8  PWM_MainOutEnable;//÷˜ ‰≥ˆ πƒ‹,  ENABLE,DISABLE
+//  u8  PWM_Mode;      //ƒ£ Ω,   CCMRn_FREEZE, CCMRn_MATCH_VALID, CCMRn_MATCH_INVALID, CCMRn_ROLLOVER, CCMRn_FORCE_INVALID, CCMRn_FORCE_VALID, CCMRn_PWM_MODE1, CCMRn_PWM_MODE2
+  u16  PWM_Period;    // ±,   0~65535
+  u8  PWM_DeadTime;  //, 0~255
+  u8  PWM_EnoSelect;    //Õ®—°,  ENO1P, ENO1N, ENO2P, ENO2N, ENO3P, ENO3N, ENO4P, ENO4N / ENO5P, ENO6P, ENO7P, ENO8P
+  u8  PWM_CEN_Enable;    // π‹º, ENABLE, DISABLE
+  u8  PWM_MainOutEnable;// π,  ENABLE, DISABLE
 } HSPWMx_InitDefine; 
 
+u8  PWM_Configuration( u8 PWM, PWMx_InitDefine *PWMx );
+void UpdatePwm( u8 PWM, PWMx_Duty *PWMx );
 
-u8  PWM_Configuration(u8 PWM, PWMx_InitDefine *PWMx);
-void UpdatePwm(u8 PWM, PWMx_Duty *PWMx);
-
-void HSPWM_Configuration(u8 PWM, HSPWMx_InitDefine *PWMx, PWMx_Duty *DUTYx);
-void UpdateHSPwm(u8 PWM, PWMx_Duty *PWMx);
+void HSPWM_Configuration( u8 PWM, HSPWMx_InitDefine *PWMx, PWMx_Duty *DUTYx );
+void UpdateHSPwm( u8 PWM, PWMx_Duty *PWMx );
 
 #endif
 

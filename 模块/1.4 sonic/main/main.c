@@ -1,3 +1,10 @@
+/**
+ * @file main.c
+ * @brief 主程序入口文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "main.h"
 
 sonic_t sonic;
@@ -81,7 +88,7 @@ void display_state() {
 
 void main_init() {
     // sonic.mode = 1;
-    //  set_seg(7, 1);
+    //  set_seg(7, 1 );
     // seg_state.mode = 0;
     // display_state();
     //  Delay1000ms();
@@ -130,4 +137,3 @@ void Timer2_Isr(void) interrupt 12 {
 
     if (leds.time < LED_TIME) { leds.time++; }
 }
-

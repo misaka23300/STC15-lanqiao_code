@@ -1,3 +1,10 @@
+/**
+ * @file uart.c
+ * @brief 串口驱动文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "uart.h"
 
 uint8_t xdata uart_tx_buf[100];
@@ -16,14 +23,14 @@ void uart_tag_init() {
 
   uart_count = 0;
 
-  for (i = 0; i < sizeof(uart_rx_buf) - 1; i++) {
+  for ( i = 0; i < sizeof( uart_rx_buf ) - 1; i++) {
     uart_rx_buf[i] = 0x00;
   }
 }
 
 // 串口发送数据
-void uart_send_byte(uint8_t byte) {
-  while (uart_flag.tx);
+void uart_send_byte( uint8_t byte ) {
+  while ( uart_flag.tx );
   SBUF = byte;
   uart_flag.tx = 1;
 }
@@ -31,16 +38,16 @@ void uart_send_byte(uint8_t byte) {
 /**
  *传入了字符串的指针，*str表示指针的取值，str表示指针。
  */
-void uart_send_str(uint8_t* str) {
-  while (*str) {
-    putchar(*str);
+void uart_send_str( uint8_t* str ) {
+  while (*str ) {
+    putchar(*str );
     str++;
   }
 }
 
-int8_t putchar(int8_t chars) {
+int8_t putchar( int8_t chars ) {
   SBUF = chars;
-  while (!TI);
+  while (!TI );
   TI = 0;
   return chars;
 }
@@ -55,12 +62,12 @@ uint8_t uart_receive_byte() {
 
 void uart_receive_str() {
   static uint8_t Data;
-  if (uart_count < sizeof(uart_rx_buf) - 1) {
+  if ( uart_count < sizeof( uart_rx_buf ) - 1 ) {
     Data = SBUF;
     uart_rx_buf[uart_count] = Data;
 
-    if (uart_count > 0 && uart_rx_buf[uart_count - 1] == 0x0d &&
-        uart_rx_buf[uart_count] == 0x0a) {
+    if ( uart_count > 0 && uart_rx_buf[uart_count - 1] == 0x0d &&
+        uart_rx_buf[uart_count] == 0x0a ) {
       uart_count = 0;
     } else {
       uart_count++;
@@ -68,13 +75,13 @@ void uart_receive_str() {
   }
 }
 
-void Uart1_Isr(void) interrupt 4 {
-  if (TI)  // 检测串口1发送中断
+void Uart1_Isr( void ) interrupt 4 {
+  if ( TI )  // 检测串口1发送中断
   {
     TI = 0;  // 清除串口1发送中断请求位
     uart_flag.tx = 0;
   }
-  if (RI)  // 检测串口1接收中断
+  if ( RI )  // 检测串口1接收中断
   {
     RI = 0;  // 清除串口1接收中断请求位
     uart_flag.rx = 0;

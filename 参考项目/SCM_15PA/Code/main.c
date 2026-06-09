@@ -1,6 +1,13 @@
+/**
+ * @file main.c
+ * @brief 主程序入口文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "main.h"
 
-void main(void)
+void main( void )
 {
     initSysTick();
     initFrqTimer();
@@ -9,7 +16,7 @@ void main(void)
     rtcInit();
     // initDAC();
 
-    while(1){
+    while (1 ){
         getFrq();
         keyScan();
         uiDsp();

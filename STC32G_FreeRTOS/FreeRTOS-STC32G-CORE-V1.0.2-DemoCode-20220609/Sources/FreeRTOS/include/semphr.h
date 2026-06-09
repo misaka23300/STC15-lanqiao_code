@@ -1,13 +1,20 @@
+/**
+ * @file semphr.h
+ * @brief 未指定描述
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 /*
  * FreeRTOS Kernel V10.4.6
- * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
+ * Copyright ( C ) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
- * SPDX-License-Identifier: MIT
+ * SPDX - icense - dentifier: MIT
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
+ * this software and associated documentation files ( the "Software"), to deal in
  * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * use, copy, modify, merge, publish, distribute, sublicense, and / r sell copies of
  * the Software, and to permit persons to whom the Software is furnished to do so,
  * subject to the following conditions:
  *
@@ -22,7 +29,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * https://www.FreeRTOS.org
- * https://github.com/FreeRTOS
+ * https://github.com / reeRTOS
  *
  */
 
@@ -41,7 +48,6 @@ typedef QueueHandle_t SemaphoreHandle_t;
 #define semSEMAPHORE_QUEUE_ITEM_LENGTH      ( ( uint8_t ) 0U )
 #define semGIVE_BLOCK_TIME                  ( ( TickType_t ) 0U )
 
-
 /**
  * semphr. h
  * @code{c}
@@ -50,7 +56,7 @@ typedef QueueHandle_t SemaphoreHandle_t;
  *
  * In many usage scenarios it is faster and more memory efficient to use a
  * direct to task notification in place of a binary semaphore!
- * https://www.FreeRTOS.org/RTOS-task-notifications.html
+ * https://www.FreeRTOS.org / TOS - ask - otifications.html
  *
  * This old vSemaphoreCreateBinary() macro is now deprecated in favour of the
  * xSemaphoreCreateBinary() function.  Note that binary semaphores created using
@@ -59,14 +65,14 @@ typedef QueueHandle_t SemaphoreHandle_t;
  * created using xSemaphoreCreateBinary() are created in a state such that the
  * the semaphore must first be 'given' before it can be 'taken'.
  *
- * <i>Macro</i> that implements a semaphore by using the existing queue mechanism.
+ * <i > acro</i> that implements a semaphore by using the existing queue mechanism.
  * The queue length is 1 as this is a binary semaphore.  The data size is 0
  * as we don't want to actually store any data - we just want to know if the
  * queue is empty or full.
  *
  * This type of semaphore can be used for pure synchronisation between tasks or
  * between an interrupt and a task.  The semaphore need not be given back once
- * obtained, so one task/interrupt can continuously 'give' the semaphore while
+ * obtained, so one task / nterrupt can continuously 'give' the semaphore while
  * another continuously 'takes' the semaphore.  For this reason this type of
  * semaphore does not use a priority inheritance mechanism.  For an alternative
  * that does use priority inheritance see xSemaphoreCreateMutex().
@@ -83,7 +89,7 @@ typedef QueueHandle_t SemaphoreHandle_t;
  *  // This is a macro so pass the variable in directly.
  *  vSemaphoreCreateBinary( xSemaphore );
  *
- *  if( xSemaphore != NULL )
+ *  if ( xSemaphore != NULL )
  *  {
  *      // The semaphore was created successfully.
  *      // The semaphore can now be used.
@@ -97,7 +103,7 @@ typedef QueueHandle_t SemaphoreHandle_t;
     #define vSemaphoreCreateBinary( xSemaphore )                                                                                     \
     {                                                                                                                                \
         ( xSemaphore ) = xQueueGenericCreate( ( UBaseType_t ) 1, semSEMAPHORE_QUEUE_ITEM_LENGTH, queueQUEUE_TYPE_BINARY_SEMAPHORE ); \
-        if( ( xSemaphore ) != NULL )                                                                                                 \
+        if ( ( xSemaphore ) != NULL )                                                                                                 \
         {                                                                                                                            \
             ( void ) xSemaphoreGive( ( xSemaphore ) );                                                                               \
         }                                                                                                                            \
@@ -115,13 +121,13 @@ typedef QueueHandle_t SemaphoreHandle_t;
  *
  * In many usage scenarios it is faster and more memory efficient to use a
  * direct to task notification in place of a binary semaphore!
- * https://www.FreeRTOS.org/RTOS-task-notifications.html
+ * https://www.FreeRTOS.org / TOS - ask - otifications.html
  *
  * Internally, within the FreeRTOS implementation, binary semaphores use a block
  * of memory, in which the semaphore structure is stored.  If a binary semaphore
  * is created using xSemaphoreCreateBinary() then the required memory is
  * automatically dynamically allocated inside the xSemaphoreCreateBinary()
- * function.  (see https://www.FreeRTOS.org/a00111.html).  If a binary semaphore
+ * function.  ( see https://www.FreeRTOS.org / 00111.html ).  If a binary semaphore
  * is created using xSemaphoreCreateBinaryStatic() then the application writer
  * must provide the memory.  xSemaphoreCreateBinaryStatic() therefore allows a
  * binary semaphore to be created without using any dynamic memory allocation.
@@ -135,7 +141,7 @@ typedef QueueHandle_t SemaphoreHandle_t;
  *
  * This type of semaphore can be used for pure synchronisation between tasks or
  * between an interrupt and a task.  The semaphore need not be given back once
- * obtained, so one task/interrupt can continuously 'give' the semaphore while
+ * obtained, so one task / nterrupt can continuously 'give' the semaphore while
  * another continuously 'takes' the semaphore.  For this reason this type of
  * semaphore does not use a priority inheritance mechanism.  For an alternative
  * that does use priority inheritance see xSemaphoreCreateMutex().
@@ -153,7 +159,7 @@ typedef QueueHandle_t SemaphoreHandle_t;
  *  // This is a macro so pass the variable in directly.
  *  xSemaphore = xSemaphoreCreateBinary();
  *
- *  if( xSemaphore != NULL )
+ *  if ( xSemaphore != NULL )
  *  {
  *      // The semaphore was created successfully.
  *      // The semaphore can now be used.
@@ -178,20 +184,20 @@ typedef QueueHandle_t SemaphoreHandle_t;
  *
  * NOTE: In many usage scenarios it is faster and more memory efficient to use a
  * direct to task notification in place of a binary semaphore!
- * https://www.FreeRTOS.org/RTOS-task-notifications.html
+ * https://www.FreeRTOS.org / TOS - ask - otifications.html
  *
  * Internally, within the FreeRTOS implementation, binary semaphores use a block
  * of memory, in which the semaphore structure is stored.  If a binary semaphore
  * is created using xSemaphoreCreateBinary() then the required memory is
  * automatically dynamically allocated inside the xSemaphoreCreateBinary()
- * function.  (see https://www.FreeRTOS.org/a00111.html).  If a binary semaphore
+ * function.  ( see https://www.FreeRTOS.org / 00111.html ).  If a binary semaphore
  * is created using xSemaphoreCreateBinaryStatic() then the application writer
  * must provide the memory.  xSemaphoreCreateBinaryStatic() therefore allows a
  * binary semaphore to be created without using any dynamic memory allocation.
  *
  * This type of semaphore can be used for pure synchronisation between tasks or
  * between an interrupt and a task.  The semaphore need not be given back once
- * obtained, so one task/interrupt can continuously 'give' the semaphore while
+ * obtained, so one task / nterrupt can continuously 'give' the semaphore while
  * another continuously 'takes' the semaphore.  For this reason this type of
  * semaphore does not use a priority inheritance mechanism.  For an alternative
  * that does use priority inheritance see xSemaphoreCreateMutex().
@@ -237,7 +243,7 @@ typedef QueueHandle_t SemaphoreHandle_t;
  *               );
  * @endcode
  *
- * <i>Macro</i> to obtain a semaphore.  The semaphore must have previously been
+ * <i > acro</i> to obtain a semaphore.  The semaphore must have previously been
  * created with a call to xSemaphoreCreateBinary(), xSemaphoreCreateMutex() or
  * xSemaphoreCreateCounting().
  *
@@ -247,8 +253,8 @@ typedef QueueHandle_t SemaphoreHandle_t;
  * @param xBlockTime The time in ticks to wait for the semaphore to become
  * available.  The macro portTICK_PERIOD_MS can be used to convert this to a
  * real time.  A block time of zero can be used to poll the semaphore.  A block
- * time of portMAX_DELAY can be used to block indefinitely (provided
- * INCLUDE_vTaskSuspend is set to 1 in FreeRTOSConfig.h).
+ * time of portMAX_DELAY can be used to block indefinitely ( provided
+ * INCLUDE_vTaskSuspend is set to 1 in FreeRTOSConfig.h ).
  *
  * @return pdTRUE if the semaphore was obtained.  pdFALSE
  * if xBlockTime expired without the semaphore becoming available.
@@ -269,11 +275,11 @@ typedef QueueHandle_t SemaphoreHandle_t;
  * {
  *  // ... Do other things.
  *
- *  if( xSemaphore != NULL )
+ *  if ( xSemaphore != NULL )
  *  {
  *      // See if we can obtain the semaphore.  If the semaphore is not available
  *      // wait 10 ticks to see if it becomes free.
- *      if( xSemaphoreTake( xSemaphore, ( TickType_t ) 10 ) == pdTRUE )
+ *      if ( xSemaphoreTake( xSemaphore, ( TickType_t ) 10 ) == pdTRUE )
  *      {
  *          // We were able to obtain the semaphore and can now access the
  *          // shared resource.
@@ -306,7 +312,7 @@ typedef QueueHandle_t SemaphoreHandle_t;
  *                        );
  * @endcode
  *
- * <i>Macro</i> to recursively obtain, or 'take', a mutex type semaphore.
+ * <i > acro</i> to recursively obtain, or 'take', a mutex type semaphore.
  * The mutex must have previously been created using a call to
  * xSemaphoreCreateRecursiveMutex();
  *
@@ -350,11 +356,11 @@ typedef QueueHandle_t SemaphoreHandle_t;
  * {
  *  // ... Do other things.
  *
- *  if( xMutex != NULL )
+ *  if ( xMutex != NULL )
  *  {
  *      // See if we can obtain the mutex.  If the mutex is not available
  *      // wait 10 ticks to see if it becomes free.
- *      if( xSemaphoreTakeRecursive( xSemaphore, ( TickType_t ) 10 ) == pdTRUE )
+ *      if ( xSemaphoreTakeRecursive( xSemaphore, ( TickType_t ) 10 ) == pdTRUE )
  *      {
  *          // We were able to obtain the mutex and can now access the
  *          // shared resource.
@@ -400,7 +406,7 @@ typedef QueueHandle_t SemaphoreHandle_t;
  * xSemaphoreGive( SemaphoreHandle_t xSemaphore );
  * @endcode
  *
- * <i>Macro</i> to release a semaphore.  The semaphore must have previously been
+ * <i > acro</i> to release a semaphore.  The semaphore must have previously been
  * created with a call to xSemaphoreCreateBinary(), xSemaphoreCreateMutex() or
  * xSemaphoreCreateCounting(). and obtained using sSemaphoreTake().
  *
@@ -427,9 +433,9 @@ typedef QueueHandle_t SemaphoreHandle_t;
  *  // Create the semaphore to guard a shared resource.
  *  xSemaphore = vSemaphoreCreateBinary();
  *
- *  if( xSemaphore != NULL )
+ *  if ( xSemaphore != NULL )
  *  {
- *      if( xSemaphoreGive( xSemaphore ) != pdTRUE )
+ *      if ( xSemaphoreGive( xSemaphore ) != pdTRUE )
  *      {
  *          // We would expect this call to fail because we cannot give
  *          // a semaphore without first "taking" it!
@@ -437,7 +443,7 @@ typedef QueueHandle_t SemaphoreHandle_t;
  *
  *      // Obtain the semaphore - don't block if the semaphore is not
  *      // immediately available.
- *      if( xSemaphoreTake( xSemaphore, ( TickType_t ) 0 ) )
+ *      if ( xSemaphoreTake( xSemaphore, ( TickType_t ) 0 ) )
  *      {
  *          // We now have the semaphore and can access the shared resource.
  *
@@ -445,7 +451,7 @@ typedef QueueHandle_t SemaphoreHandle_t;
  *
  *          // We have finished accessing the shared resource so can free the
  *          // semaphore.
- *          if( xSemaphoreGive( xSemaphore ) != pdTRUE )
+ *          if ( xSemaphoreGive( xSemaphore ) != pdTRUE )
  *          {
  *              // We would not expect this call to fail because we must have
  *              // obtained the semaphore to get here.
@@ -465,7 +471,7 @@ typedef QueueHandle_t SemaphoreHandle_t;
  * xSemaphoreGiveRecursive( SemaphoreHandle_t xMutex );
  * @endcode
  *
- * <i>Macro</i> to recursively release, or 'give', a mutex type semaphore.
+ * <i > acro</i> to recursively release, or 'give', a mutex type semaphore.
  * The mutex must have previously been created using a call to
  * xSemaphoreCreateRecursiveMutex();
  *
@@ -502,11 +508,11 @@ typedef QueueHandle_t SemaphoreHandle_t;
  * {
  *  // ... Do other things.
  *
- *  if( xMutex != NULL )
+ *  if ( xMutex != NULL )
  *  {
  *      // See if we can obtain the mutex.  If the mutex is not available
  *      // wait 10 ticks to see if it becomes free.
- *      if( xSemaphoreTakeRecursive( xMutex, ( TickType_t ) 10 ) == pdTRUE )
+ *      if ( xSemaphoreTakeRecursive( xMutex, ( TickType_t ) 10 ) == pdTRUE )
  *      {
  *          // We were able to obtain the mutex and can now access the
  *          // shared resource.
@@ -556,10 +562,10 @@ typedef QueueHandle_t SemaphoreHandle_t;
  *                    );
  * @endcode
  *
- * <i>Macro</i> to  release a semaphore.  The semaphore must have previously been
+ * <i > acro</i> to  release a semaphore.  The semaphore must have previously been
  * created with a call to xSemaphoreCreateBinary() or xSemaphoreCreateCounting().
  *
- * Mutex type semaphores (those created using a call to xSemaphoreCreateMutex())
+ * Mutex type semaphores ( those created using a call to xSemaphoreCreateMutex())
  * must not be used with this macro.
  *
  * This macro can be used from an ISR.
@@ -584,13 +590,13 @@ typedef QueueHandle_t SemaphoreHandle_t;
  * // Repetitive task.
  * void vATask( void * pvParameters )
  * {
- *  for( ;; )
+ *  for ( ;; )
  *  {
  *      // We want this task to run every 10 ticks of a timer.  The semaphore
  *      // was created before this task was started.
  *
  *      // Block waiting for the semaphore to become available.
- *      if( xSemaphoreTake( xSemaphore, LONG_TIME ) == pdTRUE )
+ *      if ( xSemaphoreTake( xSemaphore, LONG_TIME ) == pdTRUE )
  *      {
  *          // It is time to execute.
  *
@@ -617,7 +623,7 @@ typedef QueueHandle_t SemaphoreHandle_t;
  *  // Is it time for vATask () to run?
  *  xHigherPriorityTaskWoken = pdFALSE;
  *  ucLocalTickCount++;
- *  if( ucLocalTickCount >= TICKS_TO_WAIT )
+ *  if ( ucLocalTickCount >= TICKS_TO_WAIT )
  *  {
  *      // Unblock the task by releasing the semaphore.
  *      xSemaphoreGiveFromISR( xSemaphore, &xHigherPriorityTaskWoken );
@@ -626,7 +632,7 @@ typedef QueueHandle_t SemaphoreHandle_t;
  *      ucLocalTickCount = 0;
  *  }
  *
- *  if( xHigherPriorityTaskWoken != pdFALSE )
+ *  if ( xHigherPriorityTaskWoken != pdFALSE )
  *  {
  *      // We can force a context switch here.  Context switching from an
  *      // ISR uses port specific syntax.  Check the demo task for your port
@@ -648,17 +654,17 @@ typedef QueueHandle_t SemaphoreHandle_t;
  *                    );
  * @endcode
  *
- * <i>Macro</i> to  take a semaphore from an ISR.  The semaphore must have
+ * <i > acro</i> to  take a semaphore from an ISR.  The semaphore must have
  * previously been created with a call to xSemaphoreCreateBinary() or
  * xSemaphoreCreateCounting().
  *
- * Mutex type semaphores (those created using a call to xSemaphoreCreateMutex())
+ * Mutex type semaphores ( those created using a call to xSemaphoreCreateMutex())
  * must not be used with this macro.
  *
  * This macro can be used from an ISR, however taking a semaphore from an ISR
  * is not a common operation.  It is likely to only be useful when taking a
  * counting semaphore when an interrupt is obtaining an object from a resource
- * pool (when the semaphore count indicates the number of resources available).
+ * pool ( when the semaphore count indicates the number of resources available ).
  *
  * @param xSemaphore A handle to the semaphore being taken.  This is the
  * handle returned when the semaphore was created.
@@ -686,8 +692,8 @@ typedef QueueHandle_t SemaphoreHandle_t;
  * Internally, within the FreeRTOS implementation, mutex semaphores use a block
  * of memory, in which the mutex structure is stored.  If a mutex is created
  * using xSemaphoreCreateMutex() then the required memory is automatically
- * dynamically allocated inside the xSemaphoreCreateMutex() function.  (see
- * https://www.FreeRTOS.org/a00111.html).  If a mutex is created using
+ * dynamically allocated inside the xSemaphoreCreateMutex() function.  ( see
+ * https://www.FreeRTOS.org / 00111.html ).  If a mutex is created using
  * xSemaphoreCreateMutexStatic() then the application writer must provided the
  * memory.  xSemaphoreCreateMutexStatic() therefore allows a mutex to be created
  * without using any dynamic memory allocation.
@@ -703,8 +709,8 @@ typedef QueueHandle_t SemaphoreHandle_t;
  * Mutex type semaphores cannot be used from within interrupt service routines.
  *
  * See xSemaphoreCreateBinary() for an alternative implementation that can be
- * used for pure synchronisation (where one task or interrupt always 'gives' the
- * semaphore and another always 'takes' the semaphore) and from within interrupt
+ * used for pure synchronisation ( where one task or interrupt always 'gives' the
+ * semaphore and another always 'takes' the semaphore ) and from within interrupt
  * service routines.
  *
  * @return If the mutex was successfully created then a handle to the created
@@ -721,7 +727,7 @@ typedef QueueHandle_t SemaphoreHandle_t;
  *  // This is a macro so pass the variable in directly.
  *  xSemaphore = xSemaphoreCreateMutex();
  *
- *  if( xSemaphore != NULL )
+ *  if ( xSemaphore != NULL )
  *  {
  *      // The semaphore was created successfully.
  *      // The semaphore can now be used.
@@ -747,8 +753,8 @@ typedef QueueHandle_t SemaphoreHandle_t;
  * Internally, within the FreeRTOS implementation, mutex semaphores use a block
  * of memory, in which the mutex structure is stored.  If a mutex is created
  * using xSemaphoreCreateMutex() then the required memory is automatically
- * dynamically allocated inside the xSemaphoreCreateMutex() function.  (see
- * https://www.FreeRTOS.org/a00111.html).  If a mutex is created using
+ * dynamically allocated inside the xSemaphoreCreateMutex() function.  ( see
+ * https://www.FreeRTOS.org / 00111.html ).  If a mutex is created using
  * xSemaphoreCreateMutexStatic() then the application writer must provided the
  * memory.  xSemaphoreCreateMutexStatic() therefore allows a mutex to be created
  * without using any dynamic memory allocation.
@@ -764,8 +770,8 @@ typedef QueueHandle_t SemaphoreHandle_t;
  * Mutex type semaphores cannot be used from within interrupt service routines.
  *
  * See xSemaphoreCreateBinary() for an alternative implementation that can be
- * used for pure synchronisation (where one task or interrupt always 'gives' the
- * semaphore and another always 'takes' the semaphore) and from within interrupt
+ * used for pure synchronisation ( where one task or interrupt always 'gives' the
+ * semaphore and another always 'takes' the semaphore ) and from within interrupt
  * service routines.
  *
  * @param pxMutexBuffer Must point to a variable of type StaticSemaphore_t,
@@ -798,7 +804,6 @@ typedef QueueHandle_t SemaphoreHandle_t;
     #define xSemaphoreCreateMutexStatic( pxMutexBuffer )    xQueueCreateMutexStatic( queueQUEUE_TYPE_MUTEX, ( pxMutexBuffer ) )
 #endif /* configSUPPORT_STATIC_ALLOCATION */
 
-
 /**
  * semphr. h
  * @code{c}
@@ -812,8 +817,8 @@ typedef QueueHandle_t SemaphoreHandle_t;
  * of memory, in which the mutex structure is stored.  If a recursive mutex is
  * created using xSemaphoreCreateRecursiveMutex() then the required memory is
  * automatically dynamically allocated inside the
- * xSemaphoreCreateRecursiveMutex() function.  (see
- * https://www.FreeRTOS.org/a00111.html).  If a recursive mutex is created using
+ * xSemaphoreCreateRecursiveMutex() function.  ( see
+ * https://www.FreeRTOS.org / 00111.html ).  If a recursive mutex is created using
  * xSemaphoreCreateRecursiveMutexStatic() then the application writer must
  * provide the memory that will get used by the mutex.
  * xSemaphoreCreateRecursiveMutexStatic() therefore allows a recursive mutex to
@@ -837,8 +842,8 @@ typedef QueueHandle_t SemaphoreHandle_t;
  * Mutex type semaphores cannot be used from within interrupt service routines.
  *
  * See xSemaphoreCreateBinary() for an alternative implementation that can be
- * used for pure synchronisation (where one task or interrupt always 'gives' the
- * semaphore and another always 'takes' the semaphore) and from within interrupt
+ * used for pure synchronisation ( where one task or interrupt always 'gives' the
+ * semaphore and another always 'takes' the semaphore ) and from within interrupt
  * service routines.
  *
  * @return xSemaphore Handle to the created mutex semaphore.  Should be of type
@@ -854,7 +859,7 @@ typedef QueueHandle_t SemaphoreHandle_t;
  *  // This is a macro so pass the variable in directly.
  *  xSemaphore = xSemaphoreCreateRecursiveMutex();
  *
- *  if( xSemaphore != NULL )
+ *  if ( xSemaphore != NULL )
  *  {
  *      // The semaphore was created successfully.
  *      // The semaphore can now be used.
@@ -881,8 +886,8 @@ typedef QueueHandle_t SemaphoreHandle_t;
  * of memory, in which the mutex structure is stored.  If a recursive mutex is
  * created using xSemaphoreCreateRecursiveMutex() then the required memory is
  * automatically dynamically allocated inside the
- * xSemaphoreCreateRecursiveMutex() function.  (see
- * https://www.FreeRTOS.org/a00111.html).  If a recursive mutex is created using
+ * xSemaphoreCreateRecursiveMutex() function.  ( see
+ * https://www.FreeRTOS.org / 00111.html ).  If a recursive mutex is created using
  * xSemaphoreCreateRecursiveMutexStatic() then the application writer must
  * provide the memory that will get used by the mutex.
  * xSemaphoreCreateRecursiveMutexStatic() therefore allows a recursive mutex to
@@ -906,8 +911,8 @@ typedef QueueHandle_t SemaphoreHandle_t;
  * Mutex type semaphores cannot be used from within interrupt service routines.
  *
  * See xSemaphoreCreateBinary() for an alternative implementation that can be
- * used for pure synchronisation (where one task or interrupt always 'gives' the
- * semaphore and another always 'takes' the semaphore) and from within interrupt
+ * used for pure synchronisation ( where one task or interrupt always 'gives' the
+ * semaphore and another always 'takes' the semaphore ) and from within interrupt
  * service routines.
  *
  * @param pxMutexBuffer Must point to a variable of type StaticSemaphore_t,
@@ -954,14 +959,14 @@ typedef QueueHandle_t SemaphoreHandle_t;
  *
  * In many usage scenarios it is faster and more memory efficient to use a
  * direct to task notification in place of a counting semaphore!
- * https://www.FreeRTOS.org/RTOS-task-notifications.html
+ * https://www.FreeRTOS.org / TOS - ask - otifications.html
  *
  * Internally, within the FreeRTOS implementation, counting semaphores use a
  * block of memory, in which the counting semaphore structure is stored.  If a
  * counting semaphore is created using xSemaphoreCreateCounting() then the
  * required memory is automatically dynamically allocated inside the
- * xSemaphoreCreateCounting() function.  (see
- * https://www.FreeRTOS.org/a00111.html).  If a counting semaphore is created
+ * xSemaphoreCreateCounting() function.  ( see
+ * https://www.FreeRTOS.org / 00111.html ).  If a counting semaphore is created
  * using xSemaphoreCreateCountingStatic() then the application writer can
  * instead optionally provide the memory that will get used by the counting
  * semaphore.  xSemaphoreCreateCountingStatic() therefore allows a counting
@@ -969,17 +974,17 @@ typedef QueueHandle_t SemaphoreHandle_t;
  *
  * Counting semaphores are typically used for two things:
  *
- * 1) Counting events.
+ * 1 ) Counting events.
  *
  *    In this usage scenario an event handler will 'give' a semaphore each time
- *    an event occurs (incrementing the semaphore count value), and a handler
+ *    an event occurs ( incrementing the semaphore count value ), and a handler
  *    task will 'take' a semaphore each time it processes an event
- *    (decrementing the semaphore count value).  The count value is therefore
+ *    ( decrementing the semaphore count value ).  The count value is therefore
  *    the difference between the number of events that have occurred and the
  *    number that have been processed.  In this case it is desirable for the
  *    initial count value to be zero.
  *
- * 2) Resource management.
+ * 2 ) Resource management.
  *
  *    In this usage scenario the count value indicates the number of resources
  *    available.  To obtain control of a resource a task must first obtain a
@@ -1011,7 +1016,7 @@ typedef QueueHandle_t SemaphoreHandle_t;
  *  // initial value assigned to the count should be 0.
  *  xSemaphore = xSemaphoreCreateCounting( 10, 0 );
  *
- *  if( xSemaphore != NULL )
+ *  if ( xSemaphore != NULL )
  *  {
  *      // The semaphore was created successfully.
  *      // The semaphore can now be used.
@@ -1036,31 +1041,31 @@ typedef QueueHandle_t SemaphoreHandle_t;
  *
  * In many usage scenarios it is faster and more memory efficient to use a
  * direct to task notification in place of a counting semaphore!
- * https://www.FreeRTOS.org/RTOS-task-notifications.html
+ * https://www.FreeRTOS.org / TOS - ask - otifications.html
  *
  * Internally, within the FreeRTOS implementation, counting semaphores use a
  * block of memory, in which the counting semaphore structure is stored.  If a
  * counting semaphore is created using xSemaphoreCreateCounting() then the
  * required memory is automatically dynamically allocated inside the
- * xSemaphoreCreateCounting() function.  (see
- * https://www.FreeRTOS.org/a00111.html).  If a counting semaphore is created
+ * xSemaphoreCreateCounting() function.  ( see
+ * https://www.FreeRTOS.org / 00111.html ).  If a counting semaphore is created
  * using xSemaphoreCreateCountingStatic() then the application writer must
  * provide the memory.  xSemaphoreCreateCountingStatic() therefore allows a
  * counting semaphore to be created without using any dynamic memory allocation.
  *
  * Counting semaphores are typically used for two things:
  *
- * 1) Counting events.
+ * 1 ) Counting events.
  *
  *    In this usage scenario an event handler will 'give' a semaphore each time
- *    an event occurs (incrementing the semaphore count value), and a handler
+ *    an event occurs ( incrementing the semaphore count value ), and a handler
  *    task will 'take' a semaphore each time it processes an event
- *    (decrementing the semaphore count value).  The count value is therefore
+ *    ( decrementing the semaphore count value ).  The count value is therefore
  *    the difference between the number of events that have occurred and the
  *    number that have been processed.  In this case it is desirable for the
  *    initial count value to be zero.
  *
- * 2) Resource management.
+ * 2 ) Resource management.
  *
  *    In this usage scenario the count value indicates the number of resources
  *    available.  To obtain control of a resource a task must first obtain a
@@ -1135,8 +1140,8 @@ typedef QueueHandle_t SemaphoreHandle_t;
  * @endcode
  *
  * If xMutex is indeed a mutex type semaphore, return the current mutex holder.
- * If xMutex is not a mutex type semaphore, or the mutex is available (not held
- * by a task), return NULL.
+ * If xMutex is not a mutex type semaphore, or the mutex is available ( not held
+ * by a task ), return NULL.
  *
  * Note: This is a good way of determining if the calling task is the mutex
  * holder, but not a good way of determining the identity of the mutex holder as
@@ -1152,8 +1157,8 @@ typedef QueueHandle_t SemaphoreHandle_t;
  * @endcode
  *
  * If xMutex is indeed a mutex type semaphore, return the current mutex holder.
- * If xMutex is not a mutex type semaphore, or the mutex is available (not held
- * by a task), return NULL.
+ * If xMutex is not a mutex type semaphore, or the mutex is available ( not held
+ * by a task ), return NULL.
  *
  */
 #define xSemaphoreGetMutexHolderFromISR( xSemaphore )    xQueueGetMutexHolderFromISR( ( xSemaphore ) )

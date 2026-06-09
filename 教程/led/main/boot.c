@@ -1,3 +1,10 @@
+/**
+ * @file boot.c
+ * @brief 系统启动初始化文件
+ * @date 2026 - 6 - 9
+ * @version 1.0
+ */
+
 #include "boot.h"
 
 void boot_init()
@@ -12,35 +19,33 @@ void boot_init()
     P7M0 = 0x00; P7M1 = 0x00; 
 
     P0 = 0xFF;
-    latch(4);
+    latch(4 );
 
     P0 = 0x00;
-    latch(6);
+    latch(6 );
 
     P0 = 0xFF;
-    latch(7);
+    latch(7 );
 
     P0 = 0xAF;
-    latch(5);
+    latch(5 );
 
     Timer1_Init();
     EA = 1;
 }
 
-
-void latch(uint8_t i)
+void latch( uint8_t i )
 {
-    switch (i) {
-        case 4: { P0 = (P0 & 0x1F) | 0x80; break; }
-        case 5: { P0 = (P0 & 0x1F) | 0xA0; break; }
-        case 6: { P0 = (P0 & 0x1F) | 0xC0; break; }
-        case 7: { P0 = (P0 & 0x1F) | 0xE0; break; }
+    switch ( i ) {
+        case 4: { P0 = ( P0 & 0x1F ) | 0x80; break; }
+        case 5: { P0 = ( P0 & 0x1F ) | 0xA0; break; }
+        case 6: { P0 = ( P0 & 0x1F ) | 0xC0; break; }
+        case 7: { P0 = ( P0 & 0x1F ) | 0xE0; break; }
         case 0: { P0 = P0 & 0x1F; break; }
     }
 }
 
-
-void Timer1_Init(void)		//1毫秒@12.000MHz
+void Timer1_Init( void )		//1毫秒@12.000MHz
 {
 	AUXR |= 0x40;			//定时器时钟1T模式
 	TMOD &= 0x0F;			//设置定时器模式
