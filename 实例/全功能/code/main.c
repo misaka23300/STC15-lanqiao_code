@@ -55,7 +55,7 @@ uint freq_number;
 uint8_t freq_list[5] = {0, 0, 0, 0, 0};
 
 
-freq_timer_0() interrupt 1
+void freq_timer_0(void) interrupt 1
 {
     freq_number++;
 }

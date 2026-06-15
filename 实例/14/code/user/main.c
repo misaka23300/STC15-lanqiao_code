@@ -470,7 +470,7 @@ void main(void)
 }
 
 // 定时器0中断服务函数
-void Timer0_Isr(void) interrupt 1 { freq++ }
+void Timer0_Isr(void) interrupt 1 { freq++; }
 
 // 定时器2中断服务函数
 void Timer2_Isr(void) interrupt 12 {
