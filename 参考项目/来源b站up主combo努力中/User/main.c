@@ -24,7 +24,7 @@ void Key_Proc()
 	
 	Key_Val = Key_Read();//读取键码值
 	Key_Down = Key_Val & (Key_Val ^ Key_Old);//检测下降沿
-	Key_Up = ~Key_Val & (Key_Val ^ Key_Old);//检测下降沿
+	Key_Up = ~Key_Val & (Key_Val ^ Key_Old);//检测上升沿
 	Key_Old = Key_Val;//扫描辅助变量
 }
 

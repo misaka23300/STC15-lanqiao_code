@@ -11,7 +11,7 @@ code unsigned char DuanMa[]={0xc0,0xf9,0xa4,0xb0,0x99,
 
 uchar SMGa[8]={11,11,11,11,11,11,11,11};  //SMGa[0]
 
-void control(char x,y)
+void control(char x, char y)
 {
 	switch(x)
 	{
@@ -93,7 +93,7 @@ uchar Key_Read()       //ﭘﭼﺫ۰ﺙﮰﻅﭖﭖﺥﭦﺁﮌﮮ
 
 void Key_pro()
 {
-	uchar ucKey_Val,ucKey_Down,ucKey_Up,ucKey_old;
+	uchar ucKey_Val,ucKey_Down,ucKey_Up,ucKey_old=0;
 	if(Key_Delay<9)return;
 	ucKey_Val = Key_Read();                         //7
 	ucKey_Down = ucKey_Val & (ucKey_old ^ ucKey_Val);
