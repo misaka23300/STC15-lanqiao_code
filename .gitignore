@@ -1,4 +1,23 @@
 .vs/
-Listings/
-Objects/
-.vscode
+**/Listings/
+**/Objects/
+.vscode/
+
+# Keil 项目生成文件
+*.hex
+*.bin
+*.m51
+*.M51
+*.lnp
+*.plg
+*.build_log.htm
+
+# 备份文件
+*.bak
+*.uvgui.*
+
+# 临时文件
+*.tmp
+*.swp
+Thumbs.db
+.DS_Store
