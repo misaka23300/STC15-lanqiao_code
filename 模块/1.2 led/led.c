@@ -4,7 +4,7 @@ uint8_t led_value[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
 
 void led(uint8_t i, bit state)
 {
-    static uint8_t temp;
+    static uint8_t temp = 0;
     static uint8_t last = 0xFF;
 
     if (state) {
