@@ -1,3 +1,0 @@
-".\Objects\定时器与计数器.obj" 
-TO ".\Objects\定时器与计数器" 
-PRINT(".\Listings\定时器与计数器.m51") RAMSIZE(256) 

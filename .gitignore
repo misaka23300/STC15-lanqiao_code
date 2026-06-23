@@ -1,4 +1,39 @@
 .vs/
 Listings/
 Objects/
-.vscode
+.vscode/
+
+# Keil uVision project files
+*.uvopt
+*.uvproj
+*.uvproj.*
+*.uvgui.*
+*.uvgui.laffe
+*.uvgui.laffey
+
+# Build outputs
+*.hex
+*.bin
+*.obj
+*.lst
+*.lnp
+*.build_log.htm
+*.m51
+*.map
+
+# Backup files
+*.bak
+*_bk*.uvproj
+*.uvproj.bak
+
+# IDE logs
+*.build_log.htm
+
+# Binary files
+*.bin
+*.hex
+
+# Temp files
+*.tmp
+*~
+新建文本文档*
