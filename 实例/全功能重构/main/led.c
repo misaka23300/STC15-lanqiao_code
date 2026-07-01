@@ -29,21 +29,16 @@ uint8_t led_value[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 void led_display()
 {
     static uint8_t i;
-    static uint8_t temp;
-    static uint8_t last = 0xFF;
+    uint8_t temp;
 
+    temp = 0;
     if (led_value[i]) {
-        temp = temp | (0x01 << i);
-    } else {
-        temp = temp & ~(0x01 << i);
+        temp = 0x01 << i;
     }
 
-    if (last != temp) {
-        P0 = ~temp;
-        latch(4);
-        latch(0);
-        last = temp;
-    }
+    P0 = ~temp;
+    latch(4);
+    latch(0);
 
     i++;
     if (i == 8) {
