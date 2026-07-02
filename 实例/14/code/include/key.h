@@ -2,8 +2,8 @@
 #define __KEY_H__
 
 #include "boot.h"
-uint8_t key_scan();
-uint8_t key_read();
+uint8_t key_scan(void);
+uint8_t key_read(void);
 
 
 #endif

@@ -3,8 +3,8 @@
 
 #include "boot.h"
 
-void led_display();
-void seg_display();
+void led_display(void);
+void seg_display(void);
 
 
 #endif

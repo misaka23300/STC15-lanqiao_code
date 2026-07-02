@@ -8,8 +8,8 @@
 #include "iic.h"
 #include "key.h"
 
-void ds1302_proc();
-void state_proc();
-void key_proc();
+void ds1302_proc(void);
+void state_proc(void);
+void key_proc(void);
 
 #endif

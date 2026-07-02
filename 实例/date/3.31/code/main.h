@@ -8,11 +8,11 @@
 #include "display.h"
 #include "iic.h"
 
-void key_proc();
-void state_proc();
-void sonic_proc();
+void key_proc(void);
+void state_proc(void);
+void sonic_proc(void);
 
-void ADC_proc();
-void led_state();
-void adjust_out();
+void ADC_proc(void);
+void led_state(void);
+void adjust_out(void);
 #endif

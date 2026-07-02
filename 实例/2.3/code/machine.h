@@ -12,7 +12,7 @@ typedef unsigned char uint8_t;
 typedef unsigned int uint16_t;
 
 void latch(uint8_t i);
-void clean_display();
+void clean_display(void);
 
 
 #endif

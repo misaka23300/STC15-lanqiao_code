@@ -4,7 +4,7 @@
 #include "boot.h"
 
 
-void led_display();
+void led_display(void);
 void led_set(uint8_t i, uint8_t state);
 
 

@@ -3,7 +3,7 @@
 
 #include "boot.h"
 
-void sonic_send();
-uint sonic_measure();
+void sonic_send(void);
+uint sonic_measure(void);
 
 #endif

@@ -15,7 +15,7 @@ typedef signed int int16_t;
 
 //typedef bool bit;
 
-void boot_init();
+void boot_init(void);
 void latch(uint8_t i);
 void Timer2_Init(void);
 void Uart1_Init(void);

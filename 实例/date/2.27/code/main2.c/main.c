@@ -20,7 +20,7 @@ struct {
     bit flag;
 } key;
 
-timer_1_1ms() interrupt 12
+void timer_1_1ms() interrupt 12
 {
     static uint i;
     i++;

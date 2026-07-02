@@ -3,8 +3,8 @@
 
 #include "boot.h"
 
-void seg_display();
-void led_display();
+void seg_display(void);
+void led_display(void);
 void sandy(uchar i,bit state);
 
 

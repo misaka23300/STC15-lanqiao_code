@@ -13,11 +13,11 @@
 
 
 
-void task_loop();
-void test();
+void task_loop(void);
+void test(void);
 
-void display_task();
-void key_task();
-void freq_task();
-void uart_task();
+void display_task(void);
+void key_task(void);
+void freq_task(void);
+void uart_task(void);
 #endif

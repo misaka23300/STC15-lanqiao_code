@@ -6,9 +6,9 @@
 typedef unsigned char uint8_t;
 typedef unsigned int uint16_t;
 
-void clean_display();
+void clean_display(void);
 void latch(uchar i);
-void timer();
+void timer(void);
 
 void Delay14us(void);
 

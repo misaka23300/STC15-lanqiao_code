@@ -13,10 +13,10 @@
 
 
 
-void task_loop();
-void test();
+void task_loop(void);
+void test(void);
 
-void display_task();
+void display_task(void);
 
-void freq_task();
+void freq_task(void);
 #endif

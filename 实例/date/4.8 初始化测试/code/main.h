@@ -8,8 +8,8 @@
 #include "ds1302.h"
 
 
-void state_proc();
-void key_proc();
-void ds1302_proc();
+void state_proc(void);
+void key_proc(void);
+void ds1302_proc(void);
 
 #endif

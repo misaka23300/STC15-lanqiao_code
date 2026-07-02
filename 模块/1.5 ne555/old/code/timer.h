@@ -5,7 +5,7 @@
 
 void Timer0Init(void);
 void Timer1Init(void);
-void timer();
+void timer(void);
 
 
 #endif

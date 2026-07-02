@@ -3,7 +3,7 @@
 
 #include "boot.h"
 
-void led_display();
+void led_display(void);
 void sandy(uchar i, bit state);
 
 #endif

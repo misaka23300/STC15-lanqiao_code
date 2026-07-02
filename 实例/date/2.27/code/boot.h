@@ -7,7 +7,7 @@
 #define uchar unsigned char
 #define uint unsigned int
 
-void boot_init();
+void boot_init(void);
 void latch(uchar i);
 void Delay14us(void);
 void Timer2_Init(void);

@@ -3,5 +3,5 @@
 
 #include "boot.h"
 
-float read_temp();
+float read_temp(void);
 #endif

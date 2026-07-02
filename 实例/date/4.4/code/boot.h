@@ -10,7 +10,7 @@
 #include "intrins.h"
 
 
-void boot_init();
+void boot_init(void);
 void latch(uchar i);
 void Timer2_Init(void);
 

@@ -3,9 +3,9 @@
 
 #include "machine.h"
 
-void sonic_send();
-void pca_init();
-uint8_t sonic_measure();
+void sonic_send(void);
+void pca_init(void);
+uint8_t sonic_measure(void);
 
 
 

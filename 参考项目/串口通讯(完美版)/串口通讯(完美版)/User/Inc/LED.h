@@ -27,15 +27,15 @@ typedef struct{
 extern LED_ConfigTypeDef led_config;//定义句柄
 
 //LED变量初始化函数
-void LED_Tag_Init();
+void LED_Tag_Init(void);
 
 //LED位状态判断函数
-bit LED_Bit_Handler();
+bit LED_Bit_Handler(void);
 
 //LED状态判断函数
-void LED_Sta_Handler();
+void LED_Sta_Handler(void);
 
 //LED运行状态指示函数
-void LED_Running();
+void LED_Running(void);
 
 #endif

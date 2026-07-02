@@ -12,7 +12,7 @@ typedef signed char int8_t;
 typedef signed int int16_t;
 typedef signed long int32_t;
 
-void boot_init();
+void boot_init(void);
 void Timer2_Init(void);
 void Uart1_Init(void);
 void latch(uint8_t i);

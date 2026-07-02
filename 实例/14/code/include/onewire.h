@@ -2,5 +2,5 @@
 #define __ONEWIRE_H__
 
 #include "boot.h"
-float read_temperature();
+float read_temperature(void);
 #endif

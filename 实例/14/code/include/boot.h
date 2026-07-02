@@ -11,7 +11,7 @@ typedef unsigned int uint16_t;
 typedef signed int int16_t;
 typedef bit bit_t;
 
-void boot_init();
+void boot_init(void);
 void latch(uint8_t i);
 void Timer0_Init(void);
 void Uart1_Init(void);

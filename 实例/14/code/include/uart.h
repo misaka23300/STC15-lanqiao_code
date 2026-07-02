@@ -4,7 +4,7 @@
 //#include "stdio.h"
 #include "string.h"
 
-void uart_init();
+void uart_init(void);
 int8_t putchar(int8_t ch);
 
 #endif

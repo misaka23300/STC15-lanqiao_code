@@ -9,8 +9,8 @@
 
 
 
-void key_task();
-void shan_task();
+void key_task(void);
+void shan_task(void);
 
 
 #endif

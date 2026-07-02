@@ -18,7 +18,7 @@ typedef signed long int32_t; */
 #define uint16_t unsigned int
 #define int16_t signed int
 
-void boot_init();
+void boot_init(void);
 void latch(uint8_t i);
 void Delay14us(void);
 void Timer2_Init(void);

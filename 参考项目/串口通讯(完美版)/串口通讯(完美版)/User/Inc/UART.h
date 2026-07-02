@@ -27,10 +27,10 @@ extern UART_FlagTypeDef uart_flag;//定义句柄
 extern volatile uint UART1_Cnt;
 
 //串口变量初始化函数
-void UART_Tag_Init();
+void UART_Tag_Init(void);
 
 //串口1初始化函数
-void UART1_Init();
+void UART1_Init(void);
 
 //串口1发送字节函数
 void UART1_Send_Byte(uchar byte);
@@ -39,9 +39,9 @@ void UART1_Send_Byte(uchar byte);
 void UART1_Send_Str(uchar* str);
 
 //串口1接收函数
-uchar UART1_Rec_Byte();
+uchar UART1_Rec_Byte(void);
 
 //串口1接收处理函数
-void UART1_Rec();
+void UART1_Rec(void);
 
 #endif

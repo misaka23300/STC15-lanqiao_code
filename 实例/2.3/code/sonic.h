@@ -3,10 +3,10 @@
 
 #include "machine.h"
 
-void Delay14us();
+void Delay14us(void);
 
-void pca_init();
-void sonic_send();
-uint8_t sonic_measure();
+void pca_init(void);
+void sonic_send(void);
+uint8_t sonic_measure(void);
 
 #endif

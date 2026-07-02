@@ -11,8 +11,8 @@
 
 
 
-void key_task();
-void shan_task();
-void ds1302_task();
+void key_task(void);
+void shan_task(void);
+void ds1302_task(void);
 
 #endif

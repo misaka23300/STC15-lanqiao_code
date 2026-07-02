@@ -9,11 +9,11 @@
 #include "key.h"
 
 
-void state_proc();
-void ds18b20_proc();
+void state_proc(void);
+void ds18b20_proc(void);
 void delete_0(uchar *a, j, bit negative);
 
 
-void key_proc();
-void led_proc();
+void key_proc(void);
+void led_proc(void);
 #endif

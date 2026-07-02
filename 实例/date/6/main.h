@@ -9,8 +9,8 @@
 #include "onewire.h"
 
 void key_proc(uchar press);
-void state_proc();
-void temp_proc();
+void state_proc(void);
+void temp_proc(void);
 
 
 #endif

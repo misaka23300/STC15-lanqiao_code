@@ -28,7 +28,7 @@ extern INPUT input;
 
 //void uart_send(uchar *str);
 //void uart_receive() interrupt 4;
-void get_position(); // uart.receive_data -> input.x input.y
+void get_position(void); // uart.receive_data -> input.x input.y
 
 char putchar(char c);
 #endif

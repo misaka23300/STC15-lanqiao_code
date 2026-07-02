@@ -13,7 +13,7 @@ void latch(uint8_t i);
 void Timer1_Init(void);
 void Delay500ms(void);
 void Delay14us(void);
-void clean_display();
+void clean_display(void);
 
 
 #endif

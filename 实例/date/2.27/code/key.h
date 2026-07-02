@@ -3,6 +3,6 @@
 
 #include "boot.h"
 
-uchar key_scan();
+uchar key_scan(void);
 
 #endif

@@ -8,7 +8,7 @@
 #include "stdio.h"
 
 void latch(uint8_t i);
-void clean_display();
+void clean_display(void);
 
 
 #endif

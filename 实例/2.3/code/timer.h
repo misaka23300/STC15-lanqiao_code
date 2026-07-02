@@ -24,7 +24,7 @@ void Timer0Init(void);
 void Timer1Init(void);
 void UartInit(void);
 char putchar(char c);
-void timer();
+void timer(void);
 
 
 #endif

@@ -2,8 +2,8 @@
 #define __CSB_H__
 #include "sys.h"
 
-uint csb_CJ();
-void csb_Init();
-void csb_Start();
+uint csb_CJ(void);
+void csb_Init(void);
+void csb_Start(void);
 
 #endif

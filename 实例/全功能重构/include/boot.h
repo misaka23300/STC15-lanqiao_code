@@ -10,7 +10,7 @@ typedef signed char int8_t;
 typedef unsigned int uint16_t;
 typedef signed int int16_t;
 
-void boot_init();
+void boot_init(void);
 void latch(uint8_t i);
 void Timer1_Init(void);
 void Delay14us(void);

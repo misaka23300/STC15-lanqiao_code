@@ -14,8 +14,8 @@
 #define Y7 P2 = (P2 & 0x1F) | 0xE0
 #define Y0 P2 = P2 & 0x1F
 
-void boot_init();
-void timer_1();
-void Delay14us();
+void boot_init(void);
+void timer_1(void);
+void Delay14us(void);
 
 #endif

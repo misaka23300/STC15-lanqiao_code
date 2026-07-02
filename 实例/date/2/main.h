@@ -9,10 +9,10 @@
 #include "key.h"
 #include "iic.h"
 
-void key_proc();
-void state_machine();
-void sonic_proc();
-void adc_proc();
-void check_distance();
+void key_proc(void);
+void state_machine(void);
+void sonic_proc(void);
+void adc_proc(void);
+void check_distance(void);
 
 #endif

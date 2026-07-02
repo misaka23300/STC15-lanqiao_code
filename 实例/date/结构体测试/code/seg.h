@@ -3,6 +3,6 @@
 
 #include "boot.h"
 
-void seg_display();
+void seg_display(void);
 
 #endif

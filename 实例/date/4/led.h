@@ -4,7 +4,7 @@
 #include "boot.h"
 
 void led(uchar i, bit state);
-void led_display();
+void led_display(void);
 void s4_state(uchar j);
 
 

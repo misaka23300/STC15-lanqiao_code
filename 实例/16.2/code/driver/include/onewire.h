@@ -3,6 +3,6 @@
 
 #include "boot.h"
 
-float ds18b20_read();
+float ds18b20_read(void);
 
 #endif

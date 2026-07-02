@@ -7,9 +7,9 @@
 #include "key.h"
 // #include "sonic.h"
 
-void key_proc();
-void seg_proc();
-void led_proc();
+void key_proc(void);
+void seg_proc(void);
+void led_proc(void);
 //void Timer1_Isr(void) interrupt 1;
 
 #endif

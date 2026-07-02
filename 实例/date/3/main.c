@@ -390,7 +390,7 @@ void main()
 }
 
 
-timer_11() interrupt 1
+void timer_11() interrupt 1
 {
     static uchar i;
     i = (i + 1) % 30000;

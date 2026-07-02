@@ -10,15 +10,15 @@
 
 #include <stdio.h>
 
-void boot_init();
-void task_loop();
+void boot_init(void);
+void task_loop(void);
 
-void led_task();
-void key_task();
-void display_task();
-void uart_task();
-void calculator_task();
-void sonic_task();
+void led_task(void);
+void key_task(void);
+void display_task(void);
+void uart_task(void);
+void calculator_task(void);
+void sonic_task(void);
 
 
 #endif

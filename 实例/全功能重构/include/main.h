@@ -6,7 +6,7 @@
 #include "seg.h"
 #include "key.h"
 
-void key_task();
+void key_task(void);
 
 
 enum {

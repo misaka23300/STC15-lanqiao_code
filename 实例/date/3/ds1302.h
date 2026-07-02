@@ -3,9 +3,9 @@
 
 #include "boot.h"
 
-void init_time();
+void init_time(void);
 void write_time(uchar *time);
-void read_time();
+void read_time(void);
 
 
 

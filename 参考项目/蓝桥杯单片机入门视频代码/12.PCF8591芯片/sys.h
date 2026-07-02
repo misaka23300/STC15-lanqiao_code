@@ -3,5 +3,5 @@
 #include "main.h"
 void Delay(u16 xms);		//@12.000MHz
 void Timer0Init(void);		//1ºÁÃë@12.000MHz
-void Sys_Init();
+void Sys_Init(void);
 #endif

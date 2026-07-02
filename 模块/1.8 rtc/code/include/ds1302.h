@@ -3,9 +3,9 @@
 
 #include "boot.h"
 
-void datetime_write();
-void datetime_read();
-void display_task();
+void datetime_write(void);
+void datetime_read(void);
+void display_task(void);
 extern uint8_t time_now[3];
 
 #endif

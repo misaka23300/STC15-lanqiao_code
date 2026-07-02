@@ -7,8 +7,8 @@
 typedef unsigned char uint8_t;
 #define uint unsigned int
 
-void boot_init();
-void timer_1();
+void boot_init(void);
+void timer_1(void);
 void latch(uchar i);
 
 #endif

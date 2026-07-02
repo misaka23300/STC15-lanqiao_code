@@ -9,10 +9,10 @@
 
 
 
-void key_task();
-void shan_task();
-void display_task();
-void freq_task();
+void key_task(void);
+void shan_task(void);
+void display_task(void);
+void freq_task(void);
 
 
 #endif

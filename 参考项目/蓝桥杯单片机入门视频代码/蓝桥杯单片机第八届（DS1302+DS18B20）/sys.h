@@ -1,7 +1,7 @@
 #ifndef __SYS_H__
 #define __SYS_H__
 #include "main.h"
-void Sys_Init();
+void Sys_Init(void);
 void Delay(u16 xms)	;	//@12.000MHz
 void Timer0Init(void);		//1ºÁÃë@12.000MHz
 

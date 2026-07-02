@@ -8,7 +8,7 @@ typedef signed char int8_t;
 typedef unsigned int uint16_t;
 typedef signed int int16_t;
 
-void boot_init();
+void boot_init(void);
 void Timer2_Init(void);
 void Uart1_Init(void);
 

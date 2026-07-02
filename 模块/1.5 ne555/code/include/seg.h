@@ -3,7 +3,7 @@
 
 #include "boot.h"
 
-void seg_display();
+void seg_display(void);
 void seg_set(uint8_t i, uint8_t state);
 
 void relay(bit state);

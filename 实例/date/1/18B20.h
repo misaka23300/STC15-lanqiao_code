@@ -4,7 +4,7 @@
 #include "sys.h"
 #include "onewire.h"
 
-float read_temp();
+float read_temp(void);
 bit init_ds18b20(void)
 
 #endif

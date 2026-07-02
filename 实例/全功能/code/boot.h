@@ -5,12 +5,12 @@
 #include "intrins.h"
 #include <stdint.h>
 
-void boot_init();
+void boot_init(void);
 void latch(uint8_t i);
 void Timer1_Init(void);
 void Delay14us(void);
-void timer_0_sonic();
-void timer_0_ne555();
+void timer_0_sonic(void);
+void timer_0_ne555(void);
 
 
 #endif

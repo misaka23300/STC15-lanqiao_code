@@ -7,7 +7,7 @@
 #include "sonic.h"
 
 
-void state_proc();
-void sonic_proc();
+void state_proc(void);
+void sonic_proc(void);
 
 #endif

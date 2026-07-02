@@ -3,7 +3,7 @@
 
 #include "machine.h"
 
-void led_display();
+void led_display(void);
 
 
 

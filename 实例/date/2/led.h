@@ -3,8 +3,8 @@
 
 #include "boot.h"
 void led(uchar i, bit state);
-void led_display();
+void led_display(void);
 void led_state(uchar j);
-void led_shan();
+void led_shan(void);
 
 #endif

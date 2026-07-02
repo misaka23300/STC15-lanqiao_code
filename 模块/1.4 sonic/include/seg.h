@@ -3,6 +3,6 @@
 
 #include "boot.h"
 
-void seg_display();
+void seg_display(void);
 void set_seg(uint8_t i, uint8_t Data);
 #endif

@@ -5,5 +5,5 @@
 #include "boot.h"
 #include "led.h"
 
-void led_task();
+void led_task(void);
 #endif

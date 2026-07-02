@@ -12,10 +12,10 @@
 #include "seg.h"
 #include "uart.h"
 
-void display();
-void key_task();
-void freq_task();
-void adc_task();
-void temp_task();
+void display(void);
+void key_task(void);
+void freq_task(void);
+void adc_task(void);
+void temp_task(void);
 
 #endif

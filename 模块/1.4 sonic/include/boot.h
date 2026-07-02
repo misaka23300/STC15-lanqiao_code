@@ -13,7 +13,7 @@ typedef signed int int16_t; */
 #define uint16_t unsigned int
 #define int16_t signed int
 
-void boot_init();
+void boot_init(void);
 void latch(uint8_t i);
 void Delay14us(void);
 void Delay1000ms(void);

@@ -6,5 +6,5 @@
 #include "seg.h"
 
 
-void state_proc();
+void state_proc(void);
 #endif

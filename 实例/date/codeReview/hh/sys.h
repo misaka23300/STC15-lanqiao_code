@@ -12,6 +12,6 @@
 #define Y7 P2=(P2&0x1f) | 0xE0
 #define Y0 P2=P2&0x1f
 
-void sys_init();
-void Timer0_Init();
+void sys_init(void);
+void Timer0_Init(void);
 #endif

@@ -3,6 +3,6 @@
 
 #include "boot.h"
 
-int16_t read_temperature();
+int16_t read_temperature(void);
 
 #endif

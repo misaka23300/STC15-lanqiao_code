@@ -4,10 +4,10 @@
 #include "machine.h"
 
 // 数码管刷新
-void seg_display();
+void seg_display(void);
 
 // LED灯刷新
-void led_display();
+void led_display(void);
 
 // 继电器 输入1为开启 0为关闭
 void relay(bit state);

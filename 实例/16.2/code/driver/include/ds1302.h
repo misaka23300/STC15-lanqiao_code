@@ -7,7 +7,7 @@ extern uint8_t now_time[3];
 
 uint8_t hex_to_bcd(uint8_t hex);
 uint8_t bcd_to_hex(uint8_t bcd);
-void ds1302_write();
-void ds1302_read();
+void ds1302_write(void);
+void ds1302_read(void);
 
 #endif

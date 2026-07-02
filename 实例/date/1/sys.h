@@ -12,10 +12,10 @@
 #define Y0 P2 &=0x1f                    //  0001 1111
 
 
-void Delay1ms();
-void Delay1000ms();
-void sys_init();
-void Timer0Init();
+void Delay1ms(void);
+void Delay1000ms(void);
+void sys_init(void);
+void Timer0Init(void);
 void delay_ms(int x);
 
 #endif 

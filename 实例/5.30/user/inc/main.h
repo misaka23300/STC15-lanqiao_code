@@ -11,5 +11,5 @@
 
 
 
-void start_buzz_task();
+void start_buzz_task(void);
 #endif

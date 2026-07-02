@@ -4,7 +4,7 @@
 
 #include "machine.h"
 
-uint8_t key_scan();
+uint8_t key_scan(void);
 
 
 

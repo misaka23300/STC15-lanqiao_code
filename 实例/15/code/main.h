@@ -91,17 +91,17 @@ idata KEY key;
 
 
 
-void time_1ms();
-void task_loop();
-void main();
+void time_1ms(void);
+void task_loop(void);
+void main(void);
 
-void key_task();
-void freq_task();
-void uart_task();
-void adc_task();
-void display_task();
-void speed_task();
-void sonic_task();
+void key_task(void);
+void freq_task(void);
+void uart_task(void);
+void adc_task(void);
+void display_task(void);
+void speed_task(void);
+void sonic_task(void);
 
 
 void number_display(uint16_t i);

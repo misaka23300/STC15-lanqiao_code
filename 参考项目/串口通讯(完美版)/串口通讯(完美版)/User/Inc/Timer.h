@@ -20,9 +20,9 @@ typedef struct {
 extern Timer_Delay_TypeDef timer_delay; 
 
 //定时器变量初始化函数
-void Timer_Tag_Init();
+void Timer_Tag_Init(void);
 
 //定时器0初始化函数
-void Timer2_Init();
+void Timer2_Init(void);
 
 #endif

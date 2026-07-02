@@ -8,10 +8,10 @@
 #include "main.h"
 #include "uart.h"
 
-void seg_task();
-void key_task();
-void sonic_task();
-void display_task();
-void uart_send();
+void seg_task(void);
+void key_task(void);
+void sonic_task(void);
+void display_task(void);
+void uart_send(void);
 
 #endif

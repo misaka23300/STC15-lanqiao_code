@@ -6,6 +6,6 @@
 #include "key.h"
 
 #include "display.h"
-void state_proc();
+void state_proc(void);
                     
 #endif

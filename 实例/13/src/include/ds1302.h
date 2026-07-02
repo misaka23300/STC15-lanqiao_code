@@ -3,8 +3,8 @@
 
 #include "boot.h"
 
-void datetime_write();
-void datetime_read();
+void datetime_write(void);
+void datetime_read(void);
 
 extern uint8_t time_now[3];
 

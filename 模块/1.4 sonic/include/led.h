@@ -12,7 +12,7 @@ typedef signed short   int16_t; */
 
 
 void led(uint8_t i, bit state);
-void led_display();
+void led_display(void);
 void set_led(uint8_t i, uint8_t state);
 
 #endif

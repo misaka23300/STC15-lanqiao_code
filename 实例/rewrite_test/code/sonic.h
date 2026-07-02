@@ -3,10 +3,10 @@
 
 #include "machine.h"
 
-//void Timer1_Init();
-void sendSonic();
-uchar measureTimer1();
-void pcaInit();
-uint16_t measurePCA();
+//void Timer1_Init(void);
+void sendSonic(void);
+uchar measureTimer1(void);
+void pcaInit(void);
+uint16_t measurePCA(void);
 
 #endif
