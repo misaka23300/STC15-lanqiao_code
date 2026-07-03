@@ -370,7 +370,7 @@ void delete_0(uchar *list, uchar len, uchar is_negative)
     {
         if ( list[i] == 0 )
         {
-            if ( list[i-1] != 0 && is_negative == 1) 
+            if ( i > 0 && list[i-1] != 0 && is_negative == 1) 
             {
                 list[i] = 17;
             }

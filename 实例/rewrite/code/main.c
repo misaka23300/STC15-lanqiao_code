@@ -95,7 +95,7 @@ void task_loop()
     }
 }
 
-void timer_1_interrupt() interrupt 3
+void timer_1_interrupt(void) interrupt 3
 {
     if (led.time < LED_TIME) { led.time++; }
 
