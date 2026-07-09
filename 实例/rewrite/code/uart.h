@@ -3,7 +3,6 @@
 
 #include "machine.h"
 
-
-
+void Uart1_Init(void);
 
 #endif
