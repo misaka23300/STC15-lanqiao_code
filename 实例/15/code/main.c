@@ -162,7 +162,7 @@ void key_task()     // -> key.press
             if (display.state == 2)
             {
                 speed.argument_state++;
-                if (speed.argument_state == 2) {speed.argumen_state = 0; }
+                if (speed.argument_state == 2) {speed.argument_state = 0; }
             }
         }
         break;
@@ -209,7 +209,7 @@ void uart_task()    // <- uart.receive
 
         if (uart.receive_data[0] == '(')
         {
-            if (state.mode = 0)
+            if (state.mode == 0)
             {
                 printf("Got it");
                 get_position();
@@ -221,13 +221,13 @@ void uart_task()    // <- uart.receive
                 printf("Busy");
             }
         }
-        else if (uart.receive_data[0] = '?')
+        else if (uart.receive_data[0] == '?')
         {
             if (state.mode == 0) { printf("Idle"); }
             else if (state.mode == 1) { printf("Wait"); }
             else if (state.mode == 2) { printf("Busy"); }
         }
-        else if (uart.receive_data[0] = '#')
+        else if (uart.receive_data[0] == '#')
         {
             printf("(");
             printf(position.now[0]);

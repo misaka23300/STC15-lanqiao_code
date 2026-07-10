@@ -122,7 +122,7 @@ void key_task()
     {
         case 4:
         {
-            
+            state.mode_0 = (state.mode_0 + 1) % 2;
         }
         break;
     }
