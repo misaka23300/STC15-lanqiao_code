@@ -24,8 +24,6 @@ typedef struct {
 } key_t;
 
 
-#endif
-
 /* 定时型任务创建 
 
 1. 创建枚举，记录执行间隔
@@ -33,3 +31,5 @@ typedef struct {
 3. while主循环判断是否达到间隔
 4. 1ms定时器中断，对变量自加
 */
+
+#endif

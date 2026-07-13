@@ -31,9 +31,8 @@ void latch(uint8_t i)
         case 5: { P2 = (P2 & 0x1F) | 0xA0; break; }
         case 6: { P2 = (P2 & 0x1F) | 0xC0; break; }
         case 7: { P2 = (P2 & 0x1F) | 0xE0; break; }
-
+        case 0: { P2 = P2 & 0x1F; break; }
     }
-    P2 = (P2 & 0x1F);
 }
 
 void Timer1_Init(void)		//1毫秒@12.000MHz

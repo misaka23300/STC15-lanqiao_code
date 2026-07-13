@@ -28,9 +28,9 @@
  */
 uint8_t key_scan()
 {
-    static uint8_t i;
-    static uint8_t state;
-    static uint8_t value;
+    static uint8_t i = 0;
+    static uint8_t state = 0;
+    static uint8_t value = 0;
 
     uint8_t press = 0xFF;
     uint8_t temp = 99;

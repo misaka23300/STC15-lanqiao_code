@@ -13,12 +13,14 @@ uint8_t key_scan()
 
     static press_task state = wait_press;
 
-    static uint8_t value, i;
+    static uint8_t value = 0, i = 0;
     uint8_t press = 0xFF, temp = 99;
 
     P3 = 0x0F;
     P42 = 0; P44 = 0;
     P36 = P42; P37 = P44;
+
+    press = P3 & 0x0F;
 
     switch (state)
     {
