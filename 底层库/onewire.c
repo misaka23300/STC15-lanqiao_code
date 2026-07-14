@@ -60,10 +60,11 @@ bit init_ds18b20(void)
   	return initflag;
 }
 
-uint8_t read_temperature()
+float read_temperature(void)
 {
 	float temp;
 	uint8_t high, low;
+	int16_t raw;
 
 	init_ds18b20();
 	Write_DS18B20(0xcc);
@@ -78,7 +79,8 @@ uint8_t read_temperature()
 	low = Read_DS18B20();
 	high = Read_DS18B20();
 
-	temp = (high << 8) | low;
-	return (uint8_t) (temp / 16.0 * 10);
+	raw = (high << 8) | low;
+	temp = raw / 16.0;
+	return temp;
 }
 
