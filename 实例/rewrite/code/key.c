@@ -14,11 +14,12 @@ uint8_t key_scan()
     static press_task state = wait_press;
 
     static uint8_t value, i;
-    uint8_t press = 0xFF, temp = 99;
+    uint8_t press = 0x0F, temp = 99;
 
     P3 = 0x0F;
     P42 = 0; P44 = 0;
     P36 = P42; P37 = P44;
+    press = P3 & 0x0F;
 
     switch (state)
     {
@@ -33,6 +34,11 @@ uint8_t key_scan()
 
         case eliminate:
         {
+            P3 = 0x0F;
+            P42 = 0; P44 = 0;
+            P36 = P42; P37 = P44;
+            press = P3 & 0x0F;
+
             if (press == 0x0F)
             {
                 state = wait_press;
@@ -45,6 +51,7 @@ uint8_t key_scan()
 
                 press = P3;
                 state = short_press;
+                i = 0;
                 switch (press)
                 {
                     case 0x77: { value = 4; break; }
@@ -56,6 +63,11 @@ uint8_t key_scan()
 
         case short_press:
         {
+            P3 = 0x0F;
+            P42 = 0; P44 = 0;
+            P36 = P42; P37 = P44;
+            press = P3 & 0x0F;
+
             if (press != 0x0F)
             {
                 i++;
@@ -77,6 +89,11 @@ uint8_t key_scan()
 
         case long_press:
         {
+            P3 = 0x0F;
+            P42 = 0; P44 = 0;
+            P36 = P42; P37 = P44;
+            press = P3 & 0x0F;
+
             if (press == 0x0F)
             {
                 temp = value;

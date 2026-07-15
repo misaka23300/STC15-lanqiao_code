@@ -82,7 +82,7 @@ void task_loop()
         key.time = 0;
     }
 
-    if (rtc.time == TRC_TIME)
+    if (rtc.time == RTC_TIME)
     {
         read_datetime(rtc.now_time);
         rtc.time = 0;
