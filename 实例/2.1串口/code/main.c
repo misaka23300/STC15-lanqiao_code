@@ -39,20 +39,7 @@ void pcaInit()
 }
 
 
-void pcaInit()
-{
-    CMOD = 0x00;
-    CCON = 0x00;
 
-    CL = 0x00; CH = 0x00;
-
-    CCAPM0  0x49;
-    CCAP0L = TIME_CCAP_0; 
-    CCAP0H = TIME_CCAP_0 >> 8;
-
-    EA = 1;
-    CCON = 0x41;
-}
 
 void pcaInterrupt() interrupt 7
 {
