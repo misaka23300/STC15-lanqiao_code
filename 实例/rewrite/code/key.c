@@ -24,7 +24,7 @@ uint8_t key_scan()
     {
         case wait_press:
         {
-            if (press != 0x0F)
+            if (P3 != 0x0F)
             {
                 state = eliminate;
             }
@@ -33,13 +33,13 @@ uint8_t key_scan()
 
         case eliminate:
         {
-            if (press == 0x0F)
+            if (P3 == 0x0F)
             {
                 state = wait_press;
             }
             else
             {
-                P3 = press | 0xF0;
+                P3 = P3 | 0xF0;
                 P42 = 1; P44 = 1;
                 P36 = P42; P37 = P44;
 
@@ -56,7 +56,7 @@ uint8_t key_scan()
 
         case short_press:
         {
-            if (press != 0x0F)
+            if (P3 != 0x0F)
             {
                 i++;
                 if (i > 100)
@@ -77,7 +77,7 @@ uint8_t key_scan()
 
         case long_press:
         {
-            if (press == 0x0F)
+            if (P3 == 0x0F)
             {
                 temp = value;
                 value = 0;
