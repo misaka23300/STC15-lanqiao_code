@@ -1,4 +1,27 @@
 .vs/
 Listings/
 Objects/
-.vscode
+.vscode/
+
+# Keil C51 build artifacts
+*.obj
+*.hex
+*.lnp
+*.m51
+*.lst
+*.build_log.htm
+*.plg
+*.M51
+
+# EIDE / VS Code workspace
+*.code-workspace
+*.aic
+*.uvgui.*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*~
