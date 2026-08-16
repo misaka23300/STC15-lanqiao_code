@@ -48,7 +48,11 @@ void seg_display()
     latch(6);
     latch(0);
 
-    P0 = ~letter[seg[i]];
+    if (seg[i] < sizeof(letter)) {
+        P0 = ~letter[seg[i]];
+    } else {
+        P0 = ~letter[16]; /* 超出范围显示空白 */
+    }
     latch(7);
     latch(0);
 
@@ -60,5 +64,7 @@ void seg_display()
 
 void seg_set(uint8_t position, uint8_t number)
 {
-    seg[position] = number;
+    if (position < 8 && number < sizeof(letter)) {
+        seg[position] = number;
+    }
 }

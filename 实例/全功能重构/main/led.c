@@ -28,8 +28,8 @@ uint8_t led_value[8] = {0, 0, 0, 0, 0, 0, 0, 0};
  */
 void led_display()
 {
-    static uint8_t i;
-    static uint8_t temp;
+    static uint8_t i = 0;
+    static uint8_t temp = 0x00;
     static uint8_t last = 0xFF;
 
     if (led_value[i]) {
@@ -54,5 +54,7 @@ void led_display()
 
 void led_set(uint8_t position, bit value)
 {
-    led_value[position] = value;
+    if (position < 8) {
+        led_value[position] = value;
+    }
 }

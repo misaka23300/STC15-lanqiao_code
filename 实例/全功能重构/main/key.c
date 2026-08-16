@@ -28,9 +28,9 @@
  */
 uint8_t key_scan()
 {
-    static uint8_t i;
-    static uint8_t state;
-    static uint8_t value;
+    static uint8_t i = 0;
+    static uint8_t state = 0;
+    static uint8_t value = 0;
 
     uint8_t press = 0xFF;
     uint8_t temp = 99;
@@ -83,12 +83,20 @@ uint8_t key_scan()
                     case 0xEB: {value = 17; break;}
                     case 0xED: {value = 18; break;}
                     case 0xEE: {value = 19; break;}
-                    default: state = 0;
+                    default: state = 0; break;
                 }
             }
         } break;
 
         case 2: {
+            /* 重新读取按键状态进行去抖判断 */
+            P3 = 0x0F;
+            P42 = 0;
+            P44 = 0;
+            P36 = P42;
+            P37 = P44;
+            press = P3 & 0x0F;
+
             if (press != 0x0F) {
                 i++;
                 if (i > 70) {
@@ -104,6 +112,14 @@ uint8_t key_scan()
         } break;
 
         case 3: {
+            /* 重新读取按键状态判断是否松开 */
+            P3 = 0x0F;
+            P42 = 0;
+            P44 = 0;
+            P36 = P42;
+            P37 = P44;
+            press = P3 & 0x0F;
+
             if (press == 0x0F) {
                 state = 0;
                 temp = value + 20;
