@@ -156,10 +156,10 @@ uint8_t key_scan()
     return temp;
 }
 
-void key_press()
+uint8_t key_press()
 {
     uint8_t press;
-    P31 = 0;
+    P30 = 0;
     P31 = 0;
     P32 = 0;
     P33 = 0;
@@ -168,7 +168,13 @@ void key_press()
     P34 = 1;
     P35 = 1;
 
-    press = if (P44 && P42 && P34 && P35)
+    P36 = P42;
+    P37 = P44;
+    press = P3 & 0x0F;
+
+    if (press == 0x0F)
     {
+        return 0;
     }
+    return press;
 }

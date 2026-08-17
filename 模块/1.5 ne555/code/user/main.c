@@ -14,7 +14,7 @@ uint16_t volatile shan_time;
 uint16_t volatile freq_time;
 
 uint16_t freq_data;
-uint16_t freq_out = 0721;
+uint16_t freq_out = 721;
 
 uint8_t display_state = 0;
 void main() {

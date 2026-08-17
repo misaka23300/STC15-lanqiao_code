@@ -3,8 +3,8 @@
 
 #include "boot.h"
 
-
-uint8_t sonic_measure_mode1();
-uint8_t sonic_measure_mode2();
-uint8_t sonic_measure_mode3();
+void sonic_send(void);
+uint8_t sonic_measure_mode1(void);
+uint8_t sonic_measure_mode2(void);
+uint8_t sonic_measure_mode3(void);
 #endif

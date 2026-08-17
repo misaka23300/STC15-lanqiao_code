@@ -1,4 +1,5 @@
 .vs/
 Listings/
 Objects/
-.vscode
+.vscode/
+.trae-html-share-packages/
