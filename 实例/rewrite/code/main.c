@@ -40,7 +40,8 @@ KEY key;
 RTC rtc = {
     0,
     {0x50, 0x59, 0x23, 0x01, 0x01, 0x01, 0x25},
-    {0, 0, 0}
+    {0, 0, 0},
+    0
 };
 STATE state;
 
@@ -150,7 +151,7 @@ void display_task()
 
 void write_start_times()
 {
-    uchar times;
+    uint8_t times;
     times = AT24C02_read(0x00);
     times = times + 1;
     AT24C02_write(0x00, times);

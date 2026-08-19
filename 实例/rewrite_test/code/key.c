@@ -25,6 +25,10 @@ uint8_t key_scan()
      
         case 1:
         {
+            P3 = 0x0F;
+            P42 = 0; P44 = 0;
+            P36 = P42; P37 = P44;
+            press = P3 & 0x0F;
             if (press == 0x0F)
             {
                 state = 0;
@@ -68,6 +72,10 @@ uint8_t key_scan()
 
         case 2:
         {
+            P3 = 0x0F;
+            P42 = 0; P44 = 0;
+            P36 = P42; P37 = P44;
+            press = P3 & 0x0F;
             if (press != 0x0F)
             {
                 i++;

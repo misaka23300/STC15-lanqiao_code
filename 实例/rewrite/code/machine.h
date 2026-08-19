@@ -8,6 +8,8 @@
  
 typedef unsigned char uint8_t;
 typedef unsigned int uint16_t;
+typedef unsigned char uchar;
+typedef unsigned int uint;
 
 void latch(uint8_t i);
 void Timer1_Init(void);

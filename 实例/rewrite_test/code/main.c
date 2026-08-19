@@ -3,8 +3,8 @@
 
 // 显示状态
 typedef struct {
-    uchar time;
-    uchar mode_0;
+    uint8_t time;
+    uint8_t mode_0;
 } STATE;
 
 STATE state;
@@ -15,24 +15,24 @@ typedef struct {
     
 } UART;
 
-code uchar str[] = "ciallo~";
+code uint8_t str[] = "ciallo~";
 code float number = 0.0721;
 
 UART uart;
 
 // 键盘
 typedef struct {
-    uchar time;
-    uchar press;
+    uint8_t time;
+    uint8_t press;
 } KEY;
 
 KEY key;
 
 // 日期
 typedef struct {
-    uchar number[8];
-    uchar i;
-    uchar input;
+    uint8_t number[8];
+    uint8_t i;
+    uint8_t input;
 
 } CAL;
 
