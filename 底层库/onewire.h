@@ -3,6 +3,6 @@
 
 #include <stdint.h>
 
-float read_temperature();
+uint8_t read_temperature();
 
 #endif

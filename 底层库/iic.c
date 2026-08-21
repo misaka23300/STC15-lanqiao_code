@@ -159,6 +159,8 @@ uint8_t Read_2k(uint8_t address)
     uint8_t Data;
 
     I2CStart();
+
+    I2CSendByte(0xA0);
     I2CWaitAck();
 
     I2CSendByte(address);
