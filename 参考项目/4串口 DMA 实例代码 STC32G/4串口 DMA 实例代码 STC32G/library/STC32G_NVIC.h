@@ -1,3 +1,6 @@
+#ifndef _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_NVIC_H_
+#define _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_NVIC_H_
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
@@ -8,7 +11,7 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* »Áπ˚“™‘⁄≥Ã–Ú÷– π”√¥À¥˙¬Î,«Î‘⁄≥Ã–Ú÷–◊¢√˜ π”√¡ÀSTCµƒ◊ ¡œº∞≥Ã–Ú            */
+/* “™⁄≥ π√¥À¥,⁄≥◊¢ πSTCœº            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_NVIC_H
@@ -17,196 +20,196 @@
 #include	"config.h"
 
 //========================================================================
-//                              ∂®“Â…˘√˜
+//                              
 //========================================================================
 
-#define	FALLING_EDGE		1		//≤˙…˙œ¬Ωµ—ÿ÷–∂œ
-#define	RISING_EDGE			2		//≤˙…˙…œ…˝—ÿ÷–∂œ
+#define	FALLING_EDGE		1		//¬Ω–∂
+#define	RISING_EDGE			2		//–∂
 
 //========================================================================
-//                              ∂® ±∆˜÷–∂œ…Ë÷√
+//                               ±–∂
 //========================================================================
 
-#define 	Timer0_Interrupt(n)		(n==0?(ET0 = 0):(ET0 = 1))				/* Timer0÷–∂œ πƒ‹ */
-#define 	Timer1_Interrupt(n)		(n==0?(ET1 = 0):(ET1 = 1))				/* Timer1÷–∂œ πƒ‹ */
-#define 	Timer2_Interrupt(n)		(n==0?(ET2 = 0):(ET2 = 1))				/* Timer2÷–∂œ πƒ‹ */
-#define 	Timer3_Interrupt(n)		(n==0?(ET3 = 0):(ET3 = 1))				/* Timer3÷–∂œ πƒ‹ */
-#define 	Timer4_Interrupt(n)		(n==0?(ET4 = 0):(ET4 = 1))				/* Timer4÷–∂œ πƒ‹ */
+#define 	Timer0_Interrupt(n)		(n==0?(ET0 = 0):(ET0 = 1))				/* Timer0–∂ π */
+#define 	Timer1_Interrupt(n)		(n==0?(ET1 = 0):(ET1 = 1))				/* Timer1–∂ π */
+#define 	Timer2_Interrupt(n)		(n==0?(ET2 = 0):(ET2 = 1))				/* Timer2–∂ π */
+#define 	Timer3_Interrupt(n)		(n==0?(ET3 = 0):(ET3 = 1))				/* Timer3–∂ π */
+#define 	Timer4_Interrupt(n)		(n==0?(ET4 = 0):(ET4 = 1))				/* Timer4–∂ π */
 
 //========================================================================
-//                             Õ‚≤ø÷–∂œ…Ë÷√
+//                             ‚≤ø–∂
 //========================================================================
 
-#define 	INT0_Interrupt(n)		(n==0?(EX0 = 0):(EX0 = 1))			/* INT0÷–∂œ πƒ‹ */
-#define 	INT1_Interrupt(n)		(n==0?(EX1 = 0):(EX1 = 1))			/* INT1÷–∂œ πƒ‹ */
-#define 	INT2_Interrupt(n)		(n==0?(EX2 = 0):(EX2 = 1))			/* INT2÷–∂œ πƒ‹ */
-#define 	INT3_Interrupt(n)		(n==0?(EX3 = 0):(EX3 = 1))			/* INT3÷–∂œ πƒ‹ */
-#define 	INT4_Interrupt(n)		(n==0?(EX4 = 0):(EX4 = 1))			/* INT4÷–∂œ πƒ‹ */
+#define 	INT0_Interrupt(n)		(n==0?(EX0 = 0):(EX0 = 1))			/* INT0–∂ π */
+#define 	INT1_Interrupt(n)		(n==0?(EX1 = 0):(EX1 = 1))			/* INT1–∂ π */
+#define 	INT2_Interrupt(n)		(n==0?(EX2 = 0):(EX2 = 1))			/* INT2–∂ π */
+#define 	INT3_Interrupt(n)		(n==0?(EX3 = 0):(EX3 = 1))			/* INT3–∂ π */
+#define 	INT4_Interrupt(n)		(n==0?(EX4 = 0):(EX4 = 1))			/* INT4–∂ π */
 
 //========================================================================
-//                              ADC÷–∂œ…Ë÷√
+//                              ADC–∂
 //========================================================================
 
-#define 	ADC_Interrupt(n)		(n==0?(EADC = 0):(EADC = 1))	/* ADC÷–∂œøÿ÷∆ */
+#define 	ADC_Interrupt(n)		(n==0?(EADC = 0):(EADC = 1))	/* ADC–∂œø */
 
 //========================================================================
-//                              SPI÷–∂œ…Ë÷√
+//                              SPI–∂
 //========================================================================
 
-#define 	SPI_Interrupt(n)		(n==0?(ESPI = 0):(ESPI = 1))	/* SPI÷–∂œ πƒ‹ */
+#define 	SPI_Interrupt(n)		(n==0?(ESPI = 0):(ESPI = 1))	/* SPI–∂ π */
 
 //========================================================================
-//                              RTC÷–∂œ…Ë÷√
+//                              RTC–∂
 //========================================================================
 
-#define 	RTC_Interrupt(n)				RTCIEN = (n)		/* RTC÷–∂œ πƒ‹ */
+#define 	RTC_Interrupt(n)				RTCIEN = (n)		/* RTC–∂ π */
 
 //========================================================================
-//                              UART÷–∂œ…Ë÷√
+//                              UART–∂
 //========================================================================
 
-#define		UART1_Interrupt(n)	(n==0?(ES = 0):(ES = 1))					/* UART1÷–∂œ πƒ‹ */
-#define		UART2_Interrupt(n)	(n==0?(ES2 = 0):(ES2 = 1))				/* UART2÷–∂œ πƒ‹ */
-#define		UART3_Interrupt(n)	(n==0?(ES3 = 0):(ES3 = 1))				/* UART3÷–∂œ πƒ‹ */
-#define		UART4_Interrupt(n)	(n==0?(ES4 = 0):(ES4 = 1))				/* UART4÷–∂œ πƒ‹ */
+#define		UART1_Interrupt(n)	(n==0?(ES = 0):(ES = 1))					/* UART1–∂ π */
+#define		UART2_Interrupt(n)	(n==0?(ES2 = 0):(ES2 = 1))				/* UART2–∂ π */
+#define		UART3_Interrupt(n)	(n==0?(ES3 = 0):(ES3 = 1))				/* UART3–∂ π */
+#define		UART4_Interrupt(n)	(n==0?(ES4 = 0):(ES4 = 1))				/* UART4–∂ π */
 
 //========================================================================
-//                              I2C÷–∂œ…Ë÷√
+//                              I2C–∂
 //========================================================================
 
-#define		I2C_Master_Inturrupt(n)	(n==0?(I2CMSCR &= ~0x80):(I2CMSCR |= 0x80))	//0£∫Ω˚÷π I2C π¶ƒ‹£ª1£∫ πƒ‹ I2C π¶ƒ‹
+#define		I2C_Master_Inturrupt(n)	(n==0?(I2CMSCR &= ~0x80):(I2CMSCR |= 0x80))	//0÷π I2C ‹£1 π I2C 
 
 //========================================================================
-//                              LIN÷–∂œ…Ë÷√
+//                              LIN–∂
 //========================================================================
 
-#define 	LIN_Interrupt(n)				(n==0?(LINIE = 0):(LINIE = 1))					/* LIN÷–∂œ πƒ‹ */
+#define 	LIN_Interrupt(n)				(n==0?(LINIE = 0):(LINIE = 1))					/* LIN–∂ π */
 
 //========================================================================
-//                            ÷–∂œ”≈œ»º∂∂®“Â
+//                            –∂»º
 //========================================================================
 
-//¥Æø⁄2÷–∂œ”≈œ»º∂øÿ÷∆
+//2–∂»º
 #define 	UART2_Priority(n)			do{if(n == 0) PS2H = 0, PS2 = 0; \
 																if(n == 1) PS2H = 0, PS2 = 1; \
 																if(n == 2) PS2H = 1, PS2 = 0; \
 																if(n == 3) PS2H = 1, PS2 = 1; \
 															}while(0)
-//SPI÷–∂œ”≈œ»º∂øÿ÷∆
+//SPI–∂»º
 #define 	SPI_Priority(n)				do{if(n == 0) PSPIH = 0, PSPI = 0; \
 																if(n == 1) PSPIH = 0, PSPI = 1; \
 																if(n == 2) PSPIH = 1, PSPI = 0; \
 																if(n == 3) PSPIH = 1, PSPI = 1; \
 															}while(0)
-//Õ‚≤ø÷–∂œ4÷–∂œ”≈œ»º∂øÿ÷∆
+//‚≤ø–∂4–∂»º
 #define 	INT4_Priority(n)				do{if(n == 0) PX4H = 0, PX4 = 0; \
 																if(n == 1) PX4H = 0, PX4 = 1; \
 																if(n == 2) PX4H = 1, PX4 = 0; \
 																if(n == 3) PX4H = 1, PX4 = 1; \
 															}while(0)
-//±»Ωœ∆˜÷–∂œ”≈œ»º∂øÿ÷∆
+//»Ω–∂»º
 #define 	CMP_Priority(n)				do{if(n == 0) PCMPH = 0, PCMP = 0; \
 																if(n == 1) PCMPH = 0, PCMP = 1; \
 																if(n == 2) PCMPH = 1, PCMP = 0; \
 																if(n == 3) PCMPH = 1, PCMP = 1; \
 															}while(0)
-//I2C÷–∂œ”≈œ»º∂øÿ÷∆
+//I2C–∂»º
 #define 	I2C_Priority(n)				do{if(n == 0) PI2CH = 0, PI2C = 0; \
 																if(n == 1) PI2CH = 0, PI2C = 1; \
 																if(n == 2) PI2CH = 1, PI2C = 0; \
 																if(n == 3) PI2CH = 1, PI2C = 1; \
 															}while(0)
-//¥Æø⁄3÷–∂œ”≈œ»º∂øÿ÷∆
+//3–∂»º
 #define 	UART3_Priority(n)			do{if(n == 0) PS3H = 0, PS3 = 0; \
 																if(n == 1) PS3H = 0, PS3 = 1; \
 																if(n == 2) PS3H = 1, PS3 = 0; \
 																if(n == 3) PS3H = 1, PS3 = 1; \
 															}while(0)
-//¥Æø⁄4÷–∂œ”≈œ»º∂øÿ÷∆
+//4–∂»º
 #define 	UART4_Priority(n)			do{if(n == 0) PS4H = 0, PS4 = 0; \
 																if(n == 1) PS4H = 0, PS4 = 1; \
 																if(n == 2) PS4H = 1, PS4 = 0; \
 																if(n == 3) PS4H = 1, PS4 = 1; \
 															}while(0)
 
-//Õ‚≤ø÷–∂œ0÷–∂œ”≈œ»º∂øÿ÷∆
+//‚≤ø–∂0–∂»º
 #define 	INT0_Priority(n)			do{if(n == 0) PX0H = 0, PX0 = 0; \
 																if(n == 1) PX0H = 0, PX0 = 1; \
 																if(n == 2) PX0H = 1, PX0 = 0; \
 																if(n == 3) PX0H = 1, PX0 = 1; \
 															}while(0)
-//Õ‚≤ø÷–∂œ1÷–∂œ”≈œ»º∂øÿ÷∆
+//‚≤ø–∂1–∂»º
 #define 	INT1_Priority(n)			do{if(n == 0) PX1H = 0, PX1 = 0; \
 																if(n == 1) PX1H = 0, PX1 = 1; \
 																if(n == 2) PX1H = 1, PX1 = 0; \
 																if(n == 3) PX1H = 1, PX1 = 1; \
 															}while(0)
-//∂® ±∆˜0÷–∂œ”≈œ»º∂øÿ÷∆
+// ±0–∂»º
 #define 	Timer0_Priority(n)		do{if(n == 0) PT0H = 0, PT0 = 0; \
 																if(n == 1) PT0H = 0, PT0 = 1; \
 																if(n == 2) PT0H = 1, PT0 = 0; \
 																if(n == 3) PT0H = 1, PT0 = 1; \
 															}while(0)
-//∂® ±∆˜1÷–∂œ”≈œ»º∂øÿ÷∆
+// ±1–∂»º
 #define 	Timer1_Priority(n)		do{if(n == 0) PT1H = 0, PT1 = 0; \
 																if(n == 1) PT1H = 0, PT1 = 1; \
 																if(n == 2) PT1H = 1, PT1 = 0; \
 																if(n == 3) PT1H = 1, PT1 = 1; \
 															}while(0)
-//¥Æø⁄1÷–∂œ”≈œ»º∂øÿ÷∆
+//1–∂»º
 #define 	UART1_Priority(n)			do{if(n == 0) PSH = 0, PS = 0; \
 																if(n == 1) PSH = 0, PS = 1; \
 																if(n == 2) PSH = 1, PS = 0; \
 																if(n == 3) PSH = 1, PS = 1; \
 															}while(0)
-//ADC÷–∂œ”≈œ»º∂øÿ÷∆
+//ADC–∂»º
 #define 	ADC_Priority(n)				do{if(n == 0) PADCH = 0, PADC = 0; \
 																if(n == 1) PADCH = 0, PADC = 1; \
 																if(n == 2) PADCH = 1, PADC = 0; \
 																if(n == 3) PADCH = 1, PADC = 1; \
 															}while(0)
-//µÕ—πºÏ≤‚÷–∂œ”≈œ»º∂øÿ÷∆
+//—π–∂»º
 #define 	LVD_Priority(n)				do{if(n == 0) PLVDH = 0, PADC = 0; \
 																if(n == 1) PLVDH = 0, PADC = 1; \
 																if(n == 2) PLVDH = 1, PADC = 0; \
 																if(n == 3) PLVDH = 1, PADC = 1; \
 															}while(0)
-//∏ﬂº∂PWMA÷–∂œ”≈œ»º∂øÿ÷∆
+//ﬂºPWMA–∂»º
 #define 	PWMA_Priority(n)			do{if(n == 0) PPWMAH = 0, PPWMA = 0; \
 																if(n == 1) PPWMAH = 0, PPWMA = 1; \
 																if(n == 2) PPWMAH = 1, PPWMA = 0; \
 																if(n == 3) PPWMAH = 1, PPWMA = 1; \
 															}while(0)
 
-//∏ﬂº∂PWMB÷–∂œ”≈œ»º∂øÿ÷∆
+//ﬂºPWMB–∂»º
 #define 	PWMB_Priority(n)			do{if(n == 0) PPWMBH = 0, PPWMB = 0; \
 																if(n == 1) PPWMBH = 0, PPWMB = 1; \
 																if(n == 2) PPWMBH = 1, PPWMB = 0; \
 																if(n == 3) PPWMBH = 1, PPWMB = 1; \
 															}while(0)
 
-//RTC÷–∂œ”≈œ»º∂øÿ÷∆
+//RTC–∂»º
 #define 	RTC_Priority(n)			do{if(n == 0) PRTCH = 0, PRTC = 0; \
 																if(n == 1) PRTCH = 0, PRTC = 1; \
 																if(n == 2) PRTCH = 1, PRTC = 0; \
 																if(n == 3) PRTCH = 1, PRTC = 1; \
 															}while(0)
 
-//CAN1÷–∂œ”≈œ»º∂øÿ÷∆
+//CAN1–∂»º
 #define 	CAN1_Priority(n)		do{if(n == 0) PCANH = 0, PCANL = 0; \
 																if(n == 1) PCANH = 0, PCANL = 1; \
 																if(n == 2) PCANH = 1, PCANL = 0; \
 																if(n == 3) PCANH = 1, PCANL = 1; \
 															}while(0)
 
-//CAN2÷–∂œ”≈œ»º∂øÿ÷∆
+//CAN2–∂»º
 #define 	CAN2_Priority(n)		do{if(n == 0) PCAN2H = 0, PCAN2L = 0; \
 																if(n == 1) PCAN2H = 0, PCAN2L = 1; \
 																if(n == 2) PCAN2H = 1, PCAN2L = 0; \
 																if(n == 3) PCAN2H = 1, PCAN2L = 1; \
 															}while(0)
 
-//LIN÷–∂œ”≈œ»º∂øÿ÷∆
+//LIN–∂»º
 #define 	LIN_Priority(n)		do{if(n == 0) PLINH = 0, PLINL = 0; \
 																if(n == 1) PLINH = 0, PLINL = 1; \
 																if(n == 2) PLINH = 1, PLINL = 0; \
@@ -215,7 +218,7 @@
 
 
 //========================================================================
-//                           Õ‚≤ø∫Ø ˝∫Õ±‰¡ø…˘√˜
+//                           ‚≤øÕ±
 //========================================================================
 
 u8 NVIC_Timer0_Init(u8 State, u8 Priority);
@@ -258,3 +261,5 @@ u8 NVIC_LIN_Init(u8 State, u8 Priority);
 
 #endif
 
+
+#endif /* _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_NVIC_H_ */

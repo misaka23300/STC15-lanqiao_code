@@ -1,3 +1,6 @@
+#ifndef _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_CLOCK_H_
+#define _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_CLOCK_H_
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
@@ -8,7 +11,7 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* Èç¹ûÒªÔÚ³ÌÐòÖÐÊ¹ÓÃ´Ë´úÂë,ÇëÔÚ³ÌÐòÖÐ×¢Ã÷Ê¹ÓÃÁËSTCµÄ×ÊÁÏ¼°³ÌÐò            */
+/* ÒªÚ³Ê¹Ã´Ë´,Ú³×¢Ê¹STCÏ¼            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_CLOCK_H
@@ -17,21 +20,21 @@
 #include	"config.h"
 
 //========================================================================
-//                              Ê±ÖÓÉèÖÃ
+//                              Ê±
 //========================================================================
 
-#define		MainClockSel(n)	CLKSEL = (CLKSEL & ~0x0f) | (n)				/* ÏµÍ³Ê±ÖÓÑ¡Ôñ */
-#define		PLLClockSel(n)	CLKSEL = (CLKSEL & ~0x80) | (n<<7)		/* PLLÊ±ÖÓÑ¡Ôñ */
-#define		HSIOClockSel(n)	CLKSEL = (CLKSEL & ~0x40) | (n<<6)		/* ¸ßËÙIOÊ±ÖÓÑ¡Ôñ */
-#define		PLLClockIn(n)		USBCLK = (USBCLK & ~0x60) | (n<<4)		/* ÏµÍ³Ê±ÖÓ n ·ÖÆµ×÷ÎªPLLÊ±ÖÓÔ´,È·±£·ÖÆµºóÎª12M */
-#define		PLLEnable(n)		USBCLK = (USBCLK & ~0x80) | (n<<7)		/* PLL±¶ÆµÊ¹ÄÜ */
-#define		HSClockDiv(n)		HSCLKDIV = (n)		/* ¸ßËÙIOÊ±ÖÓ·ÖÆµÏµÊý */
+#define		MainClockSel(n)	CLKSEL = (CLKSEL & ~0x0f) | (n)				/* ÏµÍ³Ê±Ñ¡ */
+#define		PLLClockSel(n)	CLKSEL = (CLKSEL & ~0x80) | (n<<7)		/* PLLÊ±Ñ¡ */
+#define		HSIOClockSel(n)	CLKSEL = (CLKSEL & ~0x40) | (n<<6)		/* IOÊ±Ñ¡ */
+#define		PLLClockIn(n)		USBCLK = (USBCLK & ~0x60) | (n<<4)		/* ÏµÍ³Ê± n ÆµÎªPLLÊ±Ô´,È·ÆµÎª12M */
+#define		PLLEnable(n)		USBCLK = (USBCLK & ~0x80) | (n<<7)		/* PLLÆµÊ¹ */
+#define		HSClockDiv(n)		HSCLKDIV = (n)		/* IOÊ±Ó·ÆµÏµ */
 
 //========================================================================
-//                              ¶¨ÒåÉùÃ÷
+//                              
 //========================================================================
 
-/* ÏµÍ³Ê±ÖÓÑ¡Ôñ²ÎÊý */
+/* ÏµÍ³Ê±Ñ¡ */
 #define MCLKSEL_HIRC       0x00
 #define MCLKSEL_XIRC       0x01
 #define MCLKSEL_X32K       0x02
@@ -40,15 +43,15 @@
 #define MCLKSEL_PLL2       0x08
 #define MCLKSEL_I48M       0x0c
 
-/* PLLÊ±ÖÓÑ¡Ôñ²ÎÊý */
+/* PLLÊ±Ñ¡ */
 #define PLL_96M         0
 #define PLL_144M        1
 
-/* ¸ßËÙIOÊ±ÖÓÑ¡Ôñ²ÎÊý */
+/* IOÊ±Ñ¡ */
 #define HSCK_MCLK       0
 #define HSCK_PLL        1
 
-/* ÏµÍ³Ê±ÖÓ n ·ÖÆµ×÷ÎªPLLÊ±ÖÓÔ´²ÎÊý,È·±£·ÖÆµºóÎª12M */
+/* ÏµÍ³Ê± n ÆµÎªPLLÊ±Ô´,È·ÆµÎª12M */
 #define ENCKM           0x80
 #define PCKI_MSK        0x60
 #define PCKI_D1         0x00
@@ -57,9 +60,11 @@
 #define PCKI_D8         0x60
 
 //========================================================================
-//                              Íâ²¿ÉùÃ÷
+//                              â²¿
 //========================================================================
 
 void HSPllClkConfig(u8 clksrc, u8 pllsel, u8 div);
 
 #endif
+
+#endif /* _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_CLOCK_H_ */

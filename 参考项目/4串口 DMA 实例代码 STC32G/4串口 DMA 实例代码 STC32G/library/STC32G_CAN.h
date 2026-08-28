@@ -1,3 +1,6 @@
+#ifndef _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_CAN_H_
+#define _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_CAN_H_
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
@@ -8,7 +11,7 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* Èç¹ûÒªÔÚ³ÌÐòÖÐÊ¹ÓÃ´Ë´úÂë,ÇëÔÚ³ÌÐòÖÐ×¢Ã÷Ê¹ÓÃÁËSTCµÄ×ÊÁÏ¼°³ÌÐò            */
+/* ÒªÚ³Ê¹Ã´Ë´,Ú³×¢Ê¹STCÏ¼            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_CAN_H
@@ -17,67 +20,67 @@
 #include	"config.h"
 
 //========================================================================
-//                              ¶¨ÒåÉùÃ÷
+//                              
 //========================================================================
 
 #define	CAN1	0
 #define	CAN2	1
 
-#define	STANDARD_FRAME   0     //Ö¡¸ñÊ½£º±ê×¼Ö¡
-#define	EXTENDED_FRAME   1     //Ö¡¸ñÊ½£ºÀ©Õ¹Ö¡
+#define	STANDARD_FRAME   0     //Ö¡Ê½×¼Ö¡
+#define	EXTENDED_FRAME   1     //Ö¡Ê½Õ¹Ö¡
 
 //========================================================================
-//                              ³£Á¿ÉùÃ÷
+//                              
 //========================================================================
 
-#define CAN_DOIM     0x01  //½ÓÊÕÒç³öÖÐ¶Ï
-#define CAN_BEIM     0x02  //×ÜÏß´íÎ»ÖÐ¶Ï
-#define CAN_TIM      0x04  //·¢ËÍÖÐ¶Ï
-#define CAN_RIM      0x08  //½ÓÊÕÖÐ¶Ï
-#define CAN_EPIM     0x10  //±»¶¯´íÎ»ÖÐ¶Ï
-#define CAN_EWIM     0x20  //´íÎ»¾¯¸æÖÐ¶Ï
-#define CAN_ALIM     0x40  //ÖÙ²Ã¶ªÊ§ÖÐ¶Ï
-#define CAN_ALLIM    0x7F  //ËùÓÐÖÐ¶Ï
+#define CAN_DOIM     0x01  //Ð¶
+#define CAN_BEIM     0x02  //ß´Î»Ð¶
+#define CAN_TIM      0x04  //Ð¶
+#define CAN_RIM      0x08  //Ð¶
+#define CAN_EPIM     0x10  //Î»Ð¶
+#define CAN_EWIM     0x20  //Î»Ð¶
+#define CAN_ALIM     0x40  //Ù²Ã¶Ê§Ð¶
+#define CAN_ALLIM    0x7F  //Ð¶
 
 //========================================================================
-//                              ±äÁ¿ÉùÃ÷
+//                              
 //========================================================================
 
 typedef struct
 {
-	u8	CAN_Enable;					//CAN¹¦ÄÜÊ¹ÄÜ  	ENABLE,DISABLE
-	u8	CAN_IMR;						//CANÖÐ¶Ï¼Ä´æÆ÷ 	CAN_DOIM,CAN_BEIM,CAN_TIM,CAN_RIM,CAN_EPIM,CAN_EWIM,CAN_ALIM,CAN_ALLIM,DISABLE
-	u8	CAN_SJW;						//ÖØÐÂÍ¬²½ÌøÔ¾¿í¶È  0~3
-	u8	CAN_BRP;						//²¨ÌØÂÊ·ÖÆµÏµÊý    0~63
-	u8	CAN_SAM;						//×ÜÏßµçÆ½²ÉÑù´ÎÊý  0:²ÉÑù1´Î; 1:²ÉÑù3´Î
-	u8	CAN_TSG1;						//Í¬²½²ÉÑù¶Î1       0~15
-	u8	CAN_TSG2;						//Í¬²½²ÉÑù¶Î2       1~7 (TSG2 ²»ÄÜÉèÖÃÎª0)
+	u8	CAN_Enable;					//CANÊ¹  	ENABLE,DISABLE
+	u8	CAN_IMR;						//CANÐ¶Ï¼Ä´ 	CAN_DOIM,CAN_BEIM,CAN_TIM,CAN_RIM,CAN_EPIM,CAN_EWIM,CAN_ALIM,CAN_ALLIM,DISABLE
+	u8	CAN_SJW;						//Í¬Ô¾  0~3
+	u8	CAN_BRP;						//Ê·ÆµÏµ    0~63
+	u8	CAN_SAM;						//ßµÆ½  0:1; 1:3
+	u8	CAN_TSG1;						//Í¬1       0~15
+	u8	CAN_TSG2;						//Í¬2       1~7 (TSG2 Îª0)
 
-	u8	CAN_ACR0;						//×ÜÏßÑéÊÕ´úÂë¼Ä´æÆ÷ 0~0xFF
-	u8	CAN_ACR1;						//×ÜÏßÑéÊÕ´úÂë¼Ä´æÆ÷ 0~0xFF
-	u8	CAN_ACR2;						//×ÜÏßÑéÊÕ´úÂë¼Ä´æÆ÷ 0~0xFF
-	u8	CAN_ACR3;						//×ÜÏßÑéÊÕ´úÂë¼Ä´æÆ÷ 0~0xFF
-	u8	CAN_AMR0;						//×ÜÏßÑéÊÕÆÁ±Î¼Ä´æÆ÷ 0~0xFF
-	u8	CAN_AMR1;						//×ÜÏßÑéÊÕÆÁ±Î¼Ä´æÆ÷ 0~0xFF
-	u8	CAN_AMR2;						//×ÜÏßÑéÊÕÆÁ±Î¼Ä´æÆ÷ 0~0xFF
-	u8	CAN_AMR3;						//×ÜÏßÑéÊÕÆÁ±Î¼Ä´æÆ÷ 0~0xFF
+	u8	CAN_ACR0;						//Õ´Ä´ 0~0xFF
+	u8	CAN_ACR1;						//Õ´Ä´ 0~0xFF
+	u8	CAN_ACR2;						//Õ´Ä´ 0~0xFF
+	u8	CAN_ACR3;						//Õ´Ä´ 0~0xFF
+	u8	CAN_AMR0;						//Î¼Ä´ 0~0xFF
+	u8	CAN_AMR1;						//Î¼Ä´ 0~0xFF
+	u8	CAN_AMR2;						//Î¼Ä´ 0~0xFF
+	u8	CAN_AMR3;						//Î¼Ä´ 0~0xFF
 } CAN_InitTypeDef;
 
 typedef struct
 {
-	u8	DLC:4;          //Êý¾Ý³¤¶È, bit0~bit3
-	u8	:2;             //¿ÕÊý¾Ý, bit4~bit5
-	u8	RTR:1;          //Ö¡ÀàÐÍ, bit6
-	u8	FF:1;           //Ö¡¸ñÊ½, bit7
+	u8	DLC:4;          //Ý³, bit0~bit3
+	u8	:2;             //, bit4~bit5
+	u8	RTR:1;          //Ö¡, bit6
+	u8	FF:1;           //Ö¡Ê½, bit7
 	u32	ID;             //CAN ID
-	u8	DataBuffer[8];  //Êý¾Ý»º´æ
+	u8	DataBuffer[8];  //Ý»
 }CAN_DataDef;
 
 //========================================================================
-//                              Íâ²¿ÉùÃ÷
+//                              â²¿
 //========================================================================
-extern bit B_Can1Read;     //CAN ÊÕµ½Êý¾Ý±êÖ¾
-extern bit B_Can2Read;     //CAN ÊÕµ½Êý¾Ý±êÖ¾
+extern bit B_Can1Read;     //CAN ÕµÝ±Ö¾
+extern bit B_Can2Read;     //CAN ÕµÝ±Ö¾
 
 extern CAN_DataDef CAN1_Tx;
 extern CAN_DataDef CAN1_Rx[8];
@@ -91,3 +94,5 @@ u8 CanReadMsg(CAN_DataDef *CAN);
 void CanSendMsg(CAN_DataDef *CAN);
 
 #endif
+
+#endif /* _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_CAN_H_ */

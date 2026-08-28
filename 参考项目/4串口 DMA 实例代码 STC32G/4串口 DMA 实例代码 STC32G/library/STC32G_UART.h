@@ -1,3 +1,6 @@
+#ifndef _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_UART_H_
+#define _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_UART_H_
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
@@ -8,7 +11,7 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* Èç¹ûÒªÔÚ³ÌĞòÖĞÊ¹ÓÃ´Ë´úÂë,ÇëÔÚ³ÌĞòÖĞ×¢Ã÷Ê¹ÓÃÁËSTCµÄ×ÊÁÏ¼°³ÌĞò            */
+/* ÒªÚ³Ê¹Ã´Ë´,Ú³×¢Ê¹STCÏ¼            */
 /*---------------------------------------------------------------------*/
 
 #ifndef __STC32G_UART_H
@@ -17,145 +20,147 @@
 #include	"config.h"
 
 //========================================================================
-//                              ¶¨ÒåÉùÃ÷
+//                              
 //========================================================================
 
-#define	UART1	1       //Ê¹ÓÃÄÄĞ©´®¿Ú¾Í¿ª¶ÔÓ¦µÄ¶¨Òå£¬²»ÓÃµÄ´®¿Ú¿ÉÆÁ±Îµô¶¨Òå£¬½ÚÊ¡×ÊÔ´
+#define	UART1	1       //Ê¹Ğ©Ú¾Í¿Ó¦Ä¶å£¬ÃµÄ´Ú¿Îµå£¬Ê¡Ô´
 #define	UART2	2
 #define	UART3	3
 #define	UART4	4
 
-#define	UART_BUF_type	edata       //ÉèÖÃ´®¿ÚÊÕ·¢Êı¾İ»º´æ¿Õ¼ä£¬¿ÉÑ¡ edata »òÕß xdata
+#define	UART_BUF_type	edata       //Ã´Õ·İ»Õ¼ä£¬Ñ¡ edata  xdata
 
-#define	UART_QUEUE_MODE	0           //ÉèÖÃ´®¿Ú·¢ËÍÄ£Ê½£¬0£º×èÈûÄ£Ê½£¬1£º¶ÓÁĞÄ£Ê½
+#define	UART_QUEUE_MODE	0           //Ã´Ú·Ä£Ê½0Ä£Ê½1Ä£Ê½
 
-#define	PRINTF_SELECT  UART2		//Ñ¡Ôñ printf º¯ÊıËùÊ¹ÓÃµÄ´®¿Ú£¬²ÎÊı UART1~UART4
+#define	PRINTF_SELECT  UART2		//Ñ¡ printf Ê¹ÃµÄ´Ú£ UART1~UART4
 
 #ifdef UART1
-#define	COM_TX1_Lenth	128         //ÉèÖÃ´®¿Ú1·¢ËÍÊı¾İ»º³åÇø´óĞ¡
-#define	COM_RX1_Lenth	128         //ÉèÖÃ´®¿Ú1½ÓÊÕÊı¾İ»º³åÇø´óĞ¡
+#define	COM_TX1_Lenth	128         //Ã´1İ»Ğ¡
+#define	COM_RX1_Lenth	128         //Ã´1İ»Ğ¡
 #endif
 #ifdef UART2
-#define	COM_TX2_Lenth	128         //ÉèÖÃ´®¿Ú2·¢ËÍÊı¾İ»º³åÇø´óĞ¡
-#define	COM_RX2_Lenth	128         //ÉèÖÃ´®¿Ú2½ÓÊÕÊı¾İ»º³åÇø´óĞ¡
+#define	COM_TX2_Lenth	128         //Ã´2İ»Ğ¡
+#define	COM_RX2_Lenth	128         //Ã´2İ»Ğ¡
 #endif
 #ifdef UART3
-#define	COM_TX3_Lenth	64          //ÉèÖÃ´®¿Ú3·¢ËÍÊı¾İ»º³åÇø´óĞ¡
-#define	COM_RX3_Lenth	64          //ÉèÖÃ´®¿Ú3½ÓÊÕÊı¾İ»º³åÇø´óĞ¡
+#define	COM_TX3_Lenth	64          //Ã´3İ»Ğ¡
+#define	COM_RX3_Lenth	64          //Ã´3İ»Ğ¡
 #endif
 #ifdef UART4
-#define	COM_TX4_Lenth	64          //ÉèÖÃ´®¿Ú4·¢ËÍÊı¾İ»º³åÇø´óĞ¡
-#define	COM_RX4_Lenth	64          //ÉèÖÃ´®¿Ú4½ÓÊÕÊı¾İ»º³åÇø´óĞ¡
+#define	COM_TX4_Lenth	64          //Ã´4İ»Ğ¡
+#define	COM_RX4_Lenth	64          //Ã´4İ»Ğ¡
 #endif
 
-#define	UART_ShiftRight	0		//Í¬²½ÒÆÎ»Êä³ö
-#define	UART_8bit_BRTx	(1<<6)	//8Î»Êı¾İ,¿É±ä²¨ÌØÂÊ
-#define	UART_9bit		(2<<6)	//9Î»Êı¾İ,¹Ì¶¨²¨ÌØÂÊ
-#define	UART_9bit_BRTx	(3<<6)	//9Î»Êı¾İ,¿É±ä²¨ÌØÂÊ
+#define	UART_ShiftRight	0		//Í¬Î»
+#define	UART_8bit_BRTx	(1<<6)	//8Î»,É±ä²¨
+#define	UART_9bit		(2<<6)	//9Î»,Ì¶
+#define	UART_9bit_BRTx	(3<<6)	//9Î»,É±ä²¨
 
 
-#define	TimeOutSet1		5       //½ÓÊÕÊı¾İ³¬Ê±Ê±¼äÉèÖÃ
+#define	TimeOutSet1		5       //İ³Ê±Ê±
 #define	TimeOutSet2		5
 #define	TimeOutSet3		5
 #define	TimeOutSet4		5
 
-#define	BRT_Timer1	1           //²¨ÌØÂÊ·¢ÉúÆ÷Ñ¡Ôñ
+#define	BRT_Timer1	1           //Ê·Ñ¡
 #define	BRT_Timer2	2
 #define	BRT_Timer3	3
 #define	BRT_Timer4	4
 
 //========================================================================
-//                              UARTÉèÖÃ
+//                              UART
 //========================================================================
 
-#define		UART1_RxEnable(n)		(n==0?(REN = 0):(REN = 1))			/* UART1½ÓÊÕÊ¹ÄÜ */
-#define		UART2_RxEnable(n)		(n==0?(S2REN = 0):(S2REN = 1))		/* UART2½ÓÊÕÊ¹ÄÜ */
-#define		UART3_RxEnable(n)		(n==0?(S3REN = 0):(S3REN = 1))		/* UART3½ÓÊÕÊ¹ÄÜ */
-#define		UART4_RxEnable(n)		(n==0?(S4REN = 0):(S4REN = 1))		/* UART4½ÓÊÕÊ¹ÄÜ */
+#define		UART1_RxEnable(n)		(n==0?(REN = 0):(REN = 1))			/* UART1Ê¹ */
+#define		UART2_RxEnable(n)		(n==0?(S2REN = 0):(S2REN = 1))		/* UART2Ê¹ */
+#define		UART3_RxEnable(n)		(n==0?(S3REN = 0):(S3REN = 1))		/* UART3Ê¹ */
+#define		UART4_RxEnable(n)		(n==0?(S4REN = 0):(S4REN = 1))		/* UART4Ê¹ */
 
 
-#define		CLR_TI2()			S2TI = 0			/* Çå³ıTI2								 */
-#define		CLR_RI2()			S2RI = 0			/* Çå³ıRI2								 */
-#define		CLR_TI3()			S3TI = 0			/* Çå³ıTI3								 */
-#define		CLR_RI3()			S3RI = 0			/* Çå³ıRI3								 */
-#define		CLR_TI4()			S4TI = 0			/* Çå³ıTI3							     */
-#define		CLR_RI4()			S4RI = 0			/* Çå³ıRI3							     */
+#define		CLR_TI2()			S2TI = 0			/* TI2								 */
+#define		CLR_RI2()			S2RI = 0			/* RI2								 */
+#define		CLR_TI3()			S3TI = 0			/* TI3								 */
+#define		CLR_RI3()			S3RI = 0			/* RI3								 */
+#define		CLR_TI4()			S4TI = 0			/* TI3							     */
+#define		CLR_RI4()			S4RI = 0			/* RI3							     */
 
-#define		S3_8bit()			S3SM0 = 0	/* ´®¿Ú3Ä£Ê½0£¬8Î»UART£¬²¨ÌØÂÊ = ¶¨Ê±Æ÷µÄÒç³öÂÊ / 4  */
-#define		S3_9bit()			S3SM0 = 1	/* ´®¿Ú3Ä£Ê½1£¬9Î»UART£¬²¨ÌØÂÊ = ¶¨Ê±Æ÷µÄÒç³öÂÊ / 4  */
+#define		S3_8bit()			S3SM0 = 0	/* 3Ä£Ê½08Î»UART = Ê± / 4  */
+#define		S3_9bit()			S3SM0 = 1	/* 3Ä£Ê½19Î»UART = Ê± / 4  */
 #define 	S3_BRT_UseTimer3()	S3ST3 = 1	/* BRT select Timer3							 */
 #define 	S3_BRT_UseTimer2()	S3ST3 = 0	/* BRT select Timer2							 */
 
-#define		S4_8bit()			S4SM0 = 0	/* ´®¿Ú4Ä£Ê½0£¬8Î»UART£¬²¨ÌØÂÊ = ¶¨Ê±Æ÷µÄÒç³öÂÊ / 4  */
-#define		S4_9bit()			S4SM0 = 1	/* ´®¿Ú4Ä£Ê½1£¬9Î»UART£¬²¨ÌØÂÊ = ¶¨Ê±Æ÷µÄÒç³öÂÊ / 4  */
+#define		S4_8bit()			S4SM0 = 0	/* 4Ä£Ê½08Î»UART = Ê± / 4  */
+#define		S4_9bit()			S4SM0 = 1	/* 4Ä£Ê½19Î»UART = Ê± / 4  */
 #define 	S4_BRT_UseTimer4()	S4ST4 = 1	/* BRT select Timer4							 */
 #define 	S4_BRT_UseTimer2()	S4ST4 = 0	/* BRT select Timer2							 */
 
 //========================================================================
-//                              ±äÁ¿ÉùÃ÷
+//                              
 //========================================================================
 
 typedef struct
 { 
-	u8	TX_send;		//ÒÑ·¢ËÍÖ¸Õë
-	u8	TX_write;		//·¢ËÍĞ´Ö¸Õë
-	u8	B_TX_busy;		//Ã¦±êÖ¾
+	u8	TX_send;		//Ñ·Ö¸
+	u8	TX_write;		//Ğ´Ö¸
+	u8	B_TX_busy;		//Ã¦Ö¾
 
-	u8 	RX_Cnt;			//½ÓÊÕ×Ö½Ú¼ÆÊı
-	u8	RX_TimeOut;		//½ÓÊÕ³¬Ê±
+	u8 	RX_Cnt;			//Ö½Ú¼
+	u8	RX_TimeOut;		//Õ³Ê±
 } COMx_Define; 
 
 typedef struct
 { 
 	u8	UART_Mode;			//Ä£Ê½,         UART_ShiftRight,UART_8bit_BRTx,UART_9bit,UART_9bit_BRTx
-	u8	UART_BRT_Use;		//Ê¹ÓÃ²¨ÌØÂÊ,   BRT_Timer1,BRT_Timer2,BRT_Timer3,BRT_Timer4
-	u32	UART_BaudRate;		//²¨ÌØÂÊ, 	   Ò»°ã 110 ~ 115200
-	u8	Morecommunicate;	//¶à»úÍ¨Ñ¶ÔÊĞí, ENABLE,DISABLE
-	u8	UART_RxEnable;		//ÔÊĞí½ÓÊÕ,   ENABLE,DISABLE
-	u8	BaudRateDouble;		//²¨ÌØÂÊ¼Ó±¶, ENABLE,DISABLE
+	u8	UART_BRT_Use;		//Ê¹Ã²,   BRT_Timer1,BRT_Timer2,BRT_Timer3,BRT_Timer4
+	u32	UART_BaudRate;		//, 	   Ò» 110 ~ 115200
+	u8	Morecommunicate;	//Í¨Ñ¶, ENABLE,DISABLE
+	u8	UART_RxEnable;		//,   ENABLE,DISABLE
+	u8	BaudRateDouble;		//Ê¼Ó±, ENABLE,DISABLE
 } COMx_InitDefine; 
 
 #ifdef UART1
 extern	COMx_Define	COM1;
-extern	u8	UART_BUF_type TX1_Buffer[COM_TX1_Lenth];	//·¢ËÍ»º³å
-extern	u8 	UART_BUF_type RX1_Buffer[COM_RX1_Lenth];	//½ÓÊÕ»º³å
+extern	u8	UART_BUF_type TX1_Buffer[COM_TX1_Lenth];	//Í»
+extern	u8 	UART_BUF_type RX1_Buffer[COM_RX1_Lenth];	//Õ»
 #endif
 #ifdef UART2
 extern	COMx_Define	COM2;
-extern	u8	UART_BUF_type TX2_Buffer[COM_TX2_Lenth];	//·¢ËÍ»º³å
-extern	u8 	UART_BUF_type RX2_Buffer[COM_RX2_Lenth];	//½ÓÊÕ»º³å
+extern	u8	UART_BUF_type TX2_Buffer[COM_TX2_Lenth];	//Í»
+extern	u8 	UART_BUF_type RX2_Buffer[COM_RX2_Lenth];	//Õ»
 #endif
 #ifdef UART3
 extern	COMx_Define	COM3;
-extern	u8	UART_BUF_type TX3_Buffer[COM_TX3_Lenth];	//·¢ËÍ»º³å
-extern	u8 	UART_BUF_type RX3_Buffer[COM_RX3_Lenth];	//½ÓÊÕ»º³å
+extern	u8	UART_BUF_type TX3_Buffer[COM_TX3_Lenth];	//Í»
+extern	u8 	UART_BUF_type RX3_Buffer[COM_RX3_Lenth];	//Õ»
 #endif
 #ifdef UART4
 extern	COMx_Define	COM4;
-extern	u8	UART_BUF_type TX4_Buffer[COM_TX4_Lenth];	//·¢ËÍ»º³å
-extern	u8 	UART_BUF_type RX4_Buffer[COM_RX4_Lenth];	//½ÓÊÕ»º³å
+extern	u8	UART_BUF_type TX4_Buffer[COM_TX4_Lenth];	//Í»
+extern	u8 	UART_BUF_type RX4_Buffer[COM_RX4_Lenth];	//Õ»
 #endif
 
 u8	UART_Configuration(u8 UARTx, COMx_InitDefine *COMx);
 #ifdef UART1
-void TX1_write2buff(u8 dat);	//´®¿Ú1·¢ËÍº¯Êı
+void TX1_write2buff(u8 dat);	//1Íº
 void PrintString1(u8 *puts);
 #endif
 #ifdef UART2
-void TX2_write2buff(u8 dat);	//´®¿Ú2·¢ËÍº¯Êı
+void TX2_write2buff(u8 dat);	//2Íº
 void PrintString2(u8 *puts);
 #endif
 #ifdef UART3
-void TX3_write2buff(u8 dat);	//´®¿Ú3·¢ËÍº¯Êı
+void TX3_write2buff(u8 dat);	//3Íº
 void PrintString3(u8 *puts);
 #endif
 #ifdef UART4
-void TX4_write2buff(u8 dat);	//´®¿Ú4·¢ËÍº¯Êı
+void TX4_write2buff(u8 dat);	//4Íº
 void PrintString4(u8 *puts);
 #endif
 
-//void COMx_write2buff(u8 UARTx, u8 dat);	//´®¿Ú·¢ËÍº¯Êı
+//void COMx_write2buff(u8 UARTx, u8 dat);	//Ú·Íº
 //void PrintString(u8 UARTx, u8 *puts);
 
 #endif
 
+
+#endif /* _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_UART_H_ */

@@ -1,3 +1,6 @@
+#ifndef _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_SOFT_UART_H_
+#define _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_SOFT_UART_H_
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
@@ -20,3 +23,5 @@ void	TxSend(u8 dat);
 void 	PrintString(unsigned char code *puts);
 
 #endif
+
+#endif /* _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_SOFT_UART_H_ */

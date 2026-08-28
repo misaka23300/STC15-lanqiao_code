@@ -1,3 +1,6 @@
+#ifndef _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_WDT_H_
+#define _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_WDT_H_
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
@@ -8,7 +11,7 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+/* 要诔使么舜,诔注使STC霞            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_WDT_H
@@ -33,17 +36,19 @@
 #define WDT_SCALE_128		6
 #define WDT_SCALE_256		7
 
-#define	WDT_PS_Set(n)	WDT_CONTR = (WDT_CONTR & ~0x07) | (n & 0x07)		/* 看门狗定时器时钟分频系数设置 */
-#define	WDT_reset(n)	WDT_CONTR = D_EN_WDT + D_CLR_WDT + D_IDLE_WDT + (n)		/* 初始化WDT，喂狗 */
+#define	WDT_PS_Set(n)	WDT_CONTR = (WDT_CONTR & ~0x07) | (n & 0x07)		/* 殴时时臃频系 */
+#define	WDT_reset(n)	WDT_CONTR = D_EN_WDT + D_CLR_WDT + D_IDLE_WDT + (n)		/* 始WDT喂 */
 
 typedef struct
 {
-	u8	WDT_Enable;				//看门狗使能  	ENABLE,DISABLE
-	u8	WDT_IDLE_Mode;		//IDLE模式停止计数		WDT_IDLE_STOP,WDT_IDLE_RUN
-	u8	WDT_PS;						//看门狗定时器时钟分频系数		WDT_SCALE_2,WDT_SCALE_4,WDT_SCALE_8,WDT_SCALE_16,WDT_SCALE_32,WDT_SCALE_64,WDT_SCALE_128,WDT_SCALE_256
+	u8	WDT_Enable;				//殴使  	ENABLE,DISABLE
+	u8	WDT_IDLE_Mode;		//IDLE模式停止		WDT_IDLE_STOP,WDT_IDLE_RUN
+	u8	WDT_PS;						//殴时时臃频系		WDT_SCALE_2,WDT_SCALE_4,WDT_SCALE_8,WDT_SCALE_16,WDT_SCALE_32,WDT_SCALE_64,WDT_SCALE_128,WDT_SCALE_256
 } WDT_InitTypeDef;
 
 void WDT_Inilize(WDT_InitTypeDef *WDT);
 void WDT_Clear (void);
 
 #endif
+
+#endif /* _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_WDT_H_ */

@@ -1,3 +1,6 @@
+#ifndef STC32G_FREERTOS_FREERTOS_STC32G_CORE_V1_0_2_LIBRARY_DEMOCODE_20220817_SOURCES_DRIVER_INC_STC32G_ADC_H_
+#define STC32G_FREERTOS_FREERTOS_STC32G_CORE_V1_0_2_LIBRARY_DEMOCODE_20220817_SOURCES_DRIVER_INC_STC32G_ADC_H_
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
@@ -88,3 +91,5 @@ void	ADC_PowerControl(uint8_t pwr);
 uint16_t	Get_ADCResult(uint8_t channel);	//channel = 0~15
 
 #endif
+
+#endif /* STC32G_FREERTOS_FREERTOS_STC32G_CORE_V1_0_2_LIBRARY_DEMOCODE_20220817_SOURCES_DRIVER_INC_STC32G_ADC_H_ */

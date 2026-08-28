@@ -1,3 +1,6 @@
+#ifndef _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_DMA_H_
+#define _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_DMA_H_
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
@@ -8,7 +11,7 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* Èç¹ûÒªÔÚ³ÌÐòÖÐÊ¹ÓÃ´Ë´úÂë,ÇëÔÚ³ÌÐòÖÐ×¢Ã÷Ê¹ÓÃÁËSTCµÄ×ÊÁÏ¼°³ÌÐò            */
+/* ÒªÚ³Ê¹Ã´Ë´,Ú³×¢Ê¹STCÏ¼            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_DMA_H
@@ -17,7 +20,7 @@
 #include	"config.h"
 
 //========================================================================
-//                              ¶¨ÒåÉùÃ÷
+//                              
 //========================================================================
 
 #define DMA_ADC_TRIG()					DMA_ADC_CR |= 0x40
@@ -36,10 +39,10 @@
 #define DMA_UR3R_TRIG()					DMA_UR3R_CR |= 0x20
 #define DMA_UR4R_TRIG()					DMA_UR4R_CR |= 0x20
 
-#define DMA_SPI_TRIG_M()				DMA_SPI_CR |= 0x40		//SPI´¥·¢Ö÷»úÄ£Ê½
-#define DMA_SPI_TRIG_S()				DMA_SPI_CR |= 0x20		//SPI´¥·¢´Ó»úÄ£Ê½
+#define DMA_SPI_TRIG_M()				DMA_SPI_CR |= 0x40		//SPIÄ£Ê½
+#define DMA_SPI_TRIG_S()				DMA_SPI_CR |= 0x20		//SPIÓ»Ä£Ê½
 
-#define DMA_UR1R_CLRFIFO()			DMA_UR1R_CR |= 0x01	//Çå¿Õ DMA FIFO
+#define DMA_UR1R_CLRFIFO()			DMA_UR1R_CR |= 0x01	// DMA FIFO
 #define DMA_UR2R_CLRFIFO()			DMA_UR2R_CR |= 0x01
 #define DMA_UR3R_CLRFIFO()			DMA_UR3R_CR |= 0x01
 #define DMA_UR4R_CLRFIFO()			DMA_UR4R_CR |= 0x01
@@ -74,14 +77,14 @@
 #define SET_DMA_UR4R_CR(n)			DMA_UR4R_CR = (n)
 
 #define SET_LCM_DMA_LEN(n)			{DMA_LCM_AMTH = (n>>8); DMA_LCM_AMT = (n);}
-#define DMA_LCM_TRIG_WC()				DMA_LCM_CR |= 0xC0		//´¥·¢ LCM_DMA ·¢ÃüÁî²Ù×÷
-#define DMA_LCM_TRIG_WD()				DMA_LCM_CR |= 0xA0		//´¥·¢ LCM_DMA ·¢Êý¾Ý²Ù×÷
-#define DMA_LCM_TRIG_RC()				DMA_LCM_CR |= 0x90		//´¥·¢ LCM_DMA ¶ÁÃüÁî²Ù×÷
-#define DMA_LCM_TRIG_RD()				DMA_LCM_CR |= 0x88		//´¥·¢ LCM_DMA ¶ÁÊý¾Ý²Ù×÷
+#define DMA_LCM_TRIG_WC()				DMA_LCM_CR |= 0xC0		// LCM_DMA 
+#define DMA_LCM_TRIG_WD()				DMA_LCM_CR |= 0xA0		// LCM_DMA Ý²
+#define DMA_LCM_TRIG_RC()				DMA_LCM_CR |= 0x90		// LCM_DMA 
+#define DMA_LCM_TRIG_RD()				DMA_LCM_CR |= 0x88		// LCM_DMA Ý²
 
 #define DMA_I2CT_TRIG()					DMA_I2CT_CR |= 0x40
 #define DMA_I2CR_TRIG()					DMA_I2CR_CR |= 0x40
-#define DMA_I2CR_CLRFIFO()			DMA_I2CR_CR |= 0x01	//Çå¿Õ DMA FIFO
+#define DMA_I2CR_CLRFIFO()			DMA_I2CR_CR |= 0x01	// DMA FIFO
 #define SET_I2CT_DMA_LEN(n)			{DMA_I2CT_AMTH = (n>>8); DMA_I2CT_AMT = (n);}
 #define SET_I2CR_DMA_LEN(n)			{DMA_I2CR_AMTH = (n>>8); DMA_I2CR_AMT = (n);}
 #define SET_I2C_DMA_ST(n)				{DMA_I2C_ST2 = (n>>8); DMA_I2C_ST1 = (n);}
@@ -89,7 +92,7 @@
 #define I2C_DMA_Disable()				DMA_I2C_CR &= ~0x01
 
 //========================================================================
-//                              ³£Á¿ÉùÃ÷
+//                              
 //========================================================================
 
 #define DMA_ENABLE				0x80
@@ -121,71 +124,71 @@
 
 
 //========================================================================
-//                              ±äÁ¿ÉùÃ÷
+//                              
 //========================================================================
 
 typedef struct
 {
-	u8	DMA_Enable;					//DMAÊ¹ÄÜ  	ENABLE,DISABLE
-	u16	DMA_Channel;				//ADCÍ¨µÀÊ¹ÄÜ¼Ä´æÆ÷, 1:Ê¹ÄÜ, bit15~bit0 ¶ÔÓ¦ ADC15~ADC0
-	u16	DMA_Buffer;					//ADC×ª»»Êý¾Ý´æ´¢µØÖ·
-	u8	DMA_Times;					//Ã¿¸öÍ¨µÀ×ª»»´ÎÊý, ADC_1_Times,ADC_2_Times,ADC_4_Times,ADC_8_Times,ADC_16_Times,ADC_32_Times,ADC_64_Times,ADC_128_Times,ADC_256_Times
+	u8	DMA_Enable;					//DMAÊ¹  	ENABLE,DISABLE
+	u16	DMA_Channel;				//ADCÍ¨Ê¹Ü¼Ä´, 1:Ê¹, bit15~bit0 Ó¦ ADC15~ADC0
+	u16	DMA_Buffer;					//ADC×ªÝ´æ´¢Ö·
+	u8	DMA_Times;					//Ã¿Í¨×ª, ADC_1_Times,ADC_2_Times,ADC_4_Times,ADC_8_Times,ADC_16_Times,ADC_32_Times,ADC_64_Times,ADC_128_Times,ADC_256_Times
 } DMA_ADC_InitTypeDef;
 
 typedef struct
 {
-	u8	DMA_Enable;					//DMAÊ¹ÄÜ  	ENABLE,DISABLE
-	u16	DMA_Rx_Buffer;			//½ÓÊÕÊý¾Ý´æ´¢µØÖ·
-	u16	DMA_Tx_Buffer;			//·¢ËÍÊý¾Ý´æ´¢µØÖ·
-	u16	DMA_Length;					//DMA´«Êä×Ü×Ö½ÚÊý  	(0~65535) + 1, ²»Òª³¬¹ýÐ¾Æ¬ xdata ¿Õ¼äÉÏÏÞ
-	u8	DMA_SRC_Dir;				//Êý¾ÝÔ´µØÖ·¸Ä±ä·½Ïò  	M2M_ADDR_INC,M2M_ADDR_DEC
-	u8	DMA_DEST_Dir;				//Êý¾ÝÄ¿±êµØÖ·¸Ä±ä·½Ïò 	M2M_ADDR_INC,M2M_ADDR_DEC
+	u8	DMA_Enable;					//DMAÊ¹  	ENABLE,DISABLE
+	u16	DMA_Rx_Buffer;			//Ý´æ´¢Ö·
+	u16	DMA_Tx_Buffer;			//Ý´æ´¢Ö·
+	u16	DMA_Length;					//DMAÖ½  	(0~65535) + 1, ÒªÐ¾Æ¬ xdata Õ¼
+	u8	DMA_SRC_Dir;				//Ô´Ö·Ä±ä·½  	M2M_ADDR_INC,M2M_ADDR_DEC
+	u8	DMA_DEST_Dir;				//Ä¿Ö·Ä±ä·½ 	M2M_ADDR_INC,M2M_ADDR_DEC
 } DMA_M2M_InitTypeDef;
 
 typedef struct
 {
-	u8	DMA_TX_Enable;			//DMAÊ¹ÄÜ  	ENABLE,DISABLE
-	u16	DMA_TX_Length;			//DMA´«Êä×Ü×Ö½ÚÊý  	(0~65535) + 1, ²»Òª³¬¹ýÐ¾Æ¬ xdata ¿Õ¼äÉÏÏÞ
-	u16	DMA_TX_Buffer;			//·¢ËÍÊý¾Ý´æ´¢µØÖ·
+	u8	DMA_TX_Enable;			//DMAÊ¹  	ENABLE,DISABLE
+	u16	DMA_TX_Length;			//DMAÖ½  	(0~65535) + 1, ÒªÐ¾Æ¬ xdata Õ¼
+	u16	DMA_TX_Buffer;			//Ý´æ´¢Ö·
 
-	u8	DMA_RX_Enable;			//DMAÊ¹ÄÜ  	ENABLE,DISABLE
-	u16	DMA_RX_Length;			//DMA´«Êä×Ü×Ö½ÚÊý  	(0~65535) + 1, ²»Òª³¬¹ýÐ¾Æ¬ xdata ¿Õ¼äÉÏÏÞ
-	u16	DMA_RX_Buffer;			//½ÓÊÕÊý¾Ý´æ´¢µØÖ·
+	u8	DMA_RX_Enable;			//DMAÊ¹  	ENABLE,DISABLE
+	u16	DMA_RX_Length;			//DMAÖ½  	(0~65535) + 1, ÒªÐ¾Æ¬ xdata Õ¼
+	u16	DMA_RX_Buffer;			//Ý´æ´¢Ö·
 } DMA_UART_InitTypeDef;
 
 typedef struct
 {
-	u8	DMA_Enable;					//DMAÊ¹ÄÜ  	ENABLE,DISABLE
-	u8	DMA_Tx_Enable;			//DMA·¢ËÍÊý¾ÝÊ¹ÄÜ  	ENABLE,DISABLE
-	u8	DMA_Rx_Enable;			//DMA½ÓÊÕÊý¾ÝÊ¹ÄÜ  	ENABLE,DISABLE
-	u16	DMA_Rx_Buffer;			//½ÓÊÕÊý¾Ý´æ´¢µØÖ·
-	u16	DMA_Tx_Buffer;			//·¢ËÍÊý¾Ý´æ´¢µØÖ·
-	u16	DMA_Length;					//DMA´«Êä×Ü×Ö½ÚÊý  	(0~65535) + 1, ²»Òª³¬¹ýÐ¾Æ¬ xdata ¿Õ¼äÉÏÏÞ
-	u8	DMA_AUTO_SS;				//×Ô¶¯¿ØÖÆSS½ÅÊ¹ÄÜ  	ENABLE,DISABLE
-	u8	DMA_SS_Sel;					//×Ô¶¯¿ØÖÆSS½ÅÑ¡Ôñ 	SPI_SS_P12,SPI_SS_P22,SPI_SS_P74,SPI_SS_P35
+	u8	DMA_Enable;					//DMAÊ¹  	ENABLE,DISABLE
+	u8	DMA_Tx_Enable;			//DMAÊ¹  	ENABLE,DISABLE
+	u8	DMA_Rx_Enable;			//DMAÊ¹  	ENABLE,DISABLE
+	u16	DMA_Rx_Buffer;			//Ý´æ´¢Ö·
+	u16	DMA_Tx_Buffer;			//Ý´æ´¢Ö·
+	u16	DMA_Length;					//DMAÖ½  	(0~65535) + 1, ÒªÐ¾Æ¬ xdata Õ¼
+	u8	DMA_AUTO_SS;				//Ô¶SSÊ¹  	ENABLE,DISABLE
+	u8	DMA_SS_Sel;					//Ô¶SSÑ¡ 	SPI_SS_P12,SPI_SS_P22,SPI_SS_P74,SPI_SS_P35
 } DMA_SPI_InitTypeDef;
 
 typedef struct
 {
-	u8	DMA_Enable;					//DMAÊ¹ÄÜ  	ENABLE,DISABLE
-	u16	DMA_Rx_Buffer;			//½ÓÊÕÊý¾Ý´æ´¢µØÖ·
-	u16	DMA_Tx_Buffer;			//·¢ËÍÊý¾Ý´æ´¢µØÖ·
-	u16	DMA_Length;					//DMA´«Êä×Ü×Ö½ÚÊý  	(0~65535) + 1, ²»Òª³¬¹ýÐ¾Æ¬ xdata ¿Õ¼äÉÏÏÞ
+	u8	DMA_Enable;					//DMAÊ¹  	ENABLE,DISABLE
+	u16	DMA_Rx_Buffer;			//Ý´æ´¢Ö·
+	u16	DMA_Tx_Buffer;			//Ý´æ´¢Ö·
+	u16	DMA_Length;					//DMAÖ½  	(0~65535) + 1, ÒªÐ¾Æ¬ xdata Õ¼
 } DMA_LCM_InitTypeDef;
 
 typedef struct
 {
-	u8	DMA_TX_Enable;			//DMAÊ¹ÄÜ  	ENABLE,DISABLE
-	u16	DMA_TX_Length;			//DMA´«Êä×Ü×Ö½ÚÊý  	(0~65535) + 1, ²»Òª³¬¹ýÐ¾Æ¬ xdata ¿Õ¼äÉÏÏÞ
-	u16	DMA_TX_Buffer;			//·¢ËÍÊý¾Ý´æ´¢µØÖ·
+	u8	DMA_TX_Enable;			//DMAÊ¹  	ENABLE,DISABLE
+	u16	DMA_TX_Length;			//DMAÖ½  	(0~65535) + 1, ÒªÐ¾Æ¬ xdata Õ¼
+	u16	DMA_TX_Buffer;			//Ý´æ´¢Ö·
 
-	u8	DMA_RX_Enable;			//DMAÊ¹ÄÜ  	ENABLE,DISABLE
-	u16	DMA_RX_Length;			//DMA´«Êä×Ü×Ö½ÚÊý  	(0~65535) + 1, ²»Òª³¬¹ýÐ¾Æ¬ xdata ¿Õ¼äÉÏÏÞ
-	u16	DMA_RX_Buffer;			//½ÓÊÕÊý¾Ý´æ´¢µØÖ·
+	u8	DMA_RX_Enable;			//DMAÊ¹  	ENABLE,DISABLE
+	u16	DMA_RX_Length;			//DMAÖ½  	(0~65535) + 1, ÒªÐ¾Æ¬ xdata Õ¼
+	u16	DMA_RX_Buffer;			//Ý´æ´¢Ö·
 } DMA_I2C_InitTypeDef;
 
 //========================================================================
-//                              Íâ²¿ÉùÃ÷
+//                              â²¿
 //========================================================================
 extern bit DmaADCFlag;
 extern bit DmaM2MFlag;
@@ -217,3 +220,5 @@ void DMA_I2C_Inilize(DMA_I2C_InitTypeDef *DMA);
 void DMA_UART_Inilize(u8 UARTx, DMA_UART_InitTypeDef *DMA);
 
 #endif
+
+#endif /* _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_DMA_H_ */

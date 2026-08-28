@@ -1,3 +1,6 @@
+#ifndef _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_LIN_H_
+#define _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_LIN_H_
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
@@ -8,7 +11,7 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* Èç¹ûÒªÔÚ³ÌÐòÖÐÊ¹ÓÃ´Ë´úÂë,ÇëÔÚ³ÌÐòÖÐ×¢Ã÷Ê¹ÓÃÁËSTCµÄ×ÊÁÏ¼°³ÌÐò            */
+/* ÒªÚ³Ê¹Ã´Ë´,Ú³×¢Ê¹STCÏ¼            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_LIN_H
@@ -17,38 +20,38 @@
 #include	"config.h"
 
 //========================================================================
-//                              ¶¨ÒåÉùÃ÷
+//                              
 //========================================================================
 
-#define LIN_MODE        1    //0: LIN2.1(ÔöÇ¿Ð£Ñé);  1: LIN1.3
-#define FRAME_LEN       8    //Êý¾Ý³¤¶È: 8 ×Ö½Ú
+#define LIN_MODE        1    //0: LIN2.1(Ç¿Ð£);  1: LIN1.3
+#define FRAME_LEN       8    //Ý³: 8 Ö½
 
 //========================================================================
-//                              ³£Á¿ÉùÃ÷
+//                              
 //========================================================================
 
-#define LIN_LIDE     0x01  //HeadÖÐ¶Ï
-#define LIN_RDYE     0x02  //ReadyÖÐ¶Ï
-#define LIN_ERRE     0x04  //´íÎóÖÐ¶Ï
-#define LIN_ABORTE   0x08  //ÖÕÖ¹ÖÐ¶Ï
-#define LIN_ALLIE    0x0F  //ËùÓÐÖÐ¶Ï
+#define LIN_LIDE     0x01  //HeadÐ¶
+#define LIN_RDYE     0x02  //ReadyÐ¶
+#define LIN_ERRE     0x04  //Ð¶
+#define LIN_ABORTE   0x08  //Ö¹Ð¶
+#define LIN_ALLIE    0x0F  //Ð¶
 
 //========================================================================
-//                              ±äÁ¿ÉùÃ÷
+//                              
 //========================================================================
 
 typedef struct
 {
-	u8	LIN_Enable;         //LIN¹¦ÄÜÊ¹ÄÜ  	ENABLE,DISABLE
-	u16	LIN_Baudrate;       //LIN²¨ÌØÂÊ
-	u8	LIN_IE;             //LINÖÐ¶ÏÊ¹ÄÜ  	LIN_LIDE/LIN_RDYE/LIN_ERRE/LIN_ABORTE/LIN_ALLIE,DISABLE
-	u8	LIN_HeadDelay;      //Ö¡Í·ÑÓÊ±¼ÆÊý  	0~(65535*1000)/MAIN_Fosc
-	u8	LIN_HeadPrescaler;  //Ö¡Í·ÑÓÊ±·ÖÆµ  	0~63
+	u8	LIN_Enable;         //LINÊ¹  	ENABLE,DISABLE
+	u16	LIN_Baudrate;       //LIN
+	u8	LIN_IE;             //LINÐ¶Ê¹  	LIN_LIDE/LIN_RDYE/LIN_ERRE/LIN_ABORTE/LIN_ALLIE,DISABLE
+	u8	LIN_HeadDelay;      //Ö¡Í·Ê±  	0~(65535*1000)/MAIN_Fosc
+	u8	LIN_HeadPrescaler;  //Ö¡Í·Ê±Æµ  	0~63
 } LIN_InitTypeDef;
 
 
 //========================================================================
-//                              Íâ²¿ÉùÃ÷
+//                              â²¿
 //========================================================================
 
 void LIN_Inilize(LIN_InitTypeDef *LIN);
@@ -60,3 +63,5 @@ void LinTxResponse(u8 *pdat);
 void LinSetBaudrate(u16 brt);
 
 #endif
+
+#endif /* _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_LIN_H_ */

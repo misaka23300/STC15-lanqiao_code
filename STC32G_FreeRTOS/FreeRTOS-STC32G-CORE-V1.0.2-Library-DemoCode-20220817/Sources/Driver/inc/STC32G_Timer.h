@@ -1,3 +1,6 @@
+#ifndef STC32G_FREERTOS_FREERTOS_STC32G_CORE_V1_0_2_LIBRARY_DEMOCODE_20220817_SOURCES_DRIVER_INC_STC32G_TIMER_H_
+#define STC32G_FREERTOS_FREERTOS_STC32G_CORE_V1_0_2_LIBRARY_DEMOCODE_20220817_SOURCES_DRIVER_INC_STC32G_TIMER_H_
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
@@ -122,3 +125,5 @@ typedef struct
 uint8_t	Timer_Inilize(uint8_t TIM, TIM_InitTypeDef *TIMx);
 
 #endif
+
+#endif /* STC32G_FREERTOS_FREERTOS_STC32G_CORE_V1_0_2_LIBRARY_DEMOCODE_20220817_SOURCES_DRIVER_INC_STC32G_TIMER_H_ */

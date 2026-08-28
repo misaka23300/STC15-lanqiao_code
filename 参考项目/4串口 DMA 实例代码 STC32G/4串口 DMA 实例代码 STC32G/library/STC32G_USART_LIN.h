@@ -1,3 +1,6 @@
+#ifndef _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_USART_LIN_H_
+#define _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_USART_LIN_H_
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
@@ -8,7 +11,7 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* Èç¹ûÒªÔÚ³ÌÐòÖÐÊ¹ÓÃ´Ë´úÂë,ÇëÔÚ³ÌÐòÖÐ×¢Ã÷Ê¹ÓÃÁËSTCµÄ×ÊÁÏ¼°³ÌÐò            */
+/* ÒªÚ³Ê¹Ã´Ë´,Ú³×¢Ê¹STCÏ¼            */
 /*---------------------------------------------------------------------*/
 
 #ifndef __STC32G_USART_LIN_H
@@ -17,36 +20,36 @@
 #include	"config.h"
 
 //========================================================================
-//                              ¶¨ÒåÉùÃ÷
+//                              
 //========================================================================
 
 #define	USART1	1
 #define	USART2	2
 
-#define FRAME_LEN       8    //Êý¾Ý³¤¶È: 8 ×Ö½Ú
+#define FRAME_LEN       8    //Ý³: 8 Ö½
 
 #define	LinMasterMode		0
 #define	LinSlaveMode		1
 
 //========================================================================
-//                              USARTÉèÖÃ
+//                              USART
 //========================================================================
 
 
 //========================================================================
-//                              ±äÁ¿ÉùÃ÷
+//                              
 //========================================================================
 
 typedef struct
 { 
-	u8	LIN_Enable;				//LIN×ÜÏßÊ¹ÄÜ  	ENABLE,DISABLE
-	u8	LIN_Mode;				//LIN×ÜÏßÄ£Ê½  	LinMasterMode,LinSlaveMode
-	u8	LIN_AutoSync;			//×Ô¶¯Í¬²½Ê¹ÄÜ  	ENABLE,DISABLE
-	u16	LIN_Baudrate;			//LIN²¨ÌØÂÊ
+	u8	LIN_Enable;				//LINÊ¹  	ENABLE,DISABLE
+	u8	LIN_Mode;				//LINÄ£Ê½  	LinMasterMode,LinSlaveMode
+	u8	LIN_AutoSync;			//Ô¶Í¬Ê¹  	ENABLE,DISABLE
+	u16	LIN_Baudrate;			//LIN
 } USARTx_LIN_InitDefine; 
 
 //========================================================================
-//                              Íâ²¿ÉùÃ÷
+//                              â²¿
 //========================================================================
 
 u8 UASRT_LIN_Configuration(u8 USARTx, USARTx_LIN_InitDefine *USART);
@@ -57,3 +60,5 @@ void UsartLinSendHeader(u8 USARTx, u8 lid);
 
 #endif
 
+
+#endif /* _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_USART_LIN_H_ */

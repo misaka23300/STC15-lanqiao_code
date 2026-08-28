@@ -2,3 +2,46 @@
 Listings/
 Objects/
 .vscode
+# Keil C51 build artifacts
+*.hex
+*.obj
+*.OBJ
+*.lst
+*.LST
+*.m51
+*.M51
+*.lnp
+*.LNP
+*.plg
+*.PLG
+*.bak
+*.BAK
+*.tmp
+*.TEMP
+*.OMF
+*.crf
+*.CRF
+*.d
+*.D
+*.dep
+*.axf
+*.elf
+*.o
+# Keil project user files (machine specific)
+*.uvgui*
+# Keil uVision backup / preview
+*_uvproj.bak
+*_uvopt.bak
+# Keil list / object folders if not ignored already
+lst/
+obj/
+bin/
+# Archive / zips
+*.zip
+*.rar
+*.7z
+# Build logs
+build.log
+debug.log
+# PDF (exams/questions) - optional but usually not code
+*.pdf

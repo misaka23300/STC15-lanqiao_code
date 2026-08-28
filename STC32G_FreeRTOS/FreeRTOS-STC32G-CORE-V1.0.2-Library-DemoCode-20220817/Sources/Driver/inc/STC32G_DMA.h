@@ -1,3 +1,6 @@
+#ifndef STC32G_FREERTOS_FREERTOS_STC32G_CORE_V1_0_2_LIBRARY_DEMOCODE_20220817_SOURCES_DRIVER_INC_STC32G_DMA_H_
+#define STC32G_FREERTOS_FREERTOS_STC32G_CORE_V1_0_2_LIBRARY_DEMOCODE_20220817_SOURCES_DRIVER_INC_STC32G_DMA_H_
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
@@ -216,3 +219,5 @@ void DMA_I2C_Inilize(DMA_I2C_InitTypeDef *DMA);
 void DMA_UART_Inilize(uint8_t UARTx, DMA_UART_InitTypeDef *DMA);
 
 #endif
+
+#endif /* STC32G_FREERTOS_FREERTOS_STC32G_CORE_V1_0_2_LIBRARY_DEMOCODE_20220817_SOURCES_DRIVER_INC_STC32G_DMA_H_ */

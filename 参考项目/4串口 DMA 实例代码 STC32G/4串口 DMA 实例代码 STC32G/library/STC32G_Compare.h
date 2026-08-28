@@ -1,3 +1,6 @@
+#ifndef _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_COMPARE_H_
+#define _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_COMPARE_H_
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
@@ -8,7 +11,7 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* ศ็น๛าชิฺณฬะ๒ึะสนำรดหด๚ย๋,ว๋ิฺณฬะ๒ึะืขร๗สนำรมหSTCตฤืสมฯผฐณฬะ๒            */
+/* าชฺณสนรดหด,ฺณืขสนSTCฯผ            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_COMPARE_H
@@ -17,30 +20,32 @@
 #include	"config.h"
 
 //========================================================================
-//                              ถจาๅษ๙ร๗
+//                              
 //========================================================================
 
-#define	CMP_P_P37	0x00	//สไศ๋ีýผซะิักิ๑, 0: ักิ๑ฤฺฒฟP3.7ื๖ีýสไศ๋
-#define	CMP_P_P50	0x01	//สไศ๋ีýผซะิักิ๑, 1: ักิ๑ฤฺฒฟP5.0ื๖ีýสไศ๋
-#define	CMP_P_P51	0x02	//สไศ๋ีýผซะิักิ๑, 2: ักิ๑ฤฺฒฟP5.1ื๖ีýสไศ๋
-#define	CMP_P_ADC	0x03	//สไศ๋ีýผซะิักิ๑, 3: ำษADC_CHS[3:0]ห๙ักิ๑ตฤADCสไศ๋ถหื๖ีýสไศ๋.
-#define	CMP_N_P36	0x00	//สไศ๋ธบผซะิักิ๑, 0: ักิ๑อโฒฟP3.6ื๖สไศ๋.
-#define	CMP_N_GAP	0x01	//สไศ๋ธบผซะิักิ๑, 1: ักิ๑ฤฺฒฟBandGapต็ันBGvื๖ธบสไศ๋.
+#define	CMP_P_P37	0x00	//ัก, 0: ักฺฒP3.7
+#define	CMP_P_P50	0x01	//ัก, 1: ักฺฒP5.0
+#define	CMP_P_P51	0x02	//ัก, 2: ักฺฒP5.1
+#define	CMP_P_ADC	0x03	//ัก, 3: ADC_CHS[3:0]ักADC.
+#define	CMP_N_P36	0x00	//๋ธบัก, 0: ักโฒฟP3.6.
+#define	CMP_N_GAP	0x01	//๋ธบัก, 1: ักฺฒBandGapันBGv.
 
-#define	CMPO_P34()	CMPO_S = 0	//ฝแน๛สไณ๖ตฝP3.4.
-#define	CMPO_P41()	CMPO_S = 1	//ฝแน๛สไณ๖ตฝP4.1.
+#define	CMPO_P34()	CMPO_S = 0	//P3.4.
+#define	CMPO_P41()	CMPO_S = 1	//P4.1.
 
 typedef struct
 { 
-	u8	CMP_EN;					//ฑศฝฯฦ๗ิสะํป๒ฝ๛ึน, 			ENABLE,DISABLE
-	u8	CMP_P_Select;		//ฑศฝฯฦ๗สไศ๋ีýผซักิ๑, CMP_P_P37: ักิ๑P3.7ื๖ีýสไศ๋, CMP_P_ADC: ำษADCฤฃฤโสไศ๋ถหื๖ีýสไศ๋.
-	u8	CMP_N_Select;		//ฑศฝฯฦ๗สไศ๋ธบผซักิ๑, CMP_N_GAP: ักิ๑ฤฺฒฟBandGapพญนýOPบ๓ตฤต็ันื๖ธบสไศ๋, CMP_N_P36: ักิ๑P3.6ื๖ธบสไศ๋.
-	u8	CMP_Outpt_En;		//ิสะํฑศฝฯฝแน๛สไณ๖,   ENABLE,DISABLE
-	u8	CMP_InvCMPO;		//ฑศฝฯฦ๗สไณ๖ศกทด, ENABLE,DISABLE
-	u8	CMP_100nsFilter;	//ฤฺฒฟ0.1usยหฒจ,  ENABLE,DISABLE
-	u8	CMP_OutDelayDuty;	//0~63, ฑศฝฯฝแน๛ฑไปฏัำสฑึÜฦฺสý
+	u8	CMP_EN;					//ศฝึน, 			ENABLE,DISABLE
+	u8	CMP_P_Select;		//ศฝัก, CMP_P_P37: ักP3.7, CMP_P_ADC: ADCฤฃ.
+	u8	CMP_N_Select;		//ศฝ๋ธบัก, CMP_N_GAP: ักฺฒBandGapOPฤตัน, CMP_N_P36: ักP3.6.
+	u8	CMP_Outpt_En;		//ศฝฯฝ,   ENABLE,DISABLE
+	u8	CMP_InvCMPO;		//ศฝศก, ENABLE,DISABLE
+	u8	CMP_100nsFilter;	//ฺฒ0.1usหฒ,  ENABLE,DISABLE
+	u8	CMP_OutDelayDuty;	//0~63, ศฝฯฝไปฏสฑ
 } CMP_InitDefine; 
 
 void	CMP_Inilize(CMP_InitDefine *CMPx);
 
 #endif
+
+#endif /* _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_COMPARE_H_ */

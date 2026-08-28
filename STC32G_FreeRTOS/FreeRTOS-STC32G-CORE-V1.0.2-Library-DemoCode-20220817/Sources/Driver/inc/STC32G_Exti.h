@@ -1,3 +1,6 @@
+#ifndef STC32G_FREERTOS_FREERTOS_STC32G_CORE_V1_0_2_LIBRARY_DEMOCODE_20220817_SOURCES_DRIVER_INC_STC32G_EXTI_H_
+#define STC32G_FREERTOS_FREERTOS_STC32G_CORE_V1_0_2_LIBRARY_DEMOCODE_20220817_SOURCES_DRIVER_INC_STC32G_EXTI_H_
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
@@ -45,3 +48,5 @@ extern uint8_t WakeUpSource;
 uint8_t	Ext_Inilize(uint8_t EXT, EXTI_InitTypeDef *INTx);
 
 #endif
+
+#endif /* STC32G_FREERTOS_FREERTOS_STC32G_CORE_V1_0_2_LIBRARY_DEMOCODE_20220817_SOURCES_DRIVER_INC_STC32G_EXTI_H_ */

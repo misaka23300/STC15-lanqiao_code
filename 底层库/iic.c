@@ -119,6 +119,8 @@ uint8_t ADC(uint8_t address)
     I2CSendAck(1);
 
     I2CStop();
+
+    return adc;
 }
 
 void DAC(uint8_t value)

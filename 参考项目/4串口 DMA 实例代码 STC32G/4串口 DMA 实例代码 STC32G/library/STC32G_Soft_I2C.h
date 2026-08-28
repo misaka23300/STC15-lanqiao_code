@@ -1,3 +1,6 @@
+#ifndef _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_SOFT_I2C_H_
+#define _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_SOFT_I2C_H_
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
@@ -8,7 +11,7 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+/* 要诔使么舜,诔注使STC霞            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_SOFT_I2C_H
@@ -24,3 +27,5 @@ void SI2C_ReadNbyte(u8 dev_addr, u8 mem_addr, u8 *p, u8 number);
 
 #endif
 
+
+#endif /* _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_SOFT_I2C_H_ */

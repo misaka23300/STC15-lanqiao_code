@@ -1,3 +1,6 @@
+#ifndef STC32G_FREERTOS_FREERTOS_STC32G_CORE_V1_0_2_LIBRARY_DEMOCODE_20220817_SOURCES_USER_INCLUDE_SYSTEM_INIT_H_
+#define STC32G_FREERTOS_FREERTOS_STC32G_CORE_V1_0_2_LIBRARY_DEMOCODE_20220817_SOURCES_USER_INCLUDE_SYSTEM_INIT_H_
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
@@ -17,3 +20,5 @@ void vSystemInit(void);
 
 #endif
 
+
+#endif /* STC32G_FREERTOS_FREERTOS_STC32G_CORE_V1_0_2_LIBRARY_DEMOCODE_20220817_SOURCES_USER_INCLUDE_SYSTEM_INIT_H_ */

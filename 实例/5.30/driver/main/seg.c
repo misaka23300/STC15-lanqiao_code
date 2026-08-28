@@ -34,7 +34,11 @@ stc_err_t set_seg(uint8_t i, uint8_t state)
 {
     if (i < 8) {
         seg_value[i] = state;
+        return STC_OK;
+    } else {
+        return (stc_err_t)1;
     }
+}
     else {
         return 1;
     }

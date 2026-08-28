@@ -1,3 +1,6 @@
+#ifndef _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_EEPROM_H_
+#define _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_EEPROM_H_
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
@@ -8,7 +11,7 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* Èç¹ûÒªÔÚ³ÌÐòÖÐÊ¹ÓÃ´Ë´úÂë,ÇëÔÚ³ÌÐòÖÐ×¢Ã÷Ê¹ÓÃÁËSTCµÄ×ÊÁÏ¼°³ÌÐò            */
+/* ÒªÚ³Ê¹Ã´Ë´,Ú³×¢Ê¹STCÏ¼            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_EEPROM_H
@@ -17,18 +20,18 @@
 #include	"config.h"
 
 //========================================================================
-//                              ¶¨ÒåÉùÃ÷
+//                              
 //========================================================================
 
 
 //========================================================================
-//                               IAPÉèÖÃ
+//                               IAP
 //========================================================================
 
-#define		IAP_STANDBY()	IAP_CMD = 0		//IAP¿ÕÏÐÃüÁî£¨½ûÖ¹£©
-#define		IAP_READ()		IAP_CMD = 1		//IAP¶Á³öÃüÁî
-#define		IAP_WRITE()		IAP_CMD = 2		//IAPÐ´ÈëÃüÁî
-#define		IAP_ERASE()		IAP_CMD = 3		//IAP²Á³ýÃüÁî
+#define		IAP_STANDBY()	IAP_CMD = 0		//IAPî£¨Ö¹
+#define		IAP_READ()		IAP_CMD = 1		//IAP
+#define		IAP_WRITE()		IAP_CMD = 2		//IAPÐ´
+#define		IAP_ERASE()		IAP_CMD = 3		//IAP
 
 #define	IAP_ENABLE()		IAPEN = 1; IAP_TPS = MAIN_Fosc / 1000000
 #define	IAP_DISABLE()		IAP_CONTR = 0; IAP_CMD = 0; IAP_TRIG = 0; IAP_ADDRH = 0xff; IAP_ADDRL = 0xff
@@ -41,3 +44,5 @@ void	EEPROM_SectorErase(u32 EE_address);
 
 
 #endif
+
+#endif /* _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_EEPROM_H_ */

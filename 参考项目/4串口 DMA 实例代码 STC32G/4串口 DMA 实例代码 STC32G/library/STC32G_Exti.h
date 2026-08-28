@@ -1,3 +1,6 @@
+#ifndef _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_EXTI_H_
+#define _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_EXTI_H_
+
 /*---------------------------------------------------------------------*/
 /* --- STC MCU Limited ------------------------------------------------*/
 /* --- STC 1T Series MCU Demo Programme -------------------------------*/
@@ -8,7 +11,7 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* Èç¹ûÒªÔÚ³ÌÐòÖÐÊ¹ÓÃ´Ë´úÂë,ÇëÔÚ³ÌÐòÖÐ×¢Ã÷Ê¹ÓÃÁËSTCµÄ×ÊÁÏ¼°³ÌÐò            */
+/* ÒªÚ³Ê¹Ã´Ë´,Ú³×¢Ê¹STCÏ¼            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_EXTI_H
@@ -17,28 +20,28 @@
 #include	"config.h"
 
 //========================================================================
-//                             Íâ²¿ÖÐ¶ÏÉèÖÃ
+//                             â²¿Ð¶
 //========================================================================
 
-#define 	INT0_Mode(n)		(n==0?(IT0 = 0):(IT0 = 1))	/* INT0ÖÐ¶ÏÄ£Ê½  ÏÂ½µÑØ/ÉÏÉý,ÏÂ½µÑØÖÐ¶Ï */
-#define 	INT1_Mode(n)		(n==0?(IT1 = 0):(IT1 = 1))	/* INT0ÖÐ¶ÏÄ£Ê½  ÏÂ½µÑØ/ÉÏÉý,ÏÂ½µÑØÖÐ¶Ï */
+#define 	INT0_Mode(n)		(n==0?(IT0 = 0):(IT0 = 1))	/* INT0Ð¶Ä£Ê½  Â½/,Â½Ð¶ */
+#define 	INT1_Mode(n)		(n==0?(IT1 = 0):(IT1 = 1))	/* INT0Ð¶Ä£Ê½  Â½/,Â½Ð¶ */
 
 //========================================================================
-//                              ¶¨ÒåÉùÃ÷
+//                              
 //========================================================================
 
-#define	EXT_INT0			0	//ÍâÖÐ¶Ï0
-#define	EXT_INT1			1	//ÍâÖÐ¶Ï1
-#define	EXT_INT2			2	//ÍâÖÐ¶Ï2
-#define	EXT_INT3			3	//ÍâÖÐ¶Ï3
-#define	EXT_INT4			4	//ÍâÖÐ¶Ï4
+#define	EXT_INT0			0	//Ð¶0
+#define	EXT_INT1			1	//Ð¶1
+#define	EXT_INT2			2	//Ð¶2
+#define	EXT_INT3			3	//Ð¶3
+#define	EXT_INT4			4	//Ð¶4
 
-#define	EXT_MODE_RiseFall	0	//ÉÏÉýÑØ/ÏÂ½µÑØÖÐ¶Ï
-#define	EXT_MODE_Fall			1	//ÏÂ½µÑØÖÐ¶Ï
+#define	EXT_MODE_RiseFall	0	///Â½Ð¶
+#define	EXT_MODE_Fall			1	//Â½Ð¶
 
 typedef struct
 {
-	u8	EXTI_Mode;			//ÖÐ¶ÏÄ£Ê½,  	EXT_MODE_RiseFall, EXT_MODE_Fall
+	u8	EXTI_Mode;			//Ð¶Ä£Ê½,  	EXT_MODE_RiseFall, EXT_MODE_Fall
 } EXTI_InitTypeDef;
 
 extern u8 WakeUpSource;
@@ -46,3 +49,5 @@ extern u8 WakeUpSource;
 u8	Ext_Inilize(u8 EXT, EXTI_InitTypeDef *INTx);
 
 #endif
+
+#endif /* _4_DMA_STC32G_4_DMA_STC32G_LIBRARY_STC32G_EXTI_H_ */

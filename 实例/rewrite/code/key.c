@@ -85,7 +85,9 @@ uint8_t key_scan()
             }
         }
         break;
-    }
+    
+    return 0;
+}
 
     return temp;
 }

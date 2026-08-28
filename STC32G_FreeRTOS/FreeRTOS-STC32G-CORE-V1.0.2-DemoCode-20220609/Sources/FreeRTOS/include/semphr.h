@@ -1,3 +1,6 @@
+#ifndef STC32G_FREERTOS_FREERTOS_STC32G_CORE_V1_0_2_DEMOCODE_20220609_SOURCES_FREERTOS_INCLUDE_SEMPHR_H_
+#define STC32G_FREERTOS_FREERTOS_STC32G_CORE_V1_0_2_DEMOCODE_20220609_SOURCES_FREERTOS_INCLUDE_SEMPHR_H_
+
 /*
  * FreeRTOS Kernel V10.4.6
  * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
@@ -1187,3 +1190,5 @@ typedef QueueHandle_t SemaphoreHandle_t;
 #define uxSemaphoreGetCountFromISR( xSemaphore )         uxQueueMessagesWaitingFromISR( ( QueueHandle_t ) ( xSemaphore ) )
 
 #endif /* SEMAPHORE_H */
+
+#endif /* STC32G_FREERTOS_FREERTOS_STC32G_CORE_V1_0_2_DEMOCODE_20220609_SOURCES_FREERTOS_INCLUDE_SEMPHR_H_ */
