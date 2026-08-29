@@ -60,9 +60,9 @@ bit init_ds18b20(void)
   	return initflag;
 }
 
-uint8_t read_temperature()
+uint8_t read_temperature(void)
 {
-	float temp;
+	uint16_t raw; /* 修复: 16 位接收 12 bit 温度, 避免 high<<8 在 8 位 char 上被截断 */
 	uint8_t high, low;
 
 	init_ds18b20();
@@ -78,7 +78,8 @@ uint8_t read_temperature()
 	low = Read_DS18B20();
 	high = Read_DS18B20();
 
-	temp = (high << 8) | low;
-	return (uint8_t) (temp / 16.0 * 10);
+	raw = ((uint16_t)high << 8) | low;
+	/* 返回 0.1°C 的整数倍, 例如 25.3°C -> 253 */
+	return (uint8_t)((raw / 16U) * 10U + ((raw & 0x0FU) * 10U) / 16U);
 }
 

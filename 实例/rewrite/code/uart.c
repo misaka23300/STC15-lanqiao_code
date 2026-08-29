@@ -24,7 +24,7 @@ void Uart1_Init(void)	//4800bps@11.0592MHz
 
 void uart_receive() interrupt 4
 {
-	uchar temp;
+	uint8_t temp; /* 修复: 将未定义的 uchar 替换为已 typedef 的 uint8_t */
 
 	if(RI)
 	{

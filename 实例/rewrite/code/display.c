@@ -14,7 +14,8 @@ uint8_t led_data[8] = {0, 0, 0, 0, 0, 0, 0 ,0};
 static uint8_t randz_now;
 static uint8_t randz_last = 0xFF;
  
-void set_seg_value(uint8_t d0, d1, d2, d3, d4, d5, d6, d7)
+void set_seg_value(uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
+                   uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7)
 {
     seg_data[0] = d0;
     seg_data[1] = d1;
@@ -40,7 +41,8 @@ void set_seg_list(uint8_t *list)
 }
 
 
-void set_led_value(uint8_t d0, d1, d2, d3, d4, d5, d6, d7)
+void set_led_value(uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
+                   uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7)
 {
     led_data[0] = d0;
     led_data[1] = d1;

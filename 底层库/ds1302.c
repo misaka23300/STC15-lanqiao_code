@@ -2,7 +2,7 @@
 #include "intrins.h"
 
 sbit SDA = P2^3;
-sbit SCL = P1^7;
+sbit SCK = P1^7;   /* 修复: SCL 更名为 SCK, 与后续读写代码保持一致 */
 sbit RST = P2^7;
 
 const uint8_t write_address[7] = {0x80, 0x82, 0x84, 0x86, 0x88, 0x8A, 0x8C};

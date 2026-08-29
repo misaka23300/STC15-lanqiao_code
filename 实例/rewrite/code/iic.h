@@ -9,8 +9,8 @@ uint8_t PCF8591_ADC(uint8_t address);
 // 传入0-255,转换为电压
 void PCF8591_DAC(uint8_t value);
 
-// 传入地址和数据,进行写入
-void AT24C02_write(uint8_t address, Data);
+// 传入地址和数据,进行写入  修复: Data 显式声明为 uint8_t
+void AT24C02_write(uint8_t address, uint8_t Data);
 
 // 传入地址, 返回数据
 uint8_t AT24C02_read(uint8_t address);

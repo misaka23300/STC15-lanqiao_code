@@ -14,11 +14,13 @@ uint8_t key_scan()
     static press_task state = wait_press;
 
     static uint8_t value, i;
-    uint8_t press = 0xFF, temp = 99;
+    uint8_t press, temp = 0xFF; /* 修复: temp 默认值改为 0xFF, 表示无按键 */
 
+    /* 行扫描: P3 低 4 位拉低, 读取列 */
     P3 = 0x0F;
     P42 = 0; P44 = 0;
     P36 = P42; P37 = P44;
+    press = P3 & 0x0F; /* 修复: 真正读取 P3 输入, 而非使用未初始化常量 */
 
     switch (state)
     {
@@ -33,12 +35,19 @@ uint8_t key_scan()
 
         case eliminate:
         {
+            /* 修复: 消抖后重新读取 P3, 避免使用过期的 press */
+            P3 = 0x0F;
+            P42 = 0; P44 = 0;
+            P36 = P42; P37 = P44;
+            press = P3 & 0x0F;
+
             if (press == 0x0F)
             {
                 state = wait_press;
             }
             else
             {
+                /* 列扫描: 高 4 位拉低, 读取行 */
                 P3 = press | 0xF0;
                 P42 = 1; P44 = 1;
                 P36 = P42; P37 = P44;
@@ -56,6 +65,12 @@ uint8_t key_scan()
 
         case short_press:
         {
+            /* 修复: 长按期间也需要刷新 P3 输入状态 */
+            P3 = 0x0F;
+            P42 = 0; P44 = 0;
+            P36 = P42; P37 = P44;
+            press = P3 & 0x0F;
+
             if (press != 0x0F)
             {
                 i++;
@@ -77,6 +92,11 @@ uint8_t key_scan()
 
         case long_press:
         {
+            P3 = 0x0F;
+            P42 = 0; P44 = 0;
+            P36 = P42; P37 = P44;
+            press = P3 & 0x0F;
+
             if (press == 0x0F)
             {
                 temp = value;

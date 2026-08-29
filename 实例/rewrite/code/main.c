@@ -150,10 +150,10 @@ void display_task()
 
 void write_start_times()
 {
-    uchar times;
-    times = AT24C02_read(0x00);
-    times = times + 1;
-    AT24C02_write(0x00, times);
+	uint8_t times; /* 修复: 将未定义的 uchar 替换为已 typedef 的 uint8_t */
+	times = AT24C02_read(0x00);
+	times = times + 1;
+	AT24C02_write(0x00, times);
 }
 
 
