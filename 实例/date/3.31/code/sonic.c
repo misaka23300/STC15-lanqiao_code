@@ -31,12 +31,13 @@ uchar sonic_measure()
 
     if (TF0)
     {
-        distance = 256;
+        distance = 255;
         TF0 = 0;
     }
     else
     {
-        distance = (uchar) (TH0 << 8 | TL0) * 0.017;
+        uint time_val = ((uint)TH0 << 8) | TL0;
+        distance = (uchar)(time_val * 0.017);
     }
     TH0 = 0; TL0 = 0;
 

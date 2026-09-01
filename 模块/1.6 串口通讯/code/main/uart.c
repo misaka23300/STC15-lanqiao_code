@@ -5,7 +5,7 @@ uint8_t xdata tx_buf[100];
 
 void uart_init() {
   memset(rx_buf, 0x00, sizeof(rx_buf));
-  memset(rx_buf, 0x00, sizeof(tx_buf));
+  memset(tx_buf, 0x00, sizeof(tx_buf));
   printf("初始化完成");
 }
 

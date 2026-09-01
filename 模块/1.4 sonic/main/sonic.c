@@ -3,7 +3,7 @@
 sbit tx = P1 ^ 0;
 sbit rx = P1 ^ 1;
 
-extern void sonic_send() {
+void sonic_send() {
     uint8_t i;
     for (i = 0; i < 6; i++) {
         tx = 1;
@@ -32,7 +32,8 @@ uint8_t sonic_measure_mode1() {
     if (TF1 == 1) {
         distance = 255;
     } else {
-        distance = (uint8_t) ((TH1 << 8) | TL1) * 0.017;
+        uint16_t time_val = ((uint16_t)TH1 << 8) | TL1;
+        distance = (uint8_t)(time_val * 0.017);
     }
 
     return distance;
@@ -61,7 +62,8 @@ uint8_t sonic_measure_mode2() {
     if (TF1 == 1) {
         distance = 255;
     } else {
-        distance = (uint8_t) ((TH1 << 8) | TL1) * 0.017;
+        uint16_t time_val = ((uint16_t)TH1 << 8) | TL1;
+        distance = (uint8_t)(time_val * 0.017);
     }
 
     return distance;
@@ -81,7 +83,7 @@ uint8_t sonic_measure_mode3() {
 
     while(rx == 0);
     CR = 1;
-    while ((rx == 1) && (CH > 0x40));
+    while ((rx == 1) && (CH < 0x40));
     CR = 0;
     if (CH >= 0x40) {
         CF = 0;

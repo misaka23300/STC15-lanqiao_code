@@ -87,7 +87,7 @@ void smg_proc()
                         clock[1]/10, clock[1]%10,
                         17,
                         clock[2]/10, clock[2]%10
-                    )
+                    );
                 }
                 
             }

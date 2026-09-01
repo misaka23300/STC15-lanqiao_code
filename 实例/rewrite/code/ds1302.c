@@ -103,12 +103,12 @@ void write_datetime(uint8_t *time_init)
 void read_datetime(uint8_t *now_time)
 {
 	uint8_t i;
-	for (i = 0;i < 3;i++)
+	for (i = 0;i < 7;i++)
 	{
 		now_time[i] = Read_Ds1302_Byte(read_address[i]);
 	}
 
-	for (i = 0;i < 3;i++)
+	for (i = 0;i < 7;i++)
 	{
 		now_time[i] = bcd_to_hex(now_time[i]);
 	}

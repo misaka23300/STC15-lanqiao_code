@@ -1,7 +1,7 @@
 #include "sonic.h"
 
-sbit tx = ;
-sbit tx = ;
+sbit tx = P3^0;
+sbit rx = P3^1;
 
 void Delay14us(void)	//@12.000MHz
 {
@@ -32,7 +32,7 @@ uint8_t sonic_measure()
     while (rx == 0);
     CR = 1;
 
-    while (rx == 1 & CH > 0x40);
+    while (rx == 1 && CH < 0x40);
     CR = 0;
 
     if (CH > 0x40) {

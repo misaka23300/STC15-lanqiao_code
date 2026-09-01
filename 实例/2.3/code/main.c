@@ -204,8 +204,6 @@ void uart_task()
     uint8_t k = 1;
     //uchar position[2];
     uint8_t towards = 0;
-    uint8_t i = 4;
-    uint8_t j = 5;
     if (uart.index == 0) { return; }
 
     if (uart.out_time == 10)
@@ -237,7 +235,7 @@ void uart_task()
             case '(':
             {
                 x = 0;y = 0;
-                while (uart.receive_data[k] != ')')
+                while (k < RECEIVE_LEN && uart.receive_data[k] != ')')
                 {
                     if (uart.receive_data[k] >= '0' && uart.receive_data[k] <= '9')
                     {

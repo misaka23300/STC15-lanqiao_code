@@ -153,7 +153,7 @@ void state_proc()
                 argument[6] = argument_distance / 10 % 10;
                 argument[7] = argument_distance % 10;
             }
-            else if (argument_state = 2)
+            else if (argument_state == 2)
             {
                 argument[6] = argument_temp / 10 % 10;
                 argument[7] = argument_temp % 10;

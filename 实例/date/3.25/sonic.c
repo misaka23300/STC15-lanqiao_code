@@ -37,7 +37,8 @@ uchar sonic_measure()
     }
     else
     {
-        distance = (uchar) ((TH1 << 8) | TL1) * 0.017;
+        uint time_val = ((uint)TH1 << 8) | TL1;
+        distance = (uchar)(time_val * 0.017);
     }
     return distance;
 }

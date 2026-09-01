@@ -30,10 +30,11 @@ void uart_receive() interrupt 4
         uart.out_time = 0;
         uart.out_time_flag = 1;
         uart.receive_data_flag = 1;
+        if (uart.index >= RECEIVE_LEN) {
+            uart.index = 0;
+        }
         uart.receive_data[uart.index] = SBUF;
         uart.index++;
-
-        if (uart.index > RECEIVE_LEN) {uart.index = 0; }
         ET1 = 1;
         PT1 = 1;
     }
@@ -47,7 +48,7 @@ void get_position() // uart.receive_data -> input.x input.y
     input.x = 0;
     input.y = 0;
 
-    while (uart.receive_data[i] != ')')
+    while (i < RECEIVE_LEN && uart.receive_data[i] != ')')
     {
         if (uart.receive_data[i] >= '0' && uart.receive_data[i] <= '9')
         {

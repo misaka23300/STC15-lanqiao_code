@@ -35,7 +35,8 @@ uint8_t sonic_measure()
     }
     else
     {
-        distance = (uint8_t) ((TH0 << 8 | TL0) * 0.017);
+        uint16_t time_val = ((uint16_t)TH0 << 8) | TL0;
+        distance = (uint8_t)(time_val * 0.017);
     }
 
     return distance;

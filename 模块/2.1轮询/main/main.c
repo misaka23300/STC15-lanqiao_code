@@ -1,7 +1,7 @@
 #include "stdio.h"
 #include "main.h"
 
-#define LED_TIME 10;
+#define LED_TIME 10
 
 int led_time;
 

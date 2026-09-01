@@ -24,7 +24,7 @@ typedef struct {
 typedef struct {
     uint8_t rtc_time;
     uint8_t init_time[7]; // 秒 分 时 天 月 星期 年 
-    uint8_t now_time[3];
+    uint8_t now_time[7];
     uint16_t time;
 } RTC;
 
@@ -40,7 +40,7 @@ KEY key;
 RTC rtc = {
     0,
     {0x50, 0x59, 0x23, 0x01, 0x01, 0x01, 0x25},
-    {0, 0, 0}
+    {0, 0, 0, 0, 0, 0, 0}
 };
 STATE state;
 

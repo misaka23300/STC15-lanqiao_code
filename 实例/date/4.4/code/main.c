@@ -6,9 +6,9 @@ extern uchar seg[8];
 
 // ds1302   -> date
 struct {
-    uchar now_time[3];
+    uchar now_time[7];
     uint time;
-    uchar init_time[3];
+    uchar init_time[7];
 } date;
 
 

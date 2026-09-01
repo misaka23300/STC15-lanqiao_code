@@ -11,7 +11,7 @@ sbit RST = P2^7;
 
 uint8_t code write_address[7] = {0x80, 0x82, 0x84, 0x86, 0x88, 0x8A, 0x8C};
 uint8_t code  read_address[7] = {0x81, 0x83, 0x85, 0x87, 0x89, 0x8B, 0x8D};
-uint8_t xdata     now_time[3] = {0, 0, 0};
+uint8_t xdata     now_time[7] = {0, 0, 0, 0, 0, 0, 0};
 uint8_t code    write_time[7] = {0x09, 0x28, 0x23, 0x01, 0x04, 0x04, 0x25};
 
 
@@ -86,8 +86,7 @@ void ds1302_write()
 void ds1302_read()
 {
 	uint8_t i = 0;
-	//uint8_t idata temp[3] = {0, 0 ,0};
-	for (i = 0; i < 3;i++) {
+	for (i = 0; i < 7;i++) {
 		now_time[i] = bcd_to_hex(Read_Ds1302_Byte(read_address[i]));
 	}
 }

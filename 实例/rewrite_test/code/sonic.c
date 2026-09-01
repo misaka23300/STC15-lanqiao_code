@@ -41,7 +41,7 @@ uint8_t measureTimer1()
 
     while (rx == 0);
     TR1 = 1;
-    while (rx == 1 && TF1 != 0);
+    while (rx == 1 && TF1 == 0);
     TR1 = 0;
 
     if (TF1)
@@ -50,8 +50,8 @@ uint8_t measureTimer1()
     }
     else
     {
-        distance = (uint8_t)(TH1 << 8 | TL1)* 0.017;
-
+        uint16_t time_val = ((uint16_t)TH1 << 8) | TL1;
+        distance = (uint8_t)(time_val * 0.017);
     }
 
     return distance;
