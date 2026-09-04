@@ -8,7 +8,7 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+/* 脠莽鹿没脪陋脭脷鲁脤脨貌脰脨脢鹿脫脙麓脣麓煤脗毛,脟毛脭脷鲁脤脨貌脰脨脳垄脙梅脢鹿脫脙脕脣STC碌脛脳脢脕脧录掳鲁脤脨貌            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_TIMER_H
@@ -17,82 +17,82 @@
 #include	"config.h"
 
 //========================================================================
-//                             定时器0设置
+//                             露篓脢卤脝梅0脡猫脰脙
 //========================================================================
 
-/* 0,1: 定时器0用做定时器, 12T/1T; 2: 定时器0用做计数器	*/
+/* 0,1: 露篓脢卤脝梅0脫脙脳枚露篓脢卤脝梅, 12T/1T; 2: 露篓脢卤脝梅0脫脙脳枚录脝脢媒脝梅	*/
 #define 	Timer0_CLK_Select(n)	do{if(n == 0) T0x12 = 0, T0_CT = 0; \
 																if(n == 1) T0x12 = 1, T0_CT = 0; \
 																if(n == 2) T0_CT = 1; \
 																}while(0)
 
-#define		Timer0_CLK_Output(n)	T0CLKO = n	/* T0 溢出脉冲在T0脚输出使能 */
-#define 	Timer0_Run(n)					(n==0?(TR0 = 0):(TR0 = 1))				/* 定时器0计数使能 */
-#define 	Timer0_Stop()	 				TR0 = 0				/* 禁止定时器0计数 */
+#define		Timer0_CLK_Output(n)	T0CLKO = n	/* T0 脪莽鲁枚脗枚鲁氓脭脷T0陆脜脢盲鲁枚脢鹿脛脺 */
+#define 	Timer0_Run(n)					(n==0?(TR0 = 0):(TR0 = 1))				/* 露篓脢卤脝梅0录脝脢媒脢鹿脛脺 */
+#define 	Timer0_Stop()	 				TR0 = 0				/* 陆没脰鹿露篓脢卤脝梅0录脝脢媒 */
 #define		T0_Load(n)						TH0 = (n) / 256,	TL0 = (n) % 256
 
 //========================================================================
-//                             定时器1设置
+//                             露篓脢卤脝梅1脡猫脰脙
 //========================================================================
 
-/* 0,1: 定时器1用做定时器, 12T/1T; 2: 定时器1用做计数器	*/
+/* 0,1: 露篓脢卤脝梅1脫脙脳枚露篓脢卤脝梅, 12T/1T; 2: 露篓脢卤脝梅1脫脙脳枚录脝脢媒脝梅	*/
 #define 	Timer1_CLK_Select(n)	do{if(n == 0) T1x12 = 0, T1_CT = 0; \
 																if(n == 1) T1x12 = 1, T1_CT = 0; \
 																if(n == 2) T1_CT = 1; \
 																}while(0)
 
-#define		Timer1_CLK_Output(n)	T1CLKO = n	/* T1 溢出脉冲在T1脚输出使能 */
-#define 	Timer1_Run(n)					(n==0?(TR1 = 0):(TR1 = 1))				/* 定时器1计数使能 */
-#define 	Timer1_Stop()	 				TR1 = 0				/* 禁止定时器1计数 */
+#define		Timer1_CLK_Output(n)	T1CLKO = n	/* T1 脪莽鲁枚脗枚鲁氓脭脷T1陆脜脢盲鲁枚脢鹿脛脺 */
+#define 	Timer1_Run(n)					(n==0?(TR1 = 0):(TR1 = 1))				/* 露篓脢卤脝梅1录脝脢媒脢鹿脛脺 */
+#define 	Timer1_Stop()	 				TR1 = 0				/* 陆没脰鹿露篓脢卤脝梅1录脝脢媒 */
 #define		T1_Load(n)						TH1 = (n) / 256,	TL1 = (n) % 256
 
 //========================================================================
-//                             定时器2设置
+//                             露篓脢卤脝梅2脡猫脰脙
 //========================================================================
 
-/* 0,1: 定时器2用做定时器, 12T/1T; 2: 定时器2用做计数器	*/
+/* 0,1: 露篓脢卤脝梅2脫脙脳枚露篓脢卤脝梅, 12T/1T; 2: 露篓脢卤脝梅2脫脙脳枚录脝脢媒脝梅	*/
 #define 	Timer2_CLK_Select(n)	do{if(n == 0) T2x12 = 0, T2_CT = 0; \
 																if(n == 1) T2x12 = 1, T2_CT = 0; \
 																if(n == 2) T2_CT = 1; \
 																}while(0)
 
-#define		Timer2_CLK_Output(n)	T2CLKO = n	/* T2 溢出脉冲在T2脚输出使能 */
-#define 	Timer2_Run(n)					(n==0?(T2R = 0):(T2R = 1))		/* 定时器2计数使能 */
-#define 	Timer2_Stop()	 				T2R = 0		/* 禁止定时器2计数	*/
+#define		Timer2_CLK_Output(n)	T2CLKO = n	/* T2 脪莽鲁枚脗枚鲁氓脭脷T2陆脜脢盲鲁枚脢鹿脛脺 */
+#define 	Timer2_Run(n)					(n==0?(T2R = 0):(T2R = 1))		/* 露篓脢卤脝梅2录脝脢媒脢鹿脛脺 */
+#define 	Timer2_Stop()	 				T2R = 0		/* 陆没脰鹿露篓脢卤脝梅2录脝脢媒	*/
 #define		T2_Load(n)						T2H = (n) / 256,	T2L = (n) % 256
 
 //========================================================================
-//                             定时器3设置
+//                             露篓脢卤脝梅3脡猫脰脙
 //========================================================================
 
-/* 0,1: 定时器3用做定时器, 12T/1T; 2: 定时器3用做计数器	*/
+/* 0,1: 露篓脢卤脝梅3脫脙脳枚露篓脢卤脝梅, 12T/1T; 2: 露篓脢卤脝梅3脫脙脳枚录脝脢媒脝梅	*/
 #define 	Timer3_CLK_Select(n)	do{if(n == 0) T3x12 = 0, T3_CT = 0; \
 																if(n == 1) T3x12 = 1, T3_CT = 0; \
 																if(n == 2) T3_CT = 1; \
 																}while(0)
 
-#define		Timer3_CLK_Output(n)	T3CLKO = n				/* T3 溢出脉冲在T3脚输出使能 */
-#define 	Timer3_Run(n)					(n==0?(T3R = 0):(T3R = 1))	/* 定时器3计数使能 */
-#define 	Timer3_Stop()	 				T3R = 0	/* 禁止定时器3计数	*/
+#define		Timer3_CLK_Output(n)	T3CLKO = n				/* T3 脪莽鲁枚脗枚鲁氓脭脷T3陆脜脢盲鲁枚脢鹿脛脺 */
+#define 	Timer3_Run(n)					(n==0?(T3R = 0):(T3R = 1))	/* 露篓脢卤脝梅3录脝脢媒脢鹿脛脺 */
+#define 	Timer3_Stop()	 				T3R = 0	/* 陆没脰鹿露篓脢卤脝梅3录脝脢媒	*/
 #define		T3_Load(n)						T3H = (n) / 256,	T3L = (n) % 256
 
 //========================================================================
-//                             定时器4设置
+//                             露篓脢卤脝梅4脡猫脰脙
 //========================================================================
 
-/* 0,1: 定时器4用做定时器, 12T/1T; 2: 定时器4用做计数器	*/
+/* 0,1: 露篓脢卤脝梅4脫脙脳枚露篓脢卤脝梅, 12T/1T; 2: 露篓脢卤脝梅4脫脙脳枚录脝脢媒脝梅	*/
 #define 	Timer4_CLK_Select(n)	do{if(n == 0) T4x12 = 0, T4_CT = 0; \
 																if(n == 1) T4x12 = 1, T4_CT = 0; \
 																if(n == 2) T4_CT = 1; \
 																}while(0)
 
-#define		Timer4_CLK_Output(n)	T4CLKO = n	/* T4 溢出脉冲在T4脚输出使能 */
-#define 	Timer4_Run(n)					(n==0?(T4R = 0):(T4R = 1))	/* 定时器4计数使能 */
-#define 	Timer4_Stop()	 				T4R = 0	/* 禁止定时器4计数	*/
+#define		Timer4_CLK_Output(n)	T4CLKO = n	/* T4 脪莽鲁枚脗枚鲁氓脭脷T4陆脜脢盲鲁枚脢鹿脛脺 */
+#define 	Timer4_Run(n)					(n==0?(T4R = 0):(T4R = 1))	/* 露篓脢卤脝梅4录脝脢媒脢鹿脛脺 */
+#define 	Timer4_Stop()	 				T4R = 0	/* 陆没脰鹿露篓脢卤脝梅4录脝脢媒	*/
 #define		T4_Load(n)						T4H = (n) / 256,	T4L = (n) % 256
 
 //========================================================================
-//                              定义声明
+//                              露篓脪氓脡霉脙梅
 //========================================================================
 
 #define	Timer0						0
@@ -113,11 +113,11 @@
 
 typedef struct
 {
-	u8	TIM_Mode;		//工作模式,  	TIM_16BitAutoReload,TIM_16Bit,TIM_8BitAutoReload,TIM_16BitAutoReloadNoMask
-	u8	TIM_ClkSource;	//时钟源		TIM_CLOCK_1T,TIM_CLOCK_12T,TIM_CLOCK_Ext
-	u8	TIM_ClkOut;		//可编程时钟输出,	ENABLE,DISABLE
-	u16	TIM_Value;		//装载初值
-	u8	TIM_Run;		//是否运行		ENABLE,DISABLE
+	u8	TIM_Mode;		//鹿陇脳梅脛拢脢陆,  	TIM_16BitAutoReload,TIM_16Bit,TIM_8BitAutoReload,TIM_16BitAutoReloadNoMask
+	u8	TIM_ClkSource;	//脢卤脰脫脭麓		TIM_CLOCK_1T,TIM_CLOCK_12T,TIM_CLOCK_Ext
+	u8	TIM_ClkOut;		//驴脡卤脿鲁脤脢卤脰脫脢盲鲁枚,	ENABLE,DISABLE
+	u16	TIM_Value;		//脳掳脭脴鲁玫脰碌
+	u8	TIM_Run;		//脢脟路帽脭脣脨脨		ENABLE,DISABLE
 } TIM_InitTypeDef;
 
 u8	Timer_Inilize(u8 TIM, TIM_InitTypeDef *TIMx);

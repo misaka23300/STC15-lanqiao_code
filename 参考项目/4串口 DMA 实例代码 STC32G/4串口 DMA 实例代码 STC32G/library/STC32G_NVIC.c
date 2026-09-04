@@ -8,18 +8,18 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+/* 脠莽鹿没脪陋脭脷鲁脤脨貌脰脨脢鹿脫脙麓脣麓煤脗毛,脟毛脭脷鲁脤脨貌脰脨脳垄脙梅脢鹿脫脙脕脣STC碌脛脳脢脕脧录掳鲁脤脨貌            */
 /*---------------------------------------------------------------------*/
 
 #include "STC32G_NVIC.h"
 
 //========================================================================
-// 函数: NVIC_Timer0_Init
-// 描述: Timer0嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 潞炉脢媒: NVIC_Timer0_Init
+// 脙猫脢枚: Timer0脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2020-09-29
 //========================================================================
 u8 NVIC_Timer0_Init(u8 State, u8 Priority)
 {
@@ -29,12 +29,12 @@ u8 NVIC_Timer0_Init(u8 State, u8 Priority)
 }
 
 //========================================================================
-// 函数: NVIC_Timer1_Init
-// 描述: Timer1嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 潞炉脢媒: NVIC_Timer1_Init
+// 脙猫脢枚: Timer1脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2020-09-29
 //========================================================================
 u8 NVIC_Timer1_Init(u8 State, u8 Priority)
 {
@@ -44,12 +44,12 @@ u8 NVIC_Timer1_Init(u8 State, u8 Priority)
 }
 
 //========================================================================
-// 函数: NVIC_Timer2_Init
-// 描述: Timer2嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, NULL.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 潞炉脢媒: NVIC_Timer2_Init
+// 脙猫脢枚: Timer2脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, NULL.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2020-09-29
 //========================================================================
 u8 NVIC_Timer2_Init(u8 State, u8 Priority)
 {
@@ -59,12 +59,12 @@ u8 NVIC_Timer2_Init(u8 State, u8 Priority)
 }
 
 //========================================================================
-// 函数: NVIC_Timer3_Init
-// 描述: Timer3嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, NULL.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 潞炉脢媒: NVIC_Timer3_Init
+// 脙猫脢枚: Timer3脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, NULL.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2020-09-29
 //========================================================================
 u8 NVIC_Timer3_Init(u8 State, u8 Priority)
 {
@@ -74,12 +74,12 @@ u8 NVIC_Timer3_Init(u8 State, u8 Priority)
 }
 
 //========================================================================
-// 函数: NVIC_Timer4_Init
-// 描述: Timer4嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, NULL.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 潞炉脢媒: NVIC_Timer4_Init
+// 脙猫脢枚: Timer4脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, NULL.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2020-09-29
 //========================================================================
 u8 NVIC_Timer4_Init(u8 State, u8 Priority)
 {
@@ -89,12 +89,12 @@ u8 NVIC_Timer4_Init(u8 State, u8 Priority)
 }
 
 //========================================================================
-// 函数: NVIC_INT0_Init
-// 描述: INT0嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 潞炉脢媒: NVIC_INT0_Init
+// 脙猫脢枚: INT0脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2020-09-29
 //========================================================================
 u8 NVIC_INT0_Init(u8 State, u8 Priority)
 {
@@ -104,12 +104,12 @@ u8 NVIC_INT0_Init(u8 State, u8 Priority)
 }
 
 //========================================================================
-// 函数: NVIC_INT1_Init
-// 描述: INT1嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 潞炉脢媒: NVIC_INT1_Init
+// 脙猫脢枚: INT1脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2020-09-29
 //========================================================================
 u8 NVIC_INT1_Init(u8 State, u8 Priority)
 {
@@ -119,12 +119,12 @@ u8 NVIC_INT1_Init(u8 State, u8 Priority)
 }
 
 //========================================================================
-// 函数: NVIC_INT2_Init
-// 描述: INT2嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, NULL.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 潞炉脢媒: NVIC_INT2_Init
+// 脙猫脢枚: INT2脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, NULL.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2020-09-29
 //========================================================================
 u8 NVIC_INT2_Init(u8 State, u8 Priority)
 {
@@ -134,12 +134,12 @@ u8 NVIC_INT2_Init(u8 State, u8 Priority)
 }
 
 //========================================================================
-// 函数: NVIC_INT3_Init
-// 描述: INT3嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, NULL.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 潞炉脢媒: NVIC_INT3_Init
+// 脙猫脢枚: INT3脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, NULL.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2020-09-29
 //========================================================================
 u8 NVIC_INT3_Init(u8 State, u8 Priority)
 {
@@ -149,12 +149,12 @@ u8 NVIC_INT3_Init(u8 State, u8 Priority)
 }
 
 //========================================================================
-// 函数: NVIC_INT4_Init
-// 描述: INT4嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, NULL.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 潞炉脢媒: NVIC_INT4_Init
+// 脙猫脢枚: INT4脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, NULL.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2020-09-29
 //========================================================================
 u8 NVIC_INT4_Init(u8 State, u8 Priority)
 {
@@ -164,12 +164,12 @@ u8 NVIC_INT4_Init(u8 State, u8 Priority)
 }
 
 //========================================================================
-// 函数: NVIC_ADC_Init
-// 描述: ADC嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 潞炉脢媒: NVIC_ADC_Init
+// 脙猫脢枚: ADC脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2020-09-29
 //========================================================================
 u8 NVIC_ADC_Init(u8 State, u8 Priority)
 {
@@ -179,32 +179,32 @@ u8 NVIC_ADC_Init(u8 State, u8 Priority)
 }
 
 //========================================================================
-// 函数: NVIC_CMP_Init
-// 描述: 比较器嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, RISING_EDGE/FALLING_EDGE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 潞炉脢媒: NVIC_CMP_Init
+// 脙猫脢枚: 卤脠陆脧脝梅脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, RISING_EDGE/FALLING_EDGE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2020-09-29
 //========================================================================
 u8 NVIC_CMP_Init(u8 State, u8 Priority)
 {
-	if(State & RISING_EDGE)	PIE = 1;			//允许上升沿中断
-	else	PIE = 0;			//禁止上升沿中断
-	if(State & FALLING_EDGE)	NIE = 1;		//允许下降沿中断
-	else	NIE = 0;			//禁止上升沿中断
+	if(State & RISING_EDGE)	PIE = 1;			//脭脢脨铆脡脧脡媒脩脴脰脨露脧
+	else	PIE = 0;			//陆没脰鹿脡脧脡媒脩脴脰脨露脧
+	if(State & FALLING_EDGE)	NIE = 1;		//脭脢脨铆脧脗陆碌脩脴脰脨露脧
+	else	NIE = 0;			//陆没脰鹿脡脧脡媒脩脴脰脨露脧
 	if(Priority <= Priority_3) CMP_Priority(Priority); else  return FAIL;
 	return SUCCESS;
 }
 
 //========================================================================
-// 函数: NVIC_I2C_Init
-// 描述: I2C嵌套向量中断控制器初始化.
-// 参数: Mode:     模式, I2C_Mode_Master/I2C_Mode_Slave.
-// 参数: State:    中断使能状态, I2C_Mode_Master: ENABLE/DISABLE.
+// 潞炉脢媒: NVIC_I2C_Init
+// 脙猫脢枚: I2C脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: Mode:     脛拢脢陆, I2C_Mode_Master/I2C_Mode_Slave.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, I2C_Mode_Master: ENABLE/DISABLE.
 //                              I2C_Mode_Slave: I2C_ESTAI/I2C_ERXI/I2C_ETXI/I2C_ESTOI/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2020-09-29
 //========================================================================
 u8 NVIC_I2C_Init(u8 Mode, u8 State, u8 Priority)
 {
@@ -222,12 +222,12 @@ u8 NVIC_I2C_Init(u8 Mode, u8 State, u8 Priority)
 }
 
 //========================================================================
-// 函数: NVIC_UART1_Init
-// 描述: UART1嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 潞炉脢媒: NVIC_UART1_Init
+// 脙猫脢枚: UART1脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2020-09-29
 //========================================================================
 u8 NVIC_UART1_Init(u8 State, u8 Priority)
 {
@@ -237,12 +237,12 @@ u8 NVIC_UART1_Init(u8 State, u8 Priority)
 }
 
 //========================================================================
-// 函数: NVIC_UART2_Init
-// 描述: UART2嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 潞炉脢媒: NVIC_UART2_Init
+// 脙猫脢枚: UART2脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2020-09-29
 //========================================================================
 u8 NVIC_UART2_Init(u8 State, u8 Priority)
 {
@@ -252,12 +252,12 @@ u8 NVIC_UART2_Init(u8 State, u8 Priority)
 }
 
 //========================================================================
-// 函数: NVIC_UART3_Init
-// 描述: UART3嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 潞炉脢媒: NVIC_UART3_Init
+// 脙猫脢枚: UART3脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2020-09-29
 //========================================================================
 u8 NVIC_UART3_Init(u8 State, u8 Priority)
 {
@@ -267,12 +267,12 @@ u8 NVIC_UART3_Init(u8 State, u8 Priority)
 }
 
 //========================================================================
-// 函数: NVIC_UART4_Init
-// 描述: UART4嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 潞炉脢媒: NVIC_UART4_Init
+// 脙猫脢枚: UART4脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2020-09-29
 //========================================================================
 u8 NVIC_UART4_Init(u8 State, u8 Priority)
 {
@@ -282,12 +282,12 @@ u8 NVIC_UART4_Init(u8 State, u8 Priority)
 }
 
 //========================================================================
-// 函数: NVIC_SPI_Init
-// 描述: SPI嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 潞炉脢媒: NVIC_SPI_Init
+// 脙猫脢枚: SPI脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2020-09-29
 //========================================================================
 u8 NVIC_SPI_Init(u8 State, u8 Priority)
 {
@@ -297,12 +297,12 @@ u8 NVIC_SPI_Init(u8 State, u8 Priority)
 }
 
 //========================================================================
-// 函数: NVIC_RTC_Init
-// 描述: SPI嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, 中断使能, 0x80:闹钟中断, 0x40:日中断, 0x20:小时中断, 0x10:分钟中断, 0x08:秒中断, 0x04:1/2秒中断, 0x02:1/8秒中断, 0x01:1/32秒中断 /DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 潞炉脢媒: NVIC_RTC_Init
+// 脙猫脢枚: SPI脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, 脰脨露脧脢鹿脛脺, 0x80:脛脰脰脫脰脨露脧, 0x40:脠脮脰脨露脧, 0x20:脨隆脢卤脰脨露脧, 0x10:路脰脰脫脰脨露脧, 0x08:脙毛脰脨露脧, 0x04:1/2脙毛脰脨露脧, 0x02:1/8脙毛脰脨露脧, 0x01:1/32脙毛脰脨露脧 /DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2020-09-29
 //========================================================================
 u8 NVIC_RTC_Init(u8 State, u8 Priority)
 {
@@ -312,13 +312,13 @@ u8 NVIC_RTC_Init(u8 State, u8 Priority)
 }
 
 //========================================================================
-// 函数: NVIC_PWM_Init
-// 描述: PWM嵌套向量中断控制器初始化.
-// 参数: Channel:  通道, PWMA/PWMB.
-// 参数: State:    中断使能状态, PWM_BIE/PWM_TIE/PWM_COMIE/PWM_CC8IE~PWM_CC1IE/PWM_UIE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 潞炉脢媒: NVIC_PWM_Init
+// 脙猫脢枚: PWM脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: Channel:  脥篓碌脌, PWMA/PWMB.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, PWM_BIE/PWM_TIE/PWM_COMIE/PWM_CC8IE~PWM_CC1IE/PWM_UIE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2020-09-29
 //========================================================================
 #ifndef PWMA
 #define	PWMA	9
@@ -351,19 +351,19 @@ u8 NVIC_PWM_Init(u8 Channel, u8 State, u8 Priority)
 }
 
 //========================================================================
-// 函数: NVIC_DMA_ADC_Init
-// 描述: DMA ADC嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2021-05-21
+// 潞炉脢媒: NVIC_DMA_ADC_Init
+// 脙猫脢枚: DMA ADC脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 虏脦脢媒: Bus_Priority: 脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2021-05-21
 //========================================================================
 u8 NVIC_DMA_ADC_Init(u8 State, u8 Priority, u8 Bus_Priority)
 {
 	DMA_ADC_CFG &= ~0x0f;
 	if(Priority <= Priority_3) DMA_ADC_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_ADC_CFG |= Bus_Priority;	//数据总线访问优先级
+	if(Bus_Priority <= Priority_3) DMA_ADC_CFG |= Bus_Priority;	//脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露
 	if(State == ENABLE)
 		DMA_ADC_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
@@ -372,19 +372,19 @@ u8 NVIC_DMA_ADC_Init(u8 State, u8 Priority, u8 Bus_Priority)
 }
 
 //========================================================================
-// 函数: NVIC_DMA_M2M_Init
-// 描述: DMA M2M嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2021-05-21
+// 潞炉脢媒: NVIC_DMA_M2M_Init
+// 脙猫脢枚: DMA M2M脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 虏脦脢媒: Bus_Priority: 脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2021-05-21
 //========================================================================
 u8 NVIC_DMA_M2M_Init(u8 State, u8 Priority, u8 Bus_Priority)
 {
 	DMA_M2M_CFG &= ~0x0f;
 	if(Priority <= Priority_3) DMA_M2M_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_M2M_CFG |= Bus_Priority;	//数据总线访问优先级
+	if(Bus_Priority <= Priority_3) DMA_M2M_CFG |= Bus_Priority;	//脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露
 	if(State == ENABLE)
 		DMA_M2M_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
@@ -393,19 +393,19 @@ u8 NVIC_DMA_M2M_Init(u8 State, u8 Priority, u8 Bus_Priority)
 }
 
 //========================================================================
-// 函数: NVIC_DMA_SPI_Init
-// 描述: DMA SPI嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2021-05-27
+// 潞炉脢媒: NVIC_DMA_SPI_Init
+// 脙猫脢枚: DMA SPI脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 虏脦脢媒: Bus_Priority: 脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2021-05-27
 //========================================================================
 u8 NVIC_DMA_SPI_Init(u8 State, u8 Priority, u8 Bus_Priority)
 {
 	DMA_SPI_CFG &= ~0x0f;
 	if(Priority <= Priority_3) DMA_SPI_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_SPI_CFG |= Bus_Priority;	//数据总线访问优先级
+	if(Bus_Priority <= Priority_3) DMA_SPI_CFG |= Bus_Priority;	//脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露
 	if(State == ENABLE)
 		DMA_SPI_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
@@ -414,19 +414,19 @@ u8 NVIC_DMA_SPI_Init(u8 State, u8 Priority, u8 Bus_Priority)
 }
 
 //========================================================================
-// 函数: NVIC_DMA_UART1_Tx_Init
-// 描述: DMA UART1 Tx嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2021-05-21
+// 潞炉脢媒: NVIC_DMA_UART1_Tx_Init
+// 脙猫脢枚: DMA UART1 Tx脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 虏脦脢媒: Bus_Priority: 脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2021-05-21
 //========================================================================
 u8 NVIC_DMA_UART1_Tx_Init(u8 State, u8 Priority, u8 Bus_Priority)
 {
 	DMA_UR1T_CFG &= ~0x0f;
 	if(Priority <= Priority_3) DMA_UR1T_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_UR1T_CFG |= Bus_Priority;	//数据总线访问优先级
+	if(Bus_Priority <= Priority_3) DMA_UR1T_CFG |= Bus_Priority;	//脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露
 	if(State == ENABLE)
 		DMA_UR1T_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
@@ -435,19 +435,19 @@ u8 NVIC_DMA_UART1_Tx_Init(u8 State, u8 Priority, u8 Bus_Priority)
 }
 
 //========================================================================
-// 函数: NVIC_DMA_UART1_Rx_Init
-// 描述: DMA UART1 Rx嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2021-05-21
+// 潞炉脢媒: NVIC_DMA_UART1_Rx_Init
+// 脙猫脢枚: DMA UART1 Rx脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 虏脦脢媒: Bus_Priority: 脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2021-05-21
 //========================================================================
 u8 NVIC_DMA_UART1_Rx_Init(u8 State, u8 Priority, u8 Bus_Priority)
 {
 	DMA_UR1R_CFG &= ~0x0f;
 	if(Priority <= Priority_3) DMA_UR1R_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_UR1R_CFG |= Bus_Priority;	//数据总线访问优先级
+	if(Bus_Priority <= Priority_3) DMA_UR1R_CFG |= Bus_Priority;	//脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露
 	if(State == ENABLE)
 		DMA_UR1R_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
@@ -456,19 +456,19 @@ u8 NVIC_DMA_UART1_Rx_Init(u8 State, u8 Priority, u8 Bus_Priority)
 }
 
 //========================================================================
-// 函数: NVIC_DMA_UART2_Tx_Init
-// 描述: DMA UART2 Tx嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2021-05-21
+// 潞炉脢媒: NVIC_DMA_UART2_Tx_Init
+// 脙猫脢枚: DMA UART2 Tx脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 虏脦脢媒: Bus_Priority: 脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2021-05-21
 //========================================================================
 u8 NVIC_DMA_UART2_Tx_Init(u8 State, u8 Priority, u8 Bus_Priority)
 {
 	DMA_UR2T_CFG &= ~0x0f;
 	if(Priority <= Priority_3) DMA_UR2T_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_UR2T_CFG |= Bus_Priority;	//数据总线访问优先级
+	if(Bus_Priority <= Priority_3) DMA_UR2T_CFG |= Bus_Priority;	//脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露
 	if(State == ENABLE)
 		DMA_UR2T_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
@@ -477,19 +477,19 @@ u8 NVIC_DMA_UART2_Tx_Init(u8 State, u8 Priority, u8 Bus_Priority)
 }
 
 //========================================================================
-// 函数: NVIC_DMA_UART2_Rx_Init
-// 描述: DMA UART2 Rx嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2021-05-21
+// 潞炉脢媒: NVIC_DMA_UART2_Rx_Init
+// 脙猫脢枚: DMA UART2 Rx脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 虏脦脢媒: Bus_Priority: 脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2021-05-21
 //========================================================================
 u8 NVIC_DMA_UART2_Rx_Init(u8 State, u8 Priority, u8 Bus_Priority)
 {
 	DMA_UR2R_CFG &= ~0x0f;
 	if(Priority <= Priority_3) DMA_UR2R_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_UR2R_CFG |= Bus_Priority;	//数据总线访问优先级
+	if(Bus_Priority <= Priority_3) DMA_UR2R_CFG |= Bus_Priority;	//脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露
 	if(State == ENABLE)
 		DMA_UR2R_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
@@ -498,19 +498,19 @@ u8 NVIC_DMA_UART2_Rx_Init(u8 State, u8 Priority, u8 Bus_Priority)
 }
 
 //========================================================================
-// 函数: NVIC_DMA_UART3_Tx_Init
-// 描述: DMA UART3 Tx嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2021-05-21
+// 潞炉脢媒: NVIC_DMA_UART3_Tx_Init
+// 脙猫脢枚: DMA UART3 Tx脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 虏脦脢媒: Bus_Priority: 脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2021-05-21
 //========================================================================
 u8 NVIC_DMA_UART3_Tx_Init(u8 State, u8 Priority, u8 Bus_Priority)
 {
 	DMA_UR3T_CFG &= ~0x0f;
 	if(Priority <= Priority_3) DMA_UR3T_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_UR3T_CFG |= Bus_Priority;	//数据总线访问优先级
+	if(Bus_Priority <= Priority_3) DMA_UR3T_CFG |= Bus_Priority;	//脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露
 	if(State == ENABLE)
 		DMA_UR3T_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
@@ -519,19 +519,19 @@ u8 NVIC_DMA_UART3_Tx_Init(u8 State, u8 Priority, u8 Bus_Priority)
 }
 
 //========================================================================
-// 函数: NVIC_DMA_UART3_Rx_Init
-// 描述: DMA UART3 Rx嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2021-05-21
+// 潞炉脢媒: NVIC_DMA_UART3_Rx_Init
+// 脙猫脢枚: DMA UART3 Rx脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 虏脦脢媒: Bus_Priority: 脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2021-05-21
 //========================================================================
 u8 NVIC_DMA_UART3_Rx_Init(u8 State, u8 Priority, u8 Bus_Priority)
 {
 	DMA_UR3R_CFG &= ~0x0f;
 	if(Priority <= Priority_3) DMA_UR3R_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_UR3R_CFG |= Bus_Priority;	//数据总线访问优先级
+	if(Bus_Priority <= Priority_3) DMA_UR3R_CFG |= Bus_Priority;	//脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露
 	if(State == ENABLE)
 		DMA_UR3R_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
@@ -540,19 +540,19 @@ u8 NVIC_DMA_UART3_Rx_Init(u8 State, u8 Priority, u8 Bus_Priority)
 }
 
 //========================================================================
-// 函数: NVIC_DMA_UART4_Tx_Init
-// 描述: DMA UART4 Tx嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2021-05-21
+// 潞炉脢媒: NVIC_DMA_UART4_Tx_Init
+// 脙猫脢枚: DMA UART4 Tx脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 虏脦脢媒: Bus_Priority: 脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2021-05-21
 //========================================================================
 u8 NVIC_DMA_UART4_Tx_Init(u8 State, u8 Priority, u8 Bus_Priority)
 {
 	DMA_UR4T_CFG &= ~0x0f;
 	if(Priority <= Priority_3) DMA_UR4T_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_UR4T_CFG |= Bus_Priority;	//数据总线访问优先级
+	if(Bus_Priority <= Priority_3) DMA_UR4T_CFG |= Bus_Priority;	//脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露
 	if(State == ENABLE)
 		DMA_UR4T_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
@@ -561,19 +561,19 @@ u8 NVIC_DMA_UART4_Tx_Init(u8 State, u8 Priority, u8 Bus_Priority)
 }
 
 //========================================================================
-// 函数: NVIC_DMA_UART4_Rx_Init
-// 描述: DMA UART4 Rx嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2021-05-21
+// 潞炉脢媒: NVIC_DMA_UART4_Rx_Init
+// 脙猫脢枚: DMA UART4 Rx脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 虏脦脢媒: Bus_Priority: 脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2021-05-21
 //========================================================================
 u8 NVIC_DMA_UART4_Rx_Init(u8 State, u8 Priority, u8 Bus_Priority)
 {
 	DMA_UR4R_CFG &= ~0x0f;
 	if(Priority <= Priority_3) DMA_UR4R_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_UR4R_CFG |= Bus_Priority;	//数据总线访问优先级
+	if(Bus_Priority <= Priority_3) DMA_UR4R_CFG |= Bus_Priority;	//脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露
 	if(State == ENABLE)
 		DMA_UR4R_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
@@ -582,19 +582,19 @@ u8 NVIC_DMA_UART4_Rx_Init(u8 State, u8 Priority, u8 Bus_Priority)
 }
 
 //========================================================================
-// 函数: NVIC_DMA_LCM_Init
-// 描述: DMA LCM嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2021-05-21
+// 潞炉脢媒: NVIC_DMA_LCM_Init
+// 脙猫脢枚: DMA LCM脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 虏脦脢媒: Bus_Priority: 脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2021-05-21
 //========================================================================
 u8 NVIC_DMA_LCM_Init(u8 State, u8 Priority, u8 Bus_Priority)
 {
 	DMA_LCM_CFG &= ~0x0f;
 	if(Priority <= Priority_3) DMA_LCM_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_LCM_CFG |= Bus_Priority;	//数据总线访问优先级
+	if(Bus_Priority <= Priority_3) DMA_LCM_CFG |= Bus_Priority;	//脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露
 	if(State == ENABLE)
 		DMA_LCM_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
@@ -603,12 +603,12 @@ u8 NVIC_DMA_LCM_Init(u8 State, u8 Priority, u8 Bus_Priority)
 }
 
 //========================================================================
-// 函数: NVIC_LCM_Init
-// 描述: LCM嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2021-05-21
+// 潞炉脢媒: NVIC_LCM_Init
+// 脙猫脢枚: LCM脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2021-05-21
 //========================================================================
 u8 NVIC_LCM_Init(u8 State, u8 Priority)
 {
@@ -622,19 +622,19 @@ u8 NVIC_LCM_Init(u8 State, u8 Priority)
 }
 
 //========================================================================
-// 函数: NVIC_DMA_I2CT_Init
-// 描述: DMA I2C Tx嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2022-03-25
+// 潞炉脢媒: NVIC_DMA_I2CT_Init
+// 脙猫脢枚: DMA I2C Tx脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 虏脦脢媒: Bus_Priority: 脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2022-03-25
 //========================================================================
 u8 NVIC_DMA_I2CT_Init(u8 State, u8 Priority, u8 Bus_Priority)
 {
 	DMA_I2CT_CFG &= ~0x0f;
 	if(Priority <= Priority_3) DMA_I2CT_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_I2CT_CFG |= Bus_Priority;	//数据总线访问优先级
+	if(Bus_Priority <= Priority_3) DMA_I2CT_CFG |= Bus_Priority;	//脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露
 	if(State == ENABLE)
 		DMA_I2CT_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
@@ -643,19 +643,19 @@ u8 NVIC_DMA_I2CT_Init(u8 State, u8 Priority, u8 Bus_Priority)
 }
 
 //========================================================================
-// 函数: NVIC_DMA_I2CR_Init
-// 描述: DMA I2C Rx嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 参数: Bus_Priority: 数据总线访问优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2022-03-25
+// 潞炉脢媒: NVIC_DMA_I2CR_Init
+// 脙猫脢枚: DMA I2C Rx脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 虏脦脢媒: Bus_Priority: 脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2022-03-25
 //========================================================================
 u8 NVIC_DMA_I2CR_Init(u8 State, u8 Priority, u8 Bus_Priority)
 {
 	DMA_I2CR_CFG &= ~0x0f;
 	if(Priority <= Priority_3) DMA_I2CR_CFG |= Priority << 2;
-	if(Bus_Priority <= Priority_3) DMA_I2CR_CFG |= Bus_Priority;	//数据总线访问优先级
+	if(Bus_Priority <= Priority_3) DMA_I2CR_CFG |= Bus_Priority;	//脢媒戮脻脳脺脧脽路脙脦脢脫脜脧脠录露
 	if(State == ENABLE)
 		DMA_I2CR_CFG |= 0x80;		//bit7 1:Enable Interrupt
 	else
@@ -664,13 +664,13 @@ u8 NVIC_DMA_I2CR_Init(u8 State, u8 Priority, u8 Bus_Priority)
 }
 
 //========================================================================
-// 函数: NVIC_CAN_Init
-// 描述: CAN嵌套向量中断控制器初始化.
-// 参数: Channel:  通道, CAN1/CAN2.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2023-03-27
+// 潞炉脢媒: NVIC_CAN_Init
+// 脙猫脢枚: CAN脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: Channel:  脥篓碌脌, CAN1/CAN2.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2023-03-27
 //========================================================================
 #ifndef CAN1
 #define	CAN1	0
@@ -708,12 +708,12 @@ u8 NVIC_CAN_Init(u8 Channel, u8 State, u8 Priority)
 }
 
 //========================================================================
-// 函数: NVIC_LIN_Init
-// 描述: LIN嵌套向量中断控制器初始化.
-// 参数: State:    中断使能状态, ENABLE/DISABLE.
-// 参数: Priority: 中断优先级, Priority_0,Priority_1,Priority_2,Priority_3.
-// 返回: 执行结果 SUCCESS/FAIL.
-// 版本: V1.0, 2020-09-29
+// 潞炉脢媒: NVIC_LIN_Init
+// 脙猫脢枚: LIN脟露脤脳脧貌脕驴脰脨露脧驴脴脰脝脝梅鲁玫脢录禄炉.
+// 虏脦脢媒: State:    脰脨露脧脢鹿脛脺脳麓脤卢, ENABLE/DISABLE.
+// 虏脦脢媒: Priority: 脰脨露脧脫脜脧脠录露, Priority_0,Priority_1,Priority_2,Priority_3.
+// 路碌禄脴: 脰麓脨脨陆谩鹿没 SUCCESS/FAIL.
+// 掳忙卤戮: V1.0, 2020-09-29
 //========================================================================
 u8 NVIC_LIN_Init(u8 State, u8 Priority)
 {

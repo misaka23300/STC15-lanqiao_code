@@ -8,27 +8,27 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* Èç¹ûÒªÔÚ³ÌÐòÖÐÊ¹ÓÃ´Ë´úÂë,ÇëÔÚ³ÌÐòÖÐ×¢Ã÷Ê¹ÓÃÁËSTCµÄ×ÊÁÏ¼°³ÌÐò            */
+/* ÃˆÃ§Â¹Ã»Ã’ÂªÃ”ÃšÂ³ÃŒÃÃ²Ã–ÃÃŠÂ¹Ã“ÃƒÂ´Ã‹Â´ÃºÃ‚Ã«,Ã‡Ã«Ã”ÃšÂ³ÃŒÃÃ²Ã–ÃÃ—Â¢ÃƒÃ·ÃŠÂ¹Ã“ÃƒÃÃ‹STCÂµÃ„Ã—ÃŠÃÃÂ¼Â°Â³ÃŒÃÃ²            */
 /*---------------------------------------------------------------------*/
 
 #include	"STC32G_Compare.h"
 
 //========================================================================
-// º¯Êý:void	CMP_Inilize(CMP_InitDefine *CMPx)
-// ÃèÊö: ±È½ÏÆ÷³õÊ¼»¯³ÌÐò.
-// ²ÎÊý: CMPx: ½á¹¹²ÎÊý,Çë²Î¿¼compare.hÀïµÄ¶¨Òå.
-// ·µ»Ø: none.
-// °æ±¾: V1.0, 2012-10-22
+// ÂºÂ¯ÃŠÃ½:void	CMP_Inilize(CMP_InitDefine *CMPx)
+// ÃƒÃ¨ÃŠÃ¶: Â±ÃˆÂ½ÃÃ†Ã·Â³ÃµÃŠÂ¼Â»Â¯Â³ÃŒÃÃ².
+// Â²ÃŽÃŠÃ½: CMPx: Â½Ã¡Â¹Â¹Â²ÃŽÃŠÃ½,Ã‡Ã«Â²ÃŽÂ¿Â¼compare.hÃ€Ã¯ÂµÃ„Â¶Â¨Ã’Ã¥.
+// Â·ÂµÂ»Ã˜: none.
+// Â°Ã¦Â±Â¾: V1.0, 2012-10-22
 //========================================================================
 void	CMP_Inilize(CMP_InitDefine *CMPx)
 {
 	CMPCR1 &= 0x30;
-	CMPCR2 = CMPx->CMP_OutDelayDuty & 0x3f;							//±È½Ï½á¹û±ä»¯ÑÓÊ±ÖÜÆÚÊý, 0~63
-	if(CMPx->CMP_EN == ENABLE)				CMPEN = 1;				//ÔÊÐí±È½ÏÆ÷		ENABLE,DISABLE
-	if(CMPx->CMP_Outpt_En == ENABLE)		CMPOE = 1;			//ÔÊÐí±È½Ï½á¹ûÊä³öµ½P3.4/P4.1,   ENABLE,DISABLE
-	if(CMPx->CMP_InvCMPO     == ENABLE)		INVCMPO = 1;	//±È½ÏÆ÷Êä³öÈ¡·´, 	ENABLE,DISABLE
-	if(CMPx->CMP_100nsFilter == DISABLE)	DISFLT = 1;		//ÄÚ²¿0.1usÂË²¨,  	ENABLE,DISABLE
+	CMPCR2 = CMPx->CMP_OutDelayDuty & 0x3f;							//Â±ÃˆÂ½ÃÂ½Ã¡Â¹Ã»Â±Ã¤Â»Â¯Ã‘Ã“ÃŠÂ±Ã–ÃœÃ†ÃšÃŠÃ½, 0~63
+	if(CMPx->CMP_EN == ENABLE)				CMPEN = 1;				//Ã”ÃŠÃÃ­Â±ÃˆÂ½ÃÃ†Ã·		ENABLE,DISABLE
+	if(CMPx->CMP_Outpt_En == ENABLE)		CMPOE = 1;			//Ã”ÃŠÃÃ­Â±ÃˆÂ½ÃÂ½Ã¡Â¹Ã»ÃŠÃ¤Â³Ã¶ÂµÂ½P3.4/P4.1,   ENABLE,DISABLE
+	if(CMPx->CMP_InvCMPO     == ENABLE)		INVCMPO = 1;	//Â±ÃˆÂ½ÃÃ†Ã·ÃŠÃ¤Â³Ã¶ÃˆÂ¡Â·Â´, 	ENABLE,DISABLE
+	if(CMPx->CMP_100nsFilter == DISABLE)	DISFLT = 1;		//Ã„ÃšÂ²Â¿0.1usÃ‚Ã‹Â²Â¨,  	ENABLE,DISABLE
 
-	if(CMPx->CMP_P_Select  <= CMP_P_ADC)	CMPEXCFG = (CMPEXCFG & ~0x03) | (CMPx->CMP_P_Select);			//±È½ÏÆ÷ÊäÈëÕý¼«Ñ¡Ôñ, CMP_P_P37/CMP_P_P50/CMP_P_P51, CMP_P_ADC: ÓÉADCÄ£ÄâÊäÈë¶Ë×öÕýÊäÈë.
-	if(CMPx->CMP_N_Select  <= CMP_N_GAP)	CMPEXCFG = (CMPEXCFG & ~0x04) | (CMPx->CMP_N_Select << 2);	//±È½ÏÆ÷ÊäÈë¸º¼«Ñ¡Ôñ, CMP_N_GAP: Ñ¡ÔñÄÚ²¿BandGap¾­¹ýOPºóµÄµçÑ¹×ö¸ºÊäÈë, CMP_N_P36: Ñ¡ÔñP3.6×ö¸ºÊäÈë.
+	if(CMPx->CMP_P_Select  <= CMP_P_ADC)	CMPEXCFG = (CMPEXCFG & ~0x03) | (CMPx->CMP_P_Select);			//Â±ÃˆÂ½ÃÃ†Ã·ÃŠÃ¤ÃˆÃ«Ã•Ã½Â¼Â«Ã‘Â¡Ã”Ã±, CMP_P_P37/CMP_P_P50/CMP_P_P51, CMP_P_ADC: Ã“Ã‰ADCÃ„Â£Ã„Ã¢ÃŠÃ¤ÃˆÃ«Â¶Ã‹Ã—Ã¶Ã•Ã½ÃŠÃ¤ÃˆÃ«.
+	if(CMPx->CMP_N_Select  <= CMP_N_GAP)	CMPEXCFG = (CMPEXCFG & ~0x04) | (CMPx->CMP_N_Select << 2);	//Â±ÃˆÂ½ÃÃ†Ã·ÃŠÃ¤ÃˆÃ«Â¸ÂºÂ¼Â«Ã‘Â¡Ã”Ã±, CMP_N_GAP: Ã‘Â¡Ã”Ã±Ã„ÃšÂ²Â¿BandGapÂ¾Â­Â¹Ã½OPÂºÃ³ÂµÃ„ÂµÃ§Ã‘Â¹Ã—Ã¶Â¸ÂºÃŠÃ¤ÃˆÃ«, CMP_N_P36: Ã‘Â¡Ã”Ã±P3.6Ã—Ã¶Â¸ÂºÃŠÃ¤ÃˆÃ«.
 }

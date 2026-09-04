@@ -8,20 +8,20 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+/* 脠莽鹿没脪陋脭脷鲁脤脨貌脰脨脢鹿脫脙麓脣麓煤脗毛,脟毛脭脷鲁脤脨貌脰脨脳垄脙梅脢鹿脫脙脕脣STC碌脛脳脢脕脧录掳鲁脤脨貌            */
 /*---------------------------------------------------------------------*/
 
 #include	"STC32G_CAN.h"
 
-bit B_Can1Read;     //CAN1 收到数据标志
-bit B_Can2Read;     //CAN2 收到数据标志
+bit B_Can1Read;     //CAN1 脢脮碌陆脢媒戮脻卤锚脰戮
+bit B_Can2Read;     //CAN2 脢脮碌陆脢媒戮脻卤锚脰戮
 
 //========================================================================
-// 函数: CAN1_ISR_Handler
-// 描述: CAN1中断函数.
-// 参数: none.
-// 返回: none.
-// 版本: V1.0, 2022-03-27
+// 潞炉脢媒: CAN1_ISR_Handler
+// 脙猫脢枚: CAN1脰脨露脧潞炉脢媒.
+// 虏脦脢媒: none.
+// 路碌禄脴: none.
+// 掳忙卤戮: V1.0, 2022-03-27
 //========================================================================
 void CAN1_ISR_Handler (void) interrupt CAN1_VECTOR
 {
@@ -29,10 +29,10 @@ void CAN1_ISR_Handler (void) interrupt CAN1_VECTOR
 	u8 store;
 	u8 arTemp;
 
-	arTemp = CANAR;     //先CANAR现场保存，避免主循环里写完 CANAR 后产生中断，在中断里修改了 CANAR 内容
-	store = AUXR2;      //后AUXR2现场保存
+	arTemp = CANAR;     //脧脠CANAR脧脰鲁隆卤拢麓忙拢卢卤脺脙芒脰梅脩颅禄路脌茂脨麓脥锚 CANAR 潞贸虏煤脡煤脰脨露脧拢卢脭脷脰脨露脧脌茂脨脼赂脛脕脣 CANAR 脛脷脠脻
+	store = AUXR2;      //潞贸AUXR2脧脰鲁隆卤拢麓忙
 	
-	AUXR2 &= ~0x08;		//选择CAN1模块
+	AUXR2 &= ~0x08;		//脩隆脭帽CAN1脛拢驴茅
 	isr = CanReadReg(ISR);
 
 	if((isr & 0x04) == 0x04)  //TI
@@ -57,7 +57,7 @@ void CAN1_ISR_Handler (void) interrupt CAN1_VECTOR
 	if((isr & 0x20) == 0x20)  //EWI
 	{
 		CANAR = MR;
-		CANDR &= ~0x04;  //清除 Reset Mode, 从BUS-OFF状态退出
+		CANDR &= ~0x04;  //脟氓鲁媒 Reset Mode, 麓脫BUS-OFF脳麓脤卢脥脣鲁枚
 		
 		CANAR = ISR;
 		CANDR = 0x20;    //CLR FLAG
@@ -81,16 +81,16 @@ void CAN1_ISR_Handler (void) interrupt CAN1_VECTOR
 		CANDR = 0x01;    //CLR FLAG
 	}	
 
-	AUXR2 = store;     //先AUXR2现场恢复
-	CANAR = arTemp;    //后CANAR现场恢复
+	AUXR2 = store;     //脧脠AUXR2脧脰鲁隆禄脰赂麓
+	CANAR = arTemp;    //潞贸CANAR脧脰鲁隆禄脰赂麓
 }
 
 //========================================================================
-// 函数: CAN2_ISR_Handler
-// 描述: CAN2中断函数.
-// 参数: none.
-// 返回: none.
-// 版本: V1.0, 2022-03-27
+// 潞炉脢媒: CAN2_ISR_Handler
+// 脙猫脢枚: CAN2脰脨露脧潞炉脢媒.
+// 虏脦脢媒: none.
+// 路碌禄脴: none.
+// 掳忙卤戮: V1.0, 2022-03-27
 //========================================================================
 void CAN2_ISR_Handler (void) interrupt CAN2_VECTOR
 {
@@ -98,10 +98,10 @@ void CAN2_ISR_Handler (void) interrupt CAN2_VECTOR
 	u8 store;
 	u8 arTemp;
 
-	arTemp = CANAR;     //先CANAR现场保存，避免主循环里写完 CANAR 后产生中断，在中断里修改了 CANAR 内容
-	store = AUXR2;      //后AUXR2现场保存
+	arTemp = CANAR;     //脧脠CANAR脧脰鲁隆卤拢麓忙拢卢卤脺脙芒脰梅脩颅禄路脌茂脨麓脥锚 CANAR 潞贸虏煤脡煤脰脨露脧拢卢脭脷脰脨露脧脌茂脨脼赂脛脕脣 CANAR 脛脷脠脻
+	store = AUXR2;      //潞贸AUXR2脧脰鲁隆卤拢麓忙
 	
-	AUXR2 |= 0x08;		//选择CAN2模块
+	AUXR2 |= 0x08;		//脩隆脭帽CAN2脛拢驴茅
 	isr = CanReadReg(ISR);
 
 	if((isr & 0x04) == 0x04)  //TI
@@ -126,7 +126,7 @@ void CAN2_ISR_Handler (void) interrupt CAN2_VECTOR
 	if((isr & 0x20) == 0x20)  //EWI
 	{
 		CANAR = MR;
-		CANDR &= ~0x04;  //清除 Reset Mode, 从BUS-OFF状态退出
+		CANDR &= ~0x04;  //脟氓鲁媒 Reset Mode, 麓脫BUS-OFF脳麓脤卢脥脣鲁枚
 		
 		CANAR = ISR;
 		CANDR = 0x20;    //CLR FLAG
@@ -150,8 +150,8 @@ void CAN2_ISR_Handler (void) interrupt CAN2_VECTOR
 		CANDR = 0x01;    //CLR FLAG
 	}	
 
-	AUXR2 = store;     //先AUXR2现场恢复
-	CANAR = arTemp;    //后CANAR现场恢复
+	AUXR2 = store;     //脧脠AUXR2脧脰鲁隆禄脰赂麓
+	CANAR = arTemp;    //潞贸CANAR脧脰鲁隆禄脰赂麓
 }
 
 

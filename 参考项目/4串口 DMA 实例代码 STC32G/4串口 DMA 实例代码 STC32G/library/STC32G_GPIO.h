@@ -8,7 +8,7 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+/* 脠莽鹿没脪陋脭脷鲁脤脨貌脰脨脢鹿脫脙麓脣麓煤脗毛,脟毛脭脷鲁脤脨貌脰脨脳垄脙梅脢鹿脫脙脕脣STC碌脛脳脢脕脧录掳鲁脤脨貌            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_GPIO_H
@@ -17,9 +17,9 @@
 #include "config.h"
 
 //========================================================================
-//                            端口模式设置
+//                            露脣驴脷脛拢脢陆脡猫脰脙
 //========================================================================
-//准双向口
+//脳录脣芦脧貌驴脷
 #define  P0_MODE_IO_PU(Pin)				{P0M1 &= ~(Pin), P0M0 &= ~(Pin);}
 #define  P1_MODE_IO_PU(Pin)				{P1M1 &= ~(Pin), P1M0 &= ~(Pin);}
 #define  P2_MODE_IO_PU(Pin)				{P2M1 &= ~(Pin), P2M0 &= ~(Pin);}
@@ -28,7 +28,7 @@
 #define  P5_MODE_IO_PU(Pin)				{P5M1 &= ~(Pin), P5M0 &= ~(Pin);}
 #define  P6_MODE_IO_PU(Pin)				{P6M1 &= ~(Pin), P6M0 &= ~(Pin);}
 #define  P7_MODE_IO_PU(Pin)				{P7M1 &= ~(Pin), P7M0 &= ~(Pin);}
-//高阻输入
+//赂脽脳猫脢盲脠毛
 #define  P0_MODE_IN_HIZ(Pin)			{P0M1 |= (Pin), P0M0 &= ~(Pin);}
 #define  P1_MODE_IN_HIZ(Pin)			{P1M1 |= (Pin), P1M0 &= ~(Pin);}
 #define  P2_MODE_IN_HIZ(Pin)			{P2M1 |= (Pin), P2M0 &= ~(Pin);}
@@ -37,7 +37,7 @@
 #define  P5_MODE_IN_HIZ(Pin)			{P5M1 |= (Pin), P5M0 &= ~(Pin);}
 #define  P6_MODE_IN_HIZ(Pin)			{P6M1 |= (Pin), P6M0 &= ~(Pin);}
 #define  P7_MODE_IN_HIZ(Pin)			{P7M1 |= (Pin), P7M0 &= ~(Pin);}
-//漏极开路
+//脗漏录芦驴陋脗路
 #define  P0_MODE_OUT_OD(Pin)			{P0M1 |= (Pin), P0M0 |= (Pin);}
 #define  P1_MODE_OUT_OD(Pin)			{P1M1 |= (Pin), P1M0 |= (Pin);}
 #define  P2_MODE_OUT_OD(Pin)			{P2M1 |= (Pin), P2M0 |= (Pin);}
@@ -46,7 +46,7 @@
 #define  P5_MODE_OUT_OD(Pin)			{P5M1 |= (Pin), P5M0 |= (Pin);}
 #define  P6_MODE_OUT_OD(Pin)			{P6M1 |= (Pin), P6M0 |= (Pin);}
 #define  P7_MODE_OUT_OD(Pin)			{P7M1 |= (Pin), P7M0 |= (Pin);}
-//推挽输出
+//脥脝脥矛脢盲鲁枚
 #define  P0_MODE_OUT_PP(Pin)			{P0M1 &= ~(Pin), P0M0 |= (Pin);}
 #define  P1_MODE_OUT_PP(Pin)			{P1M1 &= ~(Pin), P1M0 |= (Pin);}
 #define  P2_MODE_OUT_PP(Pin)			{P2M1 &= ~(Pin), P2M0 |= (Pin);}
@@ -57,9 +57,9 @@
 #define  P7_MODE_OUT_PP(Pin)			{P7M1 &= ~(Pin), P7M0 |= (Pin);}
 
 //========================================================================
-//                         端口内部4.1K上拉设置
+//                         露脣驴脷脛脷虏驴4.1K脡脧脌颅脡猫脰脙
 //========================================================================
-//上拉使能
+//脡脧脌颅脢鹿脛脺
 #define P0_PULL_UP_ENABLE(Pin)		P0PU |= (Pin)
 #define P1_PULL_UP_ENABLE(Pin)		P1PU |= (Pin)
 #define P2_PULL_UP_ENABLE(Pin)		P2PU |= (Pin)
@@ -68,7 +68,7 @@
 #define P5_PULL_UP_ENABLE(Pin)		P5PU |= (Pin)
 #define P6_PULL_UP_ENABLE(Pin)		P6PU |= (Pin)
 #define P7_PULL_UP_ENABLE(Pin)		P7PU |= (Pin)
-//上拉禁止
+//脡脧脌颅陆没脰鹿
 #define P0_PULL_UP_DISABLE(Pin)		P0PU &= ~(Pin)
 #define P1_PULL_UP_DISABLE(Pin)		P1PU &= ~(Pin)
 #define P2_PULL_UP_DISABLE(Pin)		P2PU &= ~(Pin)
@@ -79,9 +79,9 @@
 #define P7_PULL_UP_DISABLE(Pin)		P7PU &= ~(Pin)
 
 //========================================================================
-//                           端口施密特触发设置
+//                           露脣驴脷脢漏脙脺脤脴麓楼路垄脡猫脰脙
 //========================================================================
-//施密特触发使能
+//脢漏脙脺脤脴麓楼路垄脢鹿脛脺
 #define P0_ST_ENABLE(Pin)					P0NCS &= ~(Pin)
 #define P1_ST_ENABLE(Pin)					P1NCS &= ~(Pin)
 #define P2_ST_ENABLE(Pin)					P2NCS &= ~(Pin)
@@ -90,7 +90,7 @@
 #define P5_ST_ENABLE(Pin)					P5NCS &= ~(Pin)
 #define P6_ST_ENABLE(Pin)					P6NCS &= ~(Pin)
 #define P7_ST_ENABLE(Pin)					P7NCS &= ~(Pin)
-//施密特触发禁止
+//脢漏脙脺脤脴麓楼路垄陆没脰鹿
 #define P0_ST_DISABLE(Pin)				P0NCS |= (Pin)
 #define P1_ST_DISABLE(Pin)				P1NCS |= (Pin)
 #define P2_ST_DISABLE(Pin)				P2NCS |= (Pin)
@@ -101,9 +101,9 @@
 #define P7_ST_DISABLE(Pin)				P7NCS |= (Pin)
 
 //========================================================================
-//                          端口电平转换速度设置
+//                          露脣驴脷碌莽脝陆脳陋禄禄脣脵露脠脡猫脰脙
 //========================================================================
-//电平转换慢速，相应的上下冲比较小
+//碌莽脝陆脳陋禄禄脗媒脣脵拢卢脧脿脫娄碌脛脡脧脧脗鲁氓卤脠陆脧脨隆
 #define P0_SPEED_LOW(Pin)					P0SR |= (Pin) 
 #define P1_SPEED_LOW(Pin)					P1SR |= (Pin) 
 #define P2_SPEED_LOW(Pin)					P2SR |= (Pin) 
@@ -112,7 +112,7 @@
 #define P5_SPEED_LOW(Pin)					P5SR |= (Pin) 
 #define P6_SPEED_LOW(Pin)					P6SR |= (Pin) 
 #define P7_SPEED_LOW(Pin)					P7SR |= (Pin) 
-//电平转换快速，相应的上下冲比较大
+//碌莽脝陆脳陋禄禄驴矛脣脵拢卢脧脿脫娄碌脛脡脧脧脗鲁氓卤脠陆脧麓贸
 #define P0_SPEED_HIGH(Pin)				P0SR &= ~(Pin) 
 #define P1_SPEED_HIGH(Pin)				P1SR &= ~(Pin) 
 #define P2_SPEED_HIGH(Pin)				P2SR &= ~(Pin) 
@@ -123,9 +123,9 @@
 #define P7_SPEED_HIGH(Pin)				P7SR &= ~(Pin) 
 
 //========================================================================
-//                          端口驱动电流控制设置
+//                          露脣驴脷脟媒露炉碌莽脕梅驴脴脰脝脡猫脰脙
 //========================================================================
-//一般驱动能力
+//脪禄掳茫脟媒露炉脛脺脕娄
 #define P0_DRIVE_MEDIUM(Pin)			P0DR |= (Pin)
 #define P1_DRIVE_MEDIUM(Pin)			P1DR |= (Pin)
 #define P2_DRIVE_MEDIUM(Pin)			P2DR |= (Pin)
@@ -134,7 +134,7 @@
 #define P5_DRIVE_MEDIUM(Pin)			P5DR |= (Pin)
 #define P6_DRIVE_MEDIUM(Pin)			P6DR |= (Pin)
 #define P7_DRIVE_MEDIUM(Pin)			P7DR |= (Pin)
-//增强驱动能力
+//脭枚脟驴脟媒露炉脛脺脕娄
 #define P0_DRIVE_HIGH(Pin)				P0DR &= ~(Pin)
 #define P1_DRIVE_HIGH(Pin)				P1DR &= ~(Pin)
 #define P2_DRIVE_HIGH(Pin)				P2DR &= ~(Pin)
@@ -145,9 +145,9 @@
 #define P7_DRIVE_HIGH(Pin)				P7DR &= ~(Pin)
 
 //========================================================================
-//                          端口数字信号输入使能
+//                          露脣驴脷脢媒脳脰脨脜潞脜脢盲脠毛脢鹿脛脺
 //========================================================================
-//使能数字信号输入
+//脢鹿脛脺脢媒脳脰脨脜潞脜脢盲脠毛
 #define P0_DIGIT_IN_ENABLE(Pin)		P0IE |= (Pin)
 #define P1_DIGIT_IN_ENABLE(Pin)		P1IE |= (Pin)
 #define P2_DIGIT_IN_ENABLE(Pin)		P2IE |= (Pin)
@@ -156,7 +156,7 @@
 #define P5_DIGIT_IN_ENABLE(Pin)		P5IE |= (Pin)
 #define P6_DIGIT_IN_ENABLE(Pin)		P6IE |= (Pin)
 #define P7_DIGIT_IN_ENABLE(Pin)		P7IE |= (Pin)
-//禁止数字信号输入
+//陆没脰鹿脢媒脳脰脨脜潞脜脢盲脠毛
 #define P0_DIGIT_IN_DISABLE(Pin)	P0IE &= ~(Pin)
 #define P1_DIGIT_IN_DISABLE(Pin)	P1IE &= ~(Pin)
 #define P2_DIGIT_IN_DISABLE(Pin)	P2IE &= ~(Pin)
@@ -167,25 +167,25 @@
 #define P7_DIGIT_IN_DISABLE(Pin)	P7IE &= ~(Pin)
 
 //========================================================================
-//                              定义声明
+//                              露篓脪氓脡霉脙梅
 //========================================================================
 
-#define	GPIO_PullUp		0	//上拉准双向口
-#define	GPIO_HighZ		1	//浮空输入
-#define	GPIO_OUT_OD		2	//开漏输出
-#define	GPIO_OUT_PP		3	//推挽输出
+#define	GPIO_PullUp		0	//脡脧脌颅脳录脣芦脧貌驴脷
+#define	GPIO_HighZ		1	//赂隆驴脮脢盲脠毛
+#define	GPIO_OUT_OD		2	//驴陋脗漏脢盲鲁枚
+#define	GPIO_OUT_PP		3	//脥脝脥矛脢盲鲁枚
 
-#define	GPIO_Pin_0		0x01	//IO引脚 Px.0
-#define	GPIO_Pin_1		0x02	//IO引脚 Px.1
-#define	GPIO_Pin_2		0x04	//IO引脚 Px.2
-#define	GPIO_Pin_3		0x08	//IO引脚 Px.3
-#define	GPIO_Pin_4		0x10	//IO引脚 Px.4
-#define	GPIO_Pin_5		0x20	//IO引脚 Px.5
-#define	GPIO_Pin_6		0x40	//IO引脚 Px.6
-#define	GPIO_Pin_7		0x80	//IO引脚 Px.7
-#define	GPIO_Pin_LOW	0x0F	//IO低4位引脚
-#define	GPIO_Pin_HIGH	0xF0	//IO高4位引脚
-#define	GPIO_Pin_All	0xFF	//IO所有引脚
+#define	GPIO_Pin_0		0x01	//IO脪媒陆脜 Px.0
+#define	GPIO_Pin_1		0x02	//IO脪媒陆脜 Px.1
+#define	GPIO_Pin_2		0x04	//IO脪媒陆脜 Px.2
+#define	GPIO_Pin_3		0x08	//IO脪媒陆脜 Px.3
+#define	GPIO_Pin_4		0x10	//IO脪媒陆脜 Px.4
+#define	GPIO_Pin_5		0x20	//IO脪媒陆脜 Px.5
+#define	GPIO_Pin_6		0x40	//IO脪媒陆脜 Px.6
+#define	GPIO_Pin_7		0x80	//IO脪媒陆脜 Px.7
+#define	GPIO_Pin_LOW	0x0F	//IO碌脥4脦禄脪媒陆脜
+#define	GPIO_Pin_HIGH	0xF0	//IO赂脽4脦禄脪媒陆脜
+#define	GPIO_Pin_All	0xFF	//IO脣霉脫脨脪媒陆脜
 
 #define	GPIO_P0			0		//
 #define	GPIO_P1			1
@@ -199,8 +199,8 @@
 
 typedef struct
 {
-	u8	Mode;		//IO模式,  		GPIO_PullUp,GPIO_HighZ,GPIO_OUT_OD,GPIO_OUT_PP
-	u8	Pin;		//要设置的端口	
+	u8	Mode;		//IO脛拢脢陆,  		GPIO_PullUp,GPIO_HighZ,GPIO_OUT_OD,GPIO_OUT_PP
+	u8	Pin;		//脪陋脡猫脰脙碌脛露脣驴脷	
 } GPIO_InitTypeDef;
 
 u8	GPIO_Inilize(u8 GPIO, GPIO_InitTypeDef *GPIOx);

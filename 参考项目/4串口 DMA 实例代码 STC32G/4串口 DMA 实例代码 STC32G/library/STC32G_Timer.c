@@ -8,79 +8,79 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+/* 脠莽鹿没脪陋脭脷鲁脤脨貌脰脨脢鹿脫脙麓脣麓煤脗毛,脟毛脭脷鲁脤脨貌脰脨脳垄脙梅脢鹿脫脙脕脣STC碌脛脳脢脕脧录掳鲁脤脨貌            */
 /*---------------------------------------------------------------------*/
 
 #include	"STC32G_Timer.h"
 
 //========================================================================
-// 函数: u8	Timer_Inilize(u8 TIM, TIM_InitTypeDef *TIMx)
-// 描述: 定时器初始化程序.
-// 参数: TIMx: 结构参数,请参考timer.h里的定义.
-// 返回: 成功返回 SUCCESS, 错误返回 FAIL.
-// 版本: V1.0, 2012-10-22
+// 潞炉脢媒: u8	Timer_Inilize(u8 TIM, TIM_InitTypeDef *TIMx)
+// 脙猫脢枚: 露篓脢卤脝梅鲁玫脢录禄炉鲁脤脨貌.
+// 虏脦脢媒: TIMx: 陆谩鹿鹿虏脦脢媒,脟毛虏脦驴录timer.h脌茂碌脛露篓脪氓.
+// 路碌禄脴: 鲁脡鹿娄路碌禄脴 SUCCESS, 麓铆脦贸路碌禄脴 FAIL.
+// 掳忙卤戮: V1.0, 2012-10-22
 //========================================================================
 u8	Timer_Inilize(u8 TIM, TIM_InitTypeDef *TIMx)
 {
 	if(TIM == Timer0)
 	{
-		Timer0_Stop();		//停止计数
-		if(TIMx->TIM_Mode >= TIM_16BitAutoReloadNoMask)	return FAIL;	//错误
-		TMOD = (TMOD & ~0x03) | TIMx->TIM_Mode;	//工作模式,0: 16位自动重装, 1: 16位定时/计数, 2: 8位自动重装, 3: 不可屏蔽16位自动重装
+		Timer0_Stop();		//脥拢脰鹿录脝脢媒
+		if(TIMx->TIM_Mode >= TIM_16BitAutoReloadNoMask)	return FAIL;	//麓铆脦贸
+		TMOD = (TMOD & ~0x03) | TIMx->TIM_Mode;	//鹿陇脳梅脛拢脢陆,0: 16脦禄脳脭露炉脰脴脳掳, 1: 16脦禄露篓脢卤/录脝脢媒, 2: 8脦禄脳脭露炉脰脴脳掳, 3: 虏禄驴脡脝脕卤脦16脦禄脳脭露炉脰脴脳掳
 		if(TIMx->TIM_ClkSource >  TIM_CLOCK_Ext)	return FAIL;
-		Timer0_CLK_Select(TIMx->TIM_ClkSource);	//对外计数或分频, 定时12T/1T
-		Timer0_CLK_Output(TIMx->TIM_ClkOut);		//输出时钟使能
+		Timer0_CLK_Select(TIMx->TIM_ClkSource);	//露脭脥芒录脝脢媒禄貌路脰脝碌, 露篓脢卤12T/1T
+		Timer0_CLK_Output(TIMx->TIM_ClkOut);		//脢盲鲁枚脢卤脰脫脢鹿脛脺
 		T0_Load(TIMx->TIM_Value);
 		Timer0_Run(TIMx->TIM_Run);
-		return	SUCCESS;		//成功
+		return	SUCCESS;		//鲁脡鹿娄
 	}
 
 	if(TIM == Timer1)
 	{
-		Timer1_Stop();		//停止计数
-		if(TIMx->TIM_Mode >= TIM_16BitAutoReloadNoMask)	return FAIL;	//错误
-		TMOD = (TMOD & ~0x30) | (TIMx->TIM_Mode << 4);	//工作模式,0: 16位自动重装, 1: 16位定时/计数, 2: 8位自动重装, 3: 停止工作
+		Timer1_Stop();		//脥拢脰鹿录脝脢媒
+		if(TIMx->TIM_Mode >= TIM_16BitAutoReloadNoMask)	return FAIL;	//麓铆脦贸
+		TMOD = (TMOD & ~0x30) | (TIMx->TIM_Mode << 4);	//鹿陇脳梅脛拢脢陆,0: 16脦禄脳脭露炉脰脴脳掳, 1: 16脦禄露篓脢卤/录脝脢媒, 2: 8脦禄脳脭露炉脰脴脳掳, 3: 脥拢脰鹿鹿陇脳梅
 		if(TIMx->TIM_ClkSource >  TIM_CLOCK_Ext)	return FAIL;
-		Timer1_CLK_Select(TIMx->TIM_ClkSource);	//对外计数或分频, 定时12T/1T
-		Timer1_CLK_Output(TIMx->TIM_ClkOut);		//输出时钟使能
+		Timer1_CLK_Select(TIMx->TIM_ClkSource);	//露脭脥芒录脝脢媒禄貌路脰脝碌, 露篓脢卤12T/1T
+		Timer1_CLK_Output(TIMx->TIM_ClkOut);		//脢盲鲁枚脢卤脰脫脢鹿脛脺
 		T1_Load(TIMx->TIM_Value);
 		Timer1_Run(TIMx->TIM_Run);
-		return	SUCCESS;		//成功
+		return	SUCCESS;		//鲁脡鹿娄
 	}
 
-	if(TIM == Timer2)		//Timer2,固定为16位自动重装, 中断无优先级
+	if(TIM == Timer2)		//Timer2,鹿脤露篓脦陋16脦禄脳脭露炉脰脴脳掳, 脰脨露脧脦脼脫脜脧脠录露
 	{
-		Timer2_Stop();	//停止计数
-		Timer2_CLK_Select(TIMx->TIM_ClkSource);	//对外计数或分频, 定时12T/1T
-		Timer2_CLK_Output(TIMx->TIM_ClkOut);		//输出时钟使能
+		Timer2_Stop();	//脥拢脰鹿录脝脢媒
+		Timer2_CLK_Select(TIMx->TIM_ClkSource);	//露脭脥芒录脝脢媒禄貌路脰脝碌, 露篓脢卤12T/1T
+		Timer2_CLK_Output(TIMx->TIM_ClkOut);		//脢盲鲁枚脢卤脰脫脢鹿脛脺
 
 		T2_Load(TIMx->TIM_Value);
 		Timer2_Run(TIMx->TIM_Run);
-		return	SUCCESS;		//成功
+		return	SUCCESS;		//鲁脡鹿娄
 	}
 
-	if(TIM == Timer3)		//Timer3,固定为16位自动重装, 中断无优先级
+	if(TIM == Timer3)		//Timer3,鹿脤露篓脦陋16脦禄脳脭露炉脰脴脳掳, 脰脨露脧脦脼脫脜脧脠录露
 	{
-		Timer3_Stop();	//停止计数
+		Timer3_Stop();	//脥拢脰鹿录脝脢媒
 		if(TIMx->TIM_ClkSource >  TIM_CLOCK_Ext)	return FAIL;
-		Timer3_CLK_Select(TIMx->TIM_ClkSource);	//对外计数或分频, 定时12T/1T
-		Timer3_CLK_Output(TIMx->TIM_ClkOut);		//输出时钟使能
+		Timer3_CLK_Select(TIMx->TIM_ClkSource);	//露脭脥芒录脝脢媒禄貌路脰脝碌, 露篓脢卤12T/1T
+		Timer3_CLK_Output(TIMx->TIM_ClkOut);		//脢盲鲁枚脢卤脰脫脢鹿脛脺
 
 		T3_Load(TIMx->TIM_Value);
 		Timer3_Run(TIMx->TIM_Run);
-		return	SUCCESS;		//成功
+		return	SUCCESS;		//鲁脡鹿娄
 	}
 
-	if(TIM == Timer4)		//Timer3,固定为16位自动重装, 中断无优先级
+	if(TIM == Timer4)		//Timer3,鹿脤露篓脦陋16脦禄脳脭露炉脰脴脳掳, 脰脨露脧脦脼脫脜脧脠录露
 	{
-		Timer4_Stop();	//停止计数
+		Timer4_Stop();	//脥拢脰鹿录脝脢媒
 		if(TIMx->TIM_ClkSource >  TIM_CLOCK_Ext)	return FAIL;
-		Timer4_CLK_Select(TIMx->TIM_ClkSource);	//对外计数或分频, 定时12T/1T
-		Timer4_CLK_Output(TIMx->TIM_ClkOut);		//输出时钟使能
+		Timer4_CLK_Select(TIMx->TIM_ClkSource);	//露脭脥芒录脝脢媒禄貌路脰脝碌, 露篓脢卤12T/1T
+		Timer4_CLK_Output(TIMx->TIM_ClkOut);		//脢盲鲁枚脢卤脰脫脢鹿脛脺
 
 		T4_Load(TIMx->TIM_Value);
 		Timer4_Run(TIMx->TIM_Run);
-		return	SUCCESS;		//成功
+		return	SUCCESS;		//鲁脡鹿娄
 	}
-	return FAIL;	//错误
+	return FAIL;	//麓铆脦贸
 }

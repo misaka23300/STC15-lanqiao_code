@@ -8,25 +8,25 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+/* 脠莽鹿没脪陋脭脷鲁脤脨貌脰脨脢鹿脫脙麓脣麓煤脗毛,脟毛脭脷鲁脤脨貌脰脨脳垄脙梅脢鹿脫脙脕脣STC碌脛脳脢脕脧录掳鲁脤脨貌            */
 /*---------------------------------------------------------------------*/
 
 #include "STC32G_UART.h"
 #include "STC32G_USART_LIN.h"
 
 //========================================================================
-//                               本地变量声明
+//                               卤戮碌脴卤盲脕驴脡霉脙梅
 //========================================================================
 
 //========================================================================
-// 函数: void UsartLinSendByte(u8 USARTx, u8 dat)
-// 描述: 发送一个字节函数。
-// 参数: USARTx: USART组号，取值：USART1或者USART2
-// 参数: dat: 发送的数据.
-// 返回: none.
-// 版本: VER1.0
-// 日期: 2021-10-28
-// 备注: 
+// 潞炉脢媒: void UsartLinSendByte(u8 USARTx, u8 dat)
+// 脙猫脢枚: 路垄脣脥脪禄赂枚脳脰陆脷潞炉脢媒隆拢
+// 虏脦脢媒: USARTx: USART脳茅潞脜拢卢脠隆脰碌拢潞USART1禄貌脮脽USART2
+// 虏脦脢媒: dat: 路垄脣脥碌脛脢媒戮脻.
+// 路碌禄脴: none.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2021-10-28
+// 卤赂脳垄: 
 //========================================================================
 void UsartLinSendByte(u8 USARTx, u8 dat)
 {
@@ -45,15 +45,15 @@ void UsartLinSendByte(u8 USARTx, u8 dat)
 }
 
 //========================================================================
-// 函数: void UsartLinSendData(u8 USARTx, u8 *pdat, u8 len)
-// 描述: Lin发送数据函数。
-// 参数: USARTx: USART组号，取值：USART1或者USART2
-// 参数: *pdat: 发生数据缓冲区
-// 参数: len: 数据长度.
-// 返回: Lin ID.
-// 版本: VER1.0
-// 日期: 2023-4-15
-// 备注: 
+// 潞炉脢媒: void UsartLinSendData(u8 USARTx, u8 *pdat, u8 len)
+// 脙猫脢枚: Lin路垄脣脥脢媒戮脻潞炉脢媒隆拢
+// 虏脦脢媒: USARTx: USART脳茅潞脜拢卢脠隆脰碌拢潞USART1禄貌脮脽USART2
+// 虏脦脢媒: *pdat: 路垄脡煤脢媒戮脻禄潞鲁氓脟酶
+// 虏脦脢媒: len: 脢媒戮脻鲁陇露脠.
+// 路碌禄脴: Lin ID.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2023-4-15
+// 卤赂脳垄: 
 //========================================================================
 void UsartLinSendData(u8 USARTx, u8 *pdat, u8 len)
 {
@@ -67,15 +67,15 @@ void UsartLinSendData(u8 USARTx, u8 *pdat, u8 len)
 }
 
 //========================================================================
-// 函数: void UsartLinSendChecksum(u8 USARTx, u8 *dat, u8 len)
-// 描述: 计算校验码并发送。
-// 参数: USARTx: USART组号，取值：USART1或者USART2
-// 参数: *dat: 数据场传输的数据
-// 参数: len: 数据长度.
-// 返回: none.
-// 版本: VER1.0
-// 日期: 2023-4-15
-// 备注: 
+// 潞炉脢媒: void UsartLinSendChecksum(u8 USARTx, u8 *dat, u8 len)
+// 脙猫脢枚: 录脝脣茫脨拢脩茅脗毛虏垄路垄脣脥隆拢
+// 虏脦脢媒: USARTx: USART脳茅潞脜拢卢脠隆脰碌拢潞USART1禄貌脮脽USART2
+// 虏脦脢媒: *dat: 脢媒戮脻鲁隆麓芦脢盲碌脛脢媒戮脻
+// 虏脦脢媒: len: 脢媒戮脻鲁陇露脠.
+// 路碌禄脴: none.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2023-4-15
+// 卤赂脳垄: 
 //========================================================================
 void UsartLinSendChecksum(u8 USARTx, u8 *dat, u8 len)
 {
@@ -96,36 +96,36 @@ void UsartLinSendChecksum(u8 USARTx, u8 *dat, u8 len)
 }
 
 //========================================================================
-// 函数: void UsartSendBreak(u8 USARTx)
-// 描述: 主模式发送Lin总线Break函数。
-// 参数: USARTx: USART组号，取值：USART1或者USART2
-// 返回: none.
-// 版本: VER1.0
-// 日期: 2021-10-28
-// 备注: 
+// 潞炉脢媒: void UsartSendBreak(u8 USARTx)
+// 脙猫脢枚: 脰梅脛拢脢陆路垄脣脥Lin脳脺脧脽Break潞炉脢媒隆拢
+// 虏脦脢媒: USARTx: USART脳茅潞脜拢卢脠隆脰碌拢潞USART1禄貌脮脽USART2
+// 路碌禄脴: none.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2021-10-28
+// 卤赂脳垄: 
 //========================================================================
 void UsartSendBreak(u8 USARTx)
 {
 	if(USARTx == USART1)
 	{
-		USARTCR5 |= 0x04;		//主模式 Send Break
+		USARTCR5 |= 0x04;		//脰梅脛拢脢陆 Send Break
 	}
 	else if(USARTx == USART2)
 	{
-		USART2CR5 |= 0x04;		//主模式 Send Break
+		USART2CR5 |= 0x04;		//脰梅脛拢脢陆 Send Break
 	}
 	UsartLinSendByte(USARTx,0x00);
 }
 
 //========================================================================
-// 函数: void UsartLinSendPID(u8 USARTx, u8 id)
-// 描述: ID码加上校验符，转成PID码并发送。
-// 参数: USARTx: USART组号，取值：USART1或者USART2
-// 参数: ID码.
-// 返回: none.
-// 版本: VER1.0
-// 日期: 2020-12-2
-// 备注: 
+// 潞炉脢媒: void UsartLinSendPID(u8 USARTx, u8 id)
+// 脙猫脢枚: ID脗毛录脫脡脧脨拢脩茅路没拢卢脳陋鲁脡PID脗毛虏垄路垄脣脥隆拢
+// 虏脦脢媒: USARTx: USART脳茅潞脜拢卢脠隆脰碌拢潞USART1禄貌脮脽USART2
+// 虏脦脢媒: ID脗毛.
+// 路碌禄脴: none.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2020-12-2
+// 卤赂脳垄: 
 //========================================================================
 void UsartLinSendPID(u8 USARTx, u8 id)
 {
@@ -139,52 +139,52 @@ void UsartLinSendPID(u8 USARTx, u8 id)
 }
 
 //========================================================================
-// 函数: void UsartLinSendHeader(u8 USARTx, u8 lid)
-// 描述: Lin主机发送帧头函数。
-// 参数: USARTx: USART组号，取值：USART1或者USART2
-// 参数: ID码.
-// 返回: none.
-// 版本: VER1.0
-// 日期: 2021-10-28
-// 备注: 
+// 潞炉脢媒: void UsartLinSendHeader(u8 USARTx, u8 lid)
+// 脙猫脢枚: Lin脰梅禄煤路垄脣脥脰隆脥路潞炉脢媒隆拢
+// 虏脦脢媒: USARTx: USART脳茅潞脜拢卢脠隆脰碌拢潞USART1禄貌脮脽USART2
+// 虏脦脢媒: ID脗毛.
+// 路碌禄脴: none.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2021-10-28
+// 卤赂脳垄: 
 //========================================================================
 void UsartLinSendHeader(u8 USARTx, u8 lid)
 {
 	UsartSendBreak(USARTx);						//Send Break
 	UsartLinSendByte(USARTx,0x55);		//Send Sync Field
-	UsartLinSendPID(USARTx,lid);			//设置总线ID
+	UsartLinSendPID(USARTx,lid);			//脡猫脰脙脳脺脧脽ID
 }
 
 //========================================================================
-// 函数: void UsartLinSendFrame(u8 USARTx, u8 lid, u8 *pdat, u8 len)
-// 描述: Lin主机发送完整帧函数。
-// 参数: USARTx: USART组号，取值：USART1或者USART2
-// 参数: lid: Lin ID
-// 参数: *pdat: 发送数据缓冲区
-// 参数: len: 数据长度
-// 返回: none.
-// 版本: VER1.0
-// 日期: 2021-10-28
-// 备注: 
+// 潞炉脢媒: void UsartLinSendFrame(u8 USARTx, u8 lid, u8 *pdat, u8 len)
+// 脙猫脢枚: Lin脰梅禄煤路垄脣脥脥锚脮没脰隆潞炉脢媒隆拢
+// 虏脦脢媒: USARTx: USART脳茅潞脜拢卢脠隆脰碌拢潞USART1禄貌脮脽USART2
+// 虏脦脢媒: lid: Lin ID
+// 虏脦脢媒: *pdat: 路垄脣脥脢媒戮脻禄潞鲁氓脟酶
+// 虏脦脢媒: len: 脢媒戮脻鲁陇露脠
+// 路碌禄脴: none.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2021-10-28
+// 卤赂脳垄: 
 //========================================================================
 void UsartLinSendFrame(u8 USARTx, u8 lid, u8 *pdat, u8 len)
 {
 	UsartSendBreak(USARTx);						//Send Break
 	UsartLinSendByte(USARTx,0x55);		//Send Sync Field
 
-	UsartLinSendPID(USARTx,lid);			//设置总线ID
+	UsartLinSendPID(USARTx,lid);			//脡猫脰脙脳脺脧脽ID
 	UsartLinSendData(USARTx,pdat,len);
 	UsartLinSendChecksum(USARTx,pdat,len);
 }
 
 //========================================================================
-// 函数: void UsartLinBaudrate(u8 USARTx, u16 brt)
-// 描述: Lin总线波特率设置函数。
-// 参数: brt: 波特率.
-// 返回: none.
-// 版本: VER1.0
-// 日期: 2021-10-28
-// 备注: 
+// 潞炉脢媒: void UsartLinBaudrate(u8 USARTx, u16 brt)
+// 脙猫脢枚: Lin脳脺脧脽虏篓脤脴脗脢脡猫脰脙潞炉脢媒隆拢
+// 虏脦脢媒: brt: 虏篓脤脴脗脢.
+// 路碌禄脴: none.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2021-10-28
+// 卤赂脳垄: 
 //========================================================================
 void UsartLinBaudrate(u8 USARTx, u16 brt)
 {
@@ -204,30 +204,30 @@ void UsartLinBaudrate(u8 USARTx, u16 brt)
 }
 
 //========================================================================
-// 函数: UASRT_LIN_Configuration
-// 描述: USART LIN初始化程序.
-// 参数: USARTx: UART组号, USART LIN结构参数,请参考STC32G_USART_LIN.h里的定义.
-// 返回: none.
-// 版本: V1.0, 2022-03-30
+// 潞炉脢媒: UASRT_LIN_Configuration
+// 脙猫脢枚: USART LIN鲁玫脢录禄炉鲁脤脨貌.
+// 虏脦脢媒: USARTx: UART脳茅潞脜, USART LIN陆谩鹿鹿虏脦脢媒,脟毛虏脦驴录STC32G_USART_LIN.h脌茂碌脛露篓脪氓.
+// 路碌禄脴: none.
+// 掳忙卤戮: V1.0, 2022-03-30
 //========================================================================
 u8 UASRT_LIN_Configuration(u8 USARTx, USARTx_LIN_InitDefine *USART)
 {
 	if(USARTx == USART1)
 	{
-		SCON = (SCON & 0x3f) | 0x40;    //USART1模式, 0x00: 同步移位输出, 0x40: 8位数据,可变波特率, 0x80: 9位数据,固定波特率, 0xc0: 9位数据,可变波特率
+		SCON = (SCON & 0x3f) | 0x40;    //USART1脛拢脢陆, 0x00: 脥卢虏陆脪脝脦禄脢盲鲁枚, 0x40: 8脦禄脢媒戮脻,驴脡卤盲虏篓脤脴脗脢, 0x80: 9脦禄脢媒戮脻,鹿脤露篓虏篓脤脴脗脢, 0xc0: 9脦禄脢媒戮脻,驴脡卤盲虏篓脤脴脗脢
 		SMOD = 1;
 		TI = 0;
-		REN = 1;    //允许接收
-		ES  = 1;    //允许中断
+		REN = 1;    //脭脢脨铆陆脫脢脮
+		ES  = 1;    //脭脢脨铆脰脨露脧
 
-		if(USART->LIN_Enable == ENABLE)	USARTCR1 |= 0x80;		//使能LIN模块
-		else								USARTCR1 &= ~0x80;		//关闭LIN模块
-		if(USART->LIN_Mode == LinSlaveMode)	USARTCR5 |= 0x20;		//LIN模块从机模式
-		else								USARTCR5 &= ~0x20;		//LIN模块主机模式
-		if(USART->LIN_AutoSync == ENABLE)	USARTCR5 |= 0x10;		//使能自动同步
-		else								USARTCR5 &= ~0x10;		//关闭自动同步
+		if(USART->LIN_Enable == ENABLE)	USARTCR1 |= 0x80;		//脢鹿脛脺LIN脛拢驴茅
+		else								USARTCR1 &= ~0x80;		//鹿脴卤脮LIN脛拢驴茅
+		if(USART->LIN_Mode == LinSlaveMode)	USARTCR5 |= 0x20;		//LIN脛拢驴茅麓脫禄煤脛拢脢陆
+		else								USARTCR5 &= ~0x20;		//LIN脛拢驴茅脰梅禄煤脛拢脢陆
+		if(USART->LIN_AutoSync == ENABLE)	USARTCR5 |= 0x10;		//脢鹿脛脺脳脭露炉脥卢虏陆
+		else								USARTCR5 &= ~0x10;		//鹿脴卤脮脳脭露炉脥卢虏陆
 
-		UsartLinBaudrate(USART1,USART->LIN_Baudrate);			//设置波特率
+		UsartLinBaudrate(USART1,USART->LIN_Baudrate);			//脡猫脰脙虏篓脤脴脗脢
 
 		return SUCCESS;
 	}
@@ -235,23 +235,23 @@ u8 UASRT_LIN_Configuration(u8 USARTx, USARTx_LIN_InitDefine *USART)
 	if(USARTx == USART2)
 	{
 		S2CON = (S2CON & 0x3f) | 0x50;
-		T2x12 = 1;   //定时器2时钟1T模式
-		T2R = 1;     //开始计时
-		ES2 = 1;     //允许中断
+		T2x12 = 1;   //露篓脢卤脝梅2脢卤脰脫1T脛拢脢陆
+		T2R = 1;     //驴陋脢录录脝脢卤
+		ES2 = 1;     //脭脢脨铆脰脨露脧
 		S2CFG |= 0x80;				//S2MOD = 1
 
-		if(USART->LIN_Enable == ENABLE)	USART2CR1 |= 0x80;		//使能LIN模块
-		else								USART2CR1 &= ~0x80;		//关闭LIN模块
-		if(USART->LIN_Mode == LinSlaveMode)	USART2CR5 |= 0x20;		//LIN模块从机模式
-		else								USART2CR5 &= ~0x20;		//LIN模块主机模式
-		if(USART->LIN_AutoSync == ENABLE)	USART2CR5 |= 0x10;		//使能自动同步
-		else								USART2CR5 &= ~0x10;		//关闭自动同步
+		if(USART->LIN_Enable == ENABLE)	USART2CR1 |= 0x80;		//脢鹿脛脺LIN脛拢驴茅
+		else								USART2CR1 &= ~0x80;		//鹿脴卤脮LIN脛拢驴茅
+		if(USART->LIN_Mode == LinSlaveMode)	USART2CR5 |= 0x20;		//LIN脛拢驴茅麓脫禄煤脛拢脢陆
+		else								USART2CR5 &= ~0x20;		//LIN脛拢驴茅脰梅禄煤脛拢脢陆
+		if(USART->LIN_AutoSync == ENABLE)	USART2CR5 |= 0x10;		//脢鹿脛脺脳脭露炉脥卢虏陆
+		else								USART2CR5 &= ~0x10;		//鹿脴卤脮脳脭露炉脥卢虏陆
 
-		UsartLinBaudrate(USART2,USART->LIN_Baudrate);			//设置波特率
+		UsartLinBaudrate(USART2,USART->LIN_Baudrate);			//脡猫脰脙虏篓脤脴脗脢
 
 		return SUCCESS;
 	}
-	return FAIL;	//错误
+	return FAIL;	//麓铆脦贸
 }
 
 /*********************************************************/

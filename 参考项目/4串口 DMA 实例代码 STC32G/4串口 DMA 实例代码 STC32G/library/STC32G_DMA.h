@@ -8,7 +8,7 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+/* 脠莽鹿没脪陋脭脷鲁脤脨貌脰脨脢鹿脫脙麓脣麓煤脗毛,脟毛脭脷鲁脤脨貌脰脨脳垄脙梅脢鹿脫脙脕脣STC碌脛脳脢脕脧录掳鲁脤脨貌            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_DMA_H
@@ -17,7 +17,7 @@
 #include	"config.h"
 
 //========================================================================
-//                              定义声明
+//                              露篓脪氓脡霉脙梅
 //========================================================================
 
 #define DMA_ADC_TRIG()					DMA_ADC_CR |= 0x40
@@ -36,10 +36,10 @@
 #define DMA_UR3R_TRIG()					DMA_UR3R_CR |= 0x20
 #define DMA_UR4R_TRIG()					DMA_UR4R_CR |= 0x20
 
-#define DMA_SPI_TRIG_M()				DMA_SPI_CR |= 0x40		//SPI触发主机模式
-#define DMA_SPI_TRIG_S()				DMA_SPI_CR |= 0x20		//SPI触发从机模式
+#define DMA_SPI_TRIG_M()				DMA_SPI_CR |= 0x40		//SPI麓楼路垄脰梅禄煤脛拢脢陆
+#define DMA_SPI_TRIG_S()				DMA_SPI_CR |= 0x20		//SPI麓楼路垄麓脫禄煤脛拢脢陆
 
-#define DMA_UR1R_CLRFIFO()			DMA_UR1R_CR |= 0x01	//清空 DMA FIFO
+#define DMA_UR1R_CLRFIFO()			DMA_UR1R_CR |= 0x01	//脟氓驴脮 DMA FIFO
 #define DMA_UR2R_CLRFIFO()			DMA_UR2R_CR |= 0x01
 #define DMA_UR3R_CLRFIFO()			DMA_UR3R_CR |= 0x01
 #define DMA_UR4R_CLRFIFO()			DMA_UR4R_CR |= 0x01
@@ -74,14 +74,14 @@
 #define SET_DMA_UR4R_CR(n)			DMA_UR4R_CR = (n)
 
 #define SET_LCM_DMA_LEN(n)			{DMA_LCM_AMTH = (n>>8); DMA_LCM_AMT = (n);}
-#define DMA_LCM_TRIG_WC()				DMA_LCM_CR |= 0xC0		//触发 LCM_DMA 发命令操作
-#define DMA_LCM_TRIG_WD()				DMA_LCM_CR |= 0xA0		//触发 LCM_DMA 发数据操作
-#define DMA_LCM_TRIG_RC()				DMA_LCM_CR |= 0x90		//触发 LCM_DMA 读命令操作
-#define DMA_LCM_TRIG_RD()				DMA_LCM_CR |= 0x88		//触发 LCM_DMA 读数据操作
+#define DMA_LCM_TRIG_WC()				DMA_LCM_CR |= 0xC0		//麓楼路垄 LCM_DMA 路垄脙眉脕卯虏脵脳梅
+#define DMA_LCM_TRIG_WD()				DMA_LCM_CR |= 0xA0		//麓楼路垄 LCM_DMA 路垄脢媒戮脻虏脵脳梅
+#define DMA_LCM_TRIG_RC()				DMA_LCM_CR |= 0x90		//麓楼路垄 LCM_DMA 露脕脙眉脕卯虏脵脳梅
+#define DMA_LCM_TRIG_RD()				DMA_LCM_CR |= 0x88		//麓楼路垄 LCM_DMA 露脕脢媒戮脻虏脵脳梅
 
 #define DMA_I2CT_TRIG()					DMA_I2CT_CR |= 0x40
 #define DMA_I2CR_TRIG()					DMA_I2CR_CR |= 0x40
-#define DMA_I2CR_CLRFIFO()			DMA_I2CR_CR |= 0x01	//清空 DMA FIFO
+#define DMA_I2CR_CLRFIFO()			DMA_I2CR_CR |= 0x01	//脟氓驴脮 DMA FIFO
 #define SET_I2CT_DMA_LEN(n)			{DMA_I2CT_AMTH = (n>>8); DMA_I2CT_AMT = (n);}
 #define SET_I2CR_DMA_LEN(n)			{DMA_I2CR_AMTH = (n>>8); DMA_I2CR_AMT = (n);}
 #define SET_I2C_DMA_ST(n)				{DMA_I2C_ST2 = (n>>8); DMA_I2C_ST1 = (n);}
@@ -89,7 +89,7 @@
 #define I2C_DMA_Disable()				DMA_I2C_CR &= ~0x01
 
 //========================================================================
-//                              常量声明
+//                              鲁拢脕驴脡霉脙梅
 //========================================================================
 
 #define DMA_ENABLE				0x80
@@ -121,71 +121,71 @@
 
 
 //========================================================================
-//                              变量声明
+//                              卤盲脕驴脡霉脙梅
 //========================================================================
 
 typedef struct
 {
-	u8	DMA_Enable;					//DMA使能  	ENABLE,DISABLE
-	u16	DMA_Channel;				//ADC通道使能寄存器, 1:使能, bit15~bit0 对应 ADC15~ADC0
-	u16	DMA_Buffer;					//ADC转换数据存储地址
-	u8	DMA_Times;					//每个通道转换次数, ADC_1_Times,ADC_2_Times,ADC_4_Times,ADC_8_Times,ADC_16_Times,ADC_32_Times,ADC_64_Times,ADC_128_Times,ADC_256_Times
+	u8	DMA_Enable;					//DMA脢鹿脛脺  	ENABLE,DISABLE
+	u16	DMA_Channel;				//ADC脥篓碌脌脢鹿脛脺录脛麓忙脝梅, 1:脢鹿脛脺, bit15~bit0 露脭脫娄 ADC15~ADC0
+	u16	DMA_Buffer;					//ADC脳陋禄禄脢媒戮脻麓忙麓垄碌脴脰路
+	u8	DMA_Times;					//脙驴赂枚脥篓碌脌脳陋禄禄麓脦脢媒, ADC_1_Times,ADC_2_Times,ADC_4_Times,ADC_8_Times,ADC_16_Times,ADC_32_Times,ADC_64_Times,ADC_128_Times,ADC_256_Times
 } DMA_ADC_InitTypeDef;
 
 typedef struct
 {
-	u8	DMA_Enable;					//DMA使能  	ENABLE,DISABLE
-	u16	DMA_Rx_Buffer;			//接收数据存储地址
-	u16	DMA_Tx_Buffer;			//发送数据存储地址
-	u16	DMA_Length;					//DMA传输总字节数  	(0~65535) + 1, 不要超过芯片 xdata 空间上限
-	u8	DMA_SRC_Dir;				//数据源地址改变方向  	M2M_ADDR_INC,M2M_ADDR_DEC
-	u8	DMA_DEST_Dir;				//数据目标地址改变方向 	M2M_ADDR_INC,M2M_ADDR_DEC
+	u8	DMA_Enable;					//DMA脢鹿脛脺  	ENABLE,DISABLE
+	u16	DMA_Rx_Buffer;			//陆脫脢脮脢媒戮脻麓忙麓垄碌脴脰路
+	u16	DMA_Tx_Buffer;			//路垄脣脥脢媒戮脻麓忙麓垄碌脴脰路
+	u16	DMA_Length;					//DMA麓芦脢盲脳脺脳脰陆脷脢媒  	(0~65535) + 1, 虏禄脪陋鲁卢鹿媒脨戮脝卢 xdata 驴脮录盲脡脧脧脼
+	u8	DMA_SRC_Dir;				//脢媒戮脻脭麓碌脴脰路赂脛卤盲路陆脧貌  	M2M_ADDR_INC,M2M_ADDR_DEC
+	u8	DMA_DEST_Dir;				//脢媒戮脻脛驴卤锚碌脴脰路赂脛卤盲路陆脧貌 	M2M_ADDR_INC,M2M_ADDR_DEC
 } DMA_M2M_InitTypeDef;
 
 typedef struct
 {
-	u8	DMA_TX_Enable;			//DMA使能  	ENABLE,DISABLE
-	u16	DMA_TX_Length;			//DMA传输总字节数  	(0~65535) + 1, 不要超过芯片 xdata 空间上限
-	u16	DMA_TX_Buffer;			//发送数据存储地址
+	u8	DMA_TX_Enable;			//DMA脢鹿脛脺  	ENABLE,DISABLE
+	u16	DMA_TX_Length;			//DMA麓芦脢盲脳脺脳脰陆脷脢媒  	(0~65535) + 1, 虏禄脪陋鲁卢鹿媒脨戮脝卢 xdata 驴脮录盲脡脧脧脼
+	u16	DMA_TX_Buffer;			//路垄脣脥脢媒戮脻麓忙麓垄碌脴脰路
 
-	u8	DMA_RX_Enable;			//DMA使能  	ENABLE,DISABLE
-	u16	DMA_RX_Length;			//DMA传输总字节数  	(0~65535) + 1, 不要超过芯片 xdata 空间上限
-	u16	DMA_RX_Buffer;			//接收数据存储地址
+	u8	DMA_RX_Enable;			//DMA脢鹿脛脺  	ENABLE,DISABLE
+	u16	DMA_RX_Length;			//DMA麓芦脢盲脳脺脳脰陆脷脢媒  	(0~65535) + 1, 虏禄脪陋鲁卢鹿媒脨戮脝卢 xdata 驴脮录盲脡脧脧脼
+	u16	DMA_RX_Buffer;			//陆脫脢脮脢媒戮脻麓忙麓垄碌脴脰路
 } DMA_UART_InitTypeDef;
 
 typedef struct
 {
-	u8	DMA_Enable;					//DMA使能  	ENABLE,DISABLE
-	u8	DMA_Tx_Enable;			//DMA发送数据使能  	ENABLE,DISABLE
-	u8	DMA_Rx_Enable;			//DMA接收数据使能  	ENABLE,DISABLE
-	u16	DMA_Rx_Buffer;			//接收数据存储地址
-	u16	DMA_Tx_Buffer;			//发送数据存储地址
-	u16	DMA_Length;					//DMA传输总字节数  	(0~65535) + 1, 不要超过芯片 xdata 空间上限
-	u8	DMA_AUTO_SS;				//自动控制SS脚使能  	ENABLE,DISABLE
-	u8	DMA_SS_Sel;					//自动控制SS脚选择 	SPI_SS_P12,SPI_SS_P22,SPI_SS_P74,SPI_SS_P35
+	u8	DMA_Enable;					//DMA脢鹿脛脺  	ENABLE,DISABLE
+	u8	DMA_Tx_Enable;			//DMA路垄脣脥脢媒戮脻脢鹿脛脺  	ENABLE,DISABLE
+	u8	DMA_Rx_Enable;			//DMA陆脫脢脮脢媒戮脻脢鹿脛脺  	ENABLE,DISABLE
+	u16	DMA_Rx_Buffer;			//陆脫脢脮脢媒戮脻麓忙麓垄碌脴脰路
+	u16	DMA_Tx_Buffer;			//路垄脣脥脢媒戮脻麓忙麓垄碌脴脰路
+	u16	DMA_Length;					//DMA麓芦脢盲脳脺脳脰陆脷脢媒  	(0~65535) + 1, 虏禄脪陋鲁卢鹿媒脨戮脝卢 xdata 驴脮录盲脡脧脧脼
+	u8	DMA_AUTO_SS;				//脳脭露炉驴脴脰脝SS陆脜脢鹿脛脺  	ENABLE,DISABLE
+	u8	DMA_SS_Sel;					//脳脭露炉驴脴脰脝SS陆脜脩隆脭帽 	SPI_SS_P12,SPI_SS_P22,SPI_SS_P74,SPI_SS_P35
 } DMA_SPI_InitTypeDef;
 
 typedef struct
 {
-	u8	DMA_Enable;					//DMA使能  	ENABLE,DISABLE
-	u16	DMA_Rx_Buffer;			//接收数据存储地址
-	u16	DMA_Tx_Buffer;			//发送数据存储地址
-	u16	DMA_Length;					//DMA传输总字节数  	(0~65535) + 1, 不要超过芯片 xdata 空间上限
+	u8	DMA_Enable;					//DMA脢鹿脛脺  	ENABLE,DISABLE
+	u16	DMA_Rx_Buffer;			//陆脫脢脮脢媒戮脻麓忙麓垄碌脴脰路
+	u16	DMA_Tx_Buffer;			//路垄脣脥脢媒戮脻麓忙麓垄碌脴脰路
+	u16	DMA_Length;					//DMA麓芦脢盲脳脺脳脰陆脷脢媒  	(0~65535) + 1, 虏禄脪陋鲁卢鹿媒脨戮脝卢 xdata 驴脮录盲脡脧脧脼
 } DMA_LCM_InitTypeDef;
 
 typedef struct
 {
-	u8	DMA_TX_Enable;			//DMA使能  	ENABLE,DISABLE
-	u16	DMA_TX_Length;			//DMA传输总字节数  	(0~65535) + 1, 不要超过芯片 xdata 空间上限
-	u16	DMA_TX_Buffer;			//发送数据存储地址
+	u8	DMA_TX_Enable;			//DMA脢鹿脛脺  	ENABLE,DISABLE
+	u16	DMA_TX_Length;			//DMA麓芦脢盲脳脺脳脰陆脷脢媒  	(0~65535) + 1, 虏禄脪陋鲁卢鹿媒脨戮脝卢 xdata 驴脮录盲脡脧脧脼
+	u16	DMA_TX_Buffer;			//路垄脣脥脢媒戮脻麓忙麓垄碌脴脰路
 
-	u8	DMA_RX_Enable;			//DMA使能  	ENABLE,DISABLE
-	u16	DMA_RX_Length;			//DMA传输总字节数  	(0~65535) + 1, 不要超过芯片 xdata 空间上限
-	u16	DMA_RX_Buffer;			//接收数据存储地址
+	u8	DMA_RX_Enable;			//DMA脢鹿脛脺  	ENABLE,DISABLE
+	u16	DMA_RX_Length;			//DMA麓芦脢盲脳脺脳脰陆脷脢媒  	(0~65535) + 1, 虏禄脪陋鲁卢鹿媒脨戮脝卢 xdata 驴脮录盲脡脧脧脼
+	u16	DMA_RX_Buffer;			//陆脫脢脮脢媒戮脻麓忙麓垄碌脴脰路
 } DMA_I2C_InitTypeDef;
 
 //========================================================================
-//                              外部声明
+//                              脥芒虏驴脡霉脙梅
 //========================================================================
 extern bit DmaADCFlag;
 extern bit DmaM2MFlag;

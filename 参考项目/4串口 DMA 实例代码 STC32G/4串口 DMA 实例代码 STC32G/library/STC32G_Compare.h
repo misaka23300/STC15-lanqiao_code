@@ -8,7 +8,7 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+/* 脠莽鹿没脪陋脭脷鲁脤脨貌脰脨脢鹿脫脙麓脣麓煤脗毛,脟毛脭脷鲁脤脨貌脰脨脳垄脙梅脢鹿脫脙脕脣STC碌脛脳脢脕脧录掳鲁脤脨貌            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_COMPARE_H
@@ -17,28 +17,28 @@
 #include	"config.h"
 
 //========================================================================
-//                              定义声明
+//                              露篓脪氓脡霉脙梅
 //========================================================================
 
-#define	CMP_P_P37	0x00	//输入正极性选择, 0: 选择内部P3.7做正输入
-#define	CMP_P_P50	0x01	//输入正极性选择, 1: 选择内部P5.0做正输入
-#define	CMP_P_P51	0x02	//输入正极性选择, 2: 选择内部P5.1做正输入
-#define	CMP_P_ADC	0x03	//输入正极性选择, 3: 由ADC_CHS[3:0]所选择的ADC输入端做正输入.
-#define	CMP_N_P36	0x00	//输入负极性选择, 0: 选择外部P3.6做输入.
-#define	CMP_N_GAP	0x01	//输入负极性选择, 1: 选择内部BandGap电压BGv做负输入.
+#define	CMP_P_P37	0x00	//脢盲脠毛脮媒录芦脨脭脩隆脭帽, 0: 脩隆脭帽脛脷虏驴P3.7脳枚脮媒脢盲脠毛
+#define	CMP_P_P50	0x01	//脢盲脠毛脮媒录芦脨脭脩隆脭帽, 1: 脩隆脭帽脛脷虏驴P5.0脳枚脮媒脢盲脠毛
+#define	CMP_P_P51	0x02	//脢盲脠毛脮媒录芦脨脭脩隆脭帽, 2: 脩隆脭帽脛脷虏驴P5.1脳枚脮媒脢盲脠毛
+#define	CMP_P_ADC	0x03	//脢盲脠毛脮媒录芦脨脭脩隆脭帽, 3: 脫脡ADC_CHS[3:0]脣霉脩隆脭帽碌脛ADC脢盲脠毛露脣脳枚脮媒脢盲脠毛.
+#define	CMP_N_P36	0x00	//脢盲脠毛赂潞录芦脨脭脩隆脭帽, 0: 脩隆脭帽脥芒虏驴P3.6脳枚脢盲脠毛.
+#define	CMP_N_GAP	0x01	//脢盲脠毛赂潞录芦脨脭脩隆脭帽, 1: 脩隆脭帽脛脷虏驴BandGap碌莽脩鹿BGv脳枚赂潞脢盲脠毛.
 
-#define	CMPO_P34()	CMPO_S = 0	//结果输出到P3.4.
-#define	CMPO_P41()	CMPO_S = 1	//结果输出到P4.1.
+#define	CMPO_P34()	CMPO_S = 0	//陆谩鹿没脢盲鲁枚碌陆P3.4.
+#define	CMPO_P41()	CMPO_S = 1	//陆谩鹿没脢盲鲁枚碌陆P4.1.
 
 typedef struct
 { 
-	u8	CMP_EN;					//比较器允许或禁止, 			ENABLE,DISABLE
-	u8	CMP_P_Select;		//比较器输入正极选择, CMP_P_P37: 选择P3.7做正输入, CMP_P_ADC: 由ADC模拟输入端做正输入.
-	u8	CMP_N_Select;		//比较器输入负极选择, CMP_N_GAP: 选择内部BandGap经过OP后的电压做负输入, CMP_N_P36: 选择P3.6做负输入.
-	u8	CMP_Outpt_En;		//允许比较结果输出,   ENABLE,DISABLE
-	u8	CMP_InvCMPO;		//比较器输出取反, ENABLE,DISABLE
-	u8	CMP_100nsFilter;	//内部0.1us滤波,  ENABLE,DISABLE
-	u8	CMP_OutDelayDuty;	//0~63, 比较结果变化延时周期数
+	u8	CMP_EN;					//卤脠陆脧脝梅脭脢脨铆禄貌陆没脰鹿, 			ENABLE,DISABLE
+	u8	CMP_P_Select;		//卤脠陆脧脝梅脢盲脠毛脮媒录芦脩隆脭帽, CMP_P_P37: 脩隆脭帽P3.7脳枚脮媒脢盲脠毛, CMP_P_ADC: 脫脡ADC脛拢脛芒脢盲脠毛露脣脳枚脮媒脢盲脠毛.
+	u8	CMP_N_Select;		//卤脠陆脧脝梅脢盲脠毛赂潞录芦脩隆脭帽, CMP_N_GAP: 脩隆脭帽脛脷虏驴BandGap戮颅鹿媒OP潞贸碌脛碌莽脩鹿脳枚赂潞脢盲脠毛, CMP_N_P36: 脩隆脭帽P3.6脳枚赂潞脢盲脠毛.
+	u8	CMP_Outpt_En;		//脭脢脨铆卤脠陆脧陆谩鹿没脢盲鲁枚,   ENABLE,DISABLE
+	u8	CMP_InvCMPO;		//卤脠陆脧脝梅脢盲鲁枚脠隆路麓, ENABLE,DISABLE
+	u8	CMP_100nsFilter;	//脛脷虏驴0.1us脗脣虏篓,  ENABLE,DISABLE
+	u8	CMP_OutDelayDuty;	//0~63, 卤脠陆脧陆谩鹿没卤盲禄炉脩脫脢卤脰脺脝脷脢媒
 } CMP_InitDefine; 
 
 void	CMP_Inilize(CMP_InitDefine *CMPx);

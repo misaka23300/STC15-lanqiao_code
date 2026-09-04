@@ -8,7 +8,7 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+/* 脠莽鹿没脪陋脭脷鲁脤脨貌脰脨脢鹿脫脙麓脣麓煤脗毛,脟毛脭脷鲁脤脨貌脰脨脳垄脙梅脢鹿脫脙脕脣STC碌脛脳脢脕脧录掳鲁脤脨貌            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_LIN_H
@@ -17,38 +17,38 @@
 #include	"config.h"
 
 //========================================================================
-//                              定义声明
+//                              露篓脪氓脡霉脙梅
 //========================================================================
 
-#define LIN_MODE        1    //0: LIN2.1(增强校验);  1: LIN1.3
-#define FRAME_LEN       8    //数据长度: 8 字节
+#define LIN_MODE        1    //0: LIN2.1(脭枚脟驴脨拢脩茅);  1: LIN1.3
+#define FRAME_LEN       8    //脢媒戮脻鲁陇露脠: 8 脳脰陆脷
 
 //========================================================================
-//                              常量声明
+//                              鲁拢脕驴脡霉脙梅
 //========================================================================
 
-#define LIN_LIDE     0x01  //Head中断
-#define LIN_RDYE     0x02  //Ready中断
-#define LIN_ERRE     0x04  //错误中断
-#define LIN_ABORTE   0x08  //终止中断
-#define LIN_ALLIE    0x0F  //所有中断
+#define LIN_LIDE     0x01  //Head脰脨露脧
+#define LIN_RDYE     0x02  //Ready脰脨露脧
+#define LIN_ERRE     0x04  //麓铆脦贸脰脨露脧
+#define LIN_ABORTE   0x08  //脰脮脰鹿脰脨露脧
+#define LIN_ALLIE    0x0F  //脣霉脫脨脰脨露脧
 
 //========================================================================
-//                              变量声明
+//                              卤盲脕驴脡霉脙梅
 //========================================================================
 
 typedef struct
 {
-	u8	LIN_Enable;         //LIN功能使能  	ENABLE,DISABLE
-	u16	LIN_Baudrate;       //LIN波特率
-	u8	LIN_IE;             //LIN中断使能  	LIN_LIDE/LIN_RDYE/LIN_ERRE/LIN_ABORTE/LIN_ALLIE,DISABLE
-	u8	LIN_HeadDelay;      //帧头延时计数  	0~(65535*1000)/MAIN_Fosc
-	u8	LIN_HeadPrescaler;  //帧头延时分频  	0~63
+	u8	LIN_Enable;         //LIN鹿娄脛脺脢鹿脛脺  	ENABLE,DISABLE
+	u16	LIN_Baudrate;       //LIN虏篓脤脴脗脢
+	u8	LIN_IE;             //LIN脰脨露脧脢鹿脛脺  	LIN_LIDE/LIN_RDYE/LIN_ERRE/LIN_ABORTE/LIN_ALLIE,DISABLE
+	u8	LIN_HeadDelay;      //脰隆脥路脩脫脢卤录脝脢媒  	0~(65535*1000)/MAIN_Fosc
+	u8	LIN_HeadPrescaler;  //脰隆脥路脩脫脢卤路脰脝碌  	0~63
 } LIN_InitTypeDef;
 
 
 //========================================================================
-//                              外部声明
+//                              脥芒虏驴脡霉脙梅
 //========================================================================
 
 void LIN_Inilize(LIN_InitTypeDef *LIN);

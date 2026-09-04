@@ -8,19 +8,19 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+/* 脠莽鹿没脪陋脭脷鲁脤脨貌脰脨脢鹿脫脙麓脣麓煤脗毛,脟毛脭脷鲁脤脨貌脰脨脳垄脙梅脢鹿脫脙脕脣STC碌脛脳脢脕脧录掳鲁脤脨貌            */
 /*---------------------------------------------------------------------*/
 
 #include "STC32G_LIN.h"
 
 //========================================================================
-// 函数: u8 ReadReg(u8 addr)
-// 描述: Lin功能寄存器读取函数。
-// 参数: Lin功能寄存器地址.
-// 返回: Lin功能寄存器数据.
-// 版本: VER1.0
-// 日期: 2021-01-05
-// 备注: 
+// 潞炉脢媒: u8 ReadReg(u8 addr)
+// 脙猫脢枚: Lin鹿娄脛脺录脛麓忙脝梅露脕脠隆潞炉脢媒隆拢
+// 虏脦脢媒: Lin鹿娄脛脺录脛麓忙脝梅碌脴脰路.
+// 路碌禄脴: Lin鹿娄脛脺录脛麓忙脝梅脢媒戮脻.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2021-01-05
+// 卤赂脳垄: 
 //========================================================================
 u8 LinReadReg(u8 addr)
 {
@@ -31,13 +31,13 @@ u8 LinReadReg(u8 addr)
 }
 
 //========================================================================
-// 函数: void WriteReg(u8 addr, u8 dat)
-// 描述: Lin功能寄存器配置函数。
-// 参数: Lin功能寄存器地址, Lin功能寄存器数据.
-// 返回: none.
-// 版本: VER1.0
-// 日期: 2021-01-05
-// 备注: 
+// 潞炉脢媒: void WriteReg(u8 addr, u8 dat)
+// 脙猫脢枚: Lin鹿娄脛脺录脛麓忙脝梅脜盲脰脙潞炉脢媒隆拢
+// 虏脦脢媒: Lin鹿娄脛脺录脛麓忙脝梅碌脴脰路, Lin鹿娄脛脺录脛麓忙脝梅脢媒戮脻.
+// 路碌禄脴: none.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2021-01-05
+// 卤赂脳垄: 
 //========================================================================
 void LinWriteReg(u8 addr, u8 dat)
 {
@@ -46,19 +46,19 @@ void LinWriteReg(u8 addr, u8 dat)
 }
 
 //========================================================================
-// 函数: void LinReadMsg(u8 *pdat)
-// 描述: Lin读取数据函数。
-// 参数: *pdat: 接收数据缓冲区.
-// 返回: none.
-// 版本: VER1.0
-// 日期: 2021-01-05
-// 备注: 
+// 潞炉脢媒: void LinReadMsg(u8 *pdat)
+// 脙猫脢枚: Lin露脕脠隆脢媒戮脻潞炉脢媒隆拢
+// 虏脦脢媒: *pdat: 陆脫脢脮脢媒戮脻禄潞鲁氓脟酶.
+// 路碌禄脴: none.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2021-01-05
+// 卤赂脳垄: 
 //========================================================================
 void LinReadMsg(u8 *pdat)
 {
 	u8 i;
 
-	LinWriteReg(LSEL,0x80);	//地址自增，从0开始
+	LinWriteReg(LSEL,0x80);	//碌脴脰路脳脭脭枚拢卢麓脫0驴陋脢录
 	for(i=0;i<FRAME_LEN;i++)
 	{
 		pdat[i] = LinReadReg(LBUF);
@@ -66,19 +66,19 @@ void LinReadMsg(u8 *pdat)
 }
 
 //========================================================================
-// 函数: void LinSendMsg(u8 *pdat)
-// 描述: Lin设置数据函数。
-// 参数: *pdat: 设置数据缓冲区.
-// 返回: Lin ID.
-// 版本: VER1.0
-// 日期: 2021-01-05
-// 备注: 
+// 潞炉脢媒: void LinSendMsg(u8 *pdat)
+// 脙猫脢枚: Lin脡猫脰脙脢媒戮脻潞炉脢媒隆拢
+// 虏脦脢媒: *pdat: 脡猫脰脙脢媒戮脻禄潞鲁氓脟酶.
+// 路碌禄脴: Lin ID.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2021-01-05
+// 卤赂脳垄: 
 //========================================================================
 void LinSendMsg(u8 *pdat)
 {
 	u8 i;
 
-	LinWriteReg(LSEL,0x80);		//地址自增，从0开始
+	LinWriteReg(LSEL,0x80);		//碌脴脰路脳脭脭枚拢卢麓脫0驴陋脢录
 	for(i=0;i<FRAME_LEN;i++)
 	{
 		LinWriteReg(LBUF,pdat[i]);
@@ -86,89 +86,89 @@ void LinSendMsg(u8 *pdat)
 }
 
 //========================================================================
-// 函数: void LinSetID(u8 lid)
-// 描述: 设置LIN ID函数。
-// 参数: none.
-// 返回: none.
-// 版本: VER1.0
-// 日期: 2021-01-05
-// 备注: 
+// 潞炉脢媒: void LinSetID(u8 lid)
+// 脙猫脢枚: 脡猫脰脙LIN ID潞炉脢媒隆拢
+// 虏脦脢媒: none.
+// 路碌禄脴: none.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2021-01-05
+// 卤赂脳垄: 
 //========================================================================
 void LinSetID(u8 lid)
 {
-	LinWriteReg(LID,lid);			//设置总线ID
+	LinWriteReg(LID,lid);			//脡猫脰脙脳脺脧脽ID
 }
 
 //========================================================================
-// 函数: u8 GetLinError(void)
-// 描述: 获取LIN总线错误寄存器状态。
-// 参数: none.
-// 返回: 错误寄存器状态.
-// 版本: VER1.0
-// 日期: 2021-01-05
-// 备注: 
+// 潞炉脢媒: u8 GetLinError(void)
+// 脙猫脢枚: 禄帽脠隆LIN脳脺脧脽麓铆脦贸录脛麓忙脝梅脳麓脤卢隆拢
+// 虏脦脢媒: none.
+// 路碌禄脴: 麓铆脦贸录脛麓忙脝梅脳麓脤卢.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2021-01-05
+// 卤赂脳垄: 
 //========================================================================
 u8 GetLinError(void)
 {
 	u8 sta;
-	sta = LinReadReg(LER);		//读取清除错误寄存器
+	sta = LinReadReg(LER);		//露脕脠隆脟氓鲁媒麓铆脦贸录脛麓忙脝梅
 	return sta;
 }
 
 //========================================================================
-// 函数: u8 WaitLinReady(void)
-// 描述: 等待LIN总线就绪。
-// 参数: none.
-// 返回: LIN总线状态.
-// 版本: VER1.0
-// 日期: 2021-01-05
-// 备注: 
+// 潞炉脢媒: u8 WaitLinReady(void)
+// 脙猫脢枚: 碌脠麓媒LIN脳脺脧脽戮脥脨梅隆拢
+// 虏脦脢媒: none.
+// 路碌禄脴: LIN脳脺脧脽脳麓脤卢.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2021-01-05
+// 卤赂脳垄: 
 //========================================================================
 u8 WaitLinReady(void)
 {
 	u8 lsr;
 	do{
 		lsr = LinReadReg(LSR);
-	}while(!(lsr & 0x02));		//判断ready状态
+	}while(!(lsr & 0x02));		//脜脨露脧ready脳麓脤卢
 	return lsr;
 }
 
 //========================================================================
-// 函数: void SendAbortCmd(void)
-// 描述: 主模式发送Lin总线Abort函数。
-// 参数: none.
-// 返回: none.
-// 版本: VER1.0
-// 日期: 2021-01-05
-// 备注: 
+// 潞炉脢媒: void SendAbortCmd(void)
+// 脙猫脢枚: 脰梅脛拢脢陆路垄脣脥Lin脳脺脧脽Abort潞炉脢媒隆拢
+// 虏脦脢媒: none.
+// 路碌禄脴: none.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2021-01-05
+// 卤赂脳垄: 
 //========================================================================
 void SendAbortCmd(void)
 {
-	LinWriteReg(LCR,0x80);		//主模式 Send Abort
+	LinWriteReg(LCR,0x80);		//脰梅脛拢脢陆 Send Abort
 }
 
 //========================================================================
-// 函数: void SendHeadCmd(void)
-// 描述: 主模式发送Lin总线Header函数。
-// 参数: none.
-// 返回: none.
-// 版本: VER1.0
-// 日期: 2021-01-05
-// 备注: 
+// 潞炉脢媒: void SendHeadCmd(void)
+// 脙猫脢枚: 脰梅脛拢脢陆路垄脣脥Lin脳脺脧脽Header潞炉脢媒隆拢
+// 虏脦脢媒: none.
+// 路碌禄脴: none.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2021-01-05
+// 卤赂脳垄: 
 //========================================================================
 void SendHeadCmd(void)
 {
-	LinWriteReg(LCR,0x81);		//主模式 Send Header
+	LinWriteReg(LCR,0x81);		//脰梅脛拢脢陆 Send Header
 }
 
 //========================================================================
-// 函数: void SendDatCmd(void)
-// 描述: 主模式发送Lin总线数据函数。
-// 参数: none.
-// 返回: none.
-// 版本: VER1.0
-// 日期: 2021-01-05
-// 备注: 
+// 潞炉脢媒: void SendDatCmd(void)
+// 脙猫脢枚: 脰梅脛拢脢陆路垄脣脥Lin脳脺脧脽脢媒戮脻潞炉脢媒隆拢
+// 虏脦脢媒: none.
+// 路碌禄脴: none.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2021-01-05
+// 卤赂脳垄: 
 //========================================================================
 void SendDatCmd(void)
 {
@@ -178,13 +178,13 @@ void SendDatCmd(void)
 }
 
 //========================================================================
-// 函数: void ResponseTxCmd(void)
-// 描述: 从模式发送Lin总线Tx Response函数。
-// 参数: none.
-// 返回: none.
-// 版本: VER1.0
-// 日期: 2021-01-05
-// 备注: 
+// 潞炉脢媒: void ResponseTxCmd(void)
+// 脙猫脢枚: 麓脫脛拢脢陆路垄脣脥Lin脳脺脧脽Tx Response潞炉脢媒隆拢
+// 虏脦脢媒: none.
+// 路碌禄脴: none.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2021-01-05
+// 卤赂脳垄: 
 //========================================================================
 void ResponseTxCmd(void)
 {
@@ -194,13 +194,13 @@ void ResponseTxCmd(void)
 }
 
 //========================================================================
-// 函数: void ResponseRxCmd(void)
-// 描述: 从模式发送Lin总线Rx Response函数。
-// 参数: none.
-// 返回: none.
-// 版本: VER1.0
-// 日期: 2021-01-05
-// 备注: 
+// 潞炉脢媒: void ResponseRxCmd(void)
+// 脙猫脢枚: 麓脫脛拢脢陆路垄脣脥Lin脳脺脧脽Rx Response潞炉脢媒隆拢
+// 虏脦脢媒: none.
+// 路碌禄脴: none.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2021-01-05
+// 卤赂脳垄: 
 //========================================================================
 void ResponseRxCmd(void)
 {
@@ -210,95 +210,95 @@ void ResponseRxCmd(void)
 }
 
 //========================================================================
-// 函数: void LinTxResponse(u8 *pdat)
-// 描述: Lin从机发送应答数据，跟主机发送的Header拼成一个完整的帧。
-// 参数: *pdat: 发送数据缓冲区.
-// 返回: none.
-// 版本: VER1.0
-// 日期: 2021-01-05
-// 备注: 
+// 潞炉脢媒: void LinTxResponse(u8 *pdat)
+// 脙猫脢枚: Lin麓脫禄煤路垄脣脥脫娄麓冒脢媒戮脻拢卢赂煤脰梅禄煤路垄脣脥碌脛Header脝麓鲁脡脪禄赂枚脥锚脮没碌脛脰隆隆拢
+// 虏脦脢媒: *pdat: 路垄脣脥脢媒戮脻禄潞鲁氓脟酶.
+// 路碌禄脴: none.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2021-01-05
+// 卤赂脳垄: 
 //========================================================================
 void LinTxResponse(u8 *pdat)
 {
 	LinSendMsg(pdat);
 	ResponseTxCmd();					//TX response
-	WaitLinReady();						//等待ready状态
-	GetLinError();						//读取清除错误寄存器
+	WaitLinReady();						//碌脠麓媒ready脳麓脤卢
+	GetLinError();						//露脕脠隆脟氓鲁媒麓铆脦贸录脛麓忙脝梅
 }
 
 //========================================================================
-// 函数: void LinReadFrame(u8 *pdat)
-// 描述: Lin从机接收数据帧函数。
-// 参数: *pdat: 接收数据缓冲区.
-// 返回: none.
-// 版本: VER1.0
-// 日期: 2021-01-05
-// 备注: 
+// 潞炉脢媒: void LinReadFrame(u8 *pdat)
+// 脙猫脢枚: Lin麓脫禄煤陆脫脢脮脢媒戮脻脰隆潞炉脢媒隆拢
+// 虏脦脢媒: *pdat: 陆脫脢脮脢媒戮脻禄潞鲁氓脟酶.
+// 路碌禄脴: none.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2021-01-05
+// 卤赂脳垄: 
 //========================================================================
 void LinReadFrame(u8 *pdat)
 {
 	ResponseRxCmd();					//RX response
-	WaitLinReady();						//等待ready状态
-	GetLinError();						//读取清除错误寄存器
+	WaitLinReady();						//碌脠麓媒ready脳麓脤卢
+	GetLinError();						//露脕脠隆脟氓鲁媒麓铆脦贸录脛麓忙脝梅
 
-	LinReadMsg(pdat);					//接收Lin总线数据
+	LinReadMsg(pdat);					//陆脫脢脮Lin脳脺脧脽脢媒戮脻
 }
 
 //========================================================================
-// 函数: void LinSendFrame(u8 lid, u8 *pdat)
-// 描述: Lin主机发送完整帧函数。
-// 参数: lid: Lin ID; *pdat: 发送数据缓冲区.
-// 返回: none.
-// 版本: VER1.0
-// 日期: 2021-01-05
-// 备注: 
+// 潞炉脢媒: void LinSendFrame(u8 lid, u8 *pdat)
+// 脙猫脢枚: Lin脰梅禄煤路垄脣脥脥锚脮没脰隆潞炉脢媒隆拢
+// 虏脦脢媒: lid: Lin ID; *pdat: 路垄脣脥脢媒戮脻禄潞鲁氓脟酶.
+// 路碌禄脴: none.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2021-01-05
+// 卤赂脳垄: 
 //========================================================================
 void LinSendFrame(u8 lid, u8 *pdat)
 {
-	LinSetID(lid);						//设置总线ID
+	LinSetID(lid);						//脡猫脰脙脳脺脧脽ID
 	LinSendMsg(pdat);
 
-	SendHeadCmd();						//主模式 Send Seader
-	WaitLinReady();						//等待ready状态
-	GetLinError();						//读取清除错误寄存器
+	SendHeadCmd();						//脰梅脛拢脢陆 Send Seader
+	WaitLinReady();						//碌脠麓媒ready脳麓脤卢
+	GetLinError();						//露脕脠隆脟氓鲁媒麓铆脦贸录脛麓忙脝梅
 
 	SendDatCmd();							//Send Data
-	WaitLinReady();						//等待ready状态
-	GetLinError();						//读取清除错误寄存器
+	WaitLinReady();						//碌脠麓媒ready脳麓脤卢
+	GetLinError();						//露脕脠隆脟氓鲁媒麓铆脦贸录脛麓忙脝梅
 }
 
 //========================================================================
-// 函数: void LinSendHeaderRead(u8 lid, u8 *pdat)
-// 描述: Lin主机发送Header，由从机发送应答数据，拼成一个完整的帧。
-// 参数: lid: 发送应答从机的总线ID; *pdat: 接收数据缓冲区.
-// 返回: none.
-// 版本: VER1.0
-// 日期: 2021-01-05
-// 备注: 
+// 潞炉脢媒: void LinSendHeaderRead(u8 lid, u8 *pdat)
+// 脙猫脢枚: Lin脰梅禄煤路垄脣脥Header拢卢脫脡麓脫禄煤路垄脣脥脫娄麓冒脢媒戮脻拢卢脝麓鲁脡脪禄赂枚脥锚脮没碌脛脰隆隆拢
+// 虏脦脢媒: lid: 路垄脣脥脫娄麓冒麓脫禄煤碌脛脳脺脧脽ID; *pdat: 陆脫脢脮脢媒戮脻禄潞鲁氓脟酶.
+// 路碌禄脴: none.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2021-01-05
+// 卤赂脳垄: 
 //========================================================================
 void LinSendHeaderRead(u8 lid, u8 *pdat)
 {
-	LinSetID(lid);						//设置发送Response从机总线ID
+	LinSetID(lid);						//脡猫脰脙路垄脣脥Response麓脫禄煤脳脺脧脽ID
 
-	SendHeadCmd();						//主模式 send header
-	WaitLinReady();						//等待ready状态
-	GetLinError();						//读取清除错误寄存器
+	SendHeadCmd();						//脰梅脛拢脢陆 send header
+	WaitLinReady();						//碌脠麓媒ready脳麓脤卢
+	GetLinError();						//露脕脠隆脟氓鲁媒麓铆脦贸录脛麓忙脝梅
 	
 	ResponseRxCmd();					//RX response
-	WaitLinReady();						//等待ready状态
-	GetLinError();						//读取清除错误寄存器
+	WaitLinReady();						//碌脠麓媒ready脳麓脤卢
+	GetLinError();						//露脕脠隆脟氓鲁媒麓铆脦贸录脛麓忙脝梅
 
-	LinReadMsg(pdat);				//接收Lin总线从机发送的应答数据
+	LinReadMsg(pdat);				//陆脫脢脮Lin脳脺脧脽麓脫禄煤路垄脣脥碌脛脫娄麓冒脢媒戮脻
 }
 
 //========================================================================
-// 函数: void LinSetBaudrate(u16 brt)
-// 描述: Lin总线波特率设置函数。
-// 参数: brt: 波特率.
-// 返回: none.
-// 版本: VER1.0
-// 日期: 2021-01-05
-// 备注: 
+// 潞炉脢媒: void LinSetBaudrate(u16 brt)
+// 脙猫脢枚: Lin脳脺脧脽虏篓脤脴脗脢脡猫脰脙潞炉脢媒隆拢
+// 虏脦脢媒: brt: 虏篓脤脴脗脢.
+// 路碌禄脴: none.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2021-01-05
+// 卤赂脳垄: 
 //========================================================================
 void LinSetBaudrate(u16 brt)
 {
@@ -309,38 +309,38 @@ void LinSetBaudrate(u16 brt)
 }
 
 //========================================================================
-// 函数: void LinSetHeadDelay(u8 base_ms, u8 prescaler)
-// 描述: Lin总线设置帧头延时函数。
-// 参数: base_ms:延时计数, prescaler:延时分频.
-// 返回: none.
-// 版本: VER1.0
-// 日期: 2021-01-05
-// 备注: 
+// 潞炉脢媒: void LinSetHeadDelay(u8 base_ms, u8 prescaler)
+// 脙猫脢枚: Lin脳脺脧脽脡猫脰脙脰隆脥路脩脫脢卤潞炉脢媒隆拢
+// 虏脦脢媒: base_ms:脩脫脢卤录脝脢媒, prescaler:脩脫脢卤路脰脝碌.
+// 路碌禄脴: none.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2021-01-05
+// 卤赂脳垄: 
 //========================================================================
 void LinSetHeadDelay(u8 base_ms, u8 prescaler)
 {
 	u16 tmp;
 	tmp = (MAIN_Fosc * base_ms) / 1000;
 	LinWriteReg(HDRH,(u8)(tmp>>8));
-	LinWriteReg(HDRL,(u8)tmp);		//设置帧头延时计数
+	LinWriteReg(HDRL,(u8)tmp);		//脡猫脰脙脰隆脥路脩脫脢卤录脝脢媒
 
-	LinWriteReg(HDP,prescaler);		//设置帧头延时分频
+	LinWriteReg(HDP,prescaler);		//脡猫脰脙脰隆脥路脩脫脢卤路脰脝碌
 }
 
 //========================================================================
-// 函数: void LIN_Inilize(LIN_InitTypeDef *LIN)
-// 描述: LIN 初始化程序.
-// 参数: LIN: 结构参数,请参考LIN.h里的定义.
-// 返回: none.
-// 版本: V1.0, 2021-06-02
+// 潞炉脢媒: void LIN_Inilize(LIN_InitTypeDef *LIN)
+// 脙猫脢枚: LIN 鲁玫脢录禄炉鲁脤脨貌.
+// 虏脦脢媒: LIN: 陆谩鹿鹿虏脦脢媒,脟毛虏脦驴录LIN.h脌茂碌脛露篓脪氓.
+// 路碌禄脴: none.
+// 掳忙卤戮: V1.0, 2021-06-02
 //========================================================================
 void LIN_Inilize(LIN_InitTypeDef *LIN)
 {
-	if(LIN->LIN_Enable == ENABLE)	LINEN = 1;		//使能LIN模块
-	else								LINEN = 0;		//关闭LIN模块
+	if(LIN->LIN_Enable == ENABLE)	LINEN = 1;		//脢鹿脛脺LIN脛拢驴茅
+	else								LINEN = 0;		//鹿脴卤脮LIN脛拢驴茅
 
-	GetLinError();						//读取清除错误寄存器
-	LinWriteReg(LIE,LIN->LIN_IE);		//LIE中断使能寄存器
-	LinSetBaudrate(LIN->LIN_Baudrate);	//设置波特率
-	LinSetHeadDelay(LIN->LIN_HeadDelay,LIN->LIN_HeadPrescaler);	//设置帧头延时
+	GetLinError();						//露脕脠隆脟氓鲁媒麓铆脦贸录脛麓忙脝梅
+	LinWriteReg(LIE,LIN->LIN_IE);		//LIE脰脨露脧脢鹿脛脺录脛麓忙脝梅
+	LinSetBaudrate(LIN->LIN_Baudrate);	//脡猫脰脙虏篓脤脴脗脢
+	LinSetHeadDelay(LIN->LIN_HeadDelay,LIN->LIN_HeadPrescaler);	//脡猫脰脙脰隆脥路脩脫脢卤
 }

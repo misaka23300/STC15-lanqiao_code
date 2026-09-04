@@ -8,7 +8,7 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+/* 脠莽鹿没脪陋脭脷鲁脤脨貌脰脨脢鹿脫脙麓脣麓煤脗毛,脟毛脭脷鲁脤脨貌脰脨脳垄脙梅脢鹿脫脙脕脣STC碌脛脳脢脕脧录掳鲁脤脨貌            */
 /*---------------------------------------------------------------------*/
 
 #include "STC32G_CAN.h"
@@ -20,13 +20,13 @@ CAN_DataDef CAN2_Tx;
 CAN_DataDef CAN2_Rx[8];
 
 //========================================================================
-// 函数: u8 ReadReg(u8 addr)
-// 描述: CAN功能寄存器读取函数。
-// 参数: CAN功能寄存器地址.
-// 返回: CAN功能寄存器数据.
-// 版本: VER1.0
-// 日期: 2020-11-16
-// 备注: 
+// 潞炉脢媒: u8 ReadReg(u8 addr)
+// 脙猫脢枚: CAN鹿娄脛脺录脛麓忙脝梅露脕脠隆潞炉脢媒隆拢
+// 虏脦脢媒: CAN鹿娄脛脺录脛麓忙脝梅碌脴脰路.
+// 路碌禄脴: CAN鹿娄脛脺录脛麓忙脝梅脢媒戮脻.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2020-11-16
+// 卤赂脳垄: 
 //========================================================================
 u8 CanReadReg(u8 addr)
 {
@@ -37,13 +37,13 @@ u8 CanReadReg(u8 addr)
 }
 
 //========================================================================
-// 函数: void WriteReg(u8 addr, u8 dat)
-// 描述: CAN功能寄存器配置函数。
-// 参数: CAN功能寄存器地址, CAN功能寄存器数据.
-// 返回: none.
-// 版本: VER1.0
-// 日期: 2020-11-16
-// 备注: 
+// 潞炉脢媒: void WriteReg(u8 addr, u8 dat)
+// 脙猫脢枚: CAN鹿娄脛脺录脛麓忙脝梅脜盲脰脙潞炉脢媒隆拢
+// 虏脦脢媒: CAN鹿娄脛脺录脛麓忙脝梅碌脴脰路, CAN鹿娄脛脺录脛麓忙脝梅脢媒戮脻.
+// 路碌禄脴: none.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2020-11-16
+// 卤赂脳垄: 
 //========================================================================
 void CanWriteReg(u8 addr, u8 dat)
 {
@@ -52,73 +52,73 @@ void CanWriteReg(u8 addr, u8 dat)
 }
 
 //========================================================================
-// 函数: void CAN_Inilize(u8 CANx, CAN_InitTypeDef *CAN)
-// 描述: CAN 初始化程序.
-// 参数: CAN: 结构参数,请参考CAN.h里的定义.
-// 返回: none.
-// 版本: V1.0, 2021-06-02
+// 潞炉脢媒: void CAN_Inilize(u8 CANx, CAN_InitTypeDef *CAN)
+// 脙猫脢枚: CAN 鲁玫脢录禄炉鲁脤脨貌.
+// 虏脦脢媒: CAN: 陆谩鹿鹿虏脦脢媒,脟毛虏脦驴录CAN.h脌茂碌脛露篓脪氓.
+// 路碌禄脴: none.
+// 掳忙卤戮: V1.0, 2021-06-02
 //========================================================================
 void CAN_Inilize(u8 CANx, CAN_InitTypeDef *CAN)
 {
     if(CANx == CAN1)
     {
-        CANSEL = CAN1;		//选择CAN1模块
-        CanWriteReg(MR  ,0x04);		//使能 Reset Mode
+        CANSEL = CAN1;		//脩隆脭帽CAN1脛拢驴茅
+        CanWriteReg(MR  ,0x04);		//脢鹿脛脺 Reset Mode
 
-        if(CAN->CAN_Enable == ENABLE)	CANEN = 1;		//使能CAN1模块
-        else								CANEN = 0;		//关闭CAN1模块
+        if(CAN->CAN_Enable == ENABLE)	CANEN = 1;		//脢鹿脛脺CAN1脛拢驴茅
+        else								CANEN = 0;		//鹿脴卤脮CAN1脛拢驴茅
         
         CanWriteReg(BTR0,(u8)((CAN->CAN_SJW << 6) + CAN->CAN_BRP));
         CanWriteReg(BTR1,(u8)((CAN->CAN_SAM << 7) + (CAN->CAN_TSG2 << 4) + CAN->CAN_TSG1));
 
-        CanWriteReg(ACR0,CAN->CAN_ACR0);		//总线验收代码寄存器
+        CanWriteReg(ACR0,CAN->CAN_ACR0);		//脳脺脧脽脩茅脢脮麓煤脗毛录脛麓忙脝梅
         CanWriteReg(ACR1,CAN->CAN_ACR1);
         CanWriteReg(ACR2,CAN->CAN_ACR2);
         CanWriteReg(ACR3,CAN->CAN_ACR3);
-        CanWriteReg(AMR0,CAN->CAN_AMR0);		//总线验收屏蔽寄存器
+        CanWriteReg(AMR0,CAN->CAN_AMR0);		//脳脺脧脽脩茅脢脮脝脕卤脦录脛麓忙脝梅
         CanWriteReg(AMR1,CAN->CAN_AMR1);
         CanWriteReg(AMR2,CAN->CAN_AMR2);
         CanWriteReg(AMR3,CAN->CAN_AMR3);
 
-        CanWriteReg(ISR ,0xff);		//清中断标志
-        CanWriteReg(IMR ,CAN->CAN_IMR);			//中断寄存器设置
-        CanWriteReg(MR  ,0x00);		//退出 Reset Mode
+        CanWriteReg(ISR ,0xff);		//脟氓脰脨露脧卤锚脰戮
+        CanWriteReg(IMR ,CAN->CAN_IMR);			//脰脨露脧录脛麓忙脝梅脡猫脰脙
+        CanWriteReg(MR  ,0x00);		//脥脣鲁枚 Reset Mode
     }
     else if(CANx == CAN2)
     {
-        CANSEL = CAN2;		//选择CAN2模块
+        CANSEL = CAN2;		//脩隆脭帽CAN2脛拢驴茅
         
-        CanWriteReg(MR  ,0x04);		//使能 Reset Mode
+        CanWriteReg(MR  ,0x04);		//脢鹿脛脺 Reset Mode
 
-        if(CAN->CAN_Enable == ENABLE)	CAN2EN = 1;		//使能CAN2模块
-        else								CAN2EN = 0;		//关闭CAN2模块
+        if(CAN->CAN_Enable == ENABLE)	CAN2EN = 1;		//脢鹿脛脺CAN2脛拢驴茅
+        else								CAN2EN = 0;		//鹿脴卤脮CAN2脛拢驴茅
         
         CanWriteReg(BTR0,(u8)((CAN->CAN_SJW << 6) + CAN->CAN_BRP));
         CanWriteReg(BTR1,(u8)((CAN->CAN_SAM << 7) + (CAN->CAN_TSG2 << 4) + CAN->CAN_TSG1));
 
-        CanWriteReg(ACR0,CAN->CAN_ACR0);		//总线验收代码寄存器
+        CanWriteReg(ACR0,CAN->CAN_ACR0);		//脳脺脧脽脩茅脢脮麓煤脗毛录脛麓忙脝梅
         CanWriteReg(ACR1,CAN->CAN_ACR1);
         CanWriteReg(ACR2,CAN->CAN_ACR2);
         CanWriteReg(ACR3,CAN->CAN_ACR3);
-        CanWriteReg(AMR0,CAN->CAN_AMR0);		//总线验收屏蔽寄存器
+        CanWriteReg(AMR0,CAN->CAN_AMR0);		//脳脺脧脽脩茅脢脮脝脕卤脦录脛麓忙脝梅
         CanWriteReg(AMR1,CAN->CAN_AMR1);
         CanWriteReg(AMR2,CAN->CAN_AMR2);
         CanWriteReg(AMR3,CAN->CAN_AMR3);
 
-        CanWriteReg(ISR ,0xff);		//清中断标志
-        CanWriteReg(IMR ,CAN->CAN_IMR);			//中断寄存器设置
-        CanWriteReg(MR  ,0x00);		//退出 Reset Mode
+        CanWriteReg(ISR ,0xff);		//脟氓脰脨露脧卤锚脰戮
+        CanWriteReg(IMR ,CAN->CAN_IMR);			//脰脨露脧录脛麓忙脝梅脡猫脰脙
+        CanWriteReg(MR  ,0x00);		//脥脣鲁枚 Reset Mode
     }
 }
 
 //========================================================================
-// 函数: void CanReadFifo(CAN_DataDef *CANx)
-// 描述: 读取CAN缓冲区数据函数。
-// 参数: *CANx: 存放CAN总线读取数据.
-// 返回: none.
-// 版本: VER2.0
-// 日期: 2023-01-31
-// 备注: 
+// 潞炉脢媒: void CanReadFifo(CAN_DataDef *CANx)
+// 脙猫脢枚: 露脕脠隆CAN禄潞鲁氓脟酶脢媒戮脻潞炉脢媒隆拢
+// 虏脦脢媒: *CANx: 麓忙路脜CAN脳脺脧脽露脕脠隆脢媒戮脻.
+// 路碌禄脴: none.
+// 掳忙卤戮: VER2.0
+// 脠脮脝脷: 2023-01-31
+// 卤赂脳垄: 
 //========================================================================
 void CanReadFifo(CAN_DataDef *CAN)
 {
@@ -128,9 +128,9 @@ void CanReadFifo(CAN_DataDef *CAN)
 
     pdat[0] = CanReadReg((u8)(RX_BUF0 + (RX_Index++&3)));
 
-    if(pdat[0] & 0x80)  //判断是标准帧还是扩展帧
+    if(pdat[0] & 0x80)  //脜脨露脧脢脟卤锚脳录脰隆禄鹿脢脟脌漏脮鹿脰隆
     {
-        pdat[1] = CanReadReg((u8)(RX_BUF0 + (RX_Index++&3)));   //扩展帧ID占4个字节
+        pdat[1] = CanReadReg((u8)(RX_BUF0 + (RX_Index++&3)));   //脌漏脮鹿脰隆ID脮录4赂枚脳脰陆脷
         pdat[2] = CanReadReg((u8)(RX_BUF0 + (RX_Index++&3)));
         pdat[3] = CanReadReg((u8)(RX_BUF0 + (RX_Index++&3)));
         pdat[4] = CanReadReg((u8)(RX_BUF0 + (RX_Index++&3)));
@@ -138,33 +138,33 @@ void CanReadFifo(CAN_DataDef *CAN)
     }
     else
     {
-        pdat[1] = CanReadReg((u8)(RX_BUF0 + (RX_Index++&3)));   //标准帧ID占2个字节
+        pdat[1] = CanReadReg((u8)(RX_BUF0 + (RX_Index++&3)));   //卤锚脳录脰隆ID脮录2赂枚脳脰陆脷
         pdat[2] = CanReadReg((u8)(RX_BUF0 + (RX_Index++&3)));
         CAN->ID = ((pdat[1] << 8) + pdat[2]) >> 5;
     }
     
-    CAN->FF = pdat[0] >> 7;     //帧格式
-    CAN->RTR = pdat[0] >> 6;    //帧类型
-    CAN->DLC = pdat[0];         //数据长度
+    CAN->FF = pdat[0] >> 7;     //脰隆赂帽脢陆
+    CAN->RTR = pdat[0] >> 6;    //脰隆脌脿脨脥
+    CAN->DLC = pdat[0];         //脢媒戮脻鲁陇露脠
 
-    for(i=0;((i<CAN->DLC) && (i<8));i++)        //读取数据长度为len，最多不超过8
+    for(i=0;((i<CAN->DLC) && (i<8));i++)        //露脕脠隆脢媒戮脻鲁陇露脠脦陋len拢卢脳卯露脿虏禄鲁卢鹿媒8
     {
-        CAN->DataBuffer[i] = CanReadReg((u8)(RX_BUF0 + (RX_Index++&3)));   //读取有效数据
+        CAN->DataBuffer[i] = CanReadReg((u8)(RX_BUF0 + (RX_Index++&3)));   //露脕脠隆脫脨脨搂脢媒戮脻
     }
-    while(RX_Index&3)   //判断已读数据长度是否4的整数倍
+    while(RX_Index&3)   //脜脨露脧脪脩露脕脢媒戮脻鲁陇露脠脢脟路帽4碌脛脮没脢媒卤露
     {
-        CanReadReg((u8)(RX_BUF0 + (RX_Index++&3)));  //读取填充数据，一帧数据占据4的整数倍缓冲区空间，不足补0
+        CanReadReg((u8)(RX_BUF0 + (RX_Index++&3)));  //露脕脠隆脤卯鲁盲脢媒戮脻拢卢脪禄脰隆脢媒戮脻脮录戮脻4碌脛脮没脢媒卤露禄潞鲁氓脟酶驴脮录盲拢卢虏禄脳茫虏鹿0
     }
 }
 
 //========================================================================
-// 函数: u8 CanReadMsg(void)
-// 描述: CAN接收数据函数。
-// 参数: *CANx: 存放CAN总线读取数据..
-// 返回: 帧个数.
-// 版本: VER2.0
-// 日期: 2023-01-31
-// 备注: 
+// 潞炉脢媒: u8 CanReadMsg(void)
+// 脙猫脢枚: CAN陆脫脢脮脢媒戮脻潞炉脢媒隆拢
+// 虏脦脢媒: *CANx: 麓忙路脜CAN脳脺脧脽露脕脠隆脢媒戮脻..
+// 路碌禄脴: 脰隆赂枚脢媒.
+// 掳忙卤戮: VER2.0
+// 脠脮脝脷: 2023-01-31
+// 卤赂脳垄: 
 //========================================================================
 u8 CanReadMsg(CAN_DataDef *CAN)
 {
@@ -172,31 +172,31 @@ u8 CanReadMsg(CAN_DataDef *CAN)
     u8 n=0;
 
     do{
-        CanReadFifo(&CAN[n++]);  //读取接收缓冲区数据
+        CanReadFifo(&CAN[n++]);  //露脕脠隆陆脫脢脮禄潞鲁氓脟酶脢媒戮脻
         i = CanReadReg(SR);
-    }while(i&0x80);     //判断接收缓冲区里是否还有数据，有的话继续读取
+    }while(i&0x80);     //脜脨露脧陆脫脢脮禄潞鲁氓脟酶脌茂脢脟路帽禄鹿脫脨脢媒戮脻拢卢脫脨碌脛禄掳录脤脨酶露脕脠隆
 
-    return n;   //返回帧个数
+    return n;   //路碌禄脴脰隆赂枚脢媒
 }
 
 //========================================================================
-// 函数: void CanSendMsg(CAN_DataDef *CAN)
-// 描述: CAN发送标准帧函数。
-// 参数: *CANx: 存放CAN总线发送数据..
-// 返回: none.
-// 版本: VER1.0
-// 日期: 2020-11-19
-// 备注: 
+// 潞炉脢媒: void CanSendMsg(CAN_DataDef *CAN)
+// 脙猫脢枚: CAN路垄脣脥卤锚脳录脰隆潞炉脢媒隆拢
+// 虏脦脢媒: *CANx: 麓忙路脜CAN脳脺脧脽路垄脣脥脢媒戮脻..
+// 路碌禄脴: none.
+// 掳忙卤戮: VER1.0
+// 脠脮脝脷: 2020-11-19
+// 卤赂脳垄: 
 //========================================================================
 void CanSendMsg(CAN_DataDef *CAN)
 {
 	u32 CanID;
     u8 RX_Index,i;
 
-    if(CAN->FF)     //判断是否扩展帧
+    if(CAN->FF)     //脜脨露脧脢脟路帽脌漏脮鹿脰隆
     {
         CanID = CAN->ID << 3;
-        CanWriteReg(TX_BUF0,CAN->DLC|((u8)CAN->RTR<<6)|0x80);	//bit7: 标准帧(0)/扩展帧(1), bit6: 数据帧(0)/远程帧(1), bit3~bit0: 数据长度(DLC)
+        CanWriteReg(TX_BUF0,CAN->DLC|((u8)CAN->RTR<<6)|0x80);	//bit7: 卤锚脳录脰隆(0)/脌漏脮鹿脰隆(1), bit6: 脢媒戮脻脰隆(0)/脭露鲁脤脰隆(1), bit3~bit0: 脢媒戮脻鲁陇露脠(DLC)
         CanWriteReg(TX_BUF1,(u8)(CanID>>24));
         CanWriteReg(TX_BUF2,(u8)(CanID>>16));
         CanWriteReg(TX_BUF3,(u8)(CanID>>8));
@@ -204,31 +204,31 @@ void CanSendMsg(CAN_DataDef *CAN)
         CanWriteReg(TX_BUF0,(u8)CanID);
 
         RX_Index = 1;
-        for(i=0;((i<CAN->DLC) && (i<8));i++)        //数据长度为DLC，最多不超过8
+        for(i=0;((i<CAN->DLC) && (i<8));i++)        //脢媒戮脻鲁陇露脠脦陋DLC拢卢脳卯露脿虏禄鲁卢鹿媒8
         {
-            CanWriteReg((u8)(TX_BUF0 + (RX_Index++&3)),CAN->DataBuffer[i]);   //写入有效数据
+            CanWriteReg((u8)(TX_BUF0 + (RX_Index++&3)),CAN->DataBuffer[i]);   //脨麓脠毛脫脨脨搂脢媒戮脻
         }
-        while(RX_Index&3)   //判断已读数据长度是否4的整数倍
+        while(RX_Index&3)   //脜脨露脧脪脩露脕脢媒戮脻鲁陇露脠脢脟路帽4碌脛脮没脢媒卤露
         {
-            CanWriteReg((u8)(TX_BUF0 + (RX_Index++&3)),0x00);  //写入填充数据，一帧数据占据4的整数倍缓冲区空间，不足补0
+            CanWriteReg((u8)(TX_BUF0 + (RX_Index++&3)),0x00);  //脨麓脠毛脤卯鲁盲脢媒戮脻拢卢脪禄脰隆脢媒戮脻脮录戮脻4碌脛脮没脢媒卤露禄潞鲁氓脟酶驴脮录盲拢卢虏禄脳茫虏鹿0
         }
     }
-    else    //发送标准帧
+    else    //路垄脣脥卤锚脳录脰隆
     {
         CanID = (u16)(CAN->ID << 5);
-        CanWriteReg(TX_BUF0,CAN->DLC|((u8)CAN->RTR<<6));  //bit7: 标准帧(0)/扩展帧(1), bit6: 数据帧(0)/远程帧(1), bit3~bit0: 数据长度(DLC)
+        CanWriteReg(TX_BUF0,CAN->DLC|((u8)CAN->RTR<<6));  //bit7: 卤锚脳录脰隆(0)/脌漏脮鹿脰隆(1), bit6: 脢媒戮脻脰隆(0)/脭露鲁脤脰隆(1), bit3~bit0: 脢媒戮脻鲁陇露脠(DLC)
         CanWriteReg(TX_BUF1,(u8)(CanID>>8));
         CanWriteReg(TX_BUF2,(u8)CanID);
 
         RX_Index = 3;
-        for(i=0;((i<CAN->DLC) && (i<8));i++)        //数据长度为DLC，最多不超过8
+        for(i=0;((i<CAN->DLC) && (i<8));i++)        //脢媒戮脻鲁陇露脠脦陋DLC拢卢脳卯露脿虏禄鲁卢鹿媒8
         {
-            CanWriteReg((u8)(TX_BUF0 + (RX_Index++&3)),CAN->DataBuffer[i]);   //写入有效数据
+            CanWriteReg((u8)(TX_BUF0 + (RX_Index++&3)),CAN->DataBuffer[i]);   //脨麓脠毛脫脨脨搂脢媒戮脻
         }
-        while(RX_Index&3)   //判断已读数据长度是否4的整数倍
+        while(RX_Index&3)   //脜脨露脧脪脩露脕脢媒戮脻鲁陇露脠脢脟路帽4碌脛脮没脢媒卤露
         {
-            CanWriteReg((u8)(TX_BUF0 + (RX_Index++&3)),0x00);  //写入填充数据，一帧数据占据4的整数倍缓冲区空间，不足补0
+            CanWriteReg((u8)(TX_BUF0 + (RX_Index++&3)),0x00);  //脨麓脠毛脤卯鲁盲脢媒戮脻拢卢脪禄脰隆脢媒戮脻脮录戮脻4碌脛脮没脢媒卤露禄潞鲁氓脟酶驴脮录盲拢卢虏禄脳茫虏鹿0
         }
     }
-	CanWriteReg(CMR ,0x04);		//发起一次帧传输
+	CanWriteReg(CMR ,0x04);		//路垄脝冒脪禄麓脦脰隆麓芦脢盲
 }

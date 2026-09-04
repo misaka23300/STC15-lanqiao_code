@@ -8,7 +8,7 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+/* 脠莽鹿没脪陋脭脷鲁脤脨貌脰脨脢鹿脫脙麓脣麓煤脗毛,脟毛脭脷鲁脤脨貌脰脨脳垄脙梅脢鹿脫脙脕脣STC碌脛脳脢脕脧录掳鲁脤脨貌            */
 /*---------------------------------------------------------------------*/
 
 #include "STC32G_UART.h"
@@ -17,11 +17,11 @@ bit B_ULinRX1_Flag;
 bit B_ULinRX2_Flag;
 
 //========================================================================
-// 函数: UART1_ISR_Handler
-// 描述: UART1中断函数.
-// 参数: none.
-// 返回: none.
-// 版本: V1.0, 2020-09-23
+// 潞炉脢媒: UART1_ISR_Handler
+// 脙猫脢枚: UART1脰脨露脧潞炉脢媒.
+// 虏脦脢媒: none.
+// 路碌禄脴: none.
+// 掳忙卤戮: V1.0, 2020-09-23
 //========================================================================
 #ifdef UART1
 void UART1_ISR_Handler (void) interrupt UART1_VECTOR
@@ -55,7 +55,7 @@ void UART1_ISR_Handler (void) interrupt UART1_VECTOR
 	{
 		TI = 0;
 		
-        #if(UART_QUEUE_MODE == 1)   //判断是否使用队列模式
+        #if(UART_QUEUE_MODE == 1)   //脜脨露脧脢脟路帽脢鹿脫脙露脫脕脨脛拢脢陆
 		if(COM1.TX_send != COM1.TX_write)
 		{
 		 	SBUF = TX1_Buffer[COM1.TX_send];
@@ -63,18 +63,18 @@ void UART1_ISR_Handler (void) interrupt UART1_VECTOR
 		}
 		else	COM1.B_TX_busy = 0;
         #else
-        COM1.B_TX_busy = 0;     //使用阻塞方式发送直接清除繁忙标志
+        COM1.B_TX_busy = 0;     //脢鹿脫脙脳猫脠没路陆脢陆路垄脣脥脰卤陆脫脟氓鲁媒路卤脙娄卤锚脰戮
         #endif
 	}
 }
 #endif
 
 //========================================================================
-// 函数: UART2_ISR_Handler
-// 描述: UART2中断函数.
-// 参数: none.
-// 返回: none.
-// 版本: V1.0, 2020-09-23
+// 潞炉脢媒: UART2_ISR_Handler
+// 脙猫脢枚: UART2脰脨露脧潞炉脢媒.
+// 虏脦脢媒: none.
+// 路碌禄脴: none.
+// 掳忙卤戮: V1.0, 2020-09-23
 //========================================================================
 #ifdef UART2
 void UART2_ISR_Handler (void) interrupt UART2_VECTOR
@@ -108,7 +108,7 @@ void UART2_ISR_Handler (void) interrupt UART2_VECTOR
 	{
 		CLR_TI2();
 		
-        #if(UART_QUEUE_MODE == 1)   //判断是否使用队列模式
+        #if(UART_QUEUE_MODE == 1)   //脜脨露脧脢脟路帽脢鹿脫脙露脫脕脨脛拢脢陆
 		if(COM2.TX_send != COM2.TX_write)
 		{
 		 	S2BUF = TX2_Buffer[COM2.TX_send];
@@ -116,18 +116,18 @@ void UART2_ISR_Handler (void) interrupt UART2_VECTOR
 		}
 		else	COM2.B_TX_busy = 0;
         #else
-        COM2.B_TX_busy = 0;     //使用阻塞方式发送直接清除繁忙标志
+        COM2.B_TX_busy = 0;     //脢鹿脫脙脳猫脠没路陆脢陆路垄脣脥脰卤陆脫脟氓鲁媒路卤脙娄卤锚脰戮
         #endif
 	}
 }
 #endif
 
 //========================================================================
-// 函数: UART3_ISR_Handler
-// 描述: UART3中断函数.
-// 参数: none.
-// 返回: none.
-// 版本: V1.0, 2020-09-23
+// 潞炉脢媒: UART3_ISR_Handler
+// 脙猫脢枚: UART3脰脨露脧潞炉脢媒.
+// 虏脦脢媒: none.
+// 路碌禄脴: none.
+// 掳忙卤戮: V1.0, 2020-09-23
 //========================================================================
 #ifdef UART3
 void UART3_ISR_Handler (void) interrupt UART3_VECTOR
@@ -145,7 +145,7 @@ void UART3_ISR_Handler (void) interrupt UART3_VECTOR
 	{
 		CLR_TI3();
 		
-        #if(UART_QUEUE_MODE == 1)   //判断是否使用队列模式
+        #if(UART_QUEUE_MODE == 1)   //脜脨露脧脢脟路帽脢鹿脫脙露脫脕脨脛拢脢陆
 		if(COM3.TX_send != COM3.TX_write)
 		{
 		 	S3BUF = TX3_Buffer[COM3.TX_send];
@@ -153,18 +153,18 @@ void UART3_ISR_Handler (void) interrupt UART3_VECTOR
 		}
 		else	COM3.B_TX_busy = 0;
         #else
-        COM3.B_TX_busy = 0;     //使用阻塞方式发送直接清除繁忙标志
+        COM3.B_TX_busy = 0;     //脢鹿脫脙脳猫脠没路陆脢陆路垄脣脥脰卤陆脫脟氓鲁媒路卤脙娄卤锚脰戮
         #endif
 	}
 }
 #endif
 
 //========================================================================
-// 函数: UART4_ISR_Handler
-// 描述: UART4中断函数.
-// 参数: none.
-// 返回: none.
-// 版本: V1.0, 2020-09-23
+// 潞炉脢媒: UART4_ISR_Handler
+// 脙猫脢枚: UART4脰脨露脧潞炉脢媒.
+// 虏脦脢媒: none.
+// 路碌禄脴: none.
+// 掳忙卤戮: V1.0, 2020-09-23
 //========================================================================
 #ifdef UART4
 void UART4_ISR_Handler (void) interrupt UART4_VECTOR
@@ -182,7 +182,7 @@ void UART4_ISR_Handler (void) interrupt UART4_VECTOR
 	{
 		CLR_TI4();
 		
-        #if(UART_QUEUE_MODE == 1)   //判断是否使用队列模式
+        #if(UART_QUEUE_MODE == 1)   //脜脨露脧脢脟路帽脢鹿脫脙露脫脕脨脛拢脢陆
 		if(COM4.TX_send != COM4.TX_write)
 		{
 		 	S4BUF = TX4_Buffer[COM4.TX_send];
@@ -190,7 +190,7 @@ void UART4_ISR_Handler (void) interrupt UART4_VECTOR
 		}
 		else	COM4.B_TX_busy = 0;
         #else
-        COM4.B_TX_busy = 0;     //使用阻塞方式发送直接清除繁忙标志
+        COM4.B_TX_busy = 0;     //脢鹿脫脙脳猫脠没路陆脢陆路垄脣脥脰卤陆脫脟氓鲁媒路卤脙娄卤锚脰戮
         #endif
 	}
 }

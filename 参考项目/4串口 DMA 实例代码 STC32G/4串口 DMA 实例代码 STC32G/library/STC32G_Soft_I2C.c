@@ -8,30 +8,30 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+/* 脠莽鹿没脪陋脭脷鲁脤脨貌脰脨脢鹿脫脙麓脣麓煤脗毛,脟毛脭脷鲁脤脨貌脰脨脳垄脙梅脢鹿脫脙脕脣STC碌脛脳脢脕脧录掳鲁脤脨貌            */
 /*---------------------------------------------------------------------*/
 
 #include	"STC32G_Soft_I2C.h"
 
-sbit    SDA = P0^1; //定义SDA
-sbit    SCL = P0^0; //定义SCL
+sbit    SDA = P0^1; //露篓脪氓SDA
+sbit    SCL = P0^0; //露篓脪氓SCL
 
 //========================================================================
-// 函数: void I2C_Delay(void)
-// 描述: I2C延时函数.
-// 参数: none.
-// 返回: none.
-// 版本: V1.0, 2020-09-15
+// 潞炉脢媒: void I2C_Delay(void)
+// 脙猫脢枚: I2C脩脫脢卤潞炉脢媒.
+// 虏脦脢媒: none.
+// 路碌禄脴: none.
+// 掳忙卤戮: V1.0, 2020-09-15
 //========================================================================
 void I2C_Delay(void) //for normal MCS51, delay (2 * dly + 4) T, for STC12Cxxxx delay (4 * dly + 10) T
 {
 	u8  dly;
-	dly = MAIN_Fosc / 2000000UL;        //按2us计算
+	dly = MAIN_Fosc / 2000000UL;        //掳麓2us录脝脣茫
 	while(--dly);
 }
 
 //========================================================================
-// I2C总线函数
+// I2C脳脺脧脽潞炉脢媒
 //========================================================================
 void I2C_Start(void)         //start the I2C, SDA High-to-low when SCL is high
 {
@@ -88,11 +88,11 @@ void I2C_Check_ACK(void)     //Check ACK, If F0=0, then right, if F0=1, then err
 }
 
 //========================================================================
-// 函数: void I2C_WriteAbyte(u8 dat)
-// 描述: I2C发送一个字节数据函数.
-// 参数: 发送的数据.
-// 返回: none.
-// 版本: V1.0, 2020-09-15
+// 潞炉脢媒: void I2C_WriteAbyte(u8 dat)
+// 脙猫脢枚: I2C路垄脣脥脪禄赂枚脳脰陆脷脢媒戮脻潞炉脢媒.
+// 虏脦脢媒: 路垄脣脥碌脛脢媒戮脻.
+// 路碌禄脴: none.
+// 掳忙卤戮: V1.0, 2020-09-15
 //========================================================================
 void I2C_WriteAbyte(u8 dat)     //write a byte to I2C
 {
@@ -113,11 +113,11 @@ void I2C_WriteAbyte(u8 dat)     //write a byte to I2C
 }
 
 //========================================================================
-// 函数: u8 I2C_ReadAbyte(void)
-// 描述: I2C读取一个字节数据函数.
-// 参数: none.
-// 返回: 读取数据.
-// 版本: V1.0, 2020-09-15
+// 潞炉脢媒: u8 I2C_ReadAbyte(void)
+// 脙猫脢枚: I2C露脕脠隆脪禄赂枚脳脰陆脷脢媒戮脻潞炉脢媒.
+// 虏脦脢媒: none.
+// 路碌禄脴: 露脕脠隆脢媒戮脻.
+// 掳忙卤戮: V1.0, 2020-09-15
 //========================================================================
 u8 I2C_ReadAbyte(void)          //read A byte from I2C
 {
@@ -138,11 +138,11 @@ u8 I2C_ReadAbyte(void)          //read A byte from I2C
 }
 
 //========================================================================
-// 函数: void SI2C_WriteNbyte(u8 dev_addr, u8 mem_addr, u8 *p, u8 number)
-// 描述: I2C写入数据函数.
-// 参数: dev_addr: 设备地址, mem_addr: 存储地址, *p写入数据存储位置, number写入数据个数.
-// 返回: none.
-// 版本: V1.0, 2020-09-15
+// 潞炉脢媒: void SI2C_WriteNbyte(u8 dev_addr, u8 mem_addr, u8 *p, u8 number)
+// 脙猫脢枚: I2C脨麓脠毛脢媒戮脻潞炉脢媒.
+// 虏脦脢媒: dev_addr: 脡猫卤赂碌脴脰路, mem_addr: 麓忙麓垄碌脴脰路, *p脨麓脠毛脢媒戮脻麓忙麓垄脦禄脰脙, number脨麓脠毛脢媒戮脻赂枚脢媒.
+// 路碌禄脴: none.
+// 掳忙卤戮: V1.0, 2020-09-15
 //========================================================================
 void SI2C_WriteNbyte(u8 dev_addr, u8 mem_addr, u8 *p, u8 number)  /*  DeviceAddress,WordAddress,First Data Address,Byte lenth  */
 {
@@ -168,11 +168,11 @@ void SI2C_WriteNbyte(u8 dev_addr, u8 mem_addr, u8 *p, u8 number)  /*  DeviceAddr
 }
 
 //========================================================================
-// 函数: void SI2C_ReadNbyte(u8 dev_addr, u8 mem_addr, u8 *p, u8 number)
-// 描述: I2C读取数据函数.
-// 参数: dev_addr: 设备地址, mem_addr: 存储地址, *p读取数据存储位置, number读取数据个数.
-// 返回: none.
-// 版本: V1.0, 2020-09-15
+// 潞炉脢媒: void SI2C_ReadNbyte(u8 dev_addr, u8 mem_addr, u8 *p, u8 number)
+// 脙猫脢枚: I2C露脕脠隆脢媒戮脻潞炉脢媒.
+// 虏脦脢媒: dev_addr: 脡猫卤赂碌脴脰路, mem_addr: 麓忙麓垄碌脴脰路, *p露脕脠隆脢媒戮脻麓忙麓垄脦禄脰脙, number露脕脠隆脢媒戮脻赂枚脢媒.
+// 路碌禄脴: none.
+// 掳忙卤戮: V1.0, 2020-09-15
 //========================================================================
 void SI2C_ReadNbyte(u8 dev_addr, u8 mem_addr, u8 *p, u8 number)  /*  DeviceAddress,WordAddress,First Data Address,Byte lenth  */
 {

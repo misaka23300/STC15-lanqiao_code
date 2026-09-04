@@ -8,38 +8,38 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+/* 脠莽鹿没脪陋脭脷鲁脤脨貌脰脨脢鹿脫脙麓脣麓煤脗毛,脟毛脭脷鲁脤脨貌脰脨脳垄脙梅脢鹿脫脙脕脣STC碌脛脳脢脕脧录掳鲁脤脨貌            */
 /*---------------------------------------------------------------------*/
 
 #include	"STC32G_ADC.h"
 
 //========================================================================
-// 函数: u8	ADC_Inilize(ADC_InitTypeDef *ADCx)
-// 描述: ADC初始化程序.
-// 参数: ADCx: 结构参数,请参考adc.h里的定义.
-// 返回: none.
-// 版本: V1.0, 2012-10-22
+// 潞炉脢媒: u8	ADC_Inilize(ADC_InitTypeDef *ADCx)
+// 脙猫脢枚: ADC鲁玫脢录禄炉鲁脤脨貌.
+// 虏脦脢媒: ADCx: 陆谩鹿鹿虏脦脢媒,脟毛虏脦驴录adc.h脌茂碌脛露篓脪氓.
+// 路碌禄脴: none.
+// 掳忙卤戮: V1.0, 2012-10-22
 //========================================================================
 u8	ADC_Inilize(ADC_InitTypeDef *ADCx)
 {
-	ADCCFG = (ADCCFG & ~ADC_SPEED_2X16T) | ADCx->ADC_Speed;	//设置ADC工作时钟频率
-	ADC_Justify(ADCx->ADC_AdjResult);		//AD转换结果对齐方式
+	ADCCFG = (ADCCFG & ~ADC_SPEED_2X16T) | ADCx->ADC_Speed;	//脡猫脰脙ADC鹿陇脳梅脢卤脰脫脝碌脗脢
+	ADC_Justify(ADCx->ADC_AdjResult);		//AD脳陋禄禄陆谩鹿没露脭脝毛路陆脢陆
 
-	if(ADCx->ADC_SMPduty > 31)	return FAIL;	//错误
-	if(ADCx->ADC_CsSetup > 1)	return FAIL;	//错误
-	if(ADCx->ADC_CsHold > 3)	return FAIL;	//错误
+	if(ADCx->ADC_SMPduty > 31)	return FAIL;	//麓铆脦贸
+	if(ADCx->ADC_CsSetup > 1)	return FAIL;	//麓铆脦贸
+	if(ADCx->ADC_CsHold > 3)	return FAIL;	//麓铆脦贸
 
-	ADCTIM = (ADCx->ADC_CsSetup << 7) | (ADCx->ADC_CsHold << 5) | ADCx->ADC_SMPduty ;		//设置 ADC 内部时序，ADC采样时间建议设最大值
+	ADCTIM = (ADCx->ADC_CsSetup << 7) | (ADCx->ADC_CsHold << 5) | ADCx->ADC_SMPduty ;		//脡猫脰脙 ADC 脛脷虏驴脢卤脨貌拢卢ADC虏脡脩霉脢卤录盲陆篓脪茅脡猫脳卯麓贸脰碌
 	return SUCCESS;
 }
 
 
 //========================================================================
-// 函数: void	ADC_PowerControl(u8 pwr)
-// 描述: ADC电源控制程序.
-// 参数: pwr: 电源控制,ENABLE或DISABLE.
-// 返回: none.
-// 版本: V1.0, 2012-10-22
+// 潞炉脢媒: void	ADC_PowerControl(u8 pwr)
+// 脙猫脢枚: ADC碌莽脭麓驴脴脰脝鲁脤脨貌.
+// 虏脦脢媒: pwr: 碌莽脭麓驴脴脰脝,ENABLE禄貌DISABLE.
+// 路碌禄脴: none.
+// 掳忙卤戮: V1.0, 2012-10-22
 //========================================================================
 void	ADC_PowerControl(u8 pwr)
 {
@@ -48,35 +48,35 @@ void	ADC_PowerControl(u8 pwr)
 }
 
 //========================================================================
-// 函数: u16	Get_ADCResult(u8 channel)
-// 描述: 查询法读一次ADC转换结果.
-// 参数: channel: 选择要转换的ADC通道.
-// 返回: ADC转换结果.
-// 版本: V1.0, 2012-10-22
+// 潞炉脢媒: u16	Get_ADCResult(u8 channel)
+// 脙猫脢枚: 虏茅脩炉路篓露脕脪禄麓脦ADC脳陋禄禄陆谩鹿没.
+// 虏脦脢媒: channel: 脩隆脭帽脪陋脳陋禄禄碌脛ADC脥篓碌脌.
+// 路碌禄脴: ADC脳陋禄禄陆谩鹿没.
+// 掳忙卤戮: V1.0, 2012-10-22
 //========================================================================
 u16	Get_ADCResult(u8 channel)	//channel = 0~15
 {
 	u16	adc;
 	u8	i;
 
-	if(channel > ADC_CH15)	return	4096;	//错误,返回4096,调用的程序判断	
+	if(channel > ADC_CH15)	return	4096;	//麓铆脦贸,路碌禄脴4096,碌梅脫脙碌脛鲁脤脨貌脜脨露脧	
 	ADC_RES = 0;
 	ADC_RESL = 0;
 
-	ADC_CONTR = (ADC_CONTR & 0xf0) | channel; //设置ADC转换通道
-	ADC_START = 1;//启动ADC转换
-	NOP(10);			//对ADC_CONTR操作后要4T之后才能访问
+	ADC_CONTR = (ADC_CONTR & 0xf0) | channel; //脡猫脰脙ADC脳陋禄禄脥篓碌脌
+	ADC_START = 1;//脝么露炉ADC脳陋禄禄
+	NOP(10);			//露脭ADC_CONTR虏脵脳梅潞贸脪陋4T脰庐潞贸虏脜脛脺路脙脦脢
 
-	for(i=0; i<250; i++)		//超时返回，正常i等于10以内就可以转换完成
+	for(i=0; i<250; i++)		//鲁卢脢卤路碌禄脴拢卢脮媒鲁拢i碌脠脫脷10脪脭脛脷戮脥驴脡脪脭脳陋禄禄脥锚鲁脡
 	{
 		if(ADC_FLAG)
 		{
-			ADC_FLAG = 0;	//清除ADC转换结束标志
-			if(RESFMT)		//转换结果右对齐。 
+			ADC_FLAG = 0;	//脟氓鲁媒ADC脳陋禄禄陆谩脢酶卤锚脰戮
+			if(RESFMT)		//脳陋禄禄陆谩鹿没脫脪露脭脝毛隆拢 
 			{
 				adc = ((u16)ADC_RES << 8) | ADC_RESL;
 			}
-			else		//转换结果左对齐。 
+			else		//脳陋禄禄陆谩鹿没脳贸露脭脝毛隆拢 
 			{
 				adc = (u16)ADC_RES;
 				adc = (adc << 4) | ((ADC_RESL >> 4) & 0x0f);
@@ -84,5 +84,5 @@ u16	Get_ADCResult(u8 channel)	//channel = 0~15
 			return	adc;
 		}
 	}
-	return	4096;	//错误,返回4096,调用的程序判断
+	return	4096;	//麓铆脦贸,路碌禄脴4096,碌梅脫脙碌脛鲁脤脨貌脜脨露脧
 }

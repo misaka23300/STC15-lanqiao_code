@@ -8,68 +8,68 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+/* 脠莽鹿没脪陋脭脷鲁脤脨貌脰脨脢鹿脫脙麓脣麓煤脗毛,脟毛脭脷鲁脤脨貌脰脨脳垄脙梅脢鹿脫脙脕脣STC碌脛脳脢脕脧录掳鲁脤脨貌            */
 /*---------------------------------------------------------------------*/
 
 #include	"STC32G_I2C.h"
 
 //========================================================================
-//                               本地变量声明
+//                               卤戮碌脴卤盲脕驴脡霉脙梅
 //========================================================================
 
 I2C_IsrTypeDef I2CIsr;
 bit DisplayFlag;
 
 //========================================================================
-//                            外部函数和变量声明
+//                            脥芒虏驴潞炉脢媒潞脥卤盲脕驴脡霉脙梅
 //========================================================================
 
 
 //========================================================================
-// 函数: I2C_ISR_Handler
-// 描述: I2C中断函数.
-// 参数: none.
-// 返回: none.
-// 版本: V1.0, 2020-09-23
+// 潞炉脢媒: I2C_ISR_Handler
+// 脙猫脢枚: I2C脰脨露脧潞炉脢媒.
+// 虏脦脢媒: none.
+// 路碌禄脴: none.
+// 掳忙卤戮: V1.0, 2020-09-23
 //========================================================================
 void I2C_ISR_Handler() interrupt I2C_VECTOR
 {
-	// TODO: 在此处添加用户代码
+	// TODO: 脭脷麓脣麓娄脤铆录脫脫脙禄搂麓煤脗毛
 
-	// 主机模式
-	I2CMSST &= ~0x40;       //I2C指令发送完成状态清除
+	// 脰梅禄煤脛拢脢陆
+	I2CMSST &= ~0x40;       //I2C脰赂脕卯路垄脣脥脥锚鲁脡脳麓脤卢脟氓鲁媒
 
 	if(DMA_I2C_CR & 0x04)   //ACKERR
 	{
-		DMA_I2C_CR &= ~0x04;  //发数据后收到NAK
+		DMA_I2C_CR &= ~0x04;  //路垄脢媒戮脻潞贸脢脮碌陆NAK
 	}
 
-	// 从机模式
+	// 麓脫禄煤脛拢脢陆
 	if (I2CSLST & 0x40)
 	{
-		I2CSLST &= ~0x40;                       //处理START事件
+		I2CSLST &= ~0x40;                       //麓娄脌铆START脢脗录镁
 	}
 	else if (I2CSLST & 0x20)
 	{
-		I2CSLST &= ~0x20;                       //处理RECV事件，SLACKO设置为0
+		I2CSLST &= ~0x20;                       //麓娄脌铆RECV脢脗录镁拢卢SLACKO脡猫脰脙脦陋0
 		if (I2CIsr.isda)
 		{
-			I2CIsr.isda = 0;                    //处理RECV事件（RECV DEVICE ADDR）
+			I2CIsr.isda = 0;                    //麓娄脌铆RECV脢脗录镁拢篓RECV DEVICE ADDR拢漏
 		}
 		else if (I2CIsr.isma)
 		{
-			I2CIsr.isma = 0;                    //处理RECV事件（RECV MEMORY ADDR）
+			I2CIsr.isma = 0;                    //麓娄脌铆RECV脢脗录镁拢篓RECV MEMORY ADDR拢漏
 			I2CIsr.addr = I2CRXD;
 			I2CTXD = I2C_Buffer[I2CIsr.addr];
 		}
 		else
 		{
-			I2C_Buffer[I2CIsr.addr++] = I2CRXD; //处理RECV事件（RECV DATA）
+			I2C_Buffer[I2CIsr.addr++] = I2CRXD; //麓娄脌铆RECV脢脗录镁拢篓RECV DATA拢漏
 		}
 	}
 	else if (I2CSLST & 0x10)
 	{
-		I2CSLST &= ~0x10;                       //处理SEND事件
+		I2CSLST &= ~0x10;                       //麓娄脌铆SEND脢脗录镁
 		if (I2CSLST & 0x02)
 		{
 			I2CTXD = 0xff;
@@ -81,7 +81,7 @@ void I2C_ISR_Handler() interrupt I2C_VECTOR
 	}
 	else if (I2CSLST & 0x08)
 	{
-		I2CSLST &= ~0x08;                       //处理STOP事件
+		I2CSLST &= ~0x08;                       //麓娄脌铆STOP脢脗录镁
 		I2CIsr.isda = 1;
 		I2CIsr.isma = 1;
 		DisplayFlag = 1;

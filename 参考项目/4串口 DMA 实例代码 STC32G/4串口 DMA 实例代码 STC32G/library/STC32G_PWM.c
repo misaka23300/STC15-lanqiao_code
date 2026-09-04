@@ -8,45 +8,45 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* Èç¹ûÒªÔÚ³ÌÐòÖÐÊ¹ÓÃ´Ë´úÂë,ÇëÔÚ³ÌÐòÖÐ×¢Ã÷Ê¹ÓÃÁËSTCµÄ×ÊÁÏ¼°³ÌÐò            */
+/* ÃˆÃ§Â¹Ã»Ã’ÂªÃ”ÃšÂ³ÃŒÃÃ²Ã–ÃÃŠÂ¹Ã“ÃƒÂ´Ã‹Â´ÃºÃ‚Ã«,Ã‡Ã«Ã”ÃšÂ³ÃŒÃÃ²Ã–ÃÃ—Â¢ÃƒÃ·ÃŠÂ¹Ã“ÃƒÃÃ‹STCÂµÃ„Ã—ÃŠÃÃÂ¼Â°Â³ÃŒÃÃ²            */
 /*---------------------------------------------------------------------*/
 
 #include "STC32G_PWM.h"
 
 //========================================================================
-// º¯Êý: PWM_Configuration
-// ÃèÊö: PWM³õÊ¼»¯³ÌÐò.
-// ²ÎÊý: PWMx: ½á¹¹²ÎÊý,Çë²Î¿¼PWM.hÀïµÄ¶¨Òå.
-// ·µ»Ø: ³É¹¦·µ»Ø SUCCESS, ´íÎó·µ»Ø FAIL.
-// °æ±¾: V1.0, 2012-10-22
+// ÂºÂ¯ÃŠÃ½: PWM_Configuration
+// ÃƒÃ¨ÃŠÃ¶: PWMÂ³ÃµÃŠÂ¼Â»Â¯Â³ÃŒÃÃ².
+// Â²ÃŽÃŠÃ½: PWMx: Â½Ã¡Â¹Â¹Â²ÃŽÃŠÃ½,Ã‡Ã«Â²ÃŽÂ¿Â¼PWM.hÃ€Ã¯ÂµÃ„Â¶Â¨Ã’Ã¥.
+// Â·ÂµÂ»Ã˜: Â³Ã‰Â¹Â¦Â·ÂµÂ»Ã˜ SUCCESS, Â´Ã­ÃŽÃ³Â·ÂµÂ»Ã˜ FAIL.
+// Â°Ã¦Â±Â¾: V1.0, 2012-10-22
 //========================================================================
 u8 PWM_Configuration(u8 PWM, PWMx_InitDefine *PWMx)
 {
 	if(PWM == PWM1)
 	{
-		PWMA_CC1E_Disable();		//¹Ø±ÕÊäÈë²¶»ñ/±È½ÏÊä³ö
-		PWMA_CC1NE_Disable();		//¹Ø±Õ±È½ÏÊä³ö
-		PWMA_CC1S_Direction(CCAS_OUTPUT);		//CCnS½öÔÚÍ¨µÀ¹Ø±ÕÊ±²ÅÊÇ¿ÉÐ´µÄ
-		PWMA_OC1ModeSet(PWMx->PWM_Mode);		//ÉèÖÃÊä³ö±È½ÏÄ£Ê½
+		PWMA_CC1E_Disable();		//Â¹Ã˜Â±Ã•ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
+		PWMA_CC1NE_Disable();		//Â¹Ã˜Â±Ã•Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
+		PWMA_CC1S_Direction(CCAS_OUTPUT);		//CCnSÂ½Ã¶Ã”ÃšÃÂ¨ÂµÃ€Â¹Ã˜Â±Ã•ÃŠÂ±Â²Ã…ÃŠÃ‡Â¿Ã‰ÃÂ´ÂµÃ„
+		PWMA_OC1ModeSet(PWMx->PWM_Mode);		//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶Â±ÃˆÂ½ÃÃ„Â£ÃŠÂ½
 
 		if(PWMx->PWM_EnoSelect & ENO1P)
 		{
-			PWMA_CC1E_Enable();			//¿ªÆôÊäÈë²¶»ñ/±È½ÏÊä³ö
+			PWMA_CC1E_Enable();			//Â¿ÂªÃ†Ã´ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
 			PWMA_ENO |= ENO1P;
 		}
 		else
 		{
-			PWMA_CC1E_Disable();		//¹Ø±ÕÊäÈë²¶»ñ/±È½ÏÊä³ö
+			PWMA_CC1E_Disable();		//Â¹Ã˜Â±Ã•ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
 			PWMA_ENO &= ~ENO1P;
 		}
 		if(PWMx->PWM_EnoSelect & ENO1N)
 		{
-			PWMA_CC1NE_Enable();		//¿ªÆôÊäÈë²¶»ñ/±È½ÏÊä³ö
+			PWMA_CC1NE_Enable();		//Â¿ÂªÃ†Ã´ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
 			PWMA_ENO |= ENO1N;
 		}
 		else
 		{
-			PWMA_CC1NE_Disable();		//¹Ø±ÕÊäÈë²¶»ñ/±È½ÏÊä³ö
+			PWMA_CC1NE_Disable();		//Â¹Ã˜Â±Ã•ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
 			PWMA_ENO &= ~ENO1N;
 		}
 		
@@ -56,29 +56,29 @@ u8 PWM_Configuration(u8 PWM, PWMx_InitDefine *PWMx)
 	
 	if(PWM == PWM2)
 	{
-		PWMA_CC2E_Disable();		//¹Ø±ÕÊäÈë²¶»ñ/±È½ÏÊä³ö
-		PWMA_CC2NE_Disable();		//¹Ø±Õ±È½ÏÊä³ö
-		PWMA_CC2S_Direction(CCAS_OUTPUT);		//CCnS½öÔÚÍ¨µÀ¹Ø±ÕÊ±²ÅÊÇ¿ÉÐ´µÄ
-		PWMA_OC2ModeSet(PWMx->PWM_Mode);		//ÉèÖÃÊä³ö±È½ÏÄ£Ê½
+		PWMA_CC2E_Disable();		//Â¹Ã˜Â±Ã•ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
+		PWMA_CC2NE_Disable();		//Â¹Ã˜Â±Ã•Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
+		PWMA_CC2S_Direction(CCAS_OUTPUT);		//CCnSÂ½Ã¶Ã”ÃšÃÂ¨ÂµÃ€Â¹Ã˜Â±Ã•ÃŠÂ±Â²Ã…ÃŠÃ‡Â¿Ã‰ÃÂ´ÂµÃ„
+		PWMA_OC2ModeSet(PWMx->PWM_Mode);		//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶Â±ÃˆÂ½ÃÃ„Â£ÃŠÂ½
 
 		if(PWMx->PWM_EnoSelect & ENO2P)
 		{
-			PWMA_CC2E_Enable();			//¿ªÆôÊäÈë²¶»ñ/±È½ÏÊä³ö
+			PWMA_CC2E_Enable();			//Â¿ÂªÃ†Ã´ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
 			PWMA_ENO |= ENO2P;
 		}
 		else
 		{
-			PWMA_CC2E_Disable();		//¹Ø±ÕÊäÈë²¶»ñ/±È½ÏÊä³ö
+			PWMA_CC2E_Disable();		//Â¹Ã˜Â±Ã•ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
 			PWMA_ENO &= ~ENO2P;
 		}
 		if(PWMx->PWM_EnoSelect & ENO2N)
 		{
-			PWMA_CC2NE_Enable();		//¿ªÆôÊäÈë²¶»ñ/±È½ÏÊä³ö
+			PWMA_CC2NE_Enable();		//Â¿ÂªÃ†Ã´ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
 			PWMA_ENO |= ENO2N;
 		}
 		else
 		{
-			PWMA_CC2NE_Disable();		//¹Ø±ÕÊäÈë²¶»ñ/±È½ÏÊä³ö
+			PWMA_CC2NE_Disable();		//Â¹Ã˜Â±Ã•ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
 			PWMA_ENO &= ~ENO2N;
 		}
 		
@@ -88,29 +88,29 @@ u8 PWM_Configuration(u8 PWM, PWMx_InitDefine *PWMx)
 	
 	if(PWM == PWM3)
 	{
-		PWMA_CC3E_Disable();		//¹Ø±ÕÊäÈë²¶»ñ/±È½ÏÊä³ö
-		PWMA_CC3NE_Disable();		//¹Ø±Õ±È½ÏÊä³ö
-		PWMA_CC3S_Direction(CCAS_OUTPUT);		//CCnS½öÔÚÍ¨µÀ¹Ø±ÕÊ±²ÅÊÇ¿ÉÐ´µÄ
-		PWMA_OC3ModeSet(PWMx->PWM_Mode);		//ÉèÖÃÊä³ö±È½ÏÄ£Ê½
+		PWMA_CC3E_Disable();		//Â¹Ã˜Â±Ã•ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
+		PWMA_CC3NE_Disable();		//Â¹Ã˜Â±Ã•Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
+		PWMA_CC3S_Direction(CCAS_OUTPUT);		//CCnSÂ½Ã¶Ã”ÃšÃÂ¨ÂµÃ€Â¹Ã˜Â±Ã•ÃŠÂ±Â²Ã…ÃŠÃ‡Â¿Ã‰ÃÂ´ÂµÃ„
+		PWMA_OC3ModeSet(PWMx->PWM_Mode);		//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶Â±ÃˆÂ½ÃÃ„Â£ÃŠÂ½
 
 		if(PWMx->PWM_EnoSelect & ENO3P)
 		{
-			PWMA_CC3E_Enable();			//¿ªÆôÊäÈë²¶»ñ/±È½ÏÊä³ö
+			PWMA_CC3E_Enable();			//Â¿ÂªÃ†Ã´ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
 			PWMA_ENO |= ENO3P;
 		}
 		else
 		{
-			PWMA_CC3E_Disable();		//¹Ø±ÕÊäÈë²¶»ñ/±È½ÏÊä³ö
+			PWMA_CC3E_Disable();		//Â¹Ã˜Â±Ã•ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
 			PWMA_ENO &= ~ENO3P;
 		}
 		if(PWMx->PWM_EnoSelect & ENO3N)
 		{
-			PWMA_CC3NE_Enable();		//¿ªÆôÊäÈë²¶»ñ/±È½ÏÊä³ö
+			PWMA_CC3NE_Enable();		//Â¿ÂªÃ†Ã´ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
 			PWMA_ENO |= ENO3N;
 		}
 		else
 		{
-			PWMA_CC3NE_Disable();		//¹Ø±ÕÊäÈë²¶»ñ/±È½ÏÊä³ö
+			PWMA_CC3NE_Disable();		//Â¹Ã˜Â±Ã•ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
 			PWMA_ENO &= ~ENO3N;
 		}
 		
@@ -120,29 +120,29 @@ u8 PWM_Configuration(u8 PWM, PWMx_InitDefine *PWMx)
 	
 	if(PWM == PWM4)
 	{
-		PWMA_CC4E_Disable();		//¹Ø±ÕÊäÈë²¶»ñ/±È½ÏÊä³ö
-		PWMA_CC4NE_Disable();		//¹Ø±Õ±È½ÏÊä³ö
-		PWMA_CC4S_Direction(CCAS_OUTPUT);		//CCnS½öÔÚÍ¨µÀ¹Ø±ÕÊ±²ÅÊÇ¿ÉÐ´µÄ
-		PWMA_OC4ModeSet(PWMx->PWM_Mode);		//ÉèÖÃÊä³ö±È½ÏÄ£Ê½
+		PWMA_CC4E_Disable();		//Â¹Ã˜Â±Ã•ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
+		PWMA_CC4NE_Disable();		//Â¹Ã˜Â±Ã•Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
+		PWMA_CC4S_Direction(CCAS_OUTPUT);		//CCnSÂ½Ã¶Ã”ÃšÃÂ¨ÂµÃ€Â¹Ã˜Â±Ã•ÃŠÂ±Â²Ã…ÃŠÃ‡Â¿Ã‰ÃÂ´ÂµÃ„
+		PWMA_OC4ModeSet(PWMx->PWM_Mode);		//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶Â±ÃˆÂ½ÃÃ„Â£ÃŠÂ½
 
 		if(PWMx->PWM_EnoSelect & ENO4P)
 		{
-			PWMA_CC4E_Enable();			//¿ªÆôÊäÈë²¶»ñ/±È½ÏÊä³ö
+			PWMA_CC4E_Enable();			//Â¿ÂªÃ†Ã´ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
 			PWMA_ENO |= ENO4P;
 		}
 		else
 		{
-			PWMA_CC4E_Disable();		//¹Ø±ÕÊäÈë²¶»ñ/±È½ÏÊä³ö
+			PWMA_CC4E_Disable();		//Â¹Ã˜Â±Ã•ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
 			PWMA_ENO &= ~ENO4P;
 		}
 		if(PWMx->PWM_EnoSelect & ENO4N)
 		{
-			PWMA_CC4NE_Enable();		//¿ªÆôÊäÈë²¶»ñ/±È½ÏÊä³ö
+			PWMA_CC4NE_Enable();		//Â¿ÂªÃ†Ã´ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
 			PWMA_ENO |= ENO4N;
 		}
 		else
 		{
-			PWMA_CC4NE_Disable();		//¹Ø±ÕÊäÈë²¶»ñ/±È½ÏÊä³ö
+			PWMA_CC4NE_Disable();		//Â¹Ã˜Â±Ã•ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
 			PWMA_ENO &= ~ENO4N;
 		}
 		
@@ -152,32 +152,32 @@ u8 PWM_Configuration(u8 PWM, PWMx_InitDefine *PWMx)
 	
 	if(PWM == PWMA)
 	{
-//		PWMA_OC1_ReloadEnable(PWMx->PWM_Reload);	//Êä³ö±È½ÏµÄÔ¤×°ÔØÊ¹ÄÜ
-//		PWMA_OC1_FastEnable(PWMx->PWM_Fast);		//Êä³ö±È½Ï¿ìËÙ¹¦ÄÜÊ¹ÄÜ
-//		PWMA_CCPCAPreloaded(PWMx->PWM_PreLoad);	//²¶»ñ/±È½ÏÔ¤×°ÔØ¿ØÖÆÎ»(¸ÃÎ»Ö»¶Ô¾ßÓÐ»¥²¹Êä³öµÄÍ¨µÀÆð×÷ÓÃ)
-//		PWMA_BrakeEnable(PWMx->PWM_BrakeEnable);	//¿ªÆô/½ûÖ¹É²³µÊäÈë
+//		PWMA_OC1_ReloadEnable(PWMx->PWM_Reload);	//ÃŠÃ¤Â³Ã¶Â±ÃˆÂ½ÃÂµÃ„Ã”Â¤Ã—Â°Ã”Ã˜ÃŠÂ¹Ã„Ãœ
+//		PWMA_OC1_FastEnable(PWMx->PWM_Fast);		//ÃŠÃ¤Â³Ã¶Â±ÃˆÂ½ÃÂ¿Ã¬Ã‹Ã™Â¹Â¦Ã„ÃœÃŠÂ¹Ã„Ãœ
+//		PWMA_CCPCAPreloaded(PWMx->PWM_PreLoad);	//Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃ”Â¤Ã—Â°Ã”Ã˜Â¿Ã˜Ã–Ã†ÃŽÂ»(Â¸ÃƒÃŽÂ»Ã–Â»Â¶Ã”Â¾ÃŸÃ“ÃÂ»Â¥Â²Â¹ÃŠÃ¤Â³Ã¶ÂµÃ„ÃÂ¨ÂµÃ€Ã†Ã°Ã—Ã·Ã“Ãƒ)
+//		PWMA_BrakeEnable(PWMx->PWM_BrakeEnable);	//Â¿ÂªÃ†Ã´/Â½Ã»Ã–Â¹Ã‰Â²Â³ÂµÃŠÃ¤ÃˆÃ«
 
-		PWMA_DeadTime(PWMx->PWM_DeadTime);	//ËÀÇø·¢ÉúÆ÷ÉèÖÃ
-		PWMA_AutoReload(PWMx->PWM_Period);	//ÖÜÆÚÉèÖÃ
-		PWMA_BrakeOutputEnable(PWMx->PWM_MainOutEnable);	//Ö÷Êä³öÊ¹ÄÜ
-		PWMA_CEN_Enable(PWMx->PWM_CEN_Enable);	//Ê¹ÄÜ¼ÆÊýÆ÷
+		PWMA_DeadTime(PWMx->PWM_DeadTime);	//Ã‹Ã€Ã‡Ã¸Â·Â¢Ã‰ÃºÃ†Ã·Ã‰Ã¨Ã–Ãƒ
+		PWMA_AutoReload(PWMx->PWM_Period);	//Ã–ÃœÃ†ÃšÃ‰Ã¨Ã–Ãƒ
+		PWMA_BrakeOutputEnable(PWMx->PWM_MainOutEnable);	//Ã–Ã·ÃŠÃ¤Â³Ã¶ÃŠÂ¹Ã„Ãœ
+		PWMA_CEN_Enable(PWMx->PWM_CEN_Enable);	//ÃŠÂ¹Ã„ÃœÂ¼Ã†ÃŠÃ½Ã†Ã·
 		return	SUCCESS;
 	}
 
 	if(PWM == PWM5)
 	{
-		PWMB_CC5E_Disable();		//¹Ø±ÕÊäÈë²¶»ñ/±È½ÏÊä³ö
-		PWMB_CC5S_Direction(CCAS_OUTPUT);		//CCnS½öÔÚÍ¨µÀ¹Ø±ÕÊ±²ÅÊÇ¿ÉÐ´µÄ
-		PWMB_OC5ModeSet(PWMx->PWM_Mode);		//ÉèÖÃÊä³ö±È½ÏÄ£Ê½
+		PWMB_CC5E_Disable();		//Â¹Ã˜Â±Ã•ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
+		PWMB_CC5S_Direction(CCAS_OUTPUT);		//CCnSÂ½Ã¶Ã”ÃšÃÂ¨ÂµÃ€Â¹Ã˜Â±Ã•ÃŠÂ±Â²Ã…ÃŠÃ‡Â¿Ã‰ÃÂ´ÂµÃ„
+		PWMB_OC5ModeSet(PWMx->PWM_Mode);		//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶Â±ÃˆÂ½ÃÃ„Â£ÃŠÂ½
 
 		if(PWMx->PWM_EnoSelect & ENO5P)
 		{
-			PWMB_CC5E_Enable();			//¿ªÆôÊäÈë²¶»ñ/±È½ÏÊä³ö
+			PWMB_CC5E_Enable();			//Â¿ÂªÃ†Ã´ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
 			PWMB_ENO |= ENO5P;
 		}
 		else
 		{
-			PWMB_CC5E_Disable();		//¹Ø±ÕÊäÈë²¶»ñ/±È½ÏÊä³ö
+			PWMB_CC5E_Disable();		//Â¹Ã˜Â±Ã•ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
 			PWMB_ENO &= ~ENO5P;
 		}
 		
@@ -187,18 +187,18 @@ u8 PWM_Configuration(u8 PWM, PWMx_InitDefine *PWMx)
 	
 	if(PWM == PWM6)
 	{
-		PWMB_CC6E_Disable();		//¹Ø±ÕÊäÈë²¶»ñ/±È½ÏÊä³ö
-		PWMB_CC6S_Direction(CCAS_OUTPUT);		//CCnS½öÔÚÍ¨µÀ¹Ø±ÕÊ±²ÅÊÇ¿ÉÐ´µÄ
-		PWMB_OC6ModeSet(PWMx->PWM_Mode);		//ÉèÖÃÊä³ö±È½ÏÄ£Ê½
+		PWMB_CC6E_Disable();		//Â¹Ã˜Â±Ã•ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
+		PWMB_CC6S_Direction(CCAS_OUTPUT);		//CCnSÂ½Ã¶Ã”ÃšÃÂ¨ÂµÃ€Â¹Ã˜Â±Ã•ÃŠÂ±Â²Ã…ÃŠÃ‡Â¿Ã‰ÃÂ´ÂµÃ„
+		PWMB_OC6ModeSet(PWMx->PWM_Mode);		//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶Â±ÃˆÂ½ÃÃ„Â£ÃŠÂ½
 
 		if(PWMx->PWM_EnoSelect & ENO6P)
 		{
-			PWMB_CC6E_Enable();			//¿ªÆôÊäÈë²¶»ñ/±È½ÏÊä³ö
+			PWMB_CC6E_Enable();			//Â¿ÂªÃ†Ã´ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
 			PWMB_ENO |= ENO6P;
 		}
 		else
 		{
-			PWMB_CC6E_Disable();		//¹Ø±ÕÊäÈë²¶»ñ/±È½ÏÊä³ö
+			PWMB_CC6E_Disable();		//Â¹Ã˜Â±Ã•ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
 			PWMB_ENO &= ~ENO6P;
 		}
 		
@@ -208,18 +208,18 @@ u8 PWM_Configuration(u8 PWM, PWMx_InitDefine *PWMx)
 	
 	if(PWM == PWM7)
 	{
-		PWMB_CC7E_Disable();		//¹Ø±ÕÊäÈë²¶»ñ/±È½ÏÊä³ö
-		PWMB_CC7S_Direction(CCAS_OUTPUT);		//CCnS½öÔÚÍ¨µÀ¹Ø±ÕÊ±²ÅÊÇ¿ÉÐ´µÄ
-		PWMB_OC7ModeSet(PWMx->PWM_Mode);		//ÉèÖÃÊä³ö±È½ÏÄ£Ê½
+		PWMB_CC7E_Disable();		//Â¹Ã˜Â±Ã•ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
+		PWMB_CC7S_Direction(CCAS_OUTPUT);		//CCnSÂ½Ã¶Ã”ÃšÃÂ¨ÂµÃ€Â¹Ã˜Â±Ã•ÃŠÂ±Â²Ã…ÃŠÃ‡Â¿Ã‰ÃÂ´ÂµÃ„
+		PWMB_OC7ModeSet(PWMx->PWM_Mode);		//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶Â±ÃˆÂ½ÃÃ„Â£ÃŠÂ½
 
 		if(PWMx->PWM_EnoSelect & ENO7P)
 		{
-			PWMB_CC7E_Enable();			//¿ªÆôÊäÈë²¶»ñ/±È½ÏÊä³ö
+			PWMB_CC7E_Enable();			//Â¿ÂªÃ†Ã´ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
 			PWMB_ENO |= ENO7P;
 		}
 		else
 		{
-			PWMB_CC7E_Disable();		//¹Ø±ÕÊäÈë²¶»ñ/±È½ÏÊä³ö
+			PWMB_CC7E_Disable();		//Â¹Ã˜Â±Ã•ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
 			PWMB_ENO &= ~ENO7P;
 		}
 		
@@ -229,18 +229,18 @@ u8 PWM_Configuration(u8 PWM, PWMx_InitDefine *PWMx)
 	
 	if(PWM == PWM8)
 	{
-		PWMB_CC8E_Disable();		//¹Ø±ÕÊäÈë²¶»ñ/±È½ÏÊä³ö
-		PWMB_CC8S_Direction(CCAS_OUTPUT);		//CCnS½öÔÚÍ¨µÀ¹Ø±ÕÊ±²ÅÊÇ¿ÉÐ´µÄ
-		PWMB_OC8ModeSet(PWMx->PWM_Mode);		//ÉèÖÃÊä³ö±È½ÏÄ£Ê½
+		PWMB_CC8E_Disable();		//Â¹Ã˜Â±Ã•ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
+		PWMB_CC8S_Direction(CCAS_OUTPUT);		//CCnSÂ½Ã¶Ã”ÃšÃÂ¨ÂµÃ€Â¹Ã˜Â±Ã•ÃŠÂ±Â²Ã…ÃŠÃ‡Â¿Ã‰ÃÂ´ÂµÃ„
+		PWMB_OC8ModeSet(PWMx->PWM_Mode);		//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶Â±ÃˆÂ½ÃÃ„Â£ÃŠÂ½
 
 		if(PWMx->PWM_EnoSelect & ENO8P)
 		{
-			PWMB_CC8E_Enable();			//¿ªÆôÊäÈë²¶»ñ/±È½ÏÊä³ö
+			PWMB_CC8E_Enable();			//Â¿ÂªÃ†Ã´ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
 			PWMB_ENO |= ENO8P;
 		}
 		else
 		{
-			PWMB_CC8E_Disable();		//¹Ø±ÕÊäÈë²¶»ñ/±È½ÏÊä³ö
+			PWMB_CC8E_Disable();		//Â¹Ã˜Â±Ã•ÃŠÃ¤ÃˆÃ«Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃŠÃ¤Â³Ã¶
 			PWMB_ENO &= ~ENO8P;
 		}
 		
@@ -250,27 +250,27 @@ u8 PWM_Configuration(u8 PWM, PWMx_InitDefine *PWMx)
 	
 	if(PWM == PWMB)
 	{
-//		PWMB_OC5_ReloadEnable(PWMx->PWM_Reload);	//Êä³ö±È½ÏµÄÔ¤×°ÔØÊ¹ÄÜ
-//		PWMB_OC5_FastEnable(PWMx->PWM_Fast);		//Êä³ö±È½Ï¿ìËÙ¹¦ÄÜÊ¹ÄÜ
-//		PWMB_CCPCBPreloaded(PWMx->PWM_PreLoad);	//²¶»ñ/±È½ÏÔ¤×°ÔØ¿ØÖÆÎ»(¸ÃÎ»Ö»¶Ô¾ßÓÐ»¥²¹Êä³öµÄÍ¨µÀÆð×÷ÓÃ)
-//		PWMB_BrakeEnable(PWMx->PWM_BrakeEnable);	//¿ªÆô/½ûÖ¹É²³µÊäÈë
+//		PWMB_OC5_ReloadEnable(PWMx->PWM_Reload);	//ÃŠÃ¤Â³Ã¶Â±ÃˆÂ½ÃÂµÃ„Ã”Â¤Ã—Â°Ã”Ã˜ÃŠÂ¹Ã„Ãœ
+//		PWMB_OC5_FastEnable(PWMx->PWM_Fast);		//ÃŠÃ¤Â³Ã¶Â±ÃˆÂ½ÃÂ¿Ã¬Ã‹Ã™Â¹Â¦Ã„ÃœÃŠÂ¹Ã„Ãœ
+//		PWMB_CCPCBPreloaded(PWMx->PWM_PreLoad);	//Â²Â¶Â»Ã±/Â±ÃˆÂ½ÃÃ”Â¤Ã—Â°Ã”Ã˜Â¿Ã˜Ã–Ã†ÃŽÂ»(Â¸ÃƒÃŽÂ»Ã–Â»Â¶Ã”Â¾ÃŸÃ“ÃÂ»Â¥Â²Â¹ÃŠÃ¤Â³Ã¶ÂµÃ„ÃÂ¨ÂµÃ€Ã†Ã°Ã—Ã·Ã“Ãƒ)
+//		PWMB_BrakeEnable(PWMx->PWM_BrakeEnable);	//Â¿ÂªÃ†Ã´/Â½Ã»Ã–Â¹Ã‰Â²Â³ÂµÃŠÃ¤ÃˆÃ«
 
-		PWMB_DeadTime(PWMx->PWM_DeadTime);	//ËÀÇø·¢ÉúÆ÷ÉèÖÃ
-		PWMB_AutoReload(PWMx->PWM_Period);	//ÖÜÆÚÉèÖÃ
-		PWMB_BrakeOutputEnable(PWMx->PWM_MainOutEnable);	//Ö÷Êä³öÊ¹ÄÜ
-		PWMB_CEN_Enable(PWMx->PWM_CEN_Enable);	//Ê¹ÄÜ¼ÆÊýÆ÷
+		PWMB_DeadTime(PWMx->PWM_DeadTime);	//Ã‹Ã€Ã‡Ã¸Â·Â¢Ã‰ÃºÃ†Ã·Ã‰Ã¨Ã–Ãƒ
+		PWMB_AutoReload(PWMx->PWM_Period);	//Ã–ÃœÃ†ÃšÃ‰Ã¨Ã–Ãƒ
+		PWMB_BrakeOutputEnable(PWMx->PWM_MainOutEnable);	//Ã–Ã·ÃŠÃ¤Â³Ã¶ÃŠÂ¹Ã„Ãœ
+		PWMB_CEN_Enable(PWMx->PWM_CEN_Enable);	//ÃŠÂ¹Ã„ÃœÂ¼Ã†ÃŠÃ½Ã†Ã·
 		return	SUCCESS;
 	}
 
-	return	FAIL;	//´íÎó
+	return	FAIL;	//Â´Ã­ÃŽÃ³
 }
 
 //========================================================================
-// º¯Êý: UpdatePwm
-// ÃèÊö: PWMÕ¼¿Õ±È¸üÐÂ³ÌÐò.
-// ²ÎÊý: PWM: PWMÍ¨µÀ/×éºÅ, PWMx½á¹¹²ÎÊý,Çë²Î¿¼PWM.hÀïµÄ¶¨Òå.
-// ·µ»Ø: none.
-// °æ±¾: V1.0, 2012-10-22
+// ÂºÂ¯ÃŠÃ½: UpdatePwm
+// ÃƒÃ¨ÃŠÃ¶: PWMÃ•Â¼Â¿Ã•Â±ÃˆÂ¸Ã¼ÃÃ‚Â³ÃŒÃÃ².
+// Â²ÃŽÃŠÃ½: PWM: PWMÃÂ¨ÂµÃ€/Ã—Ã©ÂºÃ…, PWMxÂ½Ã¡Â¹Â¹Â²ÃŽÃŠÃ½,Ã‡Ã«Â²ÃŽÂ¿Â¼PWM.hÃ€Ã¯ÂµÃ„Â¶Â¨Ã’Ã¥.
+// Â·ÂµÂ»Ã˜: none.
+// Â°Ã¦Â±Â¾: V1.0, 2012-10-22
 //========================================================================
 void UpdatePwm(u8 PWM, PWMx_Duty *PWMx)
 {
@@ -325,83 +325,83 @@ void UpdatePwm(u8 PWM, PWMx_Duty *PWMx)
 }
 
 //========================================================================
-// º¯Êý: ReadPWMA(void)
-// ÃèÊö: Òì²½¶ÁÈ¡PWMAÌØÊâ¹¦ÄÜ¼Ä´æÆ÷º¯Êý. 
-// ²ÎÊý: addr: ¶ÁÈ¡ÌØÊâ¹¦ÄÜ¼Ä´æÆ÷µØÖ·.
-// ·µ»Ø: dat:  ¶ÁÈ¡ÌØÊâ¹¦ÄÜ¼Ä´æÆ÷ÄÚÈÝ.
-// °æ±¾: V1.0, 2022-03-16
+// ÂºÂ¯ÃŠÃ½: ReadPWMA(void)
+// ÃƒÃ¨ÃŠÃ¶: Ã’Ã¬Â²Â½Â¶ÃÃˆÂ¡PWMAÃŒÃ˜ÃŠÃ¢Â¹Â¦Ã„ÃœÂ¼Ã„Â´Ã¦Ã†Ã·ÂºÂ¯ÃŠÃ½. 
+// Â²ÃŽÃŠÃ½: addr: Â¶ÃÃˆÂ¡ÃŒÃ˜ÃŠÃ¢Â¹Â¦Ã„ÃœÂ¼Ã„Â´Ã¦Ã†Ã·ÂµÃ˜Ã–Â·.
+// Â·ÂµÂ»Ã˜: dat:  Â¶ÃÃˆÂ¡ÃŒÃ˜ÃŠÃ¢Â¹Â¦Ã„ÃœÂ¼Ã„Â´Ã¦Ã†Ã·Ã„ÃšÃˆÃ.
+// Â°Ã¦Â±Â¾: V1.0, 2022-03-16
 //========================================================================
 u8 ReadPWMA(u8 addr)
 {
 	u8 dat;
 	
-	while (HSPWMA_ADR &	0x80); //µÈ´ýÇ°Ò»¸öÒì²½¶ÁÐ´Íê³É
-	HSPWMA_ADR = addr |	0x80;  //ÉèÖÃ¼ä½Ó·ÃÎÊµØÖ·,Ö»ÐèÒªÉèÖÃÔ­XFRµØÖ·µÄµÍ7Î»
-								//HSPWMA_ADDR¼Ä´æÆ÷µÄ×î¸ßÎ»Ð´1,±íÊ¾¶ÁÊý¾Ý
-	while (HSPWMA_ADR &	0x80); //µÈ´ýµ±Ç°Òì²½¶ÁÈ¡Íê³É
-	dat	= HSPWMA_DAT;		   //¶ÁÈ¡Òì²½Êý¾Ý
+	while (HSPWMA_ADR &	0x80); //ÂµÃˆÂ´Ã½Ã‡Â°Ã’Â»Â¸Ã¶Ã’Ã¬Â²Â½Â¶ÃÃÂ´ÃÃªÂ³Ã‰
+	HSPWMA_ADR = addr |	0x80;  //Ã‰Ã¨Ã–ÃƒÂ¼Ã¤Â½Ã“Â·ÃƒÃŽÃŠÂµÃ˜Ã–Â·,Ã–Â»ÃÃ¨Ã’ÂªÃ‰Ã¨Ã–ÃƒÃ”Â­XFRÂµÃ˜Ã–Â·ÂµÃ„ÂµÃ7ÃŽÂ»
+								//HSPWMA_ADDRÂ¼Ã„Â´Ã¦Ã†Ã·ÂµÃ„Ã—Ã®Â¸ÃŸÃŽÂ»ÃÂ´1,Â±Ã­ÃŠÂ¾Â¶ÃÃŠÃ½Â¾Ã
+	while (HSPWMA_ADR &	0x80); //ÂµÃˆÂ´Ã½ÂµÂ±Ã‡Â°Ã’Ã¬Â²Â½Â¶ÃÃˆÂ¡ÃÃªÂ³Ã‰
+	dat	= HSPWMA_DAT;		   //Â¶ÃÃˆÂ¡Ã’Ã¬Â²Â½ÃŠÃ½Â¾Ã
 	
 	return dat;
 }
 
 //========================================================================
-// º¯Êý: ReadPWMB(void)
-// ÃèÊö: Òì²½¶ÁÈ¡PWMBÌØÊâ¹¦ÄÜ¼Ä´æÆ÷º¯Êý. 
-// ²ÎÊý: addr: ¶ÁÈ¡ÌØÊâ¹¦ÄÜ¼Ä´æÆ÷µØÖ·.
-// ·µ»Ø: dat:  ¶ÁÈ¡ÌØÊâ¹¦ÄÜ¼Ä´æÆ÷ÄÚÈÝ.
-// °æ±¾: V1.0, 2022-03-16
+// ÂºÂ¯ÃŠÃ½: ReadPWMB(void)
+// ÃƒÃ¨ÃŠÃ¶: Ã’Ã¬Â²Â½Â¶ÃÃˆÂ¡PWMBÃŒÃ˜ÃŠÃ¢Â¹Â¦Ã„ÃœÂ¼Ã„Â´Ã¦Ã†Ã·ÂºÂ¯ÃŠÃ½. 
+// Â²ÃŽÃŠÃ½: addr: Â¶ÃÃˆÂ¡ÃŒÃ˜ÃŠÃ¢Â¹Â¦Ã„ÃœÂ¼Ã„Â´Ã¦Ã†Ã·ÂµÃ˜Ã–Â·.
+// Â·ÂµÂ»Ã˜: dat:  Â¶ÃÃˆÂ¡ÃŒÃ˜ÃŠÃ¢Â¹Â¦Ã„ÃœÂ¼Ã„Â´Ã¦Ã†Ã·Ã„ÃšÃˆÃ.
+// Â°Ã¦Â±Â¾: V1.0, 2022-03-16
 //========================================================================
 u8 ReadPWMB(u8 addr)
 {
 	u8 dat;
 	
-	while (HSPWMB_ADR &	0x80); //µÈ´ýÇ°Ò»¸öÒì²½¶ÁÐ´Íê³É
-	HSPWMB_ADR = addr |	0x80;  //ÉèÖÃ¼ä½Ó·ÃÎÊµØÖ·,Ö»ÐèÒªÉèÖÃÔ­XFRµØÖ·µÄµÍ7Î»
-								//HSPWMB_ADDR¼Ä´æÆ÷µÄ×î¸ßÎ»Ð´1,±íÊ¾¶ÁÊý¾Ý
-	while (HSPWMB_ADR &	0x80); //µÈ´ýµ±Ç°Òì²½¶ÁÈ¡Íê³É
-	dat	= HSPWMB_DAT;		   //¶ÁÈ¡Òì²½Êý¾Ý
+	while (HSPWMB_ADR &	0x80); //ÂµÃˆÂ´Ã½Ã‡Â°Ã’Â»Â¸Ã¶Ã’Ã¬Â²Â½Â¶ÃÃÂ´ÃÃªÂ³Ã‰
+	HSPWMB_ADR = addr |	0x80;  //Ã‰Ã¨Ã–ÃƒÂ¼Ã¤Â½Ã“Â·ÃƒÃŽÃŠÂµÃ˜Ã–Â·,Ã–Â»ÃÃ¨Ã’ÂªÃ‰Ã¨Ã–ÃƒÃ”Â­XFRÂµÃ˜Ã–Â·ÂµÃ„ÂµÃ7ÃŽÂ»
+								//HSPWMB_ADDRÂ¼Ã„Â´Ã¦Ã†Ã·ÂµÃ„Ã—Ã®Â¸ÃŸÃŽÂ»ÃÂ´1,Â±Ã­ÃŠÂ¾Â¶ÃÃŠÃ½Â¾Ã
+	while (HSPWMB_ADR &	0x80); //ÂµÃˆÂ´Ã½ÂµÂ±Ã‡Â°Ã’Ã¬Â²Â½Â¶ÃÃˆÂ¡ÃÃªÂ³Ã‰
+	dat	= HSPWMB_DAT;		   //Â¶ÃÃˆÂ¡Ã’Ã¬Â²Â½ÃŠÃ½Â¾Ã
 	
 	return dat;
 }
 
 //========================================================================
-// º¯Êý: WritePWMA(void)
-// ÃèÊö: Òì²½¶ÁÈ¡PWMAÌØÊâ¹¦ÄÜ¼Ä´æÆ÷º¯Êý. 
-// ²ÎÊý: addr: Ð´ÈëÌØÊâ¹¦ÄÜ¼Ä´æÆ÷µØÖ·.
-// ²ÎÊý: dat:  Ð´ÈëÌØÊâ¹¦ÄÜ¼Ä´æÆ÷ÄÚÈÝ.
-// ·µ»Ø: none.
-// °æ±¾: V1.0, 2022-03-16
+// ÂºÂ¯ÃŠÃ½: WritePWMA(void)
+// ÃƒÃ¨ÃŠÃ¶: Ã’Ã¬Â²Â½Â¶ÃÃˆÂ¡PWMAÃŒÃ˜ÃŠÃ¢Â¹Â¦Ã„ÃœÂ¼Ã„Â´Ã¦Ã†Ã·ÂºÂ¯ÃŠÃ½. 
+// Â²ÃŽÃŠÃ½: addr: ÃÂ´ÃˆÃ«ÃŒÃ˜ÃŠÃ¢Â¹Â¦Ã„ÃœÂ¼Ã„Â´Ã¦Ã†Ã·ÂµÃ˜Ã–Â·.
+// Â²ÃŽÃŠÃ½: dat:  ÃÂ´ÃˆÃ«ÃŒÃ˜ÃŠÃ¢Â¹Â¦Ã„ÃœÂ¼Ã„Â´Ã¦Ã†Ã·Ã„ÃšÃˆÃ.
+// Â·ÂµÂ»Ã˜: none.
+// Â°Ã¦Â±Â¾: V1.0, 2022-03-16
 //========================================================================
 void WritePWMA(u8	addr, u8 dat)
 {
-	while (HSPWMA_ADR &	0x80); //µÈ´ýÇ°Ò»¸öÒì²½¶ÁÐ´Íê³É
-	HSPWMA_DAT = dat;		   //×¼±¸ÐèÒªÐ´ÈëµÄÊý¾Ý
-	HSPWMA_ADR = addr &	0x7f;  //ÉèÖÃ¼ä½Ó·ÃÎÊµØÖ·,Ö»ÐèÒªÉèÖÃÔ­XFRµØÖ·µÄµÍ7Î»
-								//HSPWMA_ADDR¼Ä´æÆ÷µÄ×î¸ßÎ»Ð´0,±íÊ¾Ð´Êý¾Ý
+	while (HSPWMA_ADR &	0x80); //ÂµÃˆÂ´Ã½Ã‡Â°Ã’Â»Â¸Ã¶Ã’Ã¬Â²Â½Â¶ÃÃÂ´ÃÃªÂ³Ã‰
+	HSPWMA_DAT = dat;		   //Ã—Â¼Â±Â¸ÃÃ¨Ã’ÂªÃÂ´ÃˆÃ«ÂµÃ„ÃŠÃ½Â¾Ã
+	HSPWMA_ADR = addr &	0x7f;  //Ã‰Ã¨Ã–ÃƒÂ¼Ã¤Â½Ã“Â·ÃƒÃŽÃŠÂµÃ˜Ã–Â·,Ã–Â»ÃÃ¨Ã’ÂªÃ‰Ã¨Ã–ÃƒÃ”Â­XFRÂµÃ˜Ã–Â·ÂµÃ„ÂµÃ7ÃŽÂ»
+								//HSPWMA_ADDRÂ¼Ã„Â´Ã¦Ã†Ã·ÂµÃ„Ã—Ã®Â¸ÃŸÃŽÂ»ÃÂ´0,Â±Ã­ÃŠÂ¾ÃÂ´ÃŠÃ½Â¾Ã
 }
 
 //========================================================================
-// º¯Êý: WritePWMB(void)
-// ÃèÊö: Òì²½¶ÁÈ¡PWMBÌØÊâ¹¦ÄÜ¼Ä´æÆ÷º¯Êý. 
-// ²ÎÊý: addr: Ð´ÈëÌØÊâ¹¦ÄÜ¼Ä´æÆ÷µØÖ·.
-// ²ÎÊý: dat:  Ð´ÈëÌØÊâ¹¦ÄÜ¼Ä´æÆ÷ÄÚÈÝ.
-// ·µ»Ø: none.
-// °æ±¾: V1.0, 2022-03-16
+// ÂºÂ¯ÃŠÃ½: WritePWMB(void)
+// ÃƒÃ¨ÃŠÃ¶: Ã’Ã¬Â²Â½Â¶ÃÃˆÂ¡PWMBÃŒÃ˜ÃŠÃ¢Â¹Â¦Ã„ÃœÂ¼Ã„Â´Ã¦Ã†Ã·ÂºÂ¯ÃŠÃ½. 
+// Â²ÃŽÃŠÃ½: addr: ÃÂ´ÃˆÃ«ÃŒÃ˜ÃŠÃ¢Â¹Â¦Ã„ÃœÂ¼Ã„Â´Ã¦Ã†Ã·ÂµÃ˜Ã–Â·.
+// Â²ÃŽÃŠÃ½: dat:  ÃÂ´ÃˆÃ«ÃŒÃ˜ÃŠÃ¢Â¹Â¦Ã„ÃœÂ¼Ã„Â´Ã¦Ã†Ã·Ã„ÃšÃˆÃ.
+// Â·ÂµÂ»Ã˜: none.
+// Â°Ã¦Â±Â¾: V1.0, 2022-03-16
 //========================================================================
 void WritePWMB(u8	addr, u8 dat)
 {
-	while (HSPWMB_ADR &	0x80); //µÈ´ýÇ°Ò»¸öÒì²½¶ÁÐ´Íê³É
-	HSPWMB_DAT = dat;		   //×¼±¸ÐèÒªÐ´ÈëµÄÊý¾Ý
-	HSPWMB_ADR = addr &	0x7f;  //ÉèÖÃ¼ä½Ó·ÃÎÊµØÖ·,Ö»ÐèÒªÉèÖÃÔ­XFRµØÖ·µÄµÍ7Î»
-								//HSPWMB_ADDR¼Ä´æÆ÷µÄ×î¸ßÎ»Ð´0,±íÊ¾Ð´Êý¾Ý
+	while (HSPWMB_ADR &	0x80); //ÂµÃˆÂ´Ã½Ã‡Â°Ã’Â»Â¸Ã¶Ã’Ã¬Â²Â½Â¶ÃÃÂ´ÃÃªÂ³Ã‰
+	HSPWMB_DAT = dat;		   //Ã—Â¼Â±Â¸ÃÃ¨Ã’ÂªÃÂ´ÃˆÃ«ÂµÃ„ÃŠÃ½Â¾Ã
+	HSPWMB_ADR = addr &	0x7f;  //Ã‰Ã¨Ã–ÃƒÂ¼Ã¤Â½Ã“Â·ÃƒÃŽÃŠÂµÃ˜Ã–Â·,Ã–Â»ÃÃ¨Ã’ÂªÃ‰Ã¨Ã–ÃƒÃ”Â­XFRÂµÃ˜Ã–Â·ÂµÃ„ÂµÃ7ÃŽÂ»
+								//HSPWMB_ADDRÂ¼Ã„Â´Ã¦Ã†Ã·ÂµÃ„Ã—Ã®Â¸ÃŸÃŽÂ»ÃÂ´0,Â±Ã­ÃŠÂ¾ÃÂ´ÃŠÃ½Â¾Ã
 }
 
 //========================================================================
-// º¯Êý: HSPWM_Configuration
-// ÃèÊö: HSPWM³õÊ¼»¯³ÌÐò.
-// ²ÎÊý: PWMx: ½á¹¹²ÎÊý,Çë²Î¿¼PWM.hÀïµÄ¶¨Òå.
-// ·µ»Ø: ³É¹¦·µ»Ø SUCCESS, ´íÎó·µ»Ø FAIL.
-// °æ±¾: V1.0, 2022-04-05
+// ÂºÂ¯ÃŠÃ½: HSPWM_Configuration
+// ÃƒÃ¨ÃŠÃ¶: HSPWMÂ³ÃµÃŠÂ¼Â»Â¯Â³ÃŒÃÃ².
+// Â²ÃŽÃŠÃ½: PWMx: Â½Ã¡Â¹Â¹Â²ÃŽÃŠÃ½,Ã‡Ã«Â²ÃŽÂ¿Â¼PWM.hÃ€Ã¯ÂµÃ„Â¶Â¨Ã’Ã¥.
+// Â·ÂµÂ»Ã˜: Â³Ã‰Â¹Â¦Â·ÂµÂ»Ã˜ SUCCESS, Â´Ã­ÃŽÃ³Â·ÂµÂ»Ã˜ FAIL.
+// Â°Ã¦Â±Â¾: V1.0, 2022-04-05
 //========================================================================
 void HSPWM_Configuration(u8 PWM, HSPWMx_InitDefine *PWMx, PWMx_Duty *DUTYx)
 {
@@ -409,7 +409,7 @@ void HSPWM_Configuration(u8 PWM, HSPWMx_InitDefine *PWMx, PWMx_Duty *DUTYx)
 	
 	if(PWM == PWMA)
 	{
-		HSPWMA_CFG = 0x03;			//Ê¹ÄÜPWMAÏà¹Ø¼Ä´æÆ÷Òì²½·ÃÎÊ¹¦ÄÜ
+		HSPWMA_CFG = 0x03;			//ÃŠÂ¹Ã„ÃœPWMAÃÃ Â¹Ã˜Â¼Ã„Â´Ã¦Ã†Ã·Ã’Ã¬Â²Â½Â·ÃƒÃŽÃŠÂ¹Â¦Ã„Ãœ
 
 		if(PWMx->PWM_EnoSelect & ENO1P)
 		{
@@ -492,33 +492,33 @@ void HSPWM_Configuration(u8 PWM, HSPWMx_InitDefine *PWMx, PWMx_Duty *DUTYx)
 			tmpCCER2 &= ~0x40;
 		}
 		
-		//Í¨¹ýÒì²½·½Ê½ÉèÖÃPWMAµÄÏà¹Ø¼Ä´æÆ÷
+		//ÃÂ¨Â¹Ã½Ã’Ã¬Â²Â½Â·Â½ÃŠÂ½Ã‰Ã¨Ã–ÃƒPWMAÂµÃ„ÃÃ Â¹Ã˜Â¼Ã„Â´Ã¦Ã†Ã·
 		WritePWMA((u8)&PWMA_CCER1, 0x00);
 		WritePWMA((u8)&PWMA_CCER2, 0x00);
-		WritePWMA((u8)&PWMA_CCMR1, CCMRn_PWM_MODE1);			//Í¨µÀÄ£Ê½ÅäÖÃ
+		WritePWMA((u8)&PWMA_CCMR1, CCMRn_PWM_MODE1);			//ÃÂ¨ÂµÃ€Ã„Â£ÃŠÂ½Ã…Ã¤Ã–Ãƒ
 		WritePWMA((u8)&PWMA_CCMR2, CCMRn_PWM_MODE1);
 		WritePWMA((u8)&PWMA_CCMR3, CCMRn_PWM_MODE1);
 		WritePWMA((u8)&PWMA_CCMR4, CCMRn_PWM_MODE1);
-		WritePWMA((u8)&PWMA_CCER1, tmpCCER1);			//ÅäÖÃÍ¨µÀÊä³öÊ¹ÄÜºÍ¼«ÐÔ
+		WritePWMA((u8)&PWMA_CCER1, tmpCCER1);			//Ã…Ã¤Ã–ÃƒÃÂ¨ÂµÃ€ÃŠÃ¤Â³Ã¶ÃŠÂ¹Ã„ÃœÂºÃÂ¼Â«ÃÃ”
 		WritePWMA((u8)&PWMA_CCER2, tmpCCER2);
-		WritePWMA((u8)&PWMA_ENO, tmpENO);	//Ê¹ÄÜPWMÐÅºÅÊä³ö¶Ë¿Ú
-		WritePWMA((u8)&PWMA_CCR1H, (u8)(DUTYx->PWM1_Duty >> 8));	//ÉèÖÃÊä³öPWMµÄÕ¼¿Õ±È
+		WritePWMA((u8)&PWMA_ENO, tmpENO);	//ÃŠÂ¹Ã„ÃœPWMÃÃ…ÂºÃ…ÃŠÃ¤Â³Ã¶Â¶Ã‹Â¿Ãš
+		WritePWMA((u8)&PWMA_CCR1H, (u8)(DUTYx->PWM1_Duty >> 8));	//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã•Â¼Â¿Ã•Â±Ãˆ
 		WritePWMA((u8)&PWMA_CCR1L, (u8)DUTYx->PWM1_Duty);
-		WritePWMA((u8)&PWMA_CCR2H, (u8)(DUTYx->PWM2_Duty >> 8));	//ÉèÖÃÊä³öPWMµÄÕ¼¿Õ±È
+		WritePWMA((u8)&PWMA_CCR2H, (u8)(DUTYx->PWM2_Duty >> 8));	//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã•Â¼Â¿Ã•Â±Ãˆ
 		WritePWMA((u8)&PWMA_CCR2L, (u8)DUTYx->PWM2_Duty);
-		WritePWMA((u8)&PWMA_CCR3H, (u8)(DUTYx->PWM3_Duty >> 8));	//ÉèÖÃÊä³öPWMµÄÕ¼¿Õ±È
+		WritePWMA((u8)&PWMA_CCR3H, (u8)(DUTYx->PWM3_Duty >> 8));	//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã•Â¼Â¿Ã•Â±Ãˆ
 		WritePWMA((u8)&PWMA_CCR3L, (u8)DUTYx->PWM3_Duty);
-		WritePWMA((u8)&PWMA_CCR4H, (u8)(DUTYx->PWM4_Duty >> 8));	//ÉèÖÃÊä³öPWMµÄÕ¼¿Õ±È
+		WritePWMA((u8)&PWMA_CCR4H, (u8)(DUTYx->PWM4_Duty >> 8));	//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã•Â¼Â¿Ã•Â±Ãˆ
 		WritePWMA((u8)&PWMA_CCR4L, (u8)DUTYx->PWM4_Duty);
-		WritePWMA((u8)&PWMA_ARRH,	(u8)(PWMx->PWM_Period >> 8));	//ÉèÖÃÊä³öPWMµÄÖÜÆÚ
+		WritePWMA((u8)&PWMA_ARRH,	(u8)(PWMx->PWM_Period >> 8));	//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã–ÃœÃ†Ãš
 		WritePWMA((u8)&PWMA_ARRL,	(u8)(PWMx->PWM_Period));
-		WritePWMA((u8)&PWMA_DTR, PWMx->PWM_DeadTime);					//ÉèÖÃ»¥²¹¶Ô³ÆÊä³öPWMµÄËÀÇø
-		WritePWMA((u8)&PWMA_BKR, PWMx->PWM_MainOutEnable<<7);	//Ê¹ÄÜÖ÷Êä³ö
-		WritePWMA((u8)&PWMA_CR1, PWMx->PWM_CEN_Enable);				//¿ªÊ¼PWM¼ÆÊý
+		WritePWMA((u8)&PWMA_DTR, PWMx->PWM_DeadTime);					//Ã‰Ã¨Ã–ÃƒÂ»Â¥Â²Â¹Â¶Ã”Â³Ã†ÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã‹Ã€Ã‡Ã¸
+		WritePWMA((u8)&PWMA_BKR, PWMx->PWM_MainOutEnable<<7);	//ÃŠÂ¹Ã„ÃœÃ–Ã·ÃŠÃ¤Â³Ã¶
+		WritePWMA((u8)&PWMA_CR1, PWMx->PWM_CEN_Enable);				//Â¿ÂªÃŠÂ¼PWMÂ¼Ã†ÃŠÃ½
 	}
 	else if(PWM == PWMB)
 	{
-		HSPWMB_CFG = 0x03;			//Ê¹ÄÜPWMBÏà¹Ø¼Ä´æÆ÷Òì²½·ÃÎÊ¹¦ÄÜ
+		HSPWMB_CFG = 0x03;			//ÃŠÂ¹Ã„ÃœPWMBÃÃ Â¹Ã˜Â¼Ã„Â´Ã¦Ã†Ã·Ã’Ã¬Â²Â½Â·ÃƒÃŽÃŠÂ¹Â¦Ã„Ãœ
 
 		if(PWMx->PWM_EnoSelect & ENO5P)
 		{
@@ -561,102 +561,102 @@ void HSPWM_Configuration(u8 PWM, HSPWMx_InitDefine *PWMx, PWMx_Duty *DUTYx)
 			tmpCCER2 &= ~0x10;
 		}
 		
-		//Í¨¹ýÒì²½·½Ê½ÉèÖÃPWMAµÄÏà¹Ø¼Ä´æÆ÷
+		//ÃÂ¨Â¹Ã½Ã’Ã¬Â²Â½Â·Â½ÃŠÂ½Ã‰Ã¨Ã–ÃƒPWMAÂµÃ„ÃÃ Â¹Ã˜Â¼Ã„Â´Ã¦Ã†Ã·
 		WritePWMB((u8)&PWMB_CCER1, 0x00);
 		WritePWMB((u8)&PWMB_CCER2, 0x00);
-		WritePWMB((u8)&PWMB_CCMR1, CCMRn_PWM_MODE1);			//Í¨µÀÄ£Ê½ÅäÖÃ
+		WritePWMB((u8)&PWMB_CCMR1, CCMRn_PWM_MODE1);			//ÃÂ¨ÂµÃ€Ã„Â£ÃŠÂ½Ã…Ã¤Ã–Ãƒ
 		WritePWMB((u8)&PWMB_CCMR2, CCMRn_PWM_MODE1);
 		WritePWMB((u8)&PWMB_CCMR3, CCMRn_PWM_MODE1);
 		WritePWMB((u8)&PWMB_CCMR4, CCMRn_PWM_MODE1);
-		WritePWMB((u8)&PWMB_CCER1, tmpCCER1);			//ÅäÖÃÍ¨µÀÊä³öÊ¹ÄÜºÍ¼«ÐÔ
+		WritePWMB((u8)&PWMB_CCER1, tmpCCER1);			//Ã…Ã¤Ã–ÃƒÃÂ¨ÂµÃ€ÃŠÃ¤Â³Ã¶ÃŠÂ¹Ã„ÃœÂºÃÂ¼Â«ÃÃ”
 		WritePWMB((u8)&PWMB_CCER2, tmpCCER2);
-		WritePWMB((u8)&PWMB_ENO, tmpENO);	//Ê¹ÄÜPWMÐÅºÅÊä³ö¶Ë¿Ú
-		WritePWMB((u8)&PWMB_CCR5H, (u8)(DUTYx->PWM5_Duty >> 8));	//ÉèÖÃÊä³öPWMµÄÕ¼¿Õ±È
+		WritePWMB((u8)&PWMB_ENO, tmpENO);	//ÃŠÂ¹Ã„ÃœPWMÃÃ…ÂºÃ…ÃŠÃ¤Â³Ã¶Â¶Ã‹Â¿Ãš
+		WritePWMB((u8)&PWMB_CCR5H, (u8)(DUTYx->PWM5_Duty >> 8));	//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã•Â¼Â¿Ã•Â±Ãˆ
 		WritePWMB((u8)&PWMB_CCR5L, (u8)DUTYx->PWM5_Duty);
-		WritePWMB((u8)&PWMB_CCR6H, (u8)(DUTYx->PWM6_Duty >> 8));	//ÉèÖÃÊä³öPWMµÄÕ¼¿Õ±È
+		WritePWMB((u8)&PWMB_CCR6H, (u8)(DUTYx->PWM6_Duty >> 8));	//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã•Â¼Â¿Ã•Â±Ãˆ
 		WritePWMB((u8)&PWMB_CCR6L, (u8)DUTYx->PWM6_Duty);
-		WritePWMB((u8)&PWMB_CCR7H, (u8)(DUTYx->PWM7_Duty >> 8));	//ÉèÖÃÊä³öPWMµÄÕ¼¿Õ±È
+		WritePWMB((u8)&PWMB_CCR7H, (u8)(DUTYx->PWM7_Duty >> 8));	//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã•Â¼Â¿Ã•Â±Ãˆ
 		WritePWMB((u8)&PWMB_CCR7L, (u8)DUTYx->PWM7_Duty);
-		WritePWMB((u8)&PWMB_CCR8H, (u8)(DUTYx->PWM8_Duty >> 8));	//ÉèÖÃÊä³öPWMµÄÕ¼¿Õ±È
+		WritePWMB((u8)&PWMB_CCR8H, (u8)(DUTYx->PWM8_Duty >> 8));	//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã•Â¼Â¿Ã•Â±Ãˆ
 		WritePWMB((u8)&PWMB_CCR8L, (u8)DUTYx->PWM8_Duty);
-		WritePWMB((u8)&PWMB_ARRH,	(u8)(PWMx->PWM_Period >> 8));	//ÉèÖÃÊä³öPWMµÄÖÜÆÚ
+		WritePWMB((u8)&PWMB_ARRH,	(u8)(PWMx->PWM_Period >> 8));	//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã–ÃœÃ†Ãš
 		WritePWMB((u8)&PWMB_ARRL,	(u8)(PWMx->PWM_Period));
-		WritePWMB((u8)&PWMB_DTR, PWMx->PWM_DeadTime);					//ÉèÖÃ»¥²¹¶Ô³ÆÊä³öPWMµÄËÀÇø
-		WritePWMB((u8)&PWMB_BKR, PWMx->PWM_MainOutEnable<<7);	//Ê¹ÄÜÖ÷Êä³ö
-		WritePWMB((u8)&PWMB_CR1, PWMx->PWM_CEN_Enable);				//¿ªÊ¼PWM¼ÆÊý
+		WritePWMB((u8)&PWMB_DTR, PWMx->PWM_DeadTime);					//Ã‰Ã¨Ã–ÃƒÂ»Â¥Â²Â¹Â¶Ã”Â³Ã†ÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã‹Ã€Ã‡Ã¸
+		WritePWMB((u8)&PWMB_BKR, PWMx->PWM_MainOutEnable<<7);	//ÃŠÂ¹Ã„ÃœÃ–Ã·ÃŠÃ¤Â³Ã¶
+		WritePWMB((u8)&PWMB_CR1, PWMx->PWM_CEN_Enable);				//Â¿ÂªÃŠÂ¼PWMÂ¼Ã†ÃŠÃ½
 	}
 }
 
 //========================================================================
-// º¯Êý: UpdateHSPwm
-// ÃèÊö: HSPWMÕ¼¿Õ±È¸üÐÂ³ÌÐò.
-// ²ÎÊý: PWM: PWMÍ¨µÀ/×éºÅ, PWMx½á¹¹²ÎÊý,Çë²Î¿¼PWM.hÀïµÄ¶¨Òå.
-// ·µ»Ø: none.
-// °æ±¾: V1.0, 2022-04-05
+// ÂºÂ¯ÃŠÃ½: UpdateHSPwm
+// ÃƒÃ¨ÃŠÃ¶: HSPWMÃ•Â¼Â¿Ã•Â±ÃˆÂ¸Ã¼ÃÃ‚Â³ÃŒÃÃ².
+// Â²ÃŽÃŠÃ½: PWM: PWMÃÂ¨ÂµÃ€/Ã—Ã©ÂºÃ…, PWMxÂ½Ã¡Â¹Â¹Â²ÃŽÃŠÃ½,Ã‡Ã«Â²ÃŽÂ¿Â¼PWM.hÃ€Ã¯ÂµÃ„Â¶Â¨Ã’Ã¥.
+// Â·ÂµÂ»Ã˜: none.
+// Â°Ã¦Â±Â¾: V1.0, 2022-04-05
 //========================================================================
 void UpdateHSPwm(u8 PWM, PWMx_Duty *PWMx)
 {
 	switch(PWM)
 	{
 		case PWM1:
-			WritePWMA((u8)&PWMA_CCR1H, (u8)(PWMx->PWM1_Duty >> 8));	//ÉèÖÃÊä³öPWMµÄÕ¼¿Õ±È
+			WritePWMA((u8)&PWMA_CCR1H, (u8)(PWMx->PWM1_Duty >> 8));	//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã•Â¼Â¿Ã•Â±Ãˆ
 			WritePWMA((u8)&PWMA_CCR1L, (u8)PWMx->PWM1_Duty);
 		break;
 
 		case PWM2:
-			WritePWMA((u8)&PWMA_CCR2H, (u8)(PWMx->PWM2_Duty >> 8));	//ÉèÖÃÊä³öPWMµÄÕ¼¿Õ±È
+			WritePWMA((u8)&PWMA_CCR2H, (u8)(PWMx->PWM2_Duty >> 8));	//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã•Â¼Â¿Ã•Â±Ãˆ
 			WritePWMA((u8)&PWMA_CCR2L, (u8)PWMx->PWM2_Duty);
 		break;
 
 		case PWM3:
-			WritePWMA((u8)&PWMA_CCR3H, (u8)(PWMx->PWM3_Duty >> 8));	//ÉèÖÃÊä³öPWMµÄÕ¼¿Õ±È
+			WritePWMA((u8)&PWMA_CCR3H, (u8)(PWMx->PWM3_Duty >> 8));	//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã•Â¼Â¿Ã•Â±Ãˆ
 			WritePWMA((u8)&PWMA_CCR3L, (u8)PWMx->PWM3_Duty);
 		break;
 
 		case PWM4:
-			WritePWMA((u8)&PWMA_CCR4H, (u8)(PWMx->PWM4_Duty >> 8));	//ÉèÖÃÊä³öPWMµÄÕ¼¿Õ±È
+			WritePWMA((u8)&PWMA_CCR4H, (u8)(PWMx->PWM4_Duty >> 8));	//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã•Â¼Â¿Ã•Â±Ãˆ
 			WritePWMA((u8)&PWMA_CCR4L, (u8)PWMx->PWM4_Duty);
 		break;
 
 		case PWM5:
-			WritePWMB((u8)&PWMB_CCR5H, (u8)(PWMx->PWM5_Duty >> 8));	//ÉèÖÃÊä³öPWMµÄÕ¼¿Õ±È
+			WritePWMB((u8)&PWMB_CCR5H, (u8)(PWMx->PWM5_Duty >> 8));	//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã•Â¼Â¿Ã•Â±Ãˆ
 			WritePWMB((u8)&PWMB_CCR5L, (u8)PWMx->PWM5_Duty);
 		break;
 
 		case PWM6:
-			WritePWMB((u8)&PWMB_CCR6H, (u8)(PWMx->PWM6_Duty >> 8));	//ÉèÖÃÊä³öPWMµÄÕ¼¿Õ±È
+			WritePWMB((u8)&PWMB_CCR6H, (u8)(PWMx->PWM6_Duty >> 8));	//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã•Â¼Â¿Ã•Â±Ãˆ
 			WritePWMB((u8)&PWMB_CCR6L, (u8)PWMx->PWM6_Duty);
 		break;
 
 		case PWM7:
-			WritePWMB((u8)&PWMB_CCR7H, (u8)(PWMx->PWM7_Duty >> 8));	//ÉèÖÃÊä³öPWMµÄÕ¼¿Õ±È
+			WritePWMB((u8)&PWMB_CCR7H, (u8)(PWMx->PWM7_Duty >> 8));	//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã•Â¼Â¿Ã•Â±Ãˆ
 			WritePWMB((u8)&PWMB_CCR7L, (u8)PWMx->PWM7_Duty);
 		break;
 
 		case PWM8:
-			WritePWMB((u8)&PWMB_CCR8H, (u8)(PWMx->PWM8_Duty >> 8));	//ÉèÖÃÊä³öPWMµÄÕ¼¿Õ±È
+			WritePWMB((u8)&PWMB_CCR8H, (u8)(PWMx->PWM8_Duty >> 8));	//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã•Â¼Â¿Ã•Â±Ãˆ
 			WritePWMB((u8)&PWMB_CCR8L, (u8)PWMx->PWM8_Duty);
 		break;
 
 		case PWMA:
-			WritePWMA((u8)&PWMA_CCR1H, (u8)(PWMx->PWM1_Duty >> 8));	//ÉèÖÃÊä³öPWMµÄÕ¼¿Õ±È
+			WritePWMA((u8)&PWMA_CCR1H, (u8)(PWMx->PWM1_Duty >> 8));	//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã•Â¼Â¿Ã•Â±Ãˆ
 			WritePWMA((u8)&PWMA_CCR1L, (u8)PWMx->PWM1_Duty);
-			WritePWMA((u8)&PWMA_CCR2H, (u8)(PWMx->PWM2_Duty >> 8));	//ÉèÖÃÊä³öPWMµÄÕ¼¿Õ±È
+			WritePWMA((u8)&PWMA_CCR2H, (u8)(PWMx->PWM2_Duty >> 8));	//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã•Â¼Â¿Ã•Â±Ãˆ
 			WritePWMA((u8)&PWMA_CCR2L, (u8)PWMx->PWM2_Duty);
-			WritePWMA((u8)&PWMA_CCR3H, (u8)(PWMx->PWM3_Duty >> 8));	//ÉèÖÃÊä³öPWMµÄÕ¼¿Õ±È
+			WritePWMA((u8)&PWMA_CCR3H, (u8)(PWMx->PWM3_Duty >> 8));	//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã•Â¼Â¿Ã•Â±Ãˆ
 			WritePWMA((u8)&PWMA_CCR3L, (u8)PWMx->PWM3_Duty);
-			WritePWMA((u8)&PWMA_CCR4H, (u8)(PWMx->PWM4_Duty >> 8));	//ÉèÖÃÊä³öPWMµÄÕ¼¿Õ±È
+			WritePWMA((u8)&PWMA_CCR4H, (u8)(PWMx->PWM4_Duty >> 8));	//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã•Â¼Â¿Ã•Â±Ãˆ
 			WritePWMA((u8)&PWMA_CCR4L, (u8)PWMx->PWM4_Duty);
 		break;
 
 		case PWMB:
-			WritePWMB((u8)&PWMB_CCR5H, (u8)(PWMx->PWM5_Duty >> 8));	//ÉèÖÃÊä³öPWMµÄÕ¼¿Õ±È
+			WritePWMB((u8)&PWMB_CCR5H, (u8)(PWMx->PWM5_Duty >> 8));	//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã•Â¼Â¿Ã•Â±Ãˆ
 			WritePWMB((u8)&PWMB_CCR5L, (u8)PWMx->PWM5_Duty);
-			WritePWMB((u8)&PWMB_CCR6H, (u8)(PWMx->PWM6_Duty >> 8));	//ÉèÖÃÊä³öPWMµÄÕ¼¿Õ±È
+			WritePWMB((u8)&PWMB_CCR6H, (u8)(PWMx->PWM6_Duty >> 8));	//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã•Â¼Â¿Ã•Â±Ãˆ
 			WritePWMB((u8)&PWMB_CCR6L, (u8)PWMx->PWM6_Duty);
-			WritePWMB((u8)&PWMB_CCR7H, (u8)(PWMx->PWM7_Duty >> 8));	//ÉèÖÃÊä³öPWMµÄÕ¼¿Õ±È
+			WritePWMB((u8)&PWMB_CCR7H, (u8)(PWMx->PWM7_Duty >> 8));	//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã•Â¼Â¿Ã•Â±Ãˆ
 			WritePWMB((u8)&PWMB_CCR7L, (u8)PWMx->PWM7_Duty);
-			WritePWMB((u8)&PWMB_CCR8H, (u8)(PWMx->PWM8_Duty >> 8));	//ÉèÖÃÊä³öPWMµÄÕ¼¿Õ±È
+			WritePWMB((u8)&PWMB_CCR8H, (u8)(PWMx->PWM8_Duty >> 8));	//Ã‰Ã¨Ã–ÃƒÃŠÃ¤Â³Ã¶PWMÂµÃ„Ã•Â¼Â¿Ã•Â±Ãˆ
 			WritePWMB((u8)&PWMB_CCR8L, (u8)PWMx->PWM8_Duty);
 		break;
 	}

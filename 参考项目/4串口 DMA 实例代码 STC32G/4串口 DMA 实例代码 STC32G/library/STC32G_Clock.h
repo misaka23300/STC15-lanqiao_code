@@ -8,7 +8,7 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+/* 脠莽鹿没脪陋脭脷鲁脤脨貌脰脨脢鹿脫脙麓脣麓煤脗毛,脟毛脭脷鲁脤脨貌脰脨脳垄脙梅脢鹿脫脙脕脣STC碌脛脳脢脕脧录掳鲁脤脨貌            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_CLOCK_H
@@ -17,21 +17,21 @@
 #include	"config.h"
 
 //========================================================================
-//                              时钟设置
+//                              脢卤脰脫脡猫脰脙
 //========================================================================
 
-#define		MainClockSel(n)	CLKSEL = (CLKSEL & ~0x0f) | (n)				/* 系统时钟选择 */
-#define		PLLClockSel(n)	CLKSEL = (CLKSEL & ~0x80) | (n<<7)		/* PLL时钟选择 */
-#define		HSIOClockSel(n)	CLKSEL = (CLKSEL & ~0x40) | (n<<6)		/* 高速IO时钟选择 */
-#define		PLLClockIn(n)		USBCLK = (USBCLK & ~0x60) | (n<<4)		/* 系统时钟 n 分频作为PLL时钟源,确保分频后为12M */
-#define		PLLEnable(n)		USBCLK = (USBCLK & ~0x80) | (n<<7)		/* PLL倍频使能 */
-#define		HSClockDiv(n)		HSCLKDIV = (n)		/* 高速IO时钟分频系数 */
+#define		MainClockSel(n)	CLKSEL = (CLKSEL & ~0x0f) | (n)				/* 脧碌脥鲁脢卤脰脫脩隆脭帽 */
+#define		PLLClockSel(n)	CLKSEL = (CLKSEL & ~0x80) | (n<<7)		/* PLL脢卤脰脫脩隆脭帽 */
+#define		HSIOClockSel(n)	CLKSEL = (CLKSEL & ~0x40) | (n<<6)		/* 赂脽脣脵IO脢卤脰脫脩隆脭帽 */
+#define		PLLClockIn(n)		USBCLK = (USBCLK & ~0x60) | (n<<4)		/* 脧碌脥鲁脢卤脰脫 n 路脰脝碌脳梅脦陋PLL脢卤脰脫脭麓,脠路卤拢路脰脝碌潞贸脦陋12M */
+#define		PLLEnable(n)		USBCLK = (USBCLK & ~0x80) | (n<<7)		/* PLL卤露脝碌脢鹿脛脺 */
+#define		HSClockDiv(n)		HSCLKDIV = (n)		/* 赂脽脣脵IO脢卤脰脫路脰脝碌脧碌脢媒 */
 
 //========================================================================
-//                              定义声明
+//                              露篓脪氓脡霉脙梅
 //========================================================================
 
-/* 系统时钟选择参数 */
+/* 脧碌脥鲁脢卤脰脫脩隆脭帽虏脦脢媒 */
 #define MCLKSEL_HIRC       0x00
 #define MCLKSEL_XIRC       0x01
 #define MCLKSEL_X32K       0x02
@@ -40,15 +40,15 @@
 #define MCLKSEL_PLL2       0x08
 #define MCLKSEL_I48M       0x0c
 
-/* PLL时钟选择参数 */
+/* PLL脢卤脰脫脩隆脭帽虏脦脢媒 */
 #define PLL_96M         0
 #define PLL_144M        1
 
-/* 高速IO时钟选择参数 */
+/* 赂脽脣脵IO脢卤脰脫脩隆脭帽虏脦脢媒 */
 #define HSCK_MCLK       0
 #define HSCK_PLL        1
 
-/* 系统时钟 n 分频作为PLL时钟源参数,确保分频后为12M */
+/* 脧碌脥鲁脢卤脰脫 n 路脰脝碌脳梅脦陋PLL脢卤脰脫脭麓虏脦脢媒,脠路卤拢路脰脝碌潞贸脦陋12M */
 #define ENCKM           0x80
 #define PCKI_MSK        0x60
 #define PCKI_D1         0x00
@@ -57,7 +57,7 @@
 #define PCKI_D8         0x60
 
 //========================================================================
-//                              外部声明
+//                              脥芒虏驴脡霉脙梅
 //========================================================================
 
 void HSPllClkConfig(u8 clksrc, u8 pllsel, u8 div);

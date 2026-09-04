@@ -1,9 +1,9 @@
 /*---------------------------------------------------------
 MAIN.C
 
-main 函数演示 4个串口同时使用 DMA 收发数据, 收到数据后原路返回, 不限数据长度, 持续收发.
+main 潞炉脢媒脩脻脢戮 4赂枚麓庐驴脷脥卢脢卤脢鹿脫脙 DMA 脢脮路垄脢媒戮脻, 脢脮碌陆脢媒戮脻潞贸脭颅脗路路碌禄脴, 虏禄脧脼脢媒戮脻鲁陇露脠, 鲁脰脨酶脢脮路垄.
 
-例程中所有串口9600波特率,默认引脚,定时器2作为波特率发生器
+脌媒鲁脤脰脨脣霉脫脨麓庐驴脷9600虏篓脤脴脗脢,脛卢脠脧脪媒陆脜,露篓脢卤脝梅2脳梅脦陋虏篓脤脴脗脢路垄脡煤脝梅
 ----------------------------------------------------------*/
 
 #include "Config.h"
@@ -14,7 +14,7 @@ main 函数演示 4个串口同时使用 DMA 收发数据, 收到数据后原路返回, 不限数据长度, 持
 #include "UART4.h"
 
 /*---------------------------------------------------------
-本地函数声明
+卤戮碌脴潞炉脢媒脡霉脙梅
 ----------------------------------------------------------*/
 void Timer0_Init(void);
 void XOSCClkConfig(u8 div);
@@ -23,7 +23,7 @@ void Delay1000ms();
 
 
 /*---------------------------------------------------------
-全局变量
+脠芦戮脰卤盲脕驴
 ----------------------------------------------------------*/
 u8 ClockSignal=0;
 
@@ -32,26 +32,26 @@ main
 ----------------------------------------------------------*/
 void main(void)
 {
-	WTST = 0;		//设置程序指令延时参数，赋值为0可将CPU执行指令的速度设置为最快
-	EAXSFR();		//扩展SFR(XFR)访问使能 
-	CKCON = 0;      //提高访问XRAM速度
+	WTST = 0;		//脡猫脰脙鲁脤脨貌脰赂脕卯脩脫脢卤虏脦脢媒拢卢赂鲁脰碌脦陋0驴脡陆芦CPU脰麓脨脨脰赂脕卯碌脛脣脵露脠脡猫脰脙脦陋脳卯驴矛
+	EAXSFR();		//脌漏脮鹿SFR(XFR)路脙脦脢脢鹿脛脺 
+	CKCON = 0;      //脤谩赂脽路脙脦脢XRAM脣脵露脠
     
-    GPIO_config();      //GPIO 初始化
+    GPIO_config();      //GPIO 鲁玫脢录禄炉
     
 #if USE_Extern_Fosc
-    XOSCClkConfig(1);   //切换时钟
+    XOSCClkConfig(1);   //脟脨禄禄脢卤脰脫
 #endif
     
-    UART1_Init(9600);   //串口1 初始化
-    UART2_Init(9600);   //串口1 初始化
-    UART3_Init(9600);   //串口1 初始化
-    UART4_Init(9600);   //串口1 初始化
-    Timer0_Init();      //Timer0 初始化
+    UART1_Init(9600);   //麓庐驴脷1 鲁玫脢录禄炉
+    UART2_Init(9600);   //麓庐驴脷1 鲁玫脢录禄炉
+    UART3_Init(9600);   //麓庐驴脷1 鲁玫脢录禄炉
+    UART4_Init(9600);   //麓庐驴脷1 鲁玫脢录禄炉
+    Timer0_Init();      //Timer0 鲁玫脢录禄炉
     EA = 1;
     
-    Delay1000ms();      //等待1秒, PC端下载代码,1秒自动打开CDC串口
+    Delay1000ms();      //碌脠麓媒1脙毛, PC露脣脧脗脭脴麓煤脗毛,1脙毛脳脭露炉麓貌驴陋CDC麓庐驴脷
     
-    printf("STC32G_UART_DEMO"); //打印信到CDC
+    printf("STC32G_UART_DEMO"); //麓貌脫隆脨脜碌陆CDC
     
     while(1)
     {
@@ -62,28 +62,28 @@ void main(void)
             
 			ClockSignal--;
             
-            //串口1接收,发送
+            //麓庐驴脷1陆脫脢脮,路垄脣脥
             do{
-                len = UART1_Receive(uart_dat,32);   //读串口1收到的数据
-                UART1_Send(uart_dat,len);           //串口1发送读到的数据
+                len = UART1_Receive(uart_dat,32);   //露脕麓庐驴脷1脢脮碌陆碌脛脢媒戮脻
+                UART1_Send(uart_dat,len);           //麓庐驴脷1路垄脣脥露脕碌陆碌脛脢媒戮脻
             }while(len==32);
             
-            //串口2接收,发送
+            //麓庐驴脷2陆脫脢脮,路垄脣脥
             do{
-                len = UART2_Receive(uart_dat,32);   //读串口2收到的数据
-                UART2_Send(uart_dat,len);           //串口2发送读到的数据
+                len = UART2_Receive(uart_dat,32);   //露脕麓庐驴脷2脢脮碌陆碌脛脢媒戮脻
+                UART2_Send(uart_dat,len);           //麓庐驴脷2路垄脣脥露脕碌陆碌脛脢媒戮脻
             }while(len==32);
             
-            //串口3接收,发送
+            //麓庐驴脷3陆脫脢脮,路垄脣脥
             do{
-                len = UART3_Receive(uart_dat,32);   //读串口3收到的数据
-                UART3_Send(uart_dat,len);           //串口3发送读到的数据
+                len = UART3_Receive(uart_dat,32);   //露脕麓庐驴脷3脢脮碌陆碌脛脢媒戮脻
+                UART3_Send(uart_dat,len);           //麓庐驴脷3路垄脣脥露脕碌陆碌脛脢媒戮脻
             }while(len==32);
             
-            //串口4接收,发送
+            //麓庐驴脷4陆脫脢脮,路垄脣脥
             do{
-                len = UART4_Receive(uart_dat,32);   //读串口4收到的数据
-                UART4_Send(uart_dat,len);           //串口4发送读到的数据
+                len = UART4_Receive(uart_dat,32);   //露脕麓庐驴脷4脢脮碌陆碌脛脢媒戮脻
+                UART4_Send(uart_dat,len);           //麓庐驴脷4路垄脣脥露脕碌陆碌脛脢媒戮脻
             }while(len==32);
             
 		}
@@ -95,54 +95,54 @@ GPIO_config
 ----------------------------------------------------------*/
 void GPIO_config(void)
 {
-	P0_MODE_IO_PU(GPIO_Pin_All);		//P0 设置为准双向口
-	P1_MODE_IO_PU(GPIO_Pin_All);		//P1 设置为准双向口
-	P2_MODE_IO_PU(GPIO_Pin_All);		//P2 设置为准双向口
-	P3_MODE_IO_PU(GPIO_Pin_All);		//P3 设置为准双向口
-	P4_MODE_IO_PU(GPIO_Pin_All);		//P4 设置为准双向口
-	P5_MODE_IO_PU(GPIO_Pin_All);		//P5 设置为准双向口
-	P6_MODE_IO_PU(GPIO_Pin_All);		//P6 设置为准双向口
-	P7_MODE_IO_PU(GPIO_Pin_All);		//P7 设置为准双向口
-	P7_MODE_IO_PU(GPIO_Pin_All);		//P7 设置为准双向口
+	P0_MODE_IO_PU(GPIO_Pin_All);		//P0 脡猫脰脙脦陋脳录脣芦脧貌驴脷
+	P1_MODE_IO_PU(GPIO_Pin_All);		//P1 脡猫脰脙脦陋脳录脣芦脧貌驴脷
+	P2_MODE_IO_PU(GPIO_Pin_All);		//P2 脡猫脰脙脦陋脳录脣芦脧貌驴脷
+	P3_MODE_IO_PU(GPIO_Pin_All);		//P3 脡猫脰脙脦陋脳录脣芦脧貌驴脷
+	P4_MODE_IO_PU(GPIO_Pin_All);		//P4 脡猫脰脙脦陋脳录脣芦脧貌驴脷
+	P5_MODE_IO_PU(GPIO_Pin_All);		//P5 脡猫脰脙脦陋脳录脣芦脧貌驴脷
+	P6_MODE_IO_PU(GPIO_Pin_All);		//P6 脡猫脰脙脦陋脳录脣芦脧貌驴脷
+	P7_MODE_IO_PU(GPIO_Pin_All);		//P7 脡猫脰脙脦陋脳录脣芦脧貌驴脷
+	P7_MODE_IO_PU(GPIO_Pin_All);		//P7 脡猫脰脙脦陋脳录脣芦脧貌驴脷
 }
 
 /*-----------------------------------------------------------*
 Timer0_Init
 *-----------------------------------------------------------*/
-#define OS_TICKS_PER_SEC    50u  /*指定滴答时钟频率,宏自动计算装载值*/
+#define OS_TICKS_PER_SEC    50u  /*脰赂露篓碌脦麓冒脢卤脰脫脝碌脗脢,潞锚脳脭露炉录脝脣茫脳掳脭脴脰碌*/
 #define TM0PS_VALUE    ( MAIN_Fosc / OS_TICKS_PER_SEC / 65536UL )
 #define RELOAD_VALUE   ( 65536UL - MAIN_Fosc / (TM0PS_VALUE+1U) / OS_TICKS_PER_SEC )
 void Timer0_Init(void)
 {
-    AUXR    |=    0x80;                     //1T模式
-    TMOD    &=    0XF0;                     //模式0
-    TM0PS    =    TM0PS_VALUE;              //分频系数
-    TL0 = ( uint8_t )( RELOAD_VALUE );      //装载值
-    TH0 = ( uint8_t )( RELOAD_VALUE >> 8 ); //装载值
-    TF0 = 0;                                //清除标志
-    ET0 = 1;                                //使能中断
-    TR0 = 1;                                //定时器开启
+    AUXR    |=    0x80;                     //1T脛拢脢陆
+    TMOD    &=    0XF0;                     //脛拢脢陆0
+    TM0PS    =    TM0PS_VALUE;              //路脰脝碌脧碌脢媒
+    TL0 = ( uint8_t )( RELOAD_VALUE );      //脳掳脭脴脰碌
+    TH0 = ( uint8_t )( RELOAD_VALUE >> 8 ); //脳掳脭脴脰碌
+    TF0 = 0;                                //脟氓鲁媒卤锚脰戮
+    ET0 = 1;                                //脢鹿脛脺脰脨露脧
+    TR0 = 1;                                //露篓脢卤脝梅驴陋脝么
 }
 
 /*---------------------------------------------------------
-外部晶振时钟初始化程序.  div: 时钟分频系数.
+脥芒虏驴戮搂脮帽脢卤脰脫鲁玫脢录禄炉鲁脤脨貌.  div: 脢卤脰脫路脰脝碌脧碌脢媒.
 ----------------------------------------------------------*/
 #if USE_Extern_Fosc
 void XOSCClkConfig(u8 div)
 {
-    P1_MODE_IN_HIZ(GPIO_Pin_7|GPIO_Pin_6);  //GPIO设置
-	XOSCCR = 0xC0;                          //启动外部晶振
-	while (!(XOSCCR & 1));                  //等待时钟稳定
-	CLKDIV = div;                           //时钟分频
-	CLKSEL = 0x01;                          //选择外部晶振
+    P1_MODE_IN_HIZ(GPIO_Pin_7|GPIO_Pin_6);  //GPIO脡猫脰脙
+	XOSCCR = 0xC0;                          //脝么露炉脥芒虏驴戮搂脮帽
+	while (!(XOSCCR & 1));                  //碌脠麓媒脢卤脰脫脦脠露篓
+	CLKDIV = div;                           //脢卤脰脫路脰脝碌
+	CLKSEL = 0x01;                          //脩隆脭帽脥芒虏驴戮搂脮帽
 }
 #endif
 
 
 /*---------------------------------------------------------
-Timer0 中断
+Timer0 脰脨露脧
 ----------------------------------------------------------*/
-void Timer0_ISR_Handler (void) interrupt TMR0_VECTOR		//进中断时已经清除标志
+void Timer0_ISR_Handler (void) interrupt TMR0_VECTOR		//陆酶脰脨露脧脢卤脪脩戮颅脟氓鲁媒卤锚脰戮
 {
     ClockSignal++;
 }

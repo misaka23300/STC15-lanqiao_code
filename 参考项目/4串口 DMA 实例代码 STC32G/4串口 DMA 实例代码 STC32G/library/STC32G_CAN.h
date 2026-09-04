@@ -8,7 +8,7 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+/* 脠莽鹿没脪陋脭脷鲁脤脨貌脰脨脢鹿脫脙麓脣麓煤脗毛,脟毛脭脷鲁脤脨貌脰脨脳垄脙梅脢鹿脫脙脕脣STC碌脛脳脢脕脧录掳鲁脤脨貌            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_CAN_H
@@ -17,67 +17,67 @@
 #include	"config.h"
 
 //========================================================================
-//                              定义声明
+//                              露篓脪氓脡霉脙梅
 //========================================================================
 
 #define	CAN1	0
 #define	CAN2	1
 
-#define	STANDARD_FRAME   0     //帧格式：标准帧
-#define	EXTENDED_FRAME   1     //帧格式：扩展帧
+#define	STANDARD_FRAME   0     //脰隆赂帽脢陆拢潞卤锚脳录脰隆
+#define	EXTENDED_FRAME   1     //脰隆赂帽脢陆拢潞脌漏脮鹿脰隆
 
 //========================================================================
-//                              常量声明
+//                              鲁拢脕驴脡霉脙梅
 //========================================================================
 
-#define CAN_DOIM     0x01  //接收溢出中断
-#define CAN_BEIM     0x02  //总线错位中断
-#define CAN_TIM      0x04  //发送中断
-#define CAN_RIM      0x08  //接收中断
-#define CAN_EPIM     0x10  //被动错位中断
-#define CAN_EWIM     0x20  //错位警告中断
-#define CAN_ALIM     0x40  //仲裁丢失中断
-#define CAN_ALLIM    0x7F  //所有中断
+#define CAN_DOIM     0x01  //陆脫脢脮脪莽鲁枚脰脨露脧
+#define CAN_BEIM     0x02  //脳脺脧脽麓铆脦禄脰脨露脧
+#define CAN_TIM      0x04  //路垄脣脥脰脨露脧
+#define CAN_RIM      0x08  //陆脫脢脮脰脨露脧
+#define CAN_EPIM     0x10  //卤禄露炉麓铆脦禄脰脨露脧
+#define CAN_EWIM     0x20  //麓铆脦禄戮炉赂忙脰脨露脧
+#define CAN_ALIM     0x40  //脰脵虏脙露陋脢搂脰脨露脧
+#define CAN_ALLIM    0x7F  //脣霉脫脨脰脨露脧
 
 //========================================================================
-//                              变量声明
+//                              卤盲脕驴脡霉脙梅
 //========================================================================
 
 typedef struct
 {
-	u8	CAN_Enable;					//CAN功能使能  	ENABLE,DISABLE
-	u8	CAN_IMR;						//CAN中断寄存器 	CAN_DOIM,CAN_BEIM,CAN_TIM,CAN_RIM,CAN_EPIM,CAN_EWIM,CAN_ALIM,CAN_ALLIM,DISABLE
-	u8	CAN_SJW;						//重新同步跳跃宽度  0~3
-	u8	CAN_BRP;						//波特率分频系数    0~63
-	u8	CAN_SAM;						//总线电平采样次数  0:采样1次; 1:采样3次
-	u8	CAN_TSG1;						//同步采样段1       0~15
-	u8	CAN_TSG2;						//同步采样段2       1~7 (TSG2 不能设置为0)
+	u8	CAN_Enable;					//CAN鹿娄脛脺脢鹿脛脺  	ENABLE,DISABLE
+	u8	CAN_IMR;						//CAN脰脨露脧录脛麓忙脝梅 	CAN_DOIM,CAN_BEIM,CAN_TIM,CAN_RIM,CAN_EPIM,CAN_EWIM,CAN_ALIM,CAN_ALLIM,DISABLE
+	u8	CAN_SJW;						//脰脴脨脗脥卢虏陆脤酶脭戮驴铆露脠  0~3
+	u8	CAN_BRP;						//虏篓脤脴脗脢路脰脝碌脧碌脢媒    0~63
+	u8	CAN_SAM;						//脳脺脧脽碌莽脝陆虏脡脩霉麓脦脢媒  0:虏脡脩霉1麓脦; 1:虏脡脩霉3麓脦
+	u8	CAN_TSG1;						//脥卢虏陆虏脡脩霉露脦1       0~15
+	u8	CAN_TSG2;						//脥卢虏陆虏脡脩霉露脦2       1~7 (TSG2 虏禄脛脺脡猫脰脙脦陋0)
 
-	u8	CAN_ACR0;						//总线验收代码寄存器 0~0xFF
-	u8	CAN_ACR1;						//总线验收代码寄存器 0~0xFF
-	u8	CAN_ACR2;						//总线验收代码寄存器 0~0xFF
-	u8	CAN_ACR3;						//总线验收代码寄存器 0~0xFF
-	u8	CAN_AMR0;						//总线验收屏蔽寄存器 0~0xFF
-	u8	CAN_AMR1;						//总线验收屏蔽寄存器 0~0xFF
-	u8	CAN_AMR2;						//总线验收屏蔽寄存器 0~0xFF
-	u8	CAN_AMR3;						//总线验收屏蔽寄存器 0~0xFF
+	u8	CAN_ACR0;						//脳脺脧脽脩茅脢脮麓煤脗毛录脛麓忙脝梅 0~0xFF
+	u8	CAN_ACR1;						//脳脺脧脽脩茅脢脮麓煤脗毛录脛麓忙脝梅 0~0xFF
+	u8	CAN_ACR2;						//脳脺脧脽脩茅脢脮麓煤脗毛录脛麓忙脝梅 0~0xFF
+	u8	CAN_ACR3;						//脳脺脧脽脩茅脢脮麓煤脗毛录脛麓忙脝梅 0~0xFF
+	u8	CAN_AMR0;						//脳脺脧脽脩茅脢脮脝脕卤脦录脛麓忙脝梅 0~0xFF
+	u8	CAN_AMR1;						//脳脺脧脽脩茅脢脮脝脕卤脦录脛麓忙脝梅 0~0xFF
+	u8	CAN_AMR2;						//脳脺脧脽脩茅脢脮脝脕卤脦录脛麓忙脝梅 0~0xFF
+	u8	CAN_AMR3;						//脳脺脧脽脩茅脢脮脝脕卤脦录脛麓忙脝梅 0~0xFF
 } CAN_InitTypeDef;
 
 typedef struct
 {
-	u8	DLC:4;          //数据长度, bit0~bit3
-	u8	:2;             //空数据, bit4~bit5
-	u8	RTR:1;          //帧类型, bit6
-	u8	FF:1;           //帧格式, bit7
+	u8	DLC:4;          //脢媒戮脻鲁陇露脠, bit0~bit3
+	u8	:2;             //驴脮脢媒戮脻, bit4~bit5
+	u8	RTR:1;          //脰隆脌脿脨脥, bit6
+	u8	FF:1;           //脰隆赂帽脢陆, bit7
 	u32	ID;             //CAN ID
-	u8	DataBuffer[8];  //数据缓存
+	u8	DataBuffer[8];  //脢媒戮脻禄潞麓忙
 }CAN_DataDef;
 
 //========================================================================
-//                              外部声明
+//                              脥芒虏驴脡霉脙梅
 //========================================================================
-extern bit B_Can1Read;     //CAN 收到数据标志
-extern bit B_Can2Read;     //CAN 收到数据标志
+extern bit B_Can1Read;     //CAN 脢脮碌陆脢媒戮脻卤锚脰戮
+extern bit B_Can2Read;     //CAN 脢脮碌陆脢媒戮脻卤锚脰戮
 
 extern CAN_DataDef CAN1_Tx;
 extern CAN_DataDef CAN1_Rx[8];

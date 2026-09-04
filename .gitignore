@@ -1,4 +1,34 @@
+# IDE
 .vs/
+.vscode/
+*.uvgui*
+*.uvopt
+*.bak
+
+# Build outputs
 Listings/
 Objects/
-.vscode
+Output/
+*.lst
+*.obj
+*.hex
+*.map
+*.crf
+*.lnp
+*.iex
+*.build_log.htm
+*.plg
+
+# Archives and binaries
+*.zip
+*.rar
+*.7z
+*.exe
+*.bin
+
+# Documents (generated)
+*.pdf
+
+# OS
+.DS_Store
+Thumbs.db

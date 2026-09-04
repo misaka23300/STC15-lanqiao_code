@@ -8,31 +8,31 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+/* 脠莽鹿没脪陋脭脷鲁脤脨貌脰脨脢鹿脫脙麓脣麓煤脗毛,脟毛脭脷鲁脤脨貌脰脨脳垄脙梅脢鹿脫脙脕脣STC碌脛脳脢脕脧录掳鲁脤脨貌            */
 /*---------------------------------------------------------------------*/
 
 #include	"STC32G_RTC.h"
 
 //========================================================================
-// 函数: u8	ADC_Inilize(ADC_InitTypeDef *ADCx)
-// 描述: ADC初始化程序.
-// 参数: ADCx: 结构参数,请参考adc.h里的定义.
-// 返回: none.
-// 版本: V1.0, 2012-10-22
+// 潞炉脢媒: u8	ADC_Inilize(ADC_InitTypeDef *ADCx)
+// 脙猫脢枚: ADC鲁玫脢录禄炉鲁脤脨貌.
+// 虏脦脢媒: ADCx: 陆谩鹿鹿虏脦脢媒,脟毛虏脦驴录adc.h脌茂碌脛露篓脪氓.
+// 路碌禄脴: none.
+// 掳忙卤戮: V1.0, 2012-10-22
 //========================================================================
 u8	RTC_Inilize(RTC_InitTypeDef *RTCx)
 {
-	if(RTCx->RTC_Year > 99)	return FAIL;	//错误
-	if(RTCx->RTC_Month > 12)	return FAIL;	//错误
-	if(RTCx->RTC_Day > 31)	return FAIL;	//错误
-	if(RTCx->RTC_Hour > 23)	return FAIL;	//错误
-	if(RTCx->RTC_Min > 59)	return FAIL;	//错误
-	if(RTCx->RTC_Sec > 59)	return FAIL;	//错误
-	if(RTCx->RTC_Ssec > 127)	return FAIL;	//错误
-	if(RTCx->RTC_ALAHour > 23)	return FAIL;	//错误
-	if(RTCx->RTC_ALAMin > 59)	return FAIL;	//错误
-	if(RTCx->RTC_ALASec > 59)	return FAIL;	//错误
-	if(RTCx->RTC_ALASsec > 127)	return FAIL;	//错误
+	if(RTCx->RTC_Year > 99)	return FAIL;	//麓铆脦贸
+	if(RTCx->RTC_Month > 12)	return FAIL;	//麓铆脦贸
+	if(RTCx->RTC_Day > 31)	return FAIL;	//麓铆脦贸
+	if(RTCx->RTC_Hour > 23)	return FAIL;	//麓铆脦贸
+	if(RTCx->RTC_Min > 59)	return FAIL;	//麓铆脦贸
+	if(RTCx->RTC_Sec > 59)	return FAIL;	//麓铆脦贸
+	if(RTCx->RTC_Ssec > 127)	return FAIL;	//麓铆脦贸
+	if(RTCx->RTC_ALAHour > 23)	return FAIL;	//麓铆脦贸
+	if(RTCx->RTC_ALAMin > 59)	return FAIL;	//麓铆脦贸
+	if(RTCx->RTC_ALASec > 59)	return FAIL;	//麓铆脦贸
+	if(RTCx->RTC_ALASsec > 127)	return FAIL;	//麓铆脦贸
 
 	INIYEAR = RTCx->RTC_Year;
 	INIMONTH = RTCx->RTC_Month;
@@ -42,35 +42,35 @@ u8	RTC_Inilize(RTC_InitTypeDef *RTCx)
 	INISEC = RTCx->RTC_Sec;
 	INISSEC = RTCx->RTC_Ssec;
 
-	ALAHOUR = RTCx->RTC_ALAHour;	//闹钟小时
-	ALAMIN  = RTCx->RTC_ALAMin;		//闹钟分钟
-	ALASEC  = RTCx->RTC_ALASec;		//闹钟秒
-	ALASSEC = RTCx->RTC_ALASsec;	//闹钟1/128秒
+	ALAHOUR = RTCx->RTC_ALAHour;	//脛脰脰脫脨隆脢卤
+	ALAMIN  = RTCx->RTC_ALAMin;		//脛脰脰脫路脰脰脫
+	ALASEC  = RTCx->RTC_ALASec;		//脛脰脰脫脙毛
+	ALASSEC = RTCx->RTC_ALASsec;	//脛脰脰脫1/128脙毛
 
 	if(RTCx->RTC_Clock == RTC_IRC32KCR)
 	{
-    //STC32G 芯片使用内部32K时钟，休眠无法唤醒
-		IRC32KCR = 0x80;   //启动内部32K晶振.
-		while (!(IRC32KCR & 1));  //等待时钟稳定
-		RTCCFG = 0x03;    //选择内部32K时钟源，触发RTC寄存器初始化
+    //STC32G 脨戮脝卢脢鹿脫脙脛脷虏驴32K脢卤脰脫拢卢脨脻脙脽脦脼路篓禄陆脨脩
+		IRC32KCR = 0x80;   //脝么露炉脛脷虏驴32K戮搂脮帽.
+		while (!(IRC32KCR & 1));  //碌脠麓媒脢卤脰脫脦脠露篓
+		RTCCFG = 0x03;    //脩隆脭帽脛脷虏驴32K脢卤脰脫脭麓拢卢麓楼路垄RTC录脛麓忙脝梅鲁玫脢录禄炉
 	}
 	else
 	{
-		X32KCR = 0x80 + 0x40;   //启动外部32K晶振, 低增益+0x00, 高增益+0x40.
-		while (!(X32KCR & 1));  //等待时钟稳定
-		RTCCFG = 0x01;    //选择外部32K时钟源，触发RTC寄存器初始化
+		X32KCR = 0x80 + 0x40;   //脝么露炉脥芒虏驴32K戮搂脮帽, 碌脥脭枚脪忙+0x00, 赂脽脭枚脪忙+0x40.
+		while (!(X32KCR & 1));  //碌脠麓媒脢卤脰脫脦脠露篓
+		RTCCFG = 0x01;    //脩隆脭帽脥芒虏驴32K脢卤脰脫脭麓拢卢麓楼路垄RTC录脛麓忙脝梅鲁玫脢录禄炉
 	}
 
 	if(RTCx->RTC_Enable == ENABLE)
 	{
-		RTCCR = 0x01;     //RTC使能
-		while(RTCCFG & 0x01);	//等待初始化完成,需要在 "RTC使能" 之后判断. 
-		//设置RTC时间需要32768Hz的1个周期时间,大约30.5us. 由于同步, 所以实际等待时间是0~30.5us.
-		//如果不等待设置完成就睡眠, 则RTC会由于设置没完成, 停止计数, 唤醒后才继续完成设置并继续计数.
+		RTCCR = 0x01;     //RTC脢鹿脛脺
+		while(RTCCFG & 0x01);	//碌脠麓媒鲁玫脢录禄炉脥锚鲁脡,脨猫脪陋脭脷 "RTC脢鹿脛脺" 脰庐潞贸脜脨露脧. 
+		//脡猫脰脙RTC脢卤录盲脨猫脪陋32768Hz碌脛1赂枚脰脺脝脷脢卤录盲,麓贸脭录30.5us. 脫脡脫脷脥卢虏陆, 脣霉脪脭脢碌录脢碌脠麓媒脢卤录盲脢脟0~30.5us.
+		//脠莽鹿没虏禄碌脠麓媒脡猫脰脙脥锚鲁脡戮脥脣炉脙脽, 脭貌RTC禄谩脫脡脫脷脡猫脰脙脙禄脥锚鲁脡, 脥拢脰鹿录脝脢媒, 禄陆脨脩潞贸虏脜录脤脨酶脥锚鲁脡脡猫脰脙虏垄录脤脨酶录脝脢媒.
 	}
 	else
 	{
-		RTCCR = 0x00;     //RTC关闭
+		RTCCR = 0x00;     //RTC鹿脴卤脮
 	}
 	
 	return SUCCESS;

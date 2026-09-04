@@ -8,7 +8,7 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+/* 脠莽鹿没脪陋脭脷鲁脤脨貌脰脨脢鹿脫脙麓脣麓煤脗毛,脟毛脭脷鲁脤脨貌脰脨脳垄脙梅脢鹿脫脙脕脣STC碌脛脳脢脕脧录掳鲁脤脨貌            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_ADC_H
@@ -17,25 +17,25 @@
 #include	"config.h"
 
 //========================================================================
-//                              ADC设置
+//                              ADC脡猫脰脙
 //========================================================================
 
-#define 	ADC_PowerOn(n)			(n==0?(ADC_POWER = 0):(ADC_POWER = 1))	/* ADC电源开关 */
-#define 	ADC_Justify(n)			(n==0?(RESFMT = 0):(RESFMT = 1))				/* ADC转换结果格式控制, 左对齐/右对齐 */
+#define 	ADC_PowerOn(n)			(n==0?(ADC_POWER = 0):(ADC_POWER = 1))	/* ADC碌莽脭麓驴陋鹿脴 */
+#define 	ADC_Justify(n)			(n==0?(RESFMT = 0):(RESFMT = 1))				/* ADC脳陋禄禄陆谩鹿没赂帽脢陆驴脴脰脝, 脳贸露脭脝毛/脫脪露脭脝毛 */
 
 //========================================================================
-//                              定义声明
+//                              露篓脪氓脡霉脙梅
 //========================================================================
 
-#define	ADC_P10		0x01	//IO引脚 Px.0
-#define	ADC_P11		0x02	//IO引脚 Px.1
-#define	ADC_P12		0x04	//IO引脚 Px.2
-#define	ADC_P13		0x08	//IO引脚 Px.3
-#define	ADC_P14		0x10	//IO引脚 Px.4
-#define	ADC_P15		0x20	//IO引脚 Px.5
-#define	ADC_P16		0x40	//IO引脚 Px.6
-#define	ADC_P17		0x80	//IO引脚 Px.7
-#define	ADC_P1_All	0xFF	//IO所有引脚
+#define	ADC_P10		0x01	//IO脪媒陆脜 Px.0
+#define	ADC_P11		0x02	//IO脪媒陆脜 Px.1
+#define	ADC_P12		0x04	//IO脪媒陆脜 Px.2
+#define	ADC_P13		0x08	//IO脪媒陆脜 Px.3
+#define	ADC_P14		0x10	//IO脪媒陆脜 Px.4
+#define	ADC_P15		0x20	//IO脪媒陆脜 Px.5
+#define	ADC_P16		0x40	//IO脪媒陆脜 Px.6
+#define	ADC_P17		0x80	//IO脪媒陆脜 Px.7
+#define	ADC_P1_All	0xFF	//IO脣霉脫脨脪媒陆脜
 
 #define ADC_CH0		0
 #define ADC_CH1		1
@@ -77,11 +77,11 @@
 
 typedef struct
 {
-	u8	ADC_SMPduty;		//ADC 模拟信号采样时间控制, 0~31（注意： SMPDUTY 一定不能设置小于 10）
-	u8	ADC_Speed;			//设置 ADC 工作时钟频率	ADC_SPEED_2X1T~ADC_SPEED_2X16T
-	u8	ADC_AdjResult;	//ADC结果调整,	ADC_LEFT_JUSTIFIED,ADC_RIGHT_JUSTIFIED
-	u8	ADC_CsSetup;		//ADC 通道选择时间控制 0(默认),1
-	u8	ADC_CsHold;			//ADC 通道选择保持时间控制 0,1(默认),2,3
+	u8	ADC_SMPduty;		//ADC 脛拢脛芒脨脜潞脜虏脡脩霉脢卤录盲驴脴脰脝, 0~31拢篓脳垄脪芒拢潞 SMPDUTY 脪禄露篓虏禄脛脺脡猫脰脙脨隆脫脷 10拢漏
+	u8	ADC_Speed;			//脡猫脰脙 ADC 鹿陇脳梅脢卤脰脫脝碌脗脢	ADC_SPEED_2X1T~ADC_SPEED_2X16T
+	u8	ADC_AdjResult;	//ADC陆谩鹿没碌梅脮没,	ADC_LEFT_JUSTIFIED,ADC_RIGHT_JUSTIFIED
+	u8	ADC_CsSetup;		//ADC 脥篓碌脌脩隆脭帽脢卤录盲驴脴脰脝 0(脛卢脠脧),1
+	u8	ADC_CsHold;			//ADC 脥篓碌脌脩隆脭帽卤拢鲁脰脢卤录盲驴脴脰脝 0,1(脛卢脠脧),2,3
 } ADC_InitTypeDef;
 
 u8		ADC_Inilize(ADC_InitTypeDef *ADCx);

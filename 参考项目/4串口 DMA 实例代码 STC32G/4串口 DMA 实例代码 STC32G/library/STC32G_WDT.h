@@ -8,7 +8,7 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+/* 脠莽鹿没脪陋脭脷鲁脤脨貌脰脨脢鹿脫脙麓脣麓煤脗毛,脟毛脭脷鲁脤脨貌脰脨脳垄脙梅脢鹿脫脙脕脣STC碌脛脳脢脕脧录掳鲁脤脨貌            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_WDT_H
@@ -33,14 +33,14 @@
 #define WDT_SCALE_128		6
 #define WDT_SCALE_256		7
 
-#define	WDT_PS_Set(n)	WDT_CONTR = (WDT_CONTR & ~0x07) | (n & 0x07)		/* 看门狗定时器时钟分频系数设置 */
-#define	WDT_reset(n)	WDT_CONTR = D_EN_WDT + D_CLR_WDT + D_IDLE_WDT + (n)		/* 初始化WDT，喂狗 */
+#define	WDT_PS_Set(n)	WDT_CONTR = (WDT_CONTR & ~0x07) | (n & 0x07)		/* 驴麓脙脜鹿路露篓脢卤脝梅脢卤脰脫路脰脝碌脧碌脢媒脡猫脰脙 */
+#define	WDT_reset(n)	WDT_CONTR = D_EN_WDT + D_CLR_WDT + D_IDLE_WDT + (n)		/* 鲁玫脢录禄炉WDT拢卢脦鹿鹿路 */
 
 typedef struct
 {
-	u8	WDT_Enable;				//看门狗使能  	ENABLE,DISABLE
-	u8	WDT_IDLE_Mode;		//IDLE模式停止计数		WDT_IDLE_STOP,WDT_IDLE_RUN
-	u8	WDT_PS;						//看门狗定时器时钟分频系数		WDT_SCALE_2,WDT_SCALE_4,WDT_SCALE_8,WDT_SCALE_16,WDT_SCALE_32,WDT_SCALE_64,WDT_SCALE_128,WDT_SCALE_256
+	u8	WDT_Enable;				//驴麓脙脜鹿路脢鹿脛脺  	ENABLE,DISABLE
+	u8	WDT_IDLE_Mode;		//IDLE脛拢脢陆脥拢脰鹿录脝脢媒		WDT_IDLE_STOP,WDT_IDLE_RUN
+	u8	WDT_PS;						//驴麓脙脜鹿路露篓脢卤脝梅脢卤脰脫路脰脝碌脧碌脢媒		WDT_SCALE_2,WDT_SCALE_4,WDT_SCALE_8,WDT_SCALE_16,WDT_SCALE_32,WDT_SCALE_64,WDT_SCALE_128,WDT_SCALE_256
 } WDT_InitTypeDef;
 
 void WDT_Inilize(WDT_InitTypeDef *WDT);

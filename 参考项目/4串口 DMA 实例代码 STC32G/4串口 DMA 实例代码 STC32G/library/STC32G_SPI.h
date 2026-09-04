@@ -8,7 +8,7 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+/* 脠莽鹿没脪陋脭脷鲁脤脨貌脰脨脢鹿脫脙麓脣麓煤脗毛,脟毛脭脷鲁脤脨貌脰脨脳垄脙梅脢鹿脫脙脕脣STC碌脛脳脢脕脧录掳鲁脤脨貌            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_SPI_H
@@ -17,24 +17,24 @@
 #include	"config.h"
 
 //========================================================================
-//                               SPI设置
+//                               SPI脡猫脰脙
 //========================================================================
 
-#define		SPI_SSIG_Set(n)					SSIG = n		/* SS引脚功能控制 */
-#define		SPI_Start(n)						SPEN = n		/* SPI使能控制位 */
-#define		SPI_FirstBit_Set(n)			DORD = n		/* 数据发送/接收顺序 MSB/LSB */
-#define		SPI_Mode_Set(n)					MSTR = n		/* SPI主从模式设置 */
-#define		SPI_CPOL_Set(n)					CPOL = n		/* SPI时钟极性控制 */
-#define		SPI_CPHA_Set(n)					CPHA = n		/* SPI时钟相位控制 */
-#define		SPI_Clock_Select(n)			SPCTL = (SPCTL & ~0x03) | (n)					/* SPI时钟频率选择 */
+#define		SPI_SSIG_Set(n)					SSIG = n		/* SS脪媒陆脜鹿娄脛脺驴脴脰脝 */
+#define		SPI_Start(n)						SPEN = n		/* SPI脢鹿脛脺驴脴脰脝脦禄 */
+#define		SPI_FirstBit_Set(n)			DORD = n		/* 脢媒戮脻路垄脣脥/陆脫脢脮脣鲁脨貌 MSB/LSB */
+#define		SPI_Mode_Set(n)					MSTR = n		/* SPI脰梅麓脫脛拢脢陆脡猫脰脙 */
+#define		SPI_CPOL_Set(n)					CPOL = n		/* SPI脢卤脰脫录芦脨脭驴脴脰脝 */
+#define		SPI_CPHA_Set(n)					CPHA = n		/* SPI脢卤脰脫脧脿脦禄驴脴脰脝 */
+#define		SPI_Clock_Select(n)			SPCTL = (SPCTL & ~0x03) | (n)					/* SPI脢卤脰脫脝碌脗脢脩隆脭帽 */
 
-#define		SPI_ClearFlag()					{SPIF = 1; WCOL = 1;}		/* 写 1 清除 SPIF和WCOL 标志 */
+#define		SPI_ClearFlag()					{SPIF = 1; WCOL = 1;}		/* 脨麓 1 脟氓鲁媒 SPIF潞脥WCOL 卤锚脰戮 */
 
-#define		HSSPI_Enable(n)					HSSPI_CFG2 |= 0x20       //使能SPI高速模式
-#define		HSSPI_Disable(n)				HSSPI_CFG2 &= ~0x20      //关闭SPI高速模式
+#define		HSSPI_Enable(n)					HSSPI_CFG2 |= 0x20       //脢鹿脛脺SPI赂脽脣脵脛拢脢陆
+#define		HSSPI_Disable(n)				HSSPI_CFG2 &= ~0x20      //鹿脴卤脮SPI赂脽脣脵脛拢脢陆
 
 //========================================================================
-//                              定义声明
+//                              露篓脪氓脡霉脙梅
 //========================================================================
 
 #define	SPI_BUF_LENTH	128
@@ -76,8 +76,8 @@ sbit  SPI_SCLK_4  = P3^2;
 
 typedef struct
 {
-	u8	SPI_Enable;		//SPI启动, ENABLE,DISABLE
-	u8	SPI_SSIG;			//片选位, ENABLE(SS确定主机从机), DISABLE(忽略SS引脚功能)
+	u8	SPI_Enable;		//SPI脝么露炉, ENABLE,DISABLE
+	u8	SPI_SSIG;			//脝卢脩隆脦禄, ENABLE(SS脠路露篓脰梅禄煤麓脫禄煤), DISABLE(潞枚脗脭SS脪媒陆脜鹿娄脛脺)
 	u8	SPI_FirstBit;	//SPI_MSB, SPI_LSB
 	u8	SPI_Mode;			//SPI_Mode_Master, SPI_Mode_Slave
 	u8	SPI_CPOL;			//SPI_CPOL_High,   SPI_CPOL_Low
@@ -86,7 +86,7 @@ typedef struct
 } SPI_InitTypeDef;
 
 
-extern	bit B_SPI_Busy; //发送忙标志
+extern	bit B_SPI_Busy; //路垄脣脥脙娄卤锚脰戮
 extern	u8 	SPI_RxCnt;
 extern	u8 	SPI_RxTimerOut;
 extern	u8 	SPI_BUF_type SPI_RxBuffer[SPI_BUF_LENTH];

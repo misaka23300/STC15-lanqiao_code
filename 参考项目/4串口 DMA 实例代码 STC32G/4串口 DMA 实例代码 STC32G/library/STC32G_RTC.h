@@ -8,7 +8,7 @@
 /* --- Web: www.STCMCUDATA.com  ---------------------------------------*/
 /* --- BBS: www.STCAIMCU.com  -----------------------------------------*/
 /* --- QQ:  800003751 -------------------------------------------------*/
-/* 如果要在程序中使用此代码,请在程序中注明使用了STC的资料及程序            */
+/* 脠莽鹿没脪陋脭脷鲁脤脨貌脰脨脢鹿脫脙麓脣麓煤脗毛,脟毛脭脷鲁脤脨貌脰脨脳垄脙梅脢鹿脫脙脕脣STC碌脛脳脢脕脧录掳鲁脤脨貌            */
 /*---------------------------------------------------------------------*/
 
 #ifndef	__STC32G_RTC_H
@@ -17,38 +17,38 @@
 #include	"config.h"
 
 //========================================================================
-//                              定义声明
+//                              露篓脪氓脡霉脙梅
 //========================================================================
 
-#define RTC_IRC32KCR		0		//RTC时钟源使用内部32K时钟
-#define RTC_X32KCR			1		//RTC时钟源使用外部32K晶振
+#define RTC_IRC32KCR		0		//RTC脢卤脰脫脭麓脢鹿脫脙脛脷虏驴32K脢卤脰脫
+#define RTC_X32KCR			1		//RTC脢卤脰脫脭麓脢鹿脫脙脥芒虏驴32K戮搂脮帽
 
-//中断使能, 0x80:闹钟中断, 0x40:日中断, 0x20:小时中断, 0x10:分钟中断, 0x08:秒中断, 0x04:1/2秒中断, 0x02:1/8秒中断, 0x01:1/32秒中断
-#define RTC_ALARM_INT		0x80		//RTC 闹钟中断
-#define RTC_DAY_INT			0x40		//RTC 日中断
-#define RTC_HOUR_INT		0x20		//RTC 小时中断
-#define RTC_MIN_INT			0x10		//RTC 分钟中断
-#define RTC_SEC_INT			0x08		//RTC 秒中断
-#define RTC_SEC2_INT		0x04		//RTC 1/2秒中断
-#define RTC_SEC8_INT		0x02		//RTC 1/8秒中断
-#define RTC_SEC32_INT		0x01		//RTC 1/32秒中断
+//脰脨露脧脢鹿脛脺, 0x80:脛脰脰脫脰脨露脧, 0x40:脠脮脰脨露脧, 0x20:脨隆脢卤脰脨露脧, 0x10:路脰脰脫脰脨露脧, 0x08:脙毛脰脨露脧, 0x04:1/2脙毛脰脨露脧, 0x02:1/8脙毛脰脨露脧, 0x01:1/32脙毛脰脨露脧
+#define RTC_ALARM_INT		0x80		//RTC 脛脰脰脫脰脨露脧
+#define RTC_DAY_INT			0x40		//RTC 脠脮脰脨露脧
+#define RTC_HOUR_INT		0x20		//RTC 脨隆脢卤脰脨露脧
+#define RTC_MIN_INT			0x10		//RTC 路脰脰脫脰脨露脧
+#define RTC_SEC_INT			0x08		//RTC 脙毛脰脨露脧
+#define RTC_SEC2_INT		0x04		//RTC 1/2脙毛脰脨露脧
+#define RTC_SEC8_INT		0x02		//RTC 1/8脙毛脰脨露脧
+#define RTC_SEC32_INT		0x01		//RTC 1/32脙毛脰脨露脧
 
 typedef struct
 {
-	u8	RTC_Enable;		//RTC 使能, ENABLE, DISABLE
-	u8	RTC_Clock;		//RTC 时钟, RTC_IRC32KCR, RTC_X32KCR
-	u8	RTC_Year;			//RTC 年, 00~99, 对应2000~2099年
-	u8	RTC_Month;		//RTC 月, 01~12
-	u8	RTC_Day;			//RTC 日, 01~31
-	u8	RTC_Hour;			//RTC 时, 00~23
-	u8	RTC_Min;			//RTC 分, 00~59
-	u8	RTC_Sec;			//RTC 秒, 00~59
-	u8	RTC_Ssec;			//RTC 1/128秒, 00~127
+	u8	RTC_Enable;		//RTC 脢鹿脛脺, ENABLE, DISABLE
+	u8	RTC_Clock;		//RTC 脢卤脰脫, RTC_IRC32KCR, RTC_X32KCR
+	u8	RTC_Year;			//RTC 脛锚, 00~99, 露脭脫娄2000~2099脛锚
+	u8	RTC_Month;		//RTC 脭脗, 01~12
+	u8	RTC_Day;			//RTC 脠脮, 01~31
+	u8	RTC_Hour;			//RTC 脢卤, 00~23
+	u8	RTC_Min;			//RTC 路脰, 00~59
+	u8	RTC_Sec;			//RTC 脙毛, 00~59
+	u8	RTC_Ssec;			//RTC 1/128脙毛, 00~127
 
-	u8	RTC_ALAHour;	//RTC 闹钟时, 00~23
-	u8	RTC_ALAMin;		//RTC 闹钟分, 00~59
-	u8	RTC_ALASec;		//RTC 闹钟秒, 00~59
-	u8	RTC_ALASsec;	//RTC 闹钟1/128秒, 00~127
+	u8	RTC_ALAHour;	//RTC 脛脰脰脫脢卤, 00~23
+	u8	RTC_ALAMin;		//RTC 脛脰脰脫路脰, 00~59
+	u8	RTC_ALASec;		//RTC 脛脰脰脫脙毛, 00~59
+	u8	RTC_ALASsec;	//RTC 脛脰脰脫1/128脙毛, 00~127
 } RTC_InitTypeDef;
 
 u8	RTC_Inilize(RTC_InitTypeDef *RTCx);
