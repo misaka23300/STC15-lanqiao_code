@@ -64,7 +64,7 @@ void I2CSendByte(unsigned char byt)
 //
 unsigned char I2CReceiveByte(void)
 {
-	unsigned char da;
+	unsigned char da = 0;
 	unsigned char i;
 	for(i=0;i<8;i++){   
 		scl = 1;

@@ -19,6 +19,7 @@ uint8_t key_scan()
     P3 = 0x0F;
     P42 = 0; P44 = 0;
     P36 = P42; P37 = P44;
+    press = P3;
 
     switch (state)
     {

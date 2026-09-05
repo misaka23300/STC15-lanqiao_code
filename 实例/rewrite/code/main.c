@@ -4,7 +4,6 @@
 enum {
     LED_TIME = 20,
     KEY_TIME = 15,
-    TRC_TIME = 100,
     STATE_TIME = 50,
     RTC_TIME = 1000
 };
@@ -82,7 +81,7 @@ void task_loop()
         key.time = 0;
     }
 
-    if (rtc.time == TRC_TIME)
+    if (rtc.time == RTC_TIME)
     {
         read_datetime(rtc.now_time);
         rtc.time = 0;
