@@ -60,5 +60,11 @@ void seg_display()
 
 void seg_set(uint8_t position, uint8_t number)
 {
+    if (position >= 8) {
+        return;
+    }
+    if (number >= sizeof(letter) / sizeof(letter[0])) {
+        number = 0;
+    }
     seg[position] = number;
 }

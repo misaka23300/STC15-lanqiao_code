@@ -1,4 +1,5 @@
 #include "boot.h"
+#include "led.h"
 
 
 void main()
@@ -10,13 +11,13 @@ void main()
 
 
 
-void timer0_interrupt() interrupt 0
+void timer0_interrupt() interrupt 1
 {
     static uint16_t i;
 
     if (i % 100 == 0) {
         led_display();
-    } 
+    }
 
-    i = (i + 1) % 8;
+    i = (i + 1) % 100;
 }

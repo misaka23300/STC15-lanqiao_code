@@ -54,5 +54,8 @@ void led_display()
 
 void led_set(uint8_t position, bit value)
 {
+    if (position >= 8) {
+        return;
+    }
     led_value[position] = value;
 }
