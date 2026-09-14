@@ -55,7 +55,7 @@ uint freq_number;
 uint8_t freq_list[5] = {0, 0, 0, 0, 0};
 
 
-freq_timer_0() interrupt 1
+void freq_timer_0() interrupt 1
 {
     freq_number++;
 }
@@ -370,7 +370,7 @@ void delete_0(uchar *list, uchar len, uchar is_negative)
     {
         if ( list[i] == 0 )
         {
-            if ( list[i-1] != 0 && is_negative == 1) 
+            if ( i > 0 && list[i-1] != 0 && is_negative == 1) 
             {
                 list[i] = 17;
             }

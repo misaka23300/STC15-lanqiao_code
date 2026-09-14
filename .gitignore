@@ -2,3 +2,19 @@
 Listings/
 Objects/
 .vscode
+.trae-html-share-packages/
+
+# Keil C51 build artifacts
+*.lst
+*.obj
+*.crf
+*.o
+*.d
+*.hex
+*.m51
+*.map
+*.lnp
+*.plg
+*.build_log.htm
+*.bak
+*.uvguix.*
