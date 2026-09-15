@@ -19,12 +19,14 @@ void Uart1_Init(void)	//4800bps@11.0592MHz
 	ET1 = 0;			//禁止定时器中断
 	TR1 = 1;			//定时器1开始计时
 	ES = 1;				//使能串口1中断
+
+	uart.buffIndex = 0;
 }
 
 
 void uart_receive() interrupt 4
 {
-	uchar temp;
+	uint8_t temp;
 
 	if(RI)
 	{

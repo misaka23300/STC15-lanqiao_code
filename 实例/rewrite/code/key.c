@@ -20,6 +20,8 @@ uint8_t key_scan()
     P42 = 0; P44 = 0;
     P36 = P42; P37 = P44;
 
+    press = P3 & 0x0F;
+
     switch (state)
     {
         case wait_press:

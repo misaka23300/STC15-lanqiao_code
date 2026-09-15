@@ -1,7 +1,7 @@
 #include "seg.h"
 
 uint8_t seg_register[8] = {0, 0, 0, 0, 0, 0, 0, 0};
-uint8_t seg_last_reg[8] = (16, 16, 16, 16, 16, 16, 16, 16);
+uint8_t seg_last_reg[8] = {16, 16, 16, 16, 16, 16, 16, 16};
 
 /* const uint8_t code letter[] = { // 标准字库
     //   0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F

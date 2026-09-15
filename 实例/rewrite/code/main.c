@@ -150,7 +150,7 @@ void display_task()
 
 void write_start_times()
 {
-    uchar times;
+    uint8_t times;
     times = AT24C02_read(0x00);
     times = times + 1;
     AT24C02_write(0x00, times);
