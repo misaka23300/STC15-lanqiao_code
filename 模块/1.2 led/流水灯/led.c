@@ -57,7 +57,7 @@ void led_display()
 
 void latch(uint8_t i)
 {
-    siwtch(i):
+    switch (i)
     {
         case 4: {P2 = (P2 & 0x1F) | 0x80;break;}
         case 6: {P2 = (P2 & 0x1F) | 0x80;break;}

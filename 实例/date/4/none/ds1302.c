@@ -1,4 +1,4 @@
-#inlcude "ds1302.h"
+#include "ds1302.h"
 
 sbit SCK = P1^7;
 sbit RST = P1^3;
@@ -58,14 +58,14 @@ unsigned char Read_Ds1302_Byte ( unsigned char address )
 uchar hex_to_bcd(uchar HEX)
 {
 	uchar BCD;
-	BCD = (HEX / 10) << 4 + (HEX % 10);
+	BCD = ((HEX / 10) << 4) + (HEX % 10);
 	return BCD;
 }
 
 uchar bcd_to_hex(uchar BCD)
 {
 	uchar HEX;
-	HEX = (BCD << 4)* 10 + (BCD & 0x0F);
+	HEX = (BCD >> 4) * 10 + (BCD & 0x0F);
 	return HEX;
 }
 

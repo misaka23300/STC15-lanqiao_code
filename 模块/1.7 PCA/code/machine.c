@@ -40,7 +40,7 @@ void Uart1_Isr(void) interrupt 4
                 index = 0;
                 toward = 1;
             }
-        }8
+        }
         else
         {
             index--;
