@@ -5,7 +5,7 @@ typedef struct {
 	uint8_t buffIndex;
 } UART;
 
-UART uart;
+UART uart = { .buffIndex = 0 };
 
 
 void Uart1_Init(void)	//4800bps@11.0592MHz
@@ -24,7 +24,7 @@ void Uart1_Init(void)	//4800bps@11.0592MHz
 
 void uart_receive() interrupt 4
 {
-	uchar temp;
+	uint8_t temp;
 
 	if(RI)
 	{

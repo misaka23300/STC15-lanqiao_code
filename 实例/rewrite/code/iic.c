@@ -146,7 +146,7 @@ void PCF8591_DAC(uint8_t value)
     I2CStop();
 }
 
-void AT24C02_write(uint8_t address, Data)
+void AT24C02_write(uint8_t address, uint8_t Data)
 {
     I2CStart();
 
