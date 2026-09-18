@@ -4,7 +4,6 @@
 enum {
     LED_TIME = 20,
     KEY_TIME = 15,
-    TRC_TIME = 100,
     STATE_TIME = 50,
     RTC_TIME = 1000
 };
@@ -40,7 +39,8 @@ KEY key;
 RTC rtc = {
     0,
     {0x50, 0x59, 0x23, 0x01, 0x01, 0x01, 0x25},
-    {0, 0, 0}
+    {0, 0, 0},
+    0
 };
 STATE state;
 
@@ -82,7 +82,7 @@ void task_loop()
         key.time = 0;
     }
 
-    if (rtc.time == TRC_TIME)
+    if (rtc.time == RTC_TIME)
     {
         read_datetime(rtc.now_time);
         rtc.time = 0;
@@ -150,7 +150,7 @@ void display_task()
 
 void write_start_times()
 {
-    uchar times;
+    uint8_t times;
     times = AT24C02_read(0x00);
     times = times + 1;
     AT24C02_write(0x00, times);
