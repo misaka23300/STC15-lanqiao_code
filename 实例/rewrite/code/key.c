@@ -23,6 +23,8 @@ uint8_t key_scan()
 
     press = P3;
 
+    press = P3 & 0x0F;
+
     switch (state)
     {
         case wait_press:

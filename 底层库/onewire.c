@@ -28,7 +28,7 @@ void Write_DS18B20(uint8_t dat)
 uint8_t Read_DS18B20(void)
 {
 	uint8_t i;
-	uint8_t dat;
+	uint8_t dat = 0;
   
 	for(i=0;i<8;i++)
 	{

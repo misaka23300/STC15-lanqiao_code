@@ -107,7 +107,7 @@ void display_task()
     {
         case 0:
         {
-            set_seg_value(sonic.distance % 10 / 10 , sonic.distance / 10, 0, 0, 0, 0, 0, 0);
+            set_seg_value(sonic.distance / 100, sonic.distance / 10 % 10, 0, 0, 0, 0, 0, 0);
         }
         break;
 
@@ -180,5 +180,7 @@ void pcaInit()
 
 void PCAInterrupt() interrupt 7
 {
-    
+    if (CF) {
+        CF = 0;
+    }
 }

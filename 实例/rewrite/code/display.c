@@ -73,8 +73,8 @@ void seg_display()
 void led_display()
 {
     static uint8_t i;
-    static uint8_t now;
-    static uint8_t last;
+    static uint8_t now = 0;
+    static uint8_t last = 0;
 
     if (led_data[i])
     {
