@@ -1,4 +1,0 @@
-".\Objects\DS18B20温度读取.obj",
-".\Objects\onewire.obj" 
-TO ".\Objects\DS18B20温度的读取" 
-PRINT(".\Listings\DS18B20温度的读取.m51") RAMSIZE(256) 

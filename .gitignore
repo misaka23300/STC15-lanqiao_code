@@ -1,4 +1,44 @@
+# ===== IDE / 编辑器 =====
 .vs/
+.vscode/
+*.swp
+*~
+
+# ===== Keil 构建输出目录 =====
 Listings/
 Objects/
-.vscode
+
+# ===== Keil 构建产物 =====
+*.lst
+*.obj
+*.crf
+*.o
+*.d
+*.dep
+*.hex
+*.map
+*.m51
+*.lnp
+*.plg
+*.htm
+*.iex
+*.__i
+*.axf
+*.elf
+*.bin
+*.lib
+*.SRC
+
+# ===== Keil 用户特定文件（GUI 布局/窗口状态）=====
+*.uvgui.*
+*.uvopt.bak
+
+# ===== 备份文件 =====
+*.bak
+*.tmp
+*_uvproj.bak
+
+# ===== 操作系统文件 =====
+.DS_Store
+Thumbs.db
+desktop.ini

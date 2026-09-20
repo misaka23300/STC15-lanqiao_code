@@ -1,7 +1,0 @@
-".\Objects\STARTUP.obj",
-".\Objects\boot.obj",
-".\Objects\led.obj",
-".\Objects\main.obj" 
-TO ".\Objects\led" 
-PRINT(".\Listings\led.m51") RAMSIZE(256) 
-XDATA( 0X0000-0X06FF )
