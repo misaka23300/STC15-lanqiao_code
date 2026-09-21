@@ -1,8 +1,0 @@
-".\Objects\main.obj",
-".\Objects\Init.obj",
-".\Objects\Led.obj",
-".\Objects\Key.obj",
-".\Objects\Seg.obj",
-".\Objects\ds1302.obj" 
-TO ".\Objects\kangkang" 
-PRINT(".\Listings\kangkang.m51") RAMSIZE(256) 

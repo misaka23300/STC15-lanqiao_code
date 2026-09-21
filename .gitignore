@@ -1,4 +1,51 @@
+# Visual Studio / VS Code
 .vs/
-Listings/
-Objects/
-.vscode
+.vscode/
+
+# Keil MDK - 编译输出目录（任意层级）
+**/Objects/
+**/Listings/
+
+# Keil 工程临时文件
+*.bak
+*.uvopt
+*.uvoptx
+*.lnp
+*.plg
+
+# Keil 编译产物
+*.hex
+*.omf
+*.crf
+*.obj
+*.OBj
+*.OBJ
+*.lst
+*.M51
+*.m51
+
+# SDCC / 通用 C 编译产物
+*.asm
+*.adb
+*.cdb
+*.ihx
+*.lk
+*.map
+*.rel
+*.rst
+*.sym
+*.tmp
+
+# 编辑器/系统临时文件
+*copy*
+*~
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# IDE / 构建工具
+*.project
+*.cproject
+.idea/
+.classpath
