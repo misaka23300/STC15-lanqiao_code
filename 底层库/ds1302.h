@@ -3,8 +3,8 @@
 
 #include <stdint.h>
 
-void datetime_write(uint8_t *time);
-void datetime_read(uint8_t *time);
+void datetime_write(void);
+void datetime_read(void);
 
 extern uint8_t time_now[3];
 
