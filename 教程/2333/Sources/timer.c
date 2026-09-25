@@ -40,7 +40,7 @@ void TIMER1_Init(void)
     TIMER1_TimerMode();                 //设置定时器1为定时模式
     TIMER1_1TMode();                    //设置定时器1为1T模式
     TIMER1_Mode0();                     //设置定时器1为模式0 (16位自动重载模式)
-    TIMER1_EnableGateINT1();            //使能定时器1门控(INT1/P3.3)
+    TIMER1_DisableGateINT1();           //禁止定时器1门控，确保定时器1独立运行
     TIMER1_SetIntPriority(1);           //设置中断为高优先级
     TIMER1_EnableInt();                 //使能定时器1中断
     TIMER1_SetReload16(T1_RELOAD);      //设置定时器1的16位重载值

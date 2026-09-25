@@ -100,12 +100,12 @@ void delay_us(uint16_t us)
 ////////////////////////////////////////
 void delay_ms(uint16_t ms)
 {
-    uint16_t i;
+    volatile uint16_t i;
 
     do
     {
         i = MAIN_Fosc / 10000;
-        while (--i);
+        while (--i) { NOP(1); }
     } while (--ms);
 }
 

@@ -23,7 +23,7 @@
 //<<AICUBE_USER_GLOBAL_DEFINE_END>>
 
 
-BOOL fPrintfBusy;
+volatile BOOL fPrintfBusy;
 
 ////////////////////////////////////////
 // 串口1初始化函数
@@ -56,8 +56,8 @@ void UART1_Init(void)
 char putchar (char dat)                 //将串口1和printf函数绑定
 {
     while (fPrintfBusy);
-    UART1_SendData(dat);
     fPrintfBusy = 1;
+    UART1_SendData(dat);
 
     return dat;
 }
