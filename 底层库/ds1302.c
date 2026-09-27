@@ -13,49 +13,49 @@ uint8_t time_now[3] = {0, 0, 0};
 const uint8_t time_init[7] = {0x50, 0x59, 0x23, 0x09, 0x04, 0x03, 0x25};	
 
 
-void Write_Ds1302(uint8_t temp) 
+void Write_Ds1302(uint8_t temp)
 {
 	uint8_t i;
-	for (i=0;i<8;i++)     	
-	{ 
-		SCK = 0;
+	for (i=0;i<8;i++)
+	{
+		SCL = 0;
 		SDA = temp&0x01;
-		temp>>=1; 
-		SCK=1;
+		temp>>=1;
+		SCL = 1;
 	}
-}   
+}
 
-void Write_Ds1302_Byte( uint8_t address,uint8_t dat )     
+void Write_Ds1302_Byte( uint8_t address,uint8_t dat )
 {
  	RST=0;	_nop_();
- 	SCK=0;	_nop_();
- 	RST=1; 	_nop_();  
- 	Write_Ds1302(address);	
- 	Write_Ds1302(dat);		
- 	RST=0; 
+ 	SCL=0;	_nop_();
+ 	RST=1; 	_nop_();
+ 	Write_Ds1302(address);
+ 	Write_Ds1302(dat);
+ 	RST=0;
 }
 
 uint8_t Read_Ds1302_Byte ( uint8_t address )
 {
  	uint8_t i,temp=0x00;
  	RST=0;	_nop_();
- 	SCK=0;	_nop_();
+ 	SCL=0;	_nop_();
  	RST=1;	_nop_();
  	Write_Ds1302(address);
- 	for (i=0;i<8;i++) 	
- 	{		
-		SCK=0;
-		temp>>=1;	
+ 	for (i=0;i<8;i++)
+	{
+		SCL=0;
+		temp>>=1;
  		if(SDA)
- 		temp|=0x80;	
- 		SCK=1;
-	} 
+ 		temp|=0x80;
+ 		SCL=1;
+	}
  	RST=0;	_nop_();
- 	SCK=0;	_nop_();
-	SCK=1;	_nop_();
+ 	SCL=0;	_nop_();
+	SCL=1;	_nop_();
 	SDA=0;	_nop_();
 	SDA=1;	_nop_();
-	return (temp);			
+	return (temp);
 }
 
 uint8_t hex_to_bcd(uint8_t hex)
