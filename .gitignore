@@ -1,20 +1,44 @@
 .vs/
 Listings/
-Objects/
 .vscode
 .trae-html-share-packages/
 
+# Keil user interface and options
+*.uvgui*
+*.uvopt*
+*.uvguix.*
+*.uvoptx
+*_uvproj.bak
+*_uvopt.bak
+
 # Keil C51 build artifacts
-*.lst
+*.OBJ
 *.obj
+*.LST
+*.lst
 *.crf
 *.o
 *.d
 *.hex
+*.HEX
 *.m51
+*.M51
 *.map
 *.lnp
 *.plg
+*.sct
 *.build_log.htm
+
+# Build directories
+Objects/
+Output/
+
+# Logs
+*.log
+
+# Python
+__pycache__/
+*.pyc
+
+# Misc
 *.bak
-*.uvguix.*

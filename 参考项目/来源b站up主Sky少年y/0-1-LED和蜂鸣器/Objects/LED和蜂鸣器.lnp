@@ -1,3 +1,0 @@
-".\Objects\LEDºÍ·äÃùÆ÷.obj" 
-TO ".\Objects\LEDºÍ·äÃùÆ÷" 
-PRINT(".\Listings\LEDºÍ·äÃùÆ÷.m51") RAMSIZE(256) 
