@@ -18,10 +18,10 @@ void Write_Ds1302(uint8_t temp)
 	uint8_t i;
 	for (i=0;i<8;i++)     	
 	{ 
-		SCK = 0;
+		SCL = 0;
 		SDA = temp&0x01;
 		temp>>=1; 
-		SCK=1;
+		SCL=1;
 	}
 }   
 

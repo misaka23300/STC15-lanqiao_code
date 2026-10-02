@@ -78,7 +78,7 @@ uint8_t read_temperature()
 	low = Read_DS18B20();
 	high = Read_DS18B20();
 
-	temp = (high << 8) | low;
+	temp = ((uint16_t)high << 8) | low;
 	return (uint8_t) (temp / 16.0 * 10);
 }
 
