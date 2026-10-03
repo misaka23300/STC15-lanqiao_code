@@ -1,4 +1,30 @@
+# IDE
 .vs/
+.vscode/
+.idea/
+
+# Keil
+*.uvgui.*
+*.uvopt
+*.uvproj.bak
+*.uvopt.bak
+*.bak
+*.scvd
+
+# Build outputs
 Listings/
 Objects/
-.vscode
+*.obj
+*.lst
+*.hex
+*.lnp
+*.M51
+*.build_log.htm
+*.htm
+
+# EIDE
+.eide/log
+.eide/.cache
+
+# Misc
+*.log
