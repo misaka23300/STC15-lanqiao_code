@@ -1,4 +1,0 @@
-".\Objects\AT24C02的操作.obj",
-".\Objects\iic.obj" 
-TO ".\Objects\AT24C02的基础操作" 
-PRINT(".\Listings\AT24C02的基础操作.m51") RAMSIZE(256) 
