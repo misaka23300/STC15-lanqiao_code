@@ -1,4 +1,0 @@
-".\Objects\PCF8591的运用.obj",
-".\Objects\iic.obj" 
-TO ".\Objects\PCF8591的简单运用" 
-PRINT(".\Listings\PCF8591的简单运用.m51") RAMSIZE(256) 

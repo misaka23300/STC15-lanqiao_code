@@ -1,4 +1,75 @@
+# ===== IDE 配置 =====
+# Visual Studio
 .vs/
+.vscode/
+*.code-workspace
+
+# Keil MDK - 用户界面文件（每个人不同）
+*.uvgui*
+
+# Keil MDK - 编译输出目录
 Listings/
 Objects/
-.vscode
+
+# EIDE (Embedded IDE)
+.eide/
+
+# ===== 编译产物 =====
+# Keil 生成
+*.hex
+*.axf
+*.elf
+*.bin
+*.obj
+*.o
+*.lst
+*.plg
+*.m51
+*.lnp
+*.crf
+*.d
+*.dep
+*.i
+*.s
+
+# 通用编译产物
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+
+# ===== 备份和临时文件 =====
+*.bak
+*.backup
+*.old
+*.orig
+*.tmp
+*.temp
+*.swp
+*~
+
+# ===== 压缩包（可重新下载） =====
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+*.bz2
+
+# ===== 操作系统文件 =====
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ===== 日志文件 =====
+*.log
+build.log
+debug.log
+
+# ===== 文档保留（不忽略） =====
+# *.pdf
+# *.png
+# *.jpg
