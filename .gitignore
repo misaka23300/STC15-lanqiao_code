@@ -2,3 +2,14 @@
 Listings/
 Objects/
 .vscode
+
+# Keil user-specific files
+*.uvgui.*
+*.uvopt
+*.dep
+
+# Build artifacts
+*.hex
+*.lst
+*.obj
+*.m51
