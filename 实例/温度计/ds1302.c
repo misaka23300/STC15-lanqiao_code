@@ -84,7 +84,7 @@ void init_time()
 
 	for (i = 0; i < 7;i++)
 	{
-		Write_Ds1302_Byte(write_address[i], send_time[i]);
+		Write_Ds1302_Byte(write_address[i], hex_to_BCD(send_time[i]));
 	}
 
 	Write_Ds1302_Byte(0x8E, 0x80);
@@ -110,7 +110,7 @@ void write_time(uchar* time)
 {	
 	uchar i;	
 	for (i = 0;i < 7;i++)
-		send_time[i] = hex_to_BCD(time[i]);
+		send_time[i] = time[i];
 	init_time();
 }
 

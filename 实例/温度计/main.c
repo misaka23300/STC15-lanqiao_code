@@ -355,7 +355,7 @@ void main()
 
 void Timer2_Isr(void) interrupt 12
 {
-    static uchar i;
+    static uint i;
     i = (i + 1) % 30000;
     
     seg_display();
