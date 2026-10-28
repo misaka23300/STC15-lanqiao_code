@@ -5,6 +5,6 @@
 #include "onewire.h"
 
 float read_temp();
-bit init_ds18b20(void)
+bit init_ds18b20(void);
 
 #endif

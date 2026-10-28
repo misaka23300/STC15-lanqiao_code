@@ -29,7 +29,7 @@ void Write_DS18B20(unsigned char dat)
 unsigned char Read_DS18B20(void)
 {
 	unsigned char i;
-	unsigned char dat;
+	unsigned char dat = 0;
   
 	for(i=0;i<8;i++)
 	{
