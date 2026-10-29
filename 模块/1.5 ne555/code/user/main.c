@@ -14,7 +14,7 @@ uint16_t volatile shan_time;
 uint16_t volatile freq_time;
 
 uint16_t freq_data;
-uint16_t freq_out = 0721;
+uint16_t freq_out = 721;
 
 uint8_t display_state = 0;
 void main() {
@@ -84,9 +84,8 @@ void display_task() {
     seg_set(0, freq_out / 10000 % 10);
     seg_set(1, freq_out / 1000 % 10);
     seg_set(2, freq_out / 100 % 10);
-    seg_set(3, freq_out / 100 % 10);
-    seg_set(4, freq_out / 10 % 10);
-    seg_set(5, freq_out % 10);
+    seg_set(3, freq_out / 10 % 10);
+    seg_set(4, freq_out % 10);
     seg_set(5, 17);
   } break;
 
