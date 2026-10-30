@@ -35,17 +35,18 @@ void Uart1_Isr(void) interrupt 4
         if (toward == 0) 
         {
             index++;
-            if (index == 8)
+            if (index >= 8)
             {
-                index = 0;
+                index = 7;
                 toward = 1;
             }
-        }8
+        }
         else
         {
             index--;
-            if (index == -1)
+            if (index < 0)
             {
+                index = 0;
                 toward = 0;
             }
         }
